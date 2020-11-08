@@ -843,10 +843,12 @@
   <data name="TextBox1.Text" xml:space="preserve">
     <value>Cet outil répond à un besoin que j'ai.
 
-Nombreuses sont les proches qui veulent se lancer dans l'aventure Recalbox pour retrouver les jeux de leur enfance et pouvoir ENFIN se venger d'un boss injustement trop difficile/d'une experience traumatisante !
+Nombreux sont les proches qui veulent se lancer dans l'aventure Recalbox pour réexperimenter les jeux de leur enfance et pouvoir ENFIN se venger d'un boss injustement trop difficile/d'une experience traumatisante !
 Vous savez à quel point il peut etre chronophage et difficile de réunir les roms, les convertir, les essayer, les patcher, scrapper les images, les videos, les manuels, prendre les overlays ...etc
 
-Dans un soucis de simplicité, je leur propose généralement de choisir dans ma bibliothèque, les roms que mes proches souhaitent. Chacun étant différent, les besoins le sont également (ils me font découvrir aussi d'obscurs jeux qu'ils ont connu !)
+Dans un soucis de simplicité, je leur propose généralement de choisir dans ma bibliothèque, les roms que mes proches souhaitent.
+Chacun étant différent, les besoins le sont également (une discussion purement rétrograming et nostalgique se passe, et ils me font découvrir aussi d'obscurs jeux qu'ils ont EUX connu !)
+
 Normalement, je devrais donc copier :
 - les gamelists
 - les roms
@@ -854,11 +856,12 @@ Normalement, je devrais donc copier :
 - les saves (Tekken 3 tous les perso ?!)
 - les overlays si disponibles 
 ...etc 
-Beaucoup de fichier à penser juste pour une seule ROM !
+Beaucoup de fichiers à copier manuellement juste pour une seule et unique ROM !
+Imaginez le travail pour une liste complète ?!
 
-Cet outil me permet de réaliser un "pack" personnalisé dans un repertoire défini, qui repond au besoin de cette personne.
-Cela sous entend que vous êtes déja équipé !
-Ce n'est qu'un outil automatisé de manipulation de fichiers, pour créer un pack pour vos proches</value>
+Cet outil me permet donc de réaliser un "pack" personnalisé dans un repertoire défini au préalable "Recalbox Pour Brice"(par exemple), qui repond au besoin PERSONNALISE de celle ci
+Cela sous entend que vous êtes déja équipé et en possession de ses besoins !
+Ce n'est qu'un outil automatisé de manipulation de fichiers, pour créer un pack pour vos proches.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>54</value>

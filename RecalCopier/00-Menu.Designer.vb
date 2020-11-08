@@ -204,7 +204,7 @@ Partial Class Form1
         Me.TextBox1.Location = New System.Drawing.Point(6, 20)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(918, 271)
+        Me.TextBox1.Size = New System.Drawing.Size(918, 298)
         Me.TextBox1.TabIndex = 15
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
@@ -224,11 +224,11 @@ Partial Class Form1
         '
         Me.Button1.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Button1.Location = New System.Drawing.Point(77, 329)
+        Me.Button1.Location = New System.Drawing.Point(75, 341)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(821, 40)
         Me.Button1.TabIndex = 17
-        Me.Button1.Text = "J'accepte que l'Outil n'effectue que des opérations sur vos fichiers que je possè" &
+        Me.Button1.Text = "J'accepte que l'Outil n'effectue que des opérations sur des fichiers que je possè" &
     "de déja"
         Me.Button1.UseVisualStyleBackColor = True
         '

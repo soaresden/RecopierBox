@@ -95,7 +95,7 @@ Public Class CopyRoms
 
                 Dim YOURTEMPVARIABLE As XmlNodeList = xmldoc.GetElementsByTagName("desc")
                 If YOURTEMPVARIABLE.Count > 0 Then
-                    romdesc = YOURTEMPVARIABLE(0).InnerXml
+                    romdesc = node("desc").InnerText
                 Else
                     romdesc = ""
                 End If
