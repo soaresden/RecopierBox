@@ -6,8 +6,10 @@ Imports System.Net
 Imports System.Xml.Linq
 Imports WMPLib
 Imports System.Reflection
+Imports System.Drawing.Imaging
+
+
 Public Class CopyRoms
-    Private Playlist As WMPLib.IWMPPlaylist
     Private Sub ButtonImportXML_click(sender As Object, e As EventArgs) Handles ButtonImportXML.Click
 
         Dim list As List(Of String) = GetFilesRecursive(My.Settings.RecalboxFolder & "\roms")
@@ -58,6 +60,7 @@ Public Class CopyRoms
     End Function
 
     Private Sub ShowGames_Click(sender As Object, e As EventArgs) Handles ButtonShowGames.Click
+
         'Showing stuff
         TempGrid.Show()
         FinalGrid.Show()
@@ -92,10 +95,11 @@ Public Class CopyRoms
                         Select New With {
                   .romconsole = nomconsole,
                   .romname = st.<name>.Value,
-                  .rompath = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(st.<path>.Value, "./", "\"), "/", "\"),
+                  .rompath = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\" & Replace(st.<path>.Value, "./", "\"), "/", "\"), "\\", "\"),
                   .romdesc = st.<desc>.Value,
-                  .romimage = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(st.<image>.Value, "./", "\"), "/", "\"),
-                  .romvideo = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(st.<video>.Value, "./", "\"), "/", "\")}
+                  .romimage = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\" & Replace(st.<image>.Value, "./", "\"), "/", "\"), "\\", "\"),
+                  .romvideo = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\" & Replace(st.<video>.Value, "./", "\"), "/", "\"), "\\", "\"),
+                  .rommanual = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\" & Replace(st.<manual>.Value, "./", "\"), "/", "\"), "\\", "\")}
 
             'getting the whole informations to the gridview1
             TempGrid.DataSource = query.ToList()
@@ -122,47 +126,62 @@ Public Class CopyRoms
         Next
         'hiding the first grid
         TempGrid.Hide()
+
         'Sorting A-Z the console
         FinalGrid.Sort(FinalGrid.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+
         'Width for columns
-        FinalGrid.Columns(0).Width = 30
-        FinalGrid.Columns(1).Width = 200
-        FinalGrid.Columns(2).Width = 1
-        FinalGrid.Columns(3).Width = 1
-        FinalGrid.Columns(4).Width = 1
-        FinalGrid.Columns(5).Width = 40
+        FinalGrid.Columns(0).Width = 60     'romconsole
+        FinalGrid.Columns(1).Width = 200    'romname
+        FinalGrid.Columns(2).Width = 1      'rompath
+        FinalGrid.Columns(3).Width = 1      'romdesc
+        FinalGrid.Columns(4).Width = 1      'romimage
+        FinalGrid.Columns(5).Width = 1      'romvideo
+        FinalGrid.Columns(6).Width = 1      'rommanual
 
-        'add checkable column at the end
-        Dim chk As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(chk)
-        chk.HeaderText = "Selection"
-        chk.Name = "Coche"
-        chk.Width = 10
+        'add checkable columns at the end
+        Dim colromimage As New DataGridViewCheckBoxColumn()
+        FinalGrid.Columns.Add(colromimage)
+        colromimage.HeaderText = "Screen"
+        colromimage.Name = "Coche"
+        colromimage.Width = 30
 
-        Dim overlay As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(overlay)
-        overlay.HeaderText = "Overlay ?"
-        overlay.Name = "Coche"
-        overlay.Width = 10
+        Dim colromvideo As New DataGridViewCheckBoxColumn()
+        FinalGrid.Columns.Add(colromvideo)
+        colromvideo.HeaderText = "Video"
+        colromvideo.Name = "Coche"
+        colromvideo.Width = 30
 
-        Dim saves As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(saves)
-        saves.HeaderText = "Saves ?"
-        saves.Name = "Coche"
-        saves.Width = 10
+        Dim colrommanual As New DataGridViewCheckBoxColumn()
+        FinalGrid.Columns.Add(colrommanual)
+        colrommanual.HeaderText = "Manuel"
+        colrommanual.Name = "Coche"
+        colrommanual.Width = 30
 
-        Dim image As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(image)
-        image.HeaderText = "Saves ?"
-        image.Name = "Coche"
-        image.Width = 10
+        Dim colromoverlay As New DataGridViewCheckBoxColumn()
+        FinalGrid.Columns.Add(colromoverlay)
+        colromoverlay.HeaderText = "Overlay"
+        colromoverlay.Name = "Coche"
+        colromoverlay.Width = 30
 
-        Dim video As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(video)
-        video.HeaderText = "Saves ?"
-        video.Name = "Coche"
-        video.Width = 10
+        Dim colromsaves As New DataGridViewCheckBoxColumn()
+        FinalGrid.Columns.Add(colromsaves)
+        colromsaves.HeaderText = "Save"
+        colromsaves.Name = "Coche"
+        colromsaves.Width = 30
 
+        Dim colromselection As New DataGridViewCheckBoxColumn()
+        FinalGrid.Columns.Add(colromselection)
+        colromselection.HeaderText = "Selection"
+        colromselection.Name = "Coche"
+        colromselection.Width = 50
+
+        'Ajout de la taille du jeu 
+        Dim colromSize As New DataGridViewTextBoxColumn()
+        FinalGrid.Columns.Add(colromSize)
+        colromSize.HeaderText = "Size"
+        colromSize.Name = "Coche"
+        colromSize.Width = 50
 
         'Reajusting Interface and Showing Final Interface
         ButtonImportXML.Hide()
@@ -173,19 +192,29 @@ Public Class CopyRoms
         grp_RomInfos.Show()
         GroupBox1.Show()
         ButtonShowGames.Hide()
-        MsgBox("Bibliotheque Chargée")
+        txt_TotalRoms.Hide()
+
+        'on recupere le max ligne
+        txt_TotalRoms.Text = FinalGrid.Rows.Count
+
+        'on va calculer la taille des roms
+        Call calcultaillerom()
+
+        'On lance la completion des checkbox
+        Call completiondescheckbox()
+
+
     End Sub
 
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
         TempGrid.Hide()
+        txt_TotalRoms.Hide()
         FinalGrid.Hide()
         ButtonShowGames.Hide()
         GroupBox1.Hide()
         lbl_bibliorecalbox.Hide()
         grp_RomInfos.Hide()
-
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
@@ -194,40 +223,299 @@ Public Class CopyRoms
     End Sub
 
     Private Sub FinalGrid_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles FinalGrid.CellMouseClick
-        If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = FinalGrid.Rows(e.RowIndex)
-            txt_romname.Text = row.Cells(1).Value.ToString
-            txt_rompath.Text = row.Cells(2).Value.ToString
+
+        '(0)romconsole
+        '(1)romname
+        '(2)rompath
+        '(3)romdesc
+        '(4)romimage
+        '(5)romvideo
+        '(6)rommanual
+
+        '(7)Screen ?
+        '(8)Video ?
+        '(9)Manuel ?
+        '(10)Overlay ?
+        '(11)Save ?
+        '(12)Selection ?
+        '(13) Size
+
+        'Chargement des informations dans Rom Information
+        Dim row As DataGridViewRow = FinalGrid.Rows(e.RowIndex)
+        txt_romname.Text = row.Cells(1).Value.ToString
+        txt_rompath.Text = row.Cells(2).Value.ToString
+        If (String.IsNullOrEmpty(row.Cells(3).Value)) Then
+            txt_romdesc.Text = ""
+        Else
             txt_romdesc.Text = row.Cells(3).Value.ToString
+        End If
 
-            'calcul du vide pour ne pas afficher
-            Dim console As String = row.Cells(0).Value.ToString
-            Dim cheminduvide = My.Settings.RecalboxFolder & "\roms\" & console
+        'calcul du vide pour ne pas afficher l'image / video
+        Dim console As String = row.Cells(0).Value.ToString
+        Dim cheminduvide = My.Settings.RecalboxFolder & "\roms\" & console
 
-            If row.Cells(4).Value.ToString = cheminduvide Then
-                RomImage.Hide()
-            Else
-                RomImage.Show()
-                RomImage.Image = Image.FromFile(row.Cells(4).Value.ToString)
-            End If
+        If row.Cells(4).Value.ToString = Replace(cheminduvide & "\", "\\", "\") Then
+            RomImage.Hide()
+        Else
+            RomImage.Show()
+            RomImage.Image = Image.FromFile(row.Cells(4).Value.ToString)
+        End If
 
-            If row.Cells(5).Value.ToString = cheminduvide Then
-                vid_romvid.Hide()
-            Else
-                vid_romvid.Show()
-                vid_romvid.URL = row.Cells(5).Value.ToString
+        If row.Cells(5).Value.ToString = Replace(cheminduvide & "\", "\\", "\") Then
+            vid_romvid.Hide()
+        Else
+            vid_romvid.Show()
+            vid_romvid.URL = row.Cells(5).Value.ToString
 
-                vid_romvid.uiMode = "none"
-                vid_romvid.settings.setMode("loop", True)
+            vid_romvid.uiMode = "none"
+            vid_romvid.settings.setMode("loop", True)
 
-                vid_romvid.settings.mute = True
-                vid_romvid.Ctlcontrols.play()
-            End If
+            vid_romvid.settings.mute = True
+            vid_romvid.Ctlcontrols.play()
+        End If
+
+        'Icones du Bas
+        '(7)Screen ?
+        '(8)Video ?
+        '(9)Manuel ?
+        '(10)Overlay ?
+        '(11)Save ?
+        '(12)Selection ?
+
+        If row.Cells(7).Value = True Then
+            romscreen.Image = My.Resources.Okscreen
+        Else
+            romscreen.Image = My.Resources.noscreen
+        End If
+
+        If row.Cells(8).Value = True Then
+            romvideo.Image = My.Resources.OKvideo
+        Else
+            romvideo.Image = My.Resources.novideo
+        End If
+
+        If row.Cells(9).Value = True Then
+            rommanual.Image = My.Resources.OKmanual
+        Else
+            rommanual.Image = My.Resources.nomanual
+        End If
+
+        If row.Cells(10).Value = True Then
+            romoverlay.Image = My.Resources.OKoverlay
+        Else
+            romoverlay.Image = My.Resources.nooverlay
+        End If
+
+        If row.Cells(11).Value = True Then
+            romsave.Image = My.Resources.OKMem
+        Else
+            romsave.Image = My.Resources.nomem
         End If
     End Sub
+    Sub calcultaillerom()
+        On Error Resume Next
+        For Each oRow As DataGridViewRow In FinalGrid.Rows
+            Dim chemindelarom = oRow.Cells(2).Value
+            Dim size As Long
 
+            Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
+
+            If (attr And FileAttributes.Directory) = FileAttributes.Directory Then
+                size = GetDirectorySize(chemindelarom)
+            Else
+                Dim info As New FileInfo(chemindelarom)
+                size = info.Length
+            End If
+            'Conversion en Mo
+            Dim nouvelletaille As Decimal = size / 1024
+            Dim tailleenmo As Decimal = nouvelletaille / 1000
+
+            oRow.Cells(13).Value = Math.Round(tailleenmo, 1)
+        Next
+        On Error GoTo 0
+    End Sub
+    Public Function GetDirectorySize(path As String) As Long
+        Dim files() As String = Directory.GetFiles(path, "*", SearchOption.AllDirectories)
+        Dim size As Long = 0
+        For Each file As String In files
+            Dim info As New FileInfo(file)
+            size += info.Length
+        Next
+        Return size
+    End Function
+    Sub completiondescheckbox()
+        '(0)romconsole
+        '(1)romname
+        '(2)rompath
+        '(3)romdesc
+        '(4)romimage
+        '(5)romvideo
+        '(6)rommanual
+
+        '(7)Screen ?
+        '(8)Video ?
+        '(9)Manuel ?
+        '(10)Overlay ?
+        '(11)Save ?
+        '(12)Selection ?
+        '(13)Size
+        On Error Resume Next
+        For Each oRow As DataGridViewRow In FinalGrid.Rows
+            Dim cheminduvide = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value
+
+            'test sur le chemin des screens
+            If oRow.Cells(4).Value = cheminduvide Then
+                oRow.Cells(7).Value = False
+            Else
+                oRow.Cells(7).Value = True
+            End If
+
+            'test sur le chemin des videos
+            If oRow.Cells(5).Value = cheminduvide Then
+                oRow.Cells(8).Value = False
+            Else
+                oRow.Cells(8).Value = True
+            End If
+
+            'test sur le chemin des manuels
+            If oRow.Cells(6).Value = cheminduvide Then
+                oRow.Cells(9).Value = False
+            Else
+                oRow.Cells(9).Value = True
+            End If
+
+            'test sur le chemin des overlays
+            Dim cheminrom As String = oRow.Cells(2).Value
+            Dim FileInfo As New FileInfo(cheminrom)
+            Dim nomdelarom As String = FileInfo.Name
+            Dim nomducfg As String = nomdelarom & ".cfg"
+
+            Dim cheminoverlay As String = Replace(cheminrom, "\roms\", "\overlays\")
+            Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
+
+            If System.IO.File.Exists(testcheminoverlay) Then
+                oRow.Cells(10).Value = True
+            Else
+                oRow.Cells(10).Value = False
+            End If
+
+            'test sur le chemin des saves
+            Dim cheminsaves As String = Replace(cheminrom, "\roms\", "\saves\")
+            Dim romsansextension = FileNameWithoutExtension(nomdelarom)
+
+            Dim savesCount As Integer = IO.Directory.GetFiles(Replace(cheminsaves, nomdelarom, ""), romsansextension & ".*").Length
+
+            If savesCount >= 1 Then
+                oRow.Cells(11).Value = True
+            Else
+                oRow.Cells(11).Value = False
+            End If
+        Next
+        On Error GoTo 0
+    End Sub
+
+    Public Function AreSameImage(ByVal I1 As Image, ByVal I2 As Image) As Boolean
+        Dim BM1 As Bitmap = I1
+        Dim BM2 As Bitmap = I2
+        For X = 0 To BM1.Width - 1
+            For y = 0 To BM2.Height - 1
+                If BM1.GetPixel(X, y) <> BM2.GetPixel(X, y) Then
+                    Return False
+                End If
+            Next
+        Next
+        Return True
+    End Function
+
+    Public Function FileNameWithoutExtension(ByVal FullPath _
+        As String) As String
+        Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
+    End Function
     Private Sub RomImage_DoubleClick(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
         System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
     End Sub
 
+    Private Sub romscreen_DoubleClick(sender As Object, e As EventArgs) Handles romscreen.DoubleClick
+        Dim OK As Image = My.Resources.Okscreen
+        Dim NO As Image = My.Resources.noscreen
+
+        If AreSameImage(romscreen.Image, OK) Then
+            System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
+        End If
+    End Sub
+    Private Sub rommanual_DoubleClick(sender As Object, e As EventArgs) Handles rommanual.Click
+        Dim OK As Image = My.Resources.OKmanual
+        Dim NO As Image = My.Resources.nomanual
+
+        If AreSameImage(rommanual.Image, OK) Then
+
+            Process.Start(FinalGrid.SelectedCells(6).Value.ToString)
+        End If
+    End Sub
+
+    Private Sub romoverlay_DoubleClick(sender As Object, e As EventArgs) Handles romoverlay.Click
+        Dim OK As Image = My.Resources.OKoverlay
+        Dim NO As Image = My.Resources.nooverlay
+
+        Dim cheminrom As String = FinalGrid.SelectedCells(2).Value.ToString
+        Dim FileInfo As New FileInfo(cheminrom)
+        Dim nomdelarom As String = FileInfo.Name
+        Dim nomducfg As String = nomdelarom & ".cfg"
+
+        Dim cheminoverlay As String = Replace(cheminrom, "\roms\", "\overlays\")
+        Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
+
+        If AreSameImage(romoverlay.Image, OK) Then
+            Process.Start("explorer", Path.GetDirectoryName(testcheminoverlay).ToString)
+        End If
+    End Sub
+
+    Private Sub romsave_Click(sender As Object, e As EventArgs) Handles romsave.Click
+        Process.Start("explorer", Replace(romsave.ToString, "\roms\", "saves"))
+    End Sub
+
+    Sub calculselection()
+        'Refresh des valeurs
+        Dim count As Integer = 0
+        Dim sommeSize As Integer = 0
+
+        For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+            For b = 12 To 12             ' Colonne des checkbox 12
+                'si c'est coché, on compte la somme et le nombre de coche
+                If FinalGrid.Rows(a).Cells(b).Value = True Then
+                    count += 1
+                    sommeSize = sommeSize + FinalGrid.Rows(a).Cells(b + 1).Value
+                End If
+            Next
+            FinalGrid.Rows(a).Cells(6).Value = count
+        Next
+
+        txt_NbRomSelected.Text = count
+        txt_GoAPrevoir.Text = sommeSize
+
+        count = 0
+        sommeSize = 0
+    End Sub
+
+    'Ends Edit Mode So CellValueChanged Event Can Fire
+    Private Sub EndEditMode(sender As System.Object,
+                            e As EventArgs) _
+                Handles FinalGrid.CurrentCellDirtyStateChanged
+        'if current cell of grid is dirty, commits edit
+        If FinalGrid.IsCurrentCellDirty Then
+            FinalGrid.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
+    'Executes when Cell Value on a DataGridView changes
+    Private Sub DataGridCellValueChanged(sender As DataGridView,
+                                         e As DataGridViewCellEventArgs) _
+                Handles FinalGrid.CellValueChanged
+        'check that row isn't -1, i.e. creating datagrid header
+        If e.RowIndex = -1 Then
+            Exit Sub
+        Else
+            If e.ColumnIndex = 12 Then Call calculselection()
+        End If
+    End Sub
 End Class

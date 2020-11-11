@@ -183,5 +183,35 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nomanual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nomem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nooverlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\noscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\novideo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OKmanual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OKMem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OKoverlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Okscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OKvideo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
