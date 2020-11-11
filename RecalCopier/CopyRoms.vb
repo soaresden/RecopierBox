@@ -151,34 +151,34 @@ Public Class CopyRoms
                 Dim romdesc As String
                 Dim romimage As String
                 Dim romvideo As String
-                Dim rommanual As String
+                Dim romanual As String
 
 
                 If xEle.Element("desc") Is Nothing Then
-                    romdesc = ""
+                    romdesc = Nothing
                 Else
                     romdesc = xEle.Element("desc")
                 End If
 
                 If xEle.Element("image") Is Nothing Then
-                    romimage = ""
+                    romimage = Nothing
                 Else
                     romimage = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("image"), "./", "\"), "/", "\")
                 End If
 
                 If xEle.Element("video") Is Nothing Then
-                    romvideo = ""
+                    romvideo = Nothing
                 Else
                     romvideo = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("video"), "./", "\"), "/", "\")
                 End If
 
                 If xEle.Element("manual") Is Nothing Then
-                    rommanual = ""
+                    romanual = Nothing
                 Else
-                    rommanual = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("manual"), "./", "\"), "/", "\")
+                    romanual = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("manual"), "./", "\"), "/", "\")
                 End If
 
-                table.Rows.Add(romconsole, romname, rompath, romdesc, romimage, romvideo, rommanual)
+                table.Rows.Add(romconsole, romname, rompath, romdesc, romimage, romvideo, romanual)
             Next
         Next
 
@@ -193,7 +193,7 @@ Public Class CopyRoms
         FinalGrid.Columns(3).Width = 1      'romdesc
         FinalGrid.Columns(4).Width = 1      'romimage
         FinalGrid.Columns(5).Width = 1      'romvideo
-        FinalGrid.Columns(6).Width = 1      'rommanual
+        FinalGrid.Columns(6).Width = 1      'romanual
 
         '(0)romconsole
         '(1)romname
@@ -201,7 +201,7 @@ Public Class CopyRoms
         '(3)romdesc
         '(4)romimage
         '(5)romvideo
-        '(6)rommanual
+        '(6)romanual
 
         '(7)Screen ?
         '(8)Video ?
@@ -224,11 +224,11 @@ Public Class CopyRoms
         colromvideo.Name = "Coche"
         colromvideo.Width = 30
 
-        Dim colrommanual As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(colrommanual)
-        colrommanual.HeaderText = "Manual"
-        colrommanual.Name = "Coche"
-        colrommanual.Width = 30
+        Dim colromanual As New DataGridViewCheckBoxColumn()
+        FinalGrid.Columns.Add(colromanual)
+        colromanual.HeaderText = "Manual"
+        colromanual.Name = "Coche"
+        colromanual.Width = 30
 
         Dim colromoverlay As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromoverlay)
@@ -251,7 +251,7 @@ Public Class CopyRoms
         'Ajout de la taille de la rom 
         Dim colromSize As New DataGridViewTextBoxColumn()
         FinalGrid.Columns.Add(colromSize)
-        colromSize.HeaderText = "Size"
+        colromSize.HeaderText = "Mo"
         colromSize.Name = "Coche"
         colromSize.Width = 50
 
@@ -273,7 +273,6 @@ Public Class CopyRoms
 
         'On lance la completion des checkbox
         Call Completiondescheckbox()
-
 
     End Sub
     Sub Calcultaillerom()
@@ -305,7 +304,7 @@ Public Class CopyRoms
         '(3)romdesc
         '(4)romimage
         '(5)romvideo
-        '(6)rommanual
+        '(6)romanual
 
         '(7)Screen ?
         '(8)Video ?
