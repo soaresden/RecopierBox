@@ -11,18 +11,15 @@ Imports System.Drawing.Imaging
 
 Public Class CopyRoms
     Private Sub ButtonImportXML_click(sender As Object, e As EventArgs) Handles ButtonImportXML.Click
+        For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
 
-        Dim list As List(Of String) = GetFilesRecursive(My.Settings.RecalboxFolder & "\roms")
+            If File.Exists(foundDirectory & "\gamelist.xml") Then
+                ListGameLists.Items.Add(foundDirectory & "\gamelist.xml")
+            End If
 
-        ' Loop through and display each path.
-        For Each path In list
-            ListBox1.Items.Add(path)
         Next
-
-        MsgBox(list.Count & " Plateformes ajoutées")
-
         'showing gridview2
-        TempGrid.Hide()
+        ButtonImportXML.Hide()
         FinalGrid.Show()
         ButtonShowGames.Show()
     End Sub
@@ -61,74 +58,133 @@ Public Class CopyRoms
 
     Private Sub ShowGames_Click(sender As Object, e As EventArgs) Handles ButtonShowGames.Click
 
+        'Conditionnelle pour ne rien lancer si aucun selectionnés
+        If ListGameLists.SelectedItems.Count = 0 Then
+            MsgBox("Merci de Selectionner des Gamelists")
+            Exit Sub
+        End If
+
         'Showing stuff
-        TempGrid.Show()
         FinalGrid.Show()
 
-        If ListBox1.Items.Count = 0 Then Exit Sub
-        Dim gamelist As String = ListBox1.Items(0)
+        If ListGameLists.Items.Count = 0 Then Exit Sub
 
-        'Cloning Columns to Datagrid 2
-        Dim x As Integer
+        Dim gamelist As String = ListGameLists.Items(0)
+        Dim table As New DataTable()
+        Dim dv As DataView
 
-        For x = 0 To TempGrid.Columns.Count - 1
-            FinalGrid.Columns.Add(TempGrid.Columns(x).Clone())
-        Next
+        Dim column As DataColumn
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "romconsole"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "romname"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "rompath"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "romdesc"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "romimage"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "romvideo"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "rommanual"
+        End With
+        table.Columns.Add(column)
 
         'Loop for every gamelists
-        For i = 0 To ListBox1.Items.Count - 1
-
-            gamelist = ListBox1.Items(i)
+        For Each i In ListGameLists.SelectedItems
 
             'generating the console name
-            Dim console As String = ListBox1.Items(i)
+            Dim console As String = i
             Dim chercheroms As String = InStr(console, "roms\",)
             Dim finphrase As String = console.Substring((chercheroms + 4))
             Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
             Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
-            Dim nomconsole As String = ListBox1.Items(i).Substring((InStr(ListBox1.Items(i), "roms\",) + 4)).Substring(0, InStr(ListBox1.Items(i).Substring((InStr(ListBox1.Items(i), "roms\",) + 4)), "\gamelist.xml") - 1)
+
+            Dim nomconsole As String = i.Substring((InStr(i, "roms\",) + 4)).Substring(0, InStr(i.Substring((InStr(i, "roms\",) + 4)), "\gamelist.xml") - 1)
+
+            gamelist = i
 
             Dim gamelistXml As XElement = XElement.Load(gamelist)
 
             'getting the list for the xml with nodes
-            Dim query = From st In gamelistXml.Descendants("game")
-                        Select New With {
-                  .romconsole = nomconsole,
-                  .romname = st.<name>.Value,
-                  .rompath = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\" & Replace(st.<path>.Value, "./", "\"), "/", "\"), "\\", "\"),
-                  .romdesc = st.<desc>.Value,
-                  .romimage = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\" & Replace(st.<image>.Value, "./", "\"), "/", "\"), "\\", "\"),
-                  .romvideo = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\" & Replace(st.<video>.Value, "./", "\"), "/", "\"), "\\", "\"),
-                  .rommanual = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\" & Replace(st.<manual>.Value, "./", "\"), "/", "\"), "\\", "\")}
+            Dim query2 = From st In gamelistXml.Descendants("game") Select st
 
-            'getting the whole informations to the gridview1
-            TempGrid.DataSource = query.ToList()
+            For Each xEle As XElement In query2
+                Dim romconsole As String = nomconsole
+                Dim romname As String = xEle.Element("name")
+                Dim rompath As String = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("path"), "./", "\"), "/", "\")
 
-            'conditionnal for the first time
-            If FinalGrid.Columns.Count = 0 Then
-                For Each dgvc As DataGridViewColumn In TempGrid.Columns
-                    FinalGrid.Columns.Add(TryCast(dgvc.Clone(), DataGridViewColumn))
-                Next
-            End If
+                Dim romdesc As String
+                Dim romimage As String
+                Dim romvideo As String
+                Dim rommanual As String
 
-            'Cloning the datagridview1 for the 2nd one
-            Dim row As New DataGridViewRow()
 
-            For j As Integer = 0 To TempGrid.Rows.Count - 1
-                row = DirectCast(TempGrid.Rows(j).Clone(), DataGridViewRow)
-                Dim intColIndex As Integer = 0
-                For Each cell As DataGridViewCell In TempGrid.Rows(j).Cells
-                    row.Cells(intColIndex).Value = cell.Value
-                    intColIndex += 1
-                Next
-                FinalGrid.Rows.Add(row)
+                If xEle.Element("desc") Is Nothing Then
+                    romdesc = ""
+                Else
+                    romdesc = xEle.Element("desc")
+                End If
+
+                If xEle.Element("image") Is Nothing Then
+                    romimage = ""
+                Else
+                    romimage = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("image"), "./", "\"), "/", "\")
+                End If
+
+                If xEle.Element("video") Is Nothing Then
+                    romvideo = ""
+                Else
+                    romvideo = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("video"), "./", "\"), "/", "\")
+                End If
+
+                If xEle.Element("manual") Is Nothing Then
+                    rommanual = ""
+                Else
+                    rommanual = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("manual"), "./", "\"), "/", "\")
+                End If
+
+                table.Rows.Add(romconsole, romname, rompath, romdesc, romimage, romvideo, rommanual)
             Next
         Next
-        'hiding the first grid
-        TempGrid.Hide()
 
         'Sorting A-Z the console
-        FinalGrid.Sort(FinalGrid.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+        dv = table.DefaultView
+        FinalGrid.DataSource = table
 
         'Width for columns
         FinalGrid.Columns(0).Width = 60     'romconsole
@@ -138,6 +194,22 @@ Public Class CopyRoms
         FinalGrid.Columns(4).Width = 1      'romimage
         FinalGrid.Columns(5).Width = 1      'romvideo
         FinalGrid.Columns(6).Width = 1      'rommanual
+
+        '(0)romconsole
+        '(1)romname
+        '(2)rompath
+        '(3)romdesc
+        '(4)romimage
+        '(5)romvideo
+        '(6)rommanual
+
+        '(7)Screen ?
+        '(8)Video ?
+        '(9)Manuel ?
+        '(10)Overlay ?
+        '(11)Save ?
+        '(12)Selection ?
+        '(13)Size
 
         'add checkable columns at the end
         Dim colromimage As New DataGridViewCheckBoxColumn()
@@ -154,7 +226,7 @@ Public Class CopyRoms
 
         Dim colrommanual As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colrommanual)
-        colrommanual.HeaderText = "Manuel"
+        colrommanual.HeaderText = "Manual"
         colrommanual.Name = "Coche"
         colrommanual.Width = 30
 
@@ -176,7 +248,7 @@ Public Class CopyRoms
         colromselection.Name = "Coche"
         colromselection.Width = 50
 
-        'Ajout de la taille du jeu 
+        'Ajout de la taille de la rom 
         Dim colromSize As New DataGridViewTextBoxColumn()
         FinalGrid.Columns.Add(colromSize)
         colromSize.HeaderText = "Size"
@@ -185,7 +257,7 @@ Public Class CopyRoms
 
         'Reajusting Interface and Showing Final Interface
         ButtonImportXML.Hide()
-        ListBox1.Hide()
+        ListGameLists.Hide()
         lbl_gamelist.Hide()
         FinalGrid.Location = New Point(11, 28)
         FinalGrid.Size = New Size(596, 402)
@@ -194,27 +266,117 @@ Public Class CopyRoms
         ButtonShowGames.Hide()
         txt_TotalRoms.Hide()
 
-        'on recupere le max ligne
-        txt_TotalRoms.Text = FinalGrid.Rows.Count
+        dv.Sort = "romconsole asc, romname asc"
 
         'on va calculer la taille des roms
-        Call calcultaillerom()
+        Call Calcultaillerom()
 
         'On lance la completion des checkbox
-        Call completiondescheckbox()
+        Call Completiondescheckbox()
 
 
     End Sub
+    Sub Calcultaillerom()
+        On Error Resume Next
+        For Each oRow As DataGridViewRow In FinalGrid.Rows
+            Dim chemindelarom = oRow.Cells(2).Value
+            Dim size As Long
 
+            Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
+
+            If (attr And FileAttributes.Directory) = FileAttributes.Directory Then
+                size = GetDirectorySize(chemindelarom)
+            Else
+                Dim info As New FileInfo(chemindelarom)
+                size = info.Length
+            End If
+            'Conversion en Mo
+            Dim nouvelletaille As Decimal = size / 1024
+            Dim tailleenmo As Decimal = nouvelletaille / 1000
+
+            oRow.Cells(13).Value = Math.Round(tailleenmo, 1)
+        Next
+        On Error GoTo 0
+    End Sub
+    Sub Completiondescheckbox()
+        '(0)romconsole
+        '(1)romname
+        '(2)rompath
+        '(3)romdesc
+        '(4)romimage
+        '(5)romvideo
+        '(6)rommanual
+
+        '(7)Screen ?
+        '(8)Video ?
+        '(9)Manuel ?
+        '(10)Overlay ?
+        '(11)Save ?
+        '(12)Selection ?
+        '(13)Size
+        On Error Resume Next
+        For Each oRow As DataGridViewRow In FinalGrid.Rows
+            'test sur le chemin des screens, si la cellule est complétée alors on coche
+            If oRow.Cells(4).Value IsNot Nothing Then
+                oRow.Cells(7).Value = True
+            Else
+                oRow.Cells(7).Value = False
+            End If
+
+            'test sur le chemin des videos
+            If oRow.Cells(5).Value IsNot Nothing Then
+                oRow.Cells(8).Value = True
+            Else
+                oRow.Cells(8).Value = False
+            End If
+
+            'test sur le chemin des manuels
+            If oRow.Cells(6).Value IsNot Nothing Then
+                oRow.Cells(9).Value = True
+            Else
+                oRow.Cells(9).Value = False
+            End If
+
+            'test sur le chemin des overlays
+            Dim cheminrom As String = oRow.Cells(2).Value
+            Dim FileInfo As New FileInfo(cheminrom)
+            Dim nomdelarom As String = FileInfo.Name
+            Dim nomducfg As String = nomdelarom & ".cfg"
+
+            Dim cheminoverlay As String = Replace(cheminrom, "\roms\", "\overlays\")
+            Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
+
+            If System.IO.File.Exists(testcheminoverlay) Then
+                oRow.Cells(10).Value = True
+            Else
+                oRow.Cells(10).Value = False
+            End If
+
+            'test sur le chemin des saves
+            Dim cheminsaves As String = Replace(cheminrom, "\roms\", "\saves\")
+            Dim romsansextension = FileNameWithoutExtension(nomdelarom)
+
+            Dim savesCount As Integer = IO.Directory.GetFiles(Replace(cheminsaves, nomdelarom, ""), romsansextension & ".*").Length
+
+            If savesCount >= 1 Then
+                oRow.Cells(11).Value = True
+            Else
+                oRow.Cells(11).Value = False
+            End If
+        Next
+        On Error GoTo 0
+    End Sub
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
-        TempGrid.Hide()
         txt_TotalRoms.Hide()
         FinalGrid.Hide()
         ButtonShowGames.Hide()
         GroupBox1.Hide()
         lbl_bibliorecalbox.Hide()
         grp_RomInfos.Hide()
+
+        'Launch Import Gamelist button
+        ButtonImportXML.PerformClick()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
@@ -223,6 +385,9 @@ Public Class CopyRoms
     End Sub
 
     Private Sub FinalGrid_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles FinalGrid.CellMouseClick
+        Dim totalline As Integer = FinalGrid.RowCount - 1
+
+        If e.RowIndex = totalline Then Exit Sub
 
         '(0)romconsole
         '(1)romname
@@ -312,28 +477,7 @@ Public Class CopyRoms
             romsave.Image = My.Resources.nomem
         End If
     End Sub
-    Sub calcultaillerom()
-        On Error Resume Next
-        For Each oRow As DataGridViewRow In FinalGrid.Rows
-            Dim chemindelarom = oRow.Cells(2).Value
-            Dim size As Long
 
-            Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
-
-            If (attr And FileAttributes.Directory) = FileAttributes.Directory Then
-                size = GetDirectorySize(chemindelarom)
-            Else
-                Dim info As New FileInfo(chemindelarom)
-                size = info.Length
-            End If
-            'Conversion en Mo
-            Dim nouvelletaille As Decimal = size / 1024
-            Dim tailleenmo As Decimal = nouvelletaille / 1000
-
-            oRow.Cells(13).Value = Math.Round(tailleenmo, 1)
-        Next
-        On Error GoTo 0
-    End Sub
     Public Function GetDirectorySize(path As String) As Long
         Dim files() As String = Directory.GetFiles(path, "*", SearchOption.AllDirectories)
         Dim size As Long = 0
@@ -343,76 +487,7 @@ Public Class CopyRoms
         Next
         Return size
     End Function
-    Sub completiondescheckbox()
-        '(0)romconsole
-        '(1)romname
-        '(2)rompath
-        '(3)romdesc
-        '(4)romimage
-        '(5)romvideo
-        '(6)rommanual
 
-        '(7)Screen ?
-        '(8)Video ?
-        '(9)Manuel ?
-        '(10)Overlay ?
-        '(11)Save ?
-        '(12)Selection ?
-        '(13)Size
-        On Error Resume Next
-        For Each oRow As DataGridViewRow In FinalGrid.Rows
-            Dim cheminduvide = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value
-
-            'test sur le chemin des screens
-            If oRow.Cells(4).Value = cheminduvide Then
-                oRow.Cells(7).Value = False
-            Else
-                oRow.Cells(7).Value = True
-            End If
-
-            'test sur le chemin des videos
-            If oRow.Cells(5).Value = cheminduvide Then
-                oRow.Cells(8).Value = False
-            Else
-                oRow.Cells(8).Value = True
-            End If
-
-            'test sur le chemin des manuels
-            If oRow.Cells(6).Value = cheminduvide Then
-                oRow.Cells(9).Value = False
-            Else
-                oRow.Cells(9).Value = True
-            End If
-
-            'test sur le chemin des overlays
-            Dim cheminrom As String = oRow.Cells(2).Value
-            Dim FileInfo As New FileInfo(cheminrom)
-            Dim nomdelarom As String = FileInfo.Name
-            Dim nomducfg As String = nomdelarom & ".cfg"
-
-            Dim cheminoverlay As String = Replace(cheminrom, "\roms\", "\overlays\")
-            Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
-
-            If System.IO.File.Exists(testcheminoverlay) Then
-                oRow.Cells(10).Value = True
-            Else
-                oRow.Cells(10).Value = False
-            End If
-
-            'test sur le chemin des saves
-            Dim cheminsaves As String = Replace(cheminrom, "\roms\", "\saves\")
-            Dim romsansextension = FileNameWithoutExtension(nomdelarom)
-
-            Dim savesCount As Integer = IO.Directory.GetFiles(Replace(cheminsaves, nomdelarom, ""), romsansextension & ".*").Length
-
-            If savesCount >= 1 Then
-                oRow.Cells(11).Value = True
-            Else
-                oRow.Cells(11).Value = False
-            End If
-        Next
-        On Error GoTo 0
-    End Sub
 
     Public Function AreSameImage(ByVal I1 As Image, ByVal I2 As Image) As Boolean
         Dim BM1 As Bitmap = I1
@@ -435,7 +510,7 @@ Public Class CopyRoms
         System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
     End Sub
 
-    Private Sub romscreen_DoubleClick(sender As Object, e As EventArgs) Handles romscreen.DoubleClick
+    Private Sub Romscreen_DoubleClick(sender As Object, e As EventArgs) Handles romscreen.DoubleClick
         Dim OK As Image = My.Resources.Okscreen
         Dim NO As Image = My.Resources.noscreen
 
@@ -443,7 +518,7 @@ Public Class CopyRoms
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
         End If
     End Sub
-    Private Sub rommanual_DoubleClick(sender As Object, e As EventArgs) Handles rommanual.Click
+    Private Sub Rommanual_DoubleClick(sender As Object, e As EventArgs) Handles rommanual.Click
         Dim OK As Image = My.Resources.OKmanual
         Dim NO As Image = My.Resources.nomanual
 
@@ -453,7 +528,7 @@ Public Class CopyRoms
         End If
     End Sub
 
-    Private Sub romoverlay_DoubleClick(sender As Object, e As EventArgs) Handles romoverlay.Click
+    Private Sub Romoverlay_DoubleClick(sender As Object, e As EventArgs) Handles romoverlay.Click
         Dim OK As Image = My.Resources.OKoverlay
         Dim NO As Image = My.Resources.nooverlay
 
@@ -470,11 +545,11 @@ Public Class CopyRoms
         End If
     End Sub
 
-    Private Sub romsave_Click(sender As Object, e As EventArgs) Handles romsave.Click
+    Private Sub Romsave_Click(sender As Object, e As EventArgs) Handles romsave.Click
         Process.Start("explorer", Replace(romsave.ToString, "\roms\", "saves"))
     End Sub
 
-    Sub calculselection()
+    Sub Calculselection()
         'Refresh des valeurs
         Dim count As Integer = 0
         Dim sommeSize As Integer = 0
@@ -484,7 +559,7 @@ Public Class CopyRoms
                 'si c'est coché, on compte la somme et le nombre de coche
                 If FinalGrid.Rows(a).Cells(b).Value = True Then
                     count += 1
-                    sommeSize = sommeSize + FinalGrid.Rows(a).Cells(b + 1).Value
+                    sommeSize += FinalGrid.Rows(a).Cells(b + 1).Value
                 End If
             Next
             FinalGrid.Rows(a).Cells(6).Value = count
@@ -492,9 +567,6 @@ Public Class CopyRoms
 
         txt_NbRomSelected.Text = count
         txt_GoAPrevoir.Text = sommeSize
-
-        count = 0
-        sommeSize = 0
     End Sub
 
     'Ends Edit Mode So CellValueChanged Event Can Fire

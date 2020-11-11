@@ -24,10 +24,9 @@ Partial Class CopyRoms
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
         Me.ButtonImportXML = New System.Windows.Forms.Button()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.ListGameLists = New System.Windows.Forms.ListBox()
         Me.lbl_gamelist = New System.Windows.Forms.Label()
         Me.ButtonShowGames = New System.Windows.Forms.Button()
-        Me.TempGrid = New System.Windows.Forms.DataGridView()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
@@ -58,7 +57,6 @@ Partial Class CopyRoms
         Me.Label1 = New System.Windows.Forms.Label()
         Me.RomImage = New System.Windows.Forms.PictureBox()
         Me.txt_TotalRoms = New System.Windows.Forms.TextBox()
-        CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -83,14 +81,15 @@ Partial Class CopyRoms
         Me.ButtonImportXML.Text = "Importer les Gamelist.xml"
         Me.ButtonImportXML.UseVisualStyleBackColor = True
         '
-        'ListBox1
+        'ListGameLists
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(15, 63)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ListBox1.Size = New System.Drawing.Size(206, 329)
-        Me.ListBox1.TabIndex = 2
+        Me.ListGameLists.FormattingEnabled = True
+        Me.ListGameLists.Location = New System.Drawing.Point(15, 63)
+        Me.ListGameLists.Name = "ListGameLists"
+        Me.ListGameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ListGameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.ListGameLists.Size = New System.Drawing.Size(206, 329)
+        Me.ListGameLists.TabIndex = 2
         '
         'lbl_gamelist
         '
@@ -105,36 +104,24 @@ Partial Class CopyRoms
         '
         'ButtonShowGames
         '
-        Me.ButtonShowGames.Location = New System.Drawing.Point(48, 398)
+        Me.ButtonShowGames.Location = New System.Drawing.Point(15, 398)
         Me.ButtonShowGames.Name = "ButtonShowGames"
-        Me.ButtonShowGames.Size = New System.Drawing.Size(146, 32)
+        Me.ButtonShowGames.Size = New System.Drawing.Size(206, 32)
         Me.ButtonShowGames.TabIndex = 4
-        Me.ButtonShowGames.Text = "Construire la Bibliothèque"
+        Me.ButtonShowGames.Text = "Construire les Systemes Selectionnés"
         Me.ButtonShowGames.UseVisualStyleBackColor = True
-        '
-        'TempGrid
-        '
-        Me.TempGrid.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.TempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TempGrid.Location = New System.Drawing.Point(225, 28)
-        Me.TempGrid.Margin = New System.Windows.Forms.Padding(2)
-        Me.TempGrid.Name = "TempGrid"
-        Me.TempGrid.RowHeadersWidth = 51
-        Me.TempGrid.RowTemplate.Height = 24
-        Me.TempGrid.Size = New System.Drawing.Size(382, 30)
-        Me.TempGrid.TabIndex = 5
         '
         'FinalGrid
         '
         Me.FinalGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.FinalGrid.Location = New System.Drawing.Point(226, 63)
+        Me.FinalGrid.Location = New System.Drawing.Point(226, 28)
         Me.FinalGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.FinalGrid.MultiSelect = False
         Me.FinalGrid.Name = "FinalGrid"
         Me.FinalGrid.RowHeadersWidth = 51
         Me.FinalGrid.RowTemplate.Height = 24
         Me.FinalGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.FinalGrid.Size = New System.Drawing.Size(382, 367)
+        Me.FinalGrid.Size = New System.Drawing.Size(382, 402)
         Me.FinalGrid.TabIndex = 6
         '
         'GroupBox1
@@ -462,16 +449,14 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.lbl_bibliorecalbox)
         Me.Controls.Add(Me.Buttongetback)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.TempGrid)
         Me.Controls.Add(Me.ButtonShowGames)
         Me.Controls.Add(Me.lbl_gamelist)
-        Me.Controls.Add(Me.ListBox1)
+        Me.Controls.Add(Me.ListGameLists)
         Me.Controls.Add(Me.ButtonImportXML)
         Me.Controls.Add(Me.FinalGrid)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "CopyRoms"
         Me.Text = "CopyRoms"
-        CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
@@ -493,10 +478,9 @@ Partial Class CopyRoms
 
     End Sub
     Friend WithEvents ButtonImportXML As Button
-    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents ListGameLists As ListBox
     Friend WithEvents lbl_gamelist As Label
     Friend WithEvents ButtonShowGames As Button
-    Friend WithEvents TempGrid As DataGridView
     Friend WithEvents FinalGrid As DataGridView
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Buttongetback As Button
