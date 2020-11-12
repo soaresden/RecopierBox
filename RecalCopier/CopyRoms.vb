@@ -10,13 +10,24 @@ Imports System.Drawing.Imaging
 
 
 Public Class CopyRoms
+    Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Hiding buttons and datagrids
+        txt_TotalRoms.Hide()
+        FinalGrid.Hide()
+        ButtonShowGames.Hide()
+        GroupBox1.Hide()
+        lbl_bibliorecalbox.Hide()
+        grp_RomInfos.Hide()
+        vid_romvid.uiMode = "none"
+        'Launch Import Gamelist button
+        ButtonImportXML.PerformClick()
+    End Sub
     Private Sub ButtonImportXML_click(sender As Object, e As EventArgs) Handles ButtonImportXML.Click
         For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
 
             If File.Exists(foundDirectory & "\gamelist.xml") Then
                 ListGameLists.Items.Add(foundDirectory & "\gamelist.xml")
             End If
-
         Next
         'showing gridview2
         ButtonImportXML.Hide()
@@ -316,25 +327,32 @@ Public Class CopyRoms
         On Error Resume Next
         For Each oRow As DataGridViewRow In FinalGrid.Rows
             'test sur le chemin des screens, si la cellule est complétée alors on coche
-            If oRow.Cells(4).Value IsNot Nothing Then
-                oRow.Cells(7).Value = True
-            Else
+            Dim lescreen As String = oRow.Cells(4).Value
+            If lescreen Is Nothing Then
                 oRow.Cells(7).Value = False
+            Else
+                oRow.Cells(7).Value = True
             End If
 
             'test sur le chemin des videos
-            If oRow.Cells(5).Value IsNot Nothing Then
-                oRow.Cells(8).Value = True
-            Else
+            Dim lavideo As String = oRow.Cells(5).Value
+            If lavideo Is Nothing Then
                 oRow.Cells(8).Value = False
+            Else
+                oRow.Cells(8).Value = True
             End If
 
             'test sur le chemin des manuels
-            If oRow.Cells(6).Value IsNot Nothing Then
-                oRow.Cells(9).Value = True
-            Else
+            Dim lemanuel As String = oRow.Cells(6).Value
+            If lemanuel Is Nothing Then
                 oRow.Cells(9).Value = False
+            Else
+                oRow.Cells(9).Value = True
             End If
+
+            lescreen = Nothing
+            lavideo = Nothing
+            lemanuel = Nothing
 
             'test sur le chemin des overlays
             Dim cheminrom As String = oRow.Cells(2).Value
@@ -364,18 +382,6 @@ Public Class CopyRoms
             End If
         Next
         On Error GoTo 0
-    End Sub
-    Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Hiding buttons and datagrids
-        txt_TotalRoms.Hide()
-        FinalGrid.Hide()
-        ButtonShowGames.Hide()
-        GroupBox1.Hide()
-        lbl_bibliorecalbox.Hide()
-        grp_RomInfos.Hide()
-
-        'Launch Import Gamelist button
-        ButtonImportXML.PerformClick()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
