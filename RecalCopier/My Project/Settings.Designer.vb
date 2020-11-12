@@ -65,6 +65,18 @@ Namespace My
                 Me("RecalboxFolder") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("D:\Temp\RecalboxCopie")>  _
+        Public Property CopyFolder() As String
+            Get
+                Return CType(Me("CopyFolder"),String)
+            End Get
+            Set
+                Me("CopyFolder") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -5,5 +5,8 @@
     <Setting Name="RecalboxFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\Documents\a-Emulation et Jeux\Recalbox\Recalbox</Value>
     </Setting>
+    <Setting Name="CopyFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Temp\RecalboxCopie</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

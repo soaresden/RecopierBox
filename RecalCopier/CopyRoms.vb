@@ -12,13 +12,15 @@ Imports System.Drawing.Imaging
 Public Class CopyRoms
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
-        txt_TotalRoms.Hide()
+        txt_txtsearch.Hide()
         FinalGrid.Hide()
         ButtonShowGames.Hide()
         GroupBox1.Hide()
         lbl_bibliorecalbox.Hide()
         grp_RomInfos.Hide()
         vid_romvid.uiMode = "none"
+        lbl_TxtSearch.Hide()
+        txt_txtsearch.Hide()
         'Launch Import Gamelist button
         ButtonImportXML.PerformClick()
     End Sub
@@ -29,6 +31,7 @@ Public Class CopyRoms
                 ListGameLists.Items.Add(foundDirectory & "\gamelist.xml")
             End If
         Next
+
         'showing gridview2
         ButtonImportXML.Hide()
         FinalGrid.Show()
@@ -139,12 +142,11 @@ Public Class CopyRoms
         For Each i In ListGameLists.SelectedItems
 
             'generating the console name
-            Dim console As String = i
-            Dim chercheroms As String = InStr(console, "roms\",)
-            Dim finphrase As String = console.Substring((chercheroms + 4))
-            Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
-            Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
-
+            'Dim console As String = i
+            'Dim chercheroms As String = InStr(console, "roms\",)
+            'Dim finphrase As String = console.Substring((chercheroms + 4))
+            'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
+            'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
             Dim nomconsole As String = i.Substring((InStr(i, "roms\",) + 4)).Substring(0, InStr(i.Substring((InStr(i, "roms\",) + 4)), "\gamelist.xml") - 1)
 
             gamelist = i
@@ -271,11 +273,12 @@ Public Class CopyRoms
         ListGameLists.Hide()
         lbl_gamelist.Hide()
         FinalGrid.Location = New Point(11, 28)
-        FinalGrid.Size = New Size(596, 402)
+        FinalGrid.Size = New Size(592, 378)
         grp_RomInfos.Show()
         GroupBox1.Show()
         ButtonShowGames.Hide()
-        txt_TotalRoms.Hide()
+        txt_txtsearch.Show()
+        lbl_TxtSearch.Show()
 
         dv.Sort = "romconsole asc, romname asc"
 
@@ -284,6 +287,7 @@ Public Class CopyRoms
 
         'On lance la completion des checkbox
         Call Completiondescheckbox()
+
 
     End Sub
     Sub Calcultaillerom()
@@ -594,5 +598,22 @@ Public Class CopyRoms
         Else
             If e.ColumnIndex = 12 Then Call calculselection()
         End If
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+            txt_CopyFolder.Text = FolderBrowserDialog1.SelectedPath
+            'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
+            My.Settings.CopyFolder = txt_CopyFolder.Text
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Private Sub GroupBox1_VisibleChanged(sender As Object, e As EventArgs) Handles GroupBox1.VisibleChanged
+        txt_CopyFolder.Text = My.Settings.CopyFolder
+    End Sub
+
+    Private Sub Txt_txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txt_txtsearch.TextChanged
+        TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("romname LIKE '%{0}%'", txt_txtsearch.Text)
     End Sub
 End Class
