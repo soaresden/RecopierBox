@@ -833,6 +833,7 @@ romsuivante:
             System.IO.File.Copy(legamelist, lenouvogamelist, True)
 
             'on check si les images
+            On Error Resume Next
             If checkimgs.Checked = True Then
                 'retrouver la ligne
                 For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
@@ -852,7 +853,9 @@ romsuivante:
                     End If
                 Next
             End If
+            On Error GoTo 0
 
+            On Error Resume Next
             'on check si les videos
             If checkvideos.Checked = True Then
                 For b = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
@@ -872,8 +875,10 @@ romsuivante:
                     End If
                 Next
             End If
+            On Error GoTo 0
 
             'on check si les manuels
+            On Error Resume Next
             If checkmanuals.Checked = True Then
                 For c = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
                     Dim jeuencours As String = FinalGrid.Rows(c).Cells(2).Value
@@ -892,8 +897,10 @@ romsuivante:
                     End If
                 Next
             End If
+            On Error GoTo 0
 
             'on check si les overlays
+            On Error Resume Next
             If checkoverlays.Checked = True Then
                 For d = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
                     Dim jeuencours As String = FinalGrid.Rows(d).Cells(2).Value
@@ -961,11 +968,14 @@ romsuivante:
                         System.IO.File.Copy(cheminpng3, nouvochemin3, True)
 
                         Exit For
-                        End If
+                    End If
                 Next
             End If
+            On Error GoTo 0
+
 
             'on check si les saves
+            On Error Resume Next
             If checksaves.Checked = True Then
                 For e1 = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
                     Dim jeuencours As String = FinalGrid.Rows(e1).Cells(2).Value
@@ -983,6 +993,7 @@ romsuivante:
                     End If
                 Next
             End If
+            On Error GoTo 0
         Next
 
         'on check si les BIOS a la fin 
