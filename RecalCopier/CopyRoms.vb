@@ -531,53 +531,58 @@ romsuivante:
         Dim checkboxsave As String = row.Cells(11).Value
 
         Dim imgscreen As New Bitmap(My.Resources.Okscreen)
+        Dim imgscreenno As New Bitmap(My.Resources.noscreen)
         Dim imgscreen2 As New Bitmap(imgscreen, romscreen.Width, romscreen.Height)
-        Dim imgscreen2no As New Bitmap(imgscreen, romscreen.Width, romscreen.Height)
+        Dim imgscreen2no As New Bitmap(imgscreenno, romscreen.Width, romscreen.Height)
 
         Dim imgvideo As New Bitmap(My.Resources.OKvideo)
-        Dim imgvideo2 As New Bitmap(imgvideo, romscreen.Width, romscreen.Height)
-        Dim imgvideo2no As New Bitmap(imgvideo, romscreen.Width, romscreen.Height)
+        Dim imgvideono As New Bitmap(My.Resources.novideo)
+        Dim imgvideo2 As New Bitmap(imgvideo, romvideo.Width, romvideo.Height)
+        Dim imgvideo2no As New Bitmap(imgvideono, romvideo.Width, romvideo.Height)
 
         Dim imgmanual As New Bitmap(My.Resources.OKmanual)
-        Dim imgmanual2 As New Bitmap(imgmanual, imgmanual.Width, imgmanual.Height)
-        Dim imgmanual2no As New Bitmap(imgmanual, imgmanual.Width, imgmanual.Height)
+        Dim imgmanualno As New Bitmap(My.Resources.nomanual)
+        Dim imgmanual2 As New Bitmap(imgmanual, romvideo.Width, romvideo.Height)
+        Dim imgmanual2no As New Bitmap(imgmanualno, romvideo.Width, romvideo.Height)
 
         Dim imgoverlay As New Bitmap(My.Resources.OKoverlay)
-        Dim imgoverlay2 As New Bitmap(imgoverlay, imgoverlay.Width, imgoverlay.Height)
-        Dim imgoverlay2no As New Bitmap(imgoverlay, imgoverlay.Width, imgoverlay.Height)
+        Dim imgoverlayno As New Bitmap(My.Resources.nooverlay)
+        Dim imgoverlay2 As New Bitmap(imgoverlay, romoverlay.Width, romoverlay.Height)
+        Dim imgoverlay2no As New Bitmap(imgoverlayno, romoverlay.Width, romoverlay.Height)
 
         Dim imgsaves As New Bitmap(My.Resources.OKMem)
-        Dim imgsaves2 As New Bitmap(imgsaves, imgsaves.Width, imgsaves.Height)
-        Dim imgsaves2no As New Bitmap(imgsaves, imgsaves.Width, imgsaves.Height)
+        Dim imgsavesno As New Bitmap(My.Resources.nomem)
+        Dim imgsaves2 As New Bitmap(imgsaves, romsave.Width, romsave.Height)
+        Dim imgsaves2no As New Bitmap(imgsavesno, romsave.Width, romsave.Height)
 
         If checkboximg = True Then
-            romscreen.Image = img2
+            romscreen.Image = imgscreen2
         Else
-            romscreen.Image = My.Resources.noscreen
+            romscreen.Image = imgscreen2no
         End If
 
         If checkboxvideo = True Then
-            romvideo.Image = My.Resources.OKvideo
+            romvideo.Image = imgvideo2
         Else
-            romvideo.Image = My.Resources.novideo
+            romvideo.Image = imgvideo2no
         End If
 
         If checkboxmanual = True Then
-            rommanual.Image = My.Resources.OKmanual
+            rommanual.Image = imgmanual2
         Else
-            rommanual.Image = My.Resources.nomanual
+            rommanual.Image = imgmanual2no
         End If
 
         If checkboxoverlay = True Then
-            romoverlay.Image = My.Resources.OKoverlay
+            romoverlay.Image = imgoverlay2
         Else
-            romoverlay.Image = My.Resources.nooverlay
+            romoverlay.Image = imgoverlay2no
         End If
 
         If checkboxsave = True Then
-            romsave.Image = My.Resources.OKMem
+            romsave.Image = imgsaves2
         Else
-            romsave.Image = My.Resources.nomem
+            romsave.Image = imgsaves2no
         End If
     End Sub
     Public Function AreSameImage(ByVal I1 As Image, ByVal I2 As Image) As Boolean
