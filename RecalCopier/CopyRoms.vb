@@ -308,7 +308,7 @@ romsuivante:
                     Dim sw As StreamWriter
                     File.ReadAllLines(chemindelarom)
 
-                    ' Open the file to read from.
+                    ' Open the m3u file to read from.
                     Dim readText() As String = File.ReadAllLines(chemindelarom)
                     Dim s As String
                     size = 0
@@ -321,7 +321,7 @@ romsuivante:
                     Dim sw As StreamWriter
                     File.ReadAllLines(chemindelarom)
 
-                    ' Open the file to read from.
+                    ' Open the cue file to read from.
                     Dim readText() As String = File.ReadAllLines(chemindelarom)
                     Dim s As String
                     size = 0
@@ -674,13 +674,28 @@ romsuivante:
                     End If
 
                 Next
-                'On selectionne la ligne pour que le trigger changed s'applique
-                If listboxMaSelection.Visible = False Then
+                'On selectionne la ligne pour que le trigger change s'applique
+                If listboxMaSelection.Visible = False Then 'si la listbox est invisible on l'affiche et on la rehide
                     listboxMaSelection.Show()
-                    listboxMaSelection.SelectedItem = a
+                    'on reboucle pour ne laisser selectionné que le dernier
+                    For k = 0 To listboxMaSelection.Items.Count - 1
+                        If a = k Then
+                            listboxMaSelection.SetSelected(a, True)
+                        Else
+                            listboxMaSelection.SetSelected(a, False)
+                        End If
+                    Next
                     listboxMaSelection.Hide()
-                Else
-                    listboxMaSelection.SelectedItem = a
+
+                Else 'on le fait directement
+                    For k = 0 To listboxMaSelection.Items.Count - 1
+                        If a = k Then
+                            listboxMaSelection.SetSelected(a, True)
+                        Else
+                            listboxMaSelection.SetSelected(a, False)
+                        End If
+                    Next
+
                 End If
 
 
