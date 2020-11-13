@@ -14,6 +14,7 @@ Public Class CopyRoms
         lbl_TxtSearch.Hide()
         txt_txtsearch.Hide()
         listboxMaSelection.Hide()
+        buttonRAZ.Hide()
         'Launch Import Gamelist button
         ButtonImportXML.PerformClick()
     End Sub
@@ -275,7 +276,7 @@ romsuivante:
         ButtonShowGames.Hide()
         txt_txtsearch.Show()
         lbl_TxtSearch.Show()
-
+        buttonRAZ.Show()
         dv.Sort = "romconsole asc, romname asc"
 
         'on va calculer la taille des roms
@@ -287,11 +288,12 @@ romsuivante:
         On Error Resume Next
         Dim valeursize As String
 
-        For Each oRow As DataGridViewRow In FinalGrid.Rows
-            valeursize = oRow.Cells(13).Value
+        For oRow = 0 To FinalGrid.Rows.Count - 1
+            valeursize = FinalGrid.Rows(oRow).Cells(13).Value
             If valeursize Is Nothing Then ' si la cellule valeur size est vide on la calcule, sinon rien
+                Dim valeurrom As String = FinalGrid.Rows(oRow).Cells(2).Value
 
-                Dim chemindelarom = oRow.Cells(2).Value
+                Dim chemindelarom = valeurrom
                 Dim sizefichier As Long
                 Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
 
@@ -319,7 +321,7 @@ romsuivante:
                         Dim s As String
                         sizefichier = 0
                         For Each s In readText
-                            chemindelarom = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value & "\" & Replace(s, "/", "\")
+                            chemindelarom = My.Settings.RecalboxFolder & "\roms\" & FinalGrid.Rows(oRow).Cells(0).Value & "\" & Replace(s, "/", "\")
                             Dim info As New FileInfo(chemindelarom)
                             sizefichier += info.Length
                         Next
@@ -340,7 +342,7 @@ romsuivante:
 
                                 Dim iso As String = s.Substring(detectfile).Substring(0, InStr(s.Substring(detectfile), Chr(34)) - 1)
 
-                                chemindelarom = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value & "\" & Replace(iso, "/", "\")
+                                chemindelarom = My.Settings.RecalboxFolder & "\roms\" & FinalGrid.Rows(oRow).Cells(0).Value & "\" & Replace(iso, "/", "\")
 
                                 Dim info As New FileInfo(chemindelarom)
                                 sizefichier += info.Length
@@ -356,7 +358,7 @@ romsuivante:
                 End If
                 'Conversion en Mo
                 Dim tailleenmo As Decimal = sizefichier / 1048576
-                oRow.Cells(13).Value = Math.Round(tailleenmo, 2)
+                FinalGrid.Rows(oRow).Cells(13).Value = Math.Round(tailleenmo, 2)
                 sizefichier = 0
             End If
         Next
@@ -814,7 +816,7 @@ romsuivante:
         Dim newrecalbox As String = My.Settings.CopyFolder & "\recalbox"
         Directory.CreateDirectory(newrecalbox)
 
-        For i = 0 To listboxMaSelection.Items.Count
+        For i = 0 To listboxMaSelection.Items.Count - 1
             Dim pathjeu As String = listboxMaSelection.Items(i)
             Dim replacejeu As String = Replace(pathjeu, My.Settings.RecalboxFolder, newrecalbox)
             Dim repertoirefinal As String = Path.GetDirectoryName(replacejeu)
@@ -827,11 +829,11 @@ romsuivante:
             End If
 
             'et on copie LES ROMS
-            System.IO.File.Copy(pathjeu, replacejeu)
+            System.IO.File.Copy(pathjeu, replacejeu, True)
 
             'a optimiser pour ecrire le gamelist en temps réel ...
             'en attendant on copie le gamelist
-            System.IO.File.Copy(legamelist, lenouvogamelist)
+            System.IO.File.Copy(legamelist, lenouvogamelist, True)
 
 
             'on check si les images
@@ -845,7 +847,7 @@ romsuivante:
 
         'on check si les BIOS a la fin 
         If checkbios.Checked = True Then
-            System.IO.File.Copy(My.Settings.RecalboxFolder & "\Bios", newrecalbox & "\Bios")
+            System.IO.File.Copy(My.Settings.RecalboxFolder & "\Bios", newrecalbox & "\Bios", True)
         End If
 
 

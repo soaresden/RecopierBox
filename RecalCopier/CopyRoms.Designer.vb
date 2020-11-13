@@ -74,6 +74,7 @@ Partial Class CopyRoms
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.lbl_TxtSearch = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.buttonRAZ = New System.Windows.Forms.Button()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -474,14 +475,14 @@ Partial Class CopyRoms
         '
         'listboxMaSelection
         '
-        Me.listboxMaSelection.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.listboxMaSelection.BackColor = System.Drawing.Color.AliceBlue
         Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.InfoText
         Me.listboxMaSelection.FormattingEnabled = True
         Me.listboxMaSelection.Location = New System.Drawing.Point(0, 0)
         Me.listboxMaSelection.Name = "listboxMaSelection"
         Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.listboxMaSelection.Size = New System.Drawing.Size(114, 407)
+        Me.listboxMaSelection.Size = New System.Drawing.Size(393, 407)
         Me.listboxMaSelection.TabIndex = 12
         '
         'txt_romdesc
@@ -612,7 +613,7 @@ Partial Class CopyRoms
         '
         'txt_txtsearch
         '
-        Me.txt_txtsearch.Location = New System.Drawing.Point(121, 410)
+        Me.txt_txtsearch.Location = New System.Drawing.Point(175, 407)
         Me.txt_txtsearch.Name = "txt_txtsearch"
         Me.txt_txtsearch.Size = New System.Drawing.Size(205, 20)
         Me.txt_txtsearch.TabIndex = 4
@@ -624,12 +625,21 @@ Partial Class CopyRoms
         Me.lbl_TxtSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.lbl_TxtSearch.Location = New System.Drawing.Point(16, 412)
         Me.lbl_TxtSearch.Name = "lbl_TxtSearch"
-        Me.lbl_TxtSearch.Size = New System.Drawing.Size(99, 15)
+        Me.lbl_TxtSearch.Size = New System.Drawing.Size(183, 15)
         Me.lbl_TxtSearch.TabIndex = 11
-        Me.lbl_TxtSearch.Text = "Saisir pour Filtrer"
+        Me.lbl_TxtSearch.Text = "Recherche Romname et Entrée :"
         '
         'Timer1
         '
+        '
+        'buttonRAZ
+        '
+        Me.buttonRAZ.Location = New System.Drawing.Point(386, 405)
+        Me.buttonRAZ.Name = "buttonRAZ"
+        Me.buttonRAZ.Size = New System.Drawing.Size(111, 23)
+        Me.buttonRAZ.TabIndex = 12
+        Me.buttonRAZ.Text = "RAZ Recherche"
+        Me.buttonRAZ.UseVisualStyleBackColor = True
         '
         'CopyRoms
         '
@@ -637,6 +647,7 @@ Partial Class CopyRoms
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1017, 574)
+        Me.Controls.Add(Me.buttonRAZ)
         Me.Controls.Add(Me.lbl_TxtSearch)
         Me.Controls.Add(Me.txt_txtsearch)
         Me.Controls.Add(Me.grp_RomInfos)
@@ -724,4 +735,5 @@ Partial Class CopyRoms
     Friend WithEvents listboxMaSelection As ListBox
     Friend WithEvents buttonaffichermaselection As Button
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents buttonRAZ As Button
 End Class
