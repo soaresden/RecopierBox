@@ -601,10 +601,10 @@ romsuivante:
         As String) As String
         Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
     End Function
-    Private Sub RomImage_DoubleClick(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
+    Private Sub RomImage_Click(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
         System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
     End Sub
-    Private Sub Romscreen_DoubleClick(sender As Object, e As EventArgs)
+    Private Sub Romscreen_Click(sender As Object, e As EventArgs)
         Dim OK As Image = My.Resources.Okscreen
         Dim NO As Image = My.Resources.noscreen
 
@@ -612,7 +612,7 @@ romsuivante:
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
         End If
     End Sub
-    Private Sub Rommanual_DoubleClick(sender As Object, e As EventArgs)
+    Private Sub Rommanual_Click(sender As Object, e As EventArgs)
         Dim OK As Image = My.Resources.OKmanual
         Dim NO As Image = My.Resources.nomanual
 
@@ -621,7 +621,7 @@ romsuivante:
             Process.Start(FinalGrid.SelectedCells(6).Value.ToString)
         End If
     End Sub
-    Private Sub Romoverlay_DoubleClick(sender As Object, e As EventArgs)
+    Private Sub Romoverlay_Click(sender As Object, e As EventArgs)
         Dim OK As Image = My.Resources.OKoverlay
         Dim NO As Image = My.Resources.nooverlay
 
@@ -879,7 +879,7 @@ romsuivante:
             Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(My.Settings.RecalboxFolder & "\Bios", newrecalbox & "\Bios", True)
         End If
         MsgBox("Copie Terminée !" & Chr(13) & "Veuillez Deplacer le dossier recalbox sur votre media")
-
+        Process.Start("explorer", My.Settings.CopyFolder)
     End Sub
     Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
         If listboxMaSelection.Visible = True Then
