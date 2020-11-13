@@ -56,6 +56,11 @@ Partial Class CopyRoms
         Me.Buttongetback = New System.Windows.Forms.Button()
         Me.lbl_bibliorecalbox = New System.Windows.Forms.Label()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
+        Me.romsaveo = New System.Windows.Forms.Button()
+        Me.romoverlayo = New System.Windows.Forms.Button()
+        Me.rommanualo = New System.Windows.Forms.Button()
+        Me.romvideoo = New System.Windows.Forms.Button()
+        Me.romscreeno = New System.Windows.Forms.Button()
         Me.listboxMaSelection = New System.Windows.Forms.ListBox()
         Me.txt_romdesc = New System.Windows.Forms.RichTextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -70,11 +75,6 @@ Partial Class CopyRoms
         Me.lbl_TxtSearch = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.buttonRAZ = New System.Windows.Forms.Button()
-        Me.romscreen = New System.Windows.Forms.Button()
-        Me.romvideo = New System.Windows.Forms.Button()
-        Me.rommanual = New System.Windows.Forms.Button()
-        Me.romoverlay = New System.Windows.Forms.Button()
-        Me.romsave = New System.Windows.Forms.Button()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -447,11 +447,11 @@ Partial Class CopyRoms
         'grp_RomInfos
         '
         Me.grp_RomInfos.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.grp_RomInfos.Controls.Add(Me.romsave)
-        Me.grp_RomInfos.Controls.Add(Me.romoverlay)
-        Me.grp_RomInfos.Controls.Add(Me.rommanual)
-        Me.grp_RomInfos.Controls.Add(Me.romvideo)
-        Me.grp_RomInfos.Controls.Add(Me.romscreen)
+        Me.grp_RomInfos.Controls.Add(Me.romsaveo)
+        Me.grp_RomInfos.Controls.Add(Me.romoverlayo)
+        Me.grp_RomInfos.Controls.Add(Me.rommanualo)
+        Me.grp_RomInfos.Controls.Add(Me.romvideoo)
+        Me.grp_RomInfos.Controls.Add(Me.romscreeno)
         Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.txt_romdesc)
         Me.grp_RomInfos.Controls.Add(Me.Label4)
@@ -468,16 +468,56 @@ Partial Class CopyRoms
         Me.grp_RomInfos.TabStop = False
         Me.grp_RomInfos.Text = "Rom Infos"
         '
+        'romsaveo
+        '
+        Me.romsaveo.Location = New System.Drawing.Point(329, 344)
+        Me.romsaveo.Name = "romsaveo"
+        Me.romsaveo.Size = New System.Drawing.Size(57, 55)
+        Me.romsaveo.TabIndex = 20
+        Me.romsaveo.UseVisualStyleBackColor = True
+        '
+        'romoverlayo
+        '
+        Me.romoverlayo.Location = New System.Drawing.Point(242, 344)
+        Me.romoverlayo.Name = "romoverlayo"
+        Me.romoverlayo.Size = New System.Drawing.Size(57, 55)
+        Me.romoverlayo.TabIndex = 19
+        Me.romoverlayo.UseVisualStyleBackColor = True
+        '
+        'rommanualo
+        '
+        Me.rommanualo.Location = New System.Drawing.Point(163, 344)
+        Me.rommanualo.Name = "rommanualo"
+        Me.rommanualo.Size = New System.Drawing.Size(57, 55)
+        Me.rommanualo.TabIndex = 18
+        Me.rommanualo.UseVisualStyleBackColor = True
+        '
+        'romvideoo
+        '
+        Me.romvideoo.Location = New System.Drawing.Point(82, 344)
+        Me.romvideoo.Name = "romvideoo"
+        Me.romvideoo.Size = New System.Drawing.Size(57, 55)
+        Me.romvideoo.TabIndex = 17
+        Me.romvideoo.UseVisualStyleBackColor = True
+        '
+        'romscreeno
+        '
+        Me.romscreeno.Location = New System.Drawing.Point(9, 344)
+        Me.romscreeno.Name = "romscreeno"
+        Me.romscreeno.Size = New System.Drawing.Size(57, 55)
+        Me.romscreeno.TabIndex = 16
+        Me.romscreeno.UseVisualStyleBackColor = True
+        '
         'listboxMaSelection
         '
         Me.listboxMaSelection.BackColor = System.Drawing.Color.AliceBlue
         Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.InfoText
         Me.listboxMaSelection.FormattingEnabled = True
-        Me.listboxMaSelection.Location = New System.Drawing.Point(0, 0)
+        Me.listboxMaSelection.Location = New System.Drawing.Point(6, 0)
         Me.listboxMaSelection.Name = "listboxMaSelection"
         Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.listboxMaSelection.Size = New System.Drawing.Size(393, 264)
+        Me.listboxMaSelection.Size = New System.Drawing.Size(387, 264)
         Me.listboxMaSelection.TabIndex = 12
         '
         'txt_romdesc
@@ -586,46 +626,6 @@ Partial Class CopyRoms
         Me.buttonRAZ.Text = "RAZ Recherche"
         Me.buttonRAZ.UseVisualStyleBackColor = True
         '
-        'romscreen
-        '
-        Me.romscreen.Location = New System.Drawing.Point(9, 344)
-        Me.romscreen.Name = "romscreen"
-        Me.romscreen.Size = New System.Drawing.Size(57, 55)
-        Me.romscreen.TabIndex = 16
-        Me.romscreen.UseVisualStyleBackColor = True
-        '
-        'romvideo
-        '
-        Me.romvideo.Location = New System.Drawing.Point(82, 344)
-        Me.romvideo.Name = "romvideo"
-        Me.romvideo.Size = New System.Drawing.Size(57, 55)
-        Me.romvideo.TabIndex = 17
-        Me.romvideo.UseVisualStyleBackColor = True
-        '
-        'rommanual
-        '
-        Me.rommanual.Location = New System.Drawing.Point(163, 344)
-        Me.rommanual.Name = "rommanual"
-        Me.rommanual.Size = New System.Drawing.Size(57, 55)
-        Me.rommanual.TabIndex = 18
-        Me.rommanual.UseVisualStyleBackColor = True
-        '
-        'romoverlay
-        '
-        Me.romoverlay.Location = New System.Drawing.Point(242, 344)
-        Me.romoverlay.Name = "romoverlay"
-        Me.romoverlay.Size = New System.Drawing.Size(57, 55)
-        Me.romoverlay.TabIndex = 19
-        Me.romoverlay.UseVisualStyleBackColor = True
-        '
-        'romsave
-        '
-        Me.romsave.Location = New System.Drawing.Point(329, 344)
-        Me.romsave.Name = "romsave"
-        Me.romsave.Size = New System.Drawing.Size(57, 55)
-        Me.romsave.TabIndex = 20
-        Me.romsave.UseVisualStyleBackColor = True
-        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -711,9 +711,9 @@ Partial Class CopyRoms
     Friend WithEvents buttonaffichermaselection As Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents buttonRAZ As Button
-    Friend WithEvents romscreen As Button
-    Friend WithEvents romsave As Button
-    Friend WithEvents romoverlay As Button
-    Friend WithEvents rommanual As Button
-    Friend WithEvents romvideo As Button
+    Friend WithEvents romscreeno As Button
+    Friend WithEvents romsaveo As Button
+    Friend WithEvents romoverlayo As Button
+    Friend WithEvents rommanualo As Button
+    Friend WithEvents romvideoo As Button
 End Class

@@ -532,57 +532,57 @@ romsuivante:
 
         Dim imgscreen As New Bitmap(My.Resources.Okscreen)
         Dim imgscreenno As New Bitmap(My.Resources.noscreen)
-        Dim imgscreen2 As New Bitmap(imgscreen, romscreen.Width, romscreen.Height)
-        Dim imgscreen2no As New Bitmap(imgscreenno, romscreen.Width, romscreen.Height)
+        Dim imgscreen2 As New Bitmap(imgscreen, romscreeno.Width, romscreeno.Height)
+        Dim imgscreen2no As New Bitmap(imgscreenno, romscreeno.Width, romscreeno.Height)
 
         Dim imgvideo As New Bitmap(My.Resources.OKvideo)
         Dim imgvideono As New Bitmap(My.Resources.novideo)
-        Dim imgvideo2 As New Bitmap(imgvideo, romvideo.Width, romvideo.Height)
-        Dim imgvideo2no As New Bitmap(imgvideono, romvideo.Width, romvideo.Height)
+        Dim imgvideo2 As New Bitmap(imgvideo, romvideoo.Width, romvideoo.Height)
+        Dim imgvideo2no As New Bitmap(imgvideono, romvideoo.Width, romvideoo.Height)
 
         Dim imgmanual As New Bitmap(My.Resources.OKmanual)
         Dim imgmanualno As New Bitmap(My.Resources.nomanual)
-        Dim imgmanual2 As New Bitmap(imgmanual, romvideo.Width, romvideo.Height)
-        Dim imgmanual2no As New Bitmap(imgmanualno, romvideo.Width, romvideo.Height)
+        Dim imgmanual2 As New Bitmap(imgmanual, romvideoo.Width, romvideoo.Height)
+        Dim imgmanual2no As New Bitmap(imgmanualno, romvideoo.Width, romvideoo.Height)
 
         Dim imgoverlay As New Bitmap(My.Resources.OKoverlay)
         Dim imgoverlayno As New Bitmap(My.Resources.nooverlay)
-        Dim imgoverlay2 As New Bitmap(imgoverlay, romoverlay.Width, romoverlay.Height)
-        Dim imgoverlay2no As New Bitmap(imgoverlayno, romoverlay.Width, romoverlay.Height)
+        Dim imgoverlay2 As New Bitmap(imgoverlay, romoverlayo.Width, romoverlayo.Height)
+        Dim imgoverlay2no As New Bitmap(imgoverlayno, romoverlayo.Width, romoverlayo.Height)
 
         Dim imgsaves As New Bitmap(My.Resources.OKMem)
         Dim imgsavesno As New Bitmap(My.Resources.nomem)
-        Dim imgsaves2 As New Bitmap(imgsaves, romsave.Width, romsave.Height)
-        Dim imgsaves2no As New Bitmap(imgsavesno, romsave.Width, romsave.Height)
+        Dim imgsaves2 As New Bitmap(imgsaves, romsaveo.Width, romsaveo.Height)
+        Dim imgsaves2no As New Bitmap(imgsavesno, romsaveo.Width, romsaveo.Height)
 
         If checkboximg = True Then
-            romscreen.Image = imgscreen2
+            romscreeno.Image = imgscreen2
         Else
-            romscreen.Image = imgscreen2no
+            romscreeno.Image = imgscreen2no
         End If
 
         If checkboxvideo = True Then
-            romvideo.Image = imgvideo2
+            romvideoo.Image = imgvideo2
         Else
-            romvideo.Image = imgvideo2no
+            romvideoo.Image = imgvideo2no
         End If
 
         If checkboxmanual = True Then
-            rommanual.Image = imgmanual2
+            rommanualo.Image = imgmanual2
         Else
-            rommanual.Image = imgmanual2no
+            rommanualo.Image = imgmanual2no
         End If
 
         If checkboxoverlay = True Then
-            romoverlay.Image = imgoverlay2
+            romoverlayo.Image = imgoverlay2
         Else
-            romoverlay.Image = imgoverlay2no
+            romoverlayo.Image = imgoverlay2no
         End If
 
         If checkboxsave = True Then
-            romsave.Image = imgsaves2
+            romsaveo.Image = imgsaves2
         Else
-            romsave.Image = imgsaves2no
+            romsaveo.Image = imgsaves2no
         End If
     End Sub
     Public Function AreSameImage(ByVal I1 As Image, ByVal I2 As Image) As Boolean
@@ -601,45 +601,7 @@ romsuivante:
         As String) As String
         Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
     End Function
-    Private Sub RomImage_Click(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
-        System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
-    End Sub
-    Private Sub Romscreen_Click(sender As Object, e As EventArgs)
-        Dim OK As Image = My.Resources.Okscreen
-        Dim NO As Image = My.Resources.noscreen
 
-        If AreSameImage(romscreen.Image, OK) Then
-            System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
-        End If
-    End Sub
-    Private Sub Rommanual_Click(sender As Object, e As EventArgs)
-        Dim OK As Image = My.Resources.OKmanual
-        Dim NO As Image = My.Resources.nomanual
-
-        If AreSameImage(rommanual.Image, OK) Then
-
-            Process.Start(FinalGrid.SelectedCells(6).Value.ToString)
-        End If
-    End Sub
-    Private Sub Romoverlay_Click(sender As Object, e As EventArgs)
-        Dim OK As Image = My.Resources.OKoverlay
-        Dim NO As Image = My.Resources.nooverlay
-
-        Dim cheminrom As String = FinalGrid.SelectedCells(2).Value.ToString
-        Dim FileInfo As New FileInfo(cheminrom)
-        Dim nomdelarom As String = FileInfo.Name
-        Dim nomducfg As String = nomdelarom & ".cfg"
-
-        Dim cheminoverlay As String = Replace(cheminrom, "\roms\", "\overlays\")
-        Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
-
-        If AreSameImage(romoverlay.Image, OK) Then
-            Process.Start("explorer", Path.GetDirectoryName(testcheminoverlay).ToString)
-        End If
-    End Sub
-    Private Sub Romsave_Click(sender As Object, e As EventArgs)
-        Process.Start("explorer", Replace(romsave.ToString, "\roms\", "saves"))
-    End Sub
     Sub Calculselection()
         'Refresh des valeurs
         Dim count As Integer = 0
@@ -950,5 +912,63 @@ prochainj:
     Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs) Handles buttonRAZ.Click
         txt_txtsearch.Text = Nothing
         SendKeys.Send(Keys.Enter)
+    End Sub
+    '(0)romconsole
+    '(1)romname
+    '(2)rompath
+    '(3)romdesc
+    '(4)romimage
+    '(5)romvideo
+    '(6)rommanual
+
+    '(7)Screen ?
+    '(8)Video ?
+    '(9)Manuel ?
+    '(10)Overlay ?
+    '(11)Save ?
+    '(12)Selection ?
+    '(13) Size
+    Private Sub Romscreeno_Click(sender As Object, e As EventArgs) Handles romscreeno.Click
+        Dim variable As String = FinalGrid.SelectedCells(4).Value.ToString
+        If variable IsNot Nothing Then
+            System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
+        End If
+    End Sub
+
+    Private Sub Romvideoo_Click(sender As Object, e As EventArgs) Handles romvideoo.Click
+        Dim variable As String = FinalGrid.SelectedCells(5).Value.ToString
+        If variable IsNot Nothing Then
+            System.Diagnostics.Process.Start(FinalGrid.SelectedCells(5).Value.ToString)
+        End If
+    End Sub
+
+    Private Sub Rommanualo_Click(sender As Object, e As EventArgs) Handles rommanualo.Click
+        Dim variable As String = FinalGrid.SelectedCells(6).Value.ToString
+        If variable IsNot Nothing Then
+            System.Diagnostics.Process.Start(FinalGrid.SelectedCells(6).Value.ToString)
+        End If
+    End Sub
+
+    Private Sub Romoverlayo_Click(sender As Object, e As EventArgs) Handles romoverlayo.Click
+        Dim variable As String = FinalGrid.SelectedCells(10).Value.ToString
+        If variable IsNot Nothing Then
+            Dim cheminrom As String = FinalGrid.SelectedCells(2).Value.ToString
+            Dim FileInfo As New FileInfo(cheminrom)
+            Dim nomdelarom As String = FileInfo.Name
+            Dim nomducfg As String = nomdelarom & ".cfg"
+
+            Dim cheminoverlay As String = Replace(cheminrom, "\roms\", "\overlays\")
+            Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
+
+            Process.Start("explorer", Path.GetDirectoryName(testcheminoverlay).ToString)
+        End If
+    End Sub
+
+    Private Sub Romsaveo_Click(sender As Object, e As EventArgs) Handles romsaveo.Click
+        Process.Start("explorer", Replace(romsaveo.ToString, "\roms\", "saves"))
+    End Sub
+
+    Private Sub RomImage_Click(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
+        System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
     End Sub
 End Class
