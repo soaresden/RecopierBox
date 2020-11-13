@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports IWshRuntimeLibrary
 
 Public Class CopyRoms
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -331,28 +330,6 @@ romsuivante:
         Next
         On Error GoTo 0
     End Sub
-    Public Shared Function FormatFileSize(ByVal Size As Long) As String
-        Try
-            Dim KB As Integer = 1024
-            Dim MB As Integer = KB * KB
-            ' Return size of file in kilobytes.
-            If Size < KB Then
-                Return (Size.ToString("D") & " bytes")
-            Else
-                Select Case Size / KB
-                    Case Is < 1000
-                        Return (Size / KB).ToString("N") & "KB"
-                    Case Is < 1000000
-                        Return (Size / MB).ToString("N") & "MB"
-                    Case Is < 10000000
-                        Return (Size / MB / KB).ToString("N") & "GB"
-                End Select
-                'sRet = sRet & " (" & Format(Size, "#,##0") & " bytes)"
-            End If
-        Catch ex As Exception
-            Return Size.ToString
-        End Try
-    End Function
     Sub Completiondescheckbox()
         '(0)romconsole
         '(1)romname
