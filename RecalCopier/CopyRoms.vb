@@ -946,17 +946,22 @@ romsuivante:
                             End If
                         Next
 
+                        Dim nouvochemin1 As String = Replace(cheminoverlaycfg1, My.Settings.RecalboxFolder, newrecalbox)
+                        Dim nouvochemin2 As String = Replace(cheminpropreoverlay2, My.Settings.RecalboxFolder, newrecalbox)
+                        Dim nouvochemin3 As String = Replace(cheminpng3, My.Settings.RecalboxFolder, newrecalbox)
 
-
-                        ' Dim nouvocheminoverlay As String = Replace(detectoverlayzero, My.Settings.RecalboxFolder, newrecalbox)
                         'On check si ca existe, au cas ou on le cree
-                        'If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminoverlay))) Then
-                        'System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminoverlay))
-                        'End If
-                        'et on copie LES Overlays
-                        'System.IO.File.Copy(cheminoverlaycfg, nouvocheminoverlay, True)
+                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvochemin2))) Then
+                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvochemin2))
+                        End If
+
+                        'et on copie LES 3 fichiers Overlays
+                        System.IO.File.Copy(cheminoverlaycfg1, nouvochemin1, True)
+                        System.IO.File.Copy(cheminpropreoverlay2, nouvochemin2, True)
+                        System.IO.File.Copy(cheminpng3, nouvochemin3, True)
+
                         Exit For
-                    End If
+                        End If
                 Next
             End If
 
