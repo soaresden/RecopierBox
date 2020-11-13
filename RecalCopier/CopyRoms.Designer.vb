@@ -62,12 +62,7 @@ Partial Class CopyRoms
         Me.txt_rompath = New System.Windows.Forms.TextBox()
         Me.txt_romname = New System.Windows.Forms.TextBox()
         Me.vid_romvid = New AxWMPLib.AxWindowsMediaPlayer()
-        Me.romscreen = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.romsave = New System.Windows.Forms.PictureBox()
-        Me.romoverlay = New System.Windows.Forms.PictureBox()
-        Me.rommanual = New System.Windows.Forms.PictureBox()
-        Me.romvideo = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.RomImage = New System.Windows.Forms.PictureBox()
         Me.txt_txtsearch = New System.Windows.Forms.TextBox()
@@ -75,6 +70,11 @@ Partial Class CopyRoms
         Me.lbl_TxtSearch = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.buttonRAZ = New System.Windows.Forms.Button()
+        Me.romscreen = New System.Windows.Forms.Button()
+        Me.romvideo = New System.Windows.Forms.Button()
+        Me.rommanual = New System.Windows.Forms.Button()
+        Me.romoverlay = New System.Windows.Forms.Button()
+        Me.romsave = New System.Windows.Forms.Button()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -83,11 +83,6 @@ Partial Class CopyRoms
         Me.GroupBox3.SuspendLayout()
         Me.grp_RomInfos.SuspendLayout()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.romscreen, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.romsave, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.romoverlay, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rommanual, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.romvideo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -452,18 +447,18 @@ Partial Class CopyRoms
         'grp_RomInfos
         '
         Me.grp_RomInfos.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.grp_RomInfos.Controls.Add(Me.romsave)
+        Me.grp_RomInfos.Controls.Add(Me.romoverlay)
+        Me.grp_RomInfos.Controls.Add(Me.rommanual)
+        Me.grp_RomInfos.Controls.Add(Me.romvideo)
+        Me.grp_RomInfos.Controls.Add(Me.romscreen)
         Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.txt_romdesc)
         Me.grp_RomInfos.Controls.Add(Me.Label4)
         Me.grp_RomInfos.Controls.Add(Me.txt_rompath)
         Me.grp_RomInfos.Controls.Add(Me.txt_romname)
         Me.grp_RomInfos.Controls.Add(Me.vid_romvid)
-        Me.grp_RomInfos.Controls.Add(Me.romscreen)
         Me.grp_RomInfos.Controls.Add(Me.Label2)
-        Me.grp_RomInfos.Controls.Add(Me.romsave)
-        Me.grp_RomInfos.Controls.Add(Me.romoverlay)
-        Me.grp_RomInfos.Controls.Add(Me.rommanual)
-        Me.grp_RomInfos.Controls.Add(Me.romvideo)
         Me.grp_RomInfos.Controls.Add(Me.Label1)
         Me.grp_RomInfos.Controls.Add(Me.RomImage)
         Me.grp_RomInfos.Location = New System.Drawing.Point(612, 28)
@@ -482,7 +477,7 @@ Partial Class CopyRoms
         Me.listboxMaSelection.Name = "listboxMaSelection"
         Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.listboxMaSelection.Size = New System.Drawing.Size(393, 407)
+        Me.listboxMaSelection.Size = New System.Drawing.Size(393, 264)
         Me.listboxMaSelection.TabIndex = 12
         '
         'txt_romdesc
@@ -532,64 +527,14 @@ Partial Class CopyRoms
         Me.vid_romvid.Size = New System.Drawing.Size(227, 125)
         Me.vid_romvid.TabIndex = 12
         '
-        'romscreen
-        '
-        Me.romscreen.Image = CType(resources.GetObject("romscreen.Image"), System.Drawing.Image)
-        Me.romscreen.Location = New System.Drawing.Point(7, 344)
-        Me.romscreen.Name = "romscreen"
-        Me.romscreen.Size = New System.Drawing.Size(48, 52)
-        Me.romscreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.romscreen.TabIndex = 10
-        Me.romscreen.TabStop = False
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(7, 328)
+        Me.Label2.Location = New System.Drawing.Point(6, 328)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(133, 13)
         Me.Label2.TabIndex = 9
         Me.Label2.Text = "Autres Fichiers de la Rom :"
-        '
-        'romsave
-        '
-        Me.romsave.Image = CType(resources.GetObject("romsave.Image"), System.Drawing.Image)
-        Me.romsave.Location = New System.Drawing.Point(330, 344)
-        Me.romsave.Name = "romsave"
-        Me.romsave.Size = New System.Drawing.Size(48, 52)
-        Me.romsave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.romsave.TabIndex = 7
-        Me.romsave.TabStop = False
-        '
-        'romoverlay
-        '
-        Me.romoverlay.Image = CType(resources.GetObject("romoverlay.Image"), System.Drawing.Image)
-        Me.romoverlay.Location = New System.Drawing.Point(239, 344)
-        Me.romoverlay.Name = "romoverlay"
-        Me.romoverlay.Size = New System.Drawing.Size(48, 52)
-        Me.romoverlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.romoverlay.TabIndex = 6
-        Me.romoverlay.TabStop = False
-        '
-        'rommanual
-        '
-        Me.rommanual.Image = CType(resources.GetObject("rommanual.Image"), System.Drawing.Image)
-        Me.rommanual.Location = New System.Drawing.Point(157, 344)
-        Me.rommanual.Name = "rommanual"
-        Me.rommanual.Size = New System.Drawing.Size(48, 52)
-        Me.rommanual.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.rommanual.TabIndex = 5
-        Me.rommanual.TabStop = False
-        '
-        'romvideo
-        '
-        Me.romvideo.Image = CType(resources.GetObject("romvideo.Image"), System.Drawing.Image)
-        Me.romvideo.Location = New System.Drawing.Point(79, 344)
-        Me.romvideo.Name = "romvideo"
-        Me.romvideo.Size = New System.Drawing.Size(48, 52)
-        Me.romvideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.romvideo.TabIndex = 4
-        Me.romvideo.TabStop = False
         '
         'Label1
         '
@@ -613,9 +558,9 @@ Partial Class CopyRoms
         '
         'txt_txtsearch
         '
-        Me.txt_txtsearch.Location = New System.Drawing.Point(175, 407)
+        Me.txt_txtsearch.Location = New System.Drawing.Point(203, 407)
         Me.txt_txtsearch.Name = "txt_txtsearch"
-        Me.txt_txtsearch.Size = New System.Drawing.Size(205, 20)
+        Me.txt_txtsearch.Size = New System.Drawing.Size(177, 20)
         Me.txt_txtsearch.TabIndex = 4
         '
         'lbl_TxtSearch
@@ -640,6 +585,46 @@ Partial Class CopyRoms
         Me.buttonRAZ.TabIndex = 12
         Me.buttonRAZ.Text = "RAZ Recherche"
         Me.buttonRAZ.UseVisualStyleBackColor = True
+        '
+        'romscreen
+        '
+        Me.romscreen.Location = New System.Drawing.Point(9, 344)
+        Me.romscreen.Name = "romscreen"
+        Me.romscreen.Size = New System.Drawing.Size(57, 55)
+        Me.romscreen.TabIndex = 16
+        Me.romscreen.UseVisualStyleBackColor = True
+        '
+        'romvideo
+        '
+        Me.romvideo.Location = New System.Drawing.Point(82, 344)
+        Me.romvideo.Name = "romvideo"
+        Me.romvideo.Size = New System.Drawing.Size(57, 55)
+        Me.romvideo.TabIndex = 17
+        Me.romvideo.UseVisualStyleBackColor = True
+        '
+        'rommanual
+        '
+        Me.rommanual.Location = New System.Drawing.Point(163, 344)
+        Me.rommanual.Name = "rommanual"
+        Me.rommanual.Size = New System.Drawing.Size(57, 55)
+        Me.rommanual.TabIndex = 18
+        Me.rommanual.UseVisualStyleBackColor = True
+        '
+        'romoverlay
+        '
+        Me.romoverlay.Location = New System.Drawing.Point(242, 344)
+        Me.romoverlay.Name = "romoverlay"
+        Me.romoverlay.Size = New System.Drawing.Size(57, 55)
+        Me.romoverlay.TabIndex = 19
+        Me.romoverlay.UseVisualStyleBackColor = True
+        '
+        'romsave
+        '
+        Me.romsave.Location = New System.Drawing.Point(329, 344)
+        Me.romsave.Name = "romsave"
+        Me.romsave.Size = New System.Drawing.Size(57, 55)
+        Me.romsave.TabIndex = 20
+        Me.romsave.UseVisualStyleBackColor = True
         '
         'CopyRoms
         '
@@ -675,11 +660,6 @@ Partial Class CopyRoms
         Me.grp_RomInfos.ResumeLayout(False)
         Me.grp_RomInfos.PerformLayout()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.romscreen, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.romsave, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.romoverlay, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rommanual, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.romvideo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -703,12 +683,7 @@ Partial Class CopyRoms
     Friend WithEvents txt_USBGo As TextBox
     Friend WithEvents grp_RomInfos As GroupBox
     Friend WithEvents RomImage As PictureBox
-    Friend WithEvents romscreen As PictureBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents romsave As PictureBox
-    Friend WithEvents romoverlay As PictureBox
-    Friend WithEvents rommanual As PictureBox
-    Friend WithEvents romvideo As PictureBox
     Friend WithEvents Label1 As Label
     Friend WithEvents vid_romvid As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents txt_rompath As TextBox
@@ -736,4 +711,9 @@ Partial Class CopyRoms
     Friend WithEvents buttonaffichermaselection As Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents buttonRAZ As Button
+    Friend WithEvents romscreen As Button
+    Friend WithEvents romsave As Button
+    Friend WithEvents romoverlay As Button
+    Friend WithEvents rommanual As Button
+    Friend WithEvents romvideo As Button
 End Class

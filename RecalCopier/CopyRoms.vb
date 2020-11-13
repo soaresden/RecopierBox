@@ -290,10 +290,10 @@ romsuivante:
 
         For oRow = 0 To FinalGrid.Rows.Count - 1
             valeursize = FinalGrid.Rows(oRow).Cells(13).Value
+            Dim valeurrom As String = FinalGrid.Rows(oRow).Cells(1).Value
+            Dim chemindelarom = FinalGrid.Rows(oRow).Cells(2).Value
             If valeursize Is Nothing Then ' si la cellule valeur size est vide on la calcule, sinon rien
-                Dim valeurrom As String = FinalGrid.Rows(oRow).Cells(2).Value
 
-                Dim chemindelarom = valeurrom
                 Dim sizefichier As Long
                 Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
 
@@ -382,6 +382,11 @@ romsuivante:
         '(13)Size
         On Error Resume Next
         For orow = 0 To FinalGrid.RowCount - 1
+            If orow = 0 And FinalGrid.RowCount - 1 = orow Then
+                MsgBox("Pas de Resultats")
+                buttonRAZ.PerformClick()
+                Exit Sub
+            End If
             'test sur le chemin des screens, si la cellule est complétée alors on coche
             Dim lescreen As String = FinalGrid.Rows(orow).Cells(4).Value
             If lescreen Is Nothing Then
@@ -525,8 +530,28 @@ romsuivante:
         Dim checkboxoverlay As String = row.Cells(10).Value
         Dim checkboxsave As String = row.Cells(11).Value
 
+        Dim imgscreen As New Bitmap(My.Resources.Okscreen)
+        Dim imgscreen2 As New Bitmap(imgscreen, romscreen.Width, romscreen.Height)
+        Dim imgscreen2no As New Bitmap(imgscreen, romscreen.Width, romscreen.Height)
+
+        Dim imgvideo As New Bitmap(My.Resources.OKvideo)
+        Dim imgvideo2 As New Bitmap(imgvideo, romscreen.Width, romscreen.Height)
+        Dim imgvideo2no As New Bitmap(imgvideo, romscreen.Width, romscreen.Height)
+
+        Dim imgmanual As New Bitmap(My.Resources.OKmanual)
+        Dim imgmanual2 As New Bitmap(imgmanual, imgmanual.Width, imgmanual.Height)
+        Dim imgmanual2no As New Bitmap(imgmanual, imgmanual.Width, imgmanual.Height)
+
+        Dim imgoverlay As New Bitmap(My.Resources.OKoverlay)
+        Dim imgoverlay2 As New Bitmap(imgoverlay, imgoverlay.Width, imgoverlay.Height)
+        Dim imgoverlay2no As New Bitmap(imgoverlay, imgoverlay.Width, imgoverlay.Height)
+
+        Dim imgsaves As New Bitmap(My.Resources.OKMem)
+        Dim imgsaves2 As New Bitmap(imgsaves, imgsaves.Width, imgsaves.Height)
+        Dim imgsaves2no As New Bitmap(imgsaves, imgsaves.Width, imgsaves.Height)
+
         If checkboximg = True Then
-            romscreen.Image = My.Resources.Okscreen
+            romscreen.Image = img2
         Else
             romscreen.Image = My.Resources.noscreen
         End If
@@ -574,7 +599,7 @@ romsuivante:
     Private Sub RomImage_DoubleClick(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
         System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
     End Sub
-    Private Sub Romscreen_DoubleClick(sender As Object, e As EventArgs) Handles romscreen.DoubleClick
+    Private Sub Romscreen_DoubleClick(sender As Object, e As EventArgs)
         Dim OK As Image = My.Resources.Okscreen
         Dim NO As Image = My.Resources.noscreen
 
@@ -582,7 +607,7 @@ romsuivante:
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
         End If
     End Sub
-    Private Sub Rommanual_DoubleClick(sender As Object, e As EventArgs) Handles rommanual.Click
+    Private Sub Rommanual_DoubleClick(sender As Object, e As EventArgs)
         Dim OK As Image = My.Resources.OKmanual
         Dim NO As Image = My.Resources.nomanual
 
@@ -591,7 +616,7 @@ romsuivante:
             Process.Start(FinalGrid.SelectedCells(6).Value.ToString)
         End If
     End Sub
-    Private Sub Romoverlay_DoubleClick(sender As Object, e As EventArgs) Handles romoverlay.Click
+    Private Sub Romoverlay_DoubleClick(sender As Object, e As EventArgs)
         Dim OK As Image = My.Resources.OKoverlay
         Dim NO As Image = My.Resources.nooverlay
 
@@ -607,7 +632,7 @@ romsuivante:
             Process.Start("explorer", Path.GetDirectoryName(testcheminoverlay).ToString)
         End If
     End Sub
-    Private Sub Romsave_Click(sender As Object, e As EventArgs) Handles romsave.Click
+    Private Sub Romsave_Click(sender As Object, e As EventArgs)
         Process.Start("explorer", Replace(romsave.ToString, "\roms\", "saves"))
     End Sub
     Sub Calculselection()
@@ -807,7 +832,7 @@ romsuivante:
         End If
 
         Dim optionsbox As String = temptxt1 & Chr(13) & temptxt2 & Chr(13) & temptxt3 & Chr(13) & temptxt4 & Chr(13) & temptxt5 & Chr(13) & temptxt6
-        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus et Confirmez les options de Copie" & Chr(13) & optionsbox, vbYesNo) = vbNo Then
+        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(13) & optionsbox & Chr(13) & "Chemin de Copie :" & Chr(13) & txt_CopyFolder.Text, vbYesNo) = vbNo Then
             listboxMaSelection.Hide()
             Exit Sub
         End If
@@ -837,19 +862,18 @@ romsuivante:
 
 
             'on check si les images
-            'on check si les images
-            'on check si les images
-            'on check si les images
-            'on check si les images
-            'on check si les images
+            'on check si les videos
+            'on check si les manuels
+            'on check si les overlays
+            'on check si les saves
 
         Next i
 
         'on check si les BIOS a la fin 
         If checkbios.Checked = True Then
-            System.IO.File.Copy(My.Settings.RecalboxFolder & "\Bios", newrecalbox & "\Bios", True)
+            Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(My.Settings.RecalboxFolder & "\Bios", newrecalbox & "\Bios", True)
         End If
-
+        MsgBox("Copie Terminée !" & Chr(13) & "Veuillez Deplacer le dossier recalbox sur votre media")
 
     End Sub
     Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
@@ -916,5 +940,10 @@ prochainj:
             sec = 0
             txt_romname.Text = Mid(FinalGrid.SelectedCells(1).Value.ToString, 1, sec)
         End If
+    End Sub
+
+    Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs) Handles buttonRAZ.Click
+        txt_txtsearch.Text = Nothing
+        SendKeys.Send(Keys.Enter)
     End Sub
 End Class
