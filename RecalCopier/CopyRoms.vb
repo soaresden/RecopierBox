@@ -197,13 +197,14 @@ romsuivante:
         FinalGrid.DataSource = table
 
         'Width for columns
-        FinalGrid.Columns(0).Width = 40     'romconsole
-        FinalGrid.Columns(1).Width = 180    'romname
-        FinalGrid.Columns(2).Width = 1      'rompath
-        FinalGrid.Columns(3).Width = 1      'romdesc
-        FinalGrid.Columns(4).Width = 1      'romimage
-        FinalGrid.Columns(5).Width = 1      'romvideo
-        FinalGrid.Columns(6).Width = 1      'romanual
+        FinalGrid.Columns(0).Width = 50     'romconsole
+        FinalGrid.Columns(1).Width = 240    'romname
+        'Hiding les colonnes
+        FinalGrid.Columns(2).Visible = False      'rompath
+        FinalGrid.Columns(3).Visible = False      'romdesc
+        FinalGrid.Columns(4).Visible = False      'romimage
+        FinalGrid.Columns(5).Visible = False      'romvideo
+        FinalGrid.Columns(6).Visible = False     'romanual
 
         '(0)romconsole
         '(1)romname
@@ -283,6 +284,7 @@ romsuivante:
         Call Calcultaillerom()
         'On lance la completion des checkbox
         Call Completiondescheckbox()
+
     End Sub
     Sub Calcultaillerom()
         On Error Resume Next
@@ -844,13 +846,26 @@ romsuivante:
         Process.Start("explorer", My.Settings.CopyFolder)
     End Sub
     Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
+        'Check des Doublons
+        supdoublon(listboxMaSelection)
+        'Utiliser pour désélectionner la dernière ligne
+        listboxMaSelection.Text = "-"
+
         If listboxMaSelection.Visible = True Then
             listboxMaSelection.Hide()
         Else
+            listboxMaSelection.Location = New Point(6, 0)
+            listboxMaSelection.Size = New Size(387, 329)
             listboxMaSelection.Show()
         End If
     End Sub
-
+    Private Function Supdoublon(x As ListBox)
+        For y = 0 To x.Items.Count - 1
+            For z = y + 1 To x.Items.Count - 1
+                If x.Items(y) = x.Items(z) Then x.Items.Remove(z)
+            Next z
+        Next y
+    End Function
 
     Private Sub ListboxMaSelection_DoubleClick(sender As Object, e As EventArgs) Handles listboxMaSelection.DoubleClick
         'on enleve de la liste et on met a jour la checkbox dans la selection

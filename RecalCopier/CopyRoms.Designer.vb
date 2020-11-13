@@ -63,7 +63,6 @@ Partial Class CopyRoms
         Me.romscreeno = New System.Windows.Forms.Button()
         Me.listboxMaSelection = New System.Windows.Forms.ListBox()
         Me.txt_romdesc = New System.Windows.Forms.RichTextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.txt_rompath = New System.Windows.Forms.TextBox()
         Me.txt_romname = New System.Windows.Forms.TextBox()
         Me.vid_romvid = New AxWMPLib.AxWindowsMediaPlayer()
@@ -454,7 +453,6 @@ Partial Class CopyRoms
         Me.grp_RomInfos.Controls.Add(Me.romscreeno)
         Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.txt_romdesc)
-        Me.grp_RomInfos.Controls.Add(Me.Label4)
         Me.grp_RomInfos.Controls.Add(Me.txt_rompath)
         Me.grp_RomInfos.Controls.Add(Me.txt_romname)
         Me.grp_RomInfos.Controls.Add(Me.vid_romvid)
@@ -513,11 +511,11 @@ Partial Class CopyRoms
         Me.listboxMaSelection.BackColor = System.Drawing.Color.AliceBlue
         Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.InfoText
         Me.listboxMaSelection.FormattingEnabled = True
-        Me.listboxMaSelection.Location = New System.Drawing.Point(6, 0)
+        Me.listboxMaSelection.Location = New System.Drawing.Point(242, 58)
         Me.listboxMaSelection.Name = "listboxMaSelection"
         Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.listboxMaSelection.Size = New System.Drawing.Size(387, 264)
+        Me.listboxMaSelection.Size = New System.Drawing.Size(146, 17)
         Me.listboxMaSelection.TabIndex = 12
         '
         'txt_romdesc
@@ -528,17 +526,6 @@ Partial Class CopyRoms
         Me.txt_romdesc.Size = New System.Drawing.Size(145, 250)
         Me.txt_romdesc.TabIndex = 15
         Me.txt_romdesc.Text = ""
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.Navy
-        Me.Label4.Location = New System.Drawing.Point(35, 183)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(170, 13)
-        Me.Label4.TabIndex = 11
-        Me.Label4.Text = "2x Clic pour Ouvrir le Screen"
         '
         'txt_rompath
         '
@@ -561,16 +548,16 @@ Partial Class CopyRoms
         'vid_romvid
         '
         Me.vid_romvid.Enabled = True
-        Me.vid_romvid.Location = New System.Drawing.Point(6, 200)
+        Me.vid_romvid.Location = New System.Drawing.Point(6, 186)
         Me.vid_romvid.Name = "vid_romvid"
         Me.vid_romvid.OcxState = CType(resources.GetObject("vid_romvid.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.vid_romvid.Size = New System.Drawing.Size(227, 125)
+        Me.vid_romvid.Size = New System.Drawing.Size(227, 139)
         Me.vid_romvid.TabIndex = 12
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 328)
+        Me.Label2.Location = New System.Drawing.Point(124, 328)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(133, 13)
         Me.Label2.TabIndex = 9
@@ -688,7 +675,6 @@ Partial Class CopyRoms
     Friend WithEvents vid_romvid As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents txt_rompath As TextBox
     Friend WithEvents txt_romname As TextBox
-    Friend WithEvents Label4 As Label
     Friend WithEvents txt_romdesc As RichTextBox
     Friend WithEvents txt_txtsearch As TextBox
     Friend WithEvents GroupBox5 As GroupBox
