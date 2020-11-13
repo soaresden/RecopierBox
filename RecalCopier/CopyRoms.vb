@@ -971,4 +971,13 @@ prochainj:
     Private Sub RomImage_Click(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
         System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
     End Sub
+
+    Private Sub Txt_CopyFolder_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_CopyFolder.KeyDown
+        'Ajout d'un \ de securite si besoin
+        If e.KeyCode = Keys.Enter Then
+            If txt_CopyFolder.Text.Substring(Len(txt_CopyFolder.Text) - 1, 1) <> "\" Then
+                txt_CopyFolder.Text = txt_CopyFolder.Text + "\"
+            End If
+        End If
+    End Sub
 End Class

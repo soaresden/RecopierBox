@@ -39,6 +39,7 @@ Partial Class Form1
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Disclaimer = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.groupBox2.SuspendLayout()
         Me.MenuBoutons.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
@@ -215,7 +216,7 @@ Partial Class Form1
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Disclaimer.Location = New System.Drawing.Point(11, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(929, 414)
+        Me.Disclaimer.Size = New System.Drawing.Size(928, 414)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Pourquoi cet Outil ?"
@@ -232,6 +233,17 @@ Partial Class Form1
     "de déja"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.RichTextBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder
+        Me.RichTextBox1.Location = New System.Drawing.Point(724, 487)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(216, 27)
+        Me.RichTextBox1.TabIndex = 17
+        Me.RichTextBox1.Text = "https://github.com/soaresden/RecopierBox"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -240,6 +252,7 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(951, 540)
+        Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.Disclaimer)
         Me.Controls.Add(Me.label3)
         Me.Controls.Add(Me.Quitter)
@@ -278,4 +291,5 @@ Partial Class Form1
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Disclaimer As GroupBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents RichTextBox1 As RichTextBox
 End Class

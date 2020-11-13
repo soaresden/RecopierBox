@@ -40,4 +40,18 @@
         Disclaimer.Hide()
         MenuBoutons.Show()
     End Sub
+
+
+    Private Sub TxtRecalfolderPath_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtRecalfolderPath.KeyDown
+        'Ajout d'un \ de securite si besoin
+        If e.KeyCode = Keys.Enter Then
+            If TxtRecalfolderPath.Text.Substring(Len(TxtRecalfolderPath.Text) - 1, 1) <> "\" Then
+                TxtRecalfolderPath.Text = TxtRecalfolderPath.Text + "\"
+            End If
+        End If
+    End Sub
+
+    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
+        Process.Start("https://github.com/soaresden/RecopierBox")
+    End Sub
 End Class
