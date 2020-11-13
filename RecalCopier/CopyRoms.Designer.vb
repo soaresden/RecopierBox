@@ -30,7 +30,7 @@ Partial Class CopyRoms
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.ButtonParcourirRecalCopy = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -44,7 +44,8 @@ Partial Class CopyRoms
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.buttonaffichermaselection = New System.Windows.Forms.Button()
+        Me.txt_morestant = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lbl_GoAPrevoir = New System.Windows.Forms.Label()
         Me.txt_GoAPrevoir = New System.Windows.Forms.TextBox()
@@ -56,6 +57,7 @@ Partial Class CopyRoms
         Me.Buttongetback = New System.Windows.Forms.Button()
         Me.lbl_bibliorecalbox = New System.Windows.Forms.Label()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
+        Me.listboxMaSelection = New System.Windows.Forms.ListBox()
         Me.txt_romdesc = New System.Windows.Forms.RichTextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txt_rompath = New System.Windows.Forms.TextBox()
@@ -161,7 +163,7 @@ Partial Class CopyRoms
         'GroupBox5
         '
         Me.GroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.GroupBox5.Controls.Add(Me.Button2)
+        Me.GroupBox5.Controls.Add(Me.ButtonParcourirRecalCopy)
         Me.GroupBox5.Controls.Add(Me.TextBox2)
         Me.GroupBox5.Controls.Add(Me.Label6)
         Me.GroupBox5.Controls.Add(Me.Label8)
@@ -175,15 +177,15 @@ Partial Class CopyRoms
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Copie"
         '
-        'Button2
+        'ButtonParcourirRecalCopy
         '
-        Me.Button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Button2.Location = New System.Drawing.Point(6, 38)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(60, 23)
-        Me.Button2.TabIndex = 6
-        Me.Button2.Text = "Parcourir"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.ButtonParcourirRecalCopy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(6, 38)
+        Me.ButtonParcourirRecalCopy.Name = "ButtonParcourirRecalCopy"
+        Me.ButtonParcourirRecalCopy.Size = New System.Drawing.Size(60, 23)
+        Me.ButtonParcourirRecalCopy.TabIndex = 6
+        Me.ButtonParcourirRecalCopy.Text = "Parcourir"
+        Me.ButtonParcourirRecalCopy.UseVisualStyleBackColor = True
         '
         'TextBox2
         '
@@ -329,7 +331,8 @@ Partial Class CopyRoms
         'GroupBox4
         '
         Me.GroupBox4.BackColor = System.Drawing.Color.DeepSkyBlue
-        Me.GroupBox4.Controls.Add(Me.TextBox1)
+        Me.GroupBox4.Controls.Add(Me.buttonaffichermaselection)
+        Me.GroupBox4.Controls.Add(Me.txt_morestant)
         Me.GroupBox4.Controls.Add(Me.Label5)
         Me.GroupBox4.Controls.Add(Me.lbl_GoAPrevoir)
         Me.GroupBox4.Controls.Add(Me.txt_GoAPrevoir)
@@ -344,14 +347,24 @@ Partial Class CopyRoms
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Ma Selection"
         '
-        'TextBox1
+        'buttonaffichermaselection
         '
-        Me.TextBox1.Location = New System.Drawing.Point(187, 42)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(61, 20)
-        Me.TextBox1.TabIndex = 5
-        Me.TextBox1.Text = "0"
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.buttonaffichermaselection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.buttonaffichermaselection.Location = New System.Drawing.Point(187, 6)
+        Me.buttonaffichermaselection.Name = "buttonaffichermaselection"
+        Me.buttonaffichermaselection.Size = New System.Drawing.Size(192, 23)
+        Me.buttonaffichermaselection.TabIndex = 6
+        Me.buttonaffichermaselection.Text = "Afficher/Cacher Ma Selection"
+        Me.buttonaffichermaselection.UseVisualStyleBackColor = True
+        '
+        'txt_morestant
+        '
+        Me.txt_morestant.Location = New System.Drawing.Point(187, 42)
+        Me.txt_morestant.Name = "txt_morestant"
+        Me.txt_morestant.Size = New System.Drawing.Size(61, 20)
+        Me.txt_morestant.TabIndex = 5
+        Me.txt_morestant.Text = "0"
+        Me.txt_morestant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label5
         '
@@ -459,6 +472,7 @@ Partial Class CopyRoms
         'grp_RomInfos
         '
         Me.grp_RomInfos.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.txt_romdesc)
         Me.grp_RomInfos.Controls.Add(Me.Label4)
         Me.grp_RomInfos.Controls.Add(Me.txt_rompath)
@@ -478,6 +492,18 @@ Partial Class CopyRoms
         Me.grp_RomInfos.TabIndex = 10
         Me.grp_RomInfos.TabStop = False
         Me.grp_RomInfos.Text = "Rom Infos"
+        '
+        'listboxMaSelection
+        '
+        Me.listboxMaSelection.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.listboxMaSelection.FormattingEnabled = True
+        Me.listboxMaSelection.Location = New System.Drawing.Point(0, 0)
+        Me.listboxMaSelection.Name = "listboxMaSelection"
+        Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.listboxMaSelection.Size = New System.Drawing.Size(378, 407)
+        Me.listboxMaSelection.TabIndex = 12
         '
         'txt_romdesc
         '
@@ -698,7 +724,7 @@ Partial Class CopyRoms
     Friend WithEvents txt_romdesc As RichTextBox
     Friend WithEvents txt_txtsearch As TextBox
     Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents Button2 As Button
+    Friend WithEvents ButtonParcourirRecalCopy As Button
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label8 As Label
@@ -711,8 +737,10 @@ Partial Class CopyRoms
     Friend WithEvents CheckBox4 As CheckBox
     Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents CheckBox3 As CheckBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txt_morestant As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents lbl_TxtSearch As Label
+    Friend WithEvents listboxMaSelection As ListBox
+    Friend WithEvents buttonaffichermaselection As Button
 End Class

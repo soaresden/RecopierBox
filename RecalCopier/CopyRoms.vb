@@ -1,13 +1,5 @@
-﻿Imports System.Xml
-Imports System.Data
-Imports System.Data.SqlClient
-Imports System.IO
-Imports System.Net
-Imports System.Xml.Linq
-Imports WMPLib
-Imports System.Reflection
-Imports System.Drawing.Imaging
-
+﻿Imports System.IO
+Imports IWshRuntimeLibrary
 
 Public Class CopyRoms
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -21,6 +13,7 @@ Public Class CopyRoms
         vid_romvid.uiMode = "none"
         lbl_TxtSearch.Hide()
         txt_txtsearch.Hide()
+        listboxMaSelection.Hide()
         'Launch Import Gamelist button
         ButtonImportXML.PerformClick()
     End Sub
@@ -160,12 +153,13 @@ Public Class CopyRoms
                 Dim romconsole As String = nomconsole
                 Dim romname As String = xEle.Element("name")
                 Dim rompath As String = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("path"), "./", "\"), "/", "\")
-
+                Dim romhidden As String = xEle.Element("hidden")
                 Dim romdesc As String
                 Dim romimage As String
                 Dim romvideo As String
                 Dim romanual As String
 
+                If romhidden IsNot Nothing Then GoTo romsuivante
 
                 If xEle.Element("desc") Is Nothing Then
                     romdesc = Nothing
@@ -192,6 +186,7 @@ Public Class CopyRoms
                 End If
 
                 table.Rows.Add(romconsole, romname, rompath, romdesc, romimage, romvideo, romanual)
+romsuivante:
             Next
         Next
 
@@ -200,7 +195,7 @@ Public Class CopyRoms
         FinalGrid.DataSource = table
 
         'Width for columns
-        FinalGrid.Columns(0).Width = 60     'romconsole
+        FinalGrid.Columns(0).Width = 40     'romconsole
         FinalGrid.Columns(1).Width = 200    'romname
         FinalGrid.Columns(2).Width = 1      'rompath
         FinalGrid.Columns(3).Width = 1      'romdesc
@@ -284,11 +279,8 @@ Public Class CopyRoms
 
         'on va calculer la taille des roms
         Call Calcultaillerom()
-
         'On lance la completion des checkbox
         Call Completiondescheckbox()
-
-
     End Sub
     Sub Calcultaillerom()
         On Error Resume Next
@@ -297,21 +289,66 @@ Public Class CopyRoms
             Dim size As Long
 
             Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
+            If attr = 0 And FileAttributes.Directory = 16 Then
+                'si c'est un repertoire (daphne, dos ...etc) 
 
-            If (attr And FileAttributes.Directory) = FileAttributes.Directory Then
-                size = GetDirectorySize(chemindelarom)
+                size = FormatFileSize(chemindelarom)
+
+
             Else
-                Dim info As New FileInfo(chemindelarom)
-                size = info.Length
+                'si c'est un fichier...
+                Dim extensionrom As String = Path.GetExtension(chemindelarom)
+
+                'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+                If extensionrom = ".m3u" Then
+                    Dim sw As StreamWriter
+                    File.ReadAllLines(chemindelarom)
+
+                    ' Open the file to read from.
+                    Dim readText() As String = File.ReadAllLines(chemindelarom)
+                    Dim s As String
+                    size = 0
+                    For Each s In readText
+                        chemindelarom = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value & "\" & Replace(s, "/", "\")
+                        Dim info As New FileInfo(chemindelarom)
+                        size += info.Length
+                    Next
+                Else
+                    'sinon c'est un fichier normal 
+                    Dim info As New FileInfo(chemindelarom)
+                    size = info.Length
+                End If
+
             End If
             'Conversion en Mo
-            Dim nouvelletaille As Decimal = size / 1024
-            Dim tailleenmo As Decimal = nouvelletaille / 1000
+            Dim tailleenmo As Decimal = size / 1048576
 
-            oRow.Cells(13).Value = Math.Round(tailleenmo, 1)
+            oRow.Cells(13).Value = Math.Round(tailleenmo, 2)
         Next
         On Error GoTo 0
     End Sub
+    Public Shared Function FormatFileSize(ByVal Size As Long) As String
+        Try
+            Dim KB As Integer = 1024
+            Dim MB As Integer = KB * KB
+            ' Return size of file in kilobytes.
+            If Size < KB Then
+                Return (Size.ToString("D") & " bytes")
+            Else
+                Select Case Size / KB
+                    Case Is < 1000
+                        Return (Size / KB).ToString("N") & "KB"
+                    Case Is < 1000000
+                        Return (Size / MB).ToString("N") & "MB"
+                    Case Is < 10000000
+                        Return (Size / MB / KB).ToString("N") & "GB"
+                End Select
+                'sRet = sRet & " (" & Format(Size, "#,##0") & " bytes)"
+            End If
+        Catch ex As Exception
+            Return Size.ToString
+        End Try
+    End Function
     Sub Completiondescheckbox()
         '(0)romconsole
         '(1)romname
@@ -487,16 +524,6 @@ Public Class CopyRoms
         End If
     End Sub
 
-    Public Function GetDirectorySize(path As String) As Long
-        Dim files() As String = Directory.GetFiles(path, "*", SearchOption.AllDirectories)
-        Dim size As Long = 0
-        For Each file As String In files
-            Dim info As New FileInfo(file)
-            size += info.Length
-        Next
-        Return size
-    End Function
-
 
     Public Function AreSameImage(ByVal I1 As Image, ByVal I2 As Image) As Boolean
         Dim BM1 As Bitmap = I1
@@ -566,9 +593,22 @@ Public Class CopyRoms
         For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
             For b = 12 To 12             ' Colonne des checkbox 12
                 'si c'est coché, on compte la somme et le nombre de coche
+                Dim rompath As String = FinalGrid.Rows(a).Cells(2).Value
+
                 If FinalGrid.Rows(a).Cells(b).Value = True Then
                     count += 1
                     sommeSize += FinalGrid.Rows(a).Cells(b + 1).Value
+
+                    'pour la listbox de la selection
+                    If listboxMaSelection.Items.Contains(rompath) Then
+                    Else
+                        listboxMaSelection.Items.Add(rompath)
+                    End If
+
+                ElseIf FinalGrid.Rows(a).Cells(b).Value = False Then
+                    'on verifie que le jeu est dans la selection
+                    Dim ligneindex As Integer = listboxMaSelection.Items.IndexOf(rompath)
+                    If ligneindex <> -1 Then listboxMaSelection.Items.RemoveAt(ligneindex)
                 End If
             Next
             FinalGrid.Rows(a).Cells(6).Value = count
@@ -596,11 +636,48 @@ Public Class CopyRoms
         If e.RowIndex = -1 Then
             Exit Sub
         Else
-            If e.ColumnIndex = 12 Then Call calculselection()
+            If e.ColumnIndex = 12 Then
+                Dim columnindex As Integer = FinalGrid.CurrentCell.ColumnIndex
+                Dim rowIndex As Integer = FinalGrid.CurrentCell.RowIndex
+
+                Dim pathrom As String = FinalGrid.Rows(rowIndex).Cells(2).Value
+                'si la case est cochée, alors on ajoute dans la listebox ma selection
+                If FinalGrid.Rows(rowIndex).Cells(12).Value = True Then
+                    listboxMaSelection.Items.Add(pathrom)
+
+                Else 'sinon, on verifie si la ligne etait présente et si oui, on la supprime
+
+                    On Error Resume Next
+                    For i As Integer = 0 To listboxMaSelection.Items.Count - 1
+                        Dim ligneencours As String = listboxMaSelection.Items(i).ToString
+                        If ligneencours = pathrom Then
+                            listboxMaSelection.Items.Remove(pathrom)
+                        End If
+                    Next
+                    On Error GoTo 0
+                End If
+
+            End If
+            'on refresh les indicateurs
+            Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
+            txt_NbRomSelected.Text = valeurnbselect
+
+            'On calcule la taille des roms cochée
+            Dim sizecumulrom As Integer
+            For a = 0 To listboxMaSelection.Items.Count - 1 'Toutes les lignes
+                Dim romacchercher As String = listboxMaSelection.Items(a)
+                For j = 0 To FinalGrid.RowCount - 1
+                    If FinalGrid.Rows(j).Cells(2).Value = romacchercher Then
+                        sizecumulrom += FinalGrid.Rows(j).Cells(13).Value
+                    End If
+
+                Next
+
+            Next
+            txt_GoAPrevoir.Text = sizecumulrom
         End If
     End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub ButtonParcourirRecalCopy_Click(sender As Object, e As EventArgs) Handles ButtonParcourirRecalCopy.Click
         If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
             txt_CopyFolder.Text = FolderBrowserDialog1.SelectedPath
             'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
@@ -614,6 +691,39 @@ Public Class CopyRoms
     End Sub
 
     Private Sub Txt_txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txt_txtsearch.TextChanged
+        'commande SQL pour filtrer
         TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("romname LIKE '%{0}%'", txt_txtsearch.Text)
+        'on relance le calcul des checkbox
+        Call Completiondescheckbox()
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        MsgBox("A faire")
+    End Sub
+
+    Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
+        If listboxMaSelection.Visible = True Then
+            listboxMaSelection.Hide()
+        Else
+            listboxMaSelection.Show()
+        End If
+    End Sub
+
+
+    Private Sub ListboxMaSelection_DoubleClick(sender As Object, e As EventArgs) Handles listboxMaSelection.DoubleClick
+        'on enleve de la liste et on met a jour la checkbox dans la selection
+        Dim pathrom As String = listboxMaSelection.Items(listboxMaSelection.SelectedIndex)
+
+        For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+            If FinalGrid.Rows(a).Cells(2).Value = pathrom Then ' colonne des path
+                listboxMaSelection.Items.Remove(pathrom)
+                FinalGrid.Rows(a).Cells(12).Value = False
+                Exit Sub
+            End If
+        Next
+    End Sub
+
+    Private Sub Txt_GoAPrevoir_TextChanged(sender As Object, e As EventArgs) Handles txt_GoAPrevoir.TextChanged
+        txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
     End Sub
 End Class
