@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 
 Public Class CopyRoms
+
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
         txt_txtsearch.Hide()
@@ -316,7 +317,33 @@ romsuivante:
                         Dim info As New FileInfo(chemindelarom)
                         size += info.Length
                     Next
+                ElseIf extensionrom = ".cue" Then 'si c'est un cue, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+                    Dim sw As StreamWriter
+                    File.ReadAllLines(chemindelarom)
+
+                    ' Open the file to read from.
+                    Dim readText() As String = File.ReadAllLines(chemindelarom)
+                    Dim s As String
+                    size = 0
+                    For Each s In readText
+                        Dim detectfile = InStr(s, Chr(34))
+                        If detectfile >= 1 Then
+                            'Dim isolerome As String = s.Substring(detectfile)
+                            'Dim isolebinary As String = InStr(isolerome, Chr(34))
+                            'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
+
+                            Dim iso As String = s.Substring(detectfile).Substring(0, InStr(s.Substring(detectfile), Chr(34)) - 1)
+
+                            chemindelarom = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value & "\" & Replace(iso, "/", "\")
+
+                            Dim info As New FileInfo(chemindelarom)
+                            size += info.Length
+                        End If
+                    Next
+
+
                 Else
+
                     'sinon c'est un fichier normal 
                     Dim info As New FileInfo(chemindelarom)
                     size = info.Length
@@ -504,8 +531,6 @@ romsuivante:
             romsave.Image = My.Resources.nomem
         End If
     End Sub
-
-
     Public Function AreSameImage(ByVal I1 As Image, ByVal I2 As Image) As Boolean
         Dim BM1 As Bitmap = I1
         Dim BM2 As Bitmap = I2
@@ -518,7 +543,6 @@ romsuivante:
         Next
         Return True
     End Function
-
     Public Function FileNameWithoutExtension(ByVal FullPath _
         As String) As String
         Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
@@ -526,7 +550,6 @@ romsuivante:
     Private Sub RomImage_DoubleClick(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
         System.Diagnostics.Process.Start(FinalGrid.SelectedCells(4).Value.ToString)
     End Sub
-
     Private Sub Romscreen_DoubleClick(sender As Object, e As EventArgs) Handles romscreen.DoubleClick
         Dim OK As Image = My.Resources.Okscreen
         Dim NO As Image = My.Resources.noscreen
@@ -544,7 +567,6 @@ romsuivante:
             Process.Start(FinalGrid.SelectedCells(6).Value.ToString)
         End If
     End Sub
-
     Private Sub Romoverlay_DoubleClick(sender As Object, e As EventArgs) Handles romoverlay.Click
         Dim OK As Image = My.Resources.OKoverlay
         Dim NO As Image = My.Resources.nooverlay
@@ -561,11 +583,9 @@ romsuivante:
             Process.Start("explorer", Path.GetDirectoryName(testcheminoverlay).ToString)
         End If
     End Sub
-
     Private Sub Romsave_Click(sender As Object, e As EventArgs) Handles romsave.Click
         Process.Start("explorer", Replace(romsave.ToString, "\roms\", "saves"))
     End Sub
-
     Sub Calculselection()
         'Refresh des valeurs
         Dim count As Integer = 0
@@ -650,12 +670,24 @@ romsuivante:
                 For j = 0 To FinalGrid.RowCount - 1
                     If FinalGrid.Rows(j).Cells(2).Value = romacchercher Then
                         sizecumulrom += FinalGrid.Rows(j).Cells(13).Value
+
                     End If
 
                 Next
+                'On selectionne la ligne pour que le trigger changed s'applique
+                If listboxMaSelection.Visible = False Then
+                    listboxMaSelection.Show()
+                    listboxMaSelection.SelectedItem = a
+                    listboxMaSelection.Hide()
+                Else
+                    listboxMaSelection.SelectedItem = a
+                End If
+
 
             Next
             txt_GoAPrevoir.Text = sizecumulrom
+
+
         End If
     End Sub
     Private Sub ButtonParcourirRecalCopy_Click(sender As Object, e As EventArgs) Handles ButtonParcourirRecalCopy.Click
@@ -674,8 +706,8 @@ romsuivante:
     Private Sub Txt_txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txt_txtsearch.TextChanged
         'commande SQL pour filtrer
         TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("romname LIKE '%{0}%'", txt_txtsearch.Text)
-        'on relance le calcul des checkbox
-        Call Completiondescheckbox()
+                        'on relance le calcul des checkbox
+                        Call Completiondescheckbox()
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
@@ -706,5 +738,21 @@ romsuivante:
 
     Private Sub Txt_GoAPrevoir_TextChanged(sender As Object, e As EventArgs) Handles txt_GoAPrevoir.TextChanged
         txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
+    End Sub
+
+    Private Sub ListboxMaSelection_SelectedValueChanged(sender As Object, e As EventArgs) Handles listboxMaSelection.SelectedValueChanged
+        'Recocher les selections dans le datagrid
+        For j = 0 To listboxMaSelection.Items.Count - 1 'toutes les lignes de la listbox
+
+            Dim romselected As String = listboxMaSelection.Items(j)
+
+            For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes du grid
+                If FinalGrid.Rows(a).Cells(2).Value = romselected Then ' colonne des path
+                    FinalGrid.Rows(a).Cells(12).Value = True
+                    GoTo prochainj
+                End If
+            Next
+prochainj:
+        Next
     End Sub
 End Class
