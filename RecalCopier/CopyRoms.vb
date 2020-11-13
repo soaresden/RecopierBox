@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 
 Public Class CopyRoms
-
+    Dim sec As Integer = 0
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
         txt_txtsearch.Hide()
@@ -152,7 +152,8 @@ Public Class CopyRoms
             For Each xEle As XElement In query2
                 Dim romconsole As String = nomconsole
                 Dim romname As String = xEle.Element("name")
-                Dim rompath As String = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\\" & Replace(xEle.Element("path"), "./", "\"), "/", "\"), "\\", "")
+                Dim temprom As String = Replace(Replace(xEle.Element("path"), "/", "\"), "./", "")
+                Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & temprom
                 Dim romhidden As String = xEle.Element("hidden")
                 Dim romdesc As String
                 Dim romimage As String
@@ -170,19 +171,19 @@ Public Class CopyRoms
                 If xEle.Element("image") Is Nothing Then
                     romimage = Nothing
                 Else
-                    romimage = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("image"), "./", "\"), "/", "\")
+                    romimage = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(xEle.Element("image"), "/", "\"), "./", "")
                 End If
 
                 If xEle.Element("video") Is Nothing Then
                     romvideo = Nothing
                 Else
-                    romvideo = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("video"), "./", "\"), "/", "\")
+                    romvideo = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(xEle.Element("video"), "/", "\"), "./", "")
                 End If
 
                 If xEle.Element("manual") Is Nothing Then
                     romanual = Nothing
                 Else
-                    romanual = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("manual"), "./", "\"), "/", "\")
+                    romanual = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(xEle.Element("manual"), "/", "\"), "./", "")
                 End If
 
                 table.Rows.Add(romconsole, romname, rompath, romdesc, romimage, romvideo, romanual)
@@ -284,76 +285,80 @@ romsuivante:
     End Sub
     Sub Calcultaillerom()
         On Error Resume Next
+        Dim valeursize As String
+
         For Each oRow As DataGridViewRow In FinalGrid.Rows
-            Dim chemindelarom = oRow.Cells(2).Value
-            Dim size As Long
+            valeursize = oRow.Cells(13).Value
+            If valeursize Is Nothing Then ' si la cellule valeur size est vide on la calcule, sinon rien
 
-            Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
-            If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
-                'si c'est un repertoire (daphne, dos ...etc) 
+                Dim chemindelarom = oRow.Cells(2).Value
+                Dim sizefichier As Long
+                Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
 
-                Dim folder As New IO.DirectoryInfo(chemindelarom & "\")
-                For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
-                    size += file.Length
-                Next file
+                If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
+                    'si c'est un repertoire (daphne, dos ...etc) 
 
-                size = chemindelarom
+                    Dim folder As New IO.DirectoryInfo(chemindelarom & "\")
+                    For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
+                        sizefichier += file.Length
+                    Next file
 
-            Else
-                'si c'est un fichier...
-                Dim extensionrom As String = Path.GetExtension(chemindelarom)
-
-                'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
-                If extensionrom = ".m3u" Then
-                    Dim sw As StreamWriter
-                    File.ReadAllLines(chemindelarom)
-
-                    ' Open the m3u file to read from.
-                    Dim readText() As String = File.ReadAllLines(chemindelarom)
-                    Dim s As String
-                    size = 0
-                    For Each s In readText
-                        chemindelarom = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value & "\" & Replace(s, "/", "\")
-                        Dim info As New FileInfo(chemindelarom)
-                        size += info.Length
-                    Next
-                ElseIf extensionrom = ".cue" Then 'si c'est un cue, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
-                    Dim sw As StreamWriter
-                    File.ReadAllLines(chemindelarom)
-
-                    ' Open the cue file to read from.
-                    Dim readText() As String = File.ReadAllLines(chemindelarom)
-                    Dim s As String
-                    size = 0
-                    For Each s In readText
-                        Dim detectfile = InStr(s, Chr(34))
-                        If detectfile >= 1 Then
-                            'Dim isolerome As String = s.Substring(detectfile)
-                            'Dim isolebinary As String = InStr(isolerome, Chr(34))
-                            'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
-
-                            Dim iso As String = s.Substring(detectfile).Substring(0, InStr(s.Substring(detectfile), Chr(34)) - 1)
-
-                            chemindelarom = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value & "\" & Replace(iso, "/", "\")
-
-                            Dim info As New FileInfo(chemindelarom)
-                            size += info.Length
-                        End If
-                    Next
-
+                    sizefichier = chemindelarom
 
                 Else
+                    'si c'est un fichier...
+                    Dim extensionrom As String = Path.GetExtension(chemindelarom)
 
-                    'sinon c'est un fichier normal 
-                    Dim info As New FileInfo(chemindelarom)
-                    size = info.Length
+                    'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+                    If extensionrom = ".m3u" Then
+                        Dim sw As StreamWriter
+                        File.ReadAllLines(chemindelarom)
+
+                        ' Open the m3u file to read from.
+                        Dim readText() As String = File.ReadAllLines(chemindelarom)
+                        Dim s As String
+                        sizefichier = 0
+                        For Each s In readText
+                            chemindelarom = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value & "\" & Replace(s, "/", "\")
+                            Dim info As New FileInfo(chemindelarom)
+                            sizefichier += info.Length
+                        Next
+                    ElseIf extensionrom = ".cue" Then 'si c'est un cue, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+                        Dim sw As StreamWriter
+                        File.ReadAllLines(chemindelarom)
+
+                        ' Open the cue file to read from.
+                        Dim readText() As String = File.ReadAllLines(chemindelarom)
+                        Dim s As String
+                        sizefichier = 0
+                        For Each s In readText
+                            Dim detectfile = InStr(s, Chr(34))
+                            If detectfile >= 1 Then
+                                'Dim isolerome As String = s.Substring(detectfile)
+                                'Dim isolebinary As String = InStr(isolerome, Chr(34))
+                                'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
+
+                                Dim iso As String = s.Substring(detectfile).Substring(0, InStr(s.Substring(detectfile), Chr(34)) - 1)
+
+                                chemindelarom = My.Settings.RecalboxFolder & "\roms\" & oRow.Cells(0).Value & "\" & Replace(iso, "/", "\")
+
+                                Dim info As New FileInfo(chemindelarom)
+                                sizefichier += info.Length
+                            End If
+                        Next
+
+                    Else
+
+                        'sinon c'est un fichier normal 
+                        Dim info As New FileInfo(chemindelarom)
+                        sizefichier = info.Length
+                    End If
                 End If
-
+                'Conversion en Mo
+                Dim tailleenmo As Decimal = sizefichier / 1048576
+                oRow.Cells(13).Value = Math.Round(tailleenmo, 2)
+                sizefichier = 0
             End If
-            'Conversion en Mo
-            Dim tailleenmo As Decimal = size / 1048576
-
-            oRow.Cells(13).Value = Math.Round(tailleenmo, 2)
         Next
         On Error GoTo 0
     End Sub
@@ -374,29 +379,29 @@ romsuivante:
         '(12)Selection ?
         '(13)Size
         On Error Resume Next
-        For Each oRow As DataGridViewRow In FinalGrid.Rows
+        For orow = 0 To FinalGrid.RowCount - 1
             'test sur le chemin des screens, si la cellule est complétée alors on coche
-            Dim lescreen As String = oRow.Cells(4).Value
+            Dim lescreen As String = FinalGrid.Rows(orow).Cells(4).Value
             If lescreen Is Nothing Then
-                oRow.Cells(7).Value = False
+                FinalGrid.Rows(orow).Cells(7).Value = False
             Else
-                oRow.Cells(7).Value = True
+                FinalGrid.Rows(orow).Cells(7).Value = True
             End If
 
             'test sur le chemin des videos
-            Dim lavideo As String = oRow.Cells(5).Value
+            Dim lavideo As String = FinalGrid.Rows(orow).Cells(5).Value
             If lavideo Is Nothing Then
-                oRow.Cells(8).Value = False
+                FinalGrid.Rows(orow).Cells(8).Value = False
             Else
-                oRow.Cells(8).Value = True
+                FinalGrid.Rows(orow).Cells(8).Value = True
             End If
 
             'test sur le chemin des manuels
-            Dim lemanuel As String = oRow.Cells(6).Value
+            Dim lemanuel As String = FinalGrid.Rows(orow).Cells(6).Value
             If lemanuel Is Nothing Then
-                oRow.Cells(9).Value = False
+                FinalGrid.Rows(orow).Cells(9).Value = False
             Else
-                oRow.Cells(9).Value = True
+                FinalGrid.Rows(orow).Cells(9).Value = True
             End If
 
             lescreen = Nothing
@@ -404,7 +409,7 @@ romsuivante:
             lemanuel = Nothing
 
             'test sur le chemin des overlays
-            Dim cheminrom As String = oRow.Cells(2).Value
+            Dim cheminrom As String = FinalGrid.Rows(orow).Cells(2).Value
             Dim FileInfo As New FileInfo(cheminrom)
             Dim nomdelarom As String = FileInfo.Name
             Dim nomducfg As String = nomdelarom & ".cfg"
@@ -413,9 +418,9 @@ romsuivante:
             Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
 
             If System.IO.File.Exists(testcheminoverlay) Then
-                oRow.Cells(10).Value = True
+                FinalGrid.Rows(orow).Cells(10).Value = True
             Else
-                oRow.Cells(10).Value = False
+                FinalGrid.Rows(orow).Cells(10).Value = False
             End If
 
             'test sur le chemin des saves
@@ -425,9 +430,9 @@ romsuivante:
             Dim savesCount As Integer = IO.Directory.GetFiles(Replace(cheminsaves, nomdelarom, ""), romsansextension & ".*").Length
 
             If savesCount >= 1 Then
-                oRow.Cells(11).Value = True
+                FinalGrid.Rows(orow).Cells(11).Value = True
             Else
-                oRow.Cells(11).Value = False
+                FinalGrid.Rows(orow).Cells(11).Value = False
             End If
         Next
         On Error GoTo 0
@@ -461,9 +466,21 @@ romsuivante:
 
         'Chargement des informations dans Rom Information
         Dim row As DataGridViewRow = FinalGrid.Rows(e.RowIndex)
-        txt_romname.Text = row.Cells(1).Value.ToString
-        txt_rompath.Text = row.Cells(2).Value.ToString
-        If (String.IsNullOrEmpty(row.Cells(3).Value)) Then
+        Dim celluleromname As String = row.Cells(1).Value.ToString
+        Dim cellulerompath As String = row.Cells(2).Value.ToString
+        Dim celluledesc As String = row.Cells(3).Value.ToString
+        Dim celluleimage As String = row.Cells(4).Value.ToString
+        Dim cellulevideo As String = row.Cells(5).Value.ToString
+
+        txt_romname.Text = celluleromname
+
+        'Defilement du Titre
+        Timer1.Start()
+        sec = 0
+
+        txt_rompath.Text = cellulerompath
+
+        If celluledesc = Nothing Then
             txt_romdesc.Text = ""
         Else
             txt_romdesc.Text = row.Cells(3).Value.ToString
@@ -471,16 +488,16 @@ romsuivante:
 
         'calcul du vide pour ne pas afficher l'image / video
         Dim console As String = row.Cells(0).Value.ToString
-        Dim cheminduvide = My.Settings.RecalboxFolder & "\roms\" & console
+        ' Dim cheminduvide = My.Settings.RecalboxFolder & "\roms\" & console
 
-        If row.Cells(4).Value.ToString = Replace(cheminduvide & "\", "\\", "\") Then
+        If celluleimage = Nothing Then
             RomImage.Hide()
         Else
             RomImage.Show()
             RomImage.Image = Image.FromFile(row.Cells(4).Value.ToString)
         End If
 
-        If row.Cells(5).Value.ToString = Replace(cheminduvide & "\", "\\", "\") Then
+        If cellulevideo = Nothing Then
             vid_romvid.Hide()
         Else
             vid_romvid.Show()
@@ -500,32 +517,37 @@ romsuivante:
         '(10)Overlay ?
         '(11)Save ?
         '(12)Selection ?
+        Dim checkboximg As String = row.Cells(7).Value
+        Dim checkboxvideo As String = row.Cells(8).Value
+        Dim checkboxmanual As String = row.Cells(9).Value
+        Dim checkboxoverlay As String = row.Cells(10).Value
+        Dim checkboxsave As String = row.Cells(11).Value
 
-        If row.Cells(7).Value = True Then
+        If checkboximg = True Then
             romscreen.Image = My.Resources.Okscreen
         Else
             romscreen.Image = My.Resources.noscreen
         End If
 
-        If row.Cells(8).Value = True Then
+        If checkboxvideo = True Then
             romvideo.Image = My.Resources.OKvideo
         Else
             romvideo.Image = My.Resources.novideo
         End If
 
-        If row.Cells(9).Value = True Then
+        If checkboxmanual = True Then
             rommanual.Image = My.Resources.OKmanual
         Else
             rommanual.Image = My.Resources.nomanual
         End If
 
-        If row.Cells(10).Value = True Then
+        If checkboxoverlay = True Then
             romoverlay.Image = My.Resources.OKoverlay
         Else
             romoverlay.Image = My.Resources.nooverlay
         End If
 
-        If row.Cells(11).Value = True Then
+        If checkboxsave = True Then
             romsave.Image = My.Resources.OKMem
         Else
             romsave.Image = My.Resources.nomem
@@ -718,17 +740,116 @@ romsuivante:
         txt_CopyFolder.Text = My.Settings.CopyFolder
     End Sub
 
-    Private Sub Txt_txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txt_txtsearch.TextChanged
-        'commande SQL pour filtrer
-        TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("romname LIKE '%{0}%'", txt_txtsearch.Text)
-                        'on relance le calcul des checkbox
-                        Call Completiondescheckbox()
-    End Sub
+    Private Sub ButtonCopy_Click(sender As Object, e As EventArgs) Handles ButtonCopy.Click
+        'verif du chemin
+        If txt_CopyFolder.Text = Nothing Then
+            MsgBox("Pas de Repertoire de Copie Défini" & Chr(13 & "ABANDON"))
+            Exit Sub
+        End If
+        'verif de la liste a copier
+        If listboxMaSelection.Items.Count = Nothing Then
+            MsgBox("Pas de Roms à Copier" & Chr(13 & "ABANDON"))
+            Exit Sub
+        End If
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        MsgBox("A faire")
-    End Sub
+        'verif de l'espace disque
+        If txt_GoAPrevoir.Text <= 0 Then
+            MsgBox("Trop d'espace est necessaire à la Copie" & Chr(13 & "ABANDON"))
+            Exit Sub
+        End If
+        'msgbox pour un recap de la selection et des options
+        listboxMaSelection.Show()
+        Dim temptxt1 As String
+        Dim temptxt2 As String
+        Dim temptxt3 As String
+        Dim temptxt4 As String
+        Dim temptxt5 As String
+        Dim temptxt6 As String
 
+        If checkbios.Checked = True Then
+            temptxt1 = "Bios     : à Copier"
+        Else
+            temptxt1 = ""
+        End If
+
+
+        If checkimgs.Checked = True Then
+            temptxt2 = "Images   : à Copier"
+        Else
+            temptxt2 = ""
+        End If
+
+        If checkvideos.Checked = True Then
+            temptxt3 = "Videos   : à Copier"
+        Else
+            temptxt3 = ""
+
+        End If
+
+        If checkmanuals.Checked = True Then
+            temptxt4 = "Manuels  : à Copier"
+        Else
+            temptxt4 = ""
+        End If
+
+        If checkoverlays.Checked = True Then
+            temptxt5 = "Overlays : à Copier"
+        Else
+            temptxt5 = ""
+        End If
+
+        If checksaves.Checked = True Then
+            temptxt6 = "Saves    : à Copier"
+        Else
+            temptxt6 = ""
+        End If
+
+        Dim optionsbox As String = temptxt1 & Chr(13) & temptxt2 & Chr(13) & temptxt3 & Chr(13) & temptxt4 & Chr(13) & temptxt5 & Chr(13) & temptxt6
+        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus et Confirmez les options de Copie" & Chr(13) & optionsbox, vbYesNo) = vbNo Then
+            listboxMaSelection.Hide()
+            Exit Sub
+        End If
+
+        'On copie déja les roms
+        Dim newrecalbox As String = My.Settings.CopyFolder & "\recalbox"
+        Directory.CreateDirectory(newrecalbox)
+
+        For i = 0 To listboxMaSelection.Items.Count
+            Dim pathjeu As String = listboxMaSelection.Items(i)
+            Dim replacejeu As String = Replace(pathjeu, My.Settings.RecalboxFolder, newrecalbox)
+            Dim repertoirefinal As String = Path.GetDirectoryName(replacejeu)
+            Dim legamelist As String = Path.GetDirectoryName(pathjeu) & "\gamelist.xml"
+            Dim lenouvogamelist As String = Path.GetDirectoryName(replacejeu) & "\gamelist.xml"
+
+            'On check si ca existe, au cas ou on le cree
+            If (Not System.IO.Directory.Exists(repertoirefinal)) Then
+                System.IO.Directory.CreateDirectory(repertoirefinal)
+            End If
+
+            'et on copie LES ROMS
+            System.IO.File.Copy(pathjeu, replacejeu)
+
+            'a optimiser pour ecrire le gamelist en temps réel ...
+            'en attendant on copie le gamelist
+            System.IO.File.Copy(legamelist, lenouvogamelist)
+
+
+            'on check si les images
+            'on check si les images
+            'on check si les images
+            'on check si les images
+            'on check si les images
+            'on check si les images
+
+        Next i
+
+        'on check si les BIOS a la fin 
+        If checkbios.Checked = True Then
+            System.IO.File.Copy(My.Settings.RecalboxFolder & "\Bios", newrecalbox & "\Bios")
+        End If
+
+
+    End Sub
     Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
         If listboxMaSelection.Visible = True Then
             listboxMaSelection.Hide()
@@ -769,5 +890,29 @@ romsuivante:
             Next
 prochainj:
         Next
+    End Sub
+
+    Private Sub Txt_txtsearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_txtsearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            'commande SQL pour filtrer
+            TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("romname LIKE '%{0}%'", txt_txtsearch.Text)
+
+            'on relance le calcul des checkbox et de la taille des checkbox
+            Call Completiondescheckbox()
+            Call Calcultaillerom()
+        End If
+    End Sub
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim texteinscrit As String = txt_romname.ToString
+        Dim nbcartexte As Integer = txt_romname.ToString.Length
+        If nbcartexte = Nothing Then Exit Sub
+
+        If sec <= nbcartexte Then
+            txt_romname.Text = Mid(FinalGrid.SelectedCells(1).Value.ToString, 1, sec)
+            sec += 1
+        Else
+            sec = 0
+            txt_romname.Text = Mid(FinalGrid.SelectedCells(1).Value.ToString, 1, sec)
+        End If
     End Sub
 End Class

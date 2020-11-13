@@ -22,6 +22,7 @@ Partial Class CopyRoms
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
         Me.ButtonImportXML = New System.Windows.Forms.Button()
         Me.ListGameLists = New System.Windows.Forms.ListBox()
@@ -31,18 +32,16 @@ Partial Class CopyRoms
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ButtonParcourirRecalCopy = New System.Windows.Forms.Button()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txt_CopyFolder = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ButtonCopy = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.CheckBox6 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
+        Me.checkbios = New System.Windows.Forms.CheckBox()
+        Me.checksaves = New System.Windows.Forms.CheckBox()
+        Me.checkimgs = New System.Windows.Forms.CheckBox()
+        Me.checkoverlays = New System.Windows.Forms.CheckBox()
+        Me.checkvideos = New System.Windows.Forms.CheckBox()
+        Me.checkmanuals = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.buttonaffichermaselection = New System.Windows.Forms.Button()
         Me.txt_morestant = New System.Windows.Forms.TextBox()
@@ -74,6 +73,7 @@ Partial Class CopyRoms
         Me.txt_txtsearch = New System.Windows.Forms.TextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.lbl_TxtSearch = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -133,7 +133,7 @@ Partial Class CopyRoms
         '
         Me.FinalGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.FinalGrid.Location = New System.Drawing.Point(226, 28)
-        Me.FinalGrid.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.FinalGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.FinalGrid.MultiSelect = False
         Me.FinalGrid.Name = "FinalGrid"
         Me.FinalGrid.RowHeadersWidth = 51
@@ -146,15 +146,15 @@ Partial Class CopyRoms
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(19, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.GroupBox1.Controls.Add(Me.GroupBox5)
-        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Controls.Add(Me.ButtonCopy)
         Me.GroupBox1.Controls.Add(Me.GroupBox2)
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
         Me.GroupBox1.Controls.Add(Me.GroupBox3)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupBox1.Location = New System.Drawing.Point(15, 436)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Size = New System.Drawing.Size(990, 92)
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
@@ -164,15 +164,13 @@ Partial Class CopyRoms
         '
         Me.GroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.GroupBox5.Controls.Add(Me.ButtonParcourirRecalCopy)
-        Me.GroupBox5.Controls.Add(Me.TextBox2)
-        Me.GroupBox5.Controls.Add(Me.Label6)
         Me.GroupBox5.Controls.Add(Me.Label8)
         Me.GroupBox5.Controls.Add(Me.txt_CopyFolder)
-        Me.GroupBox5.Location = New System.Drawing.Point(749, 17)
-        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox5.Location = New System.Drawing.Point(699, 17)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.GroupBox5.Size = New System.Drawing.Size(155, 65)
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox5.Size = New System.Drawing.Size(223, 65)
         Me.GroupBox5.TabIndex = 13
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Copie"
@@ -180,153 +178,134 @@ Partial Class CopyRoms
         'ButtonParcourirRecalCopy
         '
         Me.ButtonParcourirRecalCopy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(6, 38)
+        Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(2, 38)
         Me.ButtonParcourirRecalCopy.Name = "ButtonParcourirRecalCopy"
-        Me.ButtonParcourirRecalCopy.Size = New System.Drawing.Size(60, 23)
+        Me.ButtonParcourirRecalCopy.Size = New System.Drawing.Size(61, 23)
         Me.ButtonParcourirRecalCopy.TabIndex = 6
         Me.ButtonParcourirRecalCopy.Text = "Parcourir"
         Me.ButtonParcourirRecalCopy.UseVisualStyleBackColor = True
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(170, 16)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(61, 20)
-        Me.TextBox2.TabIndex = 5
-        Me.TextBox2.Text = "0"
-        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label6.Location = New System.Drawing.Point(246, 16)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(138, 26)
-        Me.Label6.TabIndex = 4
-        Me.Label6.Text = "Mo Théorique Restants" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Sans Images/Videos etc...)"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label8.Location = New System.Drawing.Point(72, 19)
+        Me.Label8.Location = New System.Drawing.Point(64, 20)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(61, 26)
+        Me.Label8.Size = New System.Drawing.Size(157, 39)
         Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Chemin de " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Votre copie" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label8.Text = "Lettre du Support USB" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ou " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Dossier où ""recalbox"" sera crée" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'txt_CopyFolder
         '
-        Me.txt_CopyFolder.Location = New System.Drawing.Point(5, 16)
+        Me.txt_CopyFolder.Location = New System.Drawing.Point(2, 16)
         Me.txt_CopyFolder.Name = "txt_CopyFolder"
         Me.txt_CopyFolder.Size = New System.Drawing.Size(61, 20)
         Me.txt_CopyFolder.TabIndex = 0
         Me.txt_CopyFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Button1
+        'ButtonCopy
         '
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(909, 15)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 70)
-        Me.Button1.TabIndex = 14
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
+        Me.ButtonCopy.Location = New System.Drawing.Point(926, 15)
+        Me.ButtonCopy.Name = "ButtonCopy"
+        Me.ButtonCopy.Size = New System.Drawing.Size(64, 72)
+        Me.ButtonCopy.TabIndex = 14
+        Me.ButtonCopy.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.LightSlateGray
-        Me.GroupBox2.Controls.Add(Me.CheckBox6)
-        Me.GroupBox2.Controls.Add(Me.CheckBox5)
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
-        Me.GroupBox2.Controls.Add(Me.CheckBox4)
-        Me.GroupBox2.Controls.Add(Me.CheckBox2)
-        Me.GroupBox2.Controls.Add(Me.CheckBox3)
+        Me.GroupBox2.Controls.Add(Me.checkbios)
+        Me.GroupBox2.Controls.Add(Me.checksaves)
+        Me.GroupBox2.Controls.Add(Me.checkimgs)
+        Me.GroupBox2.Controls.Add(Me.checkoverlays)
+        Me.GroupBox2.Controls.Add(Me.checkvideos)
+        Me.GroupBox2.Controls.Add(Me.checkmanuals)
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ButtonFace
         Me.GroupBox2.Location = New System.Drawing.Point(121, 17)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(232, 65)
+        Me.GroupBox2.Size = New System.Drawing.Size(190, 65)
         Me.GroupBox2.TabIndex = 13
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Quoi Copier ?"
         '
-        'CheckBox6
+        'checkbios
         '
-        Me.CheckBox6.AutoSize = True
-        Me.CheckBox6.Checked = True
-        Me.CheckBox6.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.CheckBox6.Location = New System.Drawing.Point(6, 19)
-        Me.CheckBox6.Name = "CheckBox6"
-        Me.CheckBox6.Size = New System.Drawing.Size(46, 17)
-        Me.CheckBox6.TabIndex = 9
-        Me.CheckBox6.Text = "Bios"
-        Me.CheckBox6.UseVisualStyleBackColor = True
+        Me.checkbios.AutoSize = True
+        Me.checkbios.Checked = True
+        Me.checkbios.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.checkbios.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.checkbios.Location = New System.Drawing.Point(6, 19)
+        Me.checkbios.Name = "checkbios"
+        Me.checkbios.Size = New System.Drawing.Size(46, 17)
+        Me.checkbios.TabIndex = 9
+        Me.checkbios.Text = "Bios"
+        Me.checkbios.UseVisualStyleBackColor = True
         '
-        'CheckBox5
+        'checksaves
         '
-        Me.CheckBox5.AutoSize = True
-        Me.CheckBox5.Checked = True
-        Me.CheckBox5.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.CheckBox5.Location = New System.Drawing.Point(135, 38)
-        Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.Size = New System.Drawing.Size(89, 17)
-        Me.CheckBox5.TabIndex = 8
-        Me.CheckBox5.Text = "Sauvegardes"
-        Me.CheckBox5.UseVisualStyleBackColor = True
+        Me.checksaves.AutoSize = True
+        Me.checksaves.Checked = True
+        Me.checksaves.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.checksaves.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.checksaves.Location = New System.Drawing.Point(135, 38)
+        Me.checksaves.Name = "checksaves"
+        Me.checksaves.Size = New System.Drawing.Size(56, 17)
+        Me.checksaves.TabIndex = 8
+        Me.checksaves.Text = "Saves"
+        Me.checksaves.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'checkimgs
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.CheckBox1.Location = New System.Drawing.Point(70, 19)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(60, 17)
-        Me.CheckBox1.TabIndex = 4
-        Me.CheckBox1.Text = "Images"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.checkimgs.AutoSize = True
+        Me.checkimgs.Checked = True
+        Me.checkimgs.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.checkimgs.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.checkimgs.Location = New System.Drawing.Point(70, 19)
+        Me.checkimgs.Name = "checkimgs"
+        Me.checkimgs.Size = New System.Drawing.Size(60, 17)
+        Me.checkimgs.TabIndex = 4
+        Me.checkimgs.Text = "Images"
+        Me.checkimgs.UseVisualStyleBackColor = True
         '
-        'CheckBox4
+        'checkoverlays
         '
-        Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Checked = True
-        Me.CheckBox4.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.CheckBox4.Location = New System.Drawing.Point(70, 38)
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(67, 17)
-        Me.CheckBox4.TabIndex = 7
-        Me.CheckBox4.Text = "Overlays"
-        Me.CheckBox4.UseVisualStyleBackColor = True
+        Me.checkoverlays.AutoSize = True
+        Me.checkoverlays.Checked = True
+        Me.checkoverlays.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.checkoverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.checkoverlays.Location = New System.Drawing.Point(70, 38)
+        Me.checkoverlays.Name = "checkoverlays"
+        Me.checkoverlays.Size = New System.Drawing.Size(67, 17)
+        Me.checkoverlays.TabIndex = 7
+        Me.checkoverlays.Text = "Overlays"
+        Me.checkoverlays.UseVisualStyleBackColor = True
         '
-        'CheckBox2
+        'checkvideos
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.CheckBox2.Location = New System.Drawing.Point(135, 19)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(58, 17)
-        Me.CheckBox2.TabIndex = 5
-        Me.CheckBox2.Text = "Videos"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.checkvideos.AutoSize = True
+        Me.checkvideos.Checked = True
+        Me.checkvideos.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.checkvideos.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.checkvideos.Location = New System.Drawing.Point(135, 19)
+        Me.checkvideos.Name = "checkvideos"
+        Me.checkvideos.Size = New System.Drawing.Size(58, 17)
+        Me.checkvideos.TabIndex = 5
+        Me.checkvideos.Text = "Videos"
+        Me.checkvideos.UseVisualStyleBackColor = True
         '
-        'CheckBox3
+        'checkmanuals
         '
-        Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Checked = True
-        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.CheckBox3.Location = New System.Drawing.Point(6, 38)
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(66, 17)
-        Me.CheckBox3.TabIndex = 6
-        Me.CheckBox3.Text = "Manuels"
-        Me.CheckBox3.UseVisualStyleBackColor = True
+        Me.checkmanuals.AutoSize = True
+        Me.checkmanuals.Checked = True
+        Me.checkmanuals.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.checkmanuals.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.checkmanuals.Location = New System.Drawing.Point(6, 38)
+        Me.checkmanuals.Name = "checkmanuals"
+        Me.checkmanuals.Size = New System.Drawing.Size(66, 17)
+        Me.checkmanuals.TabIndex = 6
+        Me.checkmanuals.Text = "Manuels"
+        Me.checkmanuals.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
@@ -338,11 +317,11 @@ Partial Class CopyRoms
         Me.GroupBox4.Controls.Add(Me.txt_GoAPrevoir)
         Me.GroupBox4.Controls.Add(Me.lbl_romSelected)
         Me.GroupBox4.Controls.Add(Me.txt_NbRomSelected)
-        Me.GroupBox4.Location = New System.Drawing.Point(358, 17)
-        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox4.Location = New System.Drawing.Point(316, 17)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.GroupBox4.Size = New System.Drawing.Size(387, 65)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox4.Size = New System.Drawing.Size(380, 65)
         Me.GroupBox4.TabIndex = 12
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Ma Selection"
@@ -350,18 +329,18 @@ Partial Class CopyRoms
         'buttonaffichermaselection
         '
         Me.buttonaffichermaselection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.buttonaffichermaselection.Location = New System.Drawing.Point(187, 6)
+        Me.buttonaffichermaselection.Location = New System.Drawing.Point(219, 10)
         Me.buttonaffichermaselection.Name = "buttonaffichermaselection"
-        Me.buttonaffichermaselection.Size = New System.Drawing.Size(192, 23)
+        Me.buttonaffichermaselection.Size = New System.Drawing.Size(159, 23)
         Me.buttonaffichermaselection.TabIndex = 6
-        Me.buttonaffichermaselection.Text = "Afficher/Cacher Ma Selection"
+        Me.buttonaffichermaselection.Text = "Afficher/Cacher ma Selection"
         Me.buttonaffichermaselection.UseVisualStyleBackColor = True
         '
         'txt_morestant
         '
-        Me.txt_morestant.Location = New System.Drawing.Point(187, 42)
+        Me.txt_morestant.Location = New System.Drawing.Point(153, 42)
         Me.txt_morestant.Name = "txt_morestant"
-        Me.txt_morestant.Size = New System.Drawing.Size(61, 20)
+        Me.txt_morestant.Size = New System.Drawing.Size(79, 20)
         Me.txt_morestant.TabIndex = 5
         Me.txt_morestant.Text = "0"
         Me.txt_morestant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -370,7 +349,7 @@ Partial Class CopyRoms
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label5.Location = New System.Drawing.Point(246, 32)
+        Me.Label5.Location = New System.Drawing.Point(235, 32)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(138, 26)
         Me.Label5.TabIndex = 4
@@ -380,7 +359,7 @@ Partial Class CopyRoms
         '
         Me.lbl_GoAPrevoir.AutoSize = True
         Me.lbl_GoAPrevoir.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lbl_GoAPrevoir.Location = New System.Drawing.Point(72, 44)
+        Me.lbl_GoAPrevoir.Location = New System.Drawing.Point(83, 45)
         Me.lbl_GoAPrevoir.Name = "lbl_GoAPrevoir"
         Me.lbl_GoAPrevoir.Size = New System.Drawing.Size(64, 13)
         Me.lbl_GoAPrevoir.TabIndex = 3
@@ -390,7 +369,7 @@ Partial Class CopyRoms
         '
         Me.txt_GoAPrevoir.Location = New System.Drawing.Point(5, 42)
         Me.txt_GoAPrevoir.Name = "txt_GoAPrevoir"
-        Me.txt_GoAPrevoir.Size = New System.Drawing.Size(61, 20)
+        Me.txt_GoAPrevoir.Size = New System.Drawing.Size(72, 20)
         Me.txt_GoAPrevoir.TabIndex = 2
         Me.txt_GoAPrevoir.Text = "0"
         Me.txt_GoAPrevoir.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -399,7 +378,7 @@ Partial Class CopyRoms
         '
         Me.lbl_romSelected.AutoSize = True
         Me.lbl_romSelected.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.lbl_romSelected.Location = New System.Drawing.Point(72, 20)
+        Me.lbl_romSelected.Location = New System.Drawing.Point(83, 20)
         Me.lbl_romSelected.Name = "lbl_romSelected"
         Me.lbl_romSelected.Size = New System.Drawing.Size(102, 13)
         Me.lbl_romSelected.TabIndex = 1
@@ -409,7 +388,7 @@ Partial Class CopyRoms
         '
         Me.txt_NbRomSelected.Location = New System.Drawing.Point(5, 16)
         Me.txt_NbRomSelected.Name = "txt_NbRomSelected"
-        Me.txt_NbRomSelected.Size = New System.Drawing.Size(61, 20)
+        Me.txt_NbRomSelected.Size = New System.Drawing.Size(72, 20)
         Me.txt_NbRomSelected.TabIndex = 0
         Me.txt_NbRomSelected.Text = "0"
         Me.txt_NbRomSelected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -421,9 +400,9 @@ Partial Class CopyRoms
         Me.GroupBox3.Controls.Add(Me.txt_USBGo)
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox3.Location = New System.Drawing.Point(4, 17)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Size = New System.Drawing.Size(112, 65)
         Me.GroupBox3.TabIndex = 11
         Me.GroupBox3.TabStop = False
@@ -451,7 +430,7 @@ Partial Class CopyRoms
         'Buttongetback
         '
         Me.Buttongetback.Location = New System.Drawing.Point(15, 532)
-        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2)
         Me.Buttongetback.Name = "Buttongetback"
         Me.Buttongetback.Size = New System.Drawing.Size(101, 31)
         Me.Buttongetback.TabIndex = 8
@@ -502,7 +481,7 @@ Partial Class CopyRoms
         Me.listboxMaSelection.Name = "listboxMaSelection"
         Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.listboxMaSelection.Size = New System.Drawing.Size(378, 407)
+        Me.listboxMaSelection.Size = New System.Drawing.Size(114, 407)
         Me.listboxMaSelection.TabIndex = 12
         '
         'txt_romdesc
@@ -649,6 +628,9 @@ Partial Class CopyRoms
         Me.lbl_TxtSearch.TabIndex = 11
         Me.lbl_TxtSearch.Text = "Saisir pour Filtrer"
         '
+        'Timer1
+        '
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -666,7 +648,7 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.ListGameLists)
         Me.Controls.Add(Me.ButtonImportXML)
         Me.Controls.Add(Me.FinalGrid)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "CopyRoms"
         Me.Text = "CopyRoms"
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -725,22 +707,21 @@ Partial Class CopyRoms
     Friend WithEvents txt_txtsearch As TextBox
     Friend WithEvents GroupBox5 As GroupBox
     Friend WithEvents ButtonParcourirRecalCopy As Button
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Label6 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents txt_CopyFolder As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents ButtonCopy As Button
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents CheckBox6 As CheckBox
-    Friend WithEvents CheckBox5 As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents CheckBox4 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox3 As CheckBox
+    Friend WithEvents checkbios As CheckBox
+    Friend WithEvents checksaves As CheckBox
+    Friend WithEvents checkimgs As CheckBox
+    Friend WithEvents checkoverlays As CheckBox
+    Friend WithEvents checkvideos As CheckBox
+    Friend WithEvents checkmanuals As CheckBox
     Friend WithEvents txt_morestant As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents lbl_TxtSearch As Label
     Friend WithEvents listboxMaSelection As ListBox
     Friend WithEvents buttonaffichermaselection As Button
+    Friend WithEvents Timer1 As Timer
 End Class
