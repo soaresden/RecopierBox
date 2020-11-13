@@ -152,7 +152,7 @@ Public Class CopyRoms
             For Each xEle As XElement In query2
                 Dim romconsole As String = nomconsole
                 Dim romname As String = xEle.Element("name")
-                Dim rompath As String = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace(xEle.Element("path"), "./", "\"), "/", "\")
+                Dim rompath As String = Replace(My.Settings.RecalboxFolder & "\roms\" & nomconsole & Replace("\\" & Replace(xEle.Element("path"), "./", "\"), "/", "\"), "\\", "")
                 Dim romhidden As String = xEle.Element("hidden")
                 Dim romdesc As String
                 Dim romimage As String
@@ -196,7 +196,7 @@ romsuivante:
 
         'Width for columns
         FinalGrid.Columns(0).Width = 40     'romconsole
-        FinalGrid.Columns(1).Width = 200    'romname
+        FinalGrid.Columns(1).Width = 180    'romname
         FinalGrid.Columns(2).Width = 1      'rompath
         FinalGrid.Columns(3).Width = 1      'romdesc
         FinalGrid.Columns(4).Width = 1      'romimage
@@ -224,19 +224,19 @@ romsuivante:
         FinalGrid.Columns.Add(colromimage)
         colromimage.HeaderText = "Screen"
         colromimage.Name = "Coche"
-        colromimage.Width = 30
+        colromimage.Width = 25
 
         Dim colromvideo As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromvideo)
         colromvideo.HeaderText = "Video"
         colromvideo.Name = "Coche"
-        colromvideo.Width = 30
+        colromvideo.Width = 25
 
         Dim colromanual As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromanual)
         colromanual.HeaderText = "Manual"
         colromanual.Name = "Coche"
-        colromanual.Width = 30
+        colromanual.Width = 25
 
         Dim colromoverlay As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromoverlay)
@@ -248,20 +248,20 @@ romsuivante:
         FinalGrid.Columns.Add(colromsaves)
         colromsaves.HeaderText = "Save"
         colromsaves.Name = "Coche"
-        colromsaves.Width = 30
+        colromsaves.Width = 25
 
         Dim colromselection As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromselection)
         colromselection.HeaderText = "Selection"
         colromselection.Name = "Coche"
-        colromselection.Width = 50
+        colromselection.Width = 25
 
         'Ajout de la taille de la rom 
         Dim colromSize As New DataGridViewTextBoxColumn()
         FinalGrid.Columns.Add(colromSize)
         colromSize.HeaderText = "Mo"
         colromSize.Name = "Coche"
-        colromSize.Width = 50
+        colromSize.Width = 60
 
         'Reajusting Interface and Showing Final Interface
         ButtonImportXML.Hide()
@@ -289,11 +289,15 @@ romsuivante:
             Dim size As Long
 
             Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
-            If attr = 0 And FileAttributes.Directory = 16 Then
+            If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
                 'si c'est un repertoire (daphne, dos ...etc) 
 
-                size = FormatFileSize(chemindelarom)
+                Dim folder As New IO.DirectoryInfo(chemindelarom & "\")
+                For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
+                    size += file.Length
+                Next file
 
+                size = chemindelarom
 
             Else
                 'si c'est un fichier...
