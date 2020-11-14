@@ -74,16 +74,16 @@ Partial Class CopyRoms
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.buttonRAZ = New System.Windows.Forms.Button()
         Me.GroupFiltresAvances = New System.Windows.Forms.GroupBox()
+        Me.txtShownRoms = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txt_nbrom = New System.Windows.Forms.TextBox()
         Me.DecocherTout = New System.Windows.Forms.CheckBox()
         Me.CocherTout = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ButtonShowColonne = New System.Windows.Forms.Button()
         Me.ComboFiltreColonnes = New System.Windows.Forms.ComboBox()
         Me.ButtonHideColonne = New System.Windows.Forms.Button()
-        Me.txt_nbrom = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtShownRoms = New System.Windows.Forms.TextBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -645,6 +645,51 @@ Partial Class CopyRoms
         Me.GroupFiltresAvances.TabStop = False
         Me.GroupFiltresAvances.Text = "Colonnes Disponibles :"
         '
+        'txtShownRoms
+        '
+        Me.txtShownRoms.BackColor = System.Drawing.Color.Honeydew
+        Me.txtShownRoms.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtShownRoms.Location = New System.Drawing.Point(402, 23)
+        Me.txtShownRoms.Name = "txtShownRoms"
+        Me.txtShownRoms.ReadOnly = True
+        Me.txtShownRoms.Size = New System.Drawing.Size(47, 20)
+        Me.txtShownRoms.TabIndex = 19
+        Me.txtShownRoms.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label7.Location = New System.Drawing.Point(318, 50)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(84, 13)
+        Me.Label7.TabIndex = 18
+        Me.Label7.Text = "Nb Roms Total :"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label6.Location = New System.Drawing.Point(299, 25)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(104, 13)
+        Me.Label6.TabIndex = 17
+        Me.Label6.Text = "Nb Roms Affichées :"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txt_nbrom
+        '
+        Me.txt_nbrom.BackColor = System.Drawing.Color.ForestGreen
+        Me.txt_nbrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_nbrom.ForeColor = System.Drawing.SystemColors.Window
+        Me.txt_nbrom.Location = New System.Drawing.Point(402, 48)
+        Me.txt_nbrom.Name = "txt_nbrom"
+        Me.txt_nbrom.ReadOnly = True
+        Me.txt_nbrom.Size = New System.Drawing.Size(47, 22)
+        Me.txt_nbrom.TabIndex = 16
+        Me.txt_nbrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'DecocherTout
         '
         Me.DecocherTout.AutoSize = True
@@ -704,51 +749,6 @@ Partial Class CopyRoms
         Me.ButtonHideColonne.TabIndex = 1
         Me.ButtonHideColonne.Text = "Cacher"
         Me.ButtonHideColonne.UseVisualStyleBackColor = True
-        '
-        'txt_nbrom
-        '
-        Me.txt_nbrom.BackColor = System.Drawing.Color.ForestGreen
-        Me.txt_nbrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_nbrom.ForeColor = System.Drawing.SystemColors.Window
-        Me.txt_nbrom.Location = New System.Drawing.Point(402, 48)
-        Me.txt_nbrom.Name = "txt_nbrom"
-        Me.txt_nbrom.ReadOnly = True
-        Me.txt_nbrom.Size = New System.Drawing.Size(47, 22)
-        Me.txt_nbrom.TabIndex = 16
-        Me.txt_nbrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label6.Location = New System.Drawing.Point(299, 25)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(104, 13)
-        Me.Label6.TabIndex = 17
-        Me.Label6.Text = "Nb Roms Affichées :"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label7.Location = New System.Drawing.Point(318, 50)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(84, 13)
-        Me.Label7.TabIndex = 18
-        Me.Label7.Text = "Nb Roms Total :"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtShownRoms
-        '
-        Me.txtShownRoms.BackColor = System.Drawing.Color.Honeydew
-        Me.txtShownRoms.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtShownRoms.Location = New System.Drawing.Point(402, 23)
-        Me.txtShownRoms.Name = "txtShownRoms"
-        Me.txtShownRoms.ReadOnly = True
-        Me.txtShownRoms.Size = New System.Drawing.Size(47, 20)
-        Me.txtShownRoms.TabIndex = 19
-        Me.txtShownRoms.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'CopyRoms
         '

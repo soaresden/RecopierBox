@@ -345,7 +345,7 @@ romsuivante:
 
         'Width for columns
         FinalGrid.Columns("Console").Width = 50
-        FinalGrid.Columns("Titre").Width = 250
+        FinalGrid.Columns("Titre").Width = 260
         'Hiding les colonnes
         FinalGrid.Columns("CheminRom").Visible = False
         FinalGrid.Columns("Synopsis").Visible = False
@@ -450,6 +450,9 @@ romsuivante:
     Sub Calcultaillerom()
         On Error Resume Next
         Dim valeursize As String
+
+        Dim comptage As Integer = FinalGrid.Rows.Count - 1
+        If comptage = 0 Then Exit Sub
 
         For oRow = 0 To FinalGrid.Rows.Count - 1
             valeursize = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Mo").Index).Value
@@ -596,9 +599,28 @@ romsuivante:
 
         Dim celluleromname As String = row.Cells(FinalGrid.Columns("Titre").Index).Value
         Dim cellulerompath As String = row.Cells(FinalGrid.Columns("CheminRom").Index).Value
-        Dim celluledesc As String = row.Cells(FinalGrid.Columns("Synopsis").Index).Value
-        Dim celluleimage As String = row.Cells(FinalGrid.Columns("CheminImage").Index).Value
-        Dim cellulevideo As String = row.Cells(FinalGrid.Columns("CheminVideo").Index).Value
+        Dim celluledesc As String
+        Dim celluleimage As String 
+        Dim cellulevideo As String
+
+        If IsDBNull(row.Cells(FinalGrid.Columns("Synopsis").Index).Value) Then
+            celluledesc = Nothing
+        Else
+            celluledesc = row.Cells(FinalGrid.Columns("Synopsis").Index).Value
+        End If
+
+        If IsDBNull(row.Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
+            celluleimage = Nothing
+        Else
+            celluleimage = row.Cells(FinalGrid.Columns("CheminImage").Index).Value
+        End If
+
+        If IsDBNull(row.Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
+            cellulevideo = Nothing
+        Else
+            cellulevideo = row.Cells(FinalGrid.Columns("CocheImage").Index).Value
+        End If
+
 
         'Defilement du Titre du Jeu
         Timer1.Start()
@@ -746,9 +768,6 @@ romsuivante:
                     On Error GoTo 0
                 End If
             End If
-            'on refresh les indicateurs
-            Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
-            txt_NbRomSelected.Text = valeurnbselect
 
             'On calcule la taille des roms cochée
             Dim sizecumulrom As Integer
@@ -785,6 +804,10 @@ romsuivante:
 
             'On va Update les nombres Aussi
             txtShownRoms.Text = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible) - 1
+
+            'on refresh les indicateurs
+            Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
+            txt_NbRomSelected.Text = valeurnbselect
 
         End If
     End Sub
@@ -1242,37 +1265,42 @@ prochainj:
     End Sub
 
     Private Sub Txt_txtsearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_txtsearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            'Si pas de colonne selectionnée alors on fait rien
-            If ComboFiltreColonnes.Text = Nothing Then Exit Sub
+        If txt_txtsearch.Text = "forcingreset" Then Call ToucheEntree()
+        If e.KeyCode = Keys.Enter Then Call ToucheEntree()
+    End Sub
 
-            'On teste si la colonne est affichee ou non
-            Dim colonneselected As String = ComboFiltreColonnes.Text
-            Dim etat As String
-            If FinalGrid.Columns(colonneselected).Visible = False Then
-                etat = "cachee"
-                FinalGrid.Columns(colonneselected).Visible = True
-            Else
-                etat = "visible"
-            End If
+    Sub ToucheEntree()
+        If txt_txtsearch.Text = "forcingreset" Then txt_txtsearch.Text = Nothing
 
-            'On parametre la recherche
-            Dim commanderecherche As String = ComboFiltreColonnes.Text & " Like '%{0}%'"
+        'Si pas de colonne selectionnée alors on fait rien
+        If ComboFiltreColonnes.Text = Nothing Then Exit Sub
 
-            'On recupere la valeur de la colonne cherchee pour l'afficher dans la textbox
+        'On teste si la colonne est affichee ou non
+        Dim colonneselected As String = ComboFiltreColonnes.Text
+        Dim etat As String
+        If FinalGrid.Columns(colonneselected).Visible = False Then
+            etat = "cachee"
+            FinalGrid.Columns(colonneselected).Visible = True
+        Else
+            etat = "visible"
+        End If
 
-            'Si c'etait caché, on la remet en caché
-            If etat = "cachee" Then FinalGrid.Columns(colonneselected).Visible = False
+        'On parametre la recherche
+        Dim commanderecherche As String = ComboFiltreColonnes.Text & " Like '%{0}%'"
 
-            'commande pour filtrer
-            TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format(commanderecherche, txt_txtsearch.Text)
+        'Si c'etait caché, on la remet en caché
+        If etat = "cachee" Then FinalGrid.Columns(colonneselected).Visible = False
 
-                'on relance le calcul des checkbox et de la taille des checkbox
-                Call Completiondescheckbox()
-                Call Calcultaillerom()
-            End If
+        'commande pour filtrer
+        TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format(commanderecherche, txt_txtsearch.Text)
+
+        'on relance le calcul des checkbox et de la taille des checkbox
+        Call Completiondescheckbox()
+        Call Calcultaillerom()
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If txt_romname.Text = Nothing Then Timer1.Stop()
+
         Dim texteinscrit As String = txt_romname.ToString
         Dim nbcartexte As Integer = txt_romname.ToString.Length
         If nbcartexte = Nothing Then Exit Sub
@@ -1292,8 +1320,7 @@ prochainj:
         End If
     End Sub
     Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs) Handles buttonRAZ.Click
-        txt_txtsearch.Text = Nothing
-        SendKeys.Send(Keys.Enter)
+        txt_txtsearch.Text = "forcingreset"
     End Sub
     Private Sub Romscreeno_Click(sender As Object, e As EventArgs) Handles romscreeno.Click
         Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value.ToString
@@ -1349,7 +1376,6 @@ prochainj:
             If FinalGrid.Rows(i).Visible = True Then
                 FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = True
             End If
-
         Next
         CocherTout.Checked = True
     End Sub
@@ -1378,5 +1404,9 @@ prochainj:
         If ComboFiltreColonnes.Text = "Synopsis" And txt_txtsearch.Text IsNot Nothing Then
 
         End If
+    End Sub
+
+    Private Sub Txt_txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txt_txtsearch.TextChanged
+        If txt_txtsearch.Text = "forcingreset" Then Call ToucheEntree()
     End Sub
 End Class
