@@ -6,6 +6,10 @@
 
     End Sub
     Private Sub ButtonCopy_Click(sender As Object, e As EventArgs) Handles ButtonCopy.Click
+        If TxtRecalfolderPath Is Nothing Then
+            MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
+            Exit Sub
+        End If
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         CopyRoms.Show()
         Me.Hide()

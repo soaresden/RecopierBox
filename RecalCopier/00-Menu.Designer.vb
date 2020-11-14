@@ -215,7 +215,7 @@ Partial Class Form1
         Me.Disclaimer.Margin = New System.Windows.Forms.Padding(4)
         Me.Disclaimer.Name = "Disclaimer"
         Me.Disclaimer.Padding = New System.Windows.Forms.Padding(4)
-        Me.Disclaimer.Size = New System.Drawing.Size(1237, 510)
+        Me.Disclaimer.Size = New System.Drawing.Size(974, 510)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Pourquoi cet Outil ?"
