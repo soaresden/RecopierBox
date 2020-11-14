@@ -833,7 +833,6 @@ romsuivante:
             System.IO.File.Copy(legamelist, lenouvogamelist, True)
 
             'on check si les images
-            On Error Resume Next
             If checkimgs.Checked = True Then
                 'retrouver la ligne
                 For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
@@ -857,9 +856,7 @@ romsuivante:
                     End If
                 Next
             End If
-            On Error GoTo 0
 
-            On Error Resume Next
             'on check si les videos
             If checkvideos.Checked = True Then
                 For b = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
@@ -883,10 +880,8 @@ romsuivante:
                     End If
                 Next
             End If
-            On Error GoTo 0
 
             'on check si les manuels
-            On Error Resume Next
             If checkmanuals.Checked = True Then
                 For c = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
                     Dim estcequemanuel As String = FinalGrid.Rows(c).Cells(9).Value ' on check si le jeu a un overlay sinon on zappe le traitement
@@ -909,10 +904,8 @@ romsuivante:
                     End If
                 Next
             End If
-            On Error GoTo 0
 
             'on check si les overlays
-            On Error Resume Next
             If checkoverlays.Checked = True Then
                 For d = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
                     'check sur le jeu 
@@ -988,11 +981,9 @@ romsuivante:
                     End If
                 Next
             End If
-            On Error GoTo 0
 
 
             'on check si les saves
-            On Error Resume Next
             If checksaves.Checked = True Then
                 For e1 = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
                     Dim estcequesaves As String = FinalGrid.Rows(e1).Cells(11).Value ' on check si le jeu a un overlay sinon on zappe le traitement
@@ -1002,21 +993,115 @@ romsuivante:
                         Dim jeuencours As String = FinalGrid.Rows(e1).Cells(2).Value
                         If jeuencours = pathjeu Then ' colonne des path
                             Dim console As String = FinalGrid.Rows(e1).Cells(0).Value
-                            Dim cheminisaves As String = FinalGrid.Rows(e1).Cells(4).Value
-                            Dim nouvocheminsaves As String = Replace(cheminisaves, My.Settings.RecalboxFolder, newrecalbox)
-                            'On check si ca existe, au cas ou on le cree
-                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminsaves))) Then
-                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminsaves))
-                            End If
-                            'et on copie LES saves
-                            System.IO.File.Copy(cheminisaves, nouvocheminsaves, True)
-                            Exit For
+                            Dim tempsaves As String = FinalGrid.Rows(e1).Cells(2).Value
+                            Dim savesdir As String = Path.GetDirectoryName(Replace(tempsaves, "\roms\", "\saves\"))
+                            'on va creer un tableau temporaire pour stocker tous les fichiers avec la racine du jeu (sstates et saves du coup)
+                            Dim tableauresultats(100)
+                            Dim compteur As Integer = 0
+                            'on va boucler pour les stocker
+                            For Each foundFile As String In My.Computer.FileSystem.GetFiles(
+    savesdir,
+    Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWithoutExtension(jeuencours) & ".*")
+
+                                tableauresultats(compteur) = foundFile
+                                compteur += 1
+                            Next
+
+                            'on va les retravailler pour avoir le chemin complet
+                            Dim cheminfinalsave As String
+                            cheminfinalsave = 0
+                            For lignetab = 0 To compteur - 1
+                                cheminfinalsave = Replace(tableauresultats(lignetab), My.Settings.RecalboxFolder, newrecalbox)
+
+                                'On check si ca existe, au cas ou on le cree
+                                If (Not System.IO.Directory.Exists(Path.GetDirectoryName(cheminfinalsave))) Then
+                                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(cheminfinalsave))
+                                End If
+                                'et on copie LES saves
+                                System.IO.File.Copy(tableauresultats(lignetab), cheminfinalsave, True)
+                            Next
                         End If
                     End If
                 Next
             End If
-            On Error GoTo 0
         Next
+
+        'Demande les Overlay systemes ?
+        If checkoverlays.Checked = True Then
+            If MsgBox("Vous aviez coché les Overlays, voules vous les overlays systemes également ?", vbYesNo) = vbYes Then
+                On Error Resume Next
+                For overlaysys = 0 To ListGameLists.Items.Count - 1
+                    Dim fulladresse As String = Path.GetDirectoryName(ListGameLists.Items(overlaysys))
+                    Dim overlayadresse As String = Replace(fulladresse, "\roms\", "\overlays\")
+                    Dim parentName As String = IO.Path.GetFileName(overlayadresse)
+
+                    Dim fichier1cfg As String = overlayadresse & "\" & parentName & ".cfg"
+                    Dim fichier2overlaycfg As String
+                    Dim fichier3png As String
+
+                    Dim cheminpropreoverlay2 As String
+                    Dim justefichier2 As String
+
+                    fichier3png = 0
+                    justefichier2 = 0
+                    fichier2overlaycfg = 0
+                    cheminpropreoverlay2 = 0
+
+                    'on va lire le cfg pour trouver le cfg overlay
+                    File.ReadAllLines(fichier1cfg)
+
+                    Dim readText() As String = File.ReadAllLines(fichier1cfg)
+                    Dim s As String
+
+                    For Each s In readText
+                        Dim detectinputoverlay As String = InStr(s, "/overlays/")
+                        If detectinputoverlay > 0 Then
+                            'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
+                            'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
+                            'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
+                            Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
+                            cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                            justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
+                            Exit For
+                        End If
+                    Next
+
+                    'on lit le deuxieme fichier overlay cfg pour trouver le png
+                    File.ReadAllLines(cheminpropreoverlay2)
+
+                    Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
+                    Dim t As String
+
+                    For Each t In readText2
+                        Dim detectoverlayzero As String = InStr(t, "overlay0_overlay")
+                        If detectoverlayzero > 0 Then
+                            Dim chemindupng = t.Substring(detectoverlayzero + 18)
+                            Dim detectpng = InStr(chemindupng, "png")
+                            Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
+                            Dim cheminpng = t.Substring(InStr(t, "overlay0_overlay") + 18).Substring(0, InStr(t.Substring(InStr(t, "overlay0_overlay") + 18), "png") + 2)
+                            fichier3png = Replace(cheminpropreoverlay2, justefichier2, cheminpng)
+                            Exit For
+                        End If
+                    Next
+
+
+                    Dim nouvochemin1 As String = Replace(fichier1cfg, My.Settings.RecalboxFolder, newrecalbox)
+                    Dim nouvochemin2 As String = Replace(cheminpropreoverlay2, My.Settings.RecalboxFolder, newrecalbox)
+                    Dim nouvochemin3 As String = Replace(fichier3png, My.Settings.RecalboxFolder, newrecalbox)
+
+                    'On check si ca existe, au cas ou on le cree
+                    If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvochemin2))) Then
+                        System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvochemin2))
+                    End If
+
+                    'et on copie LES 3 fichiers Overlays
+                    System.IO.File.Copy(fichier1cfg, nouvochemin1, True)
+                    System.IO.File.Copy(cheminpropreoverlay2, nouvochemin2, True)
+                    System.IO.File.Copy(fichier3png, nouvochemin3, True)
+                Next
+                On Error GoTo 0
+            End If
+        End If
 
         'on check si les BIOS a la fin 
         If checkbios.Checked = True Then
@@ -1085,10 +1170,10 @@ prochainj:
     Private Sub Txt_txtsearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_txtsearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             'commande SQL pour filtrer
-            TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("romname LIKE '%{0}%'", txt_txtsearch.Text)
+            TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("romname Like '%{0}%'", txt_txtsearch.Text)
 
-            'on relance le calcul des checkbox et de la taille des checkbox
-            Call Completiondescheckbox()
+                    'on relance le calcul des checkbox et de la taille des checkbox
+                    Call Completiondescheckbox()
             Call Calcultaillerom()
         End If
     End Sub
