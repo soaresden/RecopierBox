@@ -423,8 +423,6 @@ romsuivante:
 
 
         'On va alimenter les filtres de la combobox 
-        ComboFiltreColonnes.Items.Add("Console")
-        ComboFiltreColonnes.Items.Add("Titre")
         ComboFiltreColonnes.Items.Add("CheminRom")
         ComboFiltreColonnes.Items.Add("Synopsis")
         ComboFiltreColonnes.Items.Add("CheminImage")
@@ -527,10 +525,7 @@ romsuivante:
     End Sub
     Sub Completiondescheckbox()
 
-
-
-
-        For orow = 0 To FinalGrid.RowCount - 1
+        For orow = 0 To FinalGrid.RowCount - 2
             If orow = 0 And FinalGrid.RowCount - 1 = orow Then
                 MsgBox("Pas de Resultats")
                 buttonRAZ.PerformClick()
@@ -558,7 +553,7 @@ romsuivante:
             End If
 
             'test sur le chemin des overlays
-            Dim cheminrom As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminRom").Index).ToString
+            Dim cheminrom As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminRom").Index).Value
             Dim FileInfo As New FileInfo(cheminrom)
             Dim nomdelarom As String = FileInfo.Name
             Dim nomducfg As String = nomdelarom & ".cfg"
@@ -879,6 +874,9 @@ romsuivante:
             listboxMaSelection.Hide()
             Exit Sub
         End If
+
+        'On défiltre par securité
+        buttonRAZ.PerformClick()
 
         'On copie déja les roms
         Dim newrecalbox As String = My.Settings.CopyFolder & "\recalbox"
@@ -1247,27 +1245,49 @@ prochainj:
             'Si pas de colonne selectionnée alors on fait rien
             If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
 
+            'On teste si la colonne est affichee ou non
+            Dim colonneselected As String = ComboFiltreColonnes.Text
+            Dim etat As String
+            If FinalGrid.Columns(colonneselected).Visible = False Then
+                etat = "cachee"
+                FinalGrid.Columns(colonneselected).Visible = True
+            Else
+                etat = "visible"
+            End If
+
+            'On parametre la recherche
             Dim commanderecherche As String = ComboFiltreColonnes.Text & " Like '%{0}%'"
+
+            'On recupere la valeur de la colonne cherchee pour l'afficher dans la textbox
+
+            'Si c'etait caché, on la remet en caché
+            If etat = "cachee" Then FinalGrid.Columns(colonneselected).Visible = False
 
             'commande pour filtrer
             TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format(commanderecherche, txt_txtsearch.Text)
 
-            'on relance le calcul des checkbox et de la taille des checkbox
-            Call Completiondescheckbox()
-            Call Calcultaillerom()
-        End If
+                'on relance le calcul des checkbox et de la taille des checkbox
+                Call Completiondescheckbox()
+                Call Calcultaillerom()
+            End If
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Dim texteinscrit As String = txt_romname.ToString
         Dim nbcartexte As Integer = txt_romname.ToString.Length
         If nbcartexte = Nothing Then Exit Sub
 
+        Dim rowindex As Integer = FinalGrid.CurrentCell.RowIndex
+        Dim columnindex As Integer = FinalGrid.Columns("Titre").Index
+
+        Dim valeur As String = FinalGrid.Rows(rowindex).Cells(columnindex).Value.ToString()
+
         If sec <= nbcartexte Then
-            txt_romname.Text = Mid(FinalGrid.SelectedCells(FinalGrid.Columns("Titre").Index).ToString, 1, sec)
+
+            txt_romname.Text = Mid(valeur, 1, sec)
             sec += 1
         Else
             sec = 0
-            txt_romname.Text = Mid(FinalGrid.SelectedCells(FinalGrid.Columns("Titre").Index).ToString, 1, sec)
+            txt_romname.Text = Mid(valeur, 1, sec)
         End If
     End Sub
     Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs) Handles buttonRAZ.Click
@@ -1345,5 +1365,12 @@ prochainj:
     Private Sub ButtonHideColonne_Click(sender As Object, e As EventArgs) Handles ButtonHideColonne.Click
         If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
         FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = False
+    End Sub
+
+    Private Sub Txt_romdesc_TextChanged(sender As Object, e As EventArgs) Handles txt_romdesc.TextChanged
+        'En travail, mettre en gras !
+        If ComboFiltreColonnes.Text = "Synopsis" And txt_txtsearch.Text IsNot Nothing Then
+
+        End If
     End Sub
 End Class

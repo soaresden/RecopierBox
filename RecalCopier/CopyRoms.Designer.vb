@@ -594,9 +594,9 @@ Partial Class CopyRoms
         '
         'txt_txtsearch
         '
-        Me.txt_txtsearch.Location = New System.Drawing.Point(265, 12)
+        Me.txt_txtsearch.Location = New System.Drawing.Point(174, 22)
         Me.txt_txtsearch.Name = "txt_txtsearch"
-        Me.txt_txtsearch.Size = New System.Drawing.Size(158, 20)
+        Me.txt_txtsearch.Size = New System.Drawing.Size(177, 20)
         Me.txt_txtsearch.TabIndex = 4
         '
         'Timer1
@@ -605,9 +605,9 @@ Partial Class CopyRoms
         'buttonRAZ
         '
         Me.buttonRAZ.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.buttonRAZ.Location = New System.Drawing.Point(520, 14)
+        Me.buttonRAZ.Location = New System.Drawing.Point(496, 22)
         Me.buttonRAZ.Name = "buttonRAZ"
-        Me.buttonRAZ.Size = New System.Drawing.Size(74, 54)
+        Me.buttonRAZ.Size = New System.Drawing.Size(98, 46)
         Me.buttonRAZ.TabIndex = 12
         Me.buttonRAZ.Text = "RAZ Recherche"
         Me.buttonRAZ.UseVisualStyleBackColor = True
@@ -634,11 +634,11 @@ Partial Class CopyRoms
         'DecocherTout
         '
         Me.DecocherTout.AutoSize = True
-        Me.DecocherTout.Location = New System.Drawing.Point(265, 53)
+        Me.DecocherTout.Location = New System.Drawing.Point(392, 44)
         Me.DecocherTout.Name = "DecocherTout"
-        Me.DecocherTout.Size = New System.Drawing.Size(158, 17)
+        Me.DecocherTout.Size = New System.Drawing.Size(98, 17)
         Me.DecocherTout.TabIndex = 15
-        Me.DecocherTout.Text = "Décocher tous les Elements"
+        Me.DecocherTout.Text = "Décocher Tout"
         Me.DecocherTout.UseVisualStyleBackColor = True
         '
         'CocherTout
@@ -646,18 +646,18 @@ Partial Class CopyRoms
         Me.CocherTout.AutoSize = True
         Me.CocherTout.Checked = True
         Me.CocherTout.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CocherTout.Location = New System.Drawing.Point(265, 35)
+        Me.CocherTout.Location = New System.Drawing.Point(392, 21)
         Me.CocherTout.Name = "CocherTout"
-        Me.CocherTout.Size = New System.Drawing.Size(145, 17)
+        Me.CocherTout.Size = New System.Drawing.Size(85, 17)
         Me.CocherTout.TabIndex = 14
-        Me.CocherTout.Text = "Cocher tous les Elements"
+        Me.CocherTout.Text = "Cocher Tout"
         Me.CocherTout.UseVisualStyleBackColor = True
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label4.Location = New System.Drawing.Point(164, 14)
+        Me.Label4.Location = New System.Drawing.Point(171, 10)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(95, 13)
         Me.Label4.TabIndex = 13
@@ -668,7 +668,7 @@ Partial Class CopyRoms
         Me.ButtonShowColonne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.ButtonShowColonne.Location = New System.Drawing.Point(7, 44)
         Me.ButtonShowColonne.Name = "ButtonShowColonne"
-        Me.ButtonShowColonne.Size = New System.Drawing.Size(75, 24)
+        Me.ButtonShowColonne.Size = New System.Drawing.Size(55, 24)
         Me.ButtonShowColonne.TabIndex = 2
         Me.ButtonShowColonne.Text = "Afficher"
         Me.ButtonShowColonne.UseVisualStyleBackColor = True
@@ -676,17 +676,17 @@ Partial Class CopyRoms
         'ComboFiltreColonnes
         '
         Me.ComboFiltreColonnes.FormattingEnabled = True
-        Me.ComboFiltreColonnes.Location = New System.Drawing.Point(6, 15)
+        Me.ComboFiltreColonnes.Location = New System.Drawing.Point(6, 22)
         Me.ComboFiltreColonnes.Name = "ComboFiltreColonnes"
-        Me.ComboFiltreColonnes.Size = New System.Drawing.Size(152, 21)
+        Me.ComboFiltreColonnes.Size = New System.Drawing.Size(125, 21)
         Me.ComboFiltreColonnes.TabIndex = 0
         '
         'ButtonHideColonne
         '
         Me.ButtonHideColonne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonHideColonne.Location = New System.Drawing.Point(83, 44)
+        Me.ButtonHideColonne.Location = New System.Drawing.Point(68, 44)
         Me.ButtonHideColonne.Name = "ButtonHideColonne"
-        Me.ButtonHideColonne.Size = New System.Drawing.Size(75, 24)
+        Me.ButtonHideColonne.Size = New System.Drawing.Size(63, 24)
         Me.ButtonHideColonne.TabIndex = 1
         Me.ButtonHideColonne.Text = "Cacher"
         Me.ButtonHideColonne.UseVisualStyleBackColor = True
