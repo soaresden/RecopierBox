@@ -190,7 +190,7 @@ Partial Class Form1
         Me.label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label3.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label3.ForeColor = System.Drawing.Color.Aqua
-        Me.label3.Location = New System.Drawing.Point(1135, 647)
+        Me.label3.Location = New System.Drawing.Point(1142, 629)
         Me.label3.Name = "label3"
         Me.label3.Size = New System.Drawing.Size(111, 17)
         Me.label3.TabIndex = 14
@@ -199,7 +199,7 @@ Partial Class Form1
         'TextBox1
         '
         Me.TextBox1.Location = New System.Drawing.Point(8, 25)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(1223, 366)
@@ -212,10 +212,10 @@ Partial Class Form1
         Me.Disclaimer.Controls.Add(Me.TextBox1)
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Disclaimer.Location = New System.Drawing.Point(15, 82)
-        Me.Disclaimer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Disclaimer.Margin = New System.Windows.Forms.Padding(4)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.Disclaimer.Size = New System.Drawing.Size(1090, 510)
+        Me.Disclaimer.Padding = New System.Windows.Forms.Padding(4)
+        Me.Disclaimer.Size = New System.Drawing.Size(1237, 510)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Pourquoi cet Outil ?"
@@ -225,7 +225,7 @@ Partial Class Form1
         Me.Button1.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Button1.Location = New System.Drawing.Point(100, 420)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(1095, 49)
         Me.Button1.TabIndex = 17
@@ -239,7 +239,7 @@ Partial Class Form1
         Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.RichTextBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder
         Me.RichTextBox1.Location = New System.Drawing.Point(965, 599)
-        Me.RichTextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RichTextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.Size = New System.Drawing.Size(288, 33)
         Me.RichTextBox1.TabIndex = 17
