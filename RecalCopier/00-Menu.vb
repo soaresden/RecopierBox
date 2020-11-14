@@ -50,8 +50,7 @@
             End If
         End If
     End Sub
-
-    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
-        Process.Start("https://github.com/soaresden/RecopierBox")
+    Private Sub RichTextBox1_Click(sender As Object, e As EventArgs) Handles RichTextBox1.Click
+        System.Diagnostics.Process.Start(String.Format("https://github.com/soaresden/RecopierBox"))
     End Sub
 End Class
