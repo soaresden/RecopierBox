@@ -837,19 +837,23 @@ romsuivante:
             If checkimgs.Checked = True Then
                 'retrouver la ligne
                 For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim jeuencours As String = FinalGrid.Rows(a).Cells(2).Value
-                    If jeuencours = pathjeu Then ' colonne des path
-                        Dim console As String = FinalGrid.Rows(a).Cells(0).Value
-                        Dim cheminimage As String = FinalGrid.Rows(a).Cells(4).Value
-                        Dim nouvocheminimage As String = Replace(cheminimage, My.Settings.RecalboxFolder, newrecalbox)
-                        'On check si ca existe, au cas ou on le cree
-                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminimage))) Then
-                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminimage))
-                        End If
+                    Dim estcequeimage As String = FinalGrid.Rows(a).Cells(7).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    If estcequeimage = True Then
 
-                        'et on copie LES images
-                        System.IO.File.Copy(cheminimage, nouvocheminimage, True)
-                        Exit For
+                        Dim jeuencours As String = FinalGrid.Rows(a).Cells(2).Value
+                        If jeuencours = pathjeu Then ' colonne des path
+                            Dim console As String = FinalGrid.Rows(a).Cells(0).Value
+                            Dim cheminimage As String = FinalGrid.Rows(a).Cells(4).Value
+                            Dim nouvocheminimage As String = Replace(cheminimage, My.Settings.RecalboxFolder, newrecalbox)
+                            'On check si ca existe, au cas ou on le cree
+                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminimage))) Then
+                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminimage))
+                            End If
+
+                            'et on copie LES images
+                            System.IO.File.Copy(cheminimage, nouvocheminimage, True)
+                            Exit For
+                        End If
                     End If
                 Next
             End If
@@ -859,19 +863,23 @@ romsuivante:
             'on check si les videos
             If checkvideos.Checked = True Then
                 For b = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim jeuencours As String = FinalGrid.Rows(b).Cells(2).Value
-                    If jeuencours = pathjeu Then ' colonne des path
-                        Dim console As String = FinalGrid.Rows(b).Cells(0).Value
-                        Dim cheminvideo As String = FinalGrid.Rows(b).Cells(5).Value
-                        Dim nouvocheminvideo As String = Replace(cheminvideo, My.Settings.RecalboxFolder, newrecalbox)
-                        'On check si ca existe, au cas ou on le cree
-                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminvideo))) Then
-                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminvideo))
-                        End If
+                    Dim estcequemanuel As String = FinalGrid.Rows(b).Cells(8).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    If estcequemanuel = True Then
 
-                        'et on copie LES videos
-                        System.IO.File.Copy(cheminvideo, nouvocheminvideo, True)
-                        Exit For
+                        Dim jeuencours As String = FinalGrid.Rows(b).Cells(2).Value
+                        If jeuencours = pathjeu Then ' colonne des path
+                            Dim console As String = FinalGrid.Rows(b).Cells(0).Value
+                            Dim cheminvideo As String = FinalGrid.Rows(b).Cells(5).Value
+                            Dim nouvocheminvideo As String = Replace(cheminvideo, My.Settings.RecalboxFolder, newrecalbox)
+                            'On check si ca existe, au cas ou on le cree
+                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminvideo))) Then
+                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminvideo))
+                            End If
+
+                            'et on copie LES videos
+                            System.IO.File.Copy(cheminvideo, nouvocheminvideo, True)
+                            Exit For
+                        End If
                     End If
                 Next
             End If
@@ -881,19 +889,23 @@ romsuivante:
             On Error Resume Next
             If checkmanuals.Checked = True Then
                 For c = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim jeuencours As String = FinalGrid.Rows(c).Cells(2).Value
-                    If jeuencours = pathjeu Then ' colonne des path
-                        Dim console As String = FinalGrid.Rows(c).Cells(0).Value
-                        Dim cheminmanuel As String = FinalGrid.Rows(c).Cells(6).Value
-                        Dim nouvocheminmanuel As String = Replace(cheminmanuel, My.Settings.RecalboxFolder, newrecalbox)
-                        'On check si ca existe, au cas ou on le cree
-                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminmanuel))) Then
-                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminmanuel))
-                        End If
+                    Dim estcequemanuel As String = FinalGrid.Rows(c).Cells(9).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    If estcequemanuel = True Then
 
-                        'et on copie LES images
-                        System.IO.File.Copy(cheminmanuel, nouvocheminmanuel, True)
-                        Exit For
+                        Dim jeuencours As String = FinalGrid.Rows(c).Cells(2).Value
+                        If jeuencours = pathjeu Then ' colonne des path
+                            Dim console As String = FinalGrid.Rows(c).Cells(0).Value
+                            Dim cheminmanuel As String = FinalGrid.Rows(c).Cells(6).Value
+                            Dim nouvocheminmanuel As String = Replace(cheminmanuel, My.Settings.RecalboxFolder, newrecalbox)
+                            'On check si ca existe, au cas ou on le cree
+                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminmanuel))) Then
+                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminmanuel))
+                            End If
+
+                            'et on copie LES images
+                            System.IO.File.Copy(cheminmanuel, nouvocheminmanuel, True)
+                            Exit For
+                        End If
                     End If
                 Next
             End If
@@ -903,71 +915,76 @@ romsuivante:
             On Error Resume Next
             If checkoverlays.Checked = True Then
                 For d = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim jeuencours As String = FinalGrid.Rows(d).Cells(2).Value
-                    If jeuencours = pathjeu Then ' colonne des path
-                        Dim console As String = FinalGrid.Rows(d).Cells(0).Value
-                        Dim cheminoverlaycfg1 As String = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
-                        Dim cheminpropreoverlay2 As String
-                        Dim justefichier2 As String
-                        Dim cheminpng3 As String
+                    'check sur le jeu 
+                    Dim estcequeoverlay As String = FinalGrid.Rows(d).Cells(10).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    If estcequeoverlay = True Then
+
+                        Dim jeuencours As String = FinalGrid.Rows(d).Cells(2).Value
+                        If jeuencours = pathjeu Then ' colonne des path
+                            Dim cheminpropreoverlay2 As String
+                            Dim console As String = FinalGrid.Rows(d).Cells(0).Value
+                            Dim cheminoverlaycfg1 As String = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
+
+                            Dim justefichier2 As String
+                            Dim cheminpng3 As String
 
 
-                        cheminpropreoverlay2 = 0
-                        justefichier2 = 0
-                        cheminpng3 = 0
+                            cheminpropreoverlay2 = 0
+                            justefichier2 = 0
+                            cheminpng3 = 0
 
-                        'on va lire le cfg pour trouver le cfg overlay
-                        File.ReadAllLines(cheminoverlaycfg1)
+                            'on va lire le cfg pour trouver le cfg overlay
+                            File.ReadAllLines(cheminoverlaycfg1)
 
-                        Dim readText() As String = File.ReadAllLines(cheminoverlaycfg1)
-                        Dim s As String
+                            Dim readText() As String = File.ReadAllLines(cheminoverlaycfg1)
+                            Dim s As String
 
-                        For Each s In readText
-                            Dim detectinputoverlay As String = InStr(s, "/overlays/")
-                            If detectinputoverlay > 0 Then
-                                'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
-                                'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
-                                'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
-                                Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
-                                cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
-                                justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
-                                Exit For
+                            For Each s In readText
+                                Dim detectinputoverlay As String = InStr(s, "/overlays/")
+                                If detectinputoverlay > 0 Then
+                                    'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
+                                    'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
+                                    'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
+                                    Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
+                                    cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                                    justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
+                                    Exit For
+                                End If
+                            Next
+
+                            'on lit le deuxieme fichier overlay cfg pour trouver le png
+                            File.ReadAllLines(cheminpropreoverlay2)
+
+                            Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
+                            Dim t As String
+
+                            For Each t In readText2
+                                Dim detectoverlayzero As String = InStr(t, "overlay0_overlay")
+                                If detectoverlayzero > 0 Then
+                                    'Dim chemindupng = t.Substring(detectoverlayzero + 19)
+                                    ' Dim detectpng = InStr(chemindupng, "png")
+                                    ' Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
+                                    Dim cheminpng = t.Substring(InStr(t, "overlay0_overlay") + 19).Substring(0, InStr(t.Substring(InStr(t, "overlay0_overlay") + 19), "png") + 2)
+                                    cheminpng3 = Replace(cheminpropreoverlay2, justefichier2, cheminpng)
+                                    Exit For
+                                End If
+                            Next
+
+                            Dim nouvochemin1 As String = Replace(cheminoverlaycfg1, My.Settings.RecalboxFolder, newrecalbox)
+                            Dim nouvochemin2 As String = Replace(cheminpropreoverlay2, My.Settings.RecalboxFolder, newrecalbox)
+                            Dim nouvochemin3 As String = Replace(cheminpng3, My.Settings.RecalboxFolder, newrecalbox)
+
+                            'On check si ca existe, au cas ou on le cree
+                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvochemin2))) Then
+                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvochemin2))
                             End If
-                        Next
 
-                        'on lit le deuxieme fichier overlay cfg pour trouver le png
-                        File.ReadAllLines(cheminpropreoverlay2)
-
-                        Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
-                        Dim t As String
-
-                        For Each t In readText2
-                            Dim detectoverlayzero As String = InStr(t, "overlay0_overlay")
-                            If detectoverlayzero > 0 Then
-                                'Dim chemindupng = t.Substring(detectoverlayzero + 19)
-                                ' Dim detectpng = InStr(chemindupng, "png")
-                                ' Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
-                                Dim cheminpng = t.Substring(InStr(t, "overlay0_overlay") + 19).Substring(0, InStr(t.Substring(InStr(t, "overlay0_overlay") + 19), "png") + 2)
-                                cheminpng3 = Replace(cheminpropreoverlay2, justefichier2, cheminpng)
-                                Exit For
-                            End If
-                        Next
-
-                        Dim nouvochemin1 As String = Replace(cheminoverlaycfg1, My.Settings.RecalboxFolder, newrecalbox)
-                        Dim nouvochemin2 As String = Replace(cheminpropreoverlay2, My.Settings.RecalboxFolder, newrecalbox)
-                        Dim nouvochemin3 As String = Replace(cheminpng3, My.Settings.RecalboxFolder, newrecalbox)
-
-                        'On check si ca existe, au cas ou on le cree
-                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvochemin2))) Then
-                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvochemin2))
+                            'et on copie LES 3 fichiers Overlays
+                            System.IO.File.Copy(cheminoverlaycfg1, nouvochemin1, True)
+                            System.IO.File.Copy(cheminpropreoverlay2, nouvochemin2, True)
+                            System.IO.File.Copy(cheminpng3, nouvochemin3, True)
+                            Exit For
                         End If
-
-                        'et on copie LES 3 fichiers Overlays
-                        System.IO.File.Copy(cheminoverlaycfg1, nouvochemin1, True)
-                        System.IO.File.Copy(cheminpropreoverlay2, nouvochemin2, True)
-                        System.IO.File.Copy(cheminpng3, nouvochemin3, True)
-
-                        Exit For
                     End If
                 Next
             End If
@@ -978,18 +995,23 @@ romsuivante:
             On Error Resume Next
             If checksaves.Checked = True Then
                 For e1 = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim jeuencours As String = FinalGrid.Rows(e1).Cells(2).Value
-                    If jeuencours = pathjeu Then ' colonne des path
-                        Dim console As String = FinalGrid.Rows(e1).Cells(0).Value
-                        Dim cheminisaves As String = FinalGrid.Rows(e1).Cells(4).Value
-                        Dim nouvocheminsaves As String = Replace(cheminisaves, My.Settings.RecalboxFolder, newrecalbox)
-                        'On check si ca existe, au cas ou on le cree
-                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminsaves))) Then
-                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminsaves))
+                    Dim estcequesaves As String = FinalGrid.Rows(e1).Cells(11).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    If estcequesaves = True Then
+
+
+                        Dim jeuencours As String = FinalGrid.Rows(e1).Cells(2).Value
+                        If jeuencours = pathjeu Then ' colonne des path
+                            Dim console As String = FinalGrid.Rows(e1).Cells(0).Value
+                            Dim cheminisaves As String = FinalGrid.Rows(e1).Cells(4).Value
+                            Dim nouvocheminsaves As String = Replace(cheminisaves, My.Settings.RecalboxFolder, newrecalbox)
+                            'On check si ca existe, au cas ou on le cree
+                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminsaves))) Then
+                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminsaves))
+                            End If
+                            'et on copie LES saves
+                            System.IO.File.Copy(cheminisaves, nouvocheminsaves, True)
+                            Exit For
                         End If
-                        'et on copie LES saves
-                        System.IO.File.Copy(cheminisaves, nouvocheminsaves, True)
-                        Exit For
                     End If
                 Next
             End If
