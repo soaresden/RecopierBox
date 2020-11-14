@@ -11,10 +11,10 @@ Public Class CopyRoms
         lbl_bibliorecalbox.Hide()
         grp_RomInfos.Hide()
         vid_romvid.uiMode = "none"
-        lbl_TxtSearch.Hide()
         txt_txtsearch.Hide()
         listboxMaSelection.Hide()
         buttonRAZ.Hide()
+        GroupFiltresAvances.Hide()
         'Launch Import Gamelist button
         ButtonImportXML.PerformClick()
     End Sub
@@ -354,66 +354,92 @@ romsuivante:
         FinalGrid.Columns("CheminManuel").Visible = False
         'Width for columns
         FinalGrid.Columns("Genre").Visible = False
-        FinalGrid.Columns("Adulte").Width = 10
-        FinalGrid.Columns("Note").Width = 10
-        FinalGrid.Columns("Developer").Width = 10
-        FinalGrid.Columns("Publisher").Width = 10
-        FinalGrid.Columns("NbPlayers").Width = 10
-        FinalGrid.Columns("DateSortie").Width = 10
-        FinalGrid.Columns("NbLancé").Width = 10
-        FinalGrid.Columns("Region").Width = 10
+        FinalGrid.Columns("Adulte").Visible = False
+        FinalGrid.Columns("Note").Visible = False
+        FinalGrid.Columns("Developer").Visible = False
+        FinalGrid.Columns("Publisher").Visible = False
+        FinalGrid.Columns("NbPlayers").Visible = False
+        FinalGrid.Columns("DateSortie").Visible = False
+        FinalGrid.Columns("NbLancé").Visible = False
+        FinalGrid.Columns("Region").Visible = False
 
         'add checkable columns at the end
         Dim colromimage As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromimage)
-        colromimage.HeaderText = "CocheScreen"
+        colromimage.HeaderText = "CocheImage"
+        colromimage.Name = "CocheImage"
         colromimage.Width = 25
 
         Dim colromvideo As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromvideo)
         colromvideo.HeaderText = "CocheVideo"
+        colromvideo.Name = "CocheVideo"
         colromvideo.Width = 25
 
         Dim colromanual As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromanual)
         colromanual.HeaderText = "CocheManual"
+        colromanual.Name = "CocheManual"
         colromanual.Width = 25
 
         Dim colromoverlay As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromoverlay)
         colromoverlay.HeaderText = "CocheOverlay"
+        colromoverlay.Name = "CocheOverlay"
         colromoverlay.Width = 30
 
         Dim colromsaves As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromsaves)
         colromsaves.HeaderText = "CocheSave"
+        colromsaves.Name = "CocheSave"
         colromsaves.Width = 25
 
         'Ajout de la taille de la rom 
         Dim colromSize As New DataGridViewTextBoxColumn()
         FinalGrid.Columns.Add(colromSize)
         colromSize.HeaderText = "Mo"
-        colromSize.Name = "Coche"
+        colromSize.Name = "Mo"
         colromSize.Width = 60
 
         Dim colromselection As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromselection)
         colromselection.HeaderText = "Selection"
+        colromselection.Name = "Selection"
         colromselection.Width = 25
 
         'Reajusting Interface and Showing Final Interface
         ButtonImportXML.Hide()
         ListGameLists.Hide()
         lbl_gamelist.Hide()
-        FinalGrid.Location = New Point(11, 28)
-        FinalGrid.Size = New Size(592, 378)
+        FinalGrid.Location = New Point(8, 28)
+        FinalGrid.Size = New Size(600, 365)
         grp_RomInfos.Show()
         GroupBox1.Show()
         ButtonShowGames.Hide()
         txt_txtsearch.Show()
-        lbl_TxtSearch.Show()
         buttonRAZ.Show()
+        GroupFiltresAvances.Show()
         dv.Sort = "Console asc, Titre asc"
+
+
+        'On va alimenter les filtres de la combobox 
+        ComboFiltreColonnes.Items.Add("Console")
+        ComboFiltreColonnes.Items.Add("Titre")
+        ComboFiltreColonnes.Items.Add("CheminRom")
+        ComboFiltreColonnes.Items.Add("Synopsis")
+        ComboFiltreColonnes.Items.Add("CheminImage")
+        ComboFiltreColonnes.Items.Add("CheminVideo")
+        ComboFiltreColonnes.Items.Add("CheminManuel")
+        ComboFiltreColonnes.Items.Add("Genre")
+        ComboFiltreColonnes.Items.Add("Adulte")
+        ComboFiltreColonnes.Items.Add("Note")
+        ComboFiltreColonnes.Items.Add("Developer")
+        ComboFiltreColonnes.Items.Add("Publisher")
+        ComboFiltreColonnes.Items.Add("NbPlayers")
+        ComboFiltreColonnes.Items.Add("DateSortie")
+        ComboFiltreColonnes.Items.Add("Nblancé")
+        ComboFiltreColonnes.Items.Add("Region")
+
 
         'on va calculer la taille des roms
         Call Calcultaillerom()
@@ -578,11 +604,11 @@ romsuivante:
 
         'Chargement des informations dans Rom Informations
         Dim row As DataGridViewRow = FinalGrid.Rows(e.RowIndex)
-        Dim celluleromname As String = row.Cells("Titre").Value.ToString
-        Dim cellulerompath As String = row.Cells("CheminRom").Value.ToString
-        Dim celluledesc As String = row.Cells("Synopsis").Value.ToString
-        Dim celluleimage As String = row.Cells("CheminImage").Value.ToString
-        Dim cellulevideo As String = row.Cells("CheminVideo").Value.ToString
+        Dim celluleromname As String = row.Cells("Titre").Value
+        Dim cellulerompath As String = row.Cells("CheminRom").Value
+        Dim celluledesc As String = row.Cells("Synopsis").Value
+        Dim celluleimage As String = row.Cells("CheminImage").Value
+        Dim cellulevideo As String = row.Cells("CheminVideo").Value
 
         txt_romname.Text = celluleromname
 
@@ -595,24 +621,24 @@ romsuivante:
         If celluledesc = Nothing Then
             txt_romdesc.Text = ""
         Else
-            txt_romdesc.Text = row.Cells("Synopsis").Value.ToString
+            txt_romdesc.Text = row.Cells("Synopsis").Value
         End If
 
         'VIDEO
-        Dim console As String = row.Cells("Console").Value.ToString
+        Dim console As String = row.Cells("Console").Value
 
         If celluleimage = Nothing Then
             RomImage.Hide()
         Else
             RomImage.Show()
-            RomImage.Image = Image.FromFile(row.Cells("CheminImage").Value.ToString)
+            RomImage.Image = Image.FromFile(row.Cells("CheminImage").Value)
         End If
 
         If cellulevideo = Nothing Then
             vid_romvid.Hide()
         Else
             vid_romvid.Show()
-            vid_romvid.URL = row.Cells("CheminVideo").Value.ToString
+            vid_romvid.URL = row.Cells("CheminVideo").Value
 
             vid_romvid.uiMode = "none"
             vid_romvid.settings.setMode("loop", True)
@@ -1217,8 +1243,13 @@ prochainj:
 
     Private Sub Txt_txtsearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_txtsearch.KeyDown
         If e.KeyCode = Keys.Enter Then
-            'commande SQL pour filtrer
-            TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("romname Like '%{0}%'", txt_txtsearch.Text)
+            'Si pas de colonne selectionnée alors on fait rien
+            If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
+
+            Dim commanderecherche As String = Chr(34) & ComboFiltreColonnes.Text & " Like '%{0}%'" & Chr(34)
+
+            'commande pour filtrer
+            TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format(commanderecherche, txt_txtsearch.Text)
 
             'on relance le calcul des checkbox et de la taille des checkbox
             Call Completiondescheckbox()
@@ -1289,5 +1320,29 @@ prochainj:
                 txt_CopyFolder.Text = txt_CopyFolder.Text + "\"
             End If
         End If
+    End Sub
+
+    Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles CocherTout.CheckedChanged
+        For i = 0 To FinalGrid.Rows.Count - 1
+            FinalGrid.Rows(i).Cells("Selection").Value = True
+        Next
+        CocherTout.Checked = True
+    End Sub
+
+    Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles DecocherTout.CheckedChanged
+        For i = 0 To FinalGrid.Rows.Count - 1
+            FinalGrid.Rows(i).Cells("Selection").Value = False
+        Next
+        DecocherTout.Checked = False
+    End Sub
+
+    Private Sub ButtonShowColonne_Click(sender As Object, e As EventArgs) Handles ButtonShowColonne.Click
+        If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
+        FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = True
+    End Sub
+
+    Private Sub ButtonHideColonne_Click(sender As Object, e As EventArgs) Handles ButtonHideColonne.Click
+        If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
+        FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = False
     End Sub
 End Class

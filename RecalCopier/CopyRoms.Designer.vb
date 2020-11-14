@@ -71,10 +71,15 @@ Partial Class CopyRoms
         Me.RomImage = New System.Windows.Forms.PictureBox()
         Me.txt_txtsearch = New System.Windows.Forms.TextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.lbl_TxtSearch = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.buttonRAZ = New System.Windows.Forms.Button()
         Me.GroupFiltresAvances = New System.Windows.Forms.GroupBox()
+        Me.DecocherTout = New System.Windows.Forms.CheckBox()
+        Me.CocherTout = New System.Windows.Forms.CheckBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.ButtonShowColonne = New System.Windows.Forms.Button()
+        Me.ComboFiltreColonnes = New System.Windows.Forms.ComboBox()
+        Me.ButtonHideColonne = New System.Windows.Forms.Button()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -84,6 +89,7 @@ Partial Class CopyRoms
         Me.grp_RomInfos.SuspendLayout()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupFiltresAvances.SuspendLayout()
         Me.SuspendLayout()
         '
         'ButtonImportXML
@@ -129,13 +135,13 @@ Partial Class CopyRoms
         '
         Me.FinalGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.FinalGrid.Location = New System.Drawing.Point(226, 28)
-        Me.FinalGrid.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.FinalGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.FinalGrid.MultiSelect = False
         Me.FinalGrid.Name = "FinalGrid"
         Me.FinalGrid.RowHeadersWidth = 51
         Me.FinalGrid.RowTemplate.Height = 24
         Me.FinalGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.FinalGrid.Size = New System.Drawing.Size(382, 402)
+        Me.FinalGrid.Size = New System.Drawing.Size(382, 365)
         Me.FinalGrid.TabIndex = 6
         '
         'GroupBox1
@@ -147,11 +153,11 @@ Partial Class CopyRoms
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
         Me.GroupBox1.Controls.Add(Me.GroupBox3)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupBox1.Location = New System.Drawing.Point(15, 436)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 477)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.GroupBox1.Size = New System.Drawing.Size(990, 92)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Size = New System.Drawing.Size(999, 92)
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Actions"
@@ -163,9 +169,9 @@ Partial Class CopyRoms
         Me.GroupBox5.Controls.Add(Me.Label8)
         Me.GroupBox5.Controls.Add(Me.txt_CopyFolder)
         Me.GroupBox5.Location = New System.Drawing.Point(699, 17)
-        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox5.Size = New System.Drawing.Size(223, 65)
         Me.GroupBox5.TabIndex = 13
         Me.GroupBox5.TabStop = False
@@ -202,7 +208,7 @@ Partial Class CopyRoms
         'ButtonCopy
         '
         Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
-        Me.ButtonCopy.Location = New System.Drawing.Point(921, 15)
+        Me.ButtonCopy.Location = New System.Drawing.Point(927, 15)
         Me.ButtonCopy.Name = "ButtonCopy"
         Me.ButtonCopy.Size = New System.Drawing.Size(69, 72)
         Me.ButtonCopy.TabIndex = 14
@@ -314,9 +320,9 @@ Partial Class CopyRoms
         Me.GroupBox4.Controls.Add(Me.lbl_romSelected)
         Me.GroupBox4.Controls.Add(Me.txt_NbRomSelected)
         Me.GroupBox4.Location = New System.Drawing.Point(316, 17)
-        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Size = New System.Drawing.Size(380, 65)
         Me.GroupBox4.TabIndex = 12
         Me.GroupBox4.TabStop = False
@@ -396,9 +402,9 @@ Partial Class CopyRoms
         Me.GroupBox3.Controls.Add(Me.txt_USBGo)
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupBox3.Location = New System.Drawing.Point(4, 17)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Size = New System.Drawing.Size(112, 65)
         Me.GroupBox3.TabIndex = 11
         Me.GroupBox3.TabStop = False
@@ -425,8 +431,8 @@ Partial Class CopyRoms
         '
         'Buttongetback
         '
-        Me.Buttongetback.Location = New System.Drawing.Point(15, 532)
-        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Buttongetback.Location = New System.Drawing.Point(15, 6)
+        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2)
         Me.Buttongetback.Name = "Buttongetback"
         Me.Buttongetback.Size = New System.Drawing.Size(101, 31)
         Me.Buttongetback.TabIndex = 8
@@ -463,14 +469,14 @@ Partial Class CopyRoms
         Me.grp_RomInfos.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.grp_RomInfos.Location = New System.Drawing.Point(612, 28)
         Me.grp_RomInfos.Name = "grp_RomInfos"
-        Me.grp_RomInfos.Size = New System.Drawing.Size(393, 402)
+        Me.grp_RomInfos.Size = New System.Drawing.Size(393, 444)
         Me.grp_RomInfos.TabIndex = 10
         Me.grp_RomInfos.TabStop = False
         Me.grp_RomInfos.Text = "Rom Infos"
         '
         'romsaveo
         '
-        Me.romsaveo.Location = New System.Drawing.Point(329, 344)
+        Me.romsaveo.Location = New System.Drawing.Point(326, 385)
         Me.romsaveo.Name = "romsaveo"
         Me.romsaveo.Size = New System.Drawing.Size(57, 55)
         Me.romsaveo.TabIndex = 20
@@ -478,7 +484,7 @@ Partial Class CopyRoms
         '
         'romoverlayo
         '
-        Me.romoverlayo.Location = New System.Drawing.Point(242, 344)
+        Me.romoverlayo.Location = New System.Drawing.Point(239, 385)
         Me.romoverlayo.Name = "romoverlayo"
         Me.romoverlayo.Size = New System.Drawing.Size(57, 55)
         Me.romoverlayo.TabIndex = 19
@@ -486,7 +492,7 @@ Partial Class CopyRoms
         '
         'rommanualo
         '
-        Me.rommanualo.Location = New System.Drawing.Point(163, 344)
+        Me.rommanualo.Location = New System.Drawing.Point(160, 385)
         Me.rommanualo.Name = "rommanualo"
         Me.rommanualo.Size = New System.Drawing.Size(57, 55)
         Me.rommanualo.TabIndex = 18
@@ -494,7 +500,7 @@ Partial Class CopyRoms
         '
         'romvideoo
         '
-        Me.romvideoo.Location = New System.Drawing.Point(82, 344)
+        Me.romvideoo.Location = New System.Drawing.Point(79, 385)
         Me.romvideoo.Name = "romvideoo"
         Me.romvideoo.Size = New System.Drawing.Size(57, 55)
         Me.romvideoo.TabIndex = 17
@@ -502,7 +508,7 @@ Partial Class CopyRoms
         '
         'romscreeno
         '
-        Me.romscreeno.Location = New System.Drawing.Point(9, 344)
+        Me.romscreeno.Location = New System.Drawing.Point(6, 385)
         Me.romscreeno.Name = "romscreeno"
         Me.romscreeno.Size = New System.Drawing.Size(57, 55)
         Me.romscreeno.TabIndex = 16
@@ -560,7 +566,7 @@ Partial Class CopyRoms
         '
         Me.Label2.AutoSize = True
         Me.Label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label2.Location = New System.Drawing.Point(124, 328)
+        Me.Label2.Location = New System.Drawing.Point(124, 369)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(133, 13)
         Me.Label2.TabIndex = 9
@@ -588,43 +594,102 @@ Partial Class CopyRoms
         '
         'txt_txtsearch
         '
-        Me.txt_txtsearch.Location = New System.Drawing.Point(203, 407)
+        Me.txt_txtsearch.Location = New System.Drawing.Point(265, 12)
         Me.txt_txtsearch.Name = "txt_txtsearch"
-        Me.txt_txtsearch.Size = New System.Drawing.Size(177, 20)
+        Me.txt_txtsearch.Size = New System.Drawing.Size(158, 20)
         Me.txt_txtsearch.TabIndex = 4
-        '
-        'lbl_TxtSearch
-        '
-        Me.lbl_TxtSearch.AutoSize = True
-        Me.lbl_TxtSearch.Font = New System.Drawing.Font("VAG Rounded", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TxtSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lbl_TxtSearch.Location = New System.Drawing.Point(16, 412)
-        Me.lbl_TxtSearch.Name = "lbl_TxtSearch"
-        Me.lbl_TxtSearch.Size = New System.Drawing.Size(183, 15)
-        Me.lbl_TxtSearch.TabIndex = 11
-        Me.lbl_TxtSearch.Text = "Recherche Romname et Entrée :"
         '
         'Timer1
         '
         '
         'buttonRAZ
         '
-        Me.buttonRAZ.Location = New System.Drawing.Point(386, 405)
+        Me.buttonRAZ.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.buttonRAZ.Location = New System.Drawing.Point(520, 14)
         Me.buttonRAZ.Name = "buttonRAZ"
-        Me.buttonRAZ.Size = New System.Drawing.Size(111, 23)
+        Me.buttonRAZ.Size = New System.Drawing.Size(74, 54)
         Me.buttonRAZ.TabIndex = 12
         Me.buttonRAZ.Text = "RAZ Recherche"
         Me.buttonRAZ.UseVisualStyleBackColor = True
         '
         'GroupFiltresAvances
         '
-        Me.GroupFiltresAvances.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(176, Byte), Integer))
-        Me.GroupFiltresAvances.Location = New System.Drawing.Point(129, 532)
+        Me.GroupFiltresAvances.BackColor = System.Drawing.Color.DarkCyan
+        Me.GroupFiltresAvances.Controls.Add(Me.DecocherTout)
+        Me.GroupFiltresAvances.Controls.Add(Me.CocherTout)
+        Me.GroupFiltresAvances.Controls.Add(Me.Label4)
+        Me.GroupFiltresAvances.Controls.Add(Me.ButtonShowColonne)
+        Me.GroupFiltresAvances.Controls.Add(Me.ComboFiltreColonnes)
+        Me.GroupFiltresAvances.Controls.Add(Me.buttonRAZ)
+        Me.GroupFiltresAvances.Controls.Add(Me.ButtonHideColonne)
+        Me.GroupFiltresAvances.Controls.Add(Me.txt_txtsearch)
+        Me.GroupFiltresAvances.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.GroupFiltresAvances.Location = New System.Drawing.Point(8, 398)
         Me.GroupFiltresAvances.Name = "GroupFiltresAvances"
-        Me.GroupFiltresAvances.Size = New System.Drawing.Size(582, 48)
+        Me.GroupFiltresAvances.Size = New System.Drawing.Size(600, 74)
         Me.GroupFiltresAvances.TabIndex = 13
         Me.GroupFiltresAvances.TabStop = False
-        Me.GroupFiltresAvances.Text = "Filtres Avance"
+        Me.GroupFiltresAvances.Text = "Colonnes Disponibles :"
+        '
+        'DecocherTout
+        '
+        Me.DecocherTout.AutoSize = True
+        Me.DecocherTout.Location = New System.Drawing.Point(265, 53)
+        Me.DecocherTout.Name = "DecocherTout"
+        Me.DecocherTout.Size = New System.Drawing.Size(158, 17)
+        Me.DecocherTout.TabIndex = 15
+        Me.DecocherTout.Text = "Décocher tous les Elements"
+        Me.DecocherTout.UseVisualStyleBackColor = True
+        '
+        'CocherTout
+        '
+        Me.CocherTout.AutoSize = True
+        Me.CocherTout.Checked = True
+        Me.CocherTout.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CocherTout.Location = New System.Drawing.Point(265, 35)
+        Me.CocherTout.Name = "CocherTout"
+        Me.CocherTout.Size = New System.Drawing.Size(145, 17)
+        Me.CocherTout.TabIndex = 14
+        Me.CocherTout.Text = "Cocher tous les Elements"
+        Me.CocherTout.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label4.Location = New System.Drawing.Point(164, 14)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(95, 13)
+        Me.Label4.TabIndex = 13
+        Me.Label4.Text = "puis Filtre Textuel :"
+        '
+        'ButtonShowColonne
+        '
+        Me.ButtonShowColonne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ButtonShowColonne.Location = New System.Drawing.Point(7, 44)
+        Me.ButtonShowColonne.Name = "ButtonShowColonne"
+        Me.ButtonShowColonne.Size = New System.Drawing.Size(75, 24)
+        Me.ButtonShowColonne.TabIndex = 2
+        Me.ButtonShowColonne.Text = "Afficher"
+        Me.ButtonShowColonne.UseVisualStyleBackColor = True
+        '
+        'ComboFiltreColonnes
+        '
+        Me.ComboFiltreColonnes.FormattingEnabled = True
+        Me.ComboFiltreColonnes.Location = New System.Drawing.Point(6, 15)
+        Me.ComboFiltreColonnes.Name = "ComboFiltreColonnes"
+        Me.ComboFiltreColonnes.Size = New System.Drawing.Size(152, 21)
+        Me.ComboFiltreColonnes.TabIndex = 0
+        '
+        'ButtonHideColonne
+        '
+        Me.ButtonHideColonne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ButtonHideColonne.Location = New System.Drawing.Point(83, 44)
+        Me.ButtonHideColonne.Name = "ButtonHideColonne"
+        Me.ButtonHideColonne.Size = New System.Drawing.Size(75, 24)
+        Me.ButtonHideColonne.TabIndex = 1
+        Me.ButtonHideColonne.Text = "Cacher"
+        Me.ButtonHideColonne.UseVisualStyleBackColor = True
         '
         'CopyRoms
         '
@@ -633,9 +698,6 @@ Partial Class CopyRoms
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 580)
         Me.Controls.Add(Me.GroupFiltresAvances)
-        Me.Controls.Add(Me.buttonRAZ)
-        Me.Controls.Add(Me.lbl_TxtSearch)
-        Me.Controls.Add(Me.txt_txtsearch)
         Me.Controls.Add(Me.grp_RomInfos)
         Me.Controls.Add(Me.lbl_bibliorecalbox)
         Me.Controls.Add(Me.Buttongetback)
@@ -645,7 +707,7 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.ListGameLists)
         Me.Controls.Add(Me.ButtonImportXML)
         Me.Controls.Add(Me.FinalGrid)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximumSize = New System.Drawing.Size(1034, 619)
         Me.MinimumSize = New System.Drawing.Size(1034, 619)
         Me.Name = "CopyRoms"
@@ -664,6 +726,8 @@ Partial Class CopyRoms
         Me.grp_RomInfos.PerformLayout()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupFiltresAvances.ResumeLayout(False)
+        Me.GroupFiltresAvances.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -708,7 +772,6 @@ Partial Class CopyRoms
     Friend WithEvents txt_morestant As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
-    Friend WithEvents lbl_TxtSearch As Label
     Friend WithEvents listboxMaSelection As ListBox
     Friend WithEvents buttonaffichermaselection As Button
     Friend WithEvents Timer1 As Timer
@@ -719,4 +782,10 @@ Partial Class CopyRoms
     Friend WithEvents rommanualo As Button
     Friend WithEvents romvideoo As Button
     Friend WithEvents GroupFiltresAvances As GroupBox
+    Friend WithEvents ComboFiltreColonnes As ComboBox
+    Friend WithEvents DecocherTout As CheckBox
+    Friend WithEvents CocherTout As CheckBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents ButtonShowColonne As Button
+    Friend WithEvents ButtonHideColonne As Button
 End Class
