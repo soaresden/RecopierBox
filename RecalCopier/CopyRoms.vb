@@ -1357,8 +1357,9 @@ prochainj:
     Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles DecocherTout.CheckedChanged
         For i = 0 To FinalGrid.Rows.Count - 1
             If FinalGrid.Rows(i).Visible = True Then
-            FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = False
-        End If
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = False
+            End If
+        Next
         DecocherTout.Checked = False
     End Sub
 
