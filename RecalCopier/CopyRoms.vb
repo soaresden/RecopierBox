@@ -784,7 +784,7 @@ romsuivante:
             txt_GoAPrevoir.Text = sizecumulrom
 
             'On va Update les nombres Aussi
-            txtShownRoms.Text = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible)
+            txtShownRoms.Text = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible) - 1
 
         End If
     End Sub
@@ -1346,15 +1346,18 @@ prochainj:
 
     Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles CocherTout.CheckedChanged
         For i = 0 To FinalGrid.Rows.Count - 1
-            FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = True
+            If FinalGrid.Rows(i).Visible = True Then
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = True
+            End If
+
         Next
         CocherTout.Checked = True
     End Sub
 
     Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles DecocherTout.CheckedChanged
-        For i = 0 To FinalGrid.Rows.Count - 1
+        If FinalGrid.Rows(i).Visible = True Then
             FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = False
-        Next
+        End If
         DecocherTout.Checked = False
     End Sub
 
