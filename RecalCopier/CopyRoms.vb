@@ -1107,7 +1107,17 @@ romsuivante:
         If checkbios.Checked = True Then
             Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(My.Settings.RecalboxFolder & "\Bios", newrecalbox & "\Bios", True)
         End If
-        MsgBox("Copie Terminée !" & Chr(13) & "Veuillez Deplacer le dossier recalbox sur votre media")
+
+        'calcul taille total du dossier
+        Dim sizefichier As Long
+        Dim folder As New IO.DirectoryInfo(My.Settings.CopyFolder)
+        For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
+            sizefichier += file.Length
+        Next file
+
+        Dim calcultailletotal As Decimal = Math.Round(sizefichier / 1048576, 2)
+
+        MsgBox("Copie Terminée !" & Chr(13) & "Taille Totale : " & calcultailletotal & " Mo" & Chr(13) & "Veuillez Deplacer le dossier recalbox sur votre media")
         Process.Start("explorer", My.Settings.CopyFolder)
     End Sub
     Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
