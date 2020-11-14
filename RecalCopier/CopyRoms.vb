@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 
 Public Class CopyRoms
-    Dim sec As Integer = 0
+    Private sec As Integer = 0
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
         txt_txtsearch.Hide()
@@ -345,7 +345,7 @@ romsuivante:
 
         'Width for columns
         FinalGrid.Columns("Console").Width = 50
-        FinalGrid.Columns("Titre").Width = 240
+        FinalGrid.Columns("Titre").Width = 250
         'Hiding les colonnes
         FinalGrid.Columns("CheminRom").Visible = False
         FinalGrid.Columns("Synopsis").Visible = False
@@ -378,8 +378,8 @@ romsuivante:
 
         Dim colromanual As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromanual)
-        colromanual.HeaderText = "CocheManual"
-        colromanual.Name = "CocheManual"
+        colromanual.HeaderText = "CocheManuel"
+        colromanual.Name = "CocheManuel"
         colromanual.Width = 25
 
         Dim colromoverlay As New DataGridViewCheckBoxColumn()
@@ -452,9 +452,9 @@ romsuivante:
         Dim valeursize As String
 
         For oRow = 0 To FinalGrid.Rows.Count - 1
-            valeursize = FinalGrid.Rows(oRow).Cells("Mo").Value
-            Dim valeurrom As String = FinalGrid.Rows(oRow).Cells("Titre").Value
-            Dim chemindelarom = FinalGrid.Rows(oRow).Cells("CheminRom").Value
+            valeursize = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Mo").Index).Value
+            Dim valeurrom As String = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Titre").Index).Value
+            Dim chemindelarom = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("CheminRom").Index).Value
             If valeursize Is Nothing Then ' si la cellule valeur size est vide on la calcule, sinon rien
 
                 Dim sizefichier As Long
@@ -483,7 +483,7 @@ romsuivante:
                         Dim s As String
                         sizefichier = 0
                         For Each s In readText
-                            chemindelarom = My.Settings.RecalboxFolder & "\roms\" & FinalGrid.Rows(oRow).Cells("Console").Value & "\" & Replace(s, "/", "\")
+                            chemindelarom = My.Settings.RecalboxFolder & "\roms\" & FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Console").Index).Value & "\" & Replace(s, "/", "\")
                             Dim info As New FileInfo(chemindelarom)
                             sizefichier += info.Length
                         Next
@@ -519,7 +519,7 @@ romsuivante:
                 End If
                 'Conversion en Mo
                 Dim tailleenmo As Decimal = sizefichier / 1048576
-                FinalGrid.Rows(oRow).Cells("Mo").Value = Math.Round(tailleenmo, 2)
+                FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Mo").Index).Value = Math.Round(tailleenmo, 2)
                 sizefichier = 0
             End If
         Next
@@ -527,43 +527,38 @@ romsuivante:
     End Sub
     Sub Completiondescheckbox()
 
-        On Error Resume Next
+
+
+
         For orow = 0 To FinalGrid.RowCount - 1
             If orow = 0 And FinalGrid.RowCount - 1 = orow Then
                 MsgBox("Pas de Resultats")
                 buttonRAZ.PerformClick()
                 Exit Sub
             End If
+
+
             'test sur le chemin des screens, si la cellule est complétée alors on coche
-            Dim lescreen As String = FinalGrid.Rows(orow).Cells("CheminImage").Value
-            If lescreen Is Nothing Then
-                FinalGrid.Rows(orow).Cells("CocheImage").Value = False
+            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminImage").Index)) Then
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = False
             Else
-                FinalGrid.Rows(orow).Cells("CocheImage").Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = True
             End If
-
             'test sur le chemin des videos
-            Dim lavideo As String = FinalGrid.Rows(orow).Cells("CheminVideo").Value
-            If lavideo Is Nothing Then
-                FinalGrid.Rows(orow).Cells("CocheVideo").Value = False
+            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminVideo").Index)) Then
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Value = False
             Else
-                FinalGrid.Rows(orow).Cells("CocheVideo").Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Value = True
             End If
-
             'test sur le chemin des manuels
-            Dim lemanuel As String = FinalGrid.Rows(orow).Cells("CheminManuel").Value
-            If lemanuel Is Nothing Then
-                FinalGrid.Rows(orow).Cells("CocheManual").Value = False
+            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminManuel").Index)) Then
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Value = False
             Else
-                FinalGrid.Rows(orow).Cells("CocheManual").Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Value = True
             End If
-
-            lescreen = Nothing
-            lavideo = Nothing
-            lemanuel = Nothing
 
             'test sur le chemin des overlays
-            Dim cheminrom As String = FinalGrid.Rows(orow).Cells("CheminRom").Value
+            Dim cheminrom As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminRom").Index).ToString
             Dim FileInfo As New FileInfo(cheminrom)
             Dim nomdelarom As String = FileInfo.Name
             Dim nomducfg As String = nomdelarom & ".cfg"
@@ -572,9 +567,9 @@ romsuivante:
             Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
 
             If System.IO.File.Exists(testcheminoverlay) Then
-                FinalGrid.Rows(orow).Cells("CocheOverlay").Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Value = True
             Else
-                FinalGrid.Rows(orow).Cells("CocheOverlay").Value = False
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Value = False
             End If
 
             'test sur le chemin des saves
@@ -584,12 +579,12 @@ romsuivante:
             Dim savesCount As Integer = IO.Directory.GetFiles(Replace(cheminsaves, nomdelarom, ""), romsansextension & ".*").Length
 
             If savesCount >= 1 Then
-                FinalGrid.Rows(orow).Cells("CocheSave").Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = True
             Else
-                FinalGrid.Rows(orow).Cells("CocheSave").Value = False
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = False
             End If
         Next
-        On Error GoTo 0
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
@@ -605,11 +600,11 @@ romsuivante:
         'Chargement des informations dans Rom Informations
         Dim row As DataGridViewRow = FinalGrid.Rows(e.RowIndex)
 
-        Dim celluleromname As String = row.Cells("Titre").Value
-        Dim cellulerompath As String = row.Cells("CheminRom").Value
-        Dim celluledesc As String = row.Cells("Synopsis").Value
-        Dim celluleimage As String = row.Cells("CheminImage").Value
-        Dim cellulevideo As String = row.Cells("CheminVideo").Value
+        Dim celluleromname As String = row.Cells(FinalGrid.Columns("Titre").Index).Value
+        Dim cellulerompath As String = row.Cells(FinalGrid.Columns("CheminRom").Index).Value
+        Dim celluledesc As String = row.Cells(FinalGrid.Columns("Synopsis").Index).Value
+        Dim celluleimage As String = row.Cells(FinalGrid.Columns("CheminImage").Index).Value
+        Dim cellulevideo As String = row.Cells(FinalGrid.Columns("CheminVideo").Index).Value
 
 
         'Defilement du Titre du Jeu
@@ -624,17 +619,17 @@ romsuivante:
         If celluledesc = Nothing Then
             txt_romdesc.Text = ""
         Else
-            txt_romdesc.Text = row.Cells("Synopsis").Value
+            txt_romdesc.Text = row.Cells(FinalGrid.Columns("Synopsis").Index).Value
         End If
 
         'IMAGE
-        Dim console As String = row.Cells("Console").Value
+        Dim console As String = row.Cells(FinalGrid.Columns("Console").Index).Value
 
         If celluleimage = Nothing Then
             RomImage.Hide()
         Else
             RomImage.Show()
-            RomImage.Image = Image.FromFile(row.Cells("CheminImage").Value)
+            RomImage.Image = Image.FromFile(row.Cells(FinalGrid.Columns("CheminImage").Index).Value)
         End If
 
         'VIDEO
@@ -642,7 +637,7 @@ romsuivante:
             vid_romvid.Hide()
         Else
             vid_romvid.Show()
-            vid_romvid.URL = row.Cells("CheminVideo").Value
+            vid_romvid.URL = row.Cells(FinalGrid.Columns("CheminVideo").Index).Value
 
             vid_romvid.uiMode = "none"
             vid_romvid.settings.setMode("loop", True)
@@ -652,11 +647,11 @@ romsuivante:
         End If
 
         'Conditionnelle sur les Boutons
-        Dim checkboximg As String = row.Cells("CocheImage").Value
-        Dim checkboxvideo As String = row.Cells("CocheVideo").Value
-        Dim checkboxmanual As String = row.Cells("CocheManual").Value
-        Dim checkboxoverlay As String = row.Cells("CocheOverlay").Value
-        Dim checkboxsave As String = row.Cells("CocheSave").Value
+        Dim checkboximg As String = row.Cells(FinalGrid.Columns("CocheImage").Index).Value
+        Dim checkboxvideo As String = row.Cells(FinalGrid.Columns("CocheVideo").Index).Value
+        Dim checkboxmanual As String = row.Cells(FinalGrid.Columns("CocheManuel").Index).Value
+        Dim checkboxoverlay As String = row.Cells(FinalGrid.Columns("CocheOverlay").Index).Value
+        Dim checkboxsave As String = row.Cells(FinalGrid.Columns("CocheSave").Index).Value
 
         Dim imgscreen As New Bitmap(My.Resources.Okscreen)
         Dim imgscreenno As New Bitmap(My.Resources.noscreen)
@@ -736,13 +731,15 @@ romsuivante:
         If e.RowIndex = -1 Then
             Exit Sub
         Else
-            If e.ColumnIndex = "Selection" Then
+            'On recherche le numero de la colonne des Titres
+
+            If e.ColumnIndex = FinalGrid.Columns("Titre").Index Then
                 Dim columnindex As Integer = FinalGrid.CurrentCell.ColumnIndex
                 Dim rowIndex As Integer = FinalGrid.CurrentCell.RowIndex
 
-                Dim pathrom As String = FinalGrid.Rows(rowIndex).Cells("CheminRom").Value
+                Dim pathrom As String = FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("CheminRom").Index).Value
                 'si la case est cochée, alors on ajoute dans la listebox ma selection
-                If FinalGrid.Rows(rowIndex).Cells("Selection").Value = True Then
+                If FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True Then
                     listboxMaSelection.Items.Add(pathrom)
 
                 Else 'sinon, on verifie si la ligne etait présente et si oui, on la supprime
@@ -766,8 +763,8 @@ romsuivante:
             For a = 0 To listboxMaSelection.Items.Count - 1 'Toutes les lignes
                 Dim romacchercher As String = listboxMaSelection.Items(a)
                 For j = 0 To FinalGrid.RowCount - 1
-                    If FinalGrid.Rows(j).Cells("CheminRom").Value = romacchercher Then
-                        sizecumulrom += FinalGrid.Rows(j).Cells("Mo").Value
+                    If FinalGrid.Rows(j).Cells(FinalGrid.Columns("CheminRom").Index).Value = romacchercher Then
+                        sizecumulrom += FinalGrid.Rows(j).Cells(FinalGrid.Columns("Mo").Index).Value
                     End If
                 Next
                 'On selectionne la ligne pour que le trigger change s'applique
@@ -910,13 +907,13 @@ romsuivante:
             If checkimgs.Checked = True Then
                 'retrouver la ligne
                 For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim estcequeimage As String = FinalGrid.Rows(a).Cells("CocheOverlay").Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    Dim estcequeimage As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CocheOverlay").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
                     If estcequeimage = True Then
 
-                        Dim jeuencours As String = FinalGrid.Rows(a).Cells("CheminRom").Value
+                        Dim jeuencours As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value
                         If jeuencours = pathjeu Then ' colonne des path
-                            Dim console As String = FinalGrid.Rows(a).Cells("Console").Value
-                            Dim cheminimage As String = FinalGrid.Rows(a).Cells("CheminImage").Value
+                            Dim console As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Console").Index).Value
+                            Dim cheminimage As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminImage").Index).Value
                             Dim nouvocheminimage As String = Replace(cheminimage, My.Settings.RecalboxFolder, newrecalbox)
                             'On check si ca existe, au cas ou on le cree
                             If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminimage))) Then
@@ -933,13 +930,13 @@ romsuivante:
             'on check si les videos
             If checkvideos.Checked = True Then
                 For b = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim estcequemanuel As String = FinalGrid.Rows(b).Cells("CocheManuel").Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    Dim estcequemanuel As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CocheManuel").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
                     If estcequemanuel = True Then
 
-                        Dim jeuencours As String = FinalGrid.Rows(b).Cells("CheminRom").Value
+                        Dim jeuencours As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminRom").Index).Value
                         If jeuencours = pathjeu Then ' colonne des path
-                            Dim console As String = FinalGrid.Rows(b).Cells("Console").Value
-                            Dim cheminvideo As String = FinalGrid.Rows(b).Cells("CheminVideo").Value
+                            Dim console As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("Console").Index).Value
+                            Dim cheminvideo As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminVideo").Index).Value
                             Dim nouvocheminvideo As String = Replace(cheminvideo, My.Settings.RecalboxFolder, newrecalbox)
                             'On check si ca existe, au cas ou on le cree
                             If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminvideo))) Then
@@ -957,13 +954,13 @@ romsuivante:
             'on check si les manuels
             If checkmanuals.Checked = True Then
                 For c = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim estcequemanuel As String = FinalGrid.Rows(c).Cells("CocheManuel").Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    Dim estcequemanuel As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CocheManuel").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
                     If estcequemanuel = True Then
 
-                        Dim jeuencours As String = FinalGrid.Rows(c).Cells("CheminRom").Value
+                        Dim jeuencours As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminRom").Index).Value
                         If jeuencours = pathjeu Then ' colonne des path
-                            Dim console As String = FinalGrid.Rows(c).Cells("Console").Value
-                            Dim cheminmanuel As String = FinalGrid.Rows(c).Cells("CheminManuel").Value
+                            Dim console As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("Console").Index).Value
+                            Dim cheminmanuel As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminManuel").Index).Value
                             Dim nouvocheminmanuel As String = Replace(cheminmanuel, My.Settings.RecalboxFolder, newrecalbox)
                             'On check si ca existe, au cas ou on le cree
                             If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminmanuel))) Then
@@ -982,13 +979,13 @@ romsuivante:
             If checkoverlays.Checked = True Then
                 For d = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
                     'check sur le jeu 
-                    Dim estcequeoverlay As String = FinalGrid.Rows(d).Cells("CocheOverlay").Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    Dim estcequeoverlay As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CocheOverlay").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
                     If estcequeoverlay = True Then
 
-                        Dim jeuencours As String = FinalGrid.Rows(d).Cells("CheminRom").Value
+                        Dim jeuencours As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CheminRom").Index).Value
                         If jeuencours = pathjeu Then ' colonne des path
                             Dim cheminpropreoverlay2 As String
-                            Dim console As String = FinalGrid.Rows(d).Cells("Console").Value
+                            Dim console As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("Console").Index).Value
                             Dim cheminoverlaycfg1 As String = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
 
                             Dim justefichier2 As String
@@ -1059,14 +1056,14 @@ romsuivante:
             'on check si les saves
             If checksaves.Checked = True Then
                 For e1 = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim estcequesaves As String = FinalGrid.Rows(e1).Cells("CheminSave").Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                    Dim estcequesaves As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminSave").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
                     If estcequesaves = True Then
 
 
-                        Dim jeuencours As String = FinalGrid.Rows(e1).Cells("CheminRom").Value
+                        Dim jeuencours As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
                         If jeuencours = pathjeu Then ' colonne des path
-                            Dim console As String = FinalGrid.Rows(e1).Cells("Console").Value
-                            Dim tempsaves As String = FinalGrid.Rows(e1).Cells("CheminRom").Value
+                            Dim console As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("Console").Index).Value
+                            Dim tempsaves As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
                             Dim savesdir As String = Path.GetDirectoryName(Replace(tempsaves, "\roms\", "\saves\"))
                             'on va creer un tableau temporaire pour stocker tous les fichiers avec la racine du jeu (sstates et saves du coup)
                             Dim tableauresultats(100)
@@ -1220,9 +1217,9 @@ romsuivante:
         Dim pathrom As String = listboxMaSelection.Items(listboxMaSelection.SelectedIndex)
 
         For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-            If FinalGrid.Rows(a).Cells("CheminRom").Value = pathrom Then ' colonne des path
+            If FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value = pathrom Then ' colonne des path
                 listboxMaSelection.Items.Remove(pathrom)
-                FinalGrid.Rows(a).Cells("Selection").Value = False
+                FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value = False
                 Exit Sub
             End If
         Next
@@ -1236,8 +1233,8 @@ romsuivante:
 
             Dim romselected As String = listboxMaSelection.Items(j)
             For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes du grid
-                If FinalGrid.Rows(a).Cells("CheminRom").Value = romselected Then ' colonne des path
-                    FinalGrid.Rows(a).Cells("Selection").Value = True
+                If FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value = romselected Then ' colonne des path
+                    FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value = True
                     GoTo prochainj
                 End If
             Next
@@ -1250,7 +1247,7 @@ prochainj:
             'Si pas de colonne selectionnée alors on fait rien
             If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
 
-            Dim commanderecherche As String = Chr(34) & ComboFiltreColonnes.Text & " Like '%{0}%'" & Chr(34)
+            Dim commanderecherche As String = ComboFiltreColonnes.Text & " Like '%{0}%'"
 
             'commande pour filtrer
             TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format(commanderecherche, txt_txtsearch.Text)
@@ -1266,11 +1263,11 @@ prochainj:
         If nbcartexte = Nothing Then Exit Sub
 
         If sec <= nbcartexte Then
-            txt_romname.Text = Mid(FinalGrid.SelectedCells("Titre").Value.ToString, 1, sec)
+            txt_romname.Text = Mid(FinalGrid.SelectedCells(FinalGrid.Columns("Titre").Index).ToString, 1, sec)
             sec += 1
         Else
             sec = 0
-            txt_romname.Text = Mid(FinalGrid.SelectedCells("Titre").Value.ToString, 1, sec)
+            txt_romname.Text = Mid(FinalGrid.SelectedCells(FinalGrid.Columns("Titre").Index).ToString, 1, sec)
         End If
     End Sub
     Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs) Handles buttonRAZ.Click
@@ -1278,27 +1275,27 @@ prochainj:
         SendKeys.Send(Keys.Enter)
     End Sub
     Private Sub Romscreeno_Click(sender As Object, e As EventArgs) Handles romscreeno.Click
-        Dim variable As String = FinalGrid.SelectedCells("CheminImage").Value.ToString
+        Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value.ToString
         If variable IsNot Nothing Then
-            System.Diagnostics.Process.Start(FinalGrid.SelectedCells("CheminImage").Value.ToString)
+            System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value.ToString)
         End If
     End Sub
     Private Sub Romvideoo_Click(sender As Object, e As EventArgs) Handles romvideoo.Click
-        Dim variable As String = FinalGrid.SelectedCells("CheminVideo").Value.ToString
+        Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminVideo").Index).Value.ToString
         If variable IsNot Nothing Then
-            System.Diagnostics.Process.Start(FinalGrid.SelectedCells("CheminVideo").Value.ToString)
+            System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminVideo").Index).Value.ToString)
         End If
     End Sub
     Private Sub Rommanualo_Click(sender As Object, e As EventArgs) Handles rommanualo.Click
-        Dim variable As String = FinalGrid.SelectedCells("CheminManuel").Value.ToString
+        Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminManuel").Index).Value.ToString
         If variable IsNot Nothing Then
-            System.Diagnostics.Process.Start(FinalGrid.SelectedCells("CheminManuel").Value.ToString)
+            System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminManuel").Index).Value.ToString)
         End If
     End Sub
     Private Sub Romoverlayo_Click(sender As Object, e As EventArgs) Handles romoverlayo.Click
-        Dim variable As String = FinalGrid.SelectedCells("CheminOverlay").Value.ToString
+        Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminOverlay").Index).Value.ToString
         If variable IsNot Nothing Then
-            Dim cheminrom As String = FinalGrid.SelectedCells("CheminRom").Value.ToString
+            Dim cheminrom As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminRom").Index).Value.ToString
             Dim FileInfo As New FileInfo(cheminrom)
             Dim nomdelarom As String = FileInfo.Name
             Dim nomducfg As String = nomdelarom & ".cfg"
@@ -1315,7 +1312,7 @@ prochainj:
         Process.Start("explorer", "")
     End Sub
     Private Sub RomImage_Click(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
-        System.Diagnostics.Process.Start(FinalGrid.SelectedCells("CheminImage").Value.ToString)
+        System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value.ToString)
     End Sub
     Private Sub Txt_CopyFolder_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_CopyFolder.KeyDown
         'Ajout d'un \ de securite si besoin
@@ -1328,14 +1325,14 @@ prochainj:
 
     Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles CocherTout.CheckedChanged
         For i = 0 To FinalGrid.Rows.Count - 1
-            FinalGrid.Rows(i).Cells("Selection").Value = True
+            FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = True
         Next
         CocherTout.Checked = True
     End Sub
 
     Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles DecocherTout.CheckedChanged
         For i = 0 To FinalGrid.Rows.Count - 1
-            FinalGrid.Rows(i).Cells("Selection").Value = False
+            FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = False
         Next
         DecocherTout.Checked = False
     End Sub
