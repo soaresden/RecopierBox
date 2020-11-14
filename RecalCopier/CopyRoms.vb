@@ -438,6 +438,8 @@ romsuivante:
         ComboFiltreColonnes.Items.Add("Nblancé")
         ComboFiltreColonnes.Items.Add("Region")
 
+        'On compte le nombre total d'entrées
+        txt_nbrom.Text = FinalGrid.Rows.Count - 1
 
         'on va calculer la taille des roms
         Call Calcultaillerom()
@@ -532,7 +534,6 @@ romsuivante:
                 Exit Sub
             End If
 
-
             'test sur le chemin des screens, si la cellule est complétée alors on coche
             If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminImage").Index)) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = False
@@ -581,12 +582,10 @@ romsuivante:
         Next
 
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
         Form1.Show()
         Me.Close()
     End Sub
-
     Private Sub FinalGrid_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles FinalGrid.CellMouseClick
         Dim totalline As Integer = FinalGrid.RowCount - 1
 
@@ -600,7 +599,6 @@ romsuivante:
         Dim celluledesc As String = row.Cells(FinalGrid.Columns("Synopsis").Index).Value
         Dim celluleimage As String = row.Cells(FinalGrid.Columns("CheminImage").Index).Value
         Dim cellulevideo As String = row.Cells(FinalGrid.Columns("CheminVideo").Index).Value
-
 
         'Defilement du Titre du Jeu
         Timer1.Start()
@@ -707,7 +705,6 @@ romsuivante:
         As String) As String
         Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
     End Function
-
     'Ends Edit Mode So CellValueChanged Event Can Fire
     Private Sub EndEditMode(sender As System.Object,
                             e As EventArgs) _
@@ -728,7 +725,7 @@ romsuivante:
         Else
             'On recherche le numero de la colonne des Titres
 
-            If e.ColumnIndex = FinalGrid.Columns("Titre").Index Then
+            If e.ColumnIndex = FinalGrid.Columns("Selection").Index Then
                 Dim columnindex As Integer = FinalGrid.CurrentCell.ColumnIndex
                 Dim rowIndex As Integer = FinalGrid.CurrentCell.RowIndex
 
@@ -785,6 +782,10 @@ romsuivante:
                 End If
             Next
             txt_GoAPrevoir.Text = sizecumulrom
+
+            'On va Update les nombres Aussi
+            txtShownRoms.Text = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible)
+
         End If
     End Sub
     Private Sub ButtonParcourirRecalCopy_Click(sender As Object, e As EventArgs) Handles ButtonParcourirRecalCopy.Click
@@ -1243,7 +1244,7 @@ prochainj:
     Private Sub Txt_txtsearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_txtsearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             'Si pas de colonne selectionnée alors on fait rien
-            If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
+            If ComboFiltreColonnes.Text = Nothing Then Exit Sub
 
             'On teste si la colonne est affichee ou non
             Dim colonneselected As String = ComboFiltreColonnes.Text
