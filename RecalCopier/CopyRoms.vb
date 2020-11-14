@@ -604,27 +604,30 @@ romsuivante:
 
         'Chargement des informations dans Rom Informations
         Dim row As DataGridViewRow = FinalGrid.Rows(e.RowIndex)
+
         Dim celluleromname As String = row.Cells("Titre").Value
         Dim cellulerompath As String = row.Cells("CheminRom").Value
         Dim celluledesc As String = row.Cells("Synopsis").Value
         Dim celluleimage As String = row.Cells("CheminImage").Value
         Dim cellulevideo As String = row.Cells("CheminVideo").Value
 
-        txt_romname.Text = celluleromname
 
         'Defilement du Titre du Jeu
         Timer1.Start()
         sec = 0
+        txt_romname.Text = celluleromname
 
+        'On met le RomPath
         txt_rompath.Text = cellulerompath
 
+        'SYNOPSIS
         If celluledesc = Nothing Then
             txt_romdesc.Text = ""
         Else
             txt_romdesc.Text = row.Cells("Synopsis").Value
         End If
 
-        'VIDEO
+        'IMAGE
         Dim console As String = row.Cells("Console").Value
 
         If celluleimage = Nothing Then
@@ -634,6 +637,7 @@ romsuivante:
             RomImage.Image = Image.FromFile(row.Cells("CheminImage").Value)
         End If
 
+        'VIDEO
         If cellulevideo = Nothing Then
             vid_romvid.Hide()
         Else
@@ -647,7 +651,7 @@ romsuivante:
             vid_romvid.Ctlcontrols.play()
         End If
 
-        'COnditionnelle sur les Boutons
+        'Conditionnelle sur les Boutons
         Dim checkboximg As String = row.Cells("CocheImage").Value
         Dim checkboxvideo As String = row.Cells("CocheVideo").Value
         Dim checkboxmanual As String = row.Cells("CocheManual").Value
