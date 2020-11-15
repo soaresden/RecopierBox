@@ -551,27 +551,29 @@ romsuivante:
                 Exit Sub
             End If
 
+            Dim cheminrom As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminRom").Index).Value
+
             'test sur le chemin des screens, si la cellule est complétée alors on coche
-            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminImage").Index)) Then
+            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = False
             Else
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = True
             End If
             'test sur le chemin des videos
-            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminVideo").Index)) Then
+            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Value = False
             Else
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Value = True
             End If
             'test sur le chemin des manuels
-            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminManuel").Index)) Then
+            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Value = False
             Else
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Value = True
             End If
 
             'test sur le chemin des overlays
-            Dim cheminrom As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminRom").Index).Value
+
             Dim FileInfo As New FileInfo(cheminrom)
             Dim nomdelarom As String = FileInfo.Name
             Dim nomducfg As String = nomdelarom & ".cfg"
@@ -1412,7 +1414,7 @@ prochainj:
         If txt_romname.Text = Nothing Then Exit Sub
 
         'Si pas d'image sur le jeu en cours
-        If IsDBNull(FinalGrid.SelectedCells(FinalGrid.Columns("CheminManuel").Index)) Then
+        If FinalGrid.SelectedCells(FinalGrid.Columns("CocheManuel").Index).Value = False Then
         Else
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminManuel").Index).Value.ToString)
         End If
