@@ -756,66 +756,75 @@ romsuivante:
 
     'Executes when Cell Value on a DataGridView changes
     Private Sub DataGridCellValueChanged(sender As DataGridView,
-                                         e As DataGridViewCellEventArgs) _
-                Handles FinalGrid.CellValueChanged
+                                         e As DataGridViewCellEventArgs) Handles FinalGrid.CellValueChanged
         'check that row isn't -1, i.e. creating datagrid header
-        If e.RowIndex = -1 Then
-            Exit Sub
-        Else
-            'On recherche le numero de la colonne des Titres
+        If e.RowIndex = -1 Then Exit Sub
 
-            If e.ColumnIndex = FinalGrid.Columns("Selection").Index Then
-                Dim columnindex As Integer = FinalGrid.CurrentCell.ColumnIndex
-                Dim rowIndex As Integer = FinalGrid.CurrentCell.RowIndex
+        'On recherche le numero de la colonne des Titres
+        If e.ColumnIndex = FinalGrid.Columns("Selection").Index Then
 
-                Dim pathrom As String = FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                'si la case est cochée, alors on ajoute dans la listebox ma selection
-                If FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True Then
-                    listboxMaSelection.Items.Add(pathrom)
+            'Si on est ici c'est qu'on vient de cocher la case Selection
+
+            Dim columnindex As Integer = FinalGrid.CurrentCell.ColumnIndex
+            Dim rowIndex As Integer = FinalGrid.CurrentCell.RowIndex
+            Dim pathrom As String = FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("CheminRom").Index).Value
+
+            'Verification de l'etat de la coche
+            'si la Case dans selection est cochée, alors on ajoute dans la listebox ma selection
+            If FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True Then
+                listboxMaSelection.Items.Add(pathrom)
+
+                Dim a As String = pathrom
+                'et on la selectionne dans la listbox pour l'avoir en bleue
+                If listboxMaSelection.Visible = False Then 'on reboucle pour ne laisser l'element selectionné que le dernier.
+
+                    listboxMaSelection.Show() 'si la listbox est invisible on l'affiche 
+                    Call selectiondudernier(a)
+                    listboxMaSelection.Hide() 'et On la rehide
+                Else
+                    Call selectiondudernier(a)
                 End If
-            End If
 
-            'On calcule la taille des roms cochée
-            Dim sizecumulrom As Integer
-            For a = 0 To listboxMaSelection.Items.Count - 1 'Toutes les lignes
-                Dim romacchercher As String = listboxMaSelection.Items(a)
-                For j = 0 To FinalGrid.RowCount - 1
-                    If FinalGrid.Rows(j).Cells(FinalGrid.Columns("CheminRom").Index).Value = romacchercher Then
-                        sizecumulrom += FinalGrid.Rows(j).Cells(FinalGrid.Columns("Mo").Index).Value
-                    End If
-                Next
-                'On selectionne la ligne pour que le trigger change s'applique
-                If listboxMaSelection.Visible = False Then 'si la listbox est invisible on l'affiche et on la rehide
-                    listboxMaSelection.Show()
-                    'on reboucle pour ne laisser selectionné que le dernier
-                    For k = 0 To listboxMaSelection.Items.Count - 1
-                        If a = k Then
-                            listboxMaSelection.SetSelected(a, True)
-                        Else
-                            listboxMaSelection.SetSelected(a, False)
-                        End If
-                    Next
-                    listboxMaSelection.Hide()
-                Else 'on le fait directement
-                    For k = 0 To listboxMaSelection.Items.Count - 1
-                        If a = k Then
-                            listboxMaSelection.SetSelected(a, True)
-                        Else
-                            listboxMaSelection.SetSelected(a, False)
-                        End If
-                    Next
+                'On va checker les doublons quand meme
+                Supdoublon(listboxMaSelection)
+
+            Else 'ca veut dire que on va retirer un element là
+                listboxMaSelection.Items.Remove(pathrom)
+
+            End If
+        End If
+    End Sub
+    Sub Selectiondudernier(RomPath As String)
+        For ligne = 0 To listboxMaSelection.Items.Count - 1
+            If listboxMaSelection.Items(ligne).ToString = RomPath Then
+                listboxMaSelection.SetSelected(ligne, True)
+            Else
+                listboxMaSelection.SetSelected(ligne, False)
+            End If
+        Next
+    End Sub
+    Sub UpdatelesChiffreRoms()
+        'On test d'abord si y'en a des roms dans la selection !
+        If listboxMaSelection.Items.Count = 0 Then Exit Sub
+
+        'On calcule la taille des roms cochées
+        Dim sizecumulrom As Integer
+
+        For a = 0 To listboxMaSelection.Items.Count - 1 'Toutes les lignes
+            Dim romacchercher As String = listboxMaSelection.Items(a)
+            For j = 0 To FinalGrid.RowCount - 1
+                If FinalGrid.Rows(j).Cells(FinalGrid.Columns("CheminRom").Index).Value = romacchercher Then
+                    sizecumulrom += FinalGrid.Rows(j).Cells(FinalGrid.Columns("Mo").Index).Value
                 End If
             Next
-            txt_GoAPrevoir.Text = sizecumulrom
+            txt_GoAPrevoir.Text = sizecumulrom ' et on l'affiche dans le txtbox
+        Next
+        'On va Update les nombres de visibles et le nombre de roms selectionnées
+        txtShownRoms.Text = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible) - 1
 
-            'On va Update les nombres Aussi
-            txtShownRoms.Text = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible) - 1
-
-            'on refresh les indicateurs
-            Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
-            txt_NbRomSelected.Text = valeurnbselect
-
-        End If
+        'on refresh l'indicateurs de selectionné
+        Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
+        txt_NbRomSelected.Text = valeurnbselect
     End Sub
     Private Sub ButtonParcourirRecalCopy_Click(sender As Object, e As EventArgs) Handles ButtonParcourirRecalCopy.Click
         If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
@@ -1273,11 +1282,7 @@ romsuivante:
         Process.Start("explorer", My.Settings.CopyFolder)
     End Sub
     Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
-        'Check des Doublons
-        Supdoublon(listboxMaSelection)
-        'Utiliser pour désélectionner la dernière ligne
-        listboxMaSelection.Text = "-"
-
+        'On affiche la Listbox a la bonne place ou on là referme
         If listboxMaSelection.Visible = True Then
             listboxMaSelection.Hide()
         Else
@@ -1285,15 +1290,49 @@ romsuivante:
             listboxMaSelection.Size = New Size(387, 329)
             listboxMaSelection.Show()
         End If
+
+        ' 'Verification de la listebox en coherence avec FinalGrid
+        For j = 0 To listboxMaSelection.Items.Count - 1 'toutes les lignes de la listbox
+
+            Dim romselected As String = listboxMaSelection.Items(j)
+            For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes du grid
+                If FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value = romselected Then ' colonne des path
+                    Dim valeurselection As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value
+
+                    If valeurselection = False Then 'Ici on est sur la bonne ligne du Final Grid, on verifie si c'est pas coché et on replique si besoin
+                        FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value = False
+                        GoTo prochainj 'on saute au prochain jeu
+                    ElseIf valeurselection = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value Then
+                        GoTo prochainj
+                    End If
+                End If
+            Next
+prochainj:
+        Next
+
+        'Check des Doublons
+        Supdoublon(listboxMaSelection)
+
     End Sub
-    Private Function Supdoublon(x As ListBox)
-        For y = 0 To x.Items.Count - 1
-            For z = y + 1 To x.Items.Count - 1
-                If x.Items(y) = x.Items(z) Then x.Items.Remove(z)
-            Next z
-        Next y
-#Disable Warning BC42105 ' La fonction ne retourne pas de valeur sur tous les chemins du code
+    Function supdoublon(ByVal listboxName As ListBox)
+        listboxName.Sorted = True
+        listboxName.Refresh()
+        Dim index As Integer
+        Dim itemcount As Integer = listboxName.Items.Count
+
+        If itemcount > 1 Then
+            Dim lastitem As String = listboxName.Items(itemcount - 1)
+
+            For index = itemcount - 2 To 0 Step -1
+                If listboxName.Items(index) = lastitem Then
+                    listboxName.Items.RemoveAt(index)
+                Else
+                    lastitem = listboxName.Items(index)
+                End If
+            Next
+        End If
     End Function
+
 #Enable Warning BC42105 ' La fonction ne retourne pas de valeur sur tous les chemins du code
     Private Sub ListboxMaSelection_DoubleClick(sender As Object, e As EventArgs) Handles listboxMaSelection.DoubleClick
         'on enleve de la liste et on met a jour la checkbox dans la selection
@@ -1306,25 +1345,12 @@ romsuivante:
                 Exit Sub
             End If
         Next
+        'Check des Doublons
+        Supdoublon(listboxMaSelection)
     End Sub
     Private Sub Txt_GoAPrevoir_TextChanged(sender As Object, e As EventArgs) Handles txt_GoAPrevoir.TextChanged
         txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
     End Sub
-    Private Sub ListboxMaSelection_SelectedValueChanged(sender As Object, e As EventArgs) Handles listboxMaSelection.SelectedValueChanged
-        'Recocher les selections dans le datagrid
-        For j = 0 To listboxMaSelection.Items.Count - 1 'toutes les lignes de la listbox
-
-            Dim romselected As String = listboxMaSelection.Items(j)
-            For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes du grid
-                If FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value = romselected Then ' colonne des path
-                    FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value = True
-                    GoTo prochainj
-                End If
-            Next
-prochainj:
-        Next
-    End Sub
-
     Private Sub Txt_txtsearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_txtsearch.KeyDown
         If txt_txtsearch.Text = "forcingreset" Then Call ToucheEntree()
         If e.KeyCode = Keys.Enter Then Call ToucheEntree()
@@ -1489,4 +1515,9 @@ prochainj:
     Private Sub Txt_txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txt_txtsearch.TextChanged
         If txt_txtsearch.Text = "forcingreset" Then Call ToucheEntree()
     End Sub
+
+    Private Sub FinalGrid_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles FinalGrid.RowEnter
+        Call UpdatelesChiffreRoms()
+    End Sub
+
 End Class
