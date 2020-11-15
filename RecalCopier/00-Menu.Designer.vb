@@ -42,6 +42,7 @@ Partial Class Form1
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.groupBox2.SuspendLayout()
         Me.MenuBoutons.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
@@ -95,9 +96,9 @@ Partial Class Form1
         Me.label4.Location = New System.Drawing.Point(19, 26)
         Me.label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label4.Name = "label4"
-        Me.label4.Size = New System.Drawing.Size(155, 14)
+        Me.label4.Size = New System.Drawing.Size(233, 14)
         Me.label4.TabIndex = 1
-        Me.label4.Text = "Saisir votre Dossier Recalbox"
+        Me.label4.Text = "Saisir/Selectionner le Dossier Mère Recalbox"
         '
         'TxtRecalfolderPath
         '
@@ -211,7 +212,7 @@ Partial Class Form1
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Disclaimer.Location = New System.Drawing.Point(11, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(928, 414)
+        Me.Disclaimer.Size = New System.Drawing.Size(929, 414)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Pourquoi cet Outil ?"
@@ -271,6 +272,14 @@ Partial Class Form1
         Me.PictureBox2.TabIndex = 19
         Me.PictureBox2.TabStop = False
         '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.Location = New System.Drawing.Point(704, 13)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(236, 56)
+        Me.ListBox1.TabIndex = 20
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -279,6 +288,7 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(950, 538)
+        Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.RichTextBox1)
@@ -324,4 +334,5 @@ Partial Class Form1
     Friend WithEvents TxtDisclaimer As RichTextBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents ListBox1 As ListBox
 End Class
