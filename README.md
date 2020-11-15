@@ -1,9 +1,9 @@
 # RecopierBox
-A Recalbox Copier program to be able to share a custom library for them.
+A Recalbox Copier program to be able to create custom library
 
-![alt text](https://images2.imagebam.com/e5/5e/06/352d971358966266.png)
-![alt text](https://user-images.githubusercontent.com/54243866/99146130-7a4fa080-2675-11eb-806f-95c0818aae89.png)
-![alt text](https://user-images.githubusercontent.com/54243866/99146138-8d627080-2675-11eb-956b-97d301c305c7.png)
+![image](https://user-images.githubusercontent.com/54243866/99184269-ed264d80-2741-11eb-9848-2e8948124e40.png)
+![image](https://user-images.githubusercontent.com/54243866/99184366-93725300-2742-11eb-9b51-7a9ca4e5e0cf.png)
+![image](https://user-images.githubusercontent.com/54243866/99184286-0202e100-2742-11eb-9509-767640f33ee5.png)
 
 Go to releases to download
 
