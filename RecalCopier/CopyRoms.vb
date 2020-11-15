@@ -246,7 +246,8 @@ Public Class CopyRoms
                 Dim romRegion As String
 
                 'Conditionnelles sur tous les champs
-                If romhidden IsNot Nothing Then GoTo romsuivante
+                If romhidden = "true" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
+
 
                 If xEle.Element("desc") Is Nothing Then
                     romdesc = Nothing
