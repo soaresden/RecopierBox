@@ -98,9 +98,9 @@ Partial Class CopyRoms
         '
         'ButtonImportXML
         '
-        Me.ButtonImportXML.Location = New System.Drawing.Point(15, 7)
+        Me.ButtonImportXML.Location = New System.Drawing.Point(121, 2)
         Me.ButtonImportXML.Name = "ButtonImportXML"
-        Me.ButtonImportXML.Size = New System.Drawing.Size(206, 30)
+        Me.ButtonImportXML.Size = New System.Drawing.Size(100, 37)
         Me.ButtonImportXML.TabIndex = 1
         Me.ButtonImportXML.Text = "Importer les Gamelist.xml"
         Me.ButtonImportXML.UseVisualStyleBackColor = True
@@ -374,10 +374,11 @@ Partial Class CopyRoms
         '
         'txt_GoAPrevoir
         '
+        Me.txt_GoAPrevoir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt_GoAPrevoir.Location = New System.Drawing.Point(5, 42)
         Me.txt_GoAPrevoir.Name = "txt_GoAPrevoir"
         Me.txt_GoAPrevoir.ReadOnly = True
-        Me.txt_GoAPrevoir.Size = New System.Drawing.Size(72, 20)
+        Me.txt_GoAPrevoir.Size = New System.Drawing.Size(72, 22)
         Me.txt_GoAPrevoir.TabIndex = 2
         Me.txt_GoAPrevoir.Text = "0"
         Me.txt_GoAPrevoir.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -394,10 +395,11 @@ Partial Class CopyRoms
         '
         'txt_NbRomSelected
         '
+        Me.txt_NbRomSelected.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt_NbRomSelected.Location = New System.Drawing.Point(5, 16)
         Me.txt_NbRomSelected.Name = "txt_NbRomSelected"
         Me.txt_NbRomSelected.ReadOnly = True
-        Me.txt_NbRomSelected.Size = New System.Drawing.Size(72, 20)
+        Me.txt_NbRomSelected.Size = New System.Drawing.Size(72, 22)
         Me.txt_NbRomSelected.TabIndex = 0
         Me.txt_NbRomSelected.Text = "0"
         Me.txt_NbRomSelected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -438,10 +440,10 @@ Partial Class CopyRoms
         '
         'Buttongetback
         '
-        Me.Buttongetback.Location = New System.Drawing.Point(15, 6)
+        Me.Buttongetback.Location = New System.Drawing.Point(15, 2)
         Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2)
         Me.Buttongetback.Name = "Buttongetback"
-        Me.Buttongetback.Size = New System.Drawing.Size(101, 31)
+        Me.Buttongetback.Size = New System.Drawing.Size(101, 23)
         Me.Buttongetback.TabIndex = 8
         Me.Buttongetback.Text = "Revenir au Menu"
         Me.Buttongetback.UseVisualStyleBackColor = True

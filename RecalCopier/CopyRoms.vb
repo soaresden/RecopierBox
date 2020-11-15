@@ -623,9 +623,10 @@ romsuivante:
 
 
         'Defilement du Titre du Jeu
+        txt_romname.Text = celluleromname
         Timer1.Start()
         sec = 0
-        txt_romname.Text = celluleromname
+
 
         'On met le RomPath
         txt_rompath.Text = cellulerompath
@@ -967,6 +968,7 @@ romsuivante:
                 Next
             End If
 
+            'On retourne a la copie de la rom pure (pas les fichiers induits des CUE et bin)
             'On check si ca existe, au cas ou on le cree
             If (Not System.IO.Directory.Exists(repertoirefinal)) Then
                 System.IO.Directory.CreateDirectory(repertoirefinal)
@@ -1353,24 +1355,19 @@ prochainj:
         Call Calcultaillerom()
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        If txt_romname.Text = Nothing Then Timer1.Stop()
-
-        Dim texteinscrit As String = txt_romname.ToString
-        Dim nbcartexte As Integer = txt_romname.ToString.Length
-        If nbcartexte = Nothing Then Exit Sub
-
         Dim rowindex As Integer = FinalGrid.CurrentCell.RowIndex
         Dim columnindex As Integer = FinalGrid.Columns("Titre").Index
 
-        Dim valeur As String = FinalGrid.Rows(rowindex).Cells(columnindex).Value.ToString()
+        Dim titre As String = FinalGrid.Rows(rowindex).Cells(columnindex).Value.ToString()
+        Dim nbcartexte As Integer = titre.Length
+        If nbcartexte = Nothing Then Exit Sub
 
         If sec <= nbcartexte Then
 
-            txt_romname.Text = Mid(valeur, 1, sec)
+            txt_romname.Text = titre.Substring(0, sec)
             sec += 1
         Else
-            sec = 0
-            txt_romname.Text = Mid(valeur, 1, sec)
+            txt_romname.Text = titre
         End If
     End Sub
     Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs) Handles buttonRAZ.Click
