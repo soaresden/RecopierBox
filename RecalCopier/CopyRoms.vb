@@ -423,6 +423,9 @@ romsuivante:
 
 
         'On va alimenter les filtres de la combobox 
+        ComboFiltreColonnes.Items.Add("Console")
+        ComboFiltreColonnes.Items.Add("Titre")
+        ComboFiltreColonnes.Text = "Titre"
         ComboFiltreColonnes.Items.Add("CheminRom")
         ComboFiltreColonnes.Items.Add("Synopsis")
         ComboFiltreColonnes.Items.Add("CheminImage")
@@ -454,7 +457,7 @@ romsuivante:
         Dim comptage As Integer = FinalGrid.Rows.Count - 1
         If comptage = 0 Then Exit Sub
 
-        For oRow = 0 To FinalGrid.Rows.Count - 1
+        For oRow = 0 To FinalGrid.Rows.Count - 2
             valeursize = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Mo").Index).Value
             Dim valeurrom As String = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Titre").Index).Value
             Dim chemindelarom = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("CheminRom").Index).Value
@@ -1423,37 +1426,44 @@ prochainj:
     End Sub
 
     Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles CocherTout.CheckedChanged
-        For i = 0 To FinalGrid.Rows.Count - 1
+        MsgBox("En Travail")
+        GoTo saute
+        For i = 0 To FinalGrid.Rows.Count - 2
             If FinalGrid.Rows(i).Visible = True Then
                 FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = True
             End If
         Next
+saute:
         CocherTout.Checked = True
     End Sub
 
     Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles DecocherTout.CheckedChanged
-        For i = 0 To FinalGrid.Rows.Count - 1
+        MsgBox("En Travail")
+        GoTo saute
+        For i = 0 To FinalGrid.Rows.Count - 2
             If FinalGrid.Rows(i).Visible = True Then
                 FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = False
             End If
         Next
+saute:
         DecocherTout.Checked = False
     End Sub
 
     Private Sub ButtonShowColonne_Click(sender As Object, e As EventArgs) Handles ButtonShowColonne.Click
         If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
+        If ComboFiltreColonnes.Text = "Console" Or ComboFiltreColonnes.Text = "Titre" Then Exit Sub
         FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = True
     End Sub
 
     Private Sub ButtonHideColonne_Click(sender As Object, e As EventArgs) Handles ButtonHideColonne.Click
         If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
+        If ComboFiltreColonnes.Text = "Console" Or ComboFiltreColonnes.Text = "Titre" Then Exit Sub
         FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = False
     End Sub
 
     Private Sub Txt_romdesc_TextChanged(sender As Object, e As EventArgs) Handles txt_romdesc.TextChanged
         'En travail, mettre en gras !
         If ComboFiltreColonnes.Text = "Synopsis" And txt_txtsearch.Text IsNot Nothing Then
-
         End If
     End Sub
 

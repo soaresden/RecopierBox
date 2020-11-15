@@ -699,7 +699,8 @@ Partial Class CopyRoms
         Me.DecocherTout.Name = "DecocherTout"
         Me.DecocherTout.Size = New System.Drawing.Size(98, 17)
         Me.DecocherTout.TabIndex = 15
-        Me.DecocherTout.Text = "Décocher Tout"
+        Me.DecocherTout.Text = "Tout Décocher"
+        Me.DecocherTout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.DecocherTout.UseVisualStyleBackColor = True
         '
         'CocherTout
@@ -711,7 +712,7 @@ Partial Class CopyRoms
         Me.CocherTout.Name = "CocherTout"
         Me.CocherTout.Size = New System.Drawing.Size(85, 17)
         Me.CocherTout.TabIndex = 14
-        Me.CocherTout.Text = "Cocher Tout"
+        Me.CocherTout.Text = "Tout Cocher"
         Me.CocherTout.UseVisualStyleBackColor = True
         '
         'Label4
@@ -736,10 +737,11 @@ Partial Class CopyRoms
         '
         'ComboFiltreColonnes
         '
+        Me.ComboFiltreColonnes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboFiltreColonnes.FormattingEnabled = True
-        Me.ComboFiltreColonnes.Location = New System.Drawing.Point(6, 22)
+        Me.ComboFiltreColonnes.Location = New System.Drawing.Point(7, 22)
         Me.ComboFiltreColonnes.Name = "ComboFiltreColonnes"
-        Me.ComboFiltreColonnes.Size = New System.Drawing.Size(125, 21)
+        Me.ComboFiltreColonnes.Size = New System.Drawing.Size(124, 21)
         Me.ComboFiltreColonnes.TabIndex = 0
         '
         'ButtonHideColonne
