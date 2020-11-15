@@ -305,10 +305,10 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(950, 538)
+        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Disclaimer)
         Me.Controls.Add(Me.ButtonQuizz)
         Me.Controls.Add(Me.VersionNetFramework)
-        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.label3)
