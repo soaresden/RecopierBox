@@ -912,6 +912,55 @@ romsuivante:
             Dim repertoirefinal As String = Path.GetDirectoryName(replacejeu)
             Dim legamelist As String = Path.GetDirectoryName(pathjeu) & "\gamelist.xml"
             Dim lenouvogamelist As String = Path.GetDirectoryName(replacejeu) & "\gamelist.xml"
+            Dim extensionrom As String = Path.GetExtension(pathjeu)
+
+            'Dim consola As String = InStr(pathjeu, "\roms\")
+            'Dim consoleu As String = pathjeu.Substring(consola + 5)
+            'Dim prochainslash As String = InStr(consoleu, "\")
+            'Dim consoledelarom As String = consoleu.Substring(0, prochainslash - 1)
+            Dim consolederom As String = pathjeu.Substring(InStr(pathjeu, "\roms\") + 5).Substring(0, InStr(pathjeu.Substring(InStr(pathjeu, "\roms\") + 5), "\") - 1)
+
+            'On check d'abord si c'est un m3u ou un cue pour recupérer les vrais jeux et le fichier
+            'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+            If extensionrom = ".m3u" Then
+                File.ReadAllLines(pathjeu)
+
+                ' Open the m3u file to read from.
+                Dim readText() As String = File.ReadAllLines(pathjeu)
+                Dim s As String
+
+                For Each s In readText
+                    Dim pathducd As String = My.Settings.RecalboxFolder & "\roms\" & consolederom & "\" & Replace(s, "/", "\")
+                    Dim replaceducd As String = Replace(pathducd, My.Settings.RecalboxFolder, newrecalbox)
+                    'On check si ca existe, au cas ou on le cree
+                    If (Not System.IO.Directory.Exists(Path.GetDirectoryName(replaceducd))) Then
+                        System.IO.Directory.CreateDirectory(Path.GetDirectoryName(replaceducd))
+                    End If
+                    'et on copie LES CDS
+                    System.IO.File.Copy(pathducd, replaceducd, True)
+
+                Next
+            ElseIf extensionrom = ".cue" Then 'si c'est un cue, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+                File.ReadAllLines(pathjeu)
+
+                ' Open the cue file to read from.
+                Dim readText() As String = File.ReadAllLines(pathjeu)
+                Dim g As String
+
+                For Each g In readText
+                    Dim detectfile = InStr(g, Chr(34))
+                    If detectfile >= 1 Then
+                        'Dim isolerome As String = s.Substring(detectfile)
+                        'Dim isolebinary As String = InStr(isolerome, Chr(34))
+                        'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
+
+                        Dim iso As String = g.Substring(detectfile).Substring(0, InStr(g.Substring(detectfile), Chr(34)) - 1)
+
+                        pathjeu = My.Settings.RecalboxFolder & "\roms\" & consolederom & "\" & Replace(iso, "/", "\")
+
+                    End If
+                Next
+            End If
 
             'On check si ca existe, au cas ou on le cree
             If (Not System.IO.Directory.Exists(repertoirefinal)) Then
