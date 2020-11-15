@@ -42,7 +42,7 @@ Partial Class Form1
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.VersionNetFramework = New System.Windows.Forms.Label()
         Me.groupBox2.SuspendLayout()
         Me.MenuBoutons.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
@@ -272,13 +272,16 @@ Partial Class Form1
         Me.PictureBox2.TabIndex = 19
         Me.PictureBox2.TabStop = False
         '
-        'ListBox1
+        'VersionNetFramework
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(704, 13)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(236, 56)
-        Me.ListBox1.TabIndex = 20
+        Me.VersionNetFramework.AutoSize = True
+        Me.VersionNetFramework.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.VersionNetFramework.ForeColor = System.Drawing.Color.Yellow
+        Me.VersionNetFramework.Location = New System.Drawing.Point(744, 4)
+        Me.VersionNetFramework.Name = "VersionNetFramework"
+        Me.VersionNetFramework.Size = New System.Drawing.Size(164, 18)
+        Me.VersionNetFramework.TabIndex = 21
+        Me.VersionNetFramework.Text = ".net Framework version"
         '
         'Form1
         '
@@ -288,7 +291,7 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(950, 538)
-        Me.Controls.Add(Me.ListBox1)
+        Me.Controls.Add(Me.VersionNetFramework)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.RichTextBox1)
@@ -334,5 +337,5 @@ Partial Class Form1
     Friend WithEvents TxtDisclaimer As RichTextBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents VersionNetFramework As Label
 End Class
