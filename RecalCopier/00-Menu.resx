@@ -842,10 +842,11 @@
   <data name="TxtDisclaimer.Text" xml:space="preserve">
     <value>Cet outil a pour but de simplifier la creation de votre dossier Recalbox personnalisé selon des critères.
 
-Vous voulez un dossier Recalbox avec uniquement des jeux de combat avec une contrainte de stockage 16Go ?
+Vous voulez un dossier Recalbox avec uniquement des jeux de combat
+avec une contrainte de stockage 16Go ?
 Générez le !
 
-A partir de votre Dossier Mère principal, l'outil permet de creez des petits sets personnalisé selon vos choix.</value>
+A partir de votre Dossier Mère principal, l'outil permet de creez des petits sets personnalisés selon vos choix.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>41</value>
