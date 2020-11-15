@@ -1,0 +1,4 @@
+﻿[*.vb]
+
+# BC42105: La fonction ne retourne pas de valeur sur tous les chemins du code
+dotnet_diagnostic.BC42105.severity = none

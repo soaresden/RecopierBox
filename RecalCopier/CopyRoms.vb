@@ -1314,7 +1314,7 @@ prochainj:
         Supdoublon(listboxMaSelection)
 
     End Sub
-    Function supdoublon(ByVal listboxName As ListBox)
+    Function Supdoublon(ByVal listboxName As ListBox)
         listboxName.Sorted = True
         listboxName.Refresh()
         Dim index As Integer
