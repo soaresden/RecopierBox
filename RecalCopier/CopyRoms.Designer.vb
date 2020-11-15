@@ -756,9 +756,9 @@ Partial Class CopyRoms
         '
         Me.minipic1.BackColor = System.Drawing.Color.White
         Me.minipic1.Image = Global.RecalCopier.My.Resources.Resources.Okscreen
-        Me.minipic1.Location = New System.Drawing.Point(370, 30)
+        Me.minipic1.Location = New System.Drawing.Point(370, 29)
         Me.minipic1.Name = "minipic1"
-        Me.minipic1.Size = New System.Drawing.Size(24, 23)
+        Me.minipic1.Size = New System.Drawing.Size(24, 18)
         Me.minipic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.minipic1.TabIndex = 14
         Me.minipic1.TabStop = False
@@ -767,9 +767,9 @@ Partial Class CopyRoms
         '
         Me.minipic2.BackColor = System.Drawing.Color.White
         Me.minipic2.Image = Global.RecalCopier.My.Resources.Resources.OKvideo
-        Me.minipic2.Location = New System.Drawing.Point(396, 30)
+        Me.minipic2.Location = New System.Drawing.Point(396, 29)
         Me.minipic2.Name = "minipic2"
-        Me.minipic2.Size = New System.Drawing.Size(24, 23)
+        Me.minipic2.Size = New System.Drawing.Size(24, 18)
         Me.minipic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.minipic2.TabIndex = 15
         Me.minipic2.TabStop = False
@@ -778,9 +778,9 @@ Partial Class CopyRoms
         '
         Me.minipic3.BackColor = System.Drawing.Color.White
         Me.minipic3.Image = Global.RecalCopier.My.Resources.Resources.OKmanual
-        Me.minipic3.Location = New System.Drawing.Point(422, 30)
+        Me.minipic3.Location = New System.Drawing.Point(422, 29)
         Me.minipic3.Name = "minipic3"
-        Me.minipic3.Size = New System.Drawing.Size(24, 23)
+        Me.minipic3.Size = New System.Drawing.Size(24, 18)
         Me.minipic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.minipic3.TabIndex = 16
         Me.minipic3.TabStop = False
@@ -789,9 +789,9 @@ Partial Class CopyRoms
         '
         Me.minipic4.BackColor = System.Drawing.Color.White
         Me.minipic4.Image = Global.RecalCopier.My.Resources.Resources.OKoverlay
-        Me.minipic4.Location = New System.Drawing.Point(448, 30)
+        Me.minipic4.Location = New System.Drawing.Point(448, 29)
         Me.minipic4.Name = "minipic4"
-        Me.minipic4.Size = New System.Drawing.Size(24, 23)
+        Me.minipic4.Size = New System.Drawing.Size(24, 18)
         Me.minipic4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.minipic4.TabIndex = 17
         Me.minipic4.TabStop = False
@@ -800,9 +800,9 @@ Partial Class CopyRoms
         '
         Me.minipic5.BackColor = System.Drawing.Color.White
         Me.minipic5.Image = Global.RecalCopier.My.Resources.Resources.OKMem
-        Me.minipic5.Location = New System.Drawing.Point(473, 30)
+        Me.minipic5.Location = New System.Drawing.Point(473, 29)
         Me.minipic5.Name = "minipic5"
-        Me.minipic5.Size = New System.Drawing.Size(24, 23)
+        Me.minipic5.Size = New System.Drawing.Size(24, 18)
         Me.minipic5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.minipic5.TabIndex = 18
         Me.minipic5.TabStop = False
