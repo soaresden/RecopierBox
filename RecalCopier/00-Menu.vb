@@ -69,9 +69,7 @@ Public Class Form1
                 TxtRecalfolderPath.Text = Nothing
             Else
                 MsgBox("Chemin Recalbox OK !")
-                Exit Sub
             End If
-
             TxtRecalfolderPath.Text = FolderBrowserDialog1.SelectedPath
             'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
             My.Settings.RecalboxFolder = TxtRecalfolderPath.Text

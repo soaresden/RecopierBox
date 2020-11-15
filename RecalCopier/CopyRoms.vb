@@ -772,17 +772,6 @@ romsuivante:
                 'si la case est cochée, alors on ajoute dans la listebox ma selection
                 If FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True Then
                     listboxMaSelection.Items.Add(pathrom)
-
-                Else 'sinon, on verifie si la ligne etait présente et si oui, on la supprime
-
-                    On Error Resume Next
-                    For i As Integer = 0 To listboxMaSelection.Items.Count - 1
-                        Dim ligneencours As String = listboxMaSelection.Items(i).ToString
-                        If ligneencours = pathrom Then
-                            listboxMaSelection.Items.Remove(pathrom)
-                        End If
-                    Next
-                    On Error GoTo 0
                 End If
             End If
 
