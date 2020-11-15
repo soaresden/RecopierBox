@@ -40,9 +40,13 @@ Partial Class Form1
         Me.TxtDisclaimer = New System.Windows.Forms.RichTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.groupBox2.SuspendLayout()
         Me.MenuBoutons.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Quitter
@@ -167,7 +171,7 @@ Partial Class Form1
         Me.label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label2.Font = New System.Drawing.Font("VAGRounded BT", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label2.ForeColor = System.Drawing.SystemColors.Info
-        Me.label2.Location = New System.Drawing.Point(16, 48)
+        Me.label2.Location = New System.Drawing.Point(163, 47)
         Me.label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label2.Name = "label2"
         Me.label2.Size = New System.Drawing.Size(370, 17)
@@ -180,7 +184,7 @@ Partial Class Form1
         Me.label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label1.Font = New System.Drawing.Font("VAGRounded BT", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label1.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.label1.Location = New System.Drawing.Point(11, 5)
+        Me.label1.Location = New System.Drawing.Point(158, 4)
         Me.label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label1.Name = "label1"
         Me.label1.Size = New System.Drawing.Size(516, 43)
@@ -217,7 +221,7 @@ Partial Class Form1
         Me.TxtDisclaimer.BackColor = System.Drawing.SystemColors.Info
         Me.TxtDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtDisclaimer.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.TxtDisclaimer.Location = New System.Drawing.Point(10, 44)
+        Me.TxtDisclaimer.Location = New System.Drawing.Point(5, 111)
         Me.TxtDisclaimer.Name = "TxtDisclaimer"
         Me.TxtDisclaimer.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.TxtDisclaimer.Size = New System.Drawing.Size(917, 180)
@@ -247,6 +251,26 @@ Partial Class Form1
         Me.RichTextBox1.TabIndex = 17
         Me.RichTextBox1.Text = "https://github.com/soaresden/RecopierBox"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.RecalCopier.My.Resources.Resources.iconlog
+        Me.PictureBox1.Location = New System.Drawing.Point(11, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(69, 60)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 18
+        Me.PictureBox1.TabStop = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.RecalCopier.My.Resources.Resources.iconlog
+        Me.PictureBox2.Location = New System.Drawing.Point(11, 4)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(147, 135)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 19
+        Me.PictureBox2.TabStop = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -255,6 +279,8 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(950, 538)
+        Me.Controls.Add(Me.PictureBox2)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.Disclaimer)
         Me.Controls.Add(Me.label3)
@@ -273,6 +299,8 @@ Partial Class Form1
         Me.groupBox2.PerformLayout()
         Me.MenuBoutons.ResumeLayout(False)
         Me.Disclaimer.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -294,4 +322,6 @@ Partial Class Form1
     Friend WithEvents Button1 As Button
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents TxtDisclaimer As RichTextBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
 End Class
