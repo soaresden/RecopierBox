@@ -785,13 +785,17 @@ romsuivante:
                     Call selectiondudernier(a)
                 End If
 
-                'On va checker les doublons quand meme
-                Supdoublon(listboxMaSelection)
-
             Else 'ca veut dire que on va retirer un element là
                 listboxMaSelection.Items.Remove(pathrom)
 
             End If
+
+            'On va checker les doublons quand meme
+            Supdoublon(listboxMaSelection)
+
+            'On lance une update
+            Call UpdatelesChiffreRoms()
+
         End If
     End Sub
     Sub Selectiondudernier(RomPath As String)
@@ -1313,6 +1317,9 @@ prochainj:
         'Check des Doublons
         Supdoublon(listboxMaSelection)
 
+        'On lance un calcul par securité
+        Call UpdatelesChiffreRoms()
+
     End Sub
     Function Supdoublon(ByVal listboxName As ListBox)
         listboxName.Sorted = True
@@ -1519,5 +1526,4 @@ prochainj:
     Private Sub FinalGrid_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles FinalGrid.RowEnter
         Call UpdatelesChiffreRoms()
     End Sub
-
 End Class
