@@ -955,9 +955,14 @@ romsuivante:
                         'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
 
                         Dim iso As String = g.Substring(detectfile).Substring(0, InStr(g.Substring(detectfile), Chr(34)) - 1)
-
-                        pathjeu = My.Settings.RecalboxFolder & "\roms\" & consolederom & "\" & Replace(iso, "/", "\")
-
+                        Dim pathdeliso As String = My.Settings.RecalboxFolder & "\roms\" & consolederom & "\" & Replace(iso, "/", "\")
+                        Dim pathisofinal As String = Replace(pathdeliso, My.Settings.RecalboxFolder, newrecalbox)
+                        'On check si ca existe, au cas ou on le cree
+                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(pathdeliso))) Then
+                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(pathdeliso))
+                        End If
+                        'et on copie LES CDS
+                        System.IO.File.Copy(pathdeliso, pathisofinal, True)
                     End If
                 Next
             End If
