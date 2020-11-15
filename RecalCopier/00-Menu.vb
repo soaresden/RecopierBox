@@ -14,7 +14,7 @@ Public Class Form1
         Dim netKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(strSubKey)
 
         If netKey IsNot Nothing And netKey.GetValue("Release") IsNot Nothing Then
-            MsgBox(".NET Framework Version: " + StrHigher(Integer.Parse(netKey.GetValue("Release"))))
+            'MsgBox(".NET Framework Version: " + StrHigher(Integer.Parse(netKey.GetValue("Release"))))
         Else
             MsgBox("Votre .NET Framework est inférieur à Version 4.5" & Chr(13) & "Vous vous exposez à des bugs !" & Chr(13) & "Merci d'installer le Framework et RéOuvrir le Logiciel")
             System.Diagnostics.Process.Start(String.Format("https://dotnet.microsoft.com/download/dotnet-framework"))
