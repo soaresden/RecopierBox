@@ -8,13 +8,18 @@ Public Class CopyRoms
         FinalGrid.Hide()
         ButtonShowGames.Hide()
         GroupBox1.Hide()
-        lbl_bibliorecalbox.Hide()
         grp_RomInfos.Hide()
         vid_romvid.uiMode = "none"
         txt_txtsearch.Hide()
         listboxMaSelection.Hide()
         buttonRAZ.Hide()
         GroupFiltresAvances.Hide()
+        minipic1.Hide()
+        minipic2.Hide()
+        minipic3.Hide()
+        minipic4.Hide()
+        minipic5.Hide()
+
         'Launch Import Gamelist button
         ButtonImportXML.PerformClick()
     End Sub
@@ -386,7 +391,7 @@ romsuivante:
         FinalGrid.Columns.Add(colromoverlay)
         colromoverlay.HeaderText = "CocheOverlay"
         colromoverlay.Name = "CocheOverlay"
-        colromoverlay.Width = 30
+        colromoverlay.Width = 25
 
         Dim colromsaves As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromsaves)
@@ -405,7 +410,7 @@ romsuivante:
         FinalGrid.Columns.Add(colromselection)
         colromselection.HeaderText = "Selection"
         colromselection.Name = "Selection"
-        colromselection.Width = 25
+        colromselection.Width = 30
 
         'Reajusting Interface and Showing Final Interface
         ButtonImportXML.Hide()
@@ -444,6 +449,12 @@ romsuivante:
         'On compte le nombre total d'entrées
         txt_nbrom.Text = FinalGrid.Rows.Count - 1
 
+        'On affiche les petites icones 
+        minipic1.Show()
+        minipic2.Show()
+        minipic3.Show()
+        minipic4.Show()
+        minipic5.Show()
         'on va calculer la taille des roms
         Call Calcultaillerom()
         'On lance la completion des checkbox
@@ -1377,26 +1388,42 @@ prochainj:
         txt_txtsearch.Text = "forcingreset"
     End Sub
     Private Sub Romscreeno_Click(sender As Object, e As EventArgs) Handles romscreeno.Click
-        Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value.ToString
-        If variable IsNot Nothing Then
+        'si y'a rien de loadé
+        If txt_romname.Text = Nothing Then Exit Sub
+
+        'Si pas d'image sur le jeu en cours
+        If IsDBNull(FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index)) Then
+        Else
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value.ToString)
         End If
     End Sub
     Private Sub Romvideoo_Click(sender As Object, e As EventArgs) Handles romvideoo.Click
-        Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminVideo").Index).Value.ToString
-        If variable IsNot Nothing Then
+        'si y'a rien de loadé
+        If txt_romname.Text = Nothing Then Exit Sub
+
+        'Si pas d'image sur le jeu en cours
+        If IsDBNull(FinalGrid.SelectedCells(FinalGrid.Columns("CheminVideo").Index)) Then
+        Else
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminVideo").Index).Value.ToString)
         End If
     End Sub
     Private Sub Rommanualo_Click(sender As Object, e As EventArgs) Handles rommanualo.Click
-        Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminManuel").Index).Value.ToString
-        If variable IsNot Nothing Then
+        'si y'a rien de loadé
+        If txt_romname.Text = Nothing Then Exit Sub
+
+        'Si pas d'image sur le jeu en cours
+        If IsDBNull(FinalGrid.SelectedCells(FinalGrid.Columns("CheminManuel").Index)) Then
+        Else
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminManuel").Index).Value.ToString)
         End If
     End Sub
     Private Sub Romoverlayo_Click(sender As Object, e As EventArgs) Handles romoverlayo.Click
-        Dim variable As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminOverlay").Index).Value.ToString
-        If variable IsNot Nothing Then
+        'si y'a rien de loadé
+        If txt_romname.Text = Nothing Then Exit Sub
+
+        'Si pas d'image sur le jeu en cours
+        If FinalGrid.SelectedCells(FinalGrid.Columns("CocheOverlay").Index).Value = False Then
+        Else
             Dim cheminrom As String = FinalGrid.SelectedCells(FinalGrid.Columns("CheminRom").Index).Value.ToString
             Dim FileInfo As New FileInfo(cheminrom)
             Dim nomdelarom As String = FileInfo.Name
@@ -1409,9 +1436,16 @@ prochainj:
         End If
     End Sub
     Private Sub Romsaveo_Click(sender As Object, e As EventArgs) Handles romsaveo.Click
-        Dim chemin As String = txt_rompath.ToString
-        Dim cheminsave As String = Replace(chemin, "\roms\", "\saves\")
-        Process.Start("explorer", "")
+        'si y'a rien de loadé
+        If txt_romname.Text = Nothing Then Exit Sub
+
+        'Si pas d'image sur le jeu en cours
+        If FinalGrid.SelectedCells(FinalGrid.Columns("CocheSave").Index).Value = False Then
+        Else
+            Dim chemin As String = txt_rompath.Text.ToString
+            Dim cheminsave As String = Path.GetDirectoryName(Replace(chemin, "\roms\", "\saves\"))
+            Process.Start("explorer", cheminsave)
+        End If
     End Sub
     Private Sub RomImage_Click(sender As Object, e As EventArgs) Handles RomImage.DoubleClick
         System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value.ToString)
@@ -1426,26 +1460,20 @@ prochainj:
     End Sub
 
     Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles CocherTout.CheckedChanged
-        MsgBox("En Travail")
-        GoTo saute
         For i = 0 To FinalGrid.Rows.Count - 2
             If FinalGrid.Rows(i).Visible = True Then
                 FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = True
             End If
         Next
-saute:
         CocherTout.Checked = True
     End Sub
 
     Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles DecocherTout.CheckedChanged
-        MsgBox("En Travail")
-        GoTo saute
         For i = 0 To FinalGrid.Rows.Count - 2
             If FinalGrid.Rows(i).Visible = True Then
                 FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = False
             End If
         Next
-saute:
         DecocherTout.Checked = False
     End Sub
 

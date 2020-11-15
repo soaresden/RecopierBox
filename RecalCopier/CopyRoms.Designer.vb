@@ -54,7 +54,6 @@ Partial Class CopyRoms
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_USBGo = New System.Windows.Forms.TextBox()
         Me.Buttongetback = New System.Windows.Forms.Button()
-        Me.lbl_bibliorecalbox = New System.Windows.Forms.Label()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
         Me.romsaveo = New System.Windows.Forms.Button()
         Me.romoverlayo = New System.Windows.Forms.Button()
@@ -84,6 +83,11 @@ Partial Class CopyRoms
         Me.ButtonShowColonne = New System.Windows.Forms.Button()
         Me.ComboFiltreColonnes = New System.Windows.Forms.ComboBox()
         Me.ButtonHideColonne = New System.Windows.Forms.Button()
+        Me.minipic1 = New System.Windows.Forms.PictureBox()
+        Me.minipic2 = New System.Windows.Forms.PictureBox()
+        Me.minipic3 = New System.Windows.Forms.PictureBox()
+        Me.minipic4 = New System.Windows.Forms.PictureBox()
+        Me.minipic5 = New System.Windows.Forms.PictureBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -94,6 +98,11 @@ Partial Class CopyRoms
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupFiltresAvances.SuspendLayout()
+        CType(Me.minipic1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ButtonImportXML
@@ -448,17 +457,6 @@ Partial Class CopyRoms
         Me.Buttongetback.Text = "Revenir au Menu"
         Me.Buttongetback.UseVisualStyleBackColor = True
         '
-        'lbl_bibliorecalbox
-        '
-        Me.lbl_bibliorecalbox.AutoSize = True
-        Me.lbl_bibliorecalbox.Font = New System.Drawing.Font("VAG Rounded", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_bibliorecalbox.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lbl_bibliorecalbox.Location = New System.Drawing.Point(328, 7)
-        Me.lbl_bibliorecalbox.Name = "lbl_bibliorecalbox"
-        Me.lbl_bibliorecalbox.Size = New System.Drawing.Size(201, 18)
-        Me.lbl_bibliorecalbox.TabIndex = 9
-        Me.lbl_bibliorecalbox.Text = "Bibliothèque Selectionnée :"
-        '
         'grp_RomInfos
         '
         Me.grp_RomInfos.BackColor = System.Drawing.Color.SkyBlue
@@ -754,15 +752,74 @@ Partial Class CopyRoms
         Me.ButtonHideColonne.Text = "Cacher"
         Me.ButtonHideColonne.UseVisualStyleBackColor = True
         '
+        'minipic1
+        '
+        Me.minipic1.BackColor = System.Drawing.Color.White
+        Me.minipic1.Image = Global.RecalCopier.My.Resources.Resources.Okscreen
+        Me.minipic1.Location = New System.Drawing.Point(370, 30)
+        Me.minipic1.Name = "minipic1"
+        Me.minipic1.Size = New System.Drawing.Size(24, 23)
+        Me.minipic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic1.TabIndex = 14
+        Me.minipic1.TabStop = False
+        '
+        'minipic2
+        '
+        Me.minipic2.BackColor = System.Drawing.Color.White
+        Me.minipic2.Image = Global.RecalCopier.My.Resources.Resources.OKvideo
+        Me.minipic2.Location = New System.Drawing.Point(396, 30)
+        Me.minipic2.Name = "minipic2"
+        Me.minipic2.Size = New System.Drawing.Size(24, 23)
+        Me.minipic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic2.TabIndex = 15
+        Me.minipic2.TabStop = False
+        '
+        'minipic3
+        '
+        Me.minipic3.BackColor = System.Drawing.Color.White
+        Me.minipic3.Image = Global.RecalCopier.My.Resources.Resources.OKmanual
+        Me.minipic3.Location = New System.Drawing.Point(422, 30)
+        Me.minipic3.Name = "minipic3"
+        Me.minipic3.Size = New System.Drawing.Size(24, 23)
+        Me.minipic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic3.TabIndex = 16
+        Me.minipic3.TabStop = False
+        '
+        'minipic4
+        '
+        Me.minipic4.BackColor = System.Drawing.Color.White
+        Me.minipic4.Image = Global.RecalCopier.My.Resources.Resources.OKoverlay
+        Me.minipic4.Location = New System.Drawing.Point(448, 30)
+        Me.minipic4.Name = "minipic4"
+        Me.minipic4.Size = New System.Drawing.Size(24, 23)
+        Me.minipic4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic4.TabIndex = 17
+        Me.minipic4.TabStop = False
+        '
+        'minipic5
+        '
+        Me.minipic5.BackColor = System.Drawing.Color.White
+        Me.minipic5.Image = Global.RecalCopier.My.Resources.Resources.OKMem
+        Me.minipic5.Location = New System.Drawing.Point(473, 30)
+        Me.minipic5.Name = "minipic5"
+        Me.minipic5.Size = New System.Drawing.Size(24, 23)
+        Me.minipic5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic5.TabIndex = 18
+        Me.minipic5.TabStop = False
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 580)
+        Me.Controls.Add(Me.minipic5)
+        Me.Controls.Add(Me.minipic4)
+        Me.Controls.Add(Me.minipic3)
+        Me.Controls.Add(Me.minipic2)
+        Me.Controls.Add(Me.minipic1)
         Me.Controls.Add(Me.GroupFiltresAvances)
         Me.Controls.Add(Me.grp_RomInfos)
-        Me.Controls.Add(Me.lbl_bibliorecalbox)
         Me.Controls.Add(Me.Buttongetback)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ButtonShowGames)
@@ -791,6 +848,11 @@ Partial Class CopyRoms
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupFiltresAvances.ResumeLayout(False)
         Me.GroupFiltresAvances.PerformLayout()
+        CType(Me.minipic1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -802,7 +864,6 @@ Partial Class CopyRoms
     Friend WithEvents FinalGrid As DataGridView
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Buttongetback As Button
-    Friend WithEvents lbl_bibliorecalbox As Label
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents lbl_GoAPrevoir As Label
     Friend WithEvents txt_GoAPrevoir As TextBox
@@ -855,4 +916,9 @@ Partial Class CopyRoms
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents txt_nbrom As TextBox
+    Friend WithEvents minipic1 As PictureBox
+    Friend WithEvents minipic2 As PictureBox
+    Friend WithEvents minipic3 As PictureBox
+    Friend WithEvents minipic4 As PictureBox
+    Friend WithEvents minipic5 As PictureBox
 End Class
