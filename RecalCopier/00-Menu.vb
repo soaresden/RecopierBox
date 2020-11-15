@@ -85,4 +85,8 @@ Public Class Form1
     Private Sub RichTextBox1_Click(sender As Object, e As EventArgs) Handles RichTextBox1.Click
         System.Diagnostics.Process.Start(String.Format("https://github.com/soaresden/RecopierBox"))
     End Sub
+
+    Private Sub ButtonQuizz_Click(sender As Object, e As EventArgs) Handles ButtonQuizz.Click
+        MsgBox("En Travail")
+    End Sub
 End Class

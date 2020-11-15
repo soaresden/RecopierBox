@@ -43,6 +43,7 @@ Partial Class Form1
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.VersionNetFramework = New System.Windows.Forms.Label()
+        Me.ButtonQuizz = New System.Windows.Forms.Button()
         Me.groupBox2.SuspendLayout()
         Me.MenuBoutons.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
@@ -148,7 +149,7 @@ Partial Class Form1
         Me.ButtonCopy.Name = "ButtonCopy"
         Me.ButtonCopy.Size = New System.Drawing.Size(244, 145)
         Me.ButtonCopy.TabIndex = 3
-        Me.ButtonCopy.Text = "PREPARER " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "une Copie pour un Ami"
+        Me.ButtonCopy.Text = "PREPARER" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Un Dossier Perso"
         Me.ButtonCopy.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.ButtonCopy.UseVisualStyleBackColor = True
         '
@@ -283,6 +284,19 @@ Partial Class Form1
         Me.VersionNetFramework.TabIndex = 21
         Me.VersionNetFramework.Text = ".net Framework version"
         '
+        'ButtonQuizz
+        '
+        Me.ButtonQuizz.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonQuizz.ForeColor = System.Drawing.SystemColors.InactiveBorder
+        Me.ButtonQuizz.Image = CType(resources.GetObject("ButtonQuizz.Image"), System.Drawing.Image)
+        Me.ButtonQuizz.Location = New System.Drawing.Point(561, 234)
+        Me.ButtonQuizz.Margin = New System.Windows.Forms.Padding(2)
+        Me.ButtonQuizz.Name = "ButtonQuizz"
+        Me.ButtonQuizz.Size = New System.Drawing.Size(78, 85)
+        Me.ButtonQuizz.TabIndex = 5
+        Me.ButtonQuizz.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.ButtonQuizz.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -291,11 +305,12 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(950, 538)
+        Me.Controls.Add(Me.Disclaimer)
+        Me.Controls.Add(Me.ButtonQuizz)
         Me.Controls.Add(Me.VersionNetFramework)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.RichTextBox1)
-        Me.Controls.Add(Me.Disclaimer)
         Me.Controls.Add(Me.label3)
         Me.Controls.Add(Me.Quitter)
         Me.Controls.Add(Me.groupBox2)
@@ -338,4 +353,5 @@ Partial Class Form1
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents VersionNetFramework As Label
+    Private WithEvents ButtonQuizz As Button
 End Class
