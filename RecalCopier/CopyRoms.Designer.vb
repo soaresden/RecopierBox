@@ -88,6 +88,8 @@ Partial Class CopyRoms
         Me.minipic3 = New System.Windows.Forms.PictureBox()
         Me.minipic4 = New System.Windows.Forms.PictureBox()
         Me.minipic5 = New System.Windows.Forms.PictureBox()
+        Me.listconsoleselected = New System.Windows.Forms.ListBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -166,7 +168,7 @@ Partial Class CopyRoms
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
         Me.GroupBox1.Controls.Add(Me.GroupBox3)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 477)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 508)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
@@ -625,6 +627,8 @@ Partial Class CopyRoms
         'GroupFiltresAvances
         '
         Me.GroupFiltresAvances.BackColor = System.Drawing.Color.DarkCyan
+        Me.GroupFiltresAvances.Controls.Add(Me.Label9)
+        Me.GroupFiltresAvances.Controls.Add(Me.listconsoleselected)
         Me.GroupFiltresAvances.Controls.Add(Me.txtShownRoms)
         Me.GroupFiltresAvances.Controls.Add(Me.Label7)
         Me.GroupFiltresAvances.Controls.Add(Me.Label6)
@@ -640,7 +644,7 @@ Partial Class CopyRoms
         Me.GroupFiltresAvances.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupFiltresAvances.Location = New System.Drawing.Point(8, 398)
         Me.GroupFiltresAvances.Name = "GroupFiltresAvances"
-        Me.GroupFiltresAvances.Size = New System.Drawing.Size(600, 74)
+        Me.GroupFiltresAvances.Size = New System.Drawing.Size(600, 105)
         Me.GroupFiltresAvances.TabIndex = 13
         Me.GroupFiltresAvances.TabStop = False
         Me.GroupFiltresAvances.Text = "Colonnes Disponibles :"
@@ -726,7 +730,7 @@ Partial Class CopyRoms
         'ButtonShowColonne
         '
         Me.ButtonShowColonne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonShowColonne.Location = New System.Drawing.Point(7, 44)
+        Me.ButtonShowColonne.Location = New System.Drawing.Point(256, 74)
         Me.ButtonShowColonne.Name = "ButtonShowColonne"
         Me.ButtonShowColonne.Size = New System.Drawing.Size(55, 24)
         Me.ButtonShowColonne.TabIndex = 2
@@ -737,7 +741,7 @@ Partial Class CopyRoms
         '
         Me.ComboFiltreColonnes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboFiltreColonnes.FormattingEnabled = True
-        Me.ComboFiltreColonnes.Location = New System.Drawing.Point(7, 22)
+        Me.ComboFiltreColonnes.Location = New System.Drawing.Point(256, 47)
         Me.ComboFiltreColonnes.Name = "ComboFiltreColonnes"
         Me.ComboFiltreColonnes.Size = New System.Drawing.Size(124, 21)
         Me.ComboFiltreColonnes.TabIndex = 0
@@ -745,7 +749,7 @@ Partial Class CopyRoms
         'ButtonHideColonne
         '
         Me.ButtonHideColonne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonHideColonne.Location = New System.Drawing.Point(68, 44)
+        Me.ButtonHideColonne.Location = New System.Drawing.Point(317, 74)
         Me.ButtonHideColonne.Name = "ButtonHideColonne"
         Me.ButtonHideColonne.Size = New System.Drawing.Size(63, 24)
         Me.ButtonHideColonne.TabIndex = 1
@@ -807,12 +811,31 @@ Partial Class CopyRoms
         Me.minipic5.TabIndex = 18
         Me.minipic5.TabStop = False
         '
+        'listconsoleselected
+        '
+        Me.listconsoleselected.Enabled = False
+        Me.listconsoleselected.FormattingEnabled = True
+        Me.listconsoleselected.Location = New System.Drawing.Point(7, 30)
+        Me.listconsoleselected.Name = "listconsoleselected"
+        Me.listconsoleselected.Size = New System.Drawing.Size(94, 69)
+        Me.listconsoleselected.TabIndex = 19
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label9.Location = New System.Drawing.Point(6, 14)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(96, 13)
+        Me.Label9.TabIndex = 20
+        Me.Label9.Text = "Console Selected :"
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1018, 580)
+        Me.ClientSize = New System.Drawing.Size(1018, 611)
         Me.Controls.Add(Me.minipic5)
         Me.Controls.Add(Me.minipic4)
         Me.Controls.Add(Me.minipic3)
@@ -828,7 +851,7 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.ButtonImportXML)
         Me.Controls.Add(Me.FinalGrid)
         Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.MaximumSize = New System.Drawing.Size(1034, 619)
+        Me.MaximumSize = New System.Drawing.Size(1034, 650)
         Me.MinimumSize = New System.Drawing.Size(1034, 619)
         Me.Name = "CopyRoms"
         Me.Text = "CopyRoms"
@@ -921,4 +944,6 @@ Partial Class CopyRoms
     Friend WithEvents minipic3 As PictureBox
     Friend WithEvents minipic4 As PictureBox
     Friend WithEvents minipic5 As PictureBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents listconsoleselected As ListBox
 End Class
