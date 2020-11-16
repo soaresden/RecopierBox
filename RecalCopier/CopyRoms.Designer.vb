@@ -464,9 +464,9 @@ Partial Class CopyRoms
         'grp_RomInfos
         '
         Me.grp_RomInfos.BackColor = System.Drawing.Color.SkyBlue
+        Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.GroupBox6)
         Me.grp_RomInfos.Controls.Add(Me.RomImage)
-        Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.txt_romdesc)
         Me.grp_RomInfos.Controls.Add(Me.txt_rompath)
         Me.grp_RomInfos.Controls.Add(Me.txt_romname)
@@ -506,7 +506,7 @@ Partial Class CopyRoms
         '
         'romvideoo
         '
-        Me.romvideoo.Location = New System.Drawing.Point(6, 19)
+        Me.romvideoo.Location = New System.Drawing.Point(80, 19)
         Me.romvideoo.Name = "romvideoo"
         Me.romvideoo.Size = New System.Drawing.Size(57, 54)
         Me.romvideoo.TabIndex = 17
@@ -514,7 +514,7 @@ Partial Class CopyRoms
         '
         'romscreeno
         '
-        Me.romscreeno.Location = New System.Drawing.Point(82, 19)
+        Me.romscreeno.Location = New System.Drawing.Point(8, 19)
         Me.romscreeno.Name = "romscreeno"
         Me.romscreeno.Size = New System.Drawing.Size(57, 54)
         Me.romscreeno.TabIndex = 16
@@ -525,7 +525,7 @@ Partial Class CopyRoms
         Me.listboxMaSelection.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.InfoText
         Me.listboxMaSelection.FormattingEnabled = True
-        Me.listboxMaSelection.Location = New System.Drawing.Point(184, 56)
+        Me.listboxMaSelection.Location = New System.Drawing.Point(184, 55)
         Me.listboxMaSelection.Name = "listboxMaSelection"
         Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
@@ -574,7 +574,7 @@ Partial Class CopyRoms
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(239, 58)
+        Me.Label1.Location = New System.Drawing.Point(261, 58)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(55, 13)
         Me.Label1.TabIndex = 2
@@ -646,6 +646,7 @@ Partial Class CopyRoms
         Me.txtShownRoms.ReadOnly = True
         Me.txtShownRoms.Size = New System.Drawing.Size(47, 20)
         Me.txtShownRoms.TabIndex = 19
+        Me.txtShownRoms.Text = "0"
         Me.txtShownRoms.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label7
@@ -680,6 +681,7 @@ Partial Class CopyRoms
         Me.txt_nbrom.ReadOnly = True
         Me.txt_nbrom.Size = New System.Drawing.Size(47, 22)
         Me.txt_nbrom.TabIndex = 16
+        Me.txt_nbrom.Text = "0"
         Me.txt_nbrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'DecocherTout
@@ -801,7 +803,6 @@ Partial Class CopyRoms
         '
         'listconsoleselected
         '
-        Me.listconsoleselected.Enabled = False
         Me.listconsoleselected.FormattingEnabled = True
         Me.listconsoleselected.Location = New System.Drawing.Point(7, 30)
         Me.listconsoleselected.Name = "listconsoleselected"
@@ -842,7 +843,7 @@ Partial Class CopyRoms
         Me.GroupBox6.Size = New System.Drawing.Size(381, 82)
         Me.GroupBox6.TabIndex = 21
         Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Fichiers Liés :"
+        Me.GroupBox6.Text = "Fichiers Liés à la Rom :"
         '
         'CopyRoms
         '

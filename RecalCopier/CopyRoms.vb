@@ -485,7 +485,7 @@ romsuivante:
             Dim chemindelarom = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("CheminRom").Index).Value
             If valeursize Is Nothing Then ' si la cellule valeur size est vide on la calcule, sinon rien
 
-                Dim sizefichier As Long
+                Dim sizefichier As Double
                 Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
 
                 If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
@@ -495,9 +495,7 @@ romsuivante:
                     For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
                         sizefichier += file.Length
                     Next file
-
-                    sizefichier = chemindelarom
-
+                    GoTo labelapresfolder
                 Else
                     'si c'est un fichier...
                     Dim extensionrom As String = Path.GetExtension(chemindelarom)
@@ -545,8 +543,9 @@ romsuivante:
                         sizefichier = info.Length
                     End If
                 End If
+labelapresfolder:
                 'Conversion en Mo
-                Dim tailleenmo As Decimal = sizefichier / 1048576
+                Dim tailleenmo As Double = sizefichier / 1048576
                 FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Mo").Index).Value = Math.Round(tailleenmo, 2)
                 sizefichier = 0
             End If
@@ -567,20 +566,26 @@ romsuivante:
             'test sur le chemin des screens, si la cellule est complétée alors on coche
             If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = False
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             Else
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             End If
             'test sur le chemin des videos
             If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Value = False
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             Else
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             End If
             'test sur le chemin des manuels
             If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Value = False
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             Else
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             End If
 
             'test sur le chemin des overlays
@@ -594,23 +599,70 @@ romsuivante:
 
             If System.IO.File.Exists(testcheminoverlay) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             Else
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Value = False
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
 
             'test sur le chemin des saves
             Dim cheminsaves As String = Replace(cheminrom, "\roms\", "\saves\")
             Dim romsansextension = FileNameWithoutExtension(nomdelarom)
 
+            'test consoles qui n'ont pas de saves
+            Dim consolesanssaves(34)
+            consolesanssaves(0) = "3do"
+            consolesanssaves(1) = "64dd"
+            consolesanssaves(2) = "amigacd32"
+            consolesanssaves(3) = "amigacdtv"
+            consolesanssaves(4) = "apple2gs"
+            consolesanssaves(5) = "atari5200"
+            consolesanssaves(6) = "atarist"
+            consolesanssaves(7) = "channelf"
+            consolesanssaves(8) = "easyrpg"
+            consolesanssaves(9) = "fds"
+            consolesanssaves(10) = "intellivision"
+            consolesanssaves(11) = "moonlight"
+            consolesanssaves(12) = "msx"
+            consolesanssaves(13) = "msxturbor"
+            consolesanssaves(14) = "multivision"
+            consolesanssaves(15) = "neogeocd"
+            consolesanssaves(16) = "o2em"
+            consolesanssaves(17) = "oricatmos"
+            consolesanssaves(18) = "palm"
+            consolesanssaves(19) = "pc88"
+            consolesanssaves(20) = "pc98"
+            consolesanssaves(21) = "pcengine"
+            consolesanssaves(22) = "pcfx"
+            consolesanssaves(23) = "phillipscdi"
+            consolesanssaves(24) = "ports"
+            consolesanssaves(25) = "ps2"
+            consolesanssaves(26) = "samcoupe"
+            consolesanssaves(27) = "saturn"
+            consolesanssaves(28) = "spectravideo"
+            consolesanssaves(29) = "sufami"
+            consolesanssaves(30) = "thomson"
+            consolesanssaves(31) = "tic80"
+            consolesanssaves(32) = "x1"
+            consolesanssaves(33) = "x68000"
+
+            If consolesanssaves.Contains(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("Console").Index).Value) Then
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = False
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(0, 0, 0)
+                GoTo consolesanssaves
+            End If
+
             Dim savesCount As Integer = IO.Directory.GetFiles(Replace(cheminsaves, nomdelarom, ""), romsansextension & ".*").Length
 
             If savesCount >= 1 Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = True
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             Else
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = False
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
         Next
-
+consolesanssaves:
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
         Form1.Show()
@@ -642,10 +694,10 @@ romsuivante:
             celluleimage = row.Cells(FinalGrid.Columns("CheminImage").Index).Value
         End If
 
-        If IsDBNull(row.Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
+        If IsDBNull(row.Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
             cellulevideo = Nothing
         Else
-            cellulevideo = row.Cells(FinalGrid.Columns("CocheImage").Index).Value
+            cellulevideo = row.Cells(FinalGrid.Columns("CocheVideo").Index).Value
         End If
 
 
@@ -687,6 +739,7 @@ romsuivante:
         End If
 
         'Conditionnelle sur les Boutons
+        On Error Resume Next
         Dim checkboximg As String = row.Cells(FinalGrid.Columns("CocheImage").Index).Value
         Dim checkboxvideo As String = row.Cells(FinalGrid.Columns("CocheVideo").Index).Value
         Dim checkboxmanual As String = row.Cells(FinalGrid.Columns("CocheManuel").Index).Value
@@ -718,35 +771,36 @@ romsuivante:
         Dim imgsaves2 As New Bitmap(imgsaves, romsaveo.Width, romsaveo.Height)
         Dim imgsaves2no As New Bitmap(imgsavesno, romsaveo.Width, romsaveo.Height)
 
-        If checkboximg = True Then
-            romscreeno.Image = imgscreen2
-        Else
+        If checkboximg = False Or Nothing Then
             romscreeno.Image = imgscreen2no
+        Else
+            romscreeno.Image = imgscreen2
         End If
 
-        If checkboxvideo = True Then
-            romvideoo.Image = imgvideo2
-        Else
+        If checkboxvideo = False Or Nothing Then
             romvideoo.Image = imgvideo2no
+        Else
+            romvideoo.Image = imgvideo2
         End If
 
-        If checkboxmanual = True Then
-            rommanualo.Image = imgmanual2
-        Else
+        If checkboxmanual = False Or Nothing Then
             rommanualo.Image = imgmanual2no
+        Else
+            rommanualo.Image = imgmanual2
         End If
 
-        If checkboxoverlay = True Then
-            romoverlayo.Image = imgoverlay2
-        Else
+        If checkboxoverlay = False Or Nothing Then
             romoverlayo.Image = imgoverlay2no
+        Else
+            romoverlayo.Image = imgoverlay2
         End If
 
-        If checkboxsave = True Then
-            romsaveo.Image = imgsaves2
-        Else
+        If checkboxsave = False Or Nothing Then
             romsaveo.Image = imgsaves2no
+        Else
+            romsaveo.Image = imgsaves2
         End If
+        On Error GoTo 0
     End Sub
     Public Function FileNameWithoutExtension(ByVal FullPath _
         As String) As String
@@ -878,7 +932,7 @@ romsuivante:
         Next file
 
         If sizedudossier >= 0 Then
-            If MsgBox("Le Chemin de Copie : " & txt_CopyFolder.Text & Chr(13) & "n'est pas vide" & Chr(13) & Chr(13) & "Continuer Quand Même", vbYesNo) = vbNo Then Exit Sub
+            If MsgBox("Le Chemin de Copie : " & txt_CopyFolder.Text & Chr(13) & "n'est pas vide" & Chr(13) & Chr(13) & "L'Assistant va creer un dossier : " & Chr(13) & txt_CopyFolder.Text & "\recalbox" & Chr(13) & "Continuer Quand Même", vbYesNo) = vbNo Then Exit Sub
         End If
 
         'msgbox pour un recap de la selection et des options
@@ -934,7 +988,7 @@ romsuivante:
         listboxMaSelection.Location = New Point(-2, 43)
         listboxMaSelection.Size = New Size(396, 433)
 
-        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(13) & optionsbox & Chr(13) & Chr(13) & "Chemin de Copie :" & Chr(13) & txt_CopyFolder.Text, vbYesNo) = vbNo Then
+        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(13) & optionsbox & Chr(13) & Chr(13) & "Chemin de Copie :  " & Chr(13) & txt_CopyFolder.Text, vbYesNo) = vbNo Then
             listboxMaSelection.Hide()
             Exit Sub
         End If
@@ -1309,7 +1363,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
                 For ligne = 0 To listconsoleselected.Items.Count - 1
                     Dim consolename As String = listconsoleselected.Items(ligne)
-                    Dim fulladresse As String = Path.GetDirectoryName(listconsoleselected.Items(ligne))
+                    Dim fulladresse As String = My.Settings.RecalboxFolder & "\roms\" & consolename
                     Dim overlayadresse As String = Replace(fulladresse, "\roms\", "\overlays\")
                     Dim parentName As String = IO.Path.GetFileName(overlayadresse)
 
