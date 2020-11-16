@@ -35,15 +35,6 @@ Public Class CopyRoms
         ButtonImportXML.Hide()
         FinalGrid.Show()
         ButtonShowGames.Show()
-
-        'Mettre les console dans la listebox console
-        For ligne = 0 To ListGameLists.Items.Count - 1
-            Dim consolederom As String
-            consolederom = pathjeu.Substring(InStr(pathjeu, "\roms\") + 5).Substring(0, InStr(pathjeu.Substring(InStr(pathjeu, "\roms\") + 5), "\") - 1)
-
-            listconsoleselected.Items.Add(consolederom)
-        Next
-
     End Sub
 
     Public Shared Function GetFilesRecursive(ByVal initial As String) As List(Of String)
@@ -90,6 +81,8 @@ Public Class CopyRoms
         FinalGrid.Show()
 
         If ListGameLists.Items.Count = 0 Then Exit Sub
+
+
 
         Dim gamelist As String = ListGameLists.Items(0)
         Dim table As New DataTable()
@@ -229,7 +222,13 @@ Public Class CopyRoms
 
             gamelist = i
 
-            Dim gamelistXml As XElement = XElement.Load(gamelist)
+            'On ajoute ensuite les consoles dans la listebox des console
+            Dim consolederom As String = i
+            consolederom = consolederom.Substring(InStr(consolederom, "\roms\") + 5).Substring(0, InStr(consolederom.Substring(InStr(consolederom, "\roms\") + 5), "\") - 1)
+
+                listconsoleselected.Items.Add(consolederom)
+
+                Dim gamelistXml As XElement = XElement.Load(gamelist)
 
             'getting the list for the xml with nodes
             Dim query2 = From st In gamelistXml.Descendants("game") Select st
@@ -470,7 +469,9 @@ romsuivante:
         'On lance la completion des checkbox
         Call Completiondescheckbox()
 
+
     End Sub
+
     Sub Calcultaillerom()
         On Error Resume Next
         Dim valeursize As String
@@ -920,8 +921,8 @@ romsuivante:
         Dim optionsbox As String = temptxt1 & Chr(13) & temptxt2 & Chr(13) & temptxt3 & Chr(13) & temptxt4 & Chr(13) & temptxt5 & Chr(13) & temptxt6
 
         'Reposition listboxmaselection
-        listboxMaSelection.Location = New Point(6, 0)
-        listboxMaSelection.Size = New Size(387, 329)
+        listboxMaSelection.Location = New Point(-2, 43)
+        listboxMaSelection.Size = New Size(396, 433)
 
         If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(13) & optionsbox & Chr(13) & Chr(13) & "Chemin de Copie :" & Chr(13) & txt_CopyFolder.Text, vbYesNo) = vbNo Then
             listboxMaSelection.Hide()
@@ -1298,7 +1299,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
                 For ligne = 0 To listconsoleselected.Items.Count - 1
                     Dim consolename As String = listconsoleselected.Items(ligne)
-                    Dim fulladresse As String = Path.GetDirectoryName(listconsoleselected.Items(overlaysys))
+                    Dim fulladresse As String = Path.GetDirectoryName(listconsoleselected.Items(ligne))
                     Dim overlayadresse As String = Replace(fulladresse, "\roms\", "\overlays\")
                     Dim parentName As String = IO.Path.GetFileName(overlayadresse)
 
@@ -1393,8 +1394,8 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         If listboxMaSelection.Visible = True Then
             listboxMaSelection.Hide()
         Else
-            listboxMaSelection.Location = New Point(6, 0)
-            listboxMaSelection.Size = New Size(387, 329)
+            listboxMaSelection.Location = New Point(-2, 43)
+            listboxMaSelection.Size = New Size(396, 433)
             listboxMaSelection.Show()
         End If
 
