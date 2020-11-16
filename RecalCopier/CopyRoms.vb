@@ -922,7 +922,8 @@ romsuivante:
         'On défiltre par securité
         buttonRAZ.PerformClick()
 
-        'On copie déja les roms
+        'On va boucler sur toutes les roms de la liste. 
+        'COPIE DES ROMS
         Dim newrecalbox As String = My.Settings.CopyFolder & "\recalbox"
         Directory.CreateDirectory(newrecalbox)
 
@@ -1000,15 +1001,17 @@ romsuivante:
             'en attendant on copie le gamelist
             System.IO.File.Copy(legamelist, lenouvogamelist, True)
 
-            'on check si les images
+            'on check si la copie des image a été activée
             If checkimgs.Checked = True Then
-                'retrouver la ligne
-                For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim estcequeimage As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CocheOverlay").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
-                    If estcequeimage = True Then
 
-                        Dim jeuencours As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                        If jeuencours = pathjeu Then ' colonne des path
+                For a = 0 To FinalGrid.RowCount - 1 'Auquel cas on va boucler sur toute les lignes jusqu'a trouver la rom
+                    Dim jeuencours As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                    If jeuencours = pathjeu Then ' on cherche la ligne du jeu
+
+                        Dim estcequeimage As String 'on verifie si le jeu a des images
+                        estcequeimage = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CocheOverlay").Index).Value ' onverifie si  check si le jeu a un overlay sinon on zappe le traitement
+                        If estcequeimage = True Then
+
                             Dim console As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Console").Index).Value
                             Dim cheminimage As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminImage").Index).Value
                             Dim nouvocheminimage As String = Replace(cheminimage, My.Settings.RecalboxFolder, newrecalbox)
@@ -1026,12 +1029,16 @@ romsuivante:
 
             'on check si les videos
             If checkvideos.Checked = True Then
-                For b = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim estcequemanuel As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CocheManuel").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
-                    If estcequemanuel = True Then
 
-                        Dim jeuencours As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                        If jeuencours = pathjeu Then ' colonne des path
+                For b = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+
+                    Dim jeuencours As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                    If jeuencours = pathjeu Then ' colonne des path
+
+                        Dim estcequevideo As String
+                        estcequevideo = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CocheVideo").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                        If estcequevideo = True Then
+
                             Dim console As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("Console").Index).Value
                             Dim cheminvideo As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminVideo").Index).Value
                             Dim nouvocheminvideo As String = Replace(cheminvideo, My.Settings.RecalboxFolder, newrecalbox)
@@ -1050,12 +1057,17 @@ romsuivante:
 
             'on check si les manuels
             If checkmanuals.Checked = True Then
-                For c = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim estcequemanuel As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CocheManuel").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
-                    If estcequemanuel = True Then
 
-                        Dim jeuencours As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                        If jeuencours = pathjeu Then ' colonne des path
+                For c = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+
+
+                    Dim jeuencours As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                    If jeuencours = pathjeu Then ' colonne des path
+
+                        Dim estcequemanuel As String
+                        estcequemanuel = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CocheManuel").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                        If estcequemanuel = True Then
+
                             Dim console As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("Console").Index).Value
                             Dim cheminmanuel As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminManuel").Index).Value
                             Dim nouvocheminmanuel As String = Replace(cheminmanuel, My.Settings.RecalboxFolder, newrecalbox)
@@ -1074,13 +1086,17 @@ romsuivante:
 
             'on check si les overlays
             If checkoverlays.Checked = True Then
-                For d = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    'check sur le jeu 
-                    Dim estcequeoverlay As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CocheOverlay").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
-                    If estcequeoverlay = True Then
 
-                        Dim jeuencours As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                        If jeuencours = pathjeu Then ' colonne des path
+                For d = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+
+                    'check sur le jeu 
+
+                    Dim jeuencours As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                    If jeuencours = pathjeu Then ' colonne des path
+                        Dim estcequeoverlay As String
+                        estcequeoverlay = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CocheOverlay").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                        If estcequeoverlay = True Then
+
                             Dim cheminpropreoverlay2 As String
                             Dim console As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("Console").Index).Value
                             Dim cheminoverlaycfg1 As String = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
@@ -1153,12 +1169,14 @@ romsuivante:
             'on check si les saves
             If checksaves.Checked = True Then
                 For e1 = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-                    Dim estcequesaves As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminSave").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
-                    If estcequesaves = True Then
 
+                    Dim jeuencours As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                    If jeuencours = pathjeu Then ' colonne des path
 
-                        Dim jeuencours As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                        If jeuencours = pathjeu Then ' colonne des path
+                        Dim estcequesaves As String
+                        estcequesaves = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminSave").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                        If estcequesaves = True Then
+
                             Dim console As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("Console").Index).Value
                             Dim tempsaves As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
                             Dim savesdir As String = Path.GetDirectoryName(Replace(tempsaves, "\roms\", "\saves\"))
@@ -1167,8 +1185,8 @@ romsuivante:
                             Dim compteur As Integer = 0
                             'on va boucler pour les stocker
                             For Each foundFile As String In My.Computer.FileSystem.GetFiles(
-    savesdir,
-    Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWithoutExtension(jeuencours) & ".*")
+savesdir,
+Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWithoutExtension(jeuencours) & ".*")
 
                                 tableauresultats(compteur) = foundFile
                                 compteur += 1
