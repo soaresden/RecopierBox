@@ -202,9 +202,9 @@ Partial Class Form1
         Me.label3.Location = New System.Drawing.Point(844, 515)
         Me.label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label3.Name = "label3"
-        Me.label3.Size = New System.Drawing.Size(96, 14)
+        Me.label3.Size = New System.Drawing.Size(98, 14)
         Me.label3.TabIndex = 14
-        Me.label3.Text = "v1.1 by Soaresden"
+        Me.label3.Text = "v1.2 by Soaresden"
         '
         'Disclaimer
         '
