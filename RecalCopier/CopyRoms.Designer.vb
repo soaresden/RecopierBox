@@ -189,7 +189,7 @@ Partial Class CopyRoms
         Me.GroupBox5.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox5.Size = New System.Drawing.Size(223, 65)
+        Me.GroupBox5.Size = New System.Drawing.Size(223, 70)
         Me.GroupBox5.TabIndex = 13
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Copie"
@@ -243,7 +243,7 @@ Partial Class CopyRoms
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ButtonFace
         Me.GroupBox2.Location = New System.Drawing.Point(121, 17)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(190, 65)
+        Me.GroupBox2.Size = New System.Drawing.Size(190, 70)
         Me.GroupBox2.TabIndex = 13
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Quoi Copier ?"
@@ -253,8 +253,8 @@ Partial Class CopyRoms
         Me.checkbios.AutoSize = True
         Me.checkbios.Checked = True
         Me.checkbios.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkbios.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.checkbios.Location = New System.Drawing.Point(6, 19)
+        Me.checkbios.ForeColor = System.Drawing.Color.Yellow
+        Me.checkbios.Location = New System.Drawing.Point(66, 50)
         Me.checkbios.Name = "checkbios"
         Me.checkbios.Size = New System.Drawing.Size(46, 17)
         Me.checkbios.TabIndex = 9
@@ -266,8 +266,8 @@ Partial Class CopyRoms
         Me.checksaves.AutoSize = True
         Me.checksaves.Checked = True
         Me.checksaves.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checksaves.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.checksaves.Location = New System.Drawing.Point(135, 38)
+        Me.checksaves.ForeColor = System.Drawing.Color.Lime
+        Me.checksaves.Location = New System.Drawing.Point(102, 33)
         Me.checksaves.Name = "checksaves"
         Me.checksaves.Size = New System.Drawing.Size(56, 17)
         Me.checksaves.TabIndex = 8
@@ -280,7 +280,7 @@ Partial Class CopyRoms
         Me.checkimgs.Checked = True
         Me.checkimgs.CheckState = System.Windows.Forms.CheckState.Checked
         Me.checkimgs.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.checkimgs.Location = New System.Drawing.Point(70, 19)
+        Me.checkimgs.Location = New System.Drawing.Point(4, 16)
         Me.checkimgs.Name = "checkimgs"
         Me.checkimgs.Size = New System.Drawing.Size(60, 17)
         Me.checkimgs.TabIndex = 4
@@ -293,7 +293,7 @@ Partial Class CopyRoms
         Me.checkoverlays.Checked = True
         Me.checkoverlays.CheckState = System.Windows.Forms.CheckState.Checked
         Me.checkoverlays.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.checkoverlays.Location = New System.Drawing.Point(70, 38)
+        Me.checkoverlays.Location = New System.Drawing.Point(122, 16)
         Me.checkoverlays.Name = "checkoverlays"
         Me.checkoverlays.Size = New System.Drawing.Size(67, 17)
         Me.checkoverlays.TabIndex = 7
@@ -306,7 +306,7 @@ Partial Class CopyRoms
         Me.checkvideos.Checked = True
         Me.checkvideos.CheckState = System.Windows.Forms.CheckState.Checked
         Me.checkvideos.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.checkvideos.Location = New System.Drawing.Point(135, 19)
+        Me.checkvideos.Location = New System.Drawing.Point(66, 16)
         Me.checkvideos.Name = "checkvideos"
         Me.checkvideos.Size = New System.Drawing.Size(58, 17)
         Me.checkvideos.TabIndex = 5
@@ -318,8 +318,8 @@ Partial Class CopyRoms
         Me.checkmanuals.AutoSize = True
         Me.checkmanuals.Checked = True
         Me.checkmanuals.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkmanuals.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.checkmanuals.Location = New System.Drawing.Point(6, 38)
+        Me.checkmanuals.ForeColor = System.Drawing.Color.Lime
+        Me.checkmanuals.Location = New System.Drawing.Point(37, 33)
         Me.checkmanuals.Name = "checkmanuals"
         Me.checkmanuals.Size = New System.Drawing.Size(66, 17)
         Me.checkmanuals.TabIndex = 6
@@ -340,7 +340,7 @@ Partial Class CopyRoms
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox4.Size = New System.Drawing.Size(380, 65)
+        Me.GroupBox4.Size = New System.Drawing.Size(380, 70)
         Me.GroupBox4.TabIndex = 12
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Ma Selection"
@@ -427,16 +427,16 @@ Partial Class CopyRoms
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox3.Size = New System.Drawing.Size(112, 65)
+        Me.GroupBox3.Size = New System.Drawing.Size(112, 70)
         Me.GroupBox3.TabIndex = 11
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Ma Carte SD/USB"
+        Me.GroupBox3.Text = "Support USB :"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label3.Location = New System.Drawing.Point(76, 27)
+        Me.Label3.Location = New System.Drawing.Point(76, 30)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(21, 13)
         Me.Label3.TabIndex = 1
@@ -444,7 +444,7 @@ Partial Class CopyRoms
         '
         'txt_USBGo
         '
-        Me.txt_USBGo.Location = New System.Drawing.Point(18, 24)
+        Me.txt_USBGo.Location = New System.Drawing.Point(18, 27)
         Me.txt_USBGo.Name = "txt_USBGo"
         Me.txt_USBGo.Size = New System.Drawing.Size(52, 20)
         Me.txt_USBGo.TabIndex = 0
