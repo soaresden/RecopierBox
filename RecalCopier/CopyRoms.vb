@@ -1248,7 +1248,7 @@ consolesanssaves:
                     If jeuencours = pathjeu Then ' colonne des path
 
                         Dim estcequesaves As String
-                        estcequesaves = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminSave").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                        estcequesaves = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CocheSave").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
                         If estcequesaves = True Then 'on verifie si le jeu a des saves
 
                             Dim console As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("Console").Index).Value
