@@ -681,10 +681,7 @@ romsuivante:
         Else
             vid_romvid.Show()
             vid_romvid.URL = row.Cells(FinalGrid.Columns("CheminVideo").Index).Value
-
-            vid_romvid.uiMode = "none"
             vid_romvid.settings.setMode("loop", True)
-
             vid_romvid.settings.mute = True
             vid_romvid.Ctlcontrols.play()
         End If
@@ -860,6 +857,7 @@ romsuivante:
             MsgBox("Pas de Repertoire de Copie Défini" & Chr(13) & "ABANDON")
             Exit Sub
         End If
+
         'verif de la liste a copier
         If listboxMaSelection.Items.Count = 0 Then
             MsgBox("Pas de Roms à Copier" & Chr(13) & "ABANDON")
@@ -871,6 +869,18 @@ romsuivante:
             MsgBox("Trop d'espace est necessaire à la Copie" & Chr(13) & "ABANDON")
             Exit Sub
         End If
+
+        'Verification que le chemin est vide
+        Dim folder As New IO.DirectoryInfo(txt_CopyFolder.Text & "\")
+        Dim sizedudossier = Nothing
+        For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
+            sizedudossier += file.Length
+        Next file
+
+        If sizedudossier >= 0 Then
+            If MsgBox("Le Chemin de Copie : " & txt_CopyFolder.Text & Chr(13) & "n'est pas vide" & Chr(13) & Chr(13) & "Continuer Quand Même", vbYesNo) = vbNo Then Exit Sub
+        End If
+
         'msgbox pour un recap de la selection et des options
         listboxMaSelection.Show()
         Dim temptxt1 As String
@@ -1379,8 +1389,8 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         'calcul taille total du dossier
         Dim sizefichier As Long
-        Dim folder As New IO.DirectoryInfo(My.Settings.CopyFolder)
-        For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
+        Dim foldero As New IO.DirectoryInfo(My.Settings.CopyFolder)
+        For Each file As IO.FileInfo In foldero.GetFiles("*.*", IO.SearchOption.AllDirectories)
             sizefichier += file.Length
         Next file
 
