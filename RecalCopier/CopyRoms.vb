@@ -969,7 +969,7 @@ consolesanssaves:
         End If
 
         If checkoverlays.Checked = True Then
-            temptxt5 = "Les Overlays seront Copiées"
+            temptxt5 = "Les Overlays seront Copiés"
         Else
             temptxt5 = ""
         End If
@@ -1084,226 +1084,586 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
             End If
 
+            'GAMELIST:
+            'Tentative ecriture gamelist
+            'on va d'abord tester pour voir si y'a deja un gamelist 
 
 
 
+            If System.IO.File.Exists(lenouvogamelist) Then
+                For xmline = 0 To FinalGrid.RowCount - 1
+
+                    Dim jeuencours As String = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                    If jeuencours = pathjeu Then ' on cherche la ligne du jeu' si il existe on va UPDATE le gamelist
+
+                        Dim doctoupdate As New Xml.XmlDocument()
+                        doctoupdate.Load(lenouvogamelist)
+                        Dim game As Xml.XmlElement = doctoupdate.CreateElement("game")
+
+                        'on recupere toutes les valeurs
+                        Dim xmlname As String
+                        Dim xmlpath As String = Replace(Replace(pathjeu, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        Dim xmldesc As String
+                        Dim xmlrating As String
+                        Dim xmldeveloper As String
+                        Dim xmlpublisher As String
+                        Dim xmlgenre As String
+                        Dim xmladult As String
+                        Dim xmlplayers As String
+                        Dim xmlreleasedate As String
+                        Dim xmlimage As String
+                        Dim xmlvideo As String
+                        Dim xmlmanual As String
+                        Dim xmlregion As String
+                        Dim xmlplaycount As String
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value) Then
+                            xmlname = Nothing
+                        Else
+                            xmlname = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value) Then
+                            xmldesc = Nothing
+                        Else
+                            xmldesc = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value) Then
+                            xmlrating = Nothing
+                        Else
+                            xmlrating = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value) Then
+                            xmldeveloper = Nothing
+                        Else
+                            xmldeveloper = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value) Then
+                            xmlpublisher = Nothing
+                        Else
+                            xmlpublisher = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value) Then
+                            xmlgenre = Nothing
+                        Else
+                            xmlgenre = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Adulte").Index).Value) Then
+                            xmladult = Nothing
+                        Else
+                            xmladult = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Adulte").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value) Then
+                            xmlplayers = Nothing
+                        Else
+                            xmlplayers = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value) Then
+                            xmlreleasedate = Nothing
+                        Else
+                            xmlreleasedate = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
+                            xmlimage = Nothing
+                        Else
+                            xmlimage = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
+                            xmlvideo = Nothing
+                        Else
+                            xmlvideo = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value) Then
+                            xmlplaycount = Nothing
+                        Else
+                            xmlplaycount = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
+                            xmlmanual = Nothing
+                        Else
+                            xmlmanual = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value) Then
+                            xmlregion = Nothing
+                        Else
+                            xmlregion = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value
+                        End If
+
+                        'On va prendre chaque node et assigner aux valeur du dessus
+                        Dim nameEl As Xml.XmlElement = doctoupdate.CreateElement("name")
+                        nameEl.InnerText = xmlname
+                        game.AppendChild(nameEl)
+                        doctoupdate.DocumentElement.AppendChild(game)
+
+                        Dim pathEl As Xml.XmlElement = doctoupdate.CreateElement("path")
+                        pathEl.InnerText = xmlpath
+                        game.AppendChild(pathEl)
+                        doctoupdate.DocumentElement.AppendChild(game)
+
+                        If xmldesc <> Nothing Then
+                            Dim descEl As Xml.XmlElement = doctoupdate.CreateElement("desc")
+                            descEl.InnerText = xmldesc
+                            game.AppendChild(descEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlrating <> Nothing Then
+                            Dim rateEl As Xml.XmlElement = doctoupdate.CreateElement("rating")
+                            rateEl.InnerText = xmlrating
+                            game.AppendChild(rateEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmldeveloper <> Nothing Then
+                            Dim devEl As Xml.XmlElement = doctoupdate.CreateElement("developer")
+                            devEl.InnerText = xmldeveloper
+                            game.AppendChild(devEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlpublisher <> Nothing Then
+                            Dim publEl As Xml.XmlElement = doctoupdate.CreateElement("publisher")
+                            publEl.InnerText = xmlpublisher
+                            game.AppendChild(publEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlgenre <> Nothing Then
+                            Dim genrEl As Xml.XmlElement = doctoupdate.CreateElement("genre")
+                            genrEl.InnerText = xmlgenre
+                            game.AppendChild(genrEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmladult <> Nothing Or xmladult = "true" Then
+                            Dim adultEl As Xml.XmlElement = doctoupdate.CreateElement("adult")
+                            adultEl.InnerText = xmladult
+                            game.AppendChild(adultEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlplayers <> Nothing Then
+                            Dim playEl As Xml.XmlElement = doctoupdate.CreateElement("players")
+                            playEl.InnerText = xmlplayers
+                            game.AppendChild(playEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlreleasedate <> Nothing Then
+                            Dim dateEl As Xml.XmlElement = doctoupdate.CreateElement("releasedate")
+                            dateEl.InnerText = xmlreleasedate
+                            game.AppendChild(dateEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlimage <> Nothing Then
+                            Dim imageEl As Xml.XmlElement = doctoupdate.CreateElement("image")
+                            imageEl.InnerText = xmlimage
+                            game.AppendChild(imageEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlvideo <> Nothing Then
+                            Dim videoEl As Xml.XmlElement = doctoupdate.CreateElement("video")
+                            videoEl.InnerText = xmlvideo
+                            game.AppendChild(videoEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlplaycount <> Nothing Then
+                            Dim pcountEl As Xml.XmlElement = doctoupdate.CreateElement("playcount")
+                            pcountEl.InnerText = xmlplaycount
+                            game.AppendChild(pcountEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlmanual <> Nothing Then
+                            Dim manualEl As Xml.XmlElement = doctoupdate.CreateElement("manual")
+                            manualEl.InnerText = xmlmanual
+                            game.AppendChild(manualEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlregion <> Nothing Then
+                            Dim regEl As Xml.XmlElement = doctoupdate.CreateElement("region")
+                            regEl.InnerText = xmlregion
+                            game.AppendChild(regEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+                        doctoupdate.Save(lenouvogamelist)
+                    End If
+                Next
+            Else
+                'si le gamelist n'existe pas, on va devoir le creer
+                Dim xmlDoc As New Xml.XmlDocument
+                Dim fooElement As Xml.XmlElement = xmlDoc.CreateElement("gameList")
+
+                For xmline = 0 To FinalGrid.RowCount - 1
+
+                    Dim jeuencours As String = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                    If jeuencours = pathjeu Then ' on cherche la ligne du jeu
+                        'on doit obtenir tout les nodes qu'on a sur le jeu 
+                        xmlDoc.AppendChild(fooElement)
+                        Dim xmlname As String
+                        Dim xmlpath As String = Replace(Replace(pathjeu, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        Dim xmldesc As String
+                        Dim xmlrating As String
+                        Dim xmldeveloper As String
+                        Dim xmlpublisher As String
+                        Dim xmlgenre As String
+                        Dim xmladult As String
+                        Dim xmlplayers As String
+                        Dim xmlreleasedate As String
+                        Dim xmlimage As String
+                        Dim xmlvideo As String
+                        Dim xmlmanual As String
+                        Dim xmlregion As String
+                        Dim xmlplaycount As String
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value) Then
+                            xmlname = Nothing
+                        Else
+                            xmlname = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value) Then
+                            xmldesc = Nothing
+                        Else
+                            xmldesc = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value) Then
+                            xmlrating = Nothing
+                        Else
+                            xmlrating = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value) Then
+                            xmldeveloper = Nothing
+                        Else
+                            xmldeveloper = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value) Then
+                            xmlpublisher = Nothing
+                        Else
+                            xmlpublisher = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value) Then
+                            xmlgenre = Nothing
+                        Else
+                            xmlgenre = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Adulte").Index).Value) Then
+                            xmladult = Nothing
+                        Else
+                            xmladult = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Adulte").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value) Then
+                            xmlplayers = Nothing
+                        Else
+                            xmlplayers = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value) Then
+                            xmlreleasedate = Nothing
+                        Else
+                            xmlreleasedate = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
+                            xmlimage = Nothing
+                        Else
+                            xmlimage = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
+                            xmlvideo = Nothing
+                        Else
+                            xmlvideo = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value) Then
+                            xmlplaycount = Nothing
+                        Else
+                            xmlplaycount = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
+                            xmlmanual = Nothing
+                        Else
+                            xmlmanual = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value) Then
+                            xmlregion = Nothing
+                        Else
+                            xmlregion = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value
+                        End If
+
+                        Dim wwriter As New Xml.XmlTextWriter(Path.GetDirectoryName(replacejeu) & "\gamelist.xml", System.Text.Encoding.UTF8)
+                        wwriter.WriteStartDocument(True)
+                        wwriter.Formatting = Xml.Formatting.Indented
+                        wwriter.Indentation = 2
+                        wwriter.WriteStartElement("gameList")
+
+                        CreateNode(xmlname _
+                                     , xmlpath _
+                                     , xmldesc _
+                                     , xmlrating _
+                                     , xmldeveloper _
+                                     , xmlpublisher _
+                                     , xmlgenre _
+                                     , xmladult _
+                                     , xmlplayers _
+                                     , xmlreleasedate _
+                                     , xmlimage _
+                                     , xmlvideo _
+                                     , xmlmanual _
+                                     , xmlregion _
+                                     , xmlplaycount _
+                                     , wwriter)
+
+                        wwriter.WriteEndElement()
+                        wwriter.WriteEndDocument()
+                        wwriter.Close()
+
+                    End If
+                Next
+            End If
 
             'a optimiser pour ecrire le gamelist en temps réel ...
             'en attendant on copie le gamelist
-            System.IO.File.Copy(legamelist, lenouvogamelist, True)
+            'System.IO.File.Copy(legamelist, lenouvogamelist, True)
+
 
             'on check si la copie des image a été activée
             If checkimgs.Checked = True Then
 
-                For a = 0 To FinalGrid.RowCount - 1 'Auquel cas on va boucler sur toute les lignes jusqu'a trouver la rom
-                    Dim jeuencours As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                    If jeuencours = pathjeu Then ' on cherche la ligne du jeu
+                    For a = 0 To FinalGrid.RowCount - 1 'Auquel cas on va boucler sur toute les lignes jusqu'a trouver la rom
+                        Dim jeuencours As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                        If jeuencours = pathjeu Then ' on cherche la ligne du jeu
 
-                        Dim estcequeimage As String
-                        estcequeimage = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CocheOverlay").Index).Value
-                        If estcequeimage = True Then 'on verifie si le jeu a une image
+                            Dim estcequeimage As String
+                            estcequeimage = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CocheOverlay").Index).Value
+                            If estcequeimage = True Then 'on verifie si le jeu a une image
 
-                            Dim console As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Console").Index).Value
-                            Dim cheminimage As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminImage").Index).Value
-                            Dim nouvocheminimage As String = Replace(cheminimage, My.Settings.RecalboxFolder, newrecalbox)
-                            'On check si ca existe, au cas ou on le cree
-                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminimage))) Then
-                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminimage))
-                            End If
-                            'et on copie LES images
-                            System.IO.File.Copy(cheminimage, nouvocheminimage, True)
-                            Exit For
-                        End If
-                    End If
-                Next
-            End If
-
-            'on check si les videos
-            If checkvideos.Checked = True Then
-
-                For b = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-
-                    Dim jeuencours As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                    If jeuencours = pathjeu Then ' colonne des path
-
-                        Dim estcequevideo As String
-                        estcequevideo = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CocheVideo").Index).Value
-                        If estcequevideo = True Then 'on verifie si le jeu a une video
-
-                            Dim console As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("Console").Index).Value
-                            Dim cheminvideo As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminVideo").Index).Value
-                            Dim nouvocheminvideo As String = Replace(cheminvideo, My.Settings.RecalboxFolder, newrecalbox)
-                            'On check si ca existe, au cas ou on le cree
-                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminvideo))) Then
-                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminvideo))
-                            End If
-
-                            'et on copie LES videos
-                            System.IO.File.Copy(cheminvideo, nouvocheminvideo, True)
-                            Exit For
-                        End If
-                    End If
-                Next
-            End If
-
-            'on check si les manuels
-            If checkmanuals.Checked = True Then
-
-                For c = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-
-
-                    Dim jeuencours As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                    If jeuencours = pathjeu Then ' colonne des path
-
-                        Dim estcequemanuel As String
-                        estcequemanuel = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CocheManuel").Index).Value
-                        If estcequemanuel = True Then 'on verifie si le jeu a un manuel
-
-                            Dim console As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("Console").Index).Value
-                            Dim cheminmanuel As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminManuel").Index).Value
-                            Dim nouvocheminmanuel As String = Replace(cheminmanuel, My.Settings.RecalboxFolder, newrecalbox)
-                            'On check si ca existe, au cas ou on le cree
-                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminmanuel))) Then
-                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminmanuel))
-                            End If
-
-                            'et on copie LES images
-                            System.IO.File.Copy(cheminmanuel, nouvocheminmanuel, True)
-                            Exit For
-                        End If
-                    End If
-                Next
-            End If
-
-            'on check si les overlays
-            If checkoverlays.Checked = True Then
-
-                For d = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
-
-                    'check sur le jeu 
-
-                    Dim jeuencours As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                    If jeuencours = pathjeu Then ' colonne des path
-                        Dim estcequeoverlay As String
-                        estcequeoverlay = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CocheOverlay").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
-                        If estcequeoverlay = True Then 'on verifie si le jeu a un overlay
-
-                            Dim cheminpropreoverlay2 As String
-                            Dim console As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("Console").Index).Value
-                            Dim cheminoverlaycfg1 As String = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
-
-                            Dim justefichier2 As String
-                            Dim cheminpng3 As String
-
-
-                            cheminpropreoverlay2 = 0
-                            justefichier2 = 0
-                            cheminpng3 = 0
-
-                            'on va lire le cfg pour trouver le cfg overlay
-                            File.ReadAllLines(cheminoverlaycfg1)
-
-                            Dim readText() As String = File.ReadAllLines(cheminoverlaycfg1)
-                            Dim s As String
-
-                            For Each s In readText
-                                Dim detectinputoverlay As String = InStr(s, "/overlays/")
-                                If detectinputoverlay > 0 Then
-                                    'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
-                                    'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
-                                    'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
-                                    Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
-                                    cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
-                                    justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
-                                    Exit For
+                                Dim console As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Console").Index).Value
+                                Dim cheminimage As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminImage").Index).Value
+                                Dim nouvocheminimage As String = Replace(cheminimage, My.Settings.RecalboxFolder, newrecalbox)
+                                'On check si ca existe, au cas ou on le cree
+                                If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminimage))) Then
+                                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminimage))
                                 End If
-                            Next
-
-                            'on lit le deuxieme fichier overlay cfg pour trouver le png
-                            File.ReadAllLines(cheminpropreoverlay2)
-
-                            Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
-                            Dim t As String
-
-                            For Each t In readText2
-                                Dim detectoverlayzero As String = InStr(t, "overlay0_overlay")
-                                If detectoverlayzero > 0 Then
-                                    'Dim chemindupng = t.Substring(detectoverlayzero + 19)
-                                    ' Dim detectpng = InStr(chemindupng, "png")
-                                    ' Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
-                                    Dim cheminpng = t.Substring(InStr(t, "overlay0_overlay") + 19).Substring(0, InStr(t.Substring(InStr(t, "overlay0_overlay") + 19), "png") + 2)
-                                    cheminpng3 = Replace(cheminpropreoverlay2, justefichier2, cheminpng)
-                                    Exit For
-                                End If
-                            Next
-
-                            Dim nouvochemin1 As String = Replace(cheminoverlaycfg1, My.Settings.RecalboxFolder, newrecalbox)
-                            Dim nouvochemin2 As String = Replace(cheminpropreoverlay2, My.Settings.RecalboxFolder, newrecalbox)
-                            Dim nouvochemin3 As String = Replace(cheminpng3, My.Settings.RecalboxFolder, newrecalbox)
-
-                            'On check si ca existe, au cas ou on le cree
-                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvochemin2))) Then
-                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvochemin2))
+                                'et on copie LES images
+                                System.IO.File.Copy(cheminimage, nouvocheminimage, True)
+                                Exit For
                             End If
-
-                            'et on copie LES 3 fichiers Overlays
-                            System.IO.File.Copy(cheminoverlaycfg1, nouvochemin1, True)
-                            System.IO.File.Copy(cheminpropreoverlay2, nouvochemin2, True)
-                            System.IO.File.Copy(cheminpng3, nouvochemin3, True)
-                            Exit For
                         End If
-                    End If
-                Next
-            End If
+                    Next
+                End If
+
+                'on check si les videos
+                If checkvideos.Checked = True Then
+
+                    For b = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+
+                        Dim jeuencours As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                        If jeuencours = pathjeu Then ' colonne des path
+
+                            Dim estcequevideo As String
+                            estcequevideo = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CocheVideo").Index).Value
+                            If estcequevideo = True Then 'on verifie si le jeu a une video
+
+                                Dim console As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("Console").Index).Value
+                                Dim cheminvideo As String = FinalGrid.Rows(b).Cells(FinalGrid.Columns("CheminVideo").Index).Value
+                                Dim nouvocheminvideo As String = Replace(cheminvideo, My.Settings.RecalboxFolder, newrecalbox)
+                                'On check si ca existe, au cas ou on le cree
+                                If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminvideo))) Then
+                                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminvideo))
+                                End If
+
+                                'et on copie LES videos
+                                System.IO.File.Copy(cheminvideo, nouvocheminvideo, True)
+                                Exit For
+                            End If
+                        End If
+                    Next
+                End If
+
+                'on check si les manuels
+                If checkmanuals.Checked = True Then
+
+                    For c = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
 
 
-            'on check si les saves
-            If checksaves.Checked = True Then
-                For e1 = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+                        Dim jeuencours As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                        If jeuencours = pathjeu Then ' colonne des path
 
-                    Dim jeuencours As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                    If jeuencours = pathjeu Then ' colonne des path
+                            Dim estcequemanuel As String
+                            estcequemanuel = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CocheManuel").Index).Value
+                            If estcequemanuel = True Then 'on verifie si le jeu a un manuel
 
-                        Dim estcequesaves As String
-                        estcequesaves = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CocheSave").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
-                        If estcequesaves = True Then 'on verifie si le jeu a des saves
+                                Dim console As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("Console").Index).Value
+                                Dim cheminmanuel As String = FinalGrid.Rows(c).Cells(FinalGrid.Columns("CheminManuel").Index).Value
+                                Dim nouvocheminmanuel As String = Replace(cheminmanuel, My.Settings.RecalboxFolder, newrecalbox)
+                                'On check si ca existe, au cas ou on le cree
+                                If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvocheminmanuel))) Then
+                                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvocheminmanuel))
+                                End If
 
-                            Dim console As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("Console").Index).Value
-                            Dim tempsaves As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                            Dim savesdir As String = Path.GetDirectoryName(Replace(tempsaves, "\roms\", "\saves\"))
-                            'on va creer un tableau temporaire pour stocker tous les fichiers avec la racine du jeu (sstates et saves du coup)
-                            Dim tableauresultats(100)
-                            Dim compteur As Integer = 0
-                            'on va boucler pour les stocker
-                            For Each foundFile As String In My.Computer.FileSystem.GetFiles(
+                                'et on copie LES images
+                                System.IO.File.Copy(cheminmanuel, nouvocheminmanuel, True)
+                                Exit For
+                            End If
+                        End If
+                    Next
+                End If
+
+                'on check si les overlays
+                If checkoverlays.Checked = True Then
+
+                    For d = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+
+                        'check sur le jeu 
+
+                        Dim jeuencours As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                        If jeuencours = pathjeu Then ' colonne des path
+                            Dim estcequeoverlay As String
+                            estcequeoverlay = FinalGrid.Rows(d).Cells(FinalGrid.Columns("CocheOverlay").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                            If estcequeoverlay = True Then 'on verifie si le jeu a un overlay
+
+                                Dim cheminpropreoverlay2 As String
+                                Dim console As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("Console").Index).Value
+                                Dim cheminoverlaycfg1 As String = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
+
+                                Dim justefichier2 As String
+                                Dim cheminpng3 As String
+
+
+                                cheminpropreoverlay2 = 0
+                                justefichier2 = 0
+                                cheminpng3 = 0
+
+                                'on va lire le cfg pour trouver le cfg overlay
+                                File.ReadAllLines(cheminoverlaycfg1)
+
+                                Dim readText() As String = File.ReadAllLines(cheminoverlaycfg1)
+                                Dim s As String
+
+                                For Each s In readText
+                                    Dim detectinputoverlay As String = InStr(s, "/overlays/")
+                                    If detectinputoverlay > 0 Then
+                                        'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
+                                        'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
+                                        'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
+                                        Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
+                                        cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                                        justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
+                                        Exit For
+                                    End If
+                                Next
+
+                                'on lit le deuxieme fichier overlay cfg pour trouver le png
+                                File.ReadAllLines(cheminpropreoverlay2)
+
+                                Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
+                                Dim t As String
+
+                                For Each t In readText2
+                                    Dim detectoverlayzero As String = InStr(t, "overlay0_overlay")
+                                    If detectoverlayzero > 0 Then
+                                        'Dim chemindupng = t.Substring(detectoverlayzero + 19)
+                                        ' Dim detectpng = InStr(chemindupng, "png")
+                                        ' Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
+                                        Dim cheminpng = t.Substring(InStr(t, "overlay0_overlay") + 19).Substring(0, InStr(t.Substring(InStr(t, "overlay0_overlay") + 19), "png") + 2)
+                                        cheminpng3 = Replace(cheminpropreoverlay2, justefichier2, cheminpng)
+                                        Exit For
+                                    End If
+                                Next
+
+                                Dim nouvochemin1 As String = Replace(cheminoverlaycfg1, My.Settings.RecalboxFolder, newrecalbox)
+                                Dim nouvochemin2 As String = Replace(cheminpropreoverlay2, My.Settings.RecalboxFolder, newrecalbox)
+                                Dim nouvochemin3 As String = Replace(cheminpng3, My.Settings.RecalboxFolder, newrecalbox)
+
+                                'On check si ca existe, au cas ou on le cree
+                                If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouvochemin2))) Then
+                                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouvochemin2))
+                                End If
+
+                                'et on copie LES 3 fichiers Overlays
+                                System.IO.File.Copy(cheminoverlaycfg1, nouvochemin1, True)
+                                System.IO.File.Copy(cheminpropreoverlay2, nouvochemin2, True)
+                                System.IO.File.Copy(cheminpng3, nouvochemin3, True)
+                                Exit For
+                            End If
+                        End If
+                    Next
+                End If
+
+
+                'on check si les saves
+                If checksaves.Checked = True Then
+                    For e1 = 0 To FinalGrid.RowCount - 1 'Toutes les lignes
+
+                        Dim jeuencours As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                        If jeuencours = pathjeu Then ' colonne des path
+
+                            Dim estcequesaves As String
+                            estcequesaves = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CocheSave").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                            If estcequesaves = True Then 'on verifie si le jeu a des saves
+
+                                Dim console As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("Console").Index).Value
+                                Dim tempsaves As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                                Dim savesdir As String = Path.GetDirectoryName(Replace(tempsaves, "\roms\", "\saves\"))
+                                'on va creer un tableau temporaire pour stocker tous les fichiers avec la racine du jeu (sstates et saves du coup)
+                                Dim tableauresultats(100)
+                                Dim compteur As Integer = 0
+                                'on va boucler pour les stocker
+                                For Each foundFile As String In My.Computer.FileSystem.GetFiles(
 savesdir,
 Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWithoutExtension(jeuencours) & ".*")
 
-                                tableauresultats(compteur) = foundFile
-                                compteur += 1
-                            Next
+                                    tableauresultats(compteur) = foundFile
+                                    compteur += 1
+                                Next
 
-                            'on va les retravailler pour avoir le chemin complet
-                            Dim cheminfinalsave As String
-                            cheminfinalsave = 0
-                            For lignetab = 0 To compteur - 1
-                                cheminfinalsave = Replace(tableauresultats(lignetab), My.Settings.RecalboxFolder, newrecalbox)
+                                'on va les retravailler pour avoir le chemin complet
+                                Dim cheminfinalsave As String
+                                cheminfinalsave = 0
+                                For lignetab = 0 To compteur - 1
+                                    cheminfinalsave = Replace(tableauresultats(lignetab), My.Settings.RecalboxFolder, newrecalbox)
 
-                                'On check si ca existe, au cas ou on le cree
-                                If (Not System.IO.Directory.Exists(Path.GetDirectoryName(cheminfinalsave))) Then
-                                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(cheminfinalsave))
-                                End If
-                                'et on copie LES saves
-                                System.IO.File.Copy(tableauresultats(lignetab), cheminfinalsave, True)
-                            Next
+                                    'On check si ca existe, au cas ou on le cree
+                                    If (Not System.IO.Directory.Exists(Path.GetDirectoryName(cheminfinalsave))) Then
+                                        System.IO.Directory.CreateDirectory(Path.GetDirectoryName(cheminfinalsave))
+                                    End If
+                                    'et on copie LES saves
+                                    System.IO.File.Copy(tableauresultats(lignetab), cheminfinalsave, True)
+                                Next
+                            End If
                         End If
-                    End If
-                Next
-            End If
-        Next
+                    Next
+                End If
+            Next
 
-        'Demande les Overlay systemes ?
-        If checkoverlays.Checked = True Then
+            'Demande les Overlay systemes ?
+            If checkoverlays.Checked = True Then
             If MsgBox("Vous avez coché la copie d'Overlays, Que souhaitez vous Copier ?" & Chr(13) & "Oui = Tous les Systemes" & Chr(13) & "Annuler = Uniquement les Consoles de la vue Actuelle" & Chr(13) & "Non = Aucune, Mauvaise saisie :) !", vbYesNoCancel) = vbYes Then
                 On Error Resume Next
                 For overlaysys = 0 To ListGameLists.Items.Count - 1
@@ -1469,6 +1829,113 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         MsgBox("Copie Terminée !" & Chr(13) & "Taille Totale : " & calcultailletotal & " Mo" & Chr(13) & "Veuillez Deplacer le dossier 'recalbox' sur votre media")
         Process.Start("explorer", My.Settings.CopyFolder)
+    End Sub
+    Private Sub CreateNode(ByVal xmlname As String _
+        , ByVal xmlpath As String _
+        , ByVal xmldesc As String _
+                           , ByVal xmlrating As String _
+                           , ByVal xmldeveloper As String _
+                           , ByVal xmlpublisher As String _
+                           , ByVal xmlgenre As String _
+                           , ByVal xmladult As String _
+                           , ByVal xmlplayers As String _
+                           , ByVal xmlreleasedate As String _
+                           , ByVal xmlimage As String _
+                           , ByVal xmlvideo As String _
+                           , ByVal xmlmanual As String _
+                           , ByVal xmlregion As String _
+                           , ByVal xmlplaycount As String _
+                           , ByVal writer As Xml.XmlTextWriter)
+
+        writer.WriteStartElement("game")
+
+        writer.WriteStartElement("name")
+        writer.WriteString(xmlname)
+        writer.WriteEndElement()
+
+        writer.WriteStartElement("path")
+        writer.WriteString(xmlpath)
+        writer.WriteEndElement()
+
+        If xmldesc <> Nothing Then
+            writer.WriteStartElement("desc")
+            writer.WriteString(xmldesc)
+            writer.WriteEndElement()
+        End If
+
+        If xmlrating <> Nothing Then
+            writer.WriteStartElement("rating")
+            writer.WriteString(xmlrating)
+            writer.WriteEndElement()
+        End If
+
+        If xmldeveloper <> Nothing Then
+            writer.WriteStartElement("developer")
+            writer.WriteString(xmldeveloper)
+            writer.WriteEndElement()
+        End If
+
+        If xmlpublisher <> Nothing Then
+            writer.WriteStartElement("publisher")
+            writer.WriteString(xmlpublisher)
+            writer.WriteEndElement()
+        End If
+
+        If xmlgenre <> Nothing Then
+            writer.WriteStartElement("genre")
+            writer.WriteString(xmlgenre)
+            writer.WriteEndElement()
+        End If
+
+        If xmladult <> Nothing Or xmladult = "true" Then
+            writer.WriteStartElement("adult")
+            writer.WriteString(xmladult)
+            writer.WriteEndElement()
+        End If
+
+        If xmlplayers <> Nothing Then
+            writer.WriteStartElement("players")
+            writer.WriteString(xmlplayers)
+            writer.WriteEndElement()
+        End If
+
+        If xmlreleasedate <> Nothing Then
+            writer.WriteStartElement("releasedate")
+            writer.WriteString(xmlreleasedate)
+            writer.WriteEndElement()
+        End If
+
+        If xmlimage <> Nothing Then
+            writer.WriteStartElement("image")
+            writer.WriteString(xmlimage)
+            writer.WriteEndElement()
+        End If
+
+        If xmlvideo <> Nothing Then
+            writer.WriteStartElement("video")
+            writer.WriteString(xmlvideo)
+            writer.WriteEndElement()
+        End If
+
+        If xmlmanual <> Nothing Then
+            writer.WriteStartElement("manual")
+            writer.WriteString(xmlmanual)
+            writer.WriteEndElement()
+        End If
+
+        If xmlregion <> Nothing Then
+            writer.WriteStartElement("region")
+            writer.WriteString(xmlregion)
+            writer.WriteEndElement()
+        End If
+
+        If xmlplaycount <> Nothing Then
+            writer.WriteStartElement("playcount")
+            writer.WriteString(xmlplaycount)
+            writer.WriteEndElement()
+        End If
+
+        writer.WriteEndElement()
     End Sub
     Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
         'On affiche la Listbox a la bonne place ou on là referme
