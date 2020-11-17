@@ -2209,4 +2209,10 @@ prochainj:
             My.Settings.Save()
         End If
     End Sub
+    Private Sub txt_txtsearch_MouseClick(sender As Object, e As MouseEventArgs) Handles txt_txtsearch.MouseClick
+        'Si la colonne c'est le filtre des Dates, afficher le popup
+        If ComboFiltreColonnes.Text = "DateSortie" Then
+            MsgBox("Vous allez filtrer sur une date" & Chr(13) & "Le Format des dates est 'AAAAMMJJ'" & Chr(13) & Chr(13) & "Je vous recommande de toujours saisir une année")
+        End If
+    End Sub
 End Class
