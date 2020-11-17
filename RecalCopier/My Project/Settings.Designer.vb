@@ -77,6 +77,18 @@ Namespace My
                 Me("CopyFolder") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property StockageSize() As String
+            Get
+                Return CType(Me("StockageSize"),String)
+            End Get
+            Set
+                Me("StockageSize") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

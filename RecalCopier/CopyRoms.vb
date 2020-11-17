@@ -463,8 +463,8 @@ romsuivante:
         Call Calcultaillerom()
         'On lance la completion des checkbox
         Call Completiondescheckbox()
-
-
+        'On appelle le stockage size
+        txt_USBGo.Text = My.Settings.StockageSize
     End Sub
 
     Sub Calcultaillerom()
@@ -872,20 +872,20 @@ consolesanssaves:
         If listboxMaSelection.Items.Count = 0 Then Exit Sub
 
         'On calcule la taille des roms cochées
-        Dim sizecumulrom As Integer
+        Dim sizecumulrom As Decimal
 
         For a = 0 To listboxMaSelection.Items.Count - 1 'Toutes les lignes
             Dim romacchercher As String = listboxMaSelection.Items(a)
             For j = 0 To FinalGrid.RowCount - 1
                 If FinalGrid.Rows(j).Cells(FinalGrid.Columns("CheminRom").Index).Value = romacchercher Then
-                    sizecumulrom += FinalGrid.Rows(j).Cells(FinalGrid.Columns("Mo").Index).Value
+                    sizecumulrom += Math.Round(FinalGrid.Rows(j).Cells(FinalGrid.Columns("Mo").Index).Value, 2)
                 End If
             Next
-            txt_GoAPrevoir.Text = sizecumulrom ' et on l'affiche dans le txtbox
+            txt_GoAPrevoir.Text = sizecumulrom
         Next
+
         'On va Update les nombres de visibles et le nombre de roms selectionnées
         txtShownRoms.Text = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible) - 1
-
         'on refresh l'indicateurs de selectionné
         Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
         txt_NbRomSelected.Text = valeurnbselect
@@ -2007,9 +2007,7 @@ prochainj:
         'Check des Doublons
         Supdoublon(listboxMaSelection)
     End Sub
-    Private Sub Txt_GoAPrevoir_TextChanged(sender As Object, e As EventArgs) Handles txt_GoAPrevoir.TextChanged
-        txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
-    End Sub
+
     Private Sub Txt_txtsearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_txtsearch.KeyDown
         If txt_txtsearch.Text = "forcingreset" Then Call ToucheEntree()
         If e.KeyCode = Keys.Enter Then Call ToucheEntree()
@@ -2181,5 +2179,34 @@ prochainj:
 
     Private Sub FinalGrid_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles FinalGrid.CellContentClick
 
+    End Sub
+
+    Private Sub txt_GoAPrevoir_TextChanged(sender As Object, e As EventArgs) Handles txt_GoAPrevoir.TextChanged
+        Dim calcul As Decimal = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
+
+        If calcul >= 1024 Then 'Si c'est au dessus de 1024 Mo, ca va 
+            txt_morestant.BackColor = Color.FromArgb(185, 209, 234)
+            txt_morestant.ForeColor = Color.FromArgb(0, 0, 0)
+            txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
+        ElseIf calcul > 0 And calcul < 1000 Then 'Si c'est au [0;1024] attention
+            txt_morestant.BackColor = Color.FromArgb(255, 204, 153)
+            txt_morestant.ForeColor = Color.FromArgb(0, 0, 0)
+            txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
+        Else ' Dire que c'est plein quand il reste moins de 1024 Mo ! (Securité)
+            txt_morestant.BackColor = Color.FromArgb(255, 0, 0)
+            txt_morestant.ForeColor = Color.FromArgb(255, 255, 255)
+            txt_morestant.Text = "USB PLEIN"
+        End If
+    End Sub
+    Private Sub txt_USBGo_TextChanged(sender As Object, e As EventArgs) Handles txt_USBGo.TextChanged
+        txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
+    End Sub
+
+    Private Sub txt_USBGo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_USBGo.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            'On va remplacer la valeur par defaut du Stockage et on la sauvegarde pour les prochaines fois
+            My.Settings.StockageSize = txt_USBGo.Text
+            My.Settings.Save()
+        End If
     End Sub
 End Class

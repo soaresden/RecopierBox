@@ -448,7 +448,6 @@ Partial Class CopyRoms
         Me.txt_USBGo.Name = "txt_USBGo"
         Me.txt_USBGo.Size = New System.Drawing.Size(52, 20)
         Me.txt_USBGo.TabIndex = 0
-        Me.txt_USBGo.Text = "16"
         Me.txt_USBGo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Buttongetback

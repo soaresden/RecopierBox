@@ -8,5 +8,8 @@
     <Setting Name="CopyFolder" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\Temp\RecalboxCopie</Value>
     </Setting>
+    <Setting Name="StockageSize" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
