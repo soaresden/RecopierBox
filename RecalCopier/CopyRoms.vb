@@ -930,7 +930,7 @@ consolesanssaves:
         Next file
 
         If sizedudossier >= 0 Then
-            If MsgBox("Le Chemin de Copie : " & txt_CopyFolder.Text & Chr(13) & "n'est pas vide" & Chr(13) & Chr(13) & "L'Assistant va creer un dossier : " & Chr(13) & txt_CopyFolder.Text & "\recalbox" & Chr(13) & "Continuer Quand Même", vbYesNo) = vbNo Then Exit Sub
+            If MsgBox("Le Chemin de Copie : " & Chr(13) & txt_CopyFolder.Text & Chr(13) & "n'est pas vide" & Chr(13) & Chr(13) & "L'Assistant va creer un dossier : " & Chr(13) & txt_CopyFolder.Text & "\recalbox" & Chr(13) & "Continuer ?", vbYesNo) = vbNo Then Exit Sub
         End If
 
         'msgbox pour un recap de la selection et des options
@@ -986,7 +986,7 @@ consolesanssaves:
         listboxMaSelection.Location = New Point(-2, 43)
         listboxMaSelection.Size = New Size(396, 433)
 
-        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(13) & optionsbox & Chr(13) & Chr(13) & "Chemin de Copie :  " & Chr(13) & txt_CopyFolder.Text, vbYesNo) = vbNo Then
+        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(13) & optionsbox & Chr(13) & Chr(13) & "Chemin de Copie :  " & Chr(13) & txt_CopyFolder.Text & "\recalbox", vbYesNo) = vbNo Then
             listboxMaSelection.Hide()
             Exit Sub
         End If
@@ -1068,6 +1068,25 @@ consolesanssaves:
 
             'et on copie LES ROMS
             System.IO.File.Copy(pathjeu, replacejeu, True)
+
+            'on fait un test sur les patchs SBI pour Playstation
+            If consolederom = "psx" Then
+                'on va chercher le fichier sbi avec le nom de la rom
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(
+Path.GetDirectoryName(pathjeu),
+Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWithoutExtension(pathjeu) & ".sbi")
+
+                    Dim nomdusbi = foundFile
+                    Dim cheminfinalsave = Replace(foundFile, My.Settings.RecalboxFolder, newrecalbox)
+                    'et on copie LES saves
+                    System.IO.File.Copy(foundFile, cheminfinalsave, True)
+                Next
+
+            End If
+
+
+
+
 
             'a optimiser pour ecrire le gamelist en temps réel ...
             'en attendant on copie le gamelist
@@ -1285,7 +1304,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         'Demande les Overlay systemes ?
         If checkoverlays.Checked = True Then
-            If MsgBox("Vous aviez coché les Overlays, voules vous les overlays systemes également ?" & Chr(13) & "Oui = Tous les Systemes" & Chr(13) & "Annuler = Consoles Selectionnées" & Chr(13) & "Non = Aucun", vbYesNoCancel) = vbYes Then
+            If MsgBox("Vous avez coché la copie d'Overlays, Que souhaitez vous Copier ?" & Chr(13) & "Oui = Tous les Systemes" & Chr(13) & "Annuler = Uniquement les Consoles de la vue Actuelle" & Chr(13) & "Non = Aucune, Mauvaise saisie :) !", vbYesNoCancel) = vbYes Then
                 On Error Resume Next
                 For overlaysys = 0 To ListGameLists.Items.Count - 1
                     Dim fulladresse As String = Path.GetDirectoryName(ListGameLists.Items(overlaysys))
@@ -1448,7 +1467,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         Dim calcultailletotal As Decimal = Math.Round(sizefichier / 1048576, 2)
 
-        MsgBox("Copie Terminée !" & Chr(13) & "Taille Totale : " & calcultailletotal & " Mo" & Chr(13) & "Veuillez Deplacer le dossier recalbox sur votre media")
+        MsgBox("Copie Terminée !" & Chr(13) & "Taille Totale : " & calcultailletotal & " Mo" & Chr(13) & "Veuillez Deplacer le dossier 'recalbox' sur votre media")
         Process.Start("explorer", My.Settings.CopyFolder)
     End Sub
     Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
@@ -1691,5 +1710,9 @@ prochainj:
 
     Private Sub FinalGrid_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles FinalGrid.RowEnter
         Call UpdatelesChiffreRoms()
+    End Sub
+
+    Private Sub FinalGrid_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles FinalGrid.CellContentClick
+
     End Sub
 End Class
