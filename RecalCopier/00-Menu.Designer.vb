@@ -54,10 +54,10 @@ Partial Class Form1
         'Quitter
         '
         Me.Quitter.Font = New System.Drawing.Font("VAGRounded BT", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Quitter.Location = New System.Drawing.Point(432, 486)
-        Me.Quitter.Margin = New System.Windows.Forms.Padding(2)
+        Me.Quitter.Location = New System.Drawing.Point(576, 598)
+        Me.Quitter.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Quitter.Name = "Quitter"
-        Me.Quitter.Size = New System.Drawing.Size(119, 43)
+        Me.Quitter.Size = New System.Drawing.Size(159, 53)
         Me.Quitter.TabIndex = 13
         Me.Quitter.Text = "QUITTER"
         Me.Quitter.UseVisualStyleBackColor = True
@@ -69,11 +69,11 @@ Partial Class Form1
         Me.groupBox2.Controls.Add(Me.label4)
         Me.groupBox2.Controls.Add(Me.TxtRecalfolderPath)
         Me.groupBox2.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.groupBox2.Location = New System.Drawing.Point(682, 390)
-        Me.groupBox2.Margin = New System.Windows.Forms.Padding(2)
+        Me.groupBox2.Location = New System.Drawing.Point(909, 480)
+        Me.groupBox2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.groupBox2.Name = "groupBox2"
-        Me.groupBox2.Padding = New System.Windows.Forms.Padding(2)
-        Me.groupBox2.Size = New System.Drawing.Size(258, 91)
+        Me.groupBox2.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.groupBox2.Size = New System.Drawing.Size(344, 112)
         Me.groupBox2.TabIndex = 12
         Me.groupBox2.TabStop = False
         Me.groupBox2.Text = "Configuration Initiale"
@@ -82,10 +82,10 @@ Partial Class Form1
         '
         Me.ButtonBrowseRecalboxFolder.Font = New System.Drawing.Font("VAG Rounded", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonBrowseRecalboxFolder.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.ButtonBrowseRecalboxFolder.Location = New System.Drawing.Point(182, 55)
-        Me.ButtonBrowseRecalboxFolder.Margin = New System.Windows.Forms.Padding(2)
+        Me.ButtonBrowseRecalboxFolder.Location = New System.Drawing.Point(243, 68)
+        Me.ButtonBrowseRecalboxFolder.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ButtonBrowseRecalboxFolder.Name = "ButtonBrowseRecalboxFolder"
-        Me.ButtonBrowseRecalboxFolder.Size = New System.Drawing.Size(56, 19)
+        Me.ButtonBrowseRecalboxFolder.Size = New System.Drawing.Size(75, 23)
         Me.ButtonBrowseRecalboxFolder.TabIndex = 2
         Me.ButtonBrowseRecalboxFolder.Text = "Parcourir"
         Me.ButtonBrowseRecalboxFolder.UseVisualStyleBackColor = True
@@ -94,19 +94,18 @@ Partial Class Form1
         '
         Me.label4.AutoSize = True
         Me.label4.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.label4.Location = New System.Drawing.Point(19, 26)
-        Me.label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.label4.Location = New System.Drawing.Point(25, 32)
         Me.label4.Name = "label4"
-        Me.label4.Size = New System.Drawing.Size(233, 14)
+        Me.label4.Size = New System.Drawing.Size(299, 17)
         Me.label4.TabIndex = 1
         Me.label4.Text = "Saisir/Selectionner le Dossier Mère Recalbox"
         '
         'TxtRecalfolderPath
         '
-        Me.TxtRecalfolderPath.Location = New System.Drawing.Point(21, 55)
-        Me.TxtRecalfolderPath.Margin = New System.Windows.Forms.Padding(2)
+        Me.TxtRecalfolderPath.Location = New System.Drawing.Point(28, 68)
+        Me.TxtRecalfolderPath.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TxtRecalfolderPath.Name = "TxtRecalfolderPath"
-        Me.TxtRecalfolderPath.Size = New System.Drawing.Size(144, 20)
+        Me.TxtRecalfolderPath.Size = New System.Drawing.Size(191, 22)
         Me.TxtRecalfolderPath.TabIndex = 0
         '
         'MenuBoutons
@@ -116,11 +115,11 @@ Partial Class Form1
         Me.MenuBoutons.Controls.Add(Me.ButtonCopy)
         Me.MenuBoutons.Controls.Add(Me.ButtonOverlay)
         Me.MenuBoutons.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.MenuBoutons.Location = New System.Drawing.Point(11, 67)
-        Me.MenuBoutons.Margin = New System.Windows.Forms.Padding(2)
+        Me.MenuBoutons.Location = New System.Drawing.Point(15, 82)
+        Me.MenuBoutons.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.MenuBoutons.Name = "MenuBoutons"
-        Me.MenuBoutons.Padding = New System.Windows.Forms.Padding(2)
-        Me.MenuBoutons.Size = New System.Drawing.Size(262, 463)
+        Me.MenuBoutons.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MenuBoutons.Size = New System.Drawing.Size(349, 570)
         Me.MenuBoutons.TabIndex = 11
         Me.MenuBoutons.TabStop = False
         Me.MenuBoutons.Text = "Faites votre Selection :"
@@ -130,10 +129,10 @@ Partial Class Form1
         Me.ButtonSave.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSave.ForeColor = System.Drawing.SystemColors.InactiveBorder
         Me.ButtonSave.Image = CType(resources.GetObject("ButtonSave.Image"), System.Drawing.Image)
-        Me.ButtonSave.Location = New System.Drawing.Point(8, 316)
-        Me.ButtonSave.Margin = New System.Windows.Forms.Padding(2)
+        Me.ButtonSave.Location = New System.Drawing.Point(11, 389)
+        Me.ButtonSave.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ButtonSave.Name = "ButtonSave"
-        Me.ButtonSave.Size = New System.Drawing.Size(244, 142)
+        Me.ButtonSave.Size = New System.Drawing.Size(325, 175)
         Me.ButtonSave.TabIndex = 4
         Me.ButtonSave.Text = "GERER " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "vos Saves"
         Me.ButtonSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -144,10 +143,10 @@ Partial Class Form1
         Me.ButtonCopy.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCopy.ForeColor = System.Drawing.SystemColors.InactiveBorder
         Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
-        Me.ButtonCopy.Location = New System.Drawing.Point(8, 18)
-        Me.ButtonCopy.Margin = New System.Windows.Forms.Padding(2)
+        Me.ButtonCopy.Location = New System.Drawing.Point(11, 22)
+        Me.ButtonCopy.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ButtonCopy.Name = "ButtonCopy"
-        Me.ButtonCopy.Size = New System.Drawing.Size(244, 145)
+        Me.ButtonCopy.Size = New System.Drawing.Size(325, 178)
         Me.ButtonCopy.TabIndex = 3
         Me.ButtonCopy.Text = "PREPARER" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Un Dossier Perso"
         Me.ButtonCopy.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -158,10 +157,10 @@ Partial Class Form1
         Me.ButtonOverlay.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonOverlay.ForeColor = System.Drawing.SystemColors.InactiveBorder
         Me.ButtonOverlay.Image = CType(resources.GetObject("ButtonOverlay.Image"), System.Drawing.Image)
-        Me.ButtonOverlay.Location = New System.Drawing.Point(8, 167)
-        Me.ButtonOverlay.Margin = New System.Windows.Forms.Padding(2)
+        Me.ButtonOverlay.Location = New System.Drawing.Point(11, 206)
+        Me.ButtonOverlay.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ButtonOverlay.Name = "ButtonOverlay"
-        Me.ButtonOverlay.Size = New System.Drawing.Size(244, 145)
+        Me.ButtonOverlay.Size = New System.Drawing.Size(325, 178)
         Me.ButtonOverlay.TabIndex = 1
         Me.ButtonOverlay.Text = "GERER" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "vos Overlays Consoles et Jeux"
         Me.ButtonOverlay.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -173,10 +172,9 @@ Partial Class Form1
         Me.label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label2.Font = New System.Drawing.Font("VAGRounded BT", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label2.ForeColor = System.Drawing.SystemColors.Info
-        Me.label2.Location = New System.Drawing.Point(163, 47)
-        Me.label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.label2.Location = New System.Drawing.Point(217, 58)
         Me.label2.Name = "label2"
-        Me.label2.Size = New System.Drawing.Size(370, 17)
+        Me.label2.Size = New System.Drawing.Size(454, 21)
         Me.label2.TabIndex = 10
         Me.label2.Text = "Votre Builder de Pack Personnalisé pour votre RecalBox"
         '
@@ -186,10 +184,9 @@ Partial Class Form1
         Me.label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label1.Font = New System.Drawing.Font("VAGRounded BT", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label1.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.label1.Location = New System.Drawing.Point(158, 4)
-        Me.label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.label1.Location = New System.Drawing.Point(211, 5)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(516, 43)
+        Me.label1.Size = New System.Drawing.Size(623, 53)
         Me.label1.TabIndex = 9
         Me.label1.Text = "Bienvenue dans RecopierBox"
         '
@@ -199,21 +196,22 @@ Partial Class Form1
         Me.label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label3.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label3.ForeColor = System.Drawing.Color.Aqua
-        Me.label3.Location = New System.Drawing.Point(844, 515)
-        Me.label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.label3.Location = New System.Drawing.Point(1125, 634)
         Me.label3.Name = "label3"
-        Me.label3.Size = New System.Drawing.Size(98, 14)
+        Me.label3.Size = New System.Drawing.Size(122, 17)
         Me.label3.TabIndex = 14
-        Me.label3.Text = "v1.2 by Soaresden"
+        Me.label3.Text = "v1.3 by Soaresden"
         '
         'Disclaimer
         '
         Me.Disclaimer.Controls.Add(Me.TxtDisclaimer)
         Me.Disclaimer.Controls.Add(Me.Button1)
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Disclaimer.Location = New System.Drawing.Point(11, 67)
+        Me.Disclaimer.Location = New System.Drawing.Point(15, 82)
+        Me.Disclaimer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(929, 414)
+        Me.Disclaimer.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Disclaimer.Size = New System.Drawing.Size(1239, 510)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Pourquoi cet Outil ?"
@@ -223,10 +221,11 @@ Partial Class Form1
         Me.TxtDisclaimer.BackColor = System.Drawing.SystemColors.Info
         Me.TxtDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtDisclaimer.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.TxtDisclaimer.Location = New System.Drawing.Point(5, 111)
+        Me.TxtDisclaimer.Location = New System.Drawing.Point(7, 137)
+        Me.TxtDisclaimer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TxtDisclaimer.Name = "TxtDisclaimer"
         Me.TxtDisclaimer.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtDisclaimer.Size = New System.Drawing.Size(917, 180)
+        Me.TxtDisclaimer.Size = New System.Drawing.Size(1221, 221)
         Me.TxtDisclaimer.TabIndex = 18
         Me.TxtDisclaimer.Text = resources.GetString("TxtDisclaimer.Text")
         '
@@ -234,9 +233,10 @@ Partial Class Form1
         '
         Me.Button1.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Button1.Location = New System.Drawing.Point(30, 306)
+        Me.Button1.Location = New System.Drawing.Point(40, 377)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(867, 57)
+        Me.Button1.Size = New System.Drawing.Size(1156, 70)
         Me.Button1.TabIndex = 17
         Me.Button1.Text = "J'accepte que cet Outil n'effectue QUE des opérations sur des GameList déja scrap" &
     "pés"
@@ -247,18 +247,20 @@ Partial Class Form1
         Me.RichTextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.RichTextBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.RichTextBox1.Location = New System.Drawing.Point(724, 487)
+        Me.RichTextBox1.Location = New System.Drawing.Point(965, 599)
+        Me.RichTextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(216, 27)
+        Me.RichTextBox1.Size = New System.Drawing.Size(288, 33)
         Me.RichTextBox1.TabIndex = 17
         Me.RichTextBox1.Text = "https://github.com/soaresden/RecopierBox"
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.RecalCopier.My.Resources.Resources.iconlog
-        Me.PictureBox1.Location = New System.Drawing.Point(11, 4)
+        Me.PictureBox1.Location = New System.Drawing.Point(15, 5)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(69, 60)
+        Me.PictureBox1.Size = New System.Drawing.Size(92, 74)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 18
         Me.PictureBox1.TabStop = False
@@ -266,9 +268,10 @@ Partial Class Form1
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.RecalCopier.My.Resources.Resources.iconlog
-        Me.PictureBox2.Location = New System.Drawing.Point(11, 4)
+        Me.PictureBox2.Location = New System.Drawing.Point(15, 5)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(147, 135)
+        Me.PictureBox2.Size = New System.Drawing.Size(196, 166)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 19
         Me.PictureBox2.TabStop = False
@@ -278,9 +281,10 @@ Partial Class Form1
         Me.VersionNetFramework.AutoSize = True
         Me.VersionNetFramework.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.VersionNetFramework.ForeColor = System.Drawing.Color.Yellow
-        Me.VersionNetFramework.Location = New System.Drawing.Point(744, 4)
+        Me.VersionNetFramework.Location = New System.Drawing.Point(992, 5)
+        Me.VersionNetFramework.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.VersionNetFramework.Name = "VersionNetFramework"
-        Me.VersionNetFramework.Size = New System.Drawing.Size(164, 18)
+        Me.VersionNetFramework.Size = New System.Drawing.Size(207, 24)
         Me.VersionNetFramework.TabIndex = 21
         Me.VersionNetFramework.Text = ".net Framework version"
         '
@@ -289,22 +293,22 @@ Partial Class Form1
         Me.ButtonQuizz.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonQuizz.ForeColor = System.Drawing.SystemColors.InactiveBorder
         Me.ButtonQuizz.Image = CType(resources.GetObject("ButtonQuizz.Image"), System.Drawing.Image)
-        Me.ButtonQuizz.Location = New System.Drawing.Point(561, 234)
-        Me.ButtonQuizz.Margin = New System.Windows.Forms.Padding(2)
+        Me.ButtonQuizz.Location = New System.Drawing.Point(748, 288)
+        Me.ButtonQuizz.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ButtonQuizz.Name = "ButtonQuizz"
-        Me.ButtonQuizz.Size = New System.Drawing.Size(78, 85)
+        Me.ButtonQuizz.Size = New System.Drawing.Size(104, 105)
         Me.ButtonQuizz.TabIndex = 5
         Me.ButtonQuizz.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.ButtonQuizz.UseVisualStyleBackColor = True
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(950, 538)
+        Me.ClientSize = New System.Drawing.Size(1264, 652)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Disclaimer)
         Me.Controls.Add(Me.ButtonQuizz)
@@ -317,10 +321,10 @@ Partial Class Form1
         Me.Controls.Add(Me.MenuBoutons)
         Me.Controls.Add(Me.label2)
         Me.Controls.Add(Me.label1)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(966, 577)
-        Me.MinimumSize = New System.Drawing.Size(966, 577)
+        Me.MaximumSize = New System.Drawing.Size(1282, 699)
+        Me.MinimumSize = New System.Drawing.Size(1282, 699)
         Me.Name = "Form1"
         Me.Text = "Menu RecopierBox"
         Me.groupBox2.ResumeLayout(False)
