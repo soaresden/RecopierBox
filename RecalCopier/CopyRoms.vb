@@ -238,7 +238,6 @@ Public Class CopyRoms
                 Dim romname As String = xEle.Element("name")
                 Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
                 Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & temprom
-                Dim romhidden As String = xEle.Element("hidden")
                 Dim romgenre As String
                 Dim romdesc As String
                 Dim romimage As String
@@ -252,6 +251,7 @@ Public Class CopyRoms
                 Dim romdate As String
                 Dim romCompteur As String
                 Dim romRegion As String
+                Dim romhidden As String = xEle.Element("hidden")
 
                 'Conditionnelles sur tous les champs
                 If romhidden = "true" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
@@ -297,12 +297,6 @@ Public Class CopyRoms
                     romnote = Nothing
                 Else
                     romnote = xEle.Element("rating")
-                End If
-
-                If xEle.Element("adult") Is Nothing Then
-                    romadult = Nothing
-                Else
-                    romadult = xEle.Element("adult")
                 End If
 
                 If xEle.Element("rating") Is Nothing Then
@@ -464,6 +458,7 @@ romsuivante:
         minipic3.Show()
         minipic4.Show()
         minipic5.Show()
+
         'on va calculer la taille des roms
         Call Calcultaillerom()
         'On lance la completion des checkbox
@@ -619,39 +614,42 @@ labelapresfolder:
             consolesanssaves(5) = "atari5200"
             consolesanssaves(6) = "atarist"
             consolesanssaves(7) = "channelf"
-            consolesanssaves(8) = "easyrpg"
-            consolesanssaves(9) = "fds"
-            consolesanssaves(10) = "intellivision"
-            consolesanssaves(11) = "moonlight"
-            consolesanssaves(12) = "msx"
-            consolesanssaves(13) = "msxturbor"
-            consolesanssaves(14) = "multivision"
-            consolesanssaves(15) = "neogeocd"
-            consolesanssaves(16) = "o2em"
-            consolesanssaves(17) = "oricatmos"
-            consolesanssaves(18) = "palm"
-            consolesanssaves(19) = "pc88"
-            consolesanssaves(20) = "pc98"
-            consolesanssaves(21) = "pcengine"
-            consolesanssaves(22) = "pcfx"
-            consolesanssaves(23) = "phillipscdi"
-            consolesanssaves(24) = "ports"
-            consolesanssaves(25) = "ps2"
-            consolesanssaves(26) = "samcoupe"
-            consolesanssaves(27) = "saturn"
-            consolesanssaves(28) = "spectravideo"
-            consolesanssaves(29) = "sufami"
-            consolesanssaves(30) = "thomson"
-            consolesanssaves(31) = "tic80"
-            consolesanssaves(32) = "x1"
-            consolesanssaves(33) = "x68000"
+            consolesanssaves(8) = "dos"
+            consolesanssaves(9) = "easyrpg"
+            consolesanssaves(10) = "fds"
+            consolesanssaves(11) = "intellivision"
+            consolesanssaves(12) = "moonlight"
+            consolesanssaves(13) = "msx"
+            consolesanssaves(14) = "msxturbor"
+            consolesanssaves(15) = "multivision"
+            consolesanssaves(16) = "neogeocd"
+            consolesanssaves(17) = "o2em"
+            consolesanssaves(18) = "oricatmos"
+            consolesanssaves(19) = "palm"
+            consolesanssaves(20) = "pc88"
+            consolesanssaves(21) = "pc98"
+            consolesanssaves(22) = "pcengine"
+            consolesanssaves(23) = "pcfx"
+            consolesanssaves(24) = "phillipscdi"
+            consolesanssaves(25) = "ports"
+            consolesanssaves(26) = "ps2"
+            consolesanssaves(27) = "samcoupe"
+            consolesanssaves(28) = "saturn"
+            consolesanssaves(29) = "spectravideo"
+            consolesanssaves(30) = "sufami"
+            consolesanssaves(31) = "thomson"
+            consolesanssaves(32) = "tic80"
+            consolesanssaves(33) = "x1"
+            consolesanssaves(34) = "x68000"
 
+            'On test les saves, si c'est pas une console avec un dossier save, on passe au jeu suivant en mettant son fond en gris
             If consolesanssaves.Contains(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("Console").Index).Value) Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = False
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(0, 0, 0)
+                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(50, 50, 50)
                 GoTo consolesanssaves
             End If
 
+            'on verifie si il y'a des sauvegardes avec le nom du jeu en racine
             Dim savesCount As Integer = IO.Directory.GetFiles(Replace(cheminsaves, nomdelarom, ""), romsansextension & ".*").Length
 
             If savesCount >= 1 Then
@@ -661,8 +659,8 @@ labelapresfolder:
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = False
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
-        Next
 consolesanssaves:
+        Next
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
         Form1.Show()
