@@ -26,7 +26,6 @@ Partial Class CopyRoms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
         Me.ButtonImportXML = New System.Windows.Forms.Button()
         Me.ListGameLists = New System.Windows.Forms.ListBox()
-        Me.lbl_gamelist = New System.Windows.Forms.Label()
         Me.ButtonShowGames = New System.Windows.Forms.Button()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -134,7 +133,7 @@ Partial Class CopyRoms
         '
         Me.ButtonImportXML.Location = New System.Drawing.Point(121, 2)
         Me.ButtonImportXML.Name = "ButtonImportXML"
-        Me.ButtonImportXML.Size = New System.Drawing.Size(100, 37)
+        Me.ButtonImportXML.Size = New System.Drawing.Size(132, 23)
         Me.ButtonImportXML.TabIndex = 1
         Me.ButtonImportXML.Text = "Importer les Gamelist.xml"
         Me.ButtonImportXML.UseVisualStyleBackColor = True
@@ -142,23 +141,12 @@ Partial Class CopyRoms
         'ListGameLists
         '
         Me.ListGameLists.FormattingEnabled = True
-        Me.ListGameLists.Location = New System.Drawing.Point(15, 63)
+        Me.ListGameLists.Location = New System.Drawing.Point(15, 37)
         Me.ListGameLists.Name = "ListGameLists"
         Me.ListGameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ListGameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListGameLists.Size = New System.Drawing.Size(206, 329)
+        Me.ListGameLists.Size = New System.Drawing.Size(206, 355)
         Me.ListGameLists.TabIndex = 2
-        '
-        'lbl_gamelist
-        '
-        Me.lbl_gamelist.AutoSize = True
-        Me.lbl_gamelist.Font = New System.Drawing.Font("VAG Rounded", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_gamelist.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lbl_gamelist.Location = New System.Drawing.Point(59, 42)
-        Me.lbl_gamelist.Name = "lbl_gamelist"
-        Me.lbl_gamelist.Size = New System.Drawing.Size(118, 18)
-        Me.lbl_gamelist.TabIndex = 3
-        Me.lbl_gamelist.Text = "Vos GameLists :"
         '
         'ButtonShowGames
         '
@@ -868,7 +856,7 @@ Partial Class CopyRoms
         'ButtonTuto
         '
         Me.ButtonTuto.BackColor = System.Drawing.Color.Aqua
-        Me.ButtonTuto.Location = New System.Drawing.Point(930, 2)
+        Me.ButtonTuto.Location = New System.Drawing.Point(932, 2)
         Me.ButtonTuto.Name = "ButtonTuto"
         Me.ButtonTuto.Size = New System.Drawing.Size(75, 23)
         Me.ButtonTuto.TabIndex = 19
@@ -909,9 +897,9 @@ Partial Class CopyRoms
         '
         'TutoHideGameList
         '
-        Me.TutoHideGameList.Location = New System.Drawing.Point(12, 63)
+        Me.TutoHideGameList.Location = New System.Drawing.Point(8, 28)
         Me.TutoHideGameList.Name = "TutoHideGameList"
-        Me.TutoHideGameList.Size = New System.Drawing.Size(209, 329)
+        Me.TutoHideGameList.Size = New System.Drawing.Size(213, 365)
         Me.TutoHideGameList.TabIndex = 24
         Me.TutoHideGameList.TabStop = False
         '
@@ -982,7 +970,6 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.Buttongetback)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ButtonShowGames)
-        Me.Controls.Add(Me.lbl_gamelist)
         Me.Controls.Add(Me.ListGameLists)
         Me.Controls.Add(Me.ButtonImportXML)
         Me.Controls.Add(Me.FinalGrid)
@@ -1024,12 +1011,10 @@ Partial Class CopyRoms
         CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ButtonImportXML As Button
     Friend WithEvents ListGameLists As ListBox
-    Friend WithEvents lbl_gamelist As Label
     Friend WithEvents ButtonShowGames As Button
     Friend WithEvents FinalGrid As DataGridView
     Friend WithEvents GroupBox1 As GroupBox

@@ -95,7 +95,13 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonQuizz_Click(sender As Object, e As EventArgs) Handles ButtonQuizz.Click
-        MsgBox("En Travail")
+        If TxtRecalfolderPath Is Nothing Then
+            MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
+            Exit Sub
+        End If
+        'Au clic, on ouvre le formulaire associé et on ferme le menu
+        Quizz.Show()
+        Me.Hide()
     End Sub
 
     Private Sub RichTextBox2_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox2.TextChanged

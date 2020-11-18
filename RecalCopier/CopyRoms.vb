@@ -431,7 +431,6 @@ romsuivante:
         'Reajusting Interface and Showing Final Interface
         ButtonImportXML.Hide()
         ListGameLists.Hide()
-        lbl_gamelist.Hide()
         FinalGrid.Location = New Point(8, 28)
         FinalGrid.Size = New Size(600, 365)
         grp_RomInfos.Show()
@@ -872,17 +871,12 @@ consolesanssaves:
 
             Else 'ca veut dire que on va retirer un element là
                 listboxMaSelection.Items.Remove(pathrom)
-
             End If
-
             'On va checker les doublons quand meme
             Supdoublon(listboxMaSelection)
-
             'On lance une update
             Call UpdatelesChiffreRoms()
-
         End If
-
     End Sub
     Sub Selectiondudernier(RomPath As String)
         For ligne = 0 To listboxMaSelection.Items.Count - 1

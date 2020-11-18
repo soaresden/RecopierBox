@@ -120,6 +120,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Quizz.Designer.vb">
+      <DependentUpon>Quizz.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Quizz.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="00-Menu.resx">
@@ -133,6 +139,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quizz.resx">
+      <DependentUpon>Quizz.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
