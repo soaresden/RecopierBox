@@ -97,4 +97,8 @@ Public Class Form1
     Private Sub ButtonQuizz_Click(sender As Object, e As EventArgs) Handles ButtonQuizz.Click
         MsgBox("En Travail")
     End Sub
+
+    Private Sub RichTextBox2_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox2.TextChanged
+        System.Diagnostics.Process.Start(String.Format("http://jujuvincebros.fr/telechargements2/file/10-arrm-another-recalbox-roms-manager"))
+    End Sub
 End Class
