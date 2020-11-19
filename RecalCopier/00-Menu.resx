@@ -846,7 +846,9 @@ Vous voulez un dossier Recalbox avec uniquement des jeux de combat
 avec une contrainte de stockage 16Go ?
 Générez le !
 
-A partir de votre Dossier Mère principal, l'outil permet de creez des petits sets personnalisés selon vos choix.</value>
+A partir de votre Dossier Mère principal, l'outil permet de creez des petits sets personnalisés selon vos choix.
+
+Si vous avez un tas de Videos, n'hesitez pas à vous essayer au Quizz !</value>
   </data>
   <data name="ButtonQuizz.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

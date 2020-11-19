@@ -205,7 +205,7 @@ Partial Class Form1
         Me.label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label3.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label3.ForeColor = System.Drawing.Color.Aqua
-        Me.label3.Location = New System.Drawing.Point(849, 515)
+        Me.label3.Location = New System.Drawing.Point(843, 515)
         Me.label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label3.Name = "label3"
         Me.label3.Size = New System.Drawing.Size(91, 14)
@@ -227,12 +227,12 @@ Partial Class Form1
         'TxtDisclaimer
         '
         Me.TxtDisclaimer.BackColor = System.Drawing.SystemColors.Info
-        Me.TxtDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtDisclaimer.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.TxtDisclaimer.Location = New System.Drawing.Point(5, 111)
+        Me.TxtDisclaimer.Location = New System.Drawing.Point(5, 78)
         Me.TxtDisclaimer.Name = "TxtDisclaimer"
         Me.TxtDisclaimer.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtDisclaimer.Size = New System.Drawing.Size(917, 180)
+        Me.TxtDisclaimer.Size = New System.Drawing.Size(917, 213)
         Me.TxtDisclaimer.TabIndex = 18
         Me.TxtDisclaimer.Text = resources.GetString("TxtDisclaimer.Text")
         '
