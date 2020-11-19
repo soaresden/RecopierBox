@@ -2268,6 +2268,37 @@ prochainj:
 
     Private Sub ButtonTuto_Click(sender As Object, e As EventArgs) Handles ButtonTuto.Click
         'Deroulement du Tuto
+        'Replace les overlay des tutos
+        TutoHideGameList.Size = New Point(213, 365)
+        TutoHideGameList.Location = New Point(8, 28)
+
+        TutoHideFinalGrid.Size = New Point(391, 364)
+        TutoHideFinalGrid.Location = New Point(217, 28)
+
+        TutoHideRomInfo.Size = New Point(395, 475)
+        TutoHideRomInfo.Location = New Point(612, 28)
+
+        TutoHideFiltres.Size = New Point(624, 105)
+        TutoHideFiltres.Location = New Point(8, 398)
+
+        TutoHideOutilsP1.Size = New Point(129, 90)
+        TutoHideOutilsP1.Location = New Point(8, 509)
+
+        TutoHideOutilsP2.Size = New Point(194, 91)
+        TutoHideOutilsP2.Location = New Point(129, 509)
+
+        TutoHideOutilsP3.Size = New Point(203, 91)
+        TutoHideOutilsP3.Location = New Point(323, 509)
+
+        TutoHideOutilsP4.Size = New Point(179, 91)
+        TutoHideOutilsP4.Location = New Point(525, 509)
+
+        TutoHideOutilsP5.Size = New Point(223, 91)
+        TutoHideOutilsP5.Location = New Point(707, 509)
+
+        TutoHideOutilsP6.Size = New Point(77, 91)
+        TutoHideOutilsP6.Location = New Point(930, 509)
+
         'On reaffiche tout
         TutoHideGameList.Show()
         TutoHideFinalGrid.Show()

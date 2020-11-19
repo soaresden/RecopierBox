@@ -367,7 +367,6 @@ suite5:
         Else
             ButtonValidFilters.Show()
         End If
-
     End Sub
 
     'Ensemble Got Focus et Leave Focus pour les listboxes

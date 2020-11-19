@@ -865,81 +865,81 @@ Partial Class CopyRoms
         '
         'TutoHideFinalGrid
         '
-        Me.TutoHideFinalGrid.Location = New System.Drawing.Point(217, 28)
+        Me.TutoHideFinalGrid.Location = New System.Drawing.Point(339, 2)
         Me.TutoHideFinalGrid.Name = "TutoHideFinalGrid"
-        Me.TutoHideFinalGrid.Size = New System.Drawing.Size(391, 364)
+        Me.TutoHideFinalGrid.Size = New System.Drawing.Size(64, 21)
         Me.TutoHideFinalGrid.TabIndex = 20
         Me.TutoHideFinalGrid.TabStop = False
         '
         'TutoHideFiltres
         '
-        Me.TutoHideFiltres.Location = New System.Drawing.Point(8, 398)
+        Me.TutoHideFiltres.Location = New System.Drawing.Point(487, 2)
         Me.TutoHideFiltres.Name = "TutoHideFiltres"
-        Me.TutoHideFiltres.Size = New System.Drawing.Size(604, 105)
+        Me.TutoHideFiltres.Size = New System.Drawing.Size(58, 23)
         Me.TutoHideFiltres.TabIndex = 21
         Me.TutoHideFiltres.TabStop = False
         '
         'TutoHideRomInfo
         '
-        Me.TutoHideRomInfo.Location = New System.Drawing.Point(612, 28)
+        Me.TutoHideRomInfo.Location = New System.Drawing.Point(409, 2)
         Me.TutoHideRomInfo.Name = "TutoHideRomInfo"
-        Me.TutoHideRomInfo.Size = New System.Drawing.Size(395, 475)
+        Me.TutoHideRomInfo.Size = New System.Drawing.Size(72, 21)
         Me.TutoHideRomInfo.TabIndex = 22
         Me.TutoHideRomInfo.TabStop = False
         '
         'TutoHideOutilsP1
         '
-        Me.TutoHideOutilsP1.Location = New System.Drawing.Point(8, 509)
+        Me.TutoHideOutilsP1.Location = New System.Drawing.Point(551, 2)
         Me.TutoHideOutilsP1.Name = "TutoHideOutilsP1"
-        Me.TutoHideOutilsP1.Size = New System.Drawing.Size(119, 90)
+        Me.TutoHideOutilsP1.Size = New System.Drawing.Size(48, 23)
         Me.TutoHideOutilsP1.TabIndex = 23
         Me.TutoHideOutilsP1.TabStop = False
         '
         'TutoHideGameList
         '
-        Me.TutoHideGameList.Location = New System.Drawing.Point(8, 28)
+        Me.TutoHideGameList.Location = New System.Drawing.Point(259, 2)
         Me.TutoHideGameList.Name = "TutoHideGameList"
-        Me.TutoHideGameList.Size = New System.Drawing.Size(213, 365)
+        Me.TutoHideGameList.Size = New System.Drawing.Size(74, 21)
         Me.TutoHideGameList.TabIndex = 24
         Me.TutoHideGameList.TabStop = False
         '
         'TutoHideOutilsP5
         '
-        Me.TutoHideOutilsP5.Location = New System.Drawing.Point(707, 509)
+        Me.TutoHideOutilsP5.Location = New System.Drawing.Point(750, 2)
         Me.TutoHideOutilsP5.Name = "TutoHideOutilsP5"
-        Me.TutoHideOutilsP5.Size = New System.Drawing.Size(223, 91)
+        Me.TutoHideOutilsP5.Size = New System.Drawing.Size(40, 23)
         Me.TutoHideOutilsP5.TabIndex = 26
         Me.TutoHideOutilsP5.TabStop = False
         '
         'TutoHideOutilsP3
         '
-        Me.TutoHideOutilsP3.Location = New System.Drawing.Point(323, 509)
+        Me.TutoHideOutilsP3.Location = New System.Drawing.Point(663, 2)
         Me.TutoHideOutilsP3.Name = "TutoHideOutilsP3"
-        Me.TutoHideOutilsP3.Size = New System.Drawing.Size(203, 91)
+        Me.TutoHideOutilsP3.Size = New System.Drawing.Size(36, 21)
         Me.TutoHideOutilsP3.TabIndex = 27
         Me.TutoHideOutilsP3.TabStop = False
         '
         'TutoHideOutilsP2
         '
-        Me.TutoHideOutilsP2.Location = New System.Drawing.Point(129, 509)
+        Me.TutoHideOutilsP2.Location = New System.Drawing.Point(605, 2)
         Me.TutoHideOutilsP2.Name = "TutoHideOutilsP2"
-        Me.TutoHideOutilsP2.Size = New System.Drawing.Size(194, 91)
+        Me.TutoHideOutilsP2.Size = New System.Drawing.Size(52, 20)
         Me.TutoHideOutilsP2.TabIndex = 28
         Me.TutoHideOutilsP2.TabStop = False
         '
         'TutoHideOutilsP6
         '
-        Me.TutoHideOutilsP6.Location = New System.Drawing.Point(930, 509)
+        Me.TutoHideOutilsP6.Location = New System.Drawing.Point(796, 2)
         Me.TutoHideOutilsP6.Name = "TutoHideOutilsP6"
-        Me.TutoHideOutilsP6.Size = New System.Drawing.Size(77, 91)
+        Me.TutoHideOutilsP6.Size = New System.Drawing.Size(53, 23)
         Me.TutoHideOutilsP6.TabIndex = 30
         Me.TutoHideOutilsP6.TabStop = False
         '
         'TutoHideOutilsP4
         '
-        Me.TutoHideOutilsP4.Location = New System.Drawing.Point(525, 509)
+        Me.TutoHideOutilsP4.Location = New System.Drawing.Point(705, 2)
         Me.TutoHideOutilsP4.Name = "TutoHideOutilsP4"
-        Me.TutoHideOutilsP4.Size = New System.Drawing.Size(179, 91)
+        Me.TutoHideOutilsP4.Size = New System.Drawing.Size(39, 21)
         Me.TutoHideOutilsP4.TabIndex = 31
         Me.TutoHideOutilsP4.TabStop = False
         '
