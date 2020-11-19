@@ -12,15 +12,25 @@ Public Class Quizz
         'On hide le groupe parametres
         'Afficher le groupParametres
         GroupParametres.Hide()
-        ButtonValidFilters.Hide()
+        ButtonDoRandom.Hide()
         Label10.Hide()
         TxtTotalEntrees.Hide()
+        QuizzBox.Hide()
         ButtonPlay.Hide()
+        TempGrid.Hide()
 
     End Sub
     Private Sub ButtonValidConsole_Click(sender As Object, e As EventArgs) Handles ButtonValidConsole.Click
         'Afficher le groupParametres
         GroupParametres.Show()
+
+        'On va hider le bouton des console + jeu si un seul systeme est selectionné
+
+        If ConsoleList.SelectedItems.Count = 1 Then
+            ConsoleTitre.Hide()
+            ListConsoleDesJeux.Hide()
+            TitreOnly.Checked = True
+        End If
 
         'Afficher les Totaux
         Label10.Show()
@@ -33,7 +43,6 @@ Public Class Quizz
         End If
 
         'Showing stuff
-        TempGrid.Show()
 
         If ConsoleList.Items.Count = 0 Then Exit Sub
 
@@ -286,7 +295,6 @@ romsuivante:
         TempGrid.Columns("NbLancé").Width = 50
 
         'Reajusting Interface and Showing Final Interface
-        TempGrid.Show()
         dv.Sort = "Console asc, Titre asc"
 
         'On compte le nombre total d'entrées
@@ -294,6 +302,7 @@ romsuivante:
 
         'On va alimenter les filtres de la combobox 
         PeuplerCombobox()
+
     End Sub
     Sub PeuplerCombobox()
         Dim valeur As String
@@ -303,11 +312,11 @@ romsuivante:
                 GoTo suite1
             Else
                 valeur = TempGrid.Rows(ligne).Cells(TempGrid.Columns("Genre").Index).Value ' on check si la valeur est déja presente ou non
-            If listhelpingboxGenre.Items.Contains(valeur) Then
-                listhelpingboxGenre.Items.Remove(valeur)
-            Else
-                listhelpingboxGenre.Items.Add(valeur) ' si non on l'ajoute
-            End If
+                If listhelpingboxGenre.Items.Contains(valeur) Then
+                    listhelpingboxGenre.Items.Remove(valeur)
+                Else
+                    listhelpingboxGenre.Items.Add(valeur) ' si non on l'ajoute
+                End If
 suite1:
             End If
 
@@ -360,17 +369,10 @@ suite5:
             End If
 
         Next
-    End Sub
-    Private Sub txtnbmanches_TextChanged(sender As Object, e As EventArgs) Handles txtnbmanches.TextChanged
-        If txtnbmanches.Text Is Nothing Then
-            Exit Sub
-        Else
-            ButtonValidFilters.Show()
-        End If
-    End Sub
 
+    End Sub
     'Ensemble Got Focus et Leave Focus pour les listboxes
-    Private Sub txtgenre_GotFocus(sender As Object, e As EventArgs) Handles txtgenre.GotFocus
+    Private Sub Txtgenre_GotFocus(sender As Object, e As EventArgs) Handles txtgenre.GotFocus
         listhelpingboxDev.Show()
         listhelpingboxGenre.Show()
         listhelpingboxNote.Show()
@@ -380,7 +382,7 @@ suite5:
         listhelpingboxGenre.Location = New Point(6, 16)
         listhelpingboxGenre.Size = New Point(136, 199)
     End Sub
-    Private Sub txtdev_GotFocus(sender As Object, e As EventArgs) Handles txtdev.GotFocus
+    Private Sub Txtdev_GotFocus(sender As Object, e As EventArgs) Handles txtdev.GotFocus
         listhelpingboxDev.Show()
         listhelpingboxGenre.Show()
         listhelpingboxNote.Show()
@@ -390,7 +392,7 @@ suite5:
         listhelpingboxDev.Location = New Point(6, 16)
         listhelpingboxDev.Size = New Point(136, 199)
     End Sub
-    Private Sub txtpub_GotFocus(sender As Object, e As EventArgs) Handles txtpub.GotFocus
+    Private Sub Txtpub_GotFocus(sender As Object, e As EventArgs) Handles txtpub.GotFocus
         listhelpingboxDev.Show()
         listhelpingboxGenre.Show()
         listhelpingboxNote.Show()
@@ -431,29 +433,26 @@ suite5:
         listhelpingboxPlayers.Hide()
         listhelpingboxPubl.Hide()
     End Sub
-    Private Sub txtgenre_LostFocus(sender As Object, e As EventArgs) Handles txtgenre.LostFocus
+    Private Sub Txtgenre_LostFocus(sender As Object, e As EventArgs) Handles txtgenre.LostFocus
         listhelpingboxGenre.Location = New Point(6, 16)
         listhelpingboxGenre.Size = New Point(136, 30)
     End Sub
-    Private Sub listhelpingboxDev_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxDev.LostFocus
+    Private Sub ListhelpingboxDev_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxDev.LostFocus
         listhelpingboxDev.Location = New Point(6, 58)
         listhelpingboxDev.Size = New Point(136, 30)
     End Sub
-    Private Sub listhelpingboxPubl_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxPubl.LostFocus
+    Private Sub ListhelpingboxPubl_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxPubl.LostFocus
         listhelpingboxPubl.Location = New Point(6, 94)
         listhelpingboxPubl.Size = New Point(136, 30)
     End Sub
-    Private Sub listhelpingboxPlayers_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxPlayers.LostFocus
+    Private Sub ListhelpingboxPlayers_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxPlayers.LostFocus
         listhelpingboxPlayers.Location = New Point(6, 130)
         listhelpingboxPlayers.Size = New Point(136, 30)
     End Sub
-    Private Sub listhelpingboxNote_Leave(sender As Object, e As EventArgs) Handles listhelpingboxNote.Leave
+    Private Sub LsthelpingboxNote_Leave(sender As Object, e As EventArgs) Handles listhelpingboxNote.Leave
         listhelpingboxNote.Location = New Point(6, 166)
         listhelpingboxNote.Size = New Point(136, 30)
     End Sub
-
-
-
 
 
     Private Sub TitreOnly_CheckedChanged(sender As Object, e As EventArgs) Handles TitreOnly.CheckedChanged
@@ -464,7 +463,154 @@ suite5:
         If TitreOnly.Checked = False Then ConsoleTitre.Checked = True
     End Sub
 
+    Sub Entreesurfiltres()
+        'commande pour filtrer
+        TryCast(TempGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Genre] like '%{0}%' AND [Developer] like '%{1}%' AND [Publisher] like '%{2}%' AND [DateSortie] like '%{3}%' AND [NbPlayers] like '%{4}%' AND [NbLancé] like '%{5}%' AND [Synopsis] like '%{6}%' AND [Note] like '%{7}%'", txtgenre.Text, txtdev.Text, txtpub.Text, TxtAnnee.Text, txtplayers.Text, TxtPlayCount.Text, TxtSynopsis.Text, ComboRating.Text)
+        'Recalcul des resultats
+        TxtTotalEntrees.Text = TempGrid.RowCount - 1
+    End Sub
+    Private Sub Txtgenre_KeyDown(sender As Object, e As KeyEventArgs) Handles txtgenre.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call Entreesurfiltres()
+        End If
+    End Sub
+    Private Sub Txtdev_KeyDown(sender As Object, e As KeyEventArgs) Handles txtdev.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call Entreesurfiltres()
+        End If
+    End Sub
+    Private Sub Txtpub_KeyDown(sender As Object, e As KeyEventArgs) Handles txtpub.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call Entreesurfiltres()
+        End If
+    End Sub
+    Private Sub TxtAnnee_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtAnnee.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call Entreesurfiltres()
+        End If
+    End Sub
+    Private Sub Txtplayers_KeyDown(sender As Object, e As KeyEventArgs) Handles txtplayers.KeyDown
+        If e.KeyCode = Keys.Enter Then
+        End If
+    End Sub
+    Private Sub TxtPlayCount_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtPlayCount.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call Entreesurfiltres()
+        End If
+    End Sub
+    Private Sub TxtSynopsis_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSynopsis.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call Entreesurfiltres()
+        End If
+    End Sub
+    Private Sub ComboRating_KeyDown(sender As Object, e As KeyEventArgs) Handles ComboRating.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call Entreesurfiltres()
+        End If
+    End Sub
+
+    Private Sub ButtonValidFilters_Click(sender As Object, e As EventArgs) Handles ButtonDoRandom.Click
+        If txtnbmanches.Text < 0 Then
+            MsgBox("Impossible de Générer des Manches")
+            Exit Sub
+        End If
+
+        If Val(txtnbmanches.Text) > Val(TxtTotalEntrees.Text) Then
+            MsgBox("Trop de Manches > Nb Roms")
+            Exit Sub
+        End If
+        Dim nbdemanches As Integer = Val(txtnbmanches.Text)    ' how many numbers do you want?
+        Dim nbroms As Integer = TxtTotalEntrees.Text
+
+        'On Clear par securité
+        RandomList.Items.Clear()
+
+        'On va generer un chiffre et tester
+        Dim random As New Random()
+        For i = 0 To nbdemanches - 1
+            Dim chiffregenere As Integer
+
+            'On va generer le chiffre jusqu'a ce qu'il ne soit pas dans la liste
+            Do
+                chiffregenere = Convert.ToString(random.Next(0, nbroms))
+            Loop Until RandomList.Items.Contains(chiffregenere) = False
+
+            RandomList.Items.Add(chiffregenere * 35) ' on met le numero de la row dans la listbox random et on multiplie par 35 pour perdre le User
+        Next
+
+        MsgBox("Pret à Demarrer le Quizz ?!")
+
+        'on controle que tout est bien OK
+        If TitreOnly.Checked = False And ConsoleTitre.Checked = False Then
+            MsgBox("Merci de Selectionner un Type de Partie")
+            Exit Sub
+        End If
+
+        If RandomList.Items.Count = 0 Then
+            MsgBox("Merci de Déclencher un Random")
+            Exit Sub
+        End If
+
+        'On va maintenant Charger toute l'interface de jeu
+        QuizzBox.Show()
+        If ConsoleTitre.Checked = True Then ListConsoleDesJeux.Show() Else ListConsoleDesJeux.Hide()
+
+        'On Parametre le tout
+        PlayerAudio.uiMode = "invisible";
+        PlayerAudio.settings.setMode("loop", False)
+        PlayerAudio.settings.mute = False
+        RandomList.SelectedIndex = 0
+
+        MsgBox("Veuiller Appuyer sur le Bouton Start pour Commencer")
+    End Sub
+    Private Sub Txtnbmanches_TextChanged(sender As Object, e As EventArgs) Handles txtnbmanches.TextChanged
+        If txtnbmanches.Text Is Nothing Then
+            Exit Sub
+        Else
+            ButtonDoRandom.Show()
+            txtpositionend.Text = txtnbmanches.Text
+        End If
+    End Sub
+    Private Sub Txtnbmanches_KeyDown(sender As Object, e As KeyEventArgs) Handles txtnbmanches.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            ButtonDoRandom.PerformClick()
+        End If
+    End Sub
+
+    Private Sub RandomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles RandomList.SelectedIndexChanged
+        txtpositionrandom.Text = RandomList.SelectedIndex + 1
+    End Sub
 
 
+    Private Sub PlayerNext_Click(sender As Object, e As EventArgs) Handles PlayerNext.Click
+        Dim selectionactuelle = RandomList.SelectedIndex
+        If selectionactuelle >= txtpositionend.Text - 1 Then Exit Sub
+        PlayerAudio.Ctlcontrols.stop()
+        RandomList.SelectedIndex = selectionactuelle + 1
+    End Sub
 
+    Private Sub PlayerPrev_Click(sender As Object, e As EventArgs) Handles PlayerPrev.Click
+        Dim selectionactuelle = RandomList.SelectedIndex
+        If selectionactuelle <= 0 Then Exit Sub
+        PlayerAudio.Ctlcontrols.stop()
+        RandomList.SelectedIndex = selectionactuelle - 1
+    End Sub
+
+    Private Sub PlayerPlay_Click(sender As Object, e As EventArgs) Handles PlayerPlay.Click
+        'test pour voir si c'est à l'arret ou en play
+        If (PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play on fait Pause
+            PlayerAudio.Ctlcontrols.pause()
+            Exit Sub
+        ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPaused Then 'Si c'est pause on fait play
+            PlayerAudio.Ctlcontrols.play()
+        ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Then 'Si c'est stoppé on load la video
+            Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedIndex.ToString)
+            PlayerAudio.URL = TempGrid.Rows(lavraieligne / 35).Cells(TempGrid.Columns("CheminVideo").Index).Value
+            PlayerAudio.Ctlcontrols.play()
+        End If
+    End Sub
+
+    Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
+        PlayerAudio.Ctlcontrols.stop()
+    End Sub
 End Class

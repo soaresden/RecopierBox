@@ -10,7 +10,6 @@ Public Class CopyRoms
         GroupBox1.Hide()
         grp_RomInfos.Hide()
         vid_romvid.uiMode = "none"
-        txt_txtsearch.Hide()
         listboxMaSelection.Hide()
         buttonRAZ.Hide()
         GroupFiltresAvances.Hide()
@@ -2214,18 +2213,18 @@ prochainj:
             txt_morestant.Text = "USB PLEIN"
         End If
     End Sub
-    Private Sub txt_USBGo_TextChanged(sender As Object, e As EventArgs) Handles txt_USBGo.TextChanged
+    Private Sub Txt_USBGo_TextChanged(sender As Object, e As EventArgs) Handles txt_USBGo.TextChanged
         txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
     End Sub
 
-    Private Sub txt_USBGo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_USBGo.KeyDown
+    Private Sub Txt_USBGo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_USBGo.KeyDown
         If e.KeyCode = Keys.Enter Then
             'On va remplacer la valeur par defaut du Stockage et on la sauvegarde pour les prochaines fois
             My.Settings.StockageSize = txt_USBGo.Text
             My.Settings.Save()
         End If
     End Sub
-    Private Sub txt_txtsearch_MouseClick(sender As Object, e As MouseEventArgs) Handles txt_txtsearch.MouseClick
+    Private Sub Txt_txtsearch_MouseClick(sender As Object, e As MouseEventArgs) Handles txt_txtsearch.MouseClick
         'Si la colonne c'est le filtre des Dates, afficher le popup
         If ComboFiltreColonnes.Text = "DateSortie" Then
             MsgBox("Vous allez filtrer sur une date" & Chr(13) & "Le Format des dates est 'AAAAMMJJ'" & Chr(13) & Chr(13) & "Je vous recommande de toujours saisir une année")
