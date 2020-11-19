@@ -22,8 +22,8 @@ Partial Class Quizz
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Quizz))
-        Me.ButtonPlay = New System.Windows.Forms.Button()
         Me.Buttongetback = New System.Windows.Forms.Button()
         Me.GroupParamComplet = New System.Windows.Forms.GroupBox()
         Me.TxtTotalEntrees = New System.Windows.Forms.TextBox()
@@ -76,6 +76,8 @@ Partial Class Quizz
         Me.txtpositionrandom = New System.Windows.Forms.TextBox()
         Me.RandomList = New System.Windows.Forms.ListBox()
         Me.PlayerAudio = New AxWMPLib.AxWindowsMediaPlayer()
+        Me.HiddenButton = New System.Windows.Forms.PictureBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupParamComplet.SuspendLayout()
         Me.GroupParametres.SuspendLayout()
         Me.GroupInfoRoms.SuspendLayout()
@@ -85,20 +87,8 @@ Partial Class Quizz
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.QuizzBox.SuspendLayout()
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.HiddenButton, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ButtonPlay
-        '
-        Me.ButtonPlay.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonPlay.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.ButtonPlay.Image = CType(resources.GetObject("ButtonPlay.Image"), System.Drawing.Image)
-        Me.ButtonPlay.Location = New System.Drawing.Point(388, 469)
-        Me.ButtonPlay.Margin = New System.Windows.Forms.Padding(2)
-        Me.ButtonPlay.Name = "ButtonPlay"
-        Me.ButtonPlay.Size = New System.Drawing.Size(74, 76)
-        Me.ButtonPlay.TabIndex = 6
-        Me.ButtonPlay.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.ButtonPlay.UseVisualStyleBackColor = True
         '
         'Buttongetback
         '
@@ -117,7 +107,6 @@ Partial Class Quizz
         Me.GroupParamComplet.Controls.Add(Me.Label10)
         Me.GroupParamComplet.Controls.Add(Me.GroupParametres)
         Me.GroupParamComplet.Controls.Add(Me.ButtonValidConsole)
-        Me.GroupParamComplet.Controls.Add(Me.ButtonPlay)
         Me.GroupParamComplet.Controls.Add(Me.ConsoleList)
         Me.GroupParamComplet.Controls.Add(Me.Label1)
         Me.GroupParamComplet.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -133,7 +122,7 @@ Partial Class Quizz
         Me.TxtTotalEntrees.BackColor = System.Drawing.Color.Purple
         Me.TxtTotalEntrees.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtTotalEntrees.ForeColor = System.Drawing.SystemColors.Window
-        Me.TxtTotalEntrees.Location = New System.Drawing.Point(186, 490)
+        Me.TxtTotalEntrees.Location = New System.Drawing.Point(251, 509)
         Me.TxtTotalEntrees.Name = "TxtTotalEntrees"
         Me.TxtTotalEntrees.Size = New System.Drawing.Size(94, 31)
         Me.TxtTotalEntrees.TabIndex = 23
@@ -143,7 +132,7 @@ Partial Class Quizz
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label10.Location = New System.Drawing.Point(218, 464)
+        Me.Label10.Location = New System.Drawing.Point(205, 483)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(191, 13)
         Me.Label10.TabIndex = 21
@@ -158,7 +147,7 @@ Partial Class Quizz
         Me.GroupParametres.ForeColor = System.Drawing.SystemColors.Control
         Me.GroupParametres.Location = New System.Drawing.Point(147, 16)
         Me.GroupParametres.Name = "GroupParametres"
-        Me.GroupParametres.Size = New System.Drawing.Size(315, 445)
+        Me.GroupParametres.Size = New System.Drawing.Size(315, 464)
         Me.GroupParametres.TabIndex = 29
         Me.GroupParametres.TabStop = False
         Me.GroupParametres.Text = "Selection des Filtres :"
@@ -506,7 +495,7 @@ Partial Class Quizz
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(6, 226)
+        Me.ProgressBar1.Location = New System.Drawing.Point(8, 271)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(401, 23)
         Me.ProgressBar1.TabIndex = 27
@@ -514,7 +503,7 @@ Partial Class Quizz
         'PlayerNext
         '
         Me.PlayerNext.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerNext.Location = New System.Drawing.Point(354, 168)
+        Me.PlayerNext.Location = New System.Drawing.Point(355, 226)
         Me.PlayerNext.Name = "PlayerNext"
         Me.PlayerNext.Size = New System.Drawing.Size(49, 41)
         Me.PlayerNext.TabIndex = 28
@@ -525,7 +514,7 @@ Partial Class Quizz
         '
         Me.PlayerPlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.PlayerPlay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPlay.Location = New System.Drawing.Point(220, 168)
+        Me.PlayerPlay.Location = New System.Drawing.Point(220, 226)
         Me.PlayerPlay.Name = "PlayerPlay"
         Me.PlayerPlay.Size = New System.Drawing.Size(49, 41)
         Me.PlayerPlay.TabIndex = 33
@@ -535,7 +524,7 @@ Partial Class Quizz
         'PlayerStop
         '
         Me.PlayerStop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerStop.Location = New System.Drawing.Point(275, 168)
+        Me.PlayerStop.Location = New System.Drawing.Point(275, 226)
         Me.PlayerStop.Name = "PlayerStop"
         Me.PlayerStop.Size = New System.Drawing.Size(73, 41)
         Me.PlayerStop.TabIndex = 34
@@ -579,7 +568,7 @@ Partial Class Quizz
         'PlayerPrev
         '
         Me.PlayerPrev.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPrev.Location = New System.Drawing.Point(165, 168)
+        Me.PlayerPrev.Location = New System.Drawing.Point(165, 226)
         Me.PlayerPrev.Name = "PlayerPrev"
         Me.PlayerPrev.Size = New System.Drawing.Size(49, 41)
         Me.PlayerPrev.TabIndex = 38
@@ -590,7 +579,7 @@ Partial Class Quizz
         '
         Me.txtpositionend.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtpositionend.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txtpositionend.Location = New System.Drawing.Point(92, 130)
+        Me.txtpositionend.Location = New System.Drawing.Point(92, 176)
         Me.txtpositionend.Name = "txtpositionend"
         Me.txtpositionend.ReadOnly = True
         Me.txtpositionend.Size = New System.Drawing.Size(62, 31)
@@ -601,7 +590,7 @@ Partial Class Quizz
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label12.Location = New System.Drawing.Point(114, 88)
+        Me.Label12.Location = New System.Drawing.Point(113, 120)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(21, 13)
         Me.Label12.TabIndex = 36
@@ -611,7 +600,7 @@ Partial Class Quizz
         '
         Me.txtpositionrandom.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtpositionrandom.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txtpositionrandom.Location = New System.Drawing.Point(92, 31)
+        Me.txtpositionrandom.Location = New System.Drawing.Point(92, 59)
         Me.txtpositionrandom.Name = "txtpositionrandom"
         Me.txtpositionrandom.ReadOnly = True
         Me.txtpositionrandom.Size = New System.Drawing.Size(62, 31)
@@ -623,7 +612,7 @@ Partial Class Quizz
         Me.RandomList.FormattingEnabled = True
         Me.RandomList.Location = New System.Drawing.Point(6, 17)
         Me.RandomList.Name = "RandomList"
-        Me.RandomList.Size = New System.Drawing.Size(80, 199)
+        Me.RandomList.Size = New System.Drawing.Size(80, 251)
         Me.RandomList.TabIndex = 34
         '
         'PlayerAudio
@@ -632,8 +621,20 @@ Partial Class Quizz
         Me.PlayerAudio.Location = New System.Drawing.Point(165, 17)
         Me.PlayerAudio.Name = "PlayerAudio"
         Me.PlayerAudio.OcxState = CType(resources.GetObject("PlayerAudio.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.PlayerAudio.Size = New System.Drawing.Size(239, 144)
+        Me.PlayerAudio.Size = New System.Drawing.Size(239, 206)
         Me.PlayerAudio.TabIndex = 33
+        '
+        'HiddenButton
+        '
+        Me.HiddenButton.Location = New System.Drawing.Point(0, 3)
+        Me.HiddenButton.Name = "HiddenButton"
+        Me.HiddenButton.Size = New System.Drawing.Size(10, 10)
+        Me.HiddenButton.TabIndex = 39
+        Me.HiddenButton.TabStop = False
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 500
         '
         'Quizz
         '
@@ -641,6 +642,7 @@ Partial Class Quizz
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(153, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(908, 591)
+        Me.Controls.Add(Me.HiddenButton)
         Me.Controls.Add(Me.QuizzBox)
         Me.Controls.Add(Me.TitleBox)
         Me.Controls.Add(Me.TempGrid)
@@ -661,10 +663,10 @@ Partial Class Quizz
         Me.QuizzBox.ResumeLayout(False)
         Me.QuizzBox.PerformLayout()
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.HiddenButton, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Private WithEvents ButtonPlay As Button
     Friend WithEvents Buttongetback As Button
     Friend WithEvents GroupParamComplet As GroupBox
     Friend WithEvents Label5 As Label
@@ -717,4 +719,6 @@ Partial Class Quizz
     Friend WithEvents txtpositionrandom As TextBox
     Friend WithEvents RandomList As ListBox
     Friend WithEvents PlayerAudio As AxWMPLib.AxWindowsMediaPlayer
+    Friend WithEvents HiddenButton As PictureBox
+    Friend WithEvents Timer1 As Timer
 End Class

@@ -16,7 +16,6 @@ Public Class Quizz
         Label10.Hide()
         TxtTotalEntrees.Hide()
         QuizzBox.Hide()
-        ButtonPlay.Hide()
         TempGrid.Hide()
 
     End Sub
@@ -556,10 +555,18 @@ suite5:
         If ConsoleTitre.Checked = True Then ListConsoleDesJeux.Show() Else ListConsoleDesJeux.Hide()
 
         'On Parametre le tout
-        PlayerAudio.uiMode = "invisible";
+        PlayerAudio.uiMode = "invisible"
         PlayerAudio.settings.setMode("loop", False)
         PlayerAudio.settings.mute = False
         RandomList.SelectedIndex = 0
+
+        'Et enfin on cheeck si c'est Titre+Console pour Ajouter les console de base
+        If ConsoleTitre.Checked = True Then
+
+            For Each j In ConsoleList.SelectedItems
+                ListConsoleDesJeux.Items.Add(ConsoleList.SelectedItems(j).ToString)
+            Next
+        End If
 
         MsgBox("Veuiller Appuyer sur le Bouton Start pour Commencer")
     End Sub
@@ -587,6 +594,7 @@ suite5:
         If selectionactuelle >= txtpositionend.Text - 1 Then Exit Sub
         PlayerAudio.Ctlcontrols.stop()
         RandomList.SelectedIndex = selectionactuelle + 1
+        ListTitreDesJeux.Items.Clear()
     End Sub
 
     Private Sub PlayerPrev_Click(sender As Object, e As EventArgs) Handles PlayerPrev.Click
@@ -594,23 +602,132 @@ suite5:
         If selectionactuelle <= 0 Then Exit Sub
         PlayerAudio.Ctlcontrols.stop()
         RandomList.SelectedIndex = selectionactuelle - 1
+        ListTitreDesJeux.Items.Clear()
     End Sub
 
     Private Sub PlayerPlay_Click(sender As Object, e As EventArgs) Handles PlayerPlay.Click
         'test pour voir si c'est à l'arret ou en play
         If (PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play on fait Pause
             PlayerAudio.Ctlcontrols.pause()
+            Timer1.Stop()
             Exit Sub
         ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPaused Then 'Si c'est pause on fait play
             PlayerAudio.Ctlcontrols.play()
-        ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Then 'Si c'est stoppé on load la video
-            Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedIndex.ToString)
+            Timer1.Stop()
+        ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
+            Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
             PlayerAudio.URL = TempGrid.Rows(lavraieligne / 35).Cells(TempGrid.Columns("CheminVideo").Index).Value
+
             PlayerAudio.Ctlcontrols.play()
+            PlayerAudio.uiMode = "invisible"
+
+            ProgressBar1.Minimum = 0
+            ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
+
+            ListTitreDesJeux.Items.Clear()
+
+            Timer1.Start()
         End If
     End Sub
 
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
         PlayerAudio.Ctlcontrols.stop()
+    End Sub
+
+    Private Sub HiddenButton_Click(sender As Object, e As EventArgs) Handles HiddenButton.Click
+        If TempGrid.Visible = False Then
+            TempGrid.Visible = True
+            TempGrid.Size = New Point(369, 404)
+        Else
+            TempGrid.Visible = False
+            TempGrid.Size = New Point(369, 30)
+            TempGrid.Rows(RandomList.SelectedItem.ToString / 35).Selected = True
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        ProgressBar1.Minimum = 0
+        ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
+        ProgressBar1.Value = PlayerAudio.Ctlcontrols.currentPosition
+        ProgressBar1.Increment(1)
+
+        'On check la moitié du temps
+        Dim moitiedutemps As String = PlayerAudio.currentMedia.duration / 2
+
+        'On va ajouter des valeurs au pif en listbox a partir de la moitié du temps
+        If PlayerAudio.Ctlcontrols.currentPosition > moitiedutemps Then
+
+            'on compte la liste pour voir si on doit generer ou non
+            If ListTitreDesJeux.Items.Count > 11 Then Exit Sub
+            'on recupere le vrai jeu actuel
+            Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 35
+            Dim titreencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Titre").Index).Value
+            Dim random As New Random
+            'on check le type de jeu
+            Dim TitreGen As String
+
+
+
+
+            If TitreOnly.Checked = True Then 'Titre uniquement
+
+                'On va generer un titre de jeu jusqu'a ce qu'il ne soit pas dans la liste
+                Do
+again:
+                    TitreGen = TempGrid.Rows(Convert.ToString(random.Next(0, TempGrid.Rows.Count - 1))).Cells(TempGrid.Columns("Titre").Index).Value
+                    If ListTitreDesJeux.Items.Contains(TitreGen) = True Then GoTo again
+
+                    ListTitreDesJeux.Items.Add(TitreGen)
+                Loop Until ListTitreDesJeux.Items.Count > 11
+
+                ListTitreDesJeux.Items.Add(titreencours)
+                ListTitreDesJeux.Sorted = True
+
+
+
+
+
+
+
+            ElseIf ConsoleTitre.Checked = True Then ' Titre Et Consoles
+                'On va d'abord faire un melange des consoles selectionnées
+                Dim consoleencours As String = TempGrid.Rows(Convert.ToInt32(RandomList.SelectedItem.ToString) / 35).Cells(TempGrid.Columns("Titre").Index).Value
+
+                If ListConsoleDesJeux.SelectedItem.ToString = consoleencours Then ' Si c'est la bonne console on va afficher les propositions apres 15 sec aussi
+                    Do
+again2:
+                        TitreGen = TempGrid.Rows(Convert.ToString(random.Next(0, TempGrid.Rows.Count - 1))).Cells(TempGrid.Columns("Titre").Index).Value
+                        If ListTitreDesJeux.Items.Contains(TitreGen) = True Then GoTo again2
+
+                        ListTitreDesJeux.Items.Add(TitreGen)
+                    Loop Until ListTitreDesJeux.Items.Count > 11
+
+                    ListTitreDesJeux.Items.Add(titreencours)
+                    ListTitreDesJeux.Sorted = True
+                Else
+                    Exit Sub
+                End If
+            End If
+        End If
+    End Sub
+    Private Shared Sub SortIntegerListBox(ByVal listBox As ListBox)
+        Dim TempList As New List(Of Integer)
+        For Each LI In listBox.Items
+            TempList.Add(Integer.Parse(LI.ToString()))
+        Next
+        TempList.Sort()
+        listBox.DataSource = TempList
+    End Sub
+
+    Private Sub ListTitreDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListTitreDesJeux.SelectedIndexChanged
+        'on prend le titre en cours
+        Dim titreencours As String = TempGrid.Rows(Convert.ToInt32(RandomList.SelectedItem.ToString) / 35).Cells(TempGrid.Columns("Titre").Index).Value
+        'on verifie si la selection est bien celle ci
+        If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
+            PlayerAudio.uiMode = "none"
+            MsgBox("Bien vu !")
+        Else
+            MsgBox("Et Non !")
+        End If
     End Sub
 End Class
