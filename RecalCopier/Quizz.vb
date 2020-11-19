@@ -258,7 +258,7 @@ romsuivante:
 
         'Width for columns
         TempGrid.Columns("Console").Width = 50
-        TempGrid.Columns("Titre").Width = 50
+        TempGrid.Columns("Titre").Width = 230
 
         TempGrid.Columns("CheminRom").Visible = False
         TempGrid.Columns("CheminRom").Width = 50
@@ -272,19 +272,19 @@ romsuivante:
         TempGrid.Columns("CheminVideo").Visible = False
         TempGrid.Columns("CheminVideo").Width = 50
 
-        TempGrid.Columns("Genre").Visible = True
+        TempGrid.Columns("Genre").Visible = False
         TempGrid.Columns("Genre").Width = 50
 
-        TempGrid.Columns("Note").Visible = True
+        TempGrid.Columns("Note").Visible = False
         TempGrid.Columns("Note").Width = 50
 
-        TempGrid.Columns("Developer").Visible = True
+        TempGrid.Columns("Developer").Visible = False
         TempGrid.Columns("Developer").Width = 50
 
-        TempGrid.Columns("Publisher").Visible = True
+        TempGrid.Columns("Publisher").Visible = False
         TempGrid.Columns("Publisher").Width = 50
 
-        TempGrid.Columns("NbPlayers").Visible = True
+        TempGrid.Columns("NbPlayers").Visible = False
         TempGrid.Columns("NbPlayers").Width = 50
 
         TempGrid.Columns("DateSortie").Visible = False
@@ -363,6 +363,7 @@ suite4:
                     listhelpingboxNote.Items.Remove(valeur)
                 Else
                     listhelpingboxNote.Items.Add(valeur) ' si non on l'ajoute
+
                 End If
 suite5:
             End If
@@ -401,7 +402,7 @@ suite5:
         listhelpingboxPubl.Location = New Point(6, 16)
         listhelpingboxPubl.Size = New Point(136, 199)
     End Sub
-    Private Sub ComboRating_GotFocus(sender As Object, e As EventArgs) Handles ComboRating.GotFocus
+    Private Sub ComboRating_GotFocus(sender As Object, e As EventArgs)
         listhelpingboxDev.Show()
         listhelpingboxGenre.Show()
         listhelpingboxNote.Show()
@@ -502,7 +503,7 @@ suite5:
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub ComboRating_KeyDown(sender As Object, e As KeyEventArgs) Handles ComboRating.KeyDown
+    Private Sub ComboRating_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
@@ -564,7 +565,7 @@ suite5:
         If ConsoleTitre.Checked = True Then
 
             For Each j In ConsoleList.SelectedItems
-                ListConsoleDesJeux.Items.Add(ConsoleList.SelectedItems(j).ToString)
+                ListConsoleDesJeux.Items.Add(j)
             Next
         End If
 
@@ -616,6 +617,7 @@ suite5:
             Timer1.Stop()
         ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
             Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
+
             PlayerAudio.URL = TempGrid.Rows(lavraieligne / 35).Cells(TempGrid.Columns("CheminVideo").Index).Value
 
             PlayerAudio.Ctlcontrols.play()
@@ -625,7 +627,7 @@ suite5:
             ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
 
             ListTitreDesJeux.Items.Clear()
-
+            ButtonShowVid.Hide()
             Timer1.Start()
         End If
     End Sub
@@ -638,10 +640,15 @@ suite5:
         If TempGrid.Visible = False Then
             TempGrid.Visible = True
             TempGrid.Size = New Point(369, 404)
+            Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
+            Dim nomdujeu As String = TempGrid.Rows(lavraieligne / 35).Cells(TempGrid.Columns("Titre").Index).Value
+            'on faire le focus sur la ligne
+            TempGrid.ClearSelection()
+            TempGrid.Rows(lavraieligne / 35).Selected = True
+            TempGrid.CurrentCell = TempGrid.Rows(lavraieligne / 35).Cells(1)
         Else
             TempGrid.Visible = False
             TempGrid.Size = New Point(369, 30)
-            TempGrid.Rows(RandomList.SelectedItem.ToString / 35).Selected = True
         End If
     End Sub
 
@@ -666,9 +673,6 @@ suite5:
             'on check le type de jeu
             Dim TitreGen As String
 
-
-
-
             If TitreOnly.Checked = True Then 'Titre uniquement
 
                 'On va generer un titre de jeu jusqu'a ce qu'il ne soit pas dans la liste
@@ -684,15 +688,10 @@ again:
                 ListTitreDesJeux.Sorted = True
 
 
-
-
-
-
-
             ElseIf ConsoleTitre.Checked = True Then ' Titre Et Consoles
                 'On va d'abord faire un melange des consoles selectionnées
-                Dim consoleencours As String = TempGrid.Rows(Convert.ToInt32(RandomList.SelectedItem.ToString) / 35).Cells(TempGrid.Columns("Titre").Index).Value
-
+                Dim consoleencours As String = TempGrid.Rows(Convert.ToInt32(RandomList.SelectedItem.ToString) / 35).Cells(TempGrid.Columns("Console").Index).Value
+                If ListConsoleDesJeux.SelectedItem = Nothing Then Exit Sub
                 If ListConsoleDesJeux.SelectedItem.ToString = consoleencours Then ' Si c'est la bonne console on va afficher les propositions apres 15 sec aussi
                     Do
 again2:
@@ -725,9 +724,19 @@ again2:
         'on verifie si la selection est bien celle ci
         If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
             PlayerAudio.uiMode = "none"
-            MsgBox("Bien vu !")
+            'On configure vite le bouton showvideo
+            Dim imgvideo As New Bitmap(My.Resources.OKvideo)
+            Dim imgvideo2 As New Bitmap(imgvideo, imgvideo.Width, imgvideo.Height)
+            ButtonShowVid.Image = imgvideo2
+            ButtonShowVid.Show()
+
+            MsgBox("Bien Joué !")
         Else
             MsgBox("Et Non !")
         End If
+    End Sub
+
+    Private Sub ButtonShowVid_Click(sender As Object, e As EventArgs) Handles ButtonShowVid.Click
+        System.Diagnostics.Process.Start(TempGrid.SelectedCells(TempGrid.Columns("CheminVideo").Index).Value.ToString)
     End Sub
 End Class
