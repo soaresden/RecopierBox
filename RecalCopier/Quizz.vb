@@ -29,6 +29,9 @@ Public Class Quizz
             ConsoleTitre.Hide()
             ListConsoleDesJeux.Hide()
             TitreOnly.Checked = True
+        Else
+            ConsoleTitre.Show()
+            ListConsoleDesJeux.Show()
         End If
 
         'Afficher les Totaux
@@ -546,6 +549,10 @@ suite5:
             Exit Sub
         End If
 
+        If ModeEasy.Checked = False And ModeHardcore.Checked = False Then
+            MsgBox("Merci de choisir la Difficulté")
+        End If
+
         If RandomList.Items.Count = 0 Then
             MsgBox("Merci de Déclencher un Random")
             Exit Sub
@@ -621,15 +628,16 @@ suite5:
             PlayerAudio.URL = TempGrid.Rows(lavraieligne / 35).Cells(TempGrid.Columns("CheminVideo").Index).Value
 
             PlayerAudio.Ctlcontrols.play()
-            PlayerAudio.uiMode = "invisible"
+            If ModeEasy.Checked = True Then PlayerAudio.uiMode = "none"
+            If ModeHardcore.Checked = True Then PlayerAudio.uiMode = "invisible"
 
             ProgressBar1.Minimum = 0
-            ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
+                ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
 
-            ListTitreDesJeux.Items.Clear()
-            ButtonShowVid.Hide()
-            Timer1.Start()
-        End If
+                ListTitreDesJeux.Items.Clear()
+                ButtonShowVid.Hide()
+                Timer1.Start()
+            End If
     End Sub
 
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
@@ -739,4 +747,21 @@ again2:
         System.Diagnostics.Process.Start(TempGrid.SelectedCells(TempGrid.Columns("CheminVideo").Index).Value.ToString)
     End Sub
 
+    Private Sub ModeEasy_CheckedChanged(sender As Object, e As EventArgs) Handles ModeEasy.CheckedChanged
+        If ModeEasy.Checked = True Then ModeHardcore.Checked = False
+    End Sub
+
+    Private Sub ModeHardcore_CheckedChanged(sender As Object, e As EventArgs) Handles ModeHardcore.CheckedChanged
+        If ModeHardcore.Checked = True Then ModeEasy.Checked = False
+    End Sub
+
+    Private Sub ListConsoleDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListConsoleDesJeux.SelectedIndexChanged
+        Dim consoleencours As String = TempGrid.Rows(Convert.ToInt32(RandomList.SelectedItem.ToString) / 35).Cells(TempGrid.Columns("Console").Index).Value
+
+        If ListConsoleDesJeux.SelectedItem.ToString = consoleencours Then
+            MsgBox("Bravo pour la Console !")
+        Else
+            MsgBox("Mauvaise Console !")
+        End If
+    End Sub
 End Class
