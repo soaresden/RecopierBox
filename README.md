@@ -1,9 +1,10 @@
 # RecopierBox
 A Recalbox Copier program to be able to create custom library
 
-**Presentation Des Fonctionnalités : **
+**Presentation Des Fonctionnalités :**
 
 ![image](https://user-images.githubusercontent.com/54243866/99268623-b3c70e00-2825-11eb-95ee-389d7bde9db8.png)
+
 https://streamable.com/udxcxl
 
 
