@@ -30,8 +30,10 @@ Partial Class Quizz
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupParametres = New System.Windows.Forms.GroupBox()
         Me.GroupInfoRoms = New System.Windows.Forms.GroupBox()
-        Me.ComboRating = New System.Windows.Forms.TextBox()
+        Me.TxtRating = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.listhelpingboxPlayCount = New System.Windows.Forms.ListBox()
+        Me.listhelpingboxAnnee = New System.Windows.Forms.ListBox()
         Me.listhelpingboxGenre = New System.Windows.Forms.ListBox()
         Me.listhelpingboxNote = New System.Windows.Forms.ListBox()
         Me.listhelpingboxPubl = New System.Windows.Forms.ListBox()
@@ -53,7 +55,6 @@ Partial Class Quizz
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ModeHardcore = New System.Windows.Forms.CheckBox()
         Me.ModeEasy = New System.Windows.Forms.CheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -90,7 +91,6 @@ Partial Class Quizz
         Me.GroupInfoRoms.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupConfigPartie.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.QuizzBox.SuspendLayout()
@@ -163,7 +163,7 @@ Partial Class Quizz
         'GroupInfoRoms
         '
         Me.GroupInfoRoms.BackColor = System.Drawing.Color.MistyRose
-        Me.GroupInfoRoms.Controls.Add(Me.ComboRating)
+        Me.GroupInfoRoms.Controls.Add(Me.TxtRating)
         Me.GroupInfoRoms.Controls.Add(Me.GroupBox1)
         Me.GroupInfoRoms.Controls.Add(Me.TxtSynopsis)
         Me.GroupInfoRoms.Controls.Add(Me.txtplayers)
@@ -188,16 +188,18 @@ Partial Class Quizz
         Me.GroupInfoRoms.TabStop = False
         Me.GroupInfoRoms.Text = "Définir un/plusieurs Filtres sur Votre Selection :"
         '
-        'ComboRating
+        'TxtRating
         '
-        Me.ComboRating.Location = New System.Drawing.Point(6, 307)
-        Me.ComboRating.Name = "ComboRating"
-        Me.ComboRating.Size = New System.Drawing.Size(121, 20)
-        Me.ComboRating.TabIndex = 27
+        Me.TxtRating.Location = New System.Drawing.Point(6, 307)
+        Me.TxtRating.Name = "TxtRating"
+        Me.TxtRating.Size = New System.Drawing.Size(121, 20)
+        Me.TxtRating.TabIndex = 27
         '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.DimGray
+        Me.GroupBox1.Controls.Add(Me.listhelpingboxPlayCount)
+        Me.GroupBox1.Controls.Add(Me.listhelpingboxAnnee)
         Me.GroupBox1.Controls.Add(Me.listhelpingboxGenre)
         Me.GroupBox1.Controls.Add(Me.listhelpingboxNote)
         Me.GroupBox1.Controls.Add(Me.listhelpingboxPubl)
@@ -210,6 +212,26 @@ Partial Class Quizz
         Me.GroupBox1.TabIndex = 26
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Catégories Trouvées :"
+        '
+        'listhelpingboxPlayCount
+        '
+        Me.listhelpingboxPlayCount.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.listhelpingboxPlayCount.FormattingEnabled = True
+        Me.listhelpingboxPlayCount.Location = New System.Drawing.Point(6, 198)
+        Me.listhelpingboxPlayCount.Name = "listhelpingboxPlayCount"
+        Me.listhelpingboxPlayCount.Size = New System.Drawing.Size(136, 30)
+        Me.listhelpingboxPlayCount.Sorted = True
+        Me.listhelpingboxPlayCount.TabIndex = 34
+        '
+        'listhelpingboxAnnee
+        '
+        Me.listhelpingboxAnnee.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.listhelpingboxAnnee.FormattingEnabled = True
+        Me.listhelpingboxAnnee.Location = New System.Drawing.Point(6, 124)
+        Me.listhelpingboxAnnee.Name = "listhelpingboxAnnee"
+        Me.listhelpingboxAnnee.Size = New System.Drawing.Size(136, 30)
+        Me.listhelpingboxAnnee.Sorted = True
+        Me.listhelpingboxAnnee.TabIndex = 33
         '
         'listhelpingboxGenre
         '
@@ -225,7 +247,7 @@ Partial Class Quizz
         '
         Me.listhelpingboxNote.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.listhelpingboxNote.FormattingEnabled = True
-        Me.listhelpingboxNote.Location = New System.Drawing.Point(6, 250)
+        Me.listhelpingboxNote.Location = New System.Drawing.Point(6, 275)
         Me.listhelpingboxNote.Name = "listhelpingboxNote"
         Me.listhelpingboxNote.Size = New System.Drawing.Size(136, 30)
         Me.listhelpingboxNote.Sorted = True
@@ -235,7 +257,7 @@ Partial Class Quizz
         '
         Me.listhelpingboxPubl.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.listhelpingboxPubl.FormattingEnabled = True
-        Me.listhelpingboxPubl.Location = New System.Drawing.Point(6, 117)
+        Me.listhelpingboxPubl.Location = New System.Drawing.Point(6, 88)
         Me.listhelpingboxPubl.Name = "listhelpingboxPubl"
         Me.listhelpingboxPubl.Size = New System.Drawing.Size(136, 30)
         Me.listhelpingboxPubl.Sorted = True
@@ -245,7 +267,7 @@ Partial Class Quizz
         '
         Me.listhelpingboxPlayers.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.listhelpingboxPlayers.FormattingEnabled = True
-        Me.listhelpingboxPlayers.Location = New System.Drawing.Point(6, 178)
+        Me.listhelpingboxPlayers.Location = New System.Drawing.Point(6, 162)
         Me.listhelpingboxPlayers.Name = "listhelpingboxPlayers"
         Me.listhelpingboxPlayers.Size = New System.Drawing.Size(136, 30)
         Me.listhelpingboxPlayers.Sorted = True
@@ -255,7 +277,7 @@ Partial Class Quizz
         '
         Me.listhelpingboxDev.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.listhelpingboxDev.FormattingEnabled = True
-        Me.listhelpingboxDev.Location = New System.Drawing.Point(6, 61)
+        Me.listhelpingboxDev.Location = New System.Drawing.Point(6, 52)
         Me.listhelpingboxDev.Name = "listhelpingboxDev"
         Me.listhelpingboxDev.Size = New System.Drawing.Size(136, 30)
         Me.listhelpingboxDev.Sorted = True
@@ -384,8 +406,7 @@ Partial Class Quizz
         '
         'GroupConfigPartie
         '
-        Me.GroupConfigPartie.BackColor = System.Drawing.Color.OldLace
-        Me.GroupConfigPartie.Controls.Add(Me.PictureBox1)
+        Me.GroupConfigPartie.BackColor = System.Drawing.Color.Black
         Me.GroupConfigPartie.Controls.Add(Me.ModeHardcore)
         Me.GroupConfigPartie.Controls.Add(Me.ModeEasy)
         Me.GroupConfigPartie.Controls.Add(Me.Label14)
@@ -394,6 +415,7 @@ Partial Class Quizz
         Me.GroupConfigPartie.Controls.Add(Me.Label11)
         Me.GroupConfigPartie.Controls.Add(Me.TitreOnly)
         Me.GroupConfigPartie.Controls.Add(Me.txtnbmanches)
+        Me.GroupConfigPartie.ForeColor = System.Drawing.Color.White
         Me.GroupConfigPartie.Location = New System.Drawing.Point(6, 358)
         Me.GroupConfigPartie.Name = "GroupConfigPartie"
         Me.GroupConfigPartie.Size = New System.Drawing.Size(309, 100)
@@ -401,42 +423,32 @@ Partial Class Quizz
         Me.GroupConfigPartie.TabStop = False
         Me.GroupConfigPartie.Text = "Config Partie :"
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(25, 56)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(111, 41)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 30
-        Me.PictureBox1.TabStop = False
-        '
         'ModeHardcore
         '
         Me.ModeHardcore.AutoSize = True
-        Me.ModeHardcore.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ModeHardcore.ForeColor = System.Drawing.Color.Cornsilk
         Me.ModeHardcore.Location = New System.Drawing.Point(9, 77)
         Me.ModeHardcore.Name = "ModeHardcore"
-        Me.ModeHardcore.Size = New System.Drawing.Size(97, 17)
+        Me.ModeHardcore.Size = New System.Drawing.Size(152, 17)
         Me.ModeHardcore.TabIndex = 34
-        Me.ModeHardcore.Text = "ModeHardcore"
+        Me.ModeHardcore.Text = "Mode Hardcore (Son Only)"
         Me.ModeHardcore.UseVisualStyleBackColor = True
         '
         'ModeEasy
         '
         Me.ModeEasy.AutoSize = True
-        Me.ModeEasy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ModeEasy.ForeColor = System.Drawing.Color.Cornsilk
         Me.ModeEasy.Location = New System.Drawing.Point(9, 56)
         Me.ModeEasy.Name = "ModeEasy"
-        Me.ModeEasy.Size = New System.Drawing.Size(76, 17)
+        Me.ModeEasy.Size = New System.Drawing.Size(143, 17)
         Me.ModeEasy.TabIndex = 33
-        Me.ModeEasy.Text = "ModeEasy"
+        Me.ModeEasy.Text = "Mode Easy (Avec Video)"
         Me.ModeEasy.UseVisualStyleBackColor = True
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label14.ForeColor = System.Drawing.Color.Lime
         Me.Label14.Location = New System.Drawing.Point(189, 40)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(72, 13)
@@ -446,7 +458,7 @@ Partial Class Quizz
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label13.ForeColor = System.Drawing.Color.Yellow
         Me.Label13.Location = New System.Drawing.Point(24, 40)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(54, 13)
@@ -456,7 +468,7 @@ Partial Class Quizz
         'ConsoleTitre
         '
         Me.ConsoleTitre.AutoSize = True
-        Me.ConsoleTitre.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ConsoleTitre.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.ConsoleTitre.Location = New System.Drawing.Point(192, 77)
         Me.ConsoleTitre.Name = "ConsoleTitre"
         Me.ConsoleTitre.Size = New System.Drawing.Size(96, 17)
@@ -468,8 +480,8 @@ Partial Class Quizz
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label11.Location = New System.Drawing.Point(24, 16)
+        Me.Label11.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.Label11.Location = New System.Drawing.Point(137, 16)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(112, 13)
         Me.Label11.TabIndex = 26
@@ -478,7 +490,7 @@ Partial Class Quizz
         'TitreOnly
         '
         Me.TitreOnly.AutoSize = True
-        Me.TitreOnly.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.TitreOnly.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.TitreOnly.Location = New System.Drawing.Point(192, 59)
         Me.TitreOnly.Name = "TitreOnly"
         Me.TitreOnly.Size = New System.Drawing.Size(97, 17)
@@ -489,7 +501,9 @@ Partial Class Quizz
         '
         'txtnbmanches
         '
-        Me.txtnbmanches.Location = New System.Drawing.Point(142, 13)
+        Me.txtnbmanches.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.txtnbmanches.ForeColor = System.Drawing.SystemColors.Window
+        Me.txtnbmanches.Location = New System.Drawing.Point(255, 13)
         Me.txtnbmanches.Name = "txtnbmanches"
         Me.txtnbmanches.Size = New System.Drawing.Size(48, 20)
         Me.txtnbmanches.TabIndex = 25
@@ -763,7 +777,6 @@ Partial Class Quizz
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupConfigPartie.ResumeLayout(False)
         Me.GroupConfigPartie.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.QuizzBox.ResumeLayout(False)
@@ -827,12 +840,13 @@ Partial Class Quizz
     Friend WithEvents PlayerAudio As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents HiddenButton As PictureBox
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents ComboRating As TextBox
+    Friend WithEvents TxtRating As TextBox
     Friend WithEvents ButtonShowVid As Button
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents ModeHardcore As CheckBox
     Friend WithEvents ModeEasy As CheckBox
     Friend WithEvents txtRules As TextBox
+    Friend WithEvents listhelpingboxAnnee As ListBox
+    Friend WithEvents listhelpingboxPlayCount As ListBox
 End Class

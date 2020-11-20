@@ -45,7 +45,16 @@ Public Class Quizz
             Exit Sub
         End If
 
+        'On affiche les listboxhelpers
+        listhelpingboxGenre.Show()
+        listhelpingboxDev.Show()
+        listhelpingboxPubl.Show()
+        listhelpingboxAnnee.Show()
+        listhelpingboxPlayers.Show()
+        listhelpingboxPlayCount.Show()
+        listhelpingboxNote.Show()
         'Showing stuff
+
 
         If ConsoleList.Items.Count = 0 Then Exit Sub
 
@@ -291,7 +300,7 @@ romsuivante:
         TempGrid.Columns("NbPlayers").Visible = False
         TempGrid.Columns("NbPlayers").Width = 50
 
-        TempGrid.Columns("DateSortie").Visible = False
+        TempGrid.Columns("DateSortie").Visible = True
         TempGrid.Columns("DateSortie").Width = 50
 
         TempGrid.Columns("NbLancé").Visible = False
@@ -372,90 +381,168 @@ suite4:
 suite5:
             End If
 
+
+            If IsDBNull(TempGrid.Rows(ligne).Cells(TempGrid.Columns("DateSortie").Index).Value) = True Or IsNothing(TempGrid.Rows(ligne).Cells(TempGrid.Columns("DateSortie").Index).Value) = True Then
+                GoTo suite6
+            Else
+                valeur = TempGrid.Rows(ligne).Cells(TempGrid.Columns("DateSortie").Index).Value ' on check si la valeur est déja presente ou non
+                If valeur = Nothing Then GoTo suite6
+                Dim annee As String = valeur.Substring(0, 4)
+                If listhelpingboxAnnee.Items.Contains(annee) Then
+                    listhelpingboxAnnee.Items.Remove(annee)
+                Else
+                    listhelpingboxAnnee.Items.Add(annee) ' si non on l'ajoute
+
+                End If
+suite6:
+            End If
+
+
         Next
 
     End Sub
+
+
+
+
     'Ensemble Got Focus et Leave Focus pour les listboxes
     Private Sub Txtgenre_GotFocus(sender As Object, e As EventArgs) Handles txtgenre.GotFocus
-        listhelpingboxDev.Show()
+        'On hide tout
+        listhelpingboxGenre.Hide()
+        listhelpingboxDev.Hide()
+        listhelpingboxPubl.Hide()
+        listhelpingboxAnnee.Hide()
+        listhelpingboxPlayers.Hide()
+        listhelpingboxPlayCount.Hide()
+        listhelpingboxNote.Hide()
+        'Sauf
         listhelpingboxGenre.Show()
-        listhelpingboxNote.Show()
-        listhelpingboxPlayers.Show()
-        listhelpingboxPubl.Show()
+        'On met la bonne en haut
         listhelpingboxGenre.BringToFront()
+        'On resize la bonne
         listhelpingboxGenre.Location = New Point(2, 15)
         listhelpingboxGenre.Size = New Point(145, 300)
     End Sub
     Private Sub Txtdev_GotFocus(sender As Object, e As EventArgs) Handles txtdev.GotFocus
+        'On hide tout
+        listhelpingboxGenre.Hide()
+        listhelpingboxDev.Hide()
+        listhelpingboxPubl.Hide()
+        listhelpingboxAnnee.Hide()
+        listhelpingboxPlayers.Hide()
+        listhelpingboxPlayCount.Hide()
+        listhelpingboxNote.Hide()
+        'Sauf
         listhelpingboxDev.Show()
-        listhelpingboxGenre.Show()
-        listhelpingboxNote.Show()
-        listhelpingboxPlayers.Show()
-        listhelpingboxPubl.Show()
+        'On met la bonne en haut
         listhelpingboxDev.BringToFront()
+        'On resize la bonne
         listhelpingboxDev.Location = New Point(2, 15)
         listhelpingboxDev.Size = New Point(145, 300)
     End Sub
     Private Sub Txtpub_GotFocus(sender As Object, e As EventArgs) Handles txtpub.GotFocus
-        listhelpingboxDev.Show()
-        listhelpingboxGenre.Show()
-        listhelpingboxNote.Show()
-        listhelpingboxPlayers.Show()
+        'On hide tout
+        listhelpingboxGenre.Hide()
+        listhelpingboxDev.Hide()
+        listhelpingboxPubl.Hide()
+        listhelpingboxAnnee.Hide()
+        listhelpingboxPlayers.Hide()
+        listhelpingboxPlayCount.Hide()
+        listhelpingboxNote.Hide()
+        'Sauf
         listhelpingboxPubl.Show()
+        'On met la bonne en haut
         listhelpingboxPubl.BringToFront()
+        'On resize la bonne
         listhelpingboxPubl.Location = New Point(2, 15)
         listhelpingboxPubl.Size = New Point(145, 300)
     End Sub
-    Private Sub ComboRating_GotFocus(sender As Object, e As EventArgs)
-        listhelpingboxDev.Show()
-        listhelpingboxGenre.Show()
-        listhelpingboxNote.Show()
+    Private Sub TxtAnnee_GotFocus(sender As Object, e As EventArgs) Handles TxtAnnee.GotFocus
+        'On hide tout
+        listhelpingboxGenre.Hide()
+        listhelpingboxDev.Hide()
+        listhelpingboxPubl.Hide()
+        listhelpingboxAnnee.Hide()
+        listhelpingboxPlayers.Hide()
+        listhelpingboxPlayCount.Hide()
+        listhelpingboxNote.Hide()
+        'Sauf
+        listhelpingboxAnnee.Show()
+        'On met la bonne en haut
+        listhelpingboxAnnee.BringToFront()
+        'On resize la bonne
+        listhelpingboxAnnee.Location = New Point(2, 15)
+        listhelpingboxAnnee.Size = New Point(145, 300)
+    End Sub
+    Private Sub Txtplayers_GotFocus(sender As Object, e As EventArgs) Handles txtplayers.GotFocus
+        'On hide tout
+        listhelpingboxGenre.Hide()
+        listhelpingboxDev.Hide()
+        listhelpingboxPubl.Hide()
+        listhelpingboxAnnee.Hide()
+        listhelpingboxPlayers.Hide()
+        listhelpingboxPlayCount.Hide()
+        listhelpingboxNote.Hide()
+        'Sauf
         listhelpingboxPlayers.Show()
-        listhelpingboxPubl.Show()
+        'On met la bonne en haut
+        listhelpingboxPlayers.BringToFront()
+        'On resize la bonne
+        listhelpingboxPlayers.Location = New Point(2, 15)
+        listhelpingboxPlayers.Size = New Point(145, 300)
+    End Sub
+    Private Sub TxtPlayCount_GotFocus(sender As Object, e As EventArgs) Handles TxtPlayCount.GotFocus
+        'On hide tout
+        listhelpingboxGenre.Hide()
+        listhelpingboxDev.Hide()
+        listhelpingboxPubl.Hide()
+        listhelpingboxAnnee.Hide()
+        listhelpingboxPlayers.Hide()
+        listhelpingboxPlayCount.Hide()
+        listhelpingboxNote.Hide()
+        'Sauf
+        listhelpingboxPlayCount.Show()
+        'On met la bonne en haut
+        listhelpingboxPlayCount.BringToFront()
+        'On resize la bonne
+        listhelpingboxPlayCount.Location = New Point(2, 15)
+        listhelpingboxPlayCount.Size = New Point(145, 300)
+    End Sub
+    Private Sub TxtSynopsis_GotFocus(sender As Object, e As EventArgs) Handles TxtSynopsis.GotFocus
+        'On hide tout
+        listhelpingboxGenre.Hide()
+        listhelpingboxDev.Hide()
+        listhelpingboxPubl.Hide()
+        listhelpingboxAnnee.Hide()
+        listhelpingboxPlayers.Hide()
+        listhelpingboxPlayCount.Hide()
+        listhelpingboxNote.Hide()
+    End Sub
+    Private Sub TxtRating_GotFocus(sender As Object, e As EventArgs) Handles TxtRating.GotFocus
+        'On hide tout
+        listhelpingboxGenre.Hide()
+        listhelpingboxDev.Hide()
+        listhelpingboxPubl.Hide()
+        listhelpingboxAnnee.Hide()
+        listhelpingboxPlayers.Hide()
+        listhelpingboxPlayCount.Hide()
+        listhelpingboxNote.Hide()
+        'Sauf
+        listhelpingboxNote.Show()
+        'On met la bonne en haut
         listhelpingboxNote.BringToFront()
+        'On resize la bonne
         listhelpingboxNote.Location = New Point(2, 15)
         listhelpingboxNote.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtAnnee_GotFocus(sender As Object, e As EventArgs) Handles TxtAnnee.GotFocus
-        listhelpingboxDev.Hide()
-        listhelpingboxGenre.Hide()
-        listhelpingboxNote.Hide()
-        listhelpingboxPlayers.Hide()
-        listhelpingboxPubl.Hide()
-    End Sub
-    Private Sub TxtPlayCount_GotFocus(sender As Object, e As EventArgs) Handles TxtPlayCount.GotFocus
-        listhelpingboxDev.Hide()
-        listhelpingboxGenre.Hide()
-        listhelpingboxNote.Hide()
-        listhelpingboxPlayers.Hide()
-        listhelpingboxPubl.Hide()
-    End Sub
-    Private Sub TxtSynopsis_GotFocus(sender As Object, e As EventArgs) Handles TxtSynopsis.GotFocus
-        listhelpingboxDev.Hide()
-        listhelpingboxGenre.Hide()
-        listhelpingboxNote.Hide()
-        listhelpingboxPlayers.Hide()
-        listhelpingboxPubl.Hide()
-    End Sub
-    Private Sub Txtgenre_LostFocus(sender As Object, e As EventArgs) Handles txtgenre.LostFocus
-        listhelpingboxGenre.Location = New Point(6, 16)
-        listhelpingboxGenre.Size = New Point(136, 30)
-    End Sub
-    Private Sub ListhelpingboxDev_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxDev.LostFocus
-        listhelpingboxDev.Location = New Point(6, 58)
-        listhelpingboxDev.Size = New Point(136, 30)
-    End Sub
-    Private Sub ListhelpingboxPubl_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxPubl.LostFocus
-        listhelpingboxPubl.Location = New Point(6, 94)
-        listhelpingboxPubl.Size = New Point(136, 30)
-    End Sub
-    Private Sub ListhelpingboxPlayers_LostFocus(sender As Object, e As EventArgs) Handles listhelpingboxPlayers.LostFocus
-        listhelpingboxPlayers.Location = New Point(6, 130)
-        listhelpingboxPlayers.Size = New Point(136, 30)
-    End Sub
-    Private Sub LsthelpingboxNote_Leave(sender As Object, e As EventArgs) Handles listhelpingboxNote.Leave
-        listhelpingboxNote.Location = New Point(6, 166)
-        listhelpingboxNote.Size = New Point(136, 30)
+    Private Sub TxtSynopsis_LostFocus(sender As Object, e As EventArgs) Handles TxtSynopsis.LostFocus
+        listhelpingboxGenre.Show()
+        listhelpingboxDev.Show()
+        listhelpingboxPubl.Show()
+        listhelpingboxAnnee.Show()
+        listhelpingboxPlayers.Show()
+        listhelpingboxPlayCount.Show()
+        listhelpingboxNote.Show()
     End Sub
 
 
@@ -469,7 +556,7 @@ suite5:
 
     Sub Entreesurfiltres()
         'commande pour filtrer
-        TryCast(TempGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Genre] like '%{0}%' AND [Developer] like '%{1}%' AND [Publisher] like '%{2}%' AND [DateSortie] like '%{3}%' AND [NbPlayers] like '%{4}%' AND [NbLancé] like '%{5}%' AND [Synopsis] like '%{6}%' AND [Note] like '%{7}%'", txtgenre.Text, txtdev.Text, txtpub.Text, TxtAnnee.Text, txtplayers.Text, TxtPlayCount.Text, TxtSynopsis.Text, ComboRating.Text)
+        TryCast(TempGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Genre] like '%{0}%' AND [Developer] like '%{1}%' AND [Publisher] like '%{2}%' AND [DateSortie] like '%{3}%' AND [NbPlayers] like '%{4}%' AND [NbLancé] like '%{5}%' AND [Synopsis] like '%{6}%' AND [Note] like '%{7}%'", txtgenre.Text, txtdev.Text, txtpub.Text, TxtAnnee.Text, txtplayers.Text, TxtPlayCount.Text, TxtSynopsis.Text, TxtRating.Text)
         'Recalcul des resultats
         TxtTotalEntrees.Text = TempGrid.RowCount - 1
     End Sub
@@ -648,19 +735,27 @@ suite5:
     End Sub
 
     Private Sub HiddenButton_Click(sender As Object, e As EventArgs) Handles HiddenButton.Click
-        If TempGrid.Visible = False Then
+        ' Si le quizz est pas fait encore, on affiche juste
+        If QuizzBox.Visible = False Then
             TempGrid.Visible = True
             TempGrid.Size = New Point(369, 404)
-            Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
-            Dim nomdujeu As String = TempGrid.Rows(lavraieligne / 35).Cells(TempGrid.Columns("Titre").Index).Value
-            'on faire le focus sur la ligne
-            TempGrid.ClearSelection()
-            TempGrid.Rows(lavraieligne / 35).Selected = True
-            TempGrid.CurrentCell = TempGrid.Rows(lavraieligne / 35).Cells(1)
-        Else
-            TempGrid.Visible = False
-            TempGrid.Size = New Point(369, 30)
+        Else ' sinon on affiche et on va selectionner
+            If TempGrid.Visible = False Then
+                TempGrid.Visible = True
+                TempGrid.Size = New Point(369, 404)
+                Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
+                Dim nomdujeu As String = TempGrid.Rows(lavraieligne / 35).Cells(TempGrid.Columns("Titre").Index).Value
+                'on faire le focus sur la ligne
+                TempGrid.ClearSelection()
+                TempGrid.Rows(lavraieligne / 35).Selected = True
+                TempGrid.CurrentCell = TempGrid.Rows(lavraieligne / 35).Cells(1)
+            Else
+                TempGrid.Visible = False
+                TempGrid.Size = New Point(369, 30)
+            End If
         End If
+
+
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -767,4 +862,11 @@ again2:
             MsgBox("Mauvaise Console !")
         End If
     End Sub
+
+    Private Sub Buttongetback_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
+        Me.Close()
+        Form1.Show()
+    End Sub
+
+
 End Class
