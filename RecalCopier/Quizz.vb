@@ -610,6 +610,12 @@ suite6:
             MsgBox("Trop de Manches > Nb Roms")
             Exit Sub
         End If
+
+        If TxtTotalEntrees.Text < 12 Then
+            MsgBox("Votre Total Roms doit etre Superieur à 12")
+            Exit Sub
+        End If
+
         Dim nbdemanches As Integer = Val(txtnbmanches.Text)    ' how many numbers do you want?
         Dim nbroms As Integer = TxtTotalEntrees.Text
 
@@ -775,6 +781,8 @@ suite6:
 
             'on compte la liste pour voir si on doit generer ou non
             If ListTitreDesJeux.Items.Count > 11 Then Exit Sub
+
+
             'on recupere le vrai jeu actuel
             Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 35
             Dim titreencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Titre").Index).Value
