@@ -17,6 +17,7 @@ Public Class Quizz
         TxtTotalEntrees.Hide()
         QuizzBox.Hide()
         TempGrid.Hide()
+        txtRules.Hide()
 
     End Sub
     Private Sub ButtonValidConsole_Click(sender As Object, e As EventArgs) Handles ButtonValidConsole.Click
@@ -560,6 +561,8 @@ suite5:
 
         'On va maintenant Charger toute l'interface de jeu
         QuizzBox.Show()
+        txtRules.Show()
+
         If ConsoleTitre.Checked = True Then ListConsoleDesJeux.Show() Else ListConsoleDesJeux.Hide()
 
         'On Parametre le tout

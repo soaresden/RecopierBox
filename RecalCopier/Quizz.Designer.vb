@@ -53,9 +53,11 @@ Partial Class Quizz
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.ModeHardcore = New System.Windows.Forms.CheckBox()
+        Me.ModeEasy = New System.Windows.Forms.CheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ConsoleTitre = New System.Windows.Forms.RadioButton()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TitreOnly = New System.Windows.Forms.RadioButton()
@@ -82,8 +84,7 @@ Partial Class Quizz
         Me.PlayerAudio = New AxWMPLib.AxWindowsMediaPlayer()
         Me.HiddenButton = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ModeEasy = New System.Windows.Forms.CheckBox()
-        Me.ModeHardcore = New System.Windows.Forms.CheckBox()
+        Me.txtRules = New System.Windows.Forms.TextBox()
         Me.GroupParamComplet.SuspendLayout()
         Me.GroupParametres.SuspendLayout()
         Me.GroupInfoRoms.SuspendLayout()
@@ -400,6 +401,38 @@ Partial Class Quizz
         Me.GroupConfigPartie.TabStop = False
         Me.GroupConfigPartie.Text = "Config Partie :"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(25, 56)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(111, 41)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 30
+        Me.PictureBox1.TabStop = False
+        '
+        'ModeHardcore
+        '
+        Me.ModeHardcore.AutoSize = True
+        Me.ModeHardcore.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ModeHardcore.Location = New System.Drawing.Point(9, 77)
+        Me.ModeHardcore.Name = "ModeHardcore"
+        Me.ModeHardcore.Size = New System.Drawing.Size(97, 17)
+        Me.ModeHardcore.TabIndex = 34
+        Me.ModeHardcore.Text = "ModeHardcore"
+        Me.ModeHardcore.UseVisualStyleBackColor = True
+        '
+        'ModeEasy
+        '
+        Me.ModeEasy.AutoSize = True
+        Me.ModeEasy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ModeEasy.Location = New System.Drawing.Point(9, 56)
+        Me.ModeEasy.Name = "ModeEasy"
+        Me.ModeEasy.Size = New System.Drawing.Size(76, 17)
+        Me.ModeEasy.TabIndex = 33
+        Me.ModeEasy.Text = "ModeEasy"
+        Me.ModeEasy.UseVisualStyleBackColor = True
+        '
         'Label14
         '
         Me.Label14.AutoSize = True
@@ -419,16 +452,6 @@ Partial Class Quizz
         Me.Label13.Size = New System.Drawing.Size(54, 13)
         Me.Label13.TabIndex = 31
         Me.Label13.Text = "Difficulté :"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(25, 56)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(111, 41)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 30
-        Me.PictureBox1.TabStop = False
         '
         'ConsoleTitre
         '
@@ -591,7 +614,7 @@ Partial Class Quizz
         Me.TitleBox.Image = CType(resources.GetObject("TitleBox.Image"), System.Drawing.Image)
         Me.TitleBox.Location = New System.Drawing.Point(492, 3)
         Me.TitleBox.Name = "TitleBox"
-        Me.TitleBox.Size = New System.Drawing.Size(413, 89)
+        Me.TitleBox.Size = New System.Drawing.Size(212, 89)
         Me.TitleBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.TitleBox.TabIndex = 35
         Me.TitleBox.TabStop = False
@@ -693,9 +716,9 @@ Partial Class Quizz
         '
         'HiddenButton
         '
-        Me.HiddenButton.Location = New System.Drawing.Point(806, 61)
+        Me.HiddenButton.Location = New System.Drawing.Point(683, 59)
         Me.HiddenButton.Name = "HiddenButton"
-        Me.HiddenButton.Size = New System.Drawing.Size(10, 10)
+        Me.HiddenButton.Size = New System.Drawing.Size(5, 5)
         Me.HiddenButton.TabIndex = 39
         Me.HiddenButton.TabStop = False
         '
@@ -703,27 +726,17 @@ Partial Class Quizz
         '
         Me.Timer1.Interval = 500
         '
-        'ModeEasy
+        'txtRules
         '
-        Me.ModeEasy.AutoSize = True
-        Me.ModeEasy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ModeEasy.Location = New System.Drawing.Point(9, 56)
-        Me.ModeEasy.Name = "ModeEasy"
-        Me.ModeEasy.Size = New System.Drawing.Size(76, 17)
-        Me.ModeEasy.TabIndex = 33
-        Me.ModeEasy.Text = "ModeEasy"
-        Me.ModeEasy.UseVisualStyleBackColor = True
-        '
-        'ModeHardcore
-        '
-        Me.ModeHardcore.AutoSize = True
-        Me.ModeHardcore.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ModeHardcore.Location = New System.Drawing.Point(9, 77)
-        Me.ModeHardcore.Name = "ModeHardcore"
-        Me.ModeHardcore.Size = New System.Drawing.Size(97, 17)
-        Me.ModeHardcore.TabIndex = 34
-        Me.ModeHardcore.Text = "ModeHardcore"
-        Me.ModeHardcore.UseVisualStyleBackColor = True
+        Me.txtRules.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.txtRules.Location = New System.Drawing.Point(710, 3)
+        Me.txtRules.Multiline = True
+        Me.txtRules.Name = "txtRules"
+        Me.txtRules.Size = New System.Drawing.Size(195, 89)
+        Me.txtRules.TabIndex = 40
+        Me.txtRules.Text = "Vous allez entendre/voir une video." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*1ère moitié : Concentrez-vous, Souvenez-vou" &
+    "s et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème moitié : Des propositions apparaissent, Validez vot" &
+    "re choix !"
         '
         'Quizz
         '
@@ -737,6 +750,7 @@ Partial Class Quizz
         Me.Controls.Add(Me.TempGrid)
         Me.Controls.Add(Me.GroupParamComplet)
         Me.Controls.Add(Me.Buttongetback)
+        Me.Controls.Add(Me.txtRules)
         Me.MaximumSize = New System.Drawing.Size(924, 629)
         Me.MinimumSize = New System.Drawing.Size(924, 629)
         Me.Name = "Quizz"
@@ -757,6 +771,7 @@ Partial Class Quizz
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HiddenButton, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Buttongetback As Button
@@ -819,4 +834,5 @@ Partial Class Quizz
     Friend WithEvents Label13 As Label
     Friend WithEvents ModeHardcore As CheckBox
     Friend WithEvents ModeEasy As CheckBox
+    Friend WithEvents txtRules As TextBox
 End Class
