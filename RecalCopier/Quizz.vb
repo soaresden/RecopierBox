@@ -639,6 +639,7 @@ suite6:
 
         If ModeEasy.Checked = False And ModeHardcore.Checked = False Then
             MsgBox("Merci de choisir la Difficulté")
+            Exit Sub
         End If
 
         If RandomList.Items.Count = 0 Then
@@ -693,6 +694,7 @@ suite6:
         PlayerAudio.Ctlcontrols.stop()
         RandomList.SelectedIndex = selectionactuelle + 1
         ListTitreDesJeux.Items.Clear()
+        ListConsoleDesJeux.Items.Clear()
     End Sub
 
     Private Sub PlayerPrev_Click(sender As Object, e As EventArgs) Handles PlayerPrev.Click
@@ -701,6 +703,7 @@ suite6:
         PlayerAudio.Ctlcontrols.stop()
         RandomList.SelectedIndex = selectionactuelle - 1
         ListTitreDesJeux.Items.Clear()
+        ListConsoleDesJeux.Items.Clear()
     End Sub
 
     Private Sub PlayerPlay_Click(sender As Object, e As EventArgs) Handles PlayerPlay.Click
@@ -832,7 +835,7 @@ again2:
             PlayerAudio.uiMode = "none"
             'On configure vite le bouton showvideo
             Dim imgvideo As New Bitmap(My.Resources.OKvideo)
-            Dim imgvideo2 As New Bitmap(imgvideo, imgvideo.Width, imgvideo.Height)
+            Dim imgvideo2 As New Bitmap(imgvideo, ButtonShowVid.Width, ButtonShowVid.Height)
             ButtonShowVid.Image = imgvideo2
             ButtonShowVid.Show()
 
@@ -842,7 +845,8 @@ again2:
         End If
     End Sub
     Private Sub ButtonShowVid_Click(sender As Object, e As EventArgs) Handles ButtonShowVid.Click
-        System.Diagnostics.Process.Start(TempGrid.SelectedCells(TempGrid.Columns("CheminVideo").Index).Value.ToString)
+        Dim videoencours As String = TempGrid.Rows(Convert.ToInt32(RandomList.SelectedItem.ToString) / 35).Cells(TempGrid.Columns("CheminVideo").Index).Value
+        System.Diagnostics.Process.Start(videoencours)
     End Sub
 
     Private Sub ModeEasy_CheckedChanged(sender As Object, e As EventArgs) Handles ModeEasy.CheckedChanged
