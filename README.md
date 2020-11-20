@@ -14,13 +14,10 @@ https://streamable.com/udxcxl
 
 ![image](https://user-images.githubusercontent.com/54243866/99838075-daa87b80-2b68-11eb-8be7-03edba060ef5.png)
 
-**ScreenShots**
+**ScreenShot**
 
-![image](https://user-images.githubusercontent.com/54243866/99268270-38655c80-2825-11eb-89e9-d3cd9b548c70.png)
-![image](https://user-images.githubusercontent.com/54243866/99268284-3bf8e380-2825-11eb-90c9-852a3fd53d76.png)
-![image](https://user-images.githubusercontent.com/54243866/99838735-e0eb2780-2b69-11eb-97fa-ff096c9005af.png)
-![image](https://user-images.githubusercontent.com/54243866/99838403-615d5880-2b69-11eb-9feb-8e8c09c973ea.png)
+![image](https://user-images.githubusercontent.com/54243866/99838834-05470400-2b6a-11eb-8a4e-d967a7e8b909.png)
 
-**Téléchargement : **
+**Téléchargement :**
 
 https://github.com/soaresden/RecopierBox/releases
