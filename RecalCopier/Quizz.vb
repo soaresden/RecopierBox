@@ -785,7 +785,7 @@ suite6:
                 Do
 again:
                     TitreGen = TempGrid.Rows(Convert.ToString(random.Next(0, TempGrid.Rows.Count - 1))).Cells(TempGrid.Columns("Titre").Index).Value
-                    If ListTitreDesJeux.Items.Contains(TitreGen) = True Then GoTo again
+                    If ListTitreDesJeux.Items.Contains(TitreGen) = True Or ListTitreDesJeux.Items.Contains(titreencours) Then GoTo again
 
                     ListTitreDesJeux.Items.Add(TitreGen)
                 Loop Until ListTitreDesJeux.Items.Count > 11
@@ -802,7 +802,7 @@ again:
                     Do
 again2:
                         TitreGen = TempGrid.Rows(Convert.ToString(random.Next(0, TempGrid.Rows.Count - 1))).Cells(TempGrid.Columns("Titre").Index).Value
-                        If ListTitreDesJeux.Items.Contains(TitreGen) = True Then GoTo again2
+                        If ListTitreDesJeux.Items.Contains(TitreGen) = True Or ListTitreDesJeux.Items.Contains(titreencours) Then GoTo again2
 
                         ListTitreDesJeux.Items.Add(TitreGen)
                     Loop Until ListTitreDesJeux.Items.Count > 11
