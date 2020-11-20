@@ -379,8 +379,8 @@ suite5:
         listhelpingboxPlayers.Show()
         listhelpingboxPubl.Show()
         listhelpingboxGenre.BringToFront()
-        listhelpingboxGenre.Location = New Point(6, 16)
-        listhelpingboxGenre.Size = New Point(136, 199)
+        listhelpingboxGenre.Location = New Point(2, 15)
+        listhelpingboxGenre.Size = New Point(145, 300)
     End Sub
     Private Sub Txtdev_GotFocus(sender As Object, e As EventArgs) Handles txtdev.GotFocus
         listhelpingboxDev.Show()
@@ -389,8 +389,8 @@ suite5:
         listhelpingboxPlayers.Show()
         listhelpingboxPubl.Show()
         listhelpingboxDev.BringToFront()
-        listhelpingboxDev.Location = New Point(6, 16)
-        listhelpingboxDev.Size = New Point(136, 199)
+        listhelpingboxDev.Location = New Point(2, 15)
+        listhelpingboxDev.Size = New Point(145, 300)
     End Sub
     Private Sub Txtpub_GotFocus(sender As Object, e As EventArgs) Handles txtpub.GotFocus
         listhelpingboxDev.Show()
@@ -399,8 +399,8 @@ suite5:
         listhelpingboxPlayers.Show()
         listhelpingboxPubl.Show()
         listhelpingboxPubl.BringToFront()
-        listhelpingboxPubl.Location = New Point(6, 16)
-        listhelpingboxPubl.Size = New Point(136, 199)
+        listhelpingboxPubl.Location = New Point(2, 15)
+        listhelpingboxPubl.Size = New Point(145, 300)
     End Sub
     Private Sub ComboRating_GotFocus(sender As Object, e As EventArgs)
         listhelpingboxDev.Show()
@@ -409,8 +409,8 @@ suite5:
         listhelpingboxPlayers.Show()
         listhelpingboxPubl.Show()
         listhelpingboxNote.BringToFront()
-        listhelpingboxNote.Location = New Point(6, 16)
-        listhelpingboxNote.Size = New Point(136, 199)
+        listhelpingboxNote.Location = New Point(2, 15)
+        listhelpingboxNote.Size = New Point(145, 300)
     End Sub
     Private Sub TxtAnnee_GotFocus(sender As Object, e As EventArgs) Handles TxtAnnee.GotFocus
         listhelpingboxDev.Hide()
@@ -732,11 +732,11 @@ again2:
 
             MsgBox("Bien Joué !")
         Else
-            MsgBox("Et Non !")
+            MsgBox("Nope !")
         End If
     End Sub
-
     Private Sub ButtonShowVid_Click(sender As Object, e As EventArgs) Handles ButtonShowVid.Click
         System.Diagnostics.Process.Start(TempGrid.SelectedCells(TempGrid.Columns("CheminVideo").Index).Value.ToString)
     End Sub
+
 End Class
