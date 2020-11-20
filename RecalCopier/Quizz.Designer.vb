@@ -746,6 +746,7 @@ Partial Class Quizz
         Me.txtRules.Location = New System.Drawing.Point(710, 3)
         Me.txtRules.Multiline = True
         Me.txtRules.Name = "txtRules"
+        Me.txtRules.ReadOnly = True
         Me.txtRules.Size = New System.Drawing.Size(195, 89)
         Me.txtRules.TabIndex = 40
         Me.txtRules.Text = "Vous allez entendre/voir une video." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*1ère moitié : Concentrez-vous, Souvenez-vou" &
