@@ -8,7 +8,6 @@ A Recalbox Copier program to be able to create custom library
 https://streamable.com/c11pho
 
 **Presentation du Mode Quizz :**
-Quelques ScreenShots :
 
 https://streamable.com/udxcxl
 
