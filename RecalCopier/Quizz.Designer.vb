@@ -86,6 +86,9 @@ Partial Class Quizz
         Me.HiddenButton = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.txtRules = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txttempsaffichprop = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupParamComplet.SuspendLayout()
         Me.GroupParametres.SuspendLayout()
         Me.GroupInfoRoms.SuspendLayout()
@@ -101,7 +104,7 @@ Partial Class Quizz
         'Buttongetback
         '
         Me.Buttongetback.Location = New System.Drawing.Point(11, 11)
-        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2)
+        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Buttongetback.Name = "Buttongetback"
         Me.Buttongetback.Size = New System.Drawing.Size(101, 23)
         Me.Buttongetback.TabIndex = 9
@@ -131,9 +134,9 @@ Partial Class Quizz
         Me.TxtTotalEntrees.BackColor = System.Drawing.Color.Tomato
         Me.TxtTotalEntrees.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtTotalEntrees.ForeColor = System.Drawing.SystemColors.Window
-        Me.TxtTotalEntrees.Location = New System.Drawing.Point(180, 508)
+        Me.TxtTotalEntrees.Location = New System.Drawing.Point(147, 514)
         Me.TxtTotalEntrees.Name = "TxtTotalEntrees"
-        Me.TxtTotalEntrees.Size = New System.Drawing.Size(109, 31)
+        Me.TxtTotalEntrees.Size = New System.Drawing.Size(120, 31)
         Me.TxtTotalEntrees.TabIndex = 23
         Me.TxtTotalEntrees.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -141,7 +144,7 @@ Partial Class Quizz
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label10.Location = New System.Drawing.Point(177, 486)
+        Me.Label10.Location = New System.Drawing.Point(147, 495)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(120, 13)
         Me.Label10.TabIndex = 21
@@ -407,6 +410,8 @@ Partial Class Quizz
         'GroupConfigPartie
         '
         Me.GroupConfigPartie.BackColor = System.Drawing.Color.Black
+        Me.GroupConfigPartie.Controls.Add(Me.Label16)
+        Me.GroupConfigPartie.Controls.Add(Me.txttempsaffichprop)
         Me.GroupConfigPartie.Controls.Add(Me.ModeHardcore)
         Me.GroupConfigPartie.Controls.Add(Me.ModeEasy)
         Me.GroupConfigPartie.Controls.Add(Me.Label14)
@@ -426,8 +431,10 @@ Partial Class Quizz
         'ModeHardcore
         '
         Me.ModeHardcore.AutoSize = True
+        Me.ModeHardcore.Checked = True
+        Me.ModeHardcore.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ModeHardcore.ForeColor = System.Drawing.Color.Cornsilk
-        Me.ModeHardcore.Location = New System.Drawing.Point(9, 77)
+        Me.ModeHardcore.Location = New System.Drawing.Point(155, 77)
         Me.ModeHardcore.Name = "ModeHardcore"
         Me.ModeHardcore.Size = New System.Drawing.Size(152, 17)
         Me.ModeHardcore.TabIndex = 34
@@ -438,7 +445,7 @@ Partial Class Quizz
         '
         Me.ModeEasy.AutoSize = True
         Me.ModeEasy.ForeColor = System.Drawing.Color.Cornsilk
-        Me.ModeEasy.Location = New System.Drawing.Point(9, 56)
+        Me.ModeEasy.Location = New System.Drawing.Point(9, 77)
         Me.ModeEasy.Name = "ModeEasy"
         Me.ModeEasy.Size = New System.Drawing.Size(143, 17)
         Me.ModeEasy.TabIndex = 33
@@ -449,7 +456,7 @@ Partial Class Quizz
         '
         Me.Label14.AutoSize = True
         Me.Label14.ForeColor = System.Drawing.Color.Lime
-        Me.Label14.Location = New System.Drawing.Point(189, 40)
+        Me.Label14.Location = New System.Drawing.Point(24, 11)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(72, 13)
         Me.Label14.TabIndex = 32
@@ -459,7 +466,7 @@ Partial Class Quizz
         '
         Me.Label13.AutoSize = True
         Me.Label13.ForeColor = System.Drawing.Color.Yellow
-        Me.Label13.Location = New System.Drawing.Point(24, 40)
+        Me.Label13.Location = New System.Drawing.Point(24, 61)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(54, 13)
         Me.Label13.TabIndex = 31
@@ -469,7 +476,7 @@ Partial Class Quizz
         '
         Me.ConsoleTitre.AutoSize = True
         Me.ConsoleTitre.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.ConsoleTitre.Location = New System.Drawing.Point(192, 77)
+        Me.ConsoleTitre.Location = New System.Drawing.Point(9, 41)
         Me.ConsoleTitre.Name = "ConsoleTitre"
         Me.ConsoleTitre.Size = New System.Drawing.Size(96, 17)
         Me.ConsoleTitre.TabIndex = 26
@@ -481,17 +488,17 @@ Partial Class Quizz
         '
         Me.Label11.AutoSize = True
         Me.Label11.ForeColor = System.Drawing.Color.DeepSkyBlue
-        Me.Label11.Location = New System.Drawing.Point(137, 16)
+        Me.Label11.Location = New System.Drawing.Point(134, 11)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(112, 13)
+        Me.Label11.Size = New System.Drawing.Size(115, 13)
         Me.Label11.TabIndex = 26
-        Me.Label11.Text = "Nombre de Manches :"
+        Me.Label11.Text = "Saisir nb de Manches :"
         '
         'TitreOnly
         '
         Me.TitreOnly.AutoSize = True
         Me.TitreOnly.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.TitreOnly.Location = New System.Drawing.Point(192, 59)
+        Me.TitreOnly.Location = New System.Drawing.Point(9, 24)
         Me.TitreOnly.Name = "TitreOnly"
         Me.TitreOnly.Size = New System.Drawing.Size(97, 17)
         Me.TitreOnly.TabIndex = 25
@@ -503,7 +510,7 @@ Partial Class Quizz
         '
         Me.txtnbmanches.BackColor = System.Drawing.SystemColors.HotTrack
         Me.txtnbmanches.ForeColor = System.Drawing.SystemColors.Window
-        Me.txtnbmanches.Location = New System.Drawing.Point(255, 13)
+        Me.txtnbmanches.Location = New System.Drawing.Point(255, 8)
         Me.txtnbmanches.Name = "txtnbmanches"
         Me.txtnbmanches.Size = New System.Drawing.Size(48, 20)
         Me.txtnbmanches.TabIndex = 25
@@ -521,13 +528,14 @@ Partial Class Quizz
         '
         'ButtonDoRandom
         '
+        Me.ButtonDoRandom.BackColor = System.Drawing.Color.Transparent
         Me.ButtonDoRandom.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonDoRandom.Location = New System.Drawing.Point(345, 503)
+        Me.ButtonDoRandom.Image = CType(resources.GetObject("ButtonDoRandom.Image"), System.Drawing.Image)
+        Me.ButtonDoRandom.Location = New System.Drawing.Point(274, 487)
         Me.ButtonDoRandom.Name = "ButtonDoRandom"
-        Me.ButtonDoRandom.Size = New System.Drawing.Size(111, 36)
+        Me.ButtonDoRandom.Size = New System.Drawing.Size(194, 46)
         Me.ButtonDoRandom.TabIndex = 24
-        Me.ButtonDoRandom.Text = "Génerer Le Quizz"
-        Me.ButtonDoRandom.UseVisualStyleBackColor = True
+        Me.ButtonDoRandom.UseVisualStyleBackColor = False
         '
         'ConsoleList
         '
@@ -636,6 +644,7 @@ Partial Class Quizz
         'QuizzBox
         '
         Me.QuizzBox.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.QuizzBox.Controls.Add(Me.Label15)
         Me.QuizzBox.Controls.Add(Me.ButtonShowVid)
         Me.QuizzBox.Controls.Add(Me.PlayerPrev)
         Me.QuizzBox.Controls.Add(Me.txtpositionend)
@@ -655,7 +664,7 @@ Partial Class Quizz
         Me.QuizzBox.Size = New System.Drawing.Size(413, 491)
         Me.QuizzBox.TabIndex = 36
         Me.QuizzBox.TabStop = False
-        Me.QuizzBox.Text = "QuizzBox"
+        Me.QuizzBox.Text = "Menu QuizzBox :"
         '
         'ButtonShowVid
         '
@@ -681,7 +690,7 @@ Partial Class Quizz
         '
         Me.txtpositionend.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtpositionend.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txtpositionend.Location = New System.Drawing.Point(245, 13)
+        Me.txtpositionend.Location = New System.Drawing.Point(302, 13)
         Me.txtpositionend.Name = "txtpositionend"
         Me.txtpositionend.ReadOnly = True
         Me.txtpositionend.Size = New System.Drawing.Size(79, 31)
@@ -692,7 +701,7 @@ Partial Class Quizz
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label12.Location = New System.Drawing.Point(219, 22)
+        Me.Label12.Location = New System.Drawing.Point(276, 22)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(21, 13)
         Me.Label12.TabIndex = 36
@@ -702,7 +711,7 @@ Partial Class Quizz
         '
         Me.txtpositionrandom.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtpositionrandom.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txtpositionrandom.Location = New System.Drawing.Point(133, 13)
+        Me.txtpositionrandom.Location = New System.Drawing.Point(190, 13)
         Me.txtpositionrandom.Name = "txtpositionrandom"
         Me.txtpositionrandom.ReadOnly = True
         Me.txtpositionrandom.Size = New System.Drawing.Size(79, 31)
@@ -742,7 +751,9 @@ Partial Class Quizz
         '
         'txtRules
         '
-        Me.txtRules.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.txtRules.BackColor = System.Drawing.Color.BlueViolet
+        Me.txtRules.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRules.ForeColor = System.Drawing.SystemColors.Window
         Me.txtRules.Location = New System.Drawing.Point(710, 3)
         Me.txtRules.Multiline = True
         Me.txtRules.Name = "txtRules"
@@ -753,12 +764,43 @@ Partial Class Quizz
     "s et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème moitié : Des propositions apparaissent, Validez vot" &
     "re choix !"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label15.Location = New System.Drawing.Point(143, 22)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(41, 13)
+        Me.Label15.TabIndex = 30
+        Me.Label15.Text = "Titre n°"
+        '
+        'txttempsaffichprop
+        '
+        Me.txttempsaffichprop.BackColor = System.Drawing.SystemColors.MenuHighlight
+        Me.txttempsaffichprop.ForeColor = System.Drawing.SystemColors.Window
+        Me.txttempsaffichprop.Location = New System.Drawing.Point(255, 28)
+        Me.txttempsaffichprop.Name = "txttempsaffichprop"
+        Me.txttempsaffichprop.Size = New System.Drawing.Size(48, 20)
+        Me.txttempsaffichprop.TabIndex = 35
+        Me.txttempsaffichprop.Text = "15"
+        Me.txttempsaffichprop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.Label16.Location = New System.Drawing.Point(119, 31)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(130, 13)
+        Me.Label16.TabIndex = 36
+        Me.Label16.Text = "Temps avant Proposition :"
+        '
         'Quizz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(153, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(908, 590)
+        Me.ClientSize = New System.Drawing.Size(908, 588)
         Me.Controls.Add(Me.HiddenButton)
         Me.Controls.Add(Me.QuizzBox)
         Me.Controls.Add(Me.TitleBox)
@@ -766,8 +808,8 @@ Partial Class Quizz
         Me.Controls.Add(Me.GroupParamComplet)
         Me.Controls.Add(Me.Buttongetback)
         Me.Controls.Add(Me.txtRules)
-        Me.MaximumSize = New System.Drawing.Size(924, 629)
-        Me.MinimumSize = New System.Drawing.Size(924, 629)
+        Me.MaximumSize = New System.Drawing.Size(924, 627)
+        Me.MinimumSize = New System.Drawing.Size(924, 627)
         Me.Name = "Quizz"
         Me.Text = "Quizz"
         Me.GroupParamComplet.ResumeLayout(False)
@@ -850,4 +892,7 @@ Partial Class Quizz
     Friend WithEvents txtRules As TextBox
     Friend WithEvents listhelpingboxAnnee As ListBox
     Friend WithEvents listhelpingboxPlayCount As ListBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents txttempsaffichprop As TextBox
+    Friend WithEvents Label15 As Label
 End Class

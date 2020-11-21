@@ -773,11 +773,11 @@ suite6:
         ProgressBar1.Value = PlayerAudio.Ctlcontrols.currentPosition
         ProgressBar1.Increment(1)
 
-        'On check la moitié du temps
-        Dim moitiedutemps As String = PlayerAudio.currentMedia.duration / 2
+        'On check le temps des propositions
+        Dim tempsprop As String = txttempsaffichprop.Text
 
         'On va ajouter des valeurs au pif en listbox a partir de la moitié du temps
-        If PlayerAudio.Ctlcontrols.currentPosition > moitiedutemps Then
+        If PlayerAudio.Ctlcontrols.currentPosition > tempsprop Then
 
             'on compte la liste pour voir si on doit generer ou non
             If ListTitreDesJeux.Items.Count > 11 Then Exit Sub
