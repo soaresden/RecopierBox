@@ -78,6 +78,7 @@ Partial Class Quizz
         Me.PlayerStop = New System.Windows.Forms.Button()
         Me.TitleBox = New System.Windows.Forms.PictureBox()
         Me.QuizzBox = New System.Windows.Forms.GroupBox()
+        Me.TimeBox = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.ButtonShowVid = New System.Windows.Forms.Button()
         Me.PlayerPrev = New System.Windows.Forms.Button()
@@ -89,6 +90,8 @@ Partial Class Quizz
         Me.HiddenButton = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.txtRules = New System.Windows.Forms.TextBox()
+        Me.randotimer = New System.Windows.Forms.Timer(Me.components)
+        Me.randotime = New System.Windows.Forms.TextBox()
         Me.GroupParamComplet.SuspendLayout()
         Me.GroupParametres.SuspendLayout()
         Me.GroupInfoRoms.SuspendLayout()
@@ -433,11 +436,11 @@ Partial Class Quizz
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.Color.DeepSkyBlue
-        Me.Label16.Location = New System.Drawing.Point(124, 31)
+        Me.Label16.Location = New System.Drawing.Point(125, 31)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(125, 13)
+        Me.Label16.Size = New System.Drawing.Size(124, 13)
         Me.Label16.TabIndex = 36
-        Me.Label16.Text = "x Sec avant Proposition :"
+        Me.Label16.Text = "_ sec avant Proposition :"
         '
         'txttempsaffichprop
         '
@@ -510,11 +513,11 @@ Partial Class Quizz
         '
         Me.Label11.AutoSize = True
         Me.Label11.ForeColor = System.Drawing.Color.DeepSkyBlue
-        Me.Label11.Location = New System.Drawing.Point(134, 11)
+        Me.Label11.Location = New System.Drawing.Point(143, 11)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(115, 13)
+        Me.Label11.Size = New System.Drawing.Size(106, 13)
         Me.Label11.TabIndex = 26
-        Me.Label11.Text = "Saisir nb de Manches :"
+        Me.Label11.Text = "Générer _ manches :"
         '
         'TitreOnly
         '
@@ -633,7 +636,7 @@ Partial Class Quizz
         Me.PlayerPlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.PlayerPlay.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerPlay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPlay.Location = New System.Drawing.Point(152, 224)
+        Me.PlayerPlay.Location = New System.Drawing.Point(181, 224)
         Me.PlayerPlay.Name = "PlayerPlay"
         Me.PlayerPlay.Size = New System.Drawing.Size(49, 41)
         Me.PlayerPlay.TabIndex = 33
@@ -645,7 +648,7 @@ Partial Class Quizz
         Me.PlayerStop.BackColor = System.Drawing.Color.GhostWhite
         Me.PlayerStop.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerStop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerStop.Location = New System.Drawing.Point(250, 224)
+        Me.PlayerStop.Location = New System.Drawing.Point(232, 224)
         Me.PlayerStop.Name = "PlayerStop"
         Me.PlayerStop.Size = New System.Drawing.Size(73, 41)
         Me.PlayerStop.TabIndex = 34
@@ -666,6 +669,8 @@ Partial Class Quizz
         'QuizzBox
         '
         Me.QuizzBox.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.QuizzBox.Controls.Add(Me.randotime)
+        Me.QuizzBox.Controls.Add(Me.TimeBox)
         Me.QuizzBox.Controls.Add(Me.Label15)
         Me.QuizzBox.Controls.Add(Me.ButtonShowVid)
         Me.QuizzBox.Controls.Add(Me.PlayerPrev)
@@ -687,6 +692,18 @@ Partial Class Quizz
         Me.QuizzBox.TabIndex = 36
         Me.QuizzBox.TabStop = False
         Me.QuizzBox.Text = "Menu QuizzBox :"
+        '
+        'TimeBox
+        '
+        Me.TimeBox.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.TimeBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TimeBox.ForeColor = System.Drawing.SystemColors.Window
+        Me.TimeBox.Location = New System.Drawing.Point(68, 224)
+        Me.TimeBox.Name = "TimeBox"
+        Me.TimeBox.ReadOnly = True
+        Me.TimeBox.Size = New System.Drawing.Size(107, 45)
+        Me.TimeBox.TabIndex = 40
+        Me.TimeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label15
         '
@@ -711,7 +728,7 @@ Partial Class Quizz
         Me.PlayerPrev.BackColor = System.Drawing.Color.RoyalBlue
         Me.PlayerPrev.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerPrev.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPrev.Location = New System.Drawing.Point(68, 224)
+        Me.PlayerPrev.Location = New System.Drawing.Point(306, 224)
         Me.PlayerPrev.Name = "PlayerPrev"
         Me.PlayerPrev.Size = New System.Drawing.Size(49, 41)
         Me.PlayerPrev.TabIndex = 38
@@ -752,8 +769,9 @@ Partial Class Quizz
         '
         'RandomList
         '
-        Me.RandomList.BackColor = System.Drawing.Color.Thistle
-        Me.RandomList.Enabled = False
+        Me.RandomList.BackColor = System.Drawing.Color.DimGray
+        Me.RandomList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.RandomList.ForeColor = System.Drawing.SystemColors.MenuBar
         Me.RandomList.FormattingEnabled = True
         Me.RandomList.Location = New System.Drawing.Point(6, 17)
         Me.RandomList.Name = "RandomList"
@@ -792,9 +810,20 @@ Partial Class Quizz
         Me.txtRules.ReadOnly = True
         Me.txtRules.Size = New System.Drawing.Size(195, 89)
         Me.txtRules.TabIndex = 40
-        Me.txtRules.Text = "Vous allez entendre/voir une video." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*1ère moitié : Concentrez-vous, Souvenez-vou" &
-    "s et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème moitié : Des propositions apparaissent, Validez vot" &
-    "re choix !"
+        Me.txtRules.Text = "Vous allez entendre ou voir une video." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*1ère Phase : Concentrez-vous, Souvenez-v" &
+    "ous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase : Des propositions apparaissent, Validez vo" &
+    "tre choix !"
+        '
+        'randotimer
+        '
+        '
+        'randotime
+        '
+        Me.randotime.Location = New System.Drawing.Point(68, 17)
+        Me.randotime.Name = "randotime"
+        Me.randotime.Size = New System.Drawing.Size(69, 20)
+        Me.randotime.TabIndex = 42
+        Me.randotime.Visible = False
         '
         'Quizz
         '
@@ -896,4 +925,7 @@ Partial Class Quizz
     Friend WithEvents Label16 As Label
     Friend WithEvents txttempsaffichprop As TextBox
     Friend WithEvents Label15 As Label
+    Friend WithEvents TimeBox As TextBox
+    Friend WithEvents randotimer As Timer
+    Friend WithEvents randotime As TextBox
 End Class
