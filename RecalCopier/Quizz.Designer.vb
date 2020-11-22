@@ -55,6 +55,8 @@ Partial Class Quizz
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txttempsaffichprop = New System.Windows.Forms.TextBox()
         Me.ModeHardcore = New System.Windows.Forms.CheckBox()
         Me.ModeEasy = New System.Windows.Forms.CheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -76,6 +78,7 @@ Partial Class Quizz
         Me.PlayerStop = New System.Windows.Forms.Button()
         Me.TitleBox = New System.Windows.Forms.PictureBox()
         Me.QuizzBox = New System.Windows.Forms.GroupBox()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.ButtonShowVid = New System.Windows.Forms.Button()
         Me.PlayerPrev = New System.Windows.Forms.Button()
         Me.txtpositionend = New System.Windows.Forms.TextBox()
@@ -86,9 +89,6 @@ Partial Class Quizz
         Me.HiddenButton = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.txtRules = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.txttempsaffichprop = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupParamComplet.SuspendLayout()
         Me.GroupParametres.SuspendLayout()
         Me.GroupInfoRoms.SuspendLayout()
@@ -104,7 +104,7 @@ Partial Class Quizz
         'Buttongetback
         '
         Me.Buttongetback.Location = New System.Drawing.Point(11, 11)
-        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2)
         Me.Buttongetback.Name = "Buttongetback"
         Me.Buttongetback.Size = New System.Drawing.Size(101, 23)
         Me.Buttongetback.TabIndex = 9
@@ -136,6 +136,7 @@ Partial Class Quizz
         Me.TxtTotalEntrees.ForeColor = System.Drawing.SystemColors.Window
         Me.TxtTotalEntrees.Location = New System.Drawing.Point(147, 514)
         Me.TxtTotalEntrees.Name = "TxtTotalEntrees"
+        Me.TxtTotalEntrees.ReadOnly = True
         Me.TxtTotalEntrees.Size = New System.Drawing.Size(120, 31)
         Me.TxtTotalEntrees.TabIndex = 23
         Me.TxtTotalEntrees.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -428,6 +429,27 @@ Partial Class Quizz
         Me.GroupConfigPartie.TabStop = False
         Me.GroupConfigPartie.Text = "Config Partie :"
         '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.Label16.Location = New System.Drawing.Point(124, 31)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(125, 13)
+        Me.Label16.TabIndex = 36
+        Me.Label16.Text = "x Sec avant Proposition :"
+        '
+        'txttempsaffichprop
+        '
+        Me.txttempsaffichprop.BackColor = System.Drawing.SystemColors.MenuHighlight
+        Me.txttempsaffichprop.ForeColor = System.Drawing.SystemColors.Window
+        Me.txttempsaffichprop.Location = New System.Drawing.Point(255, 28)
+        Me.txttempsaffichprop.Name = "txttempsaffichprop"
+        Me.txttempsaffichprop.Size = New System.Drawing.Size(48, 20)
+        Me.txttempsaffichprop.TabIndex = 35
+        Me.txttempsaffichprop.Text = "15"
+        Me.txttempsaffichprop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'ModeHardcore
         '
         Me.ModeHardcore.AutoSize = True
@@ -666,6 +688,16 @@ Partial Class Quizz
         Me.QuizzBox.TabStop = False
         Me.QuizzBox.Text = "Menu QuizzBox :"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label15.Location = New System.Drawing.Point(143, 22)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(41, 13)
+        Me.Label15.TabIndex = 30
+        Me.Label15.Text = "Titre n°"
+        '
         'ButtonShowVid
         '
         Me.ButtonShowVid.Location = New System.Drawing.Point(8, 222)
@@ -747,7 +779,7 @@ Partial Class Quizz
         '
         'Timer1
         '
-        Me.Timer1.Interval = 500
+        Me.Timer1.Interval = 10
         '
         'txtRules
         '
@@ -763,37 +795,6 @@ Partial Class Quizz
         Me.txtRules.Text = "Vous allez entendre/voir une video." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*1ère moitié : Concentrez-vous, Souvenez-vou" &
     "s et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème moitié : Des propositions apparaissent, Validez vot" &
     "re choix !"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label15.Location = New System.Drawing.Point(143, 22)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(41, 13)
-        Me.Label15.TabIndex = 30
-        Me.Label15.Text = "Titre n°"
-        '
-        'txttempsaffichprop
-        '
-        Me.txttempsaffichprop.BackColor = System.Drawing.SystemColors.MenuHighlight
-        Me.txttempsaffichprop.ForeColor = System.Drawing.SystemColors.Window
-        Me.txttempsaffichprop.Location = New System.Drawing.Point(255, 28)
-        Me.txttempsaffichprop.Name = "txttempsaffichprop"
-        Me.txttempsaffichprop.Size = New System.Drawing.Size(48, 20)
-        Me.txttempsaffichprop.TabIndex = 35
-        Me.txttempsaffichprop.Text = "15"
-        Me.txttempsaffichprop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.ForeColor = System.Drawing.Color.DeepSkyBlue
-        Me.Label16.Location = New System.Drawing.Point(119, 31)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(130, 13)
-        Me.Label16.TabIndex = 36
-        Me.Label16.Text = "Temps avant Proposition :"
         '
         'Quizz
         '
