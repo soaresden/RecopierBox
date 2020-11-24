@@ -248,6 +248,7 @@ Public Class CopyRoms
             For Each xEle As XElement In query2
                 Dim romconsole As String = nomconsole
                 Dim romname As String = xEle.Element("name")
+                Dim romId As String
                 Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
                 Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & temprom
                 Dim romgenre As String
@@ -273,6 +274,14 @@ Public Class CopyRoms
                     romdesc = Nothing
                 Else
                     romdesc = xEle.Element("desc")
+                End If
+
+                Dim ExistGameId As Boolean = xEle.Attributes("id").Any
+
+                If ExistGameId = True Then
+                    romId = xEle.Attribute("id").Value
+                Else
+                    romId = Nothing
                 End If
 
                 If xEle.Element("image") Is Nothing Then
@@ -2010,8 +2019,6 @@ prochainj:
             Next
         End If
     End Function
-
-#Enable Warning BC42105 ' La fonction ne retourne pas de valeur sur tous les chemins du code
     Private Sub ListboxMaSelection_DoubleClick(sender As Object, e As EventArgs) Handles listboxMaSelection.DoubleClick
         'on enleve de la liste et on met a jour la checkbox dans la selection
         Dim pathrom As String = listboxMaSelection.Items(listboxMaSelection.SelectedIndex)

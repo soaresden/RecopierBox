@@ -176,6 +176,7 @@ Public Class Quizz
             For Each xEle As XElement In query2
                 Dim romconsole As String = nomconsole
                 Dim romname As String = xEle.Element("name")
+                Dim romId As String
                 Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
                 Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & temprom
                 Dim romgenre As String
@@ -190,6 +191,7 @@ Public Class Quizz
                 Dim romCompteur As String
                 Dim romhidden As String = xEle.Element("hidden")
 
+
                 'Conditionnelles sur tous les champs
                 If romhidden = "true" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
 
@@ -198,6 +200,15 @@ Public Class Quizz
                 Else
                     romvideo = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(Replace(xEle.Element("video"), "/", "\"), "./", ""), ".\", "")
                 End If
+
+                Dim ExistGameId As Boolean = xEle.Attributes("id").Any
+
+                If ExistGameId = True Then
+                    romId = xEle.Attribute("id").Value
+                Else
+                    romId = Nothing
+                End If
+
 
                 If xEle.Element("desc") Is Nothing Then
                     romdesc = Nothing
@@ -556,9 +567,9 @@ suite6:
 
     Sub Entreesurfiltres()
         'commande pour filtrer
-        TryCast(TempGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Genre] like '%{0}%' AND [Developer] like '%{1}%' AND [Publisher] like '%{2}%' AND [DateSortie] like '%{3}%' AND [NbPlayers] like '%{4}%' AND [NbLancé] like '%{5}%' AND [Synopsis] like '%{6}%' AND [Note] like '%{7}%'", txtgenre.Text, txtdev.Text, txtpub.Text, TxtAnnee.Text, txtplayers.Text, TxtPlayCount.Text, TxtSynopsis.Text, TxtRating.Text)
-        'Recalcul des resultats
-        TxtTotalEntrees.Text = TempGrid.RowCount - 1
+        TryCast(TempGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Genre] Like '%{0}%' AND [Developer] like '%{1}%' AND [Publisher] like '%{2}%' AND [DateSortie] like '%{3}%' AND [NbPlayers] like '%{4}%' AND [NbLancé] like '%{5}%' AND [Synopsis] like '%{6}%' AND [Note] like '%{7}%'", txtgenre.Text, txtdev.Text, txtpub.Text, TxtAnnee.Text, txtplayers.Text, TxtPlayCount.Text, TxtSynopsis.Text, TxtRating.Text)
+                'Recalcul des resultats
+                TxtTotalEntrees.Text = TempGrid.RowCount - 1
     End Sub
     Private Sub Txtgenre_KeyDown(sender As Object, e As KeyEventArgs) Handles txtgenre.KeyDown
         If e.KeyCode = Keys.Enter Then
