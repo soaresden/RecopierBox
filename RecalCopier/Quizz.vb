@@ -21,6 +21,9 @@ Public Class Quizz
 
     End Sub
     Private Sub ButtonValidConsole_Click(sender As Object, e As EventArgs) Handles ButtonValidConsole.Click
+        'On stop par securité
+        PlayerStop.PerformClick()
+
         'Afficher le groupParametres
         GroupParametres.Show()
 
@@ -191,7 +194,6 @@ Public Class Quizz
                 Dim romCompteur As String
                 Dim romhidden As String = xEle.Element("hidden")
 
-
                 'Conditionnelles sur tous les champs
                 If romhidden = "true" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
 
@@ -208,7 +210,6 @@ Public Class Quizz
                 Else
                     romId = Nothing
                 End If
-
 
                 If xEle.Element("desc") Is Nothing Then
                     romdesc = Nothing
@@ -612,6 +613,7 @@ suite6:
     End Sub
 
     Private Sub ButtonValidFilters_Click(sender As Object, e As EventArgs) Handles ButtonDoRandom.Click
+
         If txtnbmanches.Text <= 0 Then
             MsgBox("Impossible de Générer des Manches")
             Exit Sub
@@ -632,16 +634,19 @@ suite6:
 
         'On Clear par securité
         RandomList.Items.Clear()
+        'On refresh les reponses par securité
+        ListTitreDesJeux.Items.Clear()
+        ListConsoleDesJeux.Items.Clear()
 
         'On va generer un chiffre et tester
         Dim rnd As New Random
         Dim x As Integer
 
-        Do Until RandomList.Items.Count = nbdemanches
+        Do Until RandomList.Items.Count = nbdemanches - 1
 recalculrando:
-            x = rnd.Next(0, nbroms+1) 'generer un chiffre entre 0 et le nb de roms
+            x = rnd.Next(0, nbroms + 1) 'generer un chiffre entre 0 et le nb de roms
             'test de la presence du vrai jeu ou d'un doublon 
-            Dim xremade As Integer = (x + 5) * 35
+            Dim xremade As Integer = x
             If RandomList.Items.Contains(xremade) Then GoTo recalculrando
             RandomList.Items.Add(xremade)
         Loop
@@ -732,12 +737,12 @@ recalculrando:
         If (PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play on fait Pause
             Exit Sub
         ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
-            Dim lavraieligne As Integer = (Convert.ToInt32(RandomList.SelectedItem.ToString) / 35) - 6
+            Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
 
             PlayerAudio.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
 
             PlayerAudio.Ctlcontrols.play()
-            If ModeEasy.Checked = True Then PlayerAudio.uiMode = "none"
+            If ModeEasy.Checked = True Then PlayerAudio.uiMode = "full"
             If ModeHardcore.Checked = True Then PlayerAudio.uiMode = "invisible"
 
             ProgressBar1.Minimum = 0
@@ -748,9 +753,15 @@ recalculrando:
             Timer1.Start()
             TimeBox.Text = ""
 
+            'On remplit la randobox e toutes les possibilités
+            listrandobox.Items.Clear()
+            Dim rando As Integer
+            For rando = 0 To TxtTotalEntrees.Text - 1
+                listrandobox.Items.Add(rando)
+            Next
+            'et on enleve le bon chiffre
+            listrandobox.Items.Remove(lavraieligne)
 
-            'Lancer le randotimer
-            randotimer.Start()
         End If
     End Sub
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
@@ -758,8 +769,6 @@ recalculrando:
         ButtonShowVid.Hide()
         TimeBox.Text = ""
         TimeBox.BackColor = Color.FromArgb(72, 61, 139)
-        randotimer.Stop()
-        randotime.Clear()
     End Sub
 
     Private Sub HiddenButton_Click(sender As Object, e As EventArgs) Handles HiddenButton.Click
@@ -776,7 +785,7 @@ recalculrando:
             If TempGrid.Visible = False Then
                 TempGrid.Visible = True
                 TempGrid.Size = New Point(369, 404)
-                Dim lavraieligne As Integer = (Convert.ToInt32(RandomList.SelectedItem.ToString) / 35) - 6
+                Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
                 Dim nomdujeu As String = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("Titre").Index).Value
                 'on faire le focus sur la ligne
                 TempGrid.ClearSelection()
@@ -792,12 +801,11 @@ recalculrando:
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-onrecommence:
 
         ProgressBar1.Minimum = 0
         ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
         ProgressBar1.Value = PlayerAudio.Ctlcontrols.currentPosition
-        ProgressBar1.Increment(0.01)
+        ProgressBar1.Increment(1)
         Dim tpsrestant As Double = PlayerAudio.currentMedia.duration - PlayerAudio.Ctlcontrols.currentPosition
         TimeBox.Text = tpsrestant.ToString("00.0")
 
@@ -818,7 +826,7 @@ onrecommence:
             TimeBox.BackColor = Color.FromArgb(218, 38, 38)
         End If
 
-        Dim lignefakeremade As Integer = (Convert.ToInt32(RandomList.SelectedItem.ToString) / 35) - 6
+        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
         Dim titreencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Titre").Index).Value
         Dim consoleencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Console").Index).Value
 
@@ -834,40 +842,37 @@ onrecommence:
                 Dim titlegeno As String
 
                 'Si la liste est prete on sort 
-                If ListTitreDesJeux.Items.Count >= 12 Then Exit Sub
-
-                'on va faire une liste de chiffre en array
+                If ListTitreDesJeux.Items.Count > 11 Then Exit Sub
+                'on va faire une liste de chiffre en list box
                 'on va prendre un chiffre au pif
                 'et si ca marche pas on va l'enlever de cette liste
                 'et on reboucle sur celle ci pour ne pas refaire le meme chiffre
-                Do Until ListTitreDesJeux.Items.Count < 12
-                    Do Until ListTitreDesJeux.Items.Count > 11
-calculgen2:
 
-                        Dim hduclic = DateTime.Parse(randotime.Text)
-                        Dim maintenant = DateTime.Now
-                        Dim difference = (maintenant - hduclic).Seconds
-                        If difference > 4 Then GoTo onrecommence
+                'on commence par remplir la randobox de tous les chiffres possible
+                listrandobox.Items.Clear()
+                Dim rando As Integer
+                For rando = 0 To TxtTotalEntrees.Text
+                    listrandobox.Items.Add(rando)
+                Next
 
-                        Dim hduclico = DateTime.Parse(randotime.Text)
-                        Dim maintenanto = DateTime.Now
-                        Dim differenceo = (maintenant - hduclic).Seconds
 
-                        If differenceo > 2 Then GoTo onrecommence
-
-                        y = rndo.Next(0, TempGrid.Rows.Count - 1) 'generer un chiffre entre 0 et le nb de roms
-                        titlegeno = TempGrid.Rows(y).Cells(TempGrid.Columns("Titre").Index).Value
-                        'test de la presence du vrai jeu ou d'un doublon 
-                        If ListTitreDesJeux.Items.Contains(titlegeno) Or ListTitreDesJeux.Items.Contains(titreencours) Then GoTo calculgen2
-                        ListTitreDesJeux.Items.Add(titlegeno)
-                    Loop
-
-                    'on ajoute le titre en cours et on range
-                    ListTitreDesJeux.Items.Add(titreencours)
-                    ListTitreDesJeux.Sorted = True
+                Do Until ListTitreDesJeux.Items.Count > 11
+                    Application.DoEvents()
+                    y = rndo.Next(0, listrandobox.Items.Count) 'generer un chiffre entre 0 et le nb de roms
+                    titlegeno = TempGrid.Rows(y).Cells(TempGrid.Columns("Titre").Index).Value
+                    'test de la presence d'un doublon 
+                    If y = RandomList.SelectedItem Then
+                        GoTo looping1
+                    End If
+                    If Not ListTitreDesJeux.Items.Contains(titlegeno) Then ListTitreDesJeux.Items.Add(titlegeno) 'si le titre est deja present, on l'enleve
+looping1:
+                    listrandobox.Items.Remove(y)
                 Loop
-                GoTo findugame
-                Exit Sub 'on force la sortie parce qu'on est en mode Titre + Console
+
+                'on ajoute le titre en cours et on range
+                ListTitreDesJeux.Items.Add(titreencours)
+                ListTitreDesJeux.Sorted = True
+                Exit Sub
             End If
 
         End If
@@ -882,35 +887,31 @@ calculgen2:
             Dim titlegen As String
 
             'Si la liste est prete on sort 
-            If ListTitreDesJeux.Items.Count >= 12 Then Exit Sub
+            If ListTitreDesJeux.Items.Count > 11 Then Exit Sub
 
-            'on va faire une liste de chiffre en array
+            'on va faire une liste de chiffre en list box
             'on va prendre un chiffre au pif
             'et si ca marche pas on va l'enlever de cette liste
             'et on reboucle sur celle ci pour ne pas refaire le meme chiffre
-            Do Until ListTitreDesJeux.Items.Count = 12
-                Do Until ListTitreDesJeux.Items.Count > 11
-calculgen:
-                    Dim hduclic = DateTime.Parse(randotime.Text)
-                    Dim maintenant = DateTime.Now
-                    Dim difference = (maintenant - hduclic).Seconds
-                    If difference > 2 Then GoTo onrecommence
 
-                    x = rnda.Next(0, TempGrid.Rows.Count - 1) 'generer un chiffre entre 0 et le nb de roms
-                    titlegen = TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
-                    'test de la presence du vrai jeu ou d'un doublon 
-                    If ListTitreDesJeux.Items.Contains(titlegen) Or ListTitreDesJeux.Items.Contains(titreencours) Then GoTo calculgen
-                    ListTitreDesJeux.Items.Add(titlegen)
 
-                Loop
-
-                'on ajoute le titre en cours et on range
-                ListTitreDesJeux.Items.Add(titreencours)
-                ListTitreDesJeux.Sorted = True
-                GoTo findugame
+            Do Until ListTitreDesJeux.Items.Count > 11
+                Application.DoEvents()
+                x = rnda.Next(0, listrandobox.Items.Count) 'generer un chiffre entre 0 et le nb de roms
+                titlegen = TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
+                'test de la presence d'un doublon 
+                If x = RandomList.SelectedItem Then
+                    GoTo looping2
+                End If
+                If Not ListTitreDesJeux.Items.Contains(titlegen) Then ListTitreDesJeux.Items.Add(titlegen) 'si le titre est deja present, on l'enleve
+looping2:
+                listrandobox.Items.Remove(x)
             Loop
-findugame:
-            Exit Sub 'on force la sortie quand même
+
+            'on ajoute le titre en cours et on range
+            ListTitreDesJeux.Items.Add(titreencours)
+            ListTitreDesJeux.Sorted = True
+            Exit Sub
         End If
     End Sub
 
@@ -925,12 +926,12 @@ findugame:
 
     Private Sub ListTitreDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListTitreDesJeux.SelectedIndexChanged
         'on prend le titre en cours
-        Dim lignefakeremade As Integer = (Convert.ToInt32(RandomList.SelectedItem.ToString) / 35) - 6
+        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
         Dim titreencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Titre").Index).Value
         'on verifie si la selection est bien celle ci
         If IsNothing(ListTitreDesJeux.SelectedItem.ToString) Then Exit Sub
         If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
-            PlayerAudio.uiMode = "none"
+            PlayerAudio.uiMode = "full"
             'On configure vite le bouton showvideo
             Dim imgvideo As New Bitmap(My.Resources.OKvideo)
             Dim imgvideo2 As New Bitmap(imgvideo, ButtonShowVid.Width, ButtonShowVid.Height)
@@ -943,7 +944,7 @@ findugame:
         End If
     End Sub
     Private Sub ButtonShowVid_Click(sender As Object, e As EventArgs) Handles ButtonShowVid.Click
-        Dim lignefakeremade As Integer = (Convert.ToInt32(RandomList.SelectedItem.ToString) / 35) - 6
+        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
         Dim videoencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("CheminVideo").Index).Value
         System.Diagnostics.Process.Start(videoencours)
     End Sub
@@ -957,7 +958,7 @@ findugame:
     End Sub
 
     Private Sub ListConsoleDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListConsoleDesJeux.SelectedIndexChanged
-        Dim lignefakeremade As Integer = (Convert.ToInt32(RandomList.SelectedItem.ToString) / 35) - 6
+        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
         Dim consoleencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Console").Index).Value
 
         If ListConsoleDesJeux.SelectedItem.ToString = consoleencours Then
@@ -993,8 +994,4 @@ findugame:
     Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" _
 (ByVal hWnd As IntPtr, ByVal wCmd As Integer,
 ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
-
-    Private Sub Randotimer_Tick(sender As Object, e As EventArgs) Handles randotimer.Tick
-        randotime.Text = Date.Now.ToString("HH:mm:ss")
-    End Sub
 End Class

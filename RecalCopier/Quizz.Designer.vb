@@ -90,8 +90,7 @@ Partial Class Quizz
         Me.HiddenButton = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.txtRules = New System.Windows.Forms.TextBox()
-        Me.randotimer = New System.Windows.Forms.Timer(Me.components)
-        Me.randotime = New System.Windows.Forms.TextBox()
+        Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.GroupParamComplet.SuspendLayout()
         Me.GroupParametres.SuspendLayout()
         Me.GroupInfoRoms.SuspendLayout()
@@ -595,6 +594,7 @@ Partial Class Quizz
         'ListTitreDesJeux
         '
         Me.ListTitreDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.ListTitreDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListTitreDesJeux.FormattingEnabled = True
         Me.ListTitreDesJeux.Location = New System.Drawing.Point(121, 299)
         Me.ListTitreDesJeux.Name = "ListTitreDesJeux"
@@ -604,17 +604,19 @@ Partial Class Quizz
         'ListConsoleDesJeux
         '
         Me.ListConsoleDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.ListConsoleDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListConsoleDesJeux.FormattingEnabled = True
+        Me.ListConsoleDesJeux.ItemHeight = 15
         Me.ListConsoleDesJeux.Location = New System.Drawing.Point(8, 300)
         Me.ListConsoleDesJeux.Name = "ListConsoleDesJeux"
-        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 186)
+        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 184)
         Me.ListConsoleDesJeux.TabIndex = 24
         '
         'ProgressBar1
         '
         Me.ProgressBar1.BackColor = System.Drawing.Color.White
         Me.ProgressBar1.ForeColor = System.Drawing.Color.Lime
-        Me.ProgressBar1.Location = New System.Drawing.Point(8, 271)
+        Me.ProgressBar1.Location = New System.Drawing.Point(8, 267)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(401, 23)
         Me.ProgressBar1.TabIndex = 27
@@ -624,7 +626,7 @@ Partial Class Quizz
         Me.PlayerNext.BackColor = System.Drawing.Color.RoyalBlue
         Me.PlayerNext.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerNext.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerNext.Location = New System.Drawing.Point(355, 224)
+        Me.PlayerNext.Location = New System.Drawing.Point(364, 218)
         Me.PlayerNext.Name = "PlayerNext"
         Me.PlayerNext.Size = New System.Drawing.Size(49, 41)
         Me.PlayerNext.TabIndex = 28
@@ -636,7 +638,7 @@ Partial Class Quizz
         Me.PlayerPlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.PlayerPlay.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerPlay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPlay.Location = New System.Drawing.Point(181, 224)
+        Me.PlayerPlay.Location = New System.Drawing.Point(170, 218)
         Me.PlayerPlay.Name = "PlayerPlay"
         Me.PlayerPlay.Size = New System.Drawing.Size(49, 41)
         Me.PlayerPlay.TabIndex = 33
@@ -648,7 +650,7 @@ Partial Class Quizz
         Me.PlayerStop.BackColor = System.Drawing.Color.GhostWhite
         Me.PlayerStop.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerStop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerStop.Location = New System.Drawing.Point(232, 224)
+        Me.PlayerStop.Location = New System.Drawing.Point(225, 218)
         Me.PlayerStop.Name = "PlayerStop"
         Me.PlayerStop.Size = New System.Drawing.Size(73, 41)
         Me.PlayerStop.TabIndex = 34
@@ -669,7 +671,7 @@ Partial Class Quizz
         'QuizzBox
         '
         Me.QuizzBox.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.QuizzBox.Controls.Add(Me.randotime)
+        Me.QuizzBox.Controls.Add(Me.listrandobox)
         Me.QuizzBox.Controls.Add(Me.TimeBox)
         Me.QuizzBox.Controls.Add(Me.Label15)
         Me.QuizzBox.Controls.Add(Me.ButtonShowVid)
@@ -698,10 +700,10 @@ Partial Class Quizz
         Me.TimeBox.BackColor = System.Drawing.Color.DarkSlateBlue
         Me.TimeBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TimeBox.ForeColor = System.Drawing.SystemColors.Window
-        Me.TimeBox.Location = New System.Drawing.Point(68, 224)
+        Me.TimeBox.Location = New System.Drawing.Point(68, 217)
         Me.TimeBox.Name = "TimeBox"
         Me.TimeBox.ReadOnly = True
-        Me.TimeBox.Size = New System.Drawing.Size(107, 45)
+        Me.TimeBox.Size = New System.Drawing.Size(96, 45)
         Me.TimeBox.TabIndex = 40
         Me.TimeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -709,7 +711,7 @@ Partial Class Quizz
         '
         Me.Label15.AutoSize = True
         Me.Label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label15.Location = New System.Drawing.Point(143, 22)
+        Me.Label15.Location = New System.Drawing.Point(98, 50)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(41, 13)
         Me.Label15.TabIndex = 30
@@ -717,7 +719,7 @@ Partial Class Quizz
         '
         'ButtonShowVid
         '
-        Me.ButtonShowVid.Location = New System.Drawing.Point(8, 222)
+        Me.ButtonShowVid.Location = New System.Drawing.Point(8, 218)
         Me.ButtonShowVid.Name = "ButtonShowVid"
         Me.ButtonShowVid.Size = New System.Drawing.Size(54, 43)
         Me.ButtonShowVid.TabIndex = 39
@@ -728,7 +730,7 @@ Partial Class Quizz
         Me.PlayerPrev.BackColor = System.Drawing.Color.RoyalBlue
         Me.PlayerPrev.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlayerPrev.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPrev.Location = New System.Drawing.Point(306, 224)
+        Me.PlayerPrev.Location = New System.Drawing.Point(309, 218)
         Me.PlayerPrev.Name = "PlayerPrev"
         Me.PlayerPrev.Size = New System.Drawing.Size(49, 41)
         Me.PlayerPrev.TabIndex = 38
@@ -739,10 +741,10 @@ Partial Class Quizz
         '
         Me.txtpositionend.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtpositionend.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txtpositionend.Location = New System.Drawing.Point(302, 13)
+        Me.txtpositionend.Location = New System.Drawing.Point(80, 148)
         Me.txtpositionend.Name = "txtpositionend"
         Me.txtpositionend.ReadOnly = True
-        Me.txtpositionend.Size = New System.Drawing.Size(79, 31)
+        Me.txtpositionend.Size = New System.Drawing.Size(72, 31)
         Me.txtpositionend.TabIndex = 37
         Me.txtpositionend.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -750,7 +752,7 @@ Partial Class Quizz
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label12.Location = New System.Drawing.Point(276, 22)
+        Me.Label12.Location = New System.Drawing.Point(108, 116)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(21, 13)
         Me.Label12.TabIndex = 36
@@ -760,10 +762,10 @@ Partial Class Quizz
         '
         Me.txtpositionrandom.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtpositionrandom.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txtpositionrandom.Location = New System.Drawing.Point(190, 13)
+        Me.txtpositionrandom.Location = New System.Drawing.Point(80, 70)
         Me.txtpositionrandom.Name = "txtpositionrandom"
         Me.txtpositionrandom.ReadOnly = True
-        Me.txtpositionrandom.Size = New System.Drawing.Size(79, 31)
+        Me.txtpositionrandom.Size = New System.Drawing.Size(72, 31)
         Me.txtpositionrandom.TabIndex = 35
         Me.txtpositionrandom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -781,10 +783,10 @@ Partial Class Quizz
         'PlayerAudio
         '
         Me.PlayerAudio.Enabled = True
-        Me.PlayerAudio.Location = New System.Drawing.Point(68, 47)
+        Me.PlayerAudio.Location = New System.Drawing.Point(170, 8)
         Me.PlayerAudio.Name = "PlayerAudio"
         Me.PlayerAudio.OcxState = CType(resources.GetObject("PlayerAudio.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.PlayerAudio.Size = New System.Drawing.Size(336, 176)
+        Me.PlayerAudio.Size = New System.Drawing.Size(243, 203)
         Me.PlayerAudio.TabIndex = 33
         '
         'HiddenButton
@@ -797,7 +799,6 @@ Partial Class Quizz
         '
         'Timer1
         '
-        Me.Timer1.Interval = 10
         '
         'txtRules
         '
@@ -814,16 +815,14 @@ Partial Class Quizz
     "ous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase : Des propositions apparaissent, Validez vo" &
     "tre choix !"
         '
-        'randotimer
+        'listrandobox
         '
-        '
-        'randotime
-        '
-        Me.randotime.Location = New System.Drawing.Point(68, 17)
-        Me.randotime.Name = "randotime"
-        Me.randotime.Size = New System.Drawing.Size(69, 20)
-        Me.randotime.TabIndex = 42
-        Me.randotime.Visible = False
+        Me.listrandobox.FormattingEnabled = True
+        Me.listrandobox.Location = New System.Drawing.Point(68, 17)
+        Me.listrandobox.Name = "listrandobox"
+        Me.listrandobox.Size = New System.Drawing.Size(49, 17)
+        Me.listrandobox.TabIndex = 41
+        Me.listrandobox.Visible = False
         '
         'Quizz
         '
@@ -926,6 +925,5 @@ Partial Class Quizz
     Friend WithEvents txttempsaffichprop As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents TimeBox As TextBox
-    Friend WithEvents randotimer As Timer
-    Friend WithEvents randotime As TextBox
+    Friend WithEvents listrandobox As ListBox
 End Class
