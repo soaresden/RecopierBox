@@ -26,6 +26,7 @@ Partial Class Quizz
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Quizz))
         Me.Buttongetback = New System.Windows.Forms.Button()
         Me.GroupParamComplet = New System.Windows.Forms.GroupBox()
+        Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.TxtTotalEntrees = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupParametres = New System.Windows.Forms.GroupBox()
@@ -78,7 +79,6 @@ Partial Class Quizz
         Me.PlayerStop = New System.Windows.Forms.Button()
         Me.TitleBox = New System.Windows.Forms.PictureBox()
         Me.QuizzBox = New System.Windows.Forms.GroupBox()
-        Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.TimeBox = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.ButtonShowVid = New System.Windows.Forms.Button()
@@ -116,7 +116,6 @@ Partial Class Quizz
         'GroupParamComplet
         '
         Me.GroupParamComplet.BackColor = System.Drawing.Color.Maroon
-        Me.GroupParamComplet.Controls.Add(Me.listrandobox)
         Me.GroupParamComplet.Controls.Add(Me.TxtTotalEntrees)
         Me.GroupParamComplet.Controls.Add(Me.Label10)
         Me.GroupParamComplet.Controls.Add(Me.GroupParametres)
@@ -131,6 +130,16 @@ Partial Class Quizz
         Me.GroupParamComplet.TabIndex = 10
         Me.GroupParamComplet.TabStop = False
         Me.GroupParamComplet.Text = "Parametres :"
+        '
+        'listrandobox
+        '
+        Me.listrandobox.BackColor = System.Drawing.SystemColors.Info
+        Me.listrandobox.FormattingEnabled = True
+        Me.listrandobox.Location = New System.Drawing.Point(80, 19)
+        Me.listrandobox.Name = "listrandobox"
+        Me.listrandobox.Size = New System.Drawing.Size(72, 30)
+        Me.listrandobox.TabIndex = 41
+        Me.listrandobox.Visible = False
         '
         'TxtTotalEntrees
         '
@@ -672,6 +681,7 @@ Partial Class Quizz
         'QuizzBox
         '
         Me.QuizzBox.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.QuizzBox.Controls.Add(Me.listrandobox)
         Me.QuizzBox.Controls.Add(Me.TimeBox)
         Me.QuizzBox.Controls.Add(Me.Label15)
         Me.QuizzBox.Controls.Add(Me.ButtonShowVid)
@@ -694,14 +704,6 @@ Partial Class Quizz
         Me.QuizzBox.TabIndex = 36
         Me.QuizzBox.TabStop = False
         Me.QuizzBox.Text = "Menu QuizzBox :"
-        '
-        'listrandobox
-        '
-        Me.listrandobox.FormattingEnabled = True
-        Me.listrandobox.Location = New System.Drawing.Point(92, 36)
-        Me.listrandobox.Name = "listrandobox"
-        Me.listrandobox.Size = New System.Drawing.Size(49, 342)
-        Me.listrandobox.TabIndex = 41
         '
         'TimeBox
         '

@@ -641,18 +641,35 @@ suite6:
         ListTitreDesJeux.Items.Clear()
         ListConsoleDesJeux.Items.Clear()
 
+
+        'On remplit la randobox de toutes les possibilités
+        listrandobox.Items.Clear()
+        Dim rando As Integer
+        For rando = 0 To nbdemanches - 1
+            listrandobox.Items.Add(rando)
+        Next
+
+
         'On va generer un chiffre et tester
         Dim rnd As New Random
         Dim x As Integer
 
+        'On clear par securité
+        RandomList.Items.Clear()
+
         Do Until RandomList.Items.Count = nbdemanches
 recalculrando:
-            x = rnd.Next(0, nbroms + 1) 'generer un chiffre entre 0 et le nb de roms
-            'test de la presence du vrai jeu ou d'un doublon 
-            Dim xremade As Integer = x
-            If RandomList.Items.Contains(xremade) Then GoTo recalculrando
-            RandomList.Items.Add(xremade)
+            x = listrandobox.Items(rnd.Next(0, listrandobox.Items.Count)) 'generer un chiffre entre 0 et le nb de roms
+            Dim xremade As Integer = (x + 5) * 37
+
+            If Not RandomList.Items.Contains(xremade) Then
+                RandomList.Items.Add(xremade) 'si le titre n'est pas present, on l'ajoute dans la liste des titres
+            End If
+            listrandobox.Items.Remove(x)
         Loop
+
+        'On Remet la temp listbox en vide
+        listrandobox.Items.Clear()
 
         'on controle que tout est bien OK
         If TitreOnly.Checked = False And ConsoleTitre.Checked = False Then
@@ -743,13 +760,12 @@ recalculrando:
         If (PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play on fait Pause
             Exit Sub
         ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
-            Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
-
+            Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
             PlayerAudio.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
-
-            PlayerAudio.Ctlcontrols.play()
             If ModeEasy.Checked = True Then PlayerAudio.uiMode = "none"
             If ModeHardcore.Checked = True Then PlayerAudio.uiMode = "invisible"
+            PlayerAudio.Ctlcontrols.play()
+
 
             ProgressBar1.Minimum = 0
             ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
@@ -793,7 +809,7 @@ recalculrando:
             If TempGrid.Visible = False Then
                 TempGrid.Visible = True
                 TempGrid.Size = New Point(369, 404)
-                Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
+                Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
                 Dim nomdujeu As String = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("Titre").Index).Value
                 'on faire le focus sur la ligne
                 TempGrid.ClearSelection()
@@ -807,7 +823,6 @@ recalculrando:
 
 
     End Sub
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         ProgressBar1.Minimum = 0
         ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
@@ -831,15 +846,13 @@ recalculrando:
             TimeBox.BackColor = Color.FromArgb(218, 38, 38)
         End If
 
-        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
+        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
         Dim titreencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Titre").Index).Value
         Dim consoleencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Console").Index).Value
-
 
         '############SI C'EST QUIZZ TITRE + CONSOLE #################
         If ConsoleTitre.Checked = True Then ' Titre Et Consoles
             RandomizerPropositions(titreencours, consoleencours)
-
         End If
         '########### CHECK DU TEMPS POUR LES TITRES ONLY ###############
         If PlayerAudio.Ctlcontrols.currentPosition < tempsprop Then Exit Sub
@@ -876,7 +889,7 @@ recalculrando:
             x = listrandobox.Items(rnd.Next(0, nblistex)) 'generer un chiffre entre 0 et le nb de roms dans la liste random
             titlegen = TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
             'test de la presence d'un doublon 
-            If x = RandomList.SelectedItem Then
+            If x = RandomList.SelectedItem Or titlegen = titreencours Then
                 GoTo looping
             End If
             If Not ListTitreDesJeux.Items.Contains(titlegen) Then ListTitreDesJeux.Items.Add(titlegen) 'si le titre n'est pas present, on l'ajoute dans la liste des titres
@@ -899,7 +912,7 @@ finboucle:
 
     Private Sub ListTitreDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListTitreDesJeux.SelectedIndexChanged
         'on prend le titre en cours
-        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
+        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
         Dim titreencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Titre").Index).Value
         'on verifie si la selection est bien celle ci
         If IsNothing(ListTitreDesJeux.SelectedItem.ToString) Then Exit Sub
@@ -917,7 +930,7 @@ finboucle:
         End If
     End Sub
     Private Sub ButtonShowVid_Click(sender As Object, e As EventArgs) Handles ButtonShowVid.Click
-        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
+        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
         Dim videoencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("CheminVideo").Index).Value
         System.Diagnostics.Process.Start(videoencours)
     End Sub
@@ -931,7 +944,7 @@ finboucle:
     End Sub
 
     Private Sub ListConsoleDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListConsoleDesJeux.SelectedIndexChanged
-        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString)
+        Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
         Dim consoleencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Console").Index).Value
 
         If ListConsoleDesJeux.SelectedItem.ToString = consoleencours Then
