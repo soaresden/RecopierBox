@@ -26,7 +26,6 @@ Partial Class Quizz
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Quizz))
         Me.Buttongetback = New System.Windows.Forms.Button()
         Me.GroupParamComplet = New System.Windows.Forms.GroupBox()
-        Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.TxtTotalEntrees = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupParametres = New System.Windows.Forms.GroupBox()
@@ -70,6 +69,7 @@ Partial Class Quizz
         Me.ButtonDoRandom = New System.Windows.Forms.Button()
         Me.ConsoleList = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.TempGrid = New System.Windows.Forms.DataGridView()
         Me.ListTitreDesJeux = New System.Windows.Forms.ListBox()
         Me.ListConsoleDesJeux = New System.Windows.Forms.ListBox()
@@ -130,16 +130,6 @@ Partial Class Quizz
         Me.GroupParamComplet.TabIndex = 10
         Me.GroupParamComplet.TabStop = False
         Me.GroupParamComplet.Text = "Parametres :"
-        '
-        'listrandobox
-        '
-        Me.listrandobox.BackColor = System.Drawing.SystemColors.Info
-        Me.listrandobox.FormattingEnabled = True
-        Me.listrandobox.Location = New System.Drawing.Point(80, 19)
-        Me.listrandobox.Name = "listrandobox"
-        Me.listrandobox.Size = New System.Drawing.Size(72, 30)
-        Me.listrandobox.TabIndex = 41
-        Me.listrandobox.Visible = False
         '
         'TxtTotalEntrees
         '
@@ -591,6 +581,16 @@ Partial Class Quizz
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Selection des Consoles"
         '
+        'listrandobox
+        '
+        Me.listrandobox.BackColor = System.Drawing.SystemColors.Info
+        Me.listrandobox.FormattingEnabled = True
+        Me.listrandobox.Location = New System.Drawing.Point(80, 19)
+        Me.listrandobox.Name = "listrandobox"
+        Me.listrandobox.Size = New System.Drawing.Size(72, 30)
+        Me.listrandobox.TabIndex = 41
+        Me.listrandobox.Visible = False
+        '
         'TempGrid
         '
         Me.TempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -614,12 +614,11 @@ Partial Class Quizz
         'ListConsoleDesJeux
         '
         Me.ListConsoleDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.ListConsoleDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListConsoleDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListConsoleDesJeux.FormattingEnabled = True
-        Me.ListConsoleDesJeux.ItemHeight = 15
         Me.ListConsoleDesJeux.Location = New System.Drawing.Point(8, 300)
         Me.ListConsoleDesJeux.Name = "ListConsoleDesJeux"
-        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 184)
+        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 186)
         Me.ListConsoleDesJeux.TabIndex = 24
         '
         'ProgressBar1
