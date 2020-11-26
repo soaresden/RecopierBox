@@ -721,6 +721,8 @@ recalculrando:
         ListConsoleDesJeux.Items.Clear()
         'On va hider le bouton video si jamais c'etait fini sur la precedente
         ButtonShowVid.Hide()
+        'On securise en mettant le player en hide
+        PlayerAudio.uiMode = "none"
     End Sub
 
     Private Sub PlayerPrev_Click(sender As Object, e As EventArgs) Handles PlayerPrev.Click
@@ -732,7 +734,8 @@ recalculrando:
         ListConsoleDesJeux.Items.Clear()
         'On va hider le bouton video si jamais c'etait fini sur la precedente
         ButtonShowVid.Hide()
-        TimeBox.Text = ""
+        'On securise en mettant le player en hide
+        PlayerAudio.uiMode = "none"
     End Sub
 
     Private Sub PlayerPlay_Click(sender As Object, e As EventArgs) Handles PlayerPlay.Click
@@ -833,7 +836,6 @@ recalculrando:
         Dim consoleencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Console").Index).Value
 
 
-
         '############SI C'EST QUIZZ TITRE + CONSOLE #################
         If ConsoleTitre.Checked = True Then ' Titre Et Consoles
             RandomizerPropositions(titreencours, consoleencours)
@@ -869,17 +871,20 @@ recalculrando:
 
         'Pour le rando, on va parcourir tous les numeros de la randobox, et vérifier si le titre est déja dedans ou non
         Do Until ListTitreDesJeux.Items.Count > 11
-            x = rnd.Next(0, listrandobox.Items.Count) 'generer un chiffre entre 0 et le nb de roms dans la liste random
+            Dim nblistex As Integer = listrandobox.Items.Count
+            If nblistex = 0 Then GoTo finboucle
+            x = listrandobox.Items(rnd.Next(0, nblistex)) 'generer un chiffre entre 0 et le nb de roms dans la liste random
             titlegen = TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
             'test de la presence d'un doublon 
             If x = RandomList.SelectedItem Then
                 GoTo looping
             End If
-            If Not ListTitreDesJeux.Items.Contains(titlegen) Then ListTitreDesJeux.Items.Add(titlegen) 'si le titre est deja present, on l'enleve
+            If Not ListTitreDesJeux.Items.Contains(titlegen) Then ListTitreDesJeux.Items.Add(titlegen) 'si le titre n'est pas present, on l'ajoute dans la liste des titres
 looping:
-            listrandobox.Items.Remove(x)
+            listrandobox.Items.Remove(x) 'on enleve ensuite le x
         Loop
         'on ajoute le titre en cours et on range
+finboucle:
         ListTitreDesJeux.Items.Add(titreencours)
         ListTitreDesJeux.Sorted = True
     End Sub
