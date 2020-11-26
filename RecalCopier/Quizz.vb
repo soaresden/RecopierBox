@@ -1,5 +1,7 @@
 ﻿Imports System.IO
 Imports System.Threading
+Imports System.Linq
+
 Public Class Quizz
     Private Sub Quizz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -643,7 +645,7 @@ suite6:
         Dim rnd As New Random
         Dim x As Integer
 
-        Do Until RandomList.Items.Count = nbdemanches - 1
+        Do Until RandomList.Items.Count = nbdemanches
 recalculrando:
             x = rnd.Next(0, nbroms + 1) 'generer un chiffre entre 0 et le nb de roms
             'test de la presence du vrai jeu ou d'un doublon 
@@ -743,7 +745,7 @@ recalculrando:
             PlayerAudio.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
 
             PlayerAudio.Ctlcontrols.play()
-            If ModeEasy.Checked = True Then PlayerAudio.uiMode = "full"
+            If ModeEasy.Checked = True Then PlayerAudio.uiMode = "none"
             If ModeHardcore.Checked = True Then PlayerAudio.uiMode = "invisible"
 
             ProgressBar1.Minimum = 0
@@ -754,6 +756,8 @@ recalculrando:
             Timer1.Start()
             TimeBox.Text = ""
 
+            'On enleve la liste des jeux par securite
+            ListTitreDesJeux.Items.Clear()
             'On remplit la randobox e toutes les possibilités
             listrandobox.Items.Clear()
             Dim rando As Integer
@@ -832,17 +836,14 @@ recalculrando:
 
         '############SI C'EST QUIZZ TITRE + CONSOLE #################
         If ConsoleTitre.Checked = True Then ' Titre Et Consoles
-
+            RandomizerPropositions(titreencours, consoleencours)
 
         End If
         '########### CHECK DU TEMPS POUR LES TITRES ONLY ###############
         If PlayerAudio.Ctlcontrols.currentPosition < tempsprop Then Exit Sub
         '############SI C'EST QUIZZ TITRE#################
         If TitreOnly.Checked = True Then ' Titre Et Consoles
-
-
-
-
+            RandomizerPropositions(titreencours, consoleencours)
         End If
 
     End Sub
@@ -855,19 +856,19 @@ recalculrando:
         Dim titlegen As String
 
         'Si on a rien selectionné, on quitte
-        If ListConsoleDesJeux.SelectedItem = Nothing Then Exit Sub
+        If ConsoleTitre.Checked = True Then
+            If ListConsoleDesJeux.SelectedItem = Nothing Then Exit Sub
+            'Check Pour les consoles+titres
+            If ListConsoleDesJeux.SelectedItem.ToString <> consoleencours Then
+                Exit Sub
+            End If
+        End If
 
         'Si la liste à déja 12 propositions, on sort 
         If ListTitreDesJeux.Items.Count >= 12 Then Exit Sub
 
-        'Check Pour les consoles+titres
-        If ListConsoleDesJeux.SelectedItem.ToString <> consoleencours Then
-            Exit Sub
-        End If
-
         'Pour le rando, on va parcourir tous les numeros de la randobox, et vérifier si le titre est déja dedans ou non
         Do Until ListTitreDesJeux.Items.Count > 11
-            Application.DoEvents()
             x = rnd.Next(0, listrandobox.Items.Count) 'generer un chiffre entre 0 et le nb de roms dans la liste random
             titlegen = TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
             'test de la presence d'un doublon 

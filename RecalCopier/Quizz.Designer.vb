@@ -78,6 +78,7 @@ Partial Class Quizz
         Me.PlayerStop = New System.Windows.Forms.Button()
         Me.TitleBox = New System.Windows.Forms.PictureBox()
         Me.QuizzBox = New System.Windows.Forms.GroupBox()
+        Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.TimeBox = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.ButtonShowVid = New System.Windows.Forms.Button()
@@ -90,7 +91,6 @@ Partial Class Quizz
         Me.HiddenButton = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.txtRules = New System.Windows.Forms.TextBox()
-        Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.GroupParamComplet.SuspendLayout()
         Me.GroupParametres.SuspendLayout()
         Me.GroupInfoRoms.SuspendLayout()
@@ -116,6 +116,7 @@ Partial Class Quizz
         'GroupParamComplet
         '
         Me.GroupParamComplet.BackColor = System.Drawing.Color.Maroon
+        Me.GroupParamComplet.Controls.Add(Me.listrandobox)
         Me.GroupParamComplet.Controls.Add(Me.TxtTotalEntrees)
         Me.GroupParamComplet.Controls.Add(Me.Label10)
         Me.GroupParamComplet.Controls.Add(Me.GroupParametres)
@@ -671,7 +672,6 @@ Partial Class Quizz
         'QuizzBox
         '
         Me.QuizzBox.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.QuizzBox.Controls.Add(Me.listrandobox)
         Me.QuizzBox.Controls.Add(Me.TimeBox)
         Me.QuizzBox.Controls.Add(Me.Label15)
         Me.QuizzBox.Controls.Add(Me.ButtonShowVid)
@@ -694,6 +694,14 @@ Partial Class Quizz
         Me.QuizzBox.TabIndex = 36
         Me.QuizzBox.TabStop = False
         Me.QuizzBox.Text = "Menu QuizzBox :"
+        '
+        'listrandobox
+        '
+        Me.listrandobox.FormattingEnabled = True
+        Me.listrandobox.Location = New System.Drawing.Point(92, 36)
+        Me.listrandobox.Name = "listrandobox"
+        Me.listrandobox.Size = New System.Drawing.Size(49, 342)
+        Me.listrandobox.TabIndex = 41
         '
         'TimeBox
         '
@@ -814,15 +822,6 @@ Partial Class Quizz
         Me.txtRules.Text = "Vous allez entendre ou voir une video." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*1ère Phase : Concentrez-vous, Souvenez-v" &
     "ous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase : Des propositions apparaissent, Validez vo" &
     "tre choix !"
-        '
-        'listrandobox
-        '
-        Me.listrandobox.FormattingEnabled = True
-        Me.listrandobox.Location = New System.Drawing.Point(68, 17)
-        Me.listrandobox.Name = "listrandobox"
-        Me.listrandobox.Size = New System.Drawing.Size(49, 17)
-        Me.listrandobox.TabIndex = 41
-        Me.listrandobox.Visible = False
         '
         'Quizz
         '
