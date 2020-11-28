@@ -954,7 +954,7 @@ Partial Class CopyRoms
         '
         Me.txt_romname.AutoSize = True
         Me.txt_romname.Font = New System.Drawing.Font("VAGRounded BT", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_romname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txt_romname.ForeColor = System.Drawing.Color.Black
         Me.txt_romname.Location = New System.Drawing.Point(1, 0)
         Me.txt_romname.Name = "txt_romname"
         Me.txt_romname.Size = New System.Drawing.Size(290, 26)

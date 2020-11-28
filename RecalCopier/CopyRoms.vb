@@ -338,12 +338,6 @@ Public Class CopyRoms
                     romnote = xEle.Element("rating")
                 End If
 
-                If xEle.Element("rating") Is Nothing Then
-                    romnote = Nothing
-                Else
-                    romnote = xEle.Element("rating")
-                End If
-
                 If xEle.Element("developer") Is Nothing Then
                     romdev = Nothing
                 Else
