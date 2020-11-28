@@ -101,6 +101,7 @@ Partial Class CopyRoms
         Me.TutoHideOutilsP2 = New System.Windows.Forms.PictureBox()
         Me.TutoHideOutilsP6 = New System.Windows.Forms.PictureBox()
         Me.TutoHideOutilsP4 = New System.Windows.Forms.PictureBox()
+        Me.CheckBoxARRM = New System.Windows.Forms.CheckBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -141,11 +142,11 @@ Partial Class CopyRoms
         'ListGameLists
         '
         Me.ListGameLists.FormattingEnabled = True
-        Me.ListGameLists.Location = New System.Drawing.Point(15, 37)
+        Me.ListGameLists.Location = New System.Drawing.Point(15, 63)
         Me.ListGameLists.Name = "ListGameLists"
         Me.ListGameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ListGameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListGameLists.Size = New System.Drawing.Size(206, 355)
+        Me.ListGameLists.Size = New System.Drawing.Size(206, 329)
         Me.ListGameLists.TabIndex = 2
         '
         'ButtonShowGames
@@ -943,12 +944,26 @@ Partial Class CopyRoms
         Me.TutoHideOutilsP4.TabIndex = 31
         Me.TutoHideOutilsP4.TabStop = False
         '
+        'CheckBoxARRM
+        '
+        Me.CheckBoxARRM.AutoSize = True
+        Me.CheckBoxARRM.Checked = True
+        Me.CheckBoxARRM.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBoxARRM.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.CheckBoxARRM.Location = New System.Drawing.Point(15, 40)
+        Me.CheckBoxARRM.Name = "CheckBoxARRM"
+        Me.CheckBoxARRM.Size = New System.Drawing.Size(198, 17)
+        Me.CheckBoxARRM.TabIndex = 32
+        Me.CheckBoxARRM.Text = "Utiliser les gamelist ARRM en priorité"
+        Me.CheckBoxARRM.UseVisualStyleBackColor = True
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.CheckBoxARRM)
         Me.Controls.Add(Me.TutoHideOutilsP4)
         Me.Controls.Add(Me.TutoHideOutilsP6)
         Me.Controls.Add(Me.TutoHideOutilsP2)
@@ -1011,6 +1026,7 @@ Partial Class CopyRoms
         CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ButtonImportXML As Button
@@ -1090,4 +1106,5 @@ Partial Class CopyRoms
     Friend WithEvents TutoHideOutilsP2 As PictureBox
     Friend WithEvents TutoHideOutilsP6 As PictureBox
     Friend WithEvents TutoHideOutilsP4 As PictureBox
+    Friend WithEvents CheckBoxARRM As CheckBox
 End Class

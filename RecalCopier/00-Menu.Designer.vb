@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.Quitter = New System.Windows.Forms.Button()
@@ -41,7 +41,6 @@ Partial Class Form1
         Me.Button1 = New System.Windows.Forms.Button()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.VersionNetFramework = New System.Windows.Forms.Label()
         Me.ButtonQuizz = New System.Windows.Forms.Button()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
@@ -52,7 +51,6 @@ Partial Class Form1
         Me.MenuBoutons.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WhyGameList.SuspendLayout()
         Me.SuspendLayout()
@@ -122,11 +120,11 @@ Partial Class Form1
         Me.MenuBoutons.Controls.Add(Me.ButtonCopy)
         Me.MenuBoutons.Controls.Add(Me.ButtonOverlay)
         Me.MenuBoutons.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.MenuBoutons.Location = New System.Drawing.Point(11, 67)
+        Me.MenuBoutons.Location = New System.Drawing.Point(11, 66)
         Me.MenuBoutons.Margin = New System.Windows.Forms.Padding(2)
         Me.MenuBoutons.Name = "MenuBoutons"
         Me.MenuBoutons.Padding = New System.Windows.Forms.Padding(2)
-        Me.MenuBoutons.Size = New System.Drawing.Size(262, 463)
+        Me.MenuBoutons.Size = New System.Drawing.Size(262, 464)
         Me.MenuBoutons.TabIndex = 11
         Me.MenuBoutons.TabStop = False
         Me.MenuBoutons.Text = "Faites votre Selection :"
@@ -136,7 +134,7 @@ Partial Class Form1
         Me.ButtonSave.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSave.ForeColor = System.Drawing.SystemColors.InactiveBorder
         Me.ButtonSave.Image = CType(resources.GetObject("ButtonSave.Image"), System.Drawing.Image)
-        Me.ButtonSave.Location = New System.Drawing.Point(8, 316)
+        Me.ButtonSave.Location = New System.Drawing.Point(8, 318)
         Me.ButtonSave.Margin = New System.Windows.Forms.Padding(2)
         Me.ButtonSave.Name = "ButtonSave"
         Me.ButtonSave.Size = New System.Drawing.Size(244, 142)
@@ -179,7 +177,7 @@ Partial Class Form1
         Me.label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label2.Font = New System.Drawing.Font("VAGRounded BT", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label2.ForeColor = System.Drawing.SystemColors.Info
-        Me.label2.Location = New System.Drawing.Point(163, 47)
+        Me.label2.Location = New System.Drawing.Point(334, 46)
         Me.label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label2.Name = "label2"
         Me.label2.Size = New System.Drawing.Size(370, 17)
@@ -192,7 +190,7 @@ Partial Class Form1
         Me.label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.label1.Font = New System.Drawing.Font("VAGRounded BT", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label1.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.label1.Location = New System.Drawing.Point(158, 4)
+        Me.label1.Location = New System.Drawing.Point(264, 3)
         Me.label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label1.Name = "label1"
         Me.label1.Size = New System.Drawing.Size(516, 43)
@@ -217,9 +215,9 @@ Partial Class Form1
         Me.Disclaimer.Controls.Add(Me.TxtDisclaimer)
         Me.Disclaimer.Controls.Add(Me.Button1)
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Disclaimer.Location = New System.Drawing.Point(11, 67)
+        Me.Disclaimer.Location = New System.Drawing.Point(11, 66)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(929, 414)
+        Me.Disclaimer.Size = New System.Drawing.Size(929, 415)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Pourquoi cet Outil ?"
@@ -229,7 +227,7 @@ Partial Class Form1
         Me.TxtDisclaimer.BackColor = System.Drawing.SystemColors.Info
         Me.TxtDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtDisclaimer.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.TxtDisclaimer.Location = New System.Drawing.Point(5, 78)
+        Me.TxtDisclaimer.Location = New System.Drawing.Point(8, 58)
         Me.TxtDisclaimer.Name = "TxtDisclaimer"
         Me.TxtDisclaimer.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.TxtDisclaimer.Size = New System.Drawing.Size(917, 213)
@@ -262,29 +260,19 @@ Partial Class Form1
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.RecalCopier.My.Resources.Resources.iconlog
-        Me.PictureBox1.Location = New System.Drawing.Point(11, 4)
+        Me.PictureBox1.Location = New System.Drawing.Point(59, 3)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(69, 60)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 18
         Me.PictureBox1.TabStop = False
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.RecalCopier.My.Resources.Resources.iconlog
-        Me.PictureBox2.Location = New System.Drawing.Point(11, 4)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(147, 135)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 19
-        Me.PictureBox2.TabStop = False
-        '
         'VersionNetFramework
         '
         Me.VersionNetFramework.AutoSize = True
         Me.VersionNetFramework.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.VersionNetFramework.ForeColor = System.Drawing.Color.Yellow
-        Me.VersionNetFramework.Location = New System.Drawing.Point(744, 4)
+        Me.VersionNetFramework.Location = New System.Drawing.Point(785, 46)
         Me.VersionNetFramework.Name = "VersionNetFramework"
         Me.VersionNetFramework.Size = New System.Drawing.Size(164, 18)
         Me.VersionNetFramework.TabIndex = 21
@@ -357,7 +345,6 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(950, 536)
-        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Disclaimer)
         Me.Controls.Add(Me.WhyGameList)
         Me.Controls.Add(Me.ButtonQuizz)
@@ -381,7 +368,6 @@ Partial Class Form1
         Me.MenuBoutons.ResumeLayout(False)
         Me.Disclaimer.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WhyGameList.ResumeLayout(False)
         Me.WhyGameList.PerformLayout()
@@ -407,7 +393,6 @@ Partial Class Form1
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents TxtDisclaimer As RichTextBox
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents VersionNetFramework As Label
     Private WithEvents ButtonQuizz As Button
     Friend WithEvents PictureBox3 As PictureBox

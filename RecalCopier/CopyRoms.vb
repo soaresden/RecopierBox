@@ -31,22 +31,31 @@ Public Class CopyRoms
         TutoHideOutilsP5.Hide()
         TutoHideOutilsP6.Hide()
 
-
-        'Launch Import Gamelist button
-        ButtonImportXML.PerformClick()
     End Sub
     Private Sub ButtonImportXML_click(sender As Object, e As EventArgs) Handles ButtonImportXML.Click
-        For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
+        If CheckBoxARRM.Checked = True Then
+            For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
 
-            If File.Exists(foundDirectory & "\gamelist.xml") Then
-                ListGameLists.Items.Add(foundDirectory & "\gamelist.xml")
-            End If
-        Next
+                If File.Exists(foundDirectory & "\gamelist_ARRM.xml") Then
+                    ListGameLists.Items.Add(foundDirectory & "\gamelist_ARRM.xml")
+                Else
+                    ListGameLists.Items.Add(foundDirectory & "\gamelist.xml")
+                End If
+            Next
+        Else
+            For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
+                If File.Exists(foundDirectory & "\gamelist.xml") Then
+                    ListGameLists.Items.Add(foundDirectory & "\gamelist.xml")
+                End If
+            Next
+        End If
 
         'showing gridview2
         ButtonImportXML.Hide()
         FinalGrid.Show()
         ButtonShowGames.Show()
+        ButtonImportXML.Hide()
+        CheckBoxARRM.Hide()
     End Sub
 
     Public Shared Function GetFilesRecursive(ByVal initial As String) As List(Of String)
@@ -113,6 +122,13 @@ Public Class CopyRoms
         With column
             .DataType = Type.GetType("System.String")
             .ColumnName = "Titre"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "GameId"
         End With
         table.Columns.Add(column)
 
@@ -230,7 +246,10 @@ Public Class CopyRoms
             'Dim finphrase As String = console.Substring((chercheroms + 4))
             'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
             'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
-            Dim nomconsole As String = i.Substring((InStr(i, "roms\",) + 4)).Substring(0, InStr(i.Substring((InStr(i, "roms\",) + 4)), "\gamelist.xml") - 1)
+            Dim dettectarm As String = InStr(i, "ARRM")
+            Dim nomduxml As String
+            If dettectarm > 1 Then nomduxml = "\gamelist_ARRM.xml" Else nomduxml = "\gamelist.xml"
+            Dim nomconsole As String = i.Substring((InStr(i, "roms\",) + 4)).Substring(0, InStr(i.Substring((InStr(i, "roms\",) + 4)), nomduxml) - 1)
 
             gamelist = i
 
@@ -363,7 +382,7 @@ Public Class CopyRoms
                 End If
 
                 'on ajoute le tout dans une table
-                table.Rows.Add(romconsole, romname, rompath, romdesc, romimage, romvideo, romanual, romgenre, romadult, romnote, romdev, rompubl, romnbplayers, romdate, romCompteur, romRegion)
+                table.Rows.Add(romconsole, romname, romId, rompath, romdesc, romimage, romvideo, romanual, romgenre, romadult, romnote, romdev, rompubl, romnbplayers, romdate, romCompteur, romRegion)
 romsuivante:
             Next
         Next
@@ -376,6 +395,7 @@ romsuivante:
         FinalGrid.Columns("Console").Width = 50
         FinalGrid.Columns("Titre").Width = 260
         'Hiding les colonnes
+        FinalGrid.Columns("GameId").Visible = False
         FinalGrid.Columns("CheminRom").Visible = False
         FinalGrid.Columns("Synopsis").Visible = False
         FinalGrid.Columns("CheminImage").Visible = False
@@ -454,6 +474,7 @@ romsuivante:
         ComboFiltreColonnes.Items.Add("Console")
         ComboFiltreColonnes.Items.Add("Titre")
         ComboFiltreColonnes.Text = "Titre"
+        ComboFiltreColonnes.Items.Add("GameId")
         ComboFiltreColonnes.Items.Add("CheminRom")
         ComboFiltreColonnes.Items.Add("Synopsis")
         ComboFiltreColonnes.Items.Add("CheminImage")
@@ -1116,8 +1137,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
             'Tentative ecriture gamelist
             'on va d'abord tester pour voir si y'a deja un gamelist 
 
-
-
             If System.IO.File.Exists(lenouvogamelist) Then
                 For xmline = 0 To FinalGrid.RowCount - 1
 
@@ -1126,11 +1145,11 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
                         Dim doctoupdate As New Xml.XmlDocument()
                         doctoupdate.Load(lenouvogamelist)
-                        Dim game As Xml.XmlElement = doctoupdate.CreateElement("game")
 
                         'on recupere toutes les valeurs
                         Dim xmlname As String
                         Dim xmlpath As String = Replace(Replace(pathjeu, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                        Dim xmlromId As String
                         Dim xmldesc As String
                         Dim xmlrating As String
                         Dim xmldeveloper As String
@@ -1144,6 +1163,15 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                         Dim xmlmanual As String
                         Dim xmlregion As String
                         Dim xmlplaycount As String
+
+                        'test dugameid 
+                        Dim game As Xml.XmlElement = doctoupdate.CreateElement("game")
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value) Then
+                            xmlromId = Nothing
+                        Else
+                            xmlromId = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value
+                        End If
 
                         If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value) Then
                             xmlname = Nothing
@@ -1233,105 +1261,108 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                         Dim nameEl As Xml.XmlElement = doctoupdate.CreateElement("name")
                         nameEl.InnerText = xmlname
                         game.AppendChild(nameEl)
+                        If xmlromId <> Nothing Then game.SetAttribute("id", xmlromId)
                         doctoupdate.DocumentElement.AppendChild(game)
 
-                        Dim pathEl As Xml.XmlElement = doctoupdate.CreateElement("path")
-                        pathEl.InnerText = xmlpath
-                        game.AppendChild(pathEl)
-                        doctoupdate.DocumentElement.AppendChild(game)
 
-                        If xmldesc <> Nothing Then
-                            Dim descEl As Xml.XmlElement = doctoupdate.CreateElement("desc")
-                            descEl.InnerText = xmldesc
-                            game.AppendChild(descEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
 
-                        If xmlrating <> Nothing Then
-                            Dim rateEl As Xml.XmlElement = doctoupdate.CreateElement("rating")
-                            rateEl.InnerText = xmlrating
-                            game.AppendChild(rateEl)
+                            Dim pathEl As Xml.XmlElement = doctoupdate.CreateElement("path")
+                            pathEl.InnerText = xmlpath
+                            game.AppendChild(pathEl)
                             doctoupdate.DocumentElement.AppendChild(game)
-                        End If
 
-                        If xmldeveloper <> Nothing Then
-                            Dim devEl As Xml.XmlElement = doctoupdate.CreateElement("developer")
-                            devEl.InnerText = xmldeveloper
-                            game.AppendChild(devEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmldesc <> Nothing Then
+                                Dim descEl As Xml.XmlElement = doctoupdate.CreateElement("desc")
+                                descEl.InnerText = xmldesc
+                                game.AppendChild(descEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlpublisher <> Nothing Then
-                            Dim publEl As Xml.XmlElement = doctoupdate.CreateElement("publisher")
-                            publEl.InnerText = xmlpublisher
-                            game.AppendChild(publEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmlrating <> Nothing Then
+                                Dim rateEl As Xml.XmlElement = doctoupdate.CreateElement("rating")
+                                rateEl.InnerText = xmlrating
+                                game.AppendChild(rateEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlgenre <> Nothing Then
-                            Dim genrEl As Xml.XmlElement = doctoupdate.CreateElement("genre")
-                            genrEl.InnerText = xmlgenre
-                            game.AppendChild(genrEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmldeveloper <> Nothing Then
+                                Dim devEl As Xml.XmlElement = doctoupdate.CreateElement("developer")
+                                devEl.InnerText = xmldeveloper
+                                game.AppendChild(devEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmladult <> Nothing Or xmladult = "true" Then
-                            Dim adultEl As Xml.XmlElement = doctoupdate.CreateElement("adult")
-                            adultEl.InnerText = xmladult
-                            game.AppendChild(adultEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmlpublisher <> Nothing Then
+                                Dim publEl As Xml.XmlElement = doctoupdate.CreateElement("publisher")
+                                publEl.InnerText = xmlpublisher
+                                game.AppendChild(publEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlplayers <> Nothing Then
-                            Dim playEl As Xml.XmlElement = doctoupdate.CreateElement("players")
-                            playEl.InnerText = xmlplayers
-                            game.AppendChild(playEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmlgenre <> Nothing Then
+                                Dim genrEl As Xml.XmlElement = doctoupdate.CreateElement("genre")
+                                genrEl.InnerText = xmlgenre
+                                game.AppendChild(genrEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlreleasedate <> Nothing Then
-                            Dim dateEl As Xml.XmlElement = doctoupdate.CreateElement("releasedate")
-                            dateEl.InnerText = xmlreleasedate
-                            game.AppendChild(dateEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmladult <> Nothing Or xmladult = "true" Then
+                                Dim adultEl As Xml.XmlElement = doctoupdate.CreateElement("adult")
+                                adultEl.InnerText = xmladult
+                                game.AppendChild(adultEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlimage <> Nothing Then
-                            Dim imageEl As Xml.XmlElement = doctoupdate.CreateElement("image")
-                            imageEl.InnerText = xmlimage
-                            game.AppendChild(imageEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmlplayers <> Nothing Then
+                                Dim playEl As Xml.XmlElement = doctoupdate.CreateElement("players")
+                                playEl.InnerText = xmlplayers
+                                game.AppendChild(playEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlvideo <> Nothing Then
-                            Dim videoEl As Xml.XmlElement = doctoupdate.CreateElement("video")
-                            videoEl.InnerText = xmlvideo
-                            game.AppendChild(videoEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmlreleasedate <> Nothing Then
+                                Dim dateEl As Xml.XmlElement = doctoupdate.CreateElement("releasedate")
+                                dateEl.InnerText = xmlreleasedate
+                                game.AppendChild(dateEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlplaycount <> Nothing Then
-                            Dim pcountEl As Xml.XmlElement = doctoupdate.CreateElement("playcount")
-                            pcountEl.InnerText = xmlplaycount
-                            game.AppendChild(pcountEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmlimage <> Nothing Then
+                                Dim imageEl As Xml.XmlElement = doctoupdate.CreateElement("image")
+                                imageEl.InnerText = xmlimage
+                                game.AppendChild(imageEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlmanual <> Nothing Then
-                            Dim manualEl As Xml.XmlElement = doctoupdate.CreateElement("manual")
-                            manualEl.InnerText = xmlmanual
-                            game.AppendChild(manualEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
+                            If xmlvideo <> Nothing Then
+                                Dim videoEl As Xml.XmlElement = doctoupdate.CreateElement("video")
+                                videoEl.InnerText = xmlvideo
+                                game.AppendChild(videoEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
 
-                        If xmlregion <> Nothing Then
-                            Dim regEl As Xml.XmlElement = doctoupdate.CreateElement("region")
-                            regEl.InnerText = xmlregion
-                            game.AppendChild(regEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
+                            If xmlplaycount <> Nothing Then
+                                Dim pcountEl As Xml.XmlElement = doctoupdate.CreateElement("playcount")
+                                pcountEl.InnerText = xmlplaycount
+                                game.AppendChild(pcountEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlmanual <> Nothing Then
+                                Dim manualEl As Xml.XmlElement = doctoupdate.CreateElement("manual")
+                                manualEl.InnerText = xmlmanual
+                                game.AppendChild(manualEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlregion <> Nothing Then
+                                Dim regEl As Xml.XmlElement = doctoupdate.CreateElement("region")
+                                regEl.InnerText = xmlregion
+                                game.AppendChild(regEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+                            doctoupdate.Save(lenouvogamelist)
                         End If
-                        doctoupdate.Save(lenouvogamelist)
-                    End If
                 Next
             Else
                 'si le gamelist n'existe pas, on va devoir le creer
@@ -1347,6 +1378,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                         Dim xmlname As String
                         Dim xmlpath As String = Replace(Replace(pathjeu, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
                         Dim xmldesc As String
+                        Dim xmlromId As Integer
                         Dim xmlrating As String
                         Dim xmldeveloper As String
                         Dim xmlpublisher As String
@@ -1364,6 +1396,12 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                             xmlname = Nothing
                         Else
                             xmlname = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value
+                        End If
+
+                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value) Then
+                            xmlromId = Nothing
+                        Else
+                            xmlromId = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value
                         End If
 
                         If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value) Then
@@ -1465,7 +1503,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                                      , xmlmanual _
                                      , xmlregion _
                                      , xmlplaycount _
-                                     , wwriter)
+                                     , wwriter, xmlromId)
 
                         wwriter.WriteEndElement()
                         wwriter.WriteEndDocument()
@@ -1873,9 +1911,14 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                            , ByVal xmlmanual As String _
                            , ByVal xmlregion As String _
                            , ByVal xmlplaycount As String _
-                           , ByVal writer As Xml.XmlTextWriter)
+                           , ByVal writer As Xml.XmlTextWriter, gameid As Integer)
 
-        writer.WriteStartElement("game")
+        If gameid = Nothing Then
+            writer.WriteStartElement("game")
+        Else
+            writer.WriteStartElement("game")
+            writer.WriteAttributeString("id", gameid)
+        End If
 
         writer.WriteStartElement("name")
         writer.WriteString(xmlname)

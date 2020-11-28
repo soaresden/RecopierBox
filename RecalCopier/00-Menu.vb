@@ -79,7 +79,6 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         MsgBox("Merci de votre compréhension")
         Disclaimer.Hide()
-        PictureBox2.Hide()
         MenuBoutons.Show()
     End Sub
     Private Sub TxtRecalfolderPath_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtRecalfolderPath.KeyDown
