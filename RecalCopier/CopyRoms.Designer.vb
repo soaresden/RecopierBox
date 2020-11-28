@@ -134,9 +134,9 @@ Partial Class CopyRoms
         '
         'ButtonImportXML
         '
-        Me.ButtonImportXML.Location = New System.Drawing.Point(121, 2)
+        Me.ButtonImportXML.Location = New System.Drawing.Point(48, 51)
         Me.ButtonImportXML.Name = "ButtonImportXML"
-        Me.ButtonImportXML.Size = New System.Drawing.Size(132, 23)
+        Me.ButtonImportXML.Size = New System.Drawing.Size(145, 32)
         Me.ButtonImportXML.TabIndex = 1
         Me.ButtonImportXML.Text = "Importer les Gamelist.xml"
         Me.ButtonImportXML.UseVisualStyleBackColor = True
@@ -144,11 +144,11 @@ Partial Class CopyRoms
         'ListGameLists
         '
         Me.ListGameLists.FormattingEnabled = True
-        Me.ListGameLists.Location = New System.Drawing.Point(15, 63)
+        Me.ListGameLists.Location = New System.Drawing.Point(15, 89)
         Me.ListGameLists.Name = "ListGameLists"
         Me.ListGameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ListGameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListGameLists.Size = New System.Drawing.Size(206, 329)
+        Me.ListGameLists.Size = New System.Drawing.Size(206, 303)
         Me.ListGameLists.TabIndex = 2
         '
         'ButtonShowGames
@@ -943,7 +943,7 @@ Partial Class CopyRoms
         Me.CheckBoxARRM.Checked = True
         Me.CheckBoxARRM.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBoxARRM.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.CheckBoxARRM.Location = New System.Drawing.Point(15, 40)
+        Me.CheckBoxARRM.Location = New System.Drawing.Point(23, 30)
         Me.CheckBoxARRM.Name = "CheckBoxARRM"
         Me.CheckBoxARRM.Size = New System.Drawing.Size(198, 17)
         Me.CheckBoxARRM.TabIndex = 32

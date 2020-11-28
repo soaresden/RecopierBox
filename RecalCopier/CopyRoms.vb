@@ -2358,10 +2358,12 @@ prochainj:
 
         TutoHideGameList.Hide()
         ListGameLists.Show()
+        FinalGrid.Hide()
         MsgBox("Ci-Contre, vos Gamelists" & Chr(13) & "Vous avez selectionné à la Souris ou en laissant enfoncé le clic" & Chr(13) & "Ou avec CTRL Enfoncé + Clic" & Chr(13) & "les systèmes qui vous interesse")
 
         ListGameLists.Hide()
         TutoHideFinalGrid.Hide()
+        FinalGrid.Show()
         MsgBox("Une fois les Gamelists chargés, retrouvez l'intégralité de vos roms dans ce tableau")
         MsgBox("Chaque ligne du tableau représente une Rom" & Chr(13) & "Les coches à sa droite representent les métadonnées")
         MsgBox("Si la cellule est Verte : Info présente dans le Gamelist" & Chr(13) & "Si la cellule est Rouge : Info non présente" & Chr(13) & "Si la cellule est Noire : Non applicable à cette Console")
