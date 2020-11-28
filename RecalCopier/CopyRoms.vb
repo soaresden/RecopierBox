@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 
 Public Class CopyRoms
-    Private sec As Integer = 0
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
         txt_txtsearch.Hide()
@@ -755,8 +754,6 @@ consolesanssaves:
         'Defilement du Titre du Jeu
         txt_romname.Text = celluleromname
         Timer1.Start()
-        sec = 0
-
 
         'On met le RomPath
         txt_rompath.Text = cellulerompath
@@ -1266,103 +1263,103 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
 
 
-                            Dim pathEl As Xml.XmlElement = doctoupdate.CreateElement("path")
-                            pathEl.InnerText = xmlpath
-                            game.AppendChild(pathEl)
+                        Dim pathEl As Xml.XmlElement = doctoupdate.CreateElement("path")
+                        pathEl.InnerText = xmlpath
+                        game.AppendChild(pathEl)
+                        doctoupdate.DocumentElement.AppendChild(game)
+
+                        If xmldesc <> Nothing Then
+                            Dim descEl As Xml.XmlElement = doctoupdate.CreateElement("desc")
+                            descEl.InnerText = xmldesc
+                            game.AppendChild(descEl)
                             doctoupdate.DocumentElement.AppendChild(game)
-
-                            If xmldesc <> Nothing Then
-                                Dim descEl As Xml.XmlElement = doctoupdate.CreateElement("desc")
-                                descEl.InnerText = xmldesc
-                                game.AppendChild(descEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlrating <> Nothing Then
-                                Dim rateEl As Xml.XmlElement = doctoupdate.CreateElement("rating")
-                                rateEl.InnerText = xmlrating
-                                game.AppendChild(rateEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmldeveloper <> Nothing Then
-                                Dim devEl As Xml.XmlElement = doctoupdate.CreateElement("developer")
-                                devEl.InnerText = xmldeveloper
-                                game.AppendChild(devEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlpublisher <> Nothing Then
-                                Dim publEl As Xml.XmlElement = doctoupdate.CreateElement("publisher")
-                                publEl.InnerText = xmlpublisher
-                                game.AppendChild(publEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlgenre <> Nothing Then
-                                Dim genrEl As Xml.XmlElement = doctoupdate.CreateElement("genre")
-                                genrEl.InnerText = xmlgenre
-                                game.AppendChild(genrEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmladult <> Nothing Or xmladult = "true" Then
-                                Dim adultEl As Xml.XmlElement = doctoupdate.CreateElement("adult")
-                                adultEl.InnerText = xmladult
-                                game.AppendChild(adultEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlplayers <> Nothing Then
-                                Dim playEl As Xml.XmlElement = doctoupdate.CreateElement("players")
-                                playEl.InnerText = xmlplayers
-                                game.AppendChild(playEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlreleasedate <> Nothing Then
-                                Dim dateEl As Xml.XmlElement = doctoupdate.CreateElement("releasedate")
-                                dateEl.InnerText = xmlreleasedate
-                                game.AppendChild(dateEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlimage <> Nothing Then
-                                Dim imageEl As Xml.XmlElement = doctoupdate.CreateElement("image")
-                                imageEl.InnerText = xmlimage
-                                game.AppendChild(imageEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlvideo <> Nothing Then
-                                Dim videoEl As Xml.XmlElement = doctoupdate.CreateElement("video")
-                                videoEl.InnerText = xmlvideo
-                                game.AppendChild(videoEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlplaycount <> Nothing Then
-                                Dim pcountEl As Xml.XmlElement = doctoupdate.CreateElement("playcount")
-                                pcountEl.InnerText = xmlplaycount
-                                game.AppendChild(pcountEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlmanual <> Nothing Then
-                                Dim manualEl As Xml.XmlElement = doctoupdate.CreateElement("manual")
-                                manualEl.InnerText = xmlmanual
-                                game.AppendChild(manualEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-
-                            If xmlregion <> Nothing Then
-                                Dim regEl As Xml.XmlElement = doctoupdate.CreateElement("region")
-                                regEl.InnerText = xmlregion
-                                game.AppendChild(regEl)
-                                doctoupdate.DocumentElement.AppendChild(game)
-                            End If
-                            doctoupdate.Save(lenouvogamelist)
                         End If
+
+                        If xmlrating <> Nothing Then
+                            Dim rateEl As Xml.XmlElement = doctoupdate.CreateElement("rating")
+                            rateEl.InnerText = xmlrating
+                            game.AppendChild(rateEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmldeveloper <> Nothing Then
+                            Dim devEl As Xml.XmlElement = doctoupdate.CreateElement("developer")
+                            devEl.InnerText = xmldeveloper
+                            game.AppendChild(devEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlpublisher <> Nothing Then
+                            Dim publEl As Xml.XmlElement = doctoupdate.CreateElement("publisher")
+                            publEl.InnerText = xmlpublisher
+                            game.AppendChild(publEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlgenre <> Nothing Then
+                            Dim genrEl As Xml.XmlElement = doctoupdate.CreateElement("genre")
+                            genrEl.InnerText = xmlgenre
+                            game.AppendChild(genrEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmladult <> Nothing Or xmladult = "true" Then
+                            Dim adultEl As Xml.XmlElement = doctoupdate.CreateElement("adult")
+                            adultEl.InnerText = xmladult
+                            game.AppendChild(adultEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlplayers <> Nothing Then
+                            Dim playEl As Xml.XmlElement = doctoupdate.CreateElement("players")
+                            playEl.InnerText = xmlplayers
+                            game.AppendChild(playEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlreleasedate <> Nothing Then
+                            Dim dateEl As Xml.XmlElement = doctoupdate.CreateElement("releasedate")
+                            dateEl.InnerText = xmlreleasedate
+                            game.AppendChild(dateEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlimage <> Nothing Then
+                            Dim imageEl As Xml.XmlElement = doctoupdate.CreateElement("image")
+                            imageEl.InnerText = xmlimage
+                            game.AppendChild(imageEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlvideo <> Nothing Then
+                            Dim videoEl As Xml.XmlElement = doctoupdate.CreateElement("video")
+                            videoEl.InnerText = xmlvideo
+                            game.AppendChild(videoEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlplaycount <> Nothing Then
+                            Dim pcountEl As Xml.XmlElement = doctoupdate.CreateElement("playcount")
+                            pcountEl.InnerText = xmlplaycount
+                            game.AppendChild(pcountEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlmanual <> Nothing Then
+                            Dim manualEl As Xml.XmlElement = doctoupdate.CreateElement("manual")
+                            manualEl.InnerText = xmlmanual
+                            game.AppendChild(manualEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+
+                        If xmlregion <> Nothing Then
+                            Dim regEl As Xml.XmlElement = doctoupdate.CreateElement("region")
+                            regEl.InnerText = xmlregion
+                            game.AppendChild(regEl)
+                            doctoupdate.DocumentElement.AppendChild(game)
+                        End If
+                        doctoupdate.Save(lenouvogamelist)
+                    End If
                 Next
             Else
                 'si le gamelist n'existe pas, on va devoir le creer
@@ -2116,16 +2113,13 @@ prochainj:
         Dim columnindex As Integer = FinalGrid.Columns("Titre").Index
 
         Dim titre As String = FinalGrid.Rows(rowindex).Cells(columnindex).Value.ToString()
-        Dim nbcartexte As Integer = titre.Length
-        If nbcartexte = Nothing Then Exit Sub
 
-        If sec <= nbcartexte Then
-
-            txt_romname.Text = titre.Substring(0, sec)
-            sec += 1
+        If txt_romname.Right < 0 Then
+            txt_romname.Left = Panel1.ClientSize.Width
         Else
-            txt_romname.Text = titre
+            txt_romname.Left -= 10
         End If
+
     End Sub
     Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs) Handles buttonRAZ.Click
         txt_txtsearch.Text = "forcingreset"

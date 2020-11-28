@@ -64,7 +64,6 @@ Partial Class CopyRoms
         Me.RomImage = New System.Windows.Forms.PictureBox()
         Me.txt_romdesc = New System.Windows.Forms.RichTextBox()
         Me.txt_rompath = New System.Windows.Forms.TextBox()
-        Me.txt_romname = New System.Windows.Forms.TextBox()
         Me.vid_romvid = New AxWMPLib.AxWindowsMediaPlayer()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txt_txtsearch = New System.Windows.Forms.TextBox()
@@ -102,6 +101,8 @@ Partial Class CopyRoms
         Me.TutoHideOutilsP6 = New System.Windows.Forms.PictureBox()
         Me.TutoHideOutilsP4 = New System.Windows.Forms.PictureBox()
         Me.CheckBoxARRM = New System.Windows.Forms.CheckBox()
+        Me.txt_romname = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -128,6 +129,7 @@ Partial Class CopyRoms
         CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ButtonImportXML
@@ -473,12 +475,12 @@ Partial Class CopyRoms
         'grp_RomInfos
         '
         Me.grp_RomInfos.BackColor = System.Drawing.Color.SkyBlue
+        Me.grp_RomInfos.Controls.Add(Me.Panel1)
         Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.GroupBox6)
         Me.grp_RomInfos.Controls.Add(Me.RomImage)
         Me.grp_RomInfos.Controls.Add(Me.txt_romdesc)
         Me.grp_RomInfos.Controls.Add(Me.txt_rompath)
-        Me.grp_RomInfos.Controls.Add(Me.txt_romname)
         Me.grp_RomInfos.Controls.Add(Me.vid_romvid)
         Me.grp_RomInfos.Controls.Add(Me.Label1)
         Me.grp_RomInfos.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
@@ -588,16 +590,6 @@ Partial Class CopyRoms
         Me.txt_rompath.Size = New System.Drawing.Size(382, 15)
         Me.txt_rompath.TabIndex = 14
         '
-        'txt_romname
-        '
-        Me.txt_romname.Font = New System.Drawing.Font("VAG Rounded", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_romname.Location = New System.Drawing.Point(5, 11)
-        Me.txt_romname.Name = "txt_romname"
-        Me.txt_romname.ReadOnly = True
-        Me.txt_romname.Size = New System.Drawing.Size(382, 29)
-        Me.txt_romname.TabIndex = 13
-        Me.txt_romname.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'vid_romvid
         '
         Me.vid_romvid.Enabled = True
@@ -625,6 +617,7 @@ Partial Class CopyRoms
         '
         'Timer1
         '
+        Me.Timer1.Interval = 75
         '
         'buttonRAZ
         '
@@ -957,6 +950,25 @@ Partial Class CopyRoms
         Me.CheckBoxARRM.Text = "Utiliser les gamelist ARRM en priorité"
         Me.CheckBoxARRM.UseVisualStyleBackColor = True
         '
+        'txt_romname
+        '
+        Me.txt_romname.AutoSize = True
+        Me.txt_romname.Font = New System.Drawing.Font("VAGRounded BT", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_romname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txt_romname.Location = New System.Drawing.Point(1, 0)
+        Me.txt_romname.Name = "txt_romname"
+        Me.txt_romname.Size = New System.Drawing.Size(290, 26)
+        Me.txt_romname.TabIndex = 22
+        Me.txt_romname.Text = "Veuillez cliquer sur une Rom"
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.txt_romname)
+        Me.Panel1.Location = New System.Drawing.Point(5, 12)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(382, 26)
+        Me.Panel1.TabIndex = 23
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1025,6 +1037,8 @@ Partial Class CopyRoms
         CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1048,7 +1062,6 @@ Partial Class CopyRoms
     Friend WithEvents Label1 As Label
     Friend WithEvents vid_romvid As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents txt_rompath As TextBox
-    Friend WithEvents txt_romname As TextBox
     Friend WithEvents txt_romdesc As RichTextBox
     Friend WithEvents txt_txtsearch As TextBox
     Friend WithEvents GroupBox5 As GroupBox
@@ -1107,4 +1120,6 @@ Partial Class CopyRoms
     Friend WithEvents TutoHideOutilsP6 As PictureBox
     Friend WithEvents TutoHideOutilsP4 As PictureBox
     Friend WithEvents CheckBoxARRM As CheckBox
+    Friend WithEvents txt_romname As Label
+    Friend WithEvents Panel1 As Panel
 End Class
