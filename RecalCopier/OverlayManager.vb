@@ -352,9 +352,9 @@ fichiersuivant:
     End Sub
 
     Private Sub ButtonMenage_Click(sender As Object, e As EventArgs) Handles ButtonMenage.Click
-        For i = 0 To ListToSupp.Items.Count - 1
-            Dim gamelist As String = My.Settings.RecalboxFolder & "roms\" & DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("Console").Index).Value & "\gamelist.xml"
+        If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-contre ?", vbNo) = vbNo Then Exit Sub
 
+        For i = 0 To ListToSupp.Items.Count - 1
 
 
         Next

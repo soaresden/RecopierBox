@@ -99,7 +99,7 @@ Partial Class OverlayManager
         'TextBox2
         '
         Me.TextBox2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.TextBox2.Location = New System.Drawing.Point(507, 361)
+        Me.TextBox2.Location = New System.Drawing.Point(507, 195)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(367, 62)
@@ -147,6 +147,7 @@ Partial Class OverlayManager
         Me.RomTotalOverlay.Name = "RomTotalOverlay"
         Me.RomTotalOverlay.Size = New System.Drawing.Size(67, 20)
         Me.RomTotalOverlay.TabIndex = 16
+        Me.RomTotalOverlay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'RomTotal
         '
@@ -154,6 +155,7 @@ Partial Class OverlayManager
         Me.RomTotal.Name = "RomTotal"
         Me.RomTotal.Size = New System.Drawing.Size(67, 20)
         Me.RomTotal.TabIndex = 15
+        Me.RomTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'GroupBox2
         '
@@ -195,6 +197,7 @@ Partial Class OverlayManager
         Me.OverlaySingle.Name = "OverlaySingle"
         Me.OverlaySingle.Size = New System.Drawing.Size(67, 20)
         Me.OverlaySingle.TabIndex = 17
+        Me.OverlaySingle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'OverlayTotal
         '
@@ -202,15 +205,16 @@ Partial Class OverlayManager
         Me.OverlayTotal.Name = "OverlayTotal"
         Me.OverlayTotal.Size = New System.Drawing.Size(67, 20)
         Me.OverlayTotal.TabIndex = 16
+        Me.OverlayTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'ButtonMenage
         '
         Me.ButtonMenage.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonMenage.Location = New System.Drawing.Point(234, 44)
+        Me.ButtonMenage.Location = New System.Drawing.Point(234, 22)
         Me.ButtonMenage.Name = "ButtonMenage"
-        Me.ButtonMenage.Size = New System.Drawing.Size(127, 38)
+        Me.ButtonMenage.Size = New System.Drawing.Size(127, 52)
         Me.ButtonMenage.TabIndex = 6
-        Me.ButtonMenage.Text = "Supprimer" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "les Overlays en Trop"
+        Me.ButtonMenage.Text = "Supprimer" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "les Overlays Orphelins"
         Me.ButtonMenage.UseVisualStyleBackColor = True
         '
         'buttonImportRoms
@@ -233,9 +237,9 @@ Partial Class OverlayManager
         '
         'ButtonGetBack
         '
-        Me.ButtonGetBack.Location = New System.Drawing.Point(12, 11)
+        Me.ButtonGetBack.Location = New System.Drawing.Point(12, 12)
         Me.ButtonGetBack.Name = "ButtonGetBack"
-        Me.ButtonGetBack.Size = New System.Drawing.Size(104, 23)
+        Me.ButtonGetBack.Size = New System.Drawing.Size(116, 23)
         Me.ButtonGetBack.TabIndex = 13
         Me.ButtonGetBack.Text = "Retour Au Menu"
         Me.ButtonGetBack.UseVisualStyleBackColor = True
@@ -258,41 +262,43 @@ Partial Class OverlayManager
         Me.DataGridOverlay.Location = New System.Drawing.Point(507, 71)
         Me.DataGridOverlay.Name = "DataGridOverlay"
         Me.DataGridOverlay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridOverlay.Size = New System.Drawing.Size(367, 179)
+        Me.DataGridOverlay.Size = New System.Drawing.Size(367, 118)
         Me.DataGridOverlay.TabIndex = 15
         '
         'ImportBoth
         '
-        Me.ImportBoth.Location = New System.Drawing.Point(430, 2)
+        Me.ImportBoth.Location = New System.Drawing.Point(439, 2)
         Me.ImportBoth.Name = "ImportBoth"
-        Me.ImportBoth.Size = New System.Drawing.Size(133, 23)
+        Me.ImportBoth.Size = New System.Drawing.Size(133, 34)
         Me.ImportBoth.TabIndex = 16
         Me.ImportBoth.Text = "Remplir les 2 Tableaux"
         Me.ImportBoth.UseVisualStyleBackColor = True
         '
         'ListToSupp
         '
+        Me.ListToSupp.BackColor = System.Drawing.Color.Silver
         Me.ListToSupp.FormattingEnabled = True
-        Me.ListToSupp.Location = New System.Drawing.Point(507, 269)
+        Me.ListToSupp.Location = New System.Drawing.Point(507, 273)
         Me.ListToSupp.Name = "ListToSupp"
         Me.ListToSupp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ListToSupp.Size = New System.Drawing.Size(185, 82)
+        Me.ListToSupp.Size = New System.Drawing.Size(367, 56)
         Me.ListToSupp.TabIndex = 17
         '
         'ListdesFichiersEnTrop
         '
+        Me.ListdesFichiersEnTrop.BackColor = System.Drawing.Color.LightPink
         Me.ListdesFichiersEnTrop.FormattingEnabled = True
-        Me.ListdesFichiersEnTrop.Location = New System.Drawing.Point(698, 269)
+        Me.ListdesFichiersEnTrop.Location = New System.Drawing.Point(507, 351)
         Me.ListdesFichiersEnTrop.Name = "ListdesFichiersEnTrop"
         Me.ListdesFichiersEnTrop.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ListdesFichiersEnTrop.Size = New System.Drawing.Size(176, 82)
+        Me.ListdesFichiersEnTrop.Size = New System.Drawing.Size(367, 69)
         Me.ListdesFichiersEnTrop.TabIndex = 18
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label7.Location = New System.Drawing.Point(507, 253)
+        Me.Label7.Location = New System.Drawing.Point(695, 261)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(179, 13)
         Me.Label7.TabIndex = 19
@@ -302,7 +308,7 @@ Partial Class OverlayManager
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label8.Location = New System.Drawing.Point(705, 253)
+        Me.Label8.Location = New System.Drawing.Point(703, 332)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(169, 13)
         Me.Label8.TabIndex = 20
