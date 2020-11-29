@@ -28,23 +28,26 @@ Partial Class OverlayManager
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.RomTotalOverlay = New System.Windows.Forms.TextBox()
+        Me.RomTotal = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.RAvecOverlay = New System.Windows.Forms.CheckBox()
-        Me.RSansOverlay = New System.Windows.Forms.CheckBox()
-        Me.RAZRoms = New System.Windows.Forms.Button()
-        Me.RAZOverlays = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.OverlaySingle = New System.Windows.Forms.TextBox()
+        Me.OverlayTotal = New System.Windows.Forms.TextBox()
         Me.ButtonMenage = New System.Windows.Forms.Button()
         Me.buttonImportRoms = New System.Windows.Forms.Button()
         Me.ButtonImportOverlays = New System.Windows.Forms.Button()
         Me.ButtonGetBack = New System.Windows.Forms.Button()
         Me.GameLists = New System.Windows.Forms.ListBox()
-        Me.RomTotal = New System.Windows.Forms.TextBox()
-        Me.RomTotalOverlay = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.DataGridOverlay = New System.Windows.Forms.DataGridView()
+        Me.ImportBoth = New System.Windows.Forms.Button()
+        Me.ListToSupp = New System.Windows.Forms.ListBox()
+        Me.ListdesFichiersEnTrop = New System.Windows.Forms.ListBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -111,10 +114,7 @@ Partial Class OverlayManager
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.RomTotalOverlay)
-        Me.GroupBox1.Controls.Add(Me.RAZRoms)
         Me.GroupBox1.Controls.Add(Me.RomTotal)
-        Me.GroupBox1.Controls.Add(Me.RSansOverlay)
-        Me.GroupBox1.Controls.Add(Me.RAvecOverlay)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupBox1.Location = New System.Drawing.Point(134, 429)
         Me.GroupBox1.Name = "GroupBox1"
@@ -123,13 +123,46 @@ Partial Class OverlayManager
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Outils Roms :"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(47, 57)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(142, 13)
+        Me.Label4.TabIndex = 18
+        Me.Label4.Text = "Total de Roms avec Overlay"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(113, 22)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(76, 13)
+        Me.Label3.TabIndex = 17
+        Me.Label3.Text = "Total de Roms"
+        '
+        'RomTotalOverlay
+        '
+        Me.RomTotalOverlay.Location = New System.Drawing.Point(195, 54)
+        Me.RomTotalOverlay.Name = "RomTotalOverlay"
+        Me.RomTotalOverlay.Size = New System.Drawing.Size(67, 20)
+        Me.RomTotalOverlay.TabIndex = 16
+        '
+        'RomTotal
+        '
+        Me.RomTotal.Location = New System.Drawing.Point(195, 18)
+        Me.RomTotal.Name = "RomTotal"
+        Me.RomTotal.Size = New System.Drawing.Size(67, 20)
+        Me.RomTotal.TabIndex = 15
+        '
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.Teal
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.OverlaySingle)
+        Me.GroupBox2.Controls.Add(Me.OverlayTotal)
         Me.GroupBox2.Controls.Add(Me.ButtonMenage)
-        Me.GroupBox2.Controls.Add(Me.RAZOverlays)
-        Me.GroupBox2.Controls.Add(Me.CheckBox1)
-        Me.GroupBox2.Controls.Add(Me.CheckBox2)
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupBox2.Location = New System.Drawing.Point(507, 429)
         Me.GroupBox2.Name = "GroupBox2"
@@ -138,74 +171,42 @@ Partial Class OverlayManager
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Outils Overlays :"
         '
-        'RAvecOverlay
+        'Label6
         '
-        Me.RAvecOverlay.AutoSize = True
-        Me.RAvecOverlay.Checked = True
-        Me.RAvecOverlay.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.RAvecOverlay.Location = New System.Drawing.Point(6, 13)
-        Me.RAvecOverlay.Name = "RAvecOverlay"
-        Me.RAvecOverlay.Size = New System.Drawing.Size(179, 17)
-        Me.RAvecOverlay.TabIndex = 0
-        Me.RAvecOverlay.Text = "Afficher les Roms avec Overlays"
-        Me.RAvecOverlay.UseVisualStyleBackColor = True
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(47, 25)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(83, 13)
+        Me.Label6.TabIndex = 20
+        Me.Label6.Text = "Total d'Overlays"
         '
-        'RSansOverlay
+        'Label5
         '
-        Me.RSansOverlay.AutoSize = True
-        Me.RSansOverlay.Location = New System.Drawing.Point(6, 28)
-        Me.RSansOverlay.Name = "RSansOverlay"
-        Me.RSansOverlay.Size = New System.Drawing.Size(177, 17)
-        Me.RSansOverlay.TabIndex = 1
-        Me.RSansOverlay.Text = "Afficher les Roms sans Overlays"
-        Me.RSansOverlay.UseVisualStyleBackColor = True
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(9, 57)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(125, 13)
+        Me.Label5.TabIndex = 19
+        Me.Label5.Text = "Total d'Overlay Orphelins"
         '
-        'RAZRoms
+        'OverlaySingle
         '
-        Me.RAZRoms.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.RAZRoms.Location = New System.Drawing.Point(65, 44)
-        Me.RAZRoms.Name = "RAZRoms"
-        Me.RAZRoms.Size = New System.Drawing.Size(68, 23)
-        Me.RAZRoms.TabIndex = 2
-        Me.RAZRoms.Text = "RAZ"
-        Me.RAZRoms.UseVisualStyleBackColor = True
+        Me.OverlaySingle.Location = New System.Drawing.Point(150, 54)
+        Me.OverlaySingle.Name = "OverlaySingle"
+        Me.OverlaySingle.Size = New System.Drawing.Size(67, 20)
+        Me.OverlaySingle.TabIndex = 17
         '
-        'RAZOverlays
+        'OverlayTotal
         '
-        Me.RAZOverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.RAZOverlays.Location = New System.Drawing.Point(65, 44)
-        Me.RAZOverlays.Name = "RAZOverlays"
-        Me.RAZOverlays.Size = New System.Drawing.Size(68, 23)
-        Me.RAZOverlays.TabIndex = 5
-        Me.RAZOverlays.Text = "RAZ"
-        Me.RAZOverlays.UseVisualStyleBackColor = True
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(6, 28)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(169, 17)
-        Me.CheckBox1.TabIndex = 4
-        Me.CheckBox1.Text = "Afficher les Overlays Orphelins"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'CheckBox2
-        '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox2.Location = New System.Drawing.Point(6, 13)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(195, 17)
-        Me.CheckBox2.TabIndex = 3
-        Me.CheckBox2.Text = "Afficher les Overlays liés à une Rom"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.OverlayTotal.Location = New System.Drawing.Point(150, 22)
+        Me.OverlayTotal.Name = "OverlayTotal"
+        Me.OverlayTotal.Size = New System.Drawing.Size(67, 20)
+        Me.OverlayTotal.TabIndex = 16
         '
         'ButtonMenage
         '
         Me.ButtonMenage.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonMenage.Location = New System.Drawing.Point(237, 19)
+        Me.ButtonMenage.Location = New System.Drawing.Point(234, 44)
         Me.ButtonMenage.Name = "ButtonMenage"
         Me.ButtonMenage.Size = New System.Drawing.Size(127, 38)
         Me.ButtonMenage.TabIndex = 6
@@ -249,38 +250,6 @@ Partial Class OverlayManager
         Me.GameLists.Size = New System.Drawing.Size(116, 355)
         Me.GameLists.TabIndex = 14
         '
-        'RomTotal
-        '
-        Me.RomTotal.Location = New System.Drawing.Point(254, 62)
-        Me.RomTotal.Name = "RomTotal"
-        Me.RomTotal.Size = New System.Drawing.Size(67, 20)
-        Me.RomTotal.TabIndex = 15
-        '
-        'RomTotalOverlay
-        '
-        Me.RomTotalOverlay.Location = New System.Drawing.Point(254, 25)
-        Me.RomTotalOverlay.Name = "RomTotalOverlay"
-        Me.RomTotalOverlay.Size = New System.Drawing.Size(67, 20)
-        Me.RomTotalOverlay.TabIndex = 16
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(251, 49)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(76, 13)
-        Me.Label3.TabIndex = 17
-        Me.Label3.Text = "Total de Roms"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(212, 10)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(142, 13)
-        Me.Label4.TabIndex = 18
-        Me.Label4.Text = "Total de Roms avec Overlay"
-        '
         'DataGridOverlay
         '
         Me.DataGridOverlay.AllowUserToOrderColumns = True
@@ -289,8 +258,55 @@ Partial Class OverlayManager
         Me.DataGridOverlay.Location = New System.Drawing.Point(507, 71)
         Me.DataGridOverlay.Name = "DataGridOverlay"
         Me.DataGridOverlay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridOverlay.Size = New System.Drawing.Size(367, 284)
+        Me.DataGridOverlay.Size = New System.Drawing.Size(367, 179)
         Me.DataGridOverlay.TabIndex = 15
+        '
+        'ImportBoth
+        '
+        Me.ImportBoth.Location = New System.Drawing.Point(430, 2)
+        Me.ImportBoth.Name = "ImportBoth"
+        Me.ImportBoth.Size = New System.Drawing.Size(133, 23)
+        Me.ImportBoth.TabIndex = 16
+        Me.ImportBoth.Text = "Remplir les 2 Tableaux"
+        Me.ImportBoth.UseVisualStyleBackColor = True
+        '
+        'ListToSupp
+        '
+        Me.ListToSupp.FormattingEnabled = True
+        Me.ListToSupp.Location = New System.Drawing.Point(507, 269)
+        Me.ListToSupp.Name = "ListToSupp"
+        Me.ListToSupp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ListToSupp.Size = New System.Drawing.Size(185, 82)
+        Me.ListToSupp.TabIndex = 17
+        '
+        'ListdesFichiersEnTrop
+        '
+        Me.ListdesFichiersEnTrop.FormattingEnabled = True
+        Me.ListdesFichiersEnTrop.Location = New System.Drawing.Point(698, 269)
+        Me.ListdesFichiersEnTrop.Name = "ListdesFichiersEnTrop"
+        Me.ListdesFichiersEnTrop.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ListdesFichiersEnTrop.Size = New System.Drawing.Size(176, 82)
+        Me.ListdesFichiersEnTrop.TabIndex = 18
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label7.Location = New System.Drawing.Point(507, 253)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(179, 13)
+        Me.Label7.TabIndex = 19
+        Me.Label7.Text = "Liste de tous les Overlays Principaux"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label8.Location = New System.Drawing.Point(705, 253)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(169, 13)
+        Me.Label8.TabIndex = 20
+        Me.Label8.Text = "Liste de tous les fichiers Overlays :"
         '
         'OverlayManager
         '
@@ -298,6 +314,11 @@ Partial Class OverlayManager
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
         Me.ClientSize = New System.Drawing.Size(884, 521)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.ListdesFichiersEnTrop)
+        Me.Controls.Add(Me.ListToSupp)
+        Me.Controls.Add(Me.ImportBoth)
         Me.Controls.Add(Me.DataGridOverlay)
         Me.Controls.Add(Me.GameLists)
         Me.Controls.Add(Me.ButtonGetBack)
@@ -331,14 +352,8 @@ Partial Class OverlayManager
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents RAZRoms As Button
-    Friend WithEvents RSansOverlay As CheckBox
-    Friend WithEvents RAvecOverlay As CheckBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents ButtonMenage As Button
-    Friend WithEvents RAZOverlays As Button
-    Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents buttonImportRoms As Button
     Friend WithEvents ButtonImportOverlays As Button
     Friend WithEvents ButtonGetBack As Button
@@ -348,4 +363,13 @@ Partial Class OverlayManager
     Friend WithEvents RomTotalOverlay As TextBox
     Friend WithEvents RomTotal As TextBox
     Friend WithEvents DataGridOverlay As DataGridView
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents OverlaySingle As TextBox
+    Friend WithEvents OverlayTotal As TextBox
+    Friend WithEvents ImportBoth As Button
+    Friend WithEvents ListToSupp As ListBox
+    Friend WithEvents ListdesFichiersEnTrop As ListBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
 End Class
