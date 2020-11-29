@@ -248,10 +248,13 @@ romsuivante:
             Dim fi As IO.FileInfo
             Dim nomducfg As String
             Dim romnomderom As String
+            Dim cheminducfg As String
+
 
             For Each fi In aryFi
                 If fi.Name = nomconsole & "_overlay.cfg" Then GoTo fichiersuivant
-                table.Rows.Add(nomconsole, Nothing, Nothing, My.Settings.RecalboxFolder & "\overlays\" & nomconsole & "\" & fi.FullName)
+                cheminducfg = fi.FullName
+                table.Rows.Add(nomconsole, Nothing, Nothing, cheminducfg)
 fichiersuivant:
             Next
         Next
@@ -294,6 +297,43 @@ fichiersuivant:
 
         'Si la liste est superieure à 1 alors on commence à ecrire tous les fichiers
         If ListToSupp.Items.Count > 0 Then Call Ecrireles3fichiers()
+
+
+        'On alimente les cellules du Titre
+        For lignass = 0 To DataGridOverlay.Rows.Count - 2
+            Dim consoleencours = DataGridOverlay.Rows(lignass).Cells(DataGridOverlay.Columns("Console").Index).Value
+            Dim gamelistgen As String = My.Settings.RecalboxFolder & "\roms\" & consoleencours & "\gamelist.xml"
+            Dim gamelistXml As XElement = XElement.Load(gamelistgen)
+
+
+            Dim valeurcell As String = DataGridOverlay.Rows(lignass).Cells(DataGridOverlay.Columns("CheminCFG").Index).Value
+            Dim nomdufichiersanscfg As String = Replace(Path.GetFileName(valeurcell), ".cfg", "")
+
+            If nomdufichiersanscfg = consoleencours Then
+                DataGridOverlay.Rows(lignass).Cells(DataGridOverlay.Columns("TitreRom Overlay").Index).Value = "OVERLAY CONSOLE"
+                GoTo lignesuivante
+            End If
+
+            Dim queryy = From st In gamelistXml.Descendants("game") Select st
+            Dim cheminromcomplet As String = Replace(Replace(valeurcell, ".cfg", ""), "\overlays\", "\roms\")
+
+
+
+            For Each xEle As XElement In queryy
+                Dim romname As String = xEle.Element("name")
+                Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
+                Dim rompatho As String = My.Settings.RecalboxFolder & "\roms\" & consoleencours & "\" & temprom
+
+                If rompatho = cheminromcomplet Then
+                    DataGridOverlay.Rows(lignass).Cells(DataGridOverlay.Columns("TitreRom Overlay").Index).Value = romname
+                    DataGridOverlay.Rows(lignass).Cells(DataGridOverlay.Columns("CocheRom").Index).Value = True
+                    DataGridOverlay.Rows(lignass).Cells(DataGridOverlay.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+                    Exit For
+                End If
+            Next
+lignesuivante:
+        Next
+
 
         'On compte le nombre total d'entrées
         OverlayTotal.Text = DataGridOverlay.Rows.Count - 1
@@ -354,10 +394,11 @@ fichiersuivant:
     Private Sub ButtonMenage_Click(sender As Object, e As EventArgs) Handles ButtonMenage.Click
         If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-contre ?", vbNo) = vbNo Then Exit Sub
 
-        For i = 0 To ListToSupp.Items.Count - 1
-
-
+        For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
+            Dim pathdufichier As String = ListdesFichiersEnTrop.Items(i)
+            System.IO.File.Delete(pathdufichier)
         Next
+        MsgBox("Fichiers Supprimés avec Succès")
     End Sub
 
     Private Sub ImportBoth_Click(sender As Object, e As EventArgs) Handles ImportBoth.Click
