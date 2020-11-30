@@ -70,9 +70,9 @@ Partial Class OverlayManager
         Me.Label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.Label2.Location = New System.Drawing.Point(510, 50)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(127, 13)
+        Me.Label2.Size = New System.Drawing.Size(131, 13)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Liste de tous les Overlays"
+        Me.Label2.Text = "Liste de Tous les Overlays"
         '
         'DataGridRoms
         '
@@ -298,21 +298,21 @@ Partial Class OverlayManager
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label7.Location = New System.Drawing.Point(695, 261)
+        Me.Label7.Location = New System.Drawing.Point(638, 260)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(179, 13)
+        Me.Label7.Size = New System.Drawing.Size(236, 13)
         Me.Label7.TabIndex = 19
-        Me.Label7.Text = "Liste de tous les Overlays Principaux"
+        Me.Label7.Text = "Liste d'Overlays Principaux Sans Rom Associés :"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label8.Location = New System.Drawing.Point(658, 335)
+        Me.Label8.Location = New System.Drawing.Point(535, 335)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(216, 13)
+        Me.Label8.Size = New System.Drawing.Size(339, 13)
         Me.Label8.TabIndex = 20
-        Me.Label8.Text = "Liste de tous les fichiers Overlays Orphelins :"
+        Me.Label8.Text = "Fichiers Cités dans la liste ci-dessus et qui deviennent donc Orphelins :"
         '
         'OverlayManager
         '

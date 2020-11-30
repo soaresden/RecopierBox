@@ -413,7 +413,7 @@ lignesuivante:
     End Sub
 
     Private Sub ButtonMenage_Click(sender As Object, e As EventArgs) Handles ButtonMenage.Click
-        If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-contre ?", vbNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-contre ?", vbYesNo) = vbNo Then Exit Sub
 
         For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
             Dim pathdufichier As String = ListdesFichiersEnTrop.Items(i)
