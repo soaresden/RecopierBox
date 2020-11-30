@@ -20,21 +20,25 @@ Public Class OverlayManager
         Next
 
         'Test sur les dossiers Overlays
-        For j = 0 To GameLists.Items.Count - 2
-            'Dim console As String = GameLists.Items(j)
-            'Dim chercheroms As String = InStr(console, "roms\",)
-            'Dim finphrase As String = console.Substring((chercheroms + 4))
-            'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
-            'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
+        'For j = 0 To GameLists.Items.Count - 1
+        'Dim console As String = GameLists.Items(j)
+        'Dim chercheroms As String = InStr(console, "roms\",)
+        'Dim finphrase As String = console.Substring((chercheroms + 4))
+        'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
+        'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
+        Dim compteur = GameLists.Items.Count - 1
+        For j = 0 To compteur
+            If j > compteur Then Exit Sub
+            Dim element As String = GameLists.Items(j)
             Dim nomconsole As String = GameLists.Items(j).Substring((InStr(GameLists.Items(j), "roms\",) + 4)).Substring(0, InStr(GameLists.Items(j).Substring((InStr(GameLists.Items(j), "roms\",) + 4)), "\gamelist.xml") - 1)
 
             Dim dossieroverlay = My.Settings.RecalboxFolder & "\overlays\" & nomconsole
             If (Not System.IO.Directory.Exists(dossieroverlay)) Then
                 GameLists.Items.RemoveAt(j)
+                j = j - 1
+                compteur = compteur - 1
             End If
         Next
-
-
     End Sub
     Private Sub ButtonImportRoms_Click(sender As Object, e As EventArgs) Handles buttonImportRoms.Click
         'Conditionnelle pour ne rien lancer si aucun selectionnés
@@ -294,8 +298,8 @@ fichiersuivant:
         'Width for columns
         DataGridOverlay.RowHeadersWidth = 25
         DataGridOverlay.Columns("Console").Width = 40
-        DataGridOverlay.Columns("NomRomXML").Width = 100
-        DataGridOverlay.Columns("NomFichierCFG").Width = 150
+        DataGridOverlay.Columns("NomRomXML").Width = 90
+        DataGridOverlay.Columns("NomFichierCFG").Width = 140
         DataGridOverlay.Columns("CheminCFG").Width = 25
 
         Dim compteuroverlay As Integer = 0
@@ -314,7 +318,7 @@ fichiersuivant:
         If ListToSupp.Items.Count > 0 Then
             Call Ecrireles3fichiers()
         Else
-            ListToSupp.Items.Add("Pas d'overlays en trop detecté dans votre dossier :)")
+            ListToSupp.Items.Add("(: Pas d'overlays en trop detecté dans votre dossier ")
         End If
 
         'Reajusting Interface and Showing Final Interface
@@ -479,4 +483,5 @@ lignesuivante:
         ListdesFichiersEnTrop.Items.Add(cheminpropreoverlay2)
         ListdesFichiersEnTrop.Items.Add(fichier3png)
     End Sub
+
 End Class
