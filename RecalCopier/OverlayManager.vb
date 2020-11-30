@@ -18,6 +18,23 @@ Public Class OverlayManager
                 GameLists.Items.Add(foundDirectory & "\gamelist.xml")
             End If
         Next
+
+        'Test sur les dossiers Overlays
+        For j = 0 To GameLists.Items.Count - 2
+            'Dim console As String = GameLists.Items(j)
+            'Dim chercheroms As String = InStr(console, "roms\",)
+            'Dim finphrase As String = console.Substring((chercheroms + 4))
+            'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
+            'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
+            Dim nomconsole As String = GameLists.Items(j).Substring((InStr(GameLists.Items(j), "roms\",) + 4)).Substring(0, InStr(GameLists.Items(j).Substring((InStr(GameLists.Items(j), "roms\",) + 4)), "\gamelist.xml") - 1)
+
+            Dim dossieroverlay = My.Settings.RecalboxFolder & "\overlays\" & nomconsole
+            If (Not System.IO.Directory.Exists(dossieroverlay)) Then
+                GameLists.Items.RemoveAt(j)
+            End If
+        Next
+
+
     End Sub
     Private Sub ButtonImportRoms_Click(sender As Object, e As EventArgs) Handles buttonImportRoms.Click
         'Conditionnelle pour ne rien lancer si aucun selectionnés
@@ -241,6 +258,12 @@ romsuivante:
             'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
             'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
             Dim nomconsole As String = i.Substring((InStr(i, "roms\",) + 4)).Substring(0, InStr(i.Substring((InStr(i, "roms\",) + 4)), "\gamelist.xml") - 1)
+            Dim nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\overlays\" & nomconsole, "*.cfg").Count
+
+            If nbdansdossier = 0 Then
+                MsgBox("Pas d'Overlays dans la console :" & nomconsole)
+                Exit Sub
+            End If
 
             Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\overlays\" & nomconsole)
             Dim aryFi As IO.FileInfo() = di.GetFiles("*.cfg")
@@ -288,7 +311,11 @@ fichiersuivant:
         DataGridOverlay.Columns("CocheRom").Width = 25
 
         'Si la liste est superieure à 1 alors on commence à ecrire tous les fichiers
-        If ListToSupp.Items.Count > 0 Then Call Ecrireles3fichiers()
+        If ListToSupp.Items.Count > 0 Then
+            Call Ecrireles3fichiers()
+        Else
+            ListToSupp.Items.Add("Pas d'overlays en trop detecté dans votre dossier :)")
+        End If
 
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, NomRomXML asc"
@@ -311,8 +338,9 @@ fichiersuivant:
         Next
 
         'On met la derniere colonne coche en readonly
-        DataGridOverlay.Columns("CocheOverlay").ReadOnly = True
-        DataGridOverlay.Columns("CocheSave").ReadOnly = True
+        DataGridRoms.Columns("CocheOverlay").ReadOnly = True
+        DataGridOverlay.Columns("CocheRom").ReadOnly = True
+
 
         'On compte le nombre total d'entrées
         OverlayTotal.Text = DataGridOverlay.Rows.Count - 1
