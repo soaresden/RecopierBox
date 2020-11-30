@@ -271,7 +271,7 @@ Partial Class OverlayManager
         Me.ImportBoth.Name = "ImportBoth"
         Me.ImportBoth.Size = New System.Drawing.Size(133, 34)
         Me.ImportBoth.TabIndex = 16
-        Me.ImportBoth.Text = "Remplir les 2 Tableaux"
+        Me.ImportBoth.Text = "Importer Roms + Overlays"
         Me.ImportBoth.UseVisualStyleBackColor = True
         '
         'ListToSupp
@@ -308,11 +308,11 @@ Partial Class OverlayManager
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label8.Location = New System.Drawing.Point(703, 332)
+        Me.Label8.Location = New System.Drawing.Point(658, 335)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(169, 13)
+        Me.Label8.Size = New System.Drawing.Size(216, 13)
         Me.Label8.TabIndex = 20
-        Me.Label8.Text = "Liste de tous les fichiers Overlays :"
+        Me.Label8.Text = "Liste de tous les fichiers Overlays Orphelins :"
         '
         'OverlayManager
         '
