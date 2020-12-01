@@ -645,7 +645,7 @@ suite6:
         'On remplit la randobox de toutes les possibilités
         listrandobox.Items.Clear()
         Dim rando As Integer
-        For rando = 0 To nbdemanches - 1
+        For rando = 0 To TxtTotalEntrees.Text - 1
             listrandobox.Items.Add(rando)
         Next
 
@@ -659,7 +659,7 @@ suite6:
 
         Do Until RandomList.Items.Count = nbdemanches
 recalculrando:
-            x = listrandobox.Items(rnd.Next(0, listrandobox.Items.Count)) 'generer un chiffre entre 0 et le nb de roms
+            x = listrandobox.Items(rnd.Next(0, listrandobox.Items.Count - 1)) 'generer un chiffre entre 0 et le nb de roms
             Dim xremade As Integer = (x + 5) * 37
 
             If Not RandomList.Items.Contains(xremade) Then

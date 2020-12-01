@@ -589,7 +589,6 @@ Partial Class Quizz
         Me.listrandobox.Name = "listrandobox"
         Me.listrandobox.Size = New System.Drawing.Size(72, 30)
         Me.listrandobox.TabIndex = 41
-        Me.listrandobox.Visible = False
         '
         'TempGrid
         '

@@ -13,7 +13,7 @@ Public Class OverlayManager
     End Sub
     Sub ImporterlesGamelists()
         'On Importe toutes les GameLists
-        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.RecalboxFolder & "\overlays\")
+        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.RecalboxFolder & "\overlays\", FileIO.SearchOption.SearchTopLevelOnly)
             GameLists.Items.Add(System.IO.Path.GetFileName(folder))
         Next
     End Sub

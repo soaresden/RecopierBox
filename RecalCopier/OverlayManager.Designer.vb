@@ -267,12 +267,13 @@ Partial Class OverlayManager
         '
         'ImportBoth
         '
-        Me.ImportBoth.Location = New System.Drawing.Point(439, 2)
+        Me.ImportBoth.BackColor = System.Drawing.Color.FloralWhite
+        Me.ImportBoth.Location = New System.Drawing.Point(418, 1)
         Me.ImportBoth.Name = "ImportBoth"
-        Me.ImportBoth.Size = New System.Drawing.Size(133, 34)
+        Me.ImportBoth.Size = New System.Drawing.Size(157, 34)
         Me.ImportBoth.TabIndex = 16
         Me.ImportBoth.Text = "Importer Roms + Overlays"
-        Me.ImportBoth.UseVisualStyleBackColor = True
+        Me.ImportBoth.UseVisualStyleBackColor = False
         '
         'ListToSupp
         '
