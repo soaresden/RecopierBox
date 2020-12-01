@@ -272,7 +272,7 @@ Partial Class Form1
         Me.VersionNetFramework.AutoSize = True
         Me.VersionNetFramework.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.VersionNetFramework.ForeColor = System.Drawing.Color.Yellow
-        Me.VersionNetFramework.Location = New System.Drawing.Point(785, 46)
+        Me.VersionNetFramework.Location = New System.Drawing.Point(744, 46)
         Me.VersionNetFramework.Name = "VersionNetFramework"
         Me.VersionNetFramework.Size = New System.Drawing.Size(164, 18)
         Me.VersionNetFramework.TabIndex = 21

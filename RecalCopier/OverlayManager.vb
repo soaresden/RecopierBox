@@ -35,8 +35,8 @@ Public Class OverlayManager
             Dim dossieroverlay = My.Settings.RecalboxFolder & "\overlays\" & nomconsole
             If (Not System.IO.Directory.Exists(dossieroverlay)) Then
                 GameLists.Items.RemoveAt(j)
-                j = j - 1
-                compteur = compteur - 1
+                j -= 1
+                compteur -= 1
             End If
         Next
     End Sub
@@ -142,9 +142,10 @@ romsuivante:
         DataGridRoms.DataSource = table
 
         'On ajoute la checkbox pour les overlays
-        Dim chk As DataGridViewCheckBoxColumn = New DataGridViewCheckBoxColumn
-        chk.HeaderText = "CocheOverlay"
-        chk.Name = "CocheOverlay"
+        Dim chk As DataGridViewCheckBoxColumn = New DataGridViewCheckBoxColumn With {
+            .HeaderText = "CocheOverlay",
+            .Name = "CocheOverlay"
+        }
         DataGridRoms.Columns.Add(chk)
 
         'Width for columns
@@ -207,7 +208,6 @@ romsuivante:
     Private Sub ButtonImportOverlays_Click(sender As Object, e As EventArgs) Handles ButtonImportOverlays.Click
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If GameLists.SelectedItems.Count = 0 Then
-            MsgBox("Merci de Selectionner des Gamelists")
             Exit Sub
         End If
 
@@ -216,6 +216,10 @@ romsuivante:
         On Error Resume Next
         DataGridOverlay.Rows.Clear()
         On Error GoTo 0
+
+        'on clear les listboxes au cas ou
+        ListToSupp.Items.Clear()
+        ListdesFichiersEnTrop.Items.Clear()
 
         If GameLists.Items.Count = 0 Then Exit Sub
 
@@ -291,6 +295,7 @@ romsuivante:
 fichiersuivant:
             Next
         Next
+
         'Sorting A-Z the console
         dv = table.DefaultView
         DataGridOverlay.DataSource = table
@@ -304,22 +309,13 @@ fichiersuivant:
 
         Dim compteuroverlay As Integer = 0
 
-        'on clear la listbox au cas ou
-        ListToSupp.Items.Clear()
-
         'On ajoute la checkbox pour les overlays
-        Dim chk As DataGridViewCheckBoxColumn = New DataGridViewCheckBoxColumn
-        chk.HeaderText = "CocheRom"
-        chk.Name = "CocheRom"
+        Dim chk As DataGridViewCheckBoxColumn = New DataGridViewCheckBoxColumn With {
+            .HeaderText = "CocheRom",
+            .Name = "CocheRom"
+        }
         DataGridOverlay.Columns.Add(chk)
         DataGridOverlay.Columns("CocheRom").Width = 25
-
-        'Si la liste est superieure à 1 alors on commence à ecrire tous les fichiers
-        If ListToSupp.Items.Count > 0 Then
-            Call Ecrireles3fichiers()
-        Else
-            ListToSupp.Items.Add("(: Pas d'overlays en trop detecté dans votre dossier ")
-        End If
 
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, NomRomXML asc"
@@ -341,10 +337,15 @@ fichiersuivant:
             End If
         Next
 
-        'On met la derniere colonne coche en readonly
-        DataGridRoms.Columns("CocheOverlay").ReadOnly = True
-        DataGridOverlay.Columns("CocheRom").ReadOnly = True
+        'Si la liste est superieure à 1 alors on commence à ecrire tous les fichiers
+        If ListToSupp.Items.Count > 0 Then
+            Call Ecrireles3fichiers()
+        Else
+            ListToSupp.Items.Add("(: Pas d'overlays en trop detecté dans votre dossier ")
+        End If
 
+        'On met la derniere colonne coche en readonly
+        DataGridOverlay.Columns("CocheRom").ReadOnly = True
 
         'On compte le nombre total d'entrées
         OverlayTotal.Text = DataGridOverlay.Rows.Count - 1
@@ -443,9 +444,10 @@ lignesuivante:
 
         'on va lire le cfg pour trouver le cfg overlay
         File.ReadAllLines(fichier1cfg)
-
         Dim readText() As String = File.ReadAllLines(fichier1cfg)
         Dim s As String
+        'On ajoute a la listbox
+        ListdesFichiersEnTrop.Items.Add(fichier1cfg)
 
         For Each s In readText
             Dim detectinputoverlay As String = InStr(s, "/overlays/")
@@ -461,7 +463,10 @@ lignesuivante:
         Next
 
         'on lit le deuxieme fichier overlay cfg pour trouver le png
+        If Not File.Exists(cheminpropreoverlay2) Then Exit Sub
         File.ReadAllLines(cheminpropreoverlay2)
+        'On ajoute a la listbox
+        ListdesFichiersEnTrop.Items.Add(cheminpropreoverlay2)
 
         Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
         Dim t As String
@@ -477,11 +482,10 @@ lignesuivante:
                 Exit For
             End If
         Next
-
-        'On ajoute ces 3 paths a la listbox des A Supprimer
-        ListdesFichiersEnTrop.Items.Add(fichier1cfg)
-        ListdesFichiersEnTrop.Items.Add(cheminpropreoverlay2)
+        'on ajoute a la listbox
         ListdesFichiersEnTrop.Items.Add(fichier3png)
+
+
     End Sub
 
 End Class

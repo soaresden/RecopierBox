@@ -308,11 +308,11 @@ Partial Class OverlayManager
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label8.Location = New System.Drawing.Point(535, 335)
+        Me.Label8.Location = New System.Drawing.Point(558, 335)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(339, 13)
+        Me.Label8.Size = New System.Drawing.Size(322, 13)
         Me.Label8.TabIndex = 20
-        Me.Label8.Text = "Fichiers Cités dans la liste ci-dessus et qui deviennent donc Orphelins :"
+        Me.Label8.Text = "Liste des fichiers cités ci-dessus et qui deviennent donc Orphelins :"
         '
         'OverlayManager
         '
