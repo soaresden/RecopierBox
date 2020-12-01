@@ -13,31 +13,8 @@ Public Class OverlayManager
     End Sub
     Sub ImporterlesGamelists()
         'On Importe toutes les GameLists
-        For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
-            If File.Exists(foundDirectory & "\gamelist.xml") Then
-                GameLists.Items.Add(foundDirectory & "\gamelist.xml")
-            End If
-        Next
-
-        'Test sur les dossiers Overlays
-        'For j = 0 To GameLists.Items.Count - 1
-        'Dim console As String = GameLists.Items(j)
-        'Dim chercheroms As String = InStr(console, "roms\",)
-        'Dim finphrase As String = console.Substring((chercheroms + 4))
-        'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
-        'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
-        Dim compteur = GameLists.Items.Count - 1
-        For j = 0 To compteur
-            If j > compteur Then Exit Sub
-            Dim element As String = GameLists.Items(j)
-            Dim nomconsole As String = GameLists.Items(j).Substring((InStr(GameLists.Items(j), "roms\",) + 4)).Substring(0, InStr(GameLists.Items(j).Substring((InStr(GameLists.Items(j), "roms\",) + 4)), "\gamelist.xml") - 1)
-
-            Dim dossieroverlay = My.Settings.RecalboxFolder & "\overlays\" & nomconsole
-            If (Not System.IO.Directory.Exists(dossieroverlay)) Then
-                GameLists.Items.RemoveAt(j)
-                j -= 1
-                compteur -= 1
-            End If
+        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.RecalboxFolder & "\overlays\")
+            GameLists.Items.Add(System.IO.Path.GetFileName(folder))
         Next
     End Sub
     Private Sub ButtonImportRoms_Click(sender As Object, e As EventArgs) Handles buttonImportRoms.Click
@@ -95,36 +72,31 @@ Public Class OverlayManager
         End With
         table.Columns.Add(column)
 
+
         'Loop for every gamelists
         For Each i In GameLists.SelectedItems
 
             'generating the console name
-            'Dim console As String = i
-            'Dim chercheroms As String = InStr(console, "roms\",)
-            'Dim finphrase As String = console.Substring((chercheroms + 4))
-            'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
-            'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
-            Dim dettectarm As String = InStr(i, "ARRM")
-            Dim nomduxml As String
-            If dettectarm > 1 Then nomduxml = "\gamelist_ARRM.xml" Else nomduxml = "\gamelist.xml"
-            Dim nomconsole As String = i.Substring((InStr(i, "roms\",) + 4)).Substring(0, InStr(i.Substring((InStr(i, "roms\",) + 4)), nomduxml) - 1)
+            Dim console As String = i
+            gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist.xml"
 
-            gamelist = i
+            'Si dans le dossier y'a pas de gamelist on va annuler l'ajout de roms parce que y'en a pas.
+            If Not System.IO.File.Exists(gamelist) Then
+                GoTo ProchainGamelist
+            End If
 
             'On ajoute ensuite les consoles dans la listebox des console
             Dim consolederom As String = i
-            consolederom = consolederom.Substring(InStr(consolederom, "\roms\") + 5).Substring(0, InStr(consolederom.Substring(InStr(consolederom, "\roms\") + 5), "\") - 1)
-
             Dim gamelistXml As XElement = XElement.Load(gamelist)
 
             'getting the list for the xml with nodes
             Dim query2 = From st In gamelistXml.Descendants("game") Select st
 
             For Each xEle As XElement In query2
-                Dim romconsole As String = nomconsole
+                Dim romconsole As String = console
                 Dim romname As String = xEle.Element("name")
                 Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
-                Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & temprom
+                Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & console & "\" & temprom
                 Dim romoverlays As String = Nothing
                 Dim romhidden As String = xEle.Element("hidden")
                 Dim romnomderom As String = Path.GetFileName(rompath)
@@ -132,11 +104,10 @@ Public Class OverlayManager
 
                 'on ajoute le tout dans une table
                 table.Rows.Add(romconsole, romname, rompath, romnomderom, romoverlays)
-romsuivante:
+Romsuivante:
             Next
+ProchainGamelist:
         Next
-
-
         'Sorting A-Z the console
         dv = table.DefaultView
         DataGridRoms.DataSource = table
@@ -260,12 +231,7 @@ romsuivante:
 
         'Loop for every gamelists
         For Each i In GameLists.SelectedItems
-            'Dim console As String = i
-            'Dim chercheroms As String = InStr(Console, "roms\",)
-            'Dim finphrase As String = Console.Substring((chercheroms + 4))
-            'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
-            'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
-            Dim nomconsole As String = i.Substring((InStr(i, "roms\",) + 4)).Substring(0, InStr(i.Substring((InStr(i, "roms\",) + 4)), "\gamelist.xml") - 1)
+            Dim nomconsole As String = i
             Dim nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\overlays\" & nomconsole, "*.cfg").Count
 
             If nbdansdossier = 0 Then
@@ -357,6 +323,13 @@ fichiersuivant:
     Function Recherchenomdelarom(console As String, pathdelarom As String)
         Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
         Dim nomdelarom = Path.GetFileName(pathdelarom)
+
+
+        'Si il n'existe pas de gamelist, on va mettre les infos generique
+        If Not System.IO.File.Exists(lagamelist) Then
+            Return "#NOGAMELIST#-" & nomdelarom
+        End If
+
         Dim gamelistXml As XElement = XElement.Load(lagamelist)
 
         'getting the list for the xml with nodes
@@ -444,9 +417,10 @@ lignesuivante:
 
         'on va lire le cfg pour trouver le cfg overlay
         File.ReadAllLines(fichier1cfg)
+
         Dim readText() As String = File.ReadAllLines(fichier1cfg)
         Dim s As String
-        'On ajoute a la listbox
+         'On ajoute a la listbox
         ListdesFichiersEnTrop.Items.Add(fichier1cfg)
 
         For Each s In readText
