@@ -132,6 +132,12 @@
     <Compile Include="Quizz.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SaveManager.Designer.vb">
+      <DependentUpon>SaveManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SaveManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="00-Menu.resx">
@@ -151,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quizz.resx">
       <DependentUpon>Quizz.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveManager.resx">
+      <DependentUpon>SaveManager.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

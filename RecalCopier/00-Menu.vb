@@ -109,7 +109,8 @@ Public Class Form1
 
     Private Sub ButtonSave_Click_1(sender As Object, e As EventArgs) Handles ButtonSave.Click
         'Au clic, on ouvre le formulaire associé et on ferme le menu
-        MsgBox("En Travail")
+        SaveManager.Show()
+        Me.Hide()
     End Sub
 
     Private Sub ButtonOverlay_Click_1(sender As Object, e As EventArgs) Handles ButtonOverlay.Click
