@@ -7,7 +7,7 @@ Public Class OverlayManager
         TextBox2.Hide()
         Call ImporterlesGamelists()
     End Sub
-    Private Sub ButtonGetBack_Click(sender As Object, e As EventArgs) Handles ButtonGetBack.Click
+    Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
         Form1.Show()
         Me.Close()
     End Sub
@@ -17,7 +17,7 @@ Public Class OverlayManager
             GameLists.Items.Add(System.IO.Path.GetFileName(folder))
         Next
     End Sub
-    Private Sub ButtonImportRoms_Click(sender As Object, e As EventArgs) Handles buttonImportRoms.Click
+    Private Sub ButtonImportRoms_Click(sender As Object, e As EventArgs) Handles buttonImportRoms1.Click
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If GameLists.SelectedItems.Count = 0 Then
             MsgBox("Merci de Selectionner des Gamelists")
@@ -100,7 +100,7 @@ Public Class OverlayManager
                 Dim romoverlays As String = Nothing
                 Dim romhidden As String = xEle.Element("hidden")
                 Dim romnomderom As String = Path.GetFileName(rompath)
-                If romhidden = "true" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
+                If romhidden = "true" Then GoTo Romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
 
                 'on ajoute le tout dans une table
                 table.Rows.Add(romconsole, romname, rompath, romnomderom, romoverlays)
@@ -138,7 +138,7 @@ ProchainGamelist:
 
         Dim compteuroverlay As Integer = 0
         'On remplit les Coches Overlays
-        Call completiondesoverlaysRoms()
+        Call CompletiondesoverlaysRoms()
 
         'On compte le nombre total d'entrées
         RomTotal.Text = DataGridRoms.Rows.Count - 1
@@ -147,7 +147,6 @@ ProchainGamelist:
         TextBox1.Show()
         GroupBox1.Show()
     End Sub
-
 
     Public Function FileNameWithoutExtension(ByVal FullPath _
     As String) As String
@@ -176,7 +175,7 @@ ProchainGamelist:
         RomTotalOverlay.Text = compteuroverlay
     End Sub
 
-    Private Sub ButtonImportOverlays_Click(sender As Object, e As EventArgs) Handles ButtonImportOverlays.Click
+    Private Sub ButtonImportOverlays_Click(sender As Object, e As EventArgs) Handles ButtonImportOverlays1.Click
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If GameLists.SelectedItems.Count = 0 Then
             Exit Sub
@@ -386,7 +385,7 @@ lignesuivante:
         Next
     End Sub
 
-    Private Sub ButtonMenage_Click(sender As Object, e As EventArgs) Handles ButtonMenage.Click
+    Private Sub ButtonMenage_Click(sender As Object, e As EventArgs) Handles ButtonMenage1.Click
         If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-contre ?", vbYesNo) = vbNo Then Exit Sub
 
         For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
@@ -396,9 +395,9 @@ lignesuivante:
         MsgBox("Fichiers Supprimés avec Succès")
     End Sub
 
-    Private Sub ImportBoth_Click(sender As Object, e As EventArgs) Handles ImportBoth.Click
-        buttonImportRoms.PerformClick()
-        ButtonImportOverlays.PerformClick()
+    Private Sub ImportBoth_Click(sender As Object, e As EventArgs) Handles ImportBoth1.Click
+        buttonImportRoms1.PerformClick()
+        ButtonImportOverlays1.PerformClick()
     End Sub
     Sub LectureDesCfgs(consolerom As String, nomducfg As String)
         Dim modifgamelistenrom As String = nomducfg
@@ -420,7 +419,7 @@ lignesuivante:
 
         Dim readText() As String = File.ReadAllLines(fichier1cfg)
         Dim s As String
-         'On ajoute a la listbox
+        'On ajoute a la listbox
         ListdesFichiersEnTrop.Items.Add(fichier1cfg)
 
         For Each s In readText
@@ -461,5 +460,4 @@ lignesuivante:
 
 
     End Sub
-
 End Class

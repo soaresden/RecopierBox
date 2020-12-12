@@ -33,21 +33,21 @@ Partial Class OverlayManager
         Me.RomTotalOverlay = New System.Windows.Forms.TextBox()
         Me.RomTotal = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ButtonMenage1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.OverlaySingle = New System.Windows.Forms.TextBox()
         Me.OverlayTotal = New System.Windows.Forms.TextBox()
-        Me.ButtonMenage = New System.Windows.Forms.Button()
-        Me.buttonImportRoms = New System.Windows.Forms.Button()
-        Me.ButtonImportOverlays = New System.Windows.Forms.Button()
-        Me.ButtonGetBack = New System.Windows.Forms.Button()
         Me.GameLists = New System.Windows.Forms.ListBox()
         Me.DataGridOverlay = New System.Windows.Forms.DataGridView()
-        Me.ImportBoth = New System.Windows.Forms.Button()
         Me.ListToSupp = New System.Windows.Forms.ListBox()
         Me.ListdesFichiersEnTrop = New System.Windows.Forms.ListBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.ImportBoth1 = New System.Windows.Forms.Button()
+        Me.ButtonGetBack1 = New System.Windows.Forms.Button()
+        Me.buttonImportRoms1 = New System.Windows.Forms.Button()
+        Me.ButtonImportOverlays1 = New System.Windows.Forms.Button()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -87,7 +87,7 @@ Partial Class OverlayManager
         '
         'TextBox1
         '
-        Me.TextBox1.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox1.BackColor = System.Drawing.Color.Lavender
         Me.TextBox1.Location = New System.Drawing.Point(134, 361)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
@@ -98,7 +98,7 @@ Partial Class OverlayManager
         '
         'TextBox2
         '
-        Me.TextBox2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.TextBox2.BackColor = System.Drawing.Color.Bisque
         Me.TextBox2.Location = New System.Drawing.Point(507, 195)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
@@ -110,7 +110,7 @@ Partial Class OverlayManager
         '
         'GroupBox1
         '
-        Me.GroupBox1.BackColor = System.Drawing.Color.DarkGoldenrod
+        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.RomTotalOverlay)
@@ -126,7 +126,7 @@ Partial Class OverlayManager
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(47, 57)
+        Me.Label4.Location = New System.Drawing.Point(146, 57)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(142, 13)
         Me.Label4.TabIndex = 18
@@ -135,7 +135,7 @@ Partial Class OverlayManager
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(113, 22)
+        Me.Label3.Location = New System.Drawing.Point(212, 22)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(76, 13)
         Me.Label3.TabIndex = 17
@@ -143,7 +143,7 @@ Partial Class OverlayManager
         '
         'RomTotalOverlay
         '
-        Me.RomTotalOverlay.Location = New System.Drawing.Point(195, 54)
+        Me.RomTotalOverlay.Location = New System.Drawing.Point(294, 54)
         Me.RomTotalOverlay.Name = "RomTotalOverlay"
         Me.RomTotalOverlay.Size = New System.Drawing.Size(67, 20)
         Me.RomTotalOverlay.TabIndex = 16
@@ -151,7 +151,7 @@ Partial Class OverlayManager
         '
         'RomTotal
         '
-        Me.RomTotal.Location = New System.Drawing.Point(195, 18)
+        Me.RomTotal.Location = New System.Drawing.Point(294, 18)
         Me.RomTotal.Name = "RomTotal"
         Me.RomTotal.Size = New System.Drawing.Size(67, 20)
         Me.RomTotal.TabIndex = 15
@@ -159,12 +159,12 @@ Partial Class OverlayManager
         '
         'GroupBox2
         '
-        Me.GroupBox2.BackColor = System.Drawing.Color.Teal
+        Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.GroupBox2.Controls.Add(Me.ButtonMenage1)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.OverlaySingle)
         Me.GroupBox2.Controls.Add(Me.OverlayTotal)
-        Me.GroupBox2.Controls.Add(Me.ButtonMenage)
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupBox2.Location = New System.Drawing.Point(507, 429)
         Me.GroupBox2.Name = "GroupBox2"
@@ -172,6 +172,23 @@ Partial Class OverlayManager
         Me.GroupBox2.TabIndex = 9
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Outils Overlays :"
+        '
+        'ButtonMenage1
+        '
+        Me.ButtonMenage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.ButtonMenage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonMenage1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonMenage1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonMenage1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(154, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.ButtonMenage1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonMenage1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonMenage1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonMenage1.Location = New System.Drawing.Point(245, 18)
+        Me.ButtonMenage1.Name = "ButtonMenage1"
+        Me.ButtonMenage1.Size = New System.Drawing.Size(116, 55)
+        Me.ButtonMenage1.TabIndex = 42
+        Me.ButtonMenage1.Text = "Supprimer les Overlays Orphelins"
+        Me.ButtonMenage1.UseVisualStyleBackColor = False
         '
         'Label6
         '
@@ -207,43 +224,6 @@ Partial Class OverlayManager
         Me.OverlayTotal.TabIndex = 16
         Me.OverlayTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'ButtonMenage
-        '
-        Me.ButtonMenage.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonMenage.Location = New System.Drawing.Point(234, 22)
-        Me.ButtonMenage.Name = "ButtonMenage"
-        Me.ButtonMenage.Size = New System.Drawing.Size(127, 52)
-        Me.ButtonMenage.TabIndex = 6
-        Me.ButtonMenage.Text = "Supprimer" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "les Overlays Orphelins"
-        Me.ButtonMenage.UseVisualStyleBackColor = True
-        '
-        'buttonImportRoms
-        '
-        Me.buttonImportRoms.Location = New System.Drawing.Point(401, 42)
-        Me.buttonImportRoms.Name = "buttonImportRoms"
-        Me.buttonImportRoms.Size = New System.Drawing.Size(100, 23)
-        Me.buttonImportRoms.TabIndex = 11
-        Me.buttonImportRoms.Text = "Importer les Roms"
-        Me.buttonImportRoms.UseVisualStyleBackColor = True
-        '
-        'ButtonImportOverlays
-        '
-        Me.ButtonImportOverlays.Location = New System.Drawing.Point(741, 43)
-        Me.ButtonImportOverlays.Name = "ButtonImportOverlays"
-        Me.ButtonImportOverlays.Size = New System.Drawing.Size(133, 23)
-        Me.ButtonImportOverlays.TabIndex = 12
-        Me.ButtonImportOverlays.Text = "Importer les Overlays"
-        Me.ButtonImportOverlays.UseVisualStyleBackColor = True
-        '
-        'ButtonGetBack
-        '
-        Me.ButtonGetBack.Location = New System.Drawing.Point(12, 12)
-        Me.ButtonGetBack.Name = "ButtonGetBack"
-        Me.ButtonGetBack.Size = New System.Drawing.Size(116, 23)
-        Me.ButtonGetBack.TabIndex = 13
-        Me.ButtonGetBack.Text = "Retour Au Menu"
-        Me.ButtonGetBack.UseVisualStyleBackColor = True
-        '
         'GameLists
         '
         Me.GameLists.FormattingEnabled = True
@@ -265,19 +245,9 @@ Partial Class OverlayManager
         Me.DataGridOverlay.Size = New System.Drawing.Size(367, 118)
         Me.DataGridOverlay.TabIndex = 15
         '
-        'ImportBoth
-        '
-        Me.ImportBoth.BackColor = System.Drawing.Color.FloralWhite
-        Me.ImportBoth.Location = New System.Drawing.Point(418, 1)
-        Me.ImportBoth.Name = "ImportBoth"
-        Me.ImportBoth.Size = New System.Drawing.Size(157, 34)
-        Me.ImportBoth.TabIndex = 16
-        Me.ImportBoth.Text = "Importer Roms + Overlays"
-        Me.ImportBoth.UseVisualStyleBackColor = False
-        '
         'ListToSupp
         '
-        Me.ListToSupp.BackColor = System.Drawing.Color.Silver
+        Me.ListToSupp.BackColor = System.Drawing.Color.MistyRose
         Me.ListToSupp.FormattingEnabled = True
         Me.ListToSupp.Location = New System.Drawing.Point(507, 273)
         Me.ListToSupp.Name = "ListToSupp"
@@ -315,22 +285,90 @@ Partial Class OverlayManager
         Me.Label8.TabIndex = 20
         Me.Label8.Text = "Liste des fichiers cités ci-dessus et qui deviennent donc Orphelins :"
         '
+        'ImportBoth1
+        '
+        Me.ImportBoth1.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(23, Byte), Integer))
+        Me.ImportBoth1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ImportBoth1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ImportBoth1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ImportBoth1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(49, Byte), Integer))
+        Me.ImportBoth1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ImportBoth1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ImportBoth1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ImportBoth1.Location = New System.Drawing.Point(507, 0)
+        Me.ImportBoth1.Name = "ImportBoth1"
+        Me.ImportBoth1.Size = New System.Drawing.Size(116, 30)
+        Me.ImportBoth1.TabIndex = 38
+        Me.ImportBoth1.Text = "Tout Importer"
+        Me.ImportBoth1.UseVisualStyleBackColor = False
+        '
+        'ButtonGetBack1
+        '
+        Me.ButtonGetBack1.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonGetBack1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonGetBack1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonGetBack1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonGetBack1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonGetBack1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonGetBack1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonGetBack1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonGetBack1.Location = New System.Drawing.Point(12, 7)
+        Me.ButtonGetBack1.Name = "ButtonGetBack1"
+        Me.ButtonGetBack1.Size = New System.Drawing.Size(116, 23)
+        Me.ButtonGetBack1.TabIndex = 39
+        Me.ButtonGetBack1.Text = "Retour Au Menu"
+        Me.ButtonGetBack1.UseVisualStyleBackColor = False
+        '
+        'buttonImportRoms1
+        '
+        Me.buttonImportRoms1.BackColor = System.Drawing.Color.FromArgb(CType(CType(117, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.buttonImportRoms1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.buttonImportRoms1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.buttonImportRoms1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.buttonImportRoms1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.buttonImportRoms1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.buttonImportRoms1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.buttonImportRoms1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.buttonImportRoms1.Location = New System.Drawing.Point(385, 35)
+        Me.buttonImportRoms1.Name = "buttonImportRoms1"
+        Me.buttonImportRoms1.Size = New System.Drawing.Size(116, 30)
+        Me.buttonImportRoms1.TabIndex = 40
+        Me.buttonImportRoms1.Text = "Importer les Roms"
+        Me.buttonImportRoms1.UseVisualStyleBackColor = False
+        '
+        'ButtonImportOverlays1
+        '
+        Me.ButtonImportOverlays1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.ButtonImportOverlays1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonImportOverlays1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonImportOverlays1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonImportOverlays1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(154, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.ButtonImportOverlays1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonImportOverlays1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonImportOverlays1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonImportOverlays1.Location = New System.Drawing.Point(758, 33)
+        Me.ButtonImportOverlays1.Name = "ButtonImportOverlays1"
+        Me.ButtonImportOverlays1.Size = New System.Drawing.Size(116, 30)
+        Me.ButtonImportOverlays1.TabIndex = 41
+        Me.ButtonImportOverlays1.Text = "Importer les Overlays"
+        Me.ButtonImportOverlays1.UseVisualStyleBackColor = False
+        '
         'OverlayManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
         Me.ClientSize = New System.Drawing.Size(884, 521)
+        Me.Controls.Add(Me.ButtonImportOverlays1)
+        Me.Controls.Add(Me.buttonImportRoms1)
+        Me.Controls.Add(Me.ButtonGetBack1)
+        Me.Controls.Add(Me.ImportBoth1)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.ListdesFichiersEnTrop)
         Me.Controls.Add(Me.ListToSupp)
-        Me.Controls.Add(Me.ImportBoth)
         Me.Controls.Add(Me.DataGridOverlay)
         Me.Controls.Add(Me.GameLists)
-        Me.Controls.Add(Me.ButtonGetBack)
-        Me.Controls.Add(Me.ButtonImportOverlays)
-        Me.Controls.Add(Me.buttonImportRoms)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TextBox2)
@@ -360,10 +398,6 @@ Partial Class OverlayManager
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents ButtonMenage As Button
-    Friend WithEvents buttonImportRoms As Button
-    Friend WithEvents ButtonImportOverlays As Button
-    Friend WithEvents ButtonGetBack As Button
     Friend WithEvents GameLists As ListBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
@@ -374,9 +408,13 @@ Partial Class OverlayManager
     Friend WithEvents Label5 As Label
     Friend WithEvents OverlaySingle As TextBox
     Friend WithEvents OverlayTotal As TextBox
-    Friend WithEvents ImportBoth As Button
     Friend WithEvents ListToSupp As ListBox
     Friend WithEvents ListdesFichiersEnTrop As ListBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents ImportBoth1 As Button
+    Friend WithEvents ButtonGetBack1 As Button
+    Friend WithEvents buttonImportRoms1 As Button
+    Friend WithEvents ButtonImportOverlays1 As Button
+    Friend WithEvents ButtonMenage1 As Button
 End Class
