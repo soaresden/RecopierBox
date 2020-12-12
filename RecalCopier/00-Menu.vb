@@ -5,7 +5,8 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'On load a l'ouverture le chemin initial
         TxtRecalfolderPath.Text = My.Settings.RecalboxFolder
-        MenuBoutons.Hide()
+        PanelGauche.Hide()
+        PanelDroite.Hide()
         NetFourDotFiveAndHigher()
     End Sub
     Private Sub NetFourDotFiveAndHigher()
@@ -38,28 +39,7 @@ Public Class Form1
         Return ".Net Framework Non Installé"
 
     End Function
-    Private Sub ButtonCopy_Click(sender As Object, e As EventArgs) Handles ButtonCopy.Click
-        If TxtRecalfolderPath Is Nothing Then
-            MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
-            Exit Sub
-        End If
-        'Au clic, on ouvre le formulaire associé et on ferme le menu
-        CopyRoms.Show()
-        Me.Hide()
-    End Sub
-    Private Sub ButtonOverlay_Click(sender As Object, e As EventArgs) Handles ButtonOverlay.Click
-        'Au clic, on ouvre le formulaire associé et on ferme le menu
-        OverlayManager.Show()
-        Me.Hide()
-    End Sub
-    Private Sub ButtonSave_Click(sender As Object, e As EventArgs) Handles ButtonSave.Click
-        'Au clic, on ouvre le formulaire associé et on ferme le menu
-        MsgBox("En Travail")
-    End Sub
-    Private Sub Quitter_Click(sender As Object, e As EventArgs) Handles Quitter.Click
-        'Au clic, on ferme le programme
-        Me.Close()
-    End Sub
+
     Private Sub ButtonBrowseRecalboxFolder_Click(sender As Object, e As EventArgs) Handles ButtonBrowseRecalboxFolder.Click
         'Au clic, on ouvre la selection du repertoire
         If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
@@ -80,7 +60,8 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         MsgBox("Merci de votre compréhension")
         Disclaimer.Hide()
-        MenuBoutons.Show()
+        PanelGauche.Show()
+        PanelDroite.Show()
     End Sub
     Private Sub TxtRecalfolderPath_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtRecalfolderPath.KeyDown
         'Ajout d'un \ de securite si besoin
@@ -94,7 +75,24 @@ Public Class Form1
         System.Diagnostics.Process.Start(String.Format("https://github.com/soaresden/RecopierBox"))
     End Sub
 
-    Private Sub ButtonQuizz_Click(sender As Object, e As EventArgs) Handles ButtonQuizz.Click
+    Private Sub ButtonQuizz_Click(sender As Object, e As EventArgs)
+
+    End Sub
+    Private Sub RichTextBox2_Click(sender As Object, e As EventArgs) Handles RichTextBox2.Click
+        System.Diagnostics.Process.Start(String.Format("http://jujuvincebros.fr/telechargements2/file/10-arrm-another-recalbox-roms-manager"))
+    End Sub
+
+    Private Sub ButtonCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonCopy.Click
+        If TxtRecalfolderPath Is Nothing Then
+            MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
+            Exit Sub
+        End If
+        'Au clic, on ouvre le formulaire associé et on ferme le menu
+        CopyRoms.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub ButtonQuizz_Click_1(sender As Object, e As EventArgs) Handles ButtonQuizz.Click
         If TxtRecalfolderPath Is Nothing Then
             MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
             Exit Sub
@@ -103,7 +101,19 @@ Public Class Form1
         Quizz.Show()
         Me.Hide()
     End Sub
-    Private Sub RichTextBox2_Click(sender As Object, e As EventArgs) Handles RichTextBox2.Click
-        System.Diagnostics.Process.Start(String.Format("http://jujuvincebros.fr/telechargements2/file/10-arrm-another-recalbox-roms-manager"))
+
+    Private Sub ButtonSave_Click_1(sender As Object, e As EventArgs) Handles ButtonSave.Click
+        'Au clic, on ouvre le formulaire associé et on ferme le menu
+        MsgBox("En Travail")
+    End Sub
+
+    Private Sub ButtonOverlay_Click_1(sender As Object, e As EventArgs) Handles ButtonOverlay.Click
+        'Au clic, on ouvre le formulaire associé et on ferme le menu
+        OverlayManager.Show()
+        Me.Hide()
+    End Sub
+    Private Sub Quitter_Click_1(sender As Object, e As EventArgs) Handles Quitter.Click
+        'Au clic, on ferme le programme
+        Me.Close()
     End Sub
 End Class

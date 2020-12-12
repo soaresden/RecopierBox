@@ -167,6 +167,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="Resources\Vag Rounded BT Normal.ttf" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">
@@ -242,6 +243,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Equinox Bold.otf" />
     <None Include="Resources\nomanual.png" />
   </ItemGroup>
   <ItemGroup>
