@@ -122,10 +122,10 @@ Partial Class Quizz
         Me.GroupParamComplet.Controls.Add(Me.ButtonValidConsole1)
         Me.GroupParamComplet.Controls.Add(Me.TxtTotalEntrees)
         Me.GroupParamComplet.Controls.Add(Me.Label10)
-        Me.GroupParamComplet.Controls.Add(Me.GroupFiltres)
         Me.GroupParamComplet.Controls.Add(Me.ConsoleList)
         Me.GroupParamComplet.Controls.Add(Me.Label1)
         Me.GroupParamComplet.Controls.Add(Me.GroupSansFiltres)
+        Me.GroupParamComplet.Controls.Add(Me.GroupFiltres)
         Me.GroupParamComplet.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupParamComplet.Location = New System.Drawing.Point(12, 39)
         Me.GroupParamComplet.Name = "GroupParamComplet"
@@ -642,16 +642,16 @@ Partial Class Quizz
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(309, 190)
+        Me.TextBox1.Size = New System.Drawing.Size(309, 208)
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(182, 198)
+        Me.PictureBox1.Location = New System.Drawing.Point(182, 215)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(133, 144)
+        Me.PictureBox1.Size = New System.Drawing.Size(133, 127)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
@@ -661,7 +661,7 @@ Partial Class Quizz
         Me.txtRules.BackColor = System.Drawing.Color.White
         Me.txtRules.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRules.ForeColor = System.Drawing.Color.Blue
-        Me.txtRules.Location = New System.Drawing.Point(6, 215)
+        Me.txtRules.Location = New System.Drawing.Point(6, 228)
         Me.txtRules.Multiline = True
         Me.txtRules.Name = "txtRules"
         Me.txtRules.ReadOnly = True

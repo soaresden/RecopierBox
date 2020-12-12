@@ -6202,9 +6202,10 @@
 Le logiciel va donc générer une liste de TOUS vos jeux avec videos issus de votre/vos GameList selectionné ci contre.
 Merci d'indiquer le nombre de Manches.
 
-Vous pouvez également personnaliser le temps d'affichage des propositions (0 pour afficher directement)
-Vous pouvez changer le type de jeu en cours de partie.
-Vous pouvez changer le mode de difficulté en cours de partie.
+*Vous pouvez également personnaliser le temps d'affichage des propositions (0 pour afficher directement) en STOP uniquement.
+*Vous pouvez changer le type de jeu en cours de partie.
+*Vous pouvez changer le mode de difficulté en cours de partie.
+
  
 Si vous souhaitez ajouter une nouvelle plateforme, il est necessaire de regénérer le jeu.
 Bon Jeu :)</value>
