@@ -276,6 +276,8 @@
   <ItemGroup>
     <Content Include="IconeLog.ico" />
     <Content Include="iconlog2.ico" />
+    <None Include="Resources\iconsound.png" />
+    <None Include="Resources\iconsound off.png" />
     <None Include="Resources\iconlog.png" />
     <None Include="Resources\IconeApp.bmp" />
   </ItemGroup>

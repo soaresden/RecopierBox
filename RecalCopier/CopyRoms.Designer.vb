@@ -24,16 +24,13 @@ Partial Class CopyRoms
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
-        Me.ButtonImportXML = New System.Windows.Forms.Button()
         Me.ListGameLists = New System.Windows.Forms.ListBox()
-        Me.ButtonShowGames = New System.Windows.Forms.Button()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ButtonParcourirRecalCopy = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txt_CopyFolder = New System.Windows.Forms.TextBox()
-        Me.ButtonCopy = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.checkbios = New System.Windows.Forms.CheckBox()
         Me.checksaves = New System.Windows.Forms.CheckBox()
@@ -42,7 +39,7 @@ Partial Class CopyRoms
         Me.checkvideos = New System.Windows.Forms.CheckBox()
         Me.checkmanuals = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.buttonaffichermaselection = New System.Windows.Forms.Button()
+        Me.ButtonAfficherMaSelection = New System.Windows.Forms.Button()
         Me.txt_morestant = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lbl_GoAPrevoir = New System.Windows.Forms.Label()
@@ -62,7 +59,6 @@ Partial Class CopyRoms
         Me.romsaveo = New System.Windows.Forms.Button()
         Me.rommanualo = New System.Windows.Forms.Button()
         Me.romoverlayo = New System.Windows.Forms.Button()
-        Me.RomImage = New System.Windows.Forms.PictureBox()
         Me.txt_romdesc = New System.Windows.Forms.RichTextBox()
         Me.txt_rompath = New System.Windows.Forms.TextBox()
         Me.vid_romvid = New AxWMPLib.AxWindowsMediaPlayer()
@@ -70,8 +66,10 @@ Partial Class CopyRoms
         Me.txt_txtsearch = New System.Windows.Forms.TextBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.buttonRAZ = New System.Windows.Forms.Button()
         Me.GroupFiltresAvances = New System.Windows.Forms.GroupBox()
+        Me.ButtonRazClickk = New System.Windows.Forms.Button()
+        Me.ButtonHideColumn = New System.Windows.Forms.Button()
+        Me.ButtonShowColonne = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.listconsoleselected = New System.Windows.Forms.ListBox()
@@ -82,27 +80,30 @@ Partial Class CopyRoms
         Me.DecocherTout = New System.Windows.Forms.CheckBox()
         Me.CocherTout = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.ButtonShowColonne = New System.Windows.Forms.Button()
         Me.ComboFiltreColonnes = New System.Windows.Forms.ComboBox()
-        Me.ButtonHideColonne = New System.Windows.Forms.Button()
-        Me.minipic1 = New System.Windows.Forms.PictureBox()
-        Me.minipic2 = New System.Windows.Forms.PictureBox()
-        Me.minipic3 = New System.Windows.Forms.PictureBox()
-        Me.minipic4 = New System.Windows.Forms.PictureBox()
-        Me.minipic5 = New System.Windows.Forms.PictureBox()
-        Me.ButtonTuto = New System.Windows.Forms.Button()
-        Me.TutoHideFinalGrid = New System.Windows.Forms.PictureBox()
-        Me.TutoHideFiltres = New System.Windows.Forms.PictureBox()
-        Me.TutoHideRomInfo = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP1 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideGameList = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP5 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP3 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP2 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP6 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP4 = New System.Windows.Forms.PictureBox()
         Me.CheckBoxARRM = New System.Windows.Forms.CheckBox()
         Me.ButtonGetBack = New System.Windows.Forms.Button()
+        Me.ButtonTuto1 = New System.Windows.Forms.Button()
+        Me.ButtonValider = New System.Windows.Forms.Button()
+        Me.ButtonGenererList = New System.Windows.Forms.Button()
+        Me.TutoHideOutilsP4 = New System.Windows.Forms.PictureBox()
+        Me.TutoHideOutilsP6 = New System.Windows.Forms.PictureBox()
+        Me.TutoHideOutilsP2 = New System.Windows.Forms.PictureBox()
+        Me.TutoHideOutilsP3 = New System.Windows.Forms.PictureBox()
+        Me.TutoHideOutilsP5 = New System.Windows.Forms.PictureBox()
+        Me.TutoHideGameList = New System.Windows.Forms.PictureBox()
+        Me.TutoHideOutilsP1 = New System.Windows.Forms.PictureBox()
+        Me.TutoHideRomInfo = New System.Windows.Forms.PictureBox()
+        Me.TutoHideFiltres = New System.Windows.Forms.PictureBox()
+        Me.TutoHideFinalGrid = New System.Windows.Forms.PictureBox()
+        Me.minipic5 = New System.Windows.Forms.PictureBox()
+        Me.minipic4 = New System.Windows.Forms.PictureBox()
+        Me.minipic3 = New System.Windows.Forms.PictureBox()
+        Me.minipic2 = New System.Windows.Forms.PictureBox()
+        Me.minipic1 = New System.Windows.Forms.PictureBox()
+        Me.ButtonSonVid = New System.Windows.Forms.Button()
+        Me.RomImage = New System.Windows.Forms.PictureBox()
+        Me.ButtonCopy = New System.Windows.Forms.Button()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -112,34 +113,25 @@ Partial Class CopyRoms
         Me.grp_RomInfos.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupFiltresAvances.SuspendLayout()
-        CType(Me.minipic1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideFiltres, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideOutilsP3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideOutilsP5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideOutilsP1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideFiltres, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.minipic1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ButtonImportXML
-        '
-        Me.ButtonImportXML.Location = New System.Drawing.Point(47, 51)
-        Me.ButtonImportXML.Name = "ButtonImportXML"
-        Me.ButtonImportXML.Size = New System.Drawing.Size(146, 32)
-        Me.ButtonImportXML.TabIndex = 1
-        Me.ButtonImportXML.Text = "Importer les Gamelist.xml"
-        Me.ButtonImportXML.UseVisualStyleBackColor = True
         '
         'ListGameLists
         '
@@ -148,17 +140,8 @@ Partial Class CopyRoms
         Me.ListGameLists.Name = "ListGameLists"
         Me.ListGameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ListGameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListGameLists.Size = New System.Drawing.Size(206, 303)
+        Me.ListGameLists.Size = New System.Drawing.Size(206, 264)
         Me.ListGameLists.TabIndex = 2
-        '
-        'ButtonShowGames
-        '
-        Me.ButtonShowGames.Location = New System.Drawing.Point(15, 398)
-        Me.ButtonShowGames.Name = "ButtonShowGames"
-        Me.ButtonShowGames.Size = New System.Drawing.Size(206, 32)
-        Me.ButtonShowGames.TabIndex = 4
-        Me.ButtonShowGames.Text = "Construire les Systemes Selectionnés"
-        Me.ButtonShowGames.UseVisualStyleBackColor = True
         '
         'FinalGrid
         '
@@ -193,7 +176,7 @@ Partial Class CopyRoms
         '
         'GroupBox5
         '
-        Me.GroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(195, Byte), Integer), CType(CType(249, Byte), Integer))
+        Me.GroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(16, Byte), Integer))
         Me.GroupBox5.Controls.Add(Me.ButtonParcourirRecalCopy)
         Me.GroupBox5.Controls.Add(Me.Label8)
         Me.GroupBox5.Controls.Add(Me.txt_CopyFolder)
@@ -208,13 +191,20 @@ Partial Class CopyRoms
         '
         'ButtonParcourirRecalCopy
         '
+        Me.ButtonParcourirRecalCopy.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.ButtonParcourirRecalCopy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonParcourirRecalCopy.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonParcourirRecalCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonParcourirRecalCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.ButtonParcourirRecalCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonParcourirRecalCopy.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonParcourirRecalCopy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(2, 38)
+        Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(2, 42)
         Me.ButtonParcourirRecalCopy.Name = "ButtonParcourirRecalCopy"
-        Me.ButtonParcourirRecalCopy.Size = New System.Drawing.Size(61, 23)
-        Me.ButtonParcourirRecalCopy.TabIndex = 6
+        Me.ButtonParcourirRecalCopy.Size = New System.Drawing.Size(61, 25)
+        Me.ButtonParcourirRecalCopy.TabIndex = 40
         Me.ButtonParcourirRecalCopy.Text = "Parcourir"
-        Me.ButtonParcourirRecalCopy.UseVisualStyleBackColor = True
+        Me.ButtonParcourirRecalCopy.UseVisualStyleBackColor = False
         '
         'Label8
         '
@@ -234,18 +224,9 @@ Partial Class CopyRoms
         Me.txt_CopyFolder.TabIndex = 0
         Me.txt_CopyFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'ButtonCopy
-        '
-        Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
-        Me.ButtonCopy.Location = New System.Drawing.Point(927, 15)
-        Me.ButtonCopy.Name = "ButtonCopy"
-        Me.ButtonCopy.Size = New System.Drawing.Size(69, 72)
-        Me.ButtonCopy.TabIndex = 14
-        Me.ButtonCopy.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
-        Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(176, Byte), Integer))
+        Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
         Me.GroupBox2.Controls.Add(Me.checkbios)
         Me.GroupBox2.Controls.Add(Me.checksaves)
         Me.GroupBox2.Controls.Add(Me.checkimgs)
@@ -340,14 +321,15 @@ Partial Class CopyRoms
         '
         'GroupBox4
         '
-        Me.GroupBox4.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.GroupBox4.Controls.Add(Me.buttonaffichermaselection)
+        Me.GroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.GroupBox4.Controls.Add(Me.ButtonAfficherMaSelection)
         Me.GroupBox4.Controls.Add(Me.txt_morestant)
         Me.GroupBox4.Controls.Add(Me.Label5)
         Me.GroupBox4.Controls.Add(Me.lbl_GoAPrevoir)
         Me.GroupBox4.Controls.Add(Me.txt_GoAPrevoir)
         Me.GroupBox4.Controls.Add(Me.lbl_romSelected)
         Me.GroupBox4.Controls.Add(Me.txt_NbRomSelected)
+        Me.GroupBox4.ForeColor = System.Drawing.Color.White
         Me.GroupBox4.Location = New System.Drawing.Point(316, 17)
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
@@ -357,15 +339,22 @@ Partial Class CopyRoms
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Ma Selection"
         '
-        'buttonaffichermaselection
+        'ButtonAfficherMaSelection
         '
-        Me.buttonaffichermaselection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.buttonaffichermaselection.Location = New System.Drawing.Point(219, 10)
-        Me.buttonaffichermaselection.Name = "buttonaffichermaselection"
-        Me.buttonaffichermaselection.Size = New System.Drawing.Size(159, 23)
-        Me.buttonaffichermaselection.TabIndex = 6
-        Me.buttonaffichermaselection.Text = "Afficher/Cacher ma Selection"
-        Me.buttonaffichermaselection.UseVisualStyleBackColor = True
+        Me.ButtonAfficherMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.ButtonAfficherMaSelection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonAfficherMaSelection.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonAfficherMaSelection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonAfficherMaSelection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.ButtonAfficherMaSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonAfficherMaSelection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonAfficherMaSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonAfficherMaSelection.Location = New System.Drawing.Point(225, 10)
+        Me.ButtonAfficherMaSelection.Name = "ButtonAfficherMaSelection"
+        Me.ButtonAfficherMaSelection.Size = New System.Drawing.Size(153, 22)
+        Me.ButtonAfficherMaSelection.TabIndex = 39
+        Me.ButtonAfficherMaSelection.Text = "Afficher/Cacher ma Selection"
+        Me.ButtonAfficherMaSelection.UseVisualStyleBackColor = False
         '
         'txt_morestant
         '
@@ -380,8 +369,8 @@ Partial Class CopyRoms
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label5.Location = New System.Drawing.Point(235, 32)
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label5.Location = New System.Drawing.Point(224, 38)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(138, 26)
         Me.Label5.TabIndex = 4
@@ -390,7 +379,7 @@ Partial Class CopyRoms
         'lbl_GoAPrevoir
         '
         Me.lbl_GoAPrevoir.AutoSize = True
-        Me.lbl_GoAPrevoir.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.lbl_GoAPrevoir.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.lbl_GoAPrevoir.Location = New System.Drawing.Point(69, 46)
         Me.lbl_GoAPrevoir.Name = "lbl_GoAPrevoir"
         Me.lbl_GoAPrevoir.Size = New System.Drawing.Size(64, 13)
@@ -411,7 +400,7 @@ Partial Class CopyRoms
         'lbl_romSelected
         '
         Me.lbl_romSelected.AutoSize = True
-        Me.lbl_romSelected.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.lbl_romSelected.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.lbl_romSelected.Location = New System.Drawing.Point(69, 19)
         Me.lbl_romSelected.Name = "lbl_romSelected"
         Me.lbl_romSelected.Size = New System.Drawing.Size(70, 13)
@@ -431,10 +420,10 @@ Partial Class CopyRoms
         '
         'GroupBox3
         '
-        Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(176, Byte), Integer))
+        Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(23, Byte), Integer))
         Me.GroupBox3.Controls.Add(Me.Label3)
         Me.GroupBox3.Controls.Add(Me.txt_USBGo)
-        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.Control
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.GroupBox3.Location = New System.Drawing.Point(4, 17)
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Name = "GroupBox3"
@@ -447,7 +436,7 @@ Partial Class CopyRoms
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label3.Location = New System.Drawing.Point(76, 30)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(21, 13)
@@ -464,7 +453,8 @@ Partial Class CopyRoms
         '
         'grp_RomInfos
         '
-        Me.grp_RomInfos.BackColor = System.Drawing.Color.SkyBlue
+        Me.grp_RomInfos.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.grp_RomInfos.Controls.Add(Me.ButtonSonVid)
         Me.grp_RomInfos.Controls.Add(Me.Panel1)
         Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.GroupBox6)
@@ -473,7 +463,7 @@ Partial Class CopyRoms
         Me.grp_RomInfos.Controls.Add(Me.txt_rompath)
         Me.grp_RomInfos.Controls.Add(Me.vid_romvid)
         Me.grp_RomInfos.Controls.Add(Me.Label1)
-        Me.grp_RomInfos.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.grp_RomInfos.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.grp_RomInfos.Location = New System.Drawing.Point(612, 28)
         Me.grp_RomInfos.Name = "grp_RomInfos"
         Me.grp_RomInfos.Size = New System.Drawing.Size(393, 475)
@@ -493,7 +483,7 @@ Partial Class CopyRoms
         '
         Me.txt_romname.AutoSize = True
         Me.txt_romname.Font = New System.Drawing.Font("VAGRounded BT", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_romname.ForeColor = System.Drawing.Color.Black
+        Me.txt_romname.ForeColor = System.Drawing.Color.White
         Me.txt_romname.Location = New System.Drawing.Point(1, 0)
         Me.txt_romname.Name = "txt_romname"
         Me.txt_romname.Size = New System.Drawing.Size(290, 26)
@@ -502,8 +492,8 @@ Partial Class CopyRoms
         '
         'listboxMaSelection
         '
-        Me.listboxMaSelection.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.listboxMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(144, Byte), Integer), CType(CType(249, Byte), Integer))
+        Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.HighlightText
         Me.listboxMaSelection.FormattingEnabled = True
         Me.listboxMaSelection.Location = New System.Drawing.Point(184, 55)
         Me.listboxMaSelection.Name = "listboxMaSelection"
@@ -514,7 +504,7 @@ Partial Class CopyRoms
         '
         'GroupBox6
         '
-        Me.GroupBox6.BackColor = System.Drawing.Color.SteelBlue
+        Me.GroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(66, Byte), Integer), CType(CType(252, Byte), Integer))
         Me.GroupBox6.Controls.Add(Me.romscreeno)
         Me.GroupBox6.Controls.Add(Me.romvideoo)
         Me.GroupBox6.Controls.Add(Me.romsaveo)
@@ -568,17 +558,6 @@ Partial Class CopyRoms
         Me.romoverlayo.TabIndex = 19
         Me.romoverlayo.UseVisualStyleBackColor = True
         '
-        'RomImage
-        '
-        Me.RomImage.Image = CType(resources.GetObject("RomImage.Image"), System.Drawing.Image)
-        Me.RomImage.InitialImage = Nothing
-        Me.RomImage.Location = New System.Drawing.Point(5, 55)
-        Me.RomImage.Name = "RomImage"
-        Me.RomImage.Size = New System.Drawing.Size(173, 132)
-        Me.RomImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.RomImage.TabIndex = 0
-        Me.RomImage.TabStop = False
-        '
         'txt_romdesc
         '
         Me.txt_romdesc.Location = New System.Drawing.Point(184, 74)
@@ -602,7 +581,7 @@ Partial Class CopyRoms
         'vid_romvid
         '
         Me.vid_romvid.Enabled = True
-        Me.vid_romvid.Location = New System.Drawing.Point(5, 232)
+        Me.vid_romvid.Location = New System.Drawing.Point(5, 249)
         Me.vid_romvid.Name = "vid_romvid"
         Me.vid_romvid.OcxState = CType(resources.GetObject("vid_romvid.OcxState"), System.Windows.Forms.AxHost.State)
         Me.vid_romvid.Size = New System.Drawing.Size(173, 132)
@@ -628,19 +607,12 @@ Partial Class CopyRoms
         '
         Me.Timer1.Interval = 75
         '
-        'buttonRAZ
-        '
-        Me.buttonRAZ.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.buttonRAZ.Location = New System.Drawing.Point(245, 64)
-        Me.buttonRAZ.Name = "buttonRAZ"
-        Me.buttonRAZ.Size = New System.Drawing.Size(113, 35)
-        Me.buttonRAZ.TabIndex = 12
-        Me.buttonRAZ.Text = "RAZ Recherche"
-        Me.buttonRAZ.UseVisualStyleBackColor = True
-        '
         'GroupFiltresAvances
         '
-        Me.GroupFiltresAvances.BackColor = System.Drawing.Color.DarkCyan
+        Me.GroupFiltresAvances.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.GroupFiltresAvances.Controls.Add(Me.ButtonRazClickk)
+        Me.GroupFiltresAvances.Controls.Add(Me.ButtonHideColumn)
+        Me.GroupFiltresAvances.Controls.Add(Me.ButtonShowColonne)
         Me.GroupFiltresAvances.Controls.Add(Me.Label10)
         Me.GroupFiltresAvances.Controls.Add(Me.Label9)
         Me.GroupFiltresAvances.Controls.Add(Me.listconsoleselected)
@@ -651,10 +623,7 @@ Partial Class CopyRoms
         Me.GroupFiltresAvances.Controls.Add(Me.DecocherTout)
         Me.GroupFiltresAvances.Controls.Add(Me.CocherTout)
         Me.GroupFiltresAvances.Controls.Add(Me.Label4)
-        Me.GroupFiltresAvances.Controls.Add(Me.ButtonShowColonne)
         Me.GroupFiltresAvances.Controls.Add(Me.ComboFiltreColonnes)
-        Me.GroupFiltresAvances.Controls.Add(Me.buttonRAZ)
-        Me.GroupFiltresAvances.Controls.Add(Me.ButtonHideColonne)
         Me.GroupFiltresAvances.Controls.Add(Me.txt_txtsearch)
         Me.GroupFiltresAvances.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupFiltresAvances.Location = New System.Drawing.Point(8, 398)
@@ -663,6 +632,57 @@ Partial Class CopyRoms
         Me.GroupFiltresAvances.TabIndex = 13
         Me.GroupFiltresAvances.TabStop = False
         Me.GroupFiltresAvances.Text = "Filtres Avancés :"
+        '
+        'ButtonRazClickk
+        '
+        Me.ButtonRazClickk.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonRazClickk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonRazClickk.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonRazClickk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonRazClickk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonRazClickk.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonRazClickk.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonRazClickk.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonRazClickk.Location = New System.Drawing.Point(245, 57)
+        Me.ButtonRazClickk.Name = "ButtonRazClickk"
+        Me.ButtonRazClickk.Size = New System.Drawing.Size(113, 42)
+        Me.ButtonRazClickk.TabIndex = 38
+        Me.ButtonRazClickk.Text = "RAZ Recherche"
+        Me.ButtonRazClickk.UseVisualStyleBackColor = False
+        '
+        'ButtonHideColumn
+        '
+        Me.ButtonHideColumn.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonHideColumn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonHideColumn.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonHideColumn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonHideColumn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonHideColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonHideColumn.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonHideColumn.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonHideColumn.Location = New System.Drawing.Point(179, 57)
+        Me.ButtonHideColumn.Name = "ButtonHideColumn"
+        Me.ButtonHideColumn.Size = New System.Drawing.Size(59, 42)
+        Me.ButtonHideColumn.TabIndex = 37
+        Me.ButtonHideColumn.Text = "Cacher"
+        Me.ButtonHideColumn.UseVisualStyleBackColor = False
+        '
+        'ButtonShowColonne
+        '
+        Me.ButtonShowColonne.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonShowColonne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonShowColonne.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonShowColonne.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonShowColonne.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonShowColonne.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonShowColonne.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonShowColonne.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonShowColonne.Location = New System.Drawing.Point(114, 57)
+        Me.ButtonShowColonne.Name = "ButtonShowColonne"
+        Me.ButtonShowColonne.Size = New System.Drawing.Size(59, 42)
+        Me.ButtonShowColonne.TabIndex = 36
+        Me.ButtonShowColonne.Text = "Afficher"
+        Me.ButtonShowColonne.UseVisualStyleBackColor = False
         '
         'Label10
         '
@@ -772,16 +792,6 @@ Partial Class CopyRoms
         Me.Label4.TabIndex = 13
         Me.Label4.Text = "Valeur du Filtre :"
         '
-        'ButtonShowColonne
-        '
-        Me.ButtonShowColonne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonShowColonne.Location = New System.Drawing.Point(113, 61)
-        Me.ButtonShowColonne.Name = "ButtonShowColonne"
-        Me.ButtonShowColonne.Size = New System.Drawing.Size(60, 38)
-        Me.ButtonShowColonne.TabIndex = 2
-        Me.ButtonShowColonne.Text = "Afficher"
-        Me.ButtonShowColonne.UseVisualStyleBackColor = True
-        '
         'ComboFiltreColonnes
         '
         Me.ComboFiltreColonnes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -790,161 +800,6 @@ Partial Class CopyRoms
         Me.ComboFiltreColonnes.Name = "ComboFiltreColonnes"
         Me.ComboFiltreColonnes.Size = New System.Drawing.Size(124, 21)
         Me.ComboFiltreColonnes.TabIndex = 0
-        '
-        'ButtonHideColonne
-        '
-        Me.ButtonHideColonne.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonHideColonne.Location = New System.Drawing.Point(174, 61)
-        Me.ButtonHideColonne.Name = "ButtonHideColonne"
-        Me.ButtonHideColonne.Size = New System.Drawing.Size(63, 38)
-        Me.ButtonHideColonne.TabIndex = 1
-        Me.ButtonHideColonne.Text = "Cacher"
-        Me.ButtonHideColonne.UseVisualStyleBackColor = True
-        '
-        'minipic1
-        '
-        Me.minipic1.BackColor = System.Drawing.Color.White
-        Me.minipic1.Image = Global.RecalCopier.My.Resources.Resources.Okscreen
-        Me.minipic1.Location = New System.Drawing.Point(370, 29)
-        Me.minipic1.Name = "minipic1"
-        Me.minipic1.Size = New System.Drawing.Size(24, 18)
-        Me.minipic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic1.TabIndex = 14
-        Me.minipic1.TabStop = False
-        '
-        'minipic2
-        '
-        Me.minipic2.BackColor = System.Drawing.Color.White
-        Me.minipic2.Image = Global.RecalCopier.My.Resources.Resources.OKvideo
-        Me.minipic2.Location = New System.Drawing.Point(396, 29)
-        Me.minipic2.Name = "minipic2"
-        Me.minipic2.Size = New System.Drawing.Size(24, 18)
-        Me.minipic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic2.TabIndex = 15
-        Me.minipic2.TabStop = False
-        '
-        'minipic3
-        '
-        Me.minipic3.BackColor = System.Drawing.Color.White
-        Me.minipic3.Image = Global.RecalCopier.My.Resources.Resources.OKmanual
-        Me.minipic3.Location = New System.Drawing.Point(422, 29)
-        Me.minipic3.Name = "minipic3"
-        Me.minipic3.Size = New System.Drawing.Size(24, 18)
-        Me.minipic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic3.TabIndex = 16
-        Me.minipic3.TabStop = False
-        '
-        'minipic4
-        '
-        Me.minipic4.BackColor = System.Drawing.Color.White
-        Me.minipic4.Image = Global.RecalCopier.My.Resources.Resources.OKoverlay
-        Me.minipic4.Location = New System.Drawing.Point(448, 29)
-        Me.minipic4.Name = "minipic4"
-        Me.minipic4.Size = New System.Drawing.Size(24, 18)
-        Me.minipic4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic4.TabIndex = 17
-        Me.minipic4.TabStop = False
-        '
-        'minipic5
-        '
-        Me.minipic5.BackColor = System.Drawing.Color.White
-        Me.minipic5.Image = Global.RecalCopier.My.Resources.Resources.OKMem
-        Me.minipic5.Location = New System.Drawing.Point(473, 29)
-        Me.minipic5.Name = "minipic5"
-        Me.minipic5.Size = New System.Drawing.Size(24, 18)
-        Me.minipic5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic5.TabIndex = 18
-        Me.minipic5.TabStop = False
-        '
-        'ButtonTuto
-        '
-        Me.ButtonTuto.BackColor = System.Drawing.Color.Aqua
-        Me.ButtonTuto.Location = New System.Drawing.Point(932, 2)
-        Me.ButtonTuto.Name = "ButtonTuto"
-        Me.ButtonTuto.Size = New System.Drawing.Size(75, 23)
-        Me.ButtonTuto.TabIndex = 19
-        Me.ButtonTuto.Text = "Help/Tuto"
-        Me.ButtonTuto.UseVisualStyleBackColor = False
-        '
-        'TutoHideFinalGrid
-        '
-        Me.TutoHideFinalGrid.Location = New System.Drawing.Point(339, 2)
-        Me.TutoHideFinalGrid.Name = "TutoHideFinalGrid"
-        Me.TutoHideFinalGrid.Size = New System.Drawing.Size(64, 21)
-        Me.TutoHideFinalGrid.TabIndex = 20
-        Me.TutoHideFinalGrid.TabStop = False
-        '
-        'TutoHideFiltres
-        '
-        Me.TutoHideFiltres.Location = New System.Drawing.Point(487, 2)
-        Me.TutoHideFiltres.Name = "TutoHideFiltres"
-        Me.TutoHideFiltres.Size = New System.Drawing.Size(58, 23)
-        Me.TutoHideFiltres.TabIndex = 21
-        Me.TutoHideFiltres.TabStop = False
-        '
-        'TutoHideRomInfo
-        '
-        Me.TutoHideRomInfo.Location = New System.Drawing.Point(409, 2)
-        Me.TutoHideRomInfo.Name = "TutoHideRomInfo"
-        Me.TutoHideRomInfo.Size = New System.Drawing.Size(72, 21)
-        Me.TutoHideRomInfo.TabIndex = 22
-        Me.TutoHideRomInfo.TabStop = False
-        '
-        'TutoHideOutilsP1
-        '
-        Me.TutoHideOutilsP1.Location = New System.Drawing.Point(551, 2)
-        Me.TutoHideOutilsP1.Name = "TutoHideOutilsP1"
-        Me.TutoHideOutilsP1.Size = New System.Drawing.Size(48, 23)
-        Me.TutoHideOutilsP1.TabIndex = 23
-        Me.TutoHideOutilsP1.TabStop = False
-        '
-        'TutoHideGameList
-        '
-        Me.TutoHideGameList.Location = New System.Drawing.Point(259, 2)
-        Me.TutoHideGameList.Name = "TutoHideGameList"
-        Me.TutoHideGameList.Size = New System.Drawing.Size(74, 21)
-        Me.TutoHideGameList.TabIndex = 24
-        Me.TutoHideGameList.TabStop = False
-        '
-        'TutoHideOutilsP5
-        '
-        Me.TutoHideOutilsP5.Location = New System.Drawing.Point(750, 2)
-        Me.TutoHideOutilsP5.Name = "TutoHideOutilsP5"
-        Me.TutoHideOutilsP5.Size = New System.Drawing.Size(40, 23)
-        Me.TutoHideOutilsP5.TabIndex = 26
-        Me.TutoHideOutilsP5.TabStop = False
-        '
-        'TutoHideOutilsP3
-        '
-        Me.TutoHideOutilsP3.Location = New System.Drawing.Point(663, 2)
-        Me.TutoHideOutilsP3.Name = "TutoHideOutilsP3"
-        Me.TutoHideOutilsP3.Size = New System.Drawing.Size(36, 21)
-        Me.TutoHideOutilsP3.TabIndex = 27
-        Me.TutoHideOutilsP3.TabStop = False
-        '
-        'TutoHideOutilsP2
-        '
-        Me.TutoHideOutilsP2.Location = New System.Drawing.Point(605, 2)
-        Me.TutoHideOutilsP2.Name = "TutoHideOutilsP2"
-        Me.TutoHideOutilsP2.Size = New System.Drawing.Size(52, 20)
-        Me.TutoHideOutilsP2.TabIndex = 28
-        Me.TutoHideOutilsP2.TabStop = False
-        '
-        'TutoHideOutilsP6
-        '
-        Me.TutoHideOutilsP6.Location = New System.Drawing.Point(796, 2)
-        Me.TutoHideOutilsP6.Name = "TutoHideOutilsP6"
-        Me.TutoHideOutilsP6.Size = New System.Drawing.Size(53, 23)
-        Me.TutoHideOutilsP6.TabIndex = 30
-        Me.TutoHideOutilsP6.TabStop = False
-        '
-        'TutoHideOutilsP4
-        '
-        Me.TutoHideOutilsP4.Location = New System.Drawing.Point(705, 2)
-        Me.TutoHideOutilsP4.Name = "TutoHideOutilsP4"
-        Me.TutoHideOutilsP4.Size = New System.Drawing.Size(39, 21)
-        Me.TutoHideOutilsP4.TabIndex = 31
-        Me.TutoHideOutilsP4.TabStop = False
         '
         'CheckBoxARRM
         '
@@ -961,14 +816,14 @@ Partial Class CopyRoms
         '
         'ButtonGetBack
         '
-        Me.ButtonGetBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ButtonGetBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.ButtonGetBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonGetBack.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonGetBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.ButtonGetBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.ButtonGetBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonGetBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.ButtonGetBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGetBack.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonGetBack.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ButtonGetBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ButtonGetBack.Location = New System.Drawing.Point(15, 2)
         Me.ButtonGetBack.Name = "ButtonGetBack"
         Me.ButtonGetBack.Size = New System.Drawing.Size(94, 23)
@@ -976,12 +831,238 @@ Partial Class CopyRoms
         Me.ButtonGetBack.Text = "Retour Au Menu"
         Me.ButtonGetBack.UseVisualStyleBackColor = False
         '
+        'ButtonTuto1
+        '
+        Me.ButtonTuto1.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.ButtonTuto1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonTuto1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonTuto1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonTuto1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.ButtonTuto1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonTuto1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonTuto1.ForeColor = System.Drawing.Color.White
+        Me.ButtonTuto1.Location = New System.Drawing.Point(912, 2)
+        Me.ButtonTuto1.Name = "ButtonTuto1"
+        Me.ButtonTuto1.Size = New System.Drawing.Size(94, 23)
+        Me.ButtonTuto1.TabIndex = 35
+        Me.ButtonTuto1.Text = "Help/Tutoriel"
+        Me.ButtonTuto1.UseVisualStyleBackColor = False
+        '
+        'ButtonValider
+        '
+        Me.ButtonValider.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.ButtonValider.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonValider.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonValider.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonValider.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(49, Byte), Integer))
+        Me.ButtonValider.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonValider.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonValider.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonValider.Location = New System.Drawing.Point(88, 53)
+        Me.ButtonValider.Name = "ButtonValider"
+        Me.ButtonValider.Size = New System.Drawing.Size(72, 30)
+        Me.ButtonValider.TabIndex = 36
+        Me.ButtonValider.Text = "Valider"
+        Me.ButtonValider.UseVisualStyleBackColor = False
+        '
+        'ButtonGenererList
+        '
+        Me.ButtonGenererList.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.ButtonGenererList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonGenererList.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonGenererList.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonGenererList.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(47, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonGenererList.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonGenererList.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonGenererList.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonGenererList.Location = New System.Drawing.Point(76, 362)
+        Me.ButtonGenererList.Name = "ButtonGenererList"
+        Me.ButtonGenererList.Size = New System.Drawing.Size(105, 30)
+        Me.ButtonGenererList.TabIndex = 37
+        Me.ButtonGenererList.Text = "Valider la Selection"
+        Me.ButtonGenererList.UseVisualStyleBackColor = False
+        '
+        'TutoHideOutilsP4
+        '
+        Me.TutoHideOutilsP4.Location = New System.Drawing.Point(705, 2)
+        Me.TutoHideOutilsP4.Name = "TutoHideOutilsP4"
+        Me.TutoHideOutilsP4.Size = New System.Drawing.Size(39, 21)
+        Me.TutoHideOutilsP4.TabIndex = 31
+        Me.TutoHideOutilsP4.TabStop = False
+        '
+        'TutoHideOutilsP6
+        '
+        Me.TutoHideOutilsP6.Location = New System.Drawing.Point(796, 2)
+        Me.TutoHideOutilsP6.Name = "TutoHideOutilsP6"
+        Me.TutoHideOutilsP6.Size = New System.Drawing.Size(53, 23)
+        Me.TutoHideOutilsP6.TabIndex = 30
+        Me.TutoHideOutilsP6.TabStop = False
+        '
+        'TutoHideOutilsP2
+        '
+        Me.TutoHideOutilsP2.Location = New System.Drawing.Point(605, 2)
+        Me.TutoHideOutilsP2.Name = "TutoHideOutilsP2"
+        Me.TutoHideOutilsP2.Size = New System.Drawing.Size(52, 20)
+        Me.TutoHideOutilsP2.TabIndex = 28
+        Me.TutoHideOutilsP2.TabStop = False
+        '
+        'TutoHideOutilsP3
+        '
+        Me.TutoHideOutilsP3.Location = New System.Drawing.Point(663, 2)
+        Me.TutoHideOutilsP3.Name = "TutoHideOutilsP3"
+        Me.TutoHideOutilsP3.Size = New System.Drawing.Size(36, 21)
+        Me.TutoHideOutilsP3.TabIndex = 27
+        Me.TutoHideOutilsP3.TabStop = False
+        '
+        'TutoHideOutilsP5
+        '
+        Me.TutoHideOutilsP5.Location = New System.Drawing.Point(750, 2)
+        Me.TutoHideOutilsP5.Name = "TutoHideOutilsP5"
+        Me.TutoHideOutilsP5.Size = New System.Drawing.Size(40, 23)
+        Me.TutoHideOutilsP5.TabIndex = 26
+        Me.TutoHideOutilsP5.TabStop = False
+        '
+        'TutoHideGameList
+        '
+        Me.TutoHideGameList.Location = New System.Drawing.Point(259, 2)
+        Me.TutoHideGameList.Name = "TutoHideGameList"
+        Me.TutoHideGameList.Size = New System.Drawing.Size(74, 21)
+        Me.TutoHideGameList.TabIndex = 24
+        Me.TutoHideGameList.TabStop = False
+        '
+        'TutoHideOutilsP1
+        '
+        Me.TutoHideOutilsP1.Location = New System.Drawing.Point(551, 2)
+        Me.TutoHideOutilsP1.Name = "TutoHideOutilsP1"
+        Me.TutoHideOutilsP1.Size = New System.Drawing.Size(48, 23)
+        Me.TutoHideOutilsP1.TabIndex = 23
+        Me.TutoHideOutilsP1.TabStop = False
+        '
+        'TutoHideRomInfo
+        '
+        Me.TutoHideRomInfo.Location = New System.Drawing.Point(409, 2)
+        Me.TutoHideRomInfo.Name = "TutoHideRomInfo"
+        Me.TutoHideRomInfo.Size = New System.Drawing.Size(72, 21)
+        Me.TutoHideRomInfo.TabIndex = 22
+        Me.TutoHideRomInfo.TabStop = False
+        '
+        'TutoHideFiltres
+        '
+        Me.TutoHideFiltres.Location = New System.Drawing.Point(487, 2)
+        Me.TutoHideFiltres.Name = "TutoHideFiltres"
+        Me.TutoHideFiltres.Size = New System.Drawing.Size(58, 23)
+        Me.TutoHideFiltres.TabIndex = 21
+        Me.TutoHideFiltres.TabStop = False
+        '
+        'TutoHideFinalGrid
+        '
+        Me.TutoHideFinalGrid.Location = New System.Drawing.Point(339, 2)
+        Me.TutoHideFinalGrid.Name = "TutoHideFinalGrid"
+        Me.TutoHideFinalGrid.Size = New System.Drawing.Size(64, 21)
+        Me.TutoHideFinalGrid.TabIndex = 20
+        Me.TutoHideFinalGrid.TabStop = False
+        '
+        'minipic5
+        '
+        Me.minipic5.BackColor = System.Drawing.Color.White
+        Me.minipic5.Image = Global.RecalCopier.My.Resources.Resources.OKMem
+        Me.minipic5.Location = New System.Drawing.Point(473, 29)
+        Me.minipic5.Name = "minipic5"
+        Me.minipic5.Size = New System.Drawing.Size(24, 18)
+        Me.minipic5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic5.TabIndex = 18
+        Me.minipic5.TabStop = False
+        '
+        'minipic4
+        '
+        Me.minipic4.BackColor = System.Drawing.Color.White
+        Me.minipic4.Image = Global.RecalCopier.My.Resources.Resources.OKoverlay
+        Me.minipic4.Location = New System.Drawing.Point(448, 29)
+        Me.minipic4.Name = "minipic4"
+        Me.minipic4.Size = New System.Drawing.Size(24, 18)
+        Me.minipic4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic4.TabIndex = 17
+        Me.minipic4.TabStop = False
+        '
+        'minipic3
+        '
+        Me.minipic3.BackColor = System.Drawing.Color.White
+        Me.minipic3.Image = Global.RecalCopier.My.Resources.Resources.OKmanual
+        Me.minipic3.Location = New System.Drawing.Point(422, 29)
+        Me.minipic3.Name = "minipic3"
+        Me.minipic3.Size = New System.Drawing.Size(24, 18)
+        Me.minipic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic3.TabIndex = 16
+        Me.minipic3.TabStop = False
+        '
+        'minipic2
+        '
+        Me.minipic2.BackColor = System.Drawing.Color.White
+        Me.minipic2.Image = Global.RecalCopier.My.Resources.Resources.OKvideo
+        Me.minipic2.Location = New System.Drawing.Point(396, 29)
+        Me.minipic2.Name = "minipic2"
+        Me.minipic2.Size = New System.Drawing.Size(24, 18)
+        Me.minipic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic2.TabIndex = 15
+        Me.minipic2.TabStop = False
+        '
+        'minipic1
+        '
+        Me.minipic1.BackColor = System.Drawing.Color.White
+        Me.minipic1.Image = Global.RecalCopier.My.Resources.Resources.Okscreen
+        Me.minipic1.Location = New System.Drawing.Point(370, 29)
+        Me.minipic1.Name = "minipic1"
+        Me.minipic1.Size = New System.Drawing.Size(24, 18)
+        Me.minipic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.minipic1.TabIndex = 14
+        Me.minipic1.TabStop = False
+        '
+        'ButtonSonVid
+        '
+        Me.ButtonSonVid.BackColor = System.Drawing.Color.White
+        Me.ButtonSonVid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonSonVid.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonSonVid.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonSonVid.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
+        Me.ButtonSonVid.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonSonVid.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonSonVid.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonSonVid.Image = Global.RecalCopier.My.Resources.Resources.iconsound
+        Me.ButtonSonVid.Location = New System.Drawing.Point(66, 194)
+        Me.ButtonSonVid.Name = "ButtonSonVid"
+        Me.ButtonSonVid.Size = New System.Drawing.Size(52, 49)
+        Me.ButtonSonVid.TabIndex = 40
+        Me.ButtonSonVid.UseVisualStyleBackColor = False
+        '
+        'RomImage
+        '
+        Me.RomImage.Image = CType(resources.GetObject("RomImage.Image"), System.Drawing.Image)
+        Me.RomImage.InitialImage = Nothing
+        Me.RomImage.Location = New System.Drawing.Point(5, 55)
+        Me.RomImage.Name = "RomImage"
+        Me.RomImage.Size = New System.Drawing.Size(173, 132)
+        Me.RomImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.RomImage.TabIndex = 0
+        Me.RomImage.TabStop = False
+        '
+        'ButtonCopy
+        '
+        Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
+        Me.ButtonCopy.Location = New System.Drawing.Point(927, 15)
+        Me.ButtonCopy.Name = "ButtonCopy"
+        Me.ButtonCopy.Size = New System.Drawing.Size(69, 72)
+        Me.ButtonCopy.TabIndex = 14
+        Me.ButtonCopy.UseVisualStyleBackColor = True
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.ButtonGenererList)
+        Me.Controls.Add(Me.ButtonValider)
+        Me.Controls.Add(Me.ButtonTuto1)
         Me.Controls.Add(Me.ButtonGetBack)
         Me.Controls.Add(Me.CheckBoxARRM)
         Me.Controls.Add(Me.TutoHideOutilsP4)
@@ -994,7 +1075,6 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.TutoHideRomInfo)
         Me.Controls.Add(Me.TutoHideFiltres)
         Me.Controls.Add(Me.TutoHideFinalGrid)
-        Me.Controls.Add(Me.ButtonTuto)
         Me.Controls.Add(Me.minipic5)
         Me.Controls.Add(Me.minipic4)
         Me.Controls.Add(Me.minipic3)
@@ -1003,9 +1083,7 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.GroupFiltresAvances)
         Me.Controls.Add(Me.grp_RomInfos)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.ButtonShowGames)
         Me.Controls.Add(Me.ListGameLists)
-        Me.Controls.Add(Me.ButtonImportXML)
         Me.Controls.Add(Me.FinalGrid)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximumSize = New System.Drawing.Size(1034, 650)
@@ -1027,32 +1105,30 @@ Partial Class CopyRoms
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
-        CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupFiltresAvances.ResumeLayout(False)
         Me.GroupFiltresAvances.PerformLayout()
-        CType(Me.minipic1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideFiltres, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideOutilsP3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideOutilsP5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideOutilsP1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideFiltres, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.minipic1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ButtonImportXML As Button
     Friend WithEvents ListGameLists As ListBox
-    Friend WithEvents ButtonShowGames As Button
     Friend WithEvents FinalGrid As DataGridView
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox4 As GroupBox
@@ -1071,7 +1147,6 @@ Partial Class CopyRoms
     Friend WithEvents txt_romdesc As RichTextBox
     Friend WithEvents txt_txtsearch As TextBox
     Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents ButtonParcourirRecalCopy As Button
     Friend WithEvents Label8 As Label
     Friend WithEvents txt_CopyFolder As TextBox
     Friend WithEvents ButtonCopy As Button
@@ -1086,9 +1161,7 @@ Partial Class CopyRoms
     Friend WithEvents Label5 As Label
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents listboxMaSelection As ListBox
-    Friend WithEvents buttonaffichermaselection As Button
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents buttonRAZ As Button
     Friend WithEvents romscreeno As Button
     Friend WithEvents romsaveo As Button
     Friend WithEvents romoverlayo As Button
@@ -1099,8 +1172,6 @@ Partial Class CopyRoms
     Friend WithEvents DecocherTout As CheckBox
     Friend WithEvents CocherTout As CheckBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents ButtonShowColonne As Button
-    Friend WithEvents ButtonHideColonne As Button
     Friend WithEvents txtShownRoms As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
@@ -1114,7 +1185,6 @@ Partial Class CopyRoms
     Friend WithEvents listconsoleselected As ListBox
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents ButtonTuto As Button
     Friend WithEvents TutoHideFinalGrid As PictureBox
     Friend WithEvents TutoHideFiltres As PictureBox
     Friend WithEvents TutoHideRomInfo As PictureBox
@@ -1129,4 +1199,13 @@ Partial Class CopyRoms
     Friend WithEvents txt_romname As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents ButtonGetBack As Button
+    Friend WithEvents ButtonTuto1 As Button
+    Friend WithEvents ButtonRazClickk As Button
+    Friend WithEvents ButtonHideColumn As Button
+    Friend WithEvents ButtonShowColonne As Button
+    Friend WithEvents ButtonAfficherMaSelection As Button
+    Friend WithEvents ButtonParcourirRecalCopy As Button
+    Friend WithEvents ButtonSonVid As Button
+    Friend WithEvents ButtonValider As Button
+    Friend WithEvents ButtonGenererList As Button
 End Class

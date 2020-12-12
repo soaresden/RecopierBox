@@ -5,19 +5,19 @@ Public Class CopyRoms
         'Hiding buttons and datagrids
         txt_txtsearch.Hide()
         FinalGrid.Hide()
-        ButtonShowGames.Hide()
+        ButtonGenererList.Hide()
         GroupBox1.Hide()
         grp_RomInfos.Hide()
         vid_romvid.uiMode = "none"
         listboxMaSelection.Hide()
-        buttonRAZ.Hide()
+        ButtonRazClickk.Hide()
         GroupFiltresAvances.Hide()
         minipic1.Hide()
         minipic2.Hide()
         minipic3.Hide()
         minipic4.Hide()
         minipic5.Hide()
-        ButtonTuto.Hide()
+        ButtonTuto1.Hide()
         'Et tout le Block Tuto
         TutoHideGameList.Hide()
         TutoHideFinalGrid.Hide()
@@ -29,9 +29,8 @@ Public Class CopyRoms
         TutoHideOutilsP4.Hide()
         TutoHideOutilsP5.Hide()
         TutoHideOutilsP6.Hide()
-
     End Sub
-    Private Sub ButtonImportXML_click(sender As Object, e As EventArgs) Handles ButtonImportXML.Click
+    Private Sub ButtonValider_Click(sender As Object, e As EventArgs) Handles ButtonValider.Click
         If CheckBoxARRM.Checked = True Then
             For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
 
@@ -48,15 +47,13 @@ Public Class CopyRoms
                 End If
             Next
         End If
-
         'showing gridview2
-        ButtonImportXML.Hide()
+        ButtonValider.Hide()
         FinalGrid.Show()
-        ButtonShowGames.Show()
-        ButtonImportXML.Hide()
+        ButtonGenererList.Show()
+        ButtonValider.Hide()
         CheckBoxARRM.Hide()
     End Sub
-
     Public Shared Function GetFilesRecursive(ByVal initial As String) As List(Of String)
         ' This list stores the results.
         Dim result As New List(Of String)
@@ -88,8 +85,7 @@ Public Class CopyRoms
         ' Return the list
         Return result
     End Function
-
-    Private Sub ShowGames_Click(sender As Object, e As EventArgs) Handles ButtonShowGames.Click
+    Private Sub ButtonGenererList_Click_1(sender As Object, e As EventArgs) Handles ButtonGenererList.Click
 
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If ListGameLists.SelectedItems.Count = 0 Then
@@ -450,15 +446,15 @@ romsuivante:
         colromselection.Width = 30
 
         'Reajusting Interface and Showing Final Interface
-        ButtonImportXML.Hide()
+        ButtonValider.Hide()
         ListGameLists.Hide()
         FinalGrid.Location = New Point(8, 28)
         FinalGrid.Size = New Size(600, 365)
         grp_RomInfos.Show()
         GroupBox1.Show()
-        ButtonShowGames.Hide()
+        ButtonGenererList.Hide()
         txt_txtsearch.Show()
-        buttonRAZ.Show()
+        ButtonRazClickk.Show()
         GroupFiltresAvances.Show()
         dv.Sort = "Console asc, Titre asc"
 
@@ -493,7 +489,6 @@ romsuivante:
         minipic4.Show()
         minipic5.Show()
 
-
         'on va calculer la taille des roms
         Call Calcultaillerom()
         'On lance la completion des checkbox
@@ -502,9 +497,8 @@ romsuivante:
         txt_USBGo.Text = My.Settings.StockageSize
 
         'On affiche le bouton Tuto !
-        ButtonTuto.Show()
+        ButtonTuto1.Show()
     End Sub
-
     Sub Calcultaillerom()
         On Error Resume Next
         Dim valeursize As String
@@ -590,7 +584,7 @@ labelapresfolder:
         For orow = 0 To FinalGrid.RowCount - 2
             If orow = 0 And FinalGrid.RowCount - 1 = orow Then
                 MsgBox("Pas de Resultats")
-                buttonRAZ.PerformClick()
+                ButtonRazClickk.PerformClick()
                 Exit Sub
             End If
 
@@ -776,7 +770,9 @@ consolesanssaves:
             vid_romvid.Show()
             vid_romvid.URL = row.Cells(FinalGrid.Columns("CheminVideo").Index).Value
             vid_romvid.settings.setMode("loop", True)
+            vid_romvid.settings.volume = 80
             vid_romvid.settings.mute = True
+            ButtonSonVid.BackgroundImage = My.Resources.iconsound
             vid_romvid.Ctlcontrols.play()
         End If
 
@@ -930,13 +926,8 @@ consolesanssaves:
         Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
         txt_NbRomSelected.Text = valeurnbselect
     End Sub
-    Private Sub ButtonParcourirRecalCopy_Click(sender As Object, e As EventArgs) Handles ButtonParcourirRecalCopy.Click
-        If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-            txt_CopyFolder.Text = FolderBrowserDialog1.SelectedPath
-            'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
-            My.Settings.CopyFolder = txt_CopyFolder.Text
-            My.Settings.Save()
-        End If
+    Private Sub ButtonParcourirRecalCopy_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub GroupBox1_VisibleChanged(sender As Object, e As EventArgs) Handles GroupBox1.VisibleChanged
@@ -1032,7 +1023,7 @@ consolesanssaves:
         End If
 
         'On défiltre par securité
-        buttonRAZ.PerformClick()
+        ButtonRazClickk.PerformClick()
 
         'On va boucler sur toutes les roms de la liste. 
         'COPIE DES ROMS
@@ -1999,40 +1990,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         writer.WriteEndElement()
     End Sub
-    Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs) Handles buttonaffichermaselection.Click
-        'On affiche la Listbox a la bonne place ou on là referme
-        If listboxMaSelection.Visible = True Then
-            listboxMaSelection.Hide()
-        Else
-            listboxMaSelection.Location = New Point(-2, 43)
-            listboxMaSelection.Size = New Size(396, 433)
-            listboxMaSelection.Show()
-        End If
-
-        ' 'Verification de la listebox en coherence avec FinalGrid
-        For j = 0 To listboxMaSelection.Items.Count - 1 'toutes les lignes de la listbox
-
-            Dim romselected As String = listboxMaSelection.Items(j)
-            For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes du grid
-                If FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value = romselected Then ' colonne des path
-                    Dim valeurselection As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value
-
-                    If valeurselection = False Then 'Ici on est sur la bonne ligne du Final Grid, on verifie si c'est pas coché et on replique si besoin
-                        FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value = False
-                        GoTo prochainj 'on saute au prochain jeu
-                    ElseIf valeurselection = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value Then
-                        GoTo prochainj
-                    End If
-                End If
-            Next
-prochainj:
-        Next
-
-        'Check des Doublons
-        Supdoublon(listboxMaSelection)
-
-        'On lance un calcul par securité
-        Call UpdatelesChiffreRoms()
+    Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs)
 
     End Sub
     Function Supdoublon(ByVal listboxName As ListBox)
@@ -2115,8 +2073,8 @@ prochainj:
         End If
 
     End Sub
-    Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs) Handles buttonRAZ.Click
-        txt_txtsearch.Text = "forcingreset"
+    Private Sub ButtonRAZ_Click(sender As Object, e As EventArgs)
+
     End Sub
     Private Sub Romscreeno_Click(sender As Object, e As EventArgs) Handles romscreeno.Click
         'si y'a rien de loadé
@@ -2208,16 +2166,12 @@ prochainj:
         DecocherTout.Checked = False
     End Sub
 
-    Private Sub ButtonShowColonne_Click(sender As Object, e As EventArgs) Handles ButtonShowColonne.Click
-        If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
-        If ComboFiltreColonnes.Text = "Console" Or ComboFiltreColonnes.Text = "Titre" Then Exit Sub
-        FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = True
+    Private Sub ButtonShowColonne_Click(sender As Object, e As EventArgs)
+
     End Sub
 
-    Private Sub ButtonHideColonne_Click(sender As Object, e As EventArgs) Handles ButtonHideColonne.Click
-        If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
-        If ComboFiltreColonnes.Text = "Console" Or ComboFiltreColonnes.Text = "Titre" Then Exit Sub
-        FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = False
+    Private Sub ButtonHideColonne_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub Txt_romdesc_TextChanged(sender As Object, e As EventArgs) Handles txt_romdesc.TextChanged
@@ -2303,7 +2257,12 @@ prochainj:
         Next
     End Sub
 
-    Private Sub ButtonTuto_Click(sender As Object, e As EventArgs) Handles ButtonTuto.Click
+    Private Sub ButtonGetBack_Click(sender As Object, e As EventArgs) Handles ButtonGetBack.Click
+        Me.Close()
+        Form1.Show()
+    End Sub
+
+    Private Sub ButtonTuto1_Click_1(sender As Object, e As EventArgs) Handles ButtonTuto1.Click
         'Deroulement du Tuto
         'Replace les overlay des tutos
         TutoHideGameList.Size = New Point(213, 365)
@@ -2407,8 +2366,76 @@ prochainj:
 
     End Sub
 
-    Private Sub ButtonGetBack_Click(sender As Object, e As EventArgs) Handles ButtonGetBack.Click
-        Me.Close()
-        Form1.Show()
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles ButtonShowColonne.Click
+        If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
+        If ComboFiltreColonnes.Text = "Console" Or ComboFiltreColonnes.Text = "Titre" Then Exit Sub
+        FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = True
     End Sub
+
+    Private Sub ButtonHideColumn_Click(sender As Object, e As EventArgs) Handles ButtonHideColumn.Click
+        If ComboFiltreColonnes.Text Is Nothing Then Exit Sub
+        If ComboFiltreColonnes.Text = "Console" Or ComboFiltreColonnes.Text = "Titre" Then Exit Sub
+        FinalGrid.Columns(ComboFiltreColonnes.Text).Visible = False
+    End Sub
+
+    Private Sub ButtonRazClickk_Click(sender As Object, e As EventArgs) Handles ButtonRazClickk.Click
+        txt_txtsearch.Text = "forcingreset"
+    End Sub
+
+    Private Sub ButtonAfficherMaSelection_Click_1(sender As Object, e As EventArgs) Handles ButtonAfficherMaSelection.Click
+        'On affiche la Listbox a la bonne place ou on là referme
+        If listboxMaSelection.Visible = True Then
+            listboxMaSelection.Hide()
+        Else
+            listboxMaSelection.Location = New Point(-2, 43)
+            listboxMaSelection.Size = New Size(396, 433)
+            listboxMaSelection.Show()
+        End If
+
+        ' 'Verification de la listebox en coherence avec FinalGrid
+        For j = 0 To listboxMaSelection.Items.Count - 1 'toutes les lignes de la listbox
+
+            Dim romselected As String = listboxMaSelection.Items(j)
+            For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes du grid
+                If FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value = romselected Then ' colonne des path
+                    Dim valeurselection As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value
+
+                    If valeurselection = False Then 'Ici on est sur la bonne ligne du Final Grid, on verifie si c'est pas coché et on replique si besoin
+                        FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value = False
+                        GoTo prochainj 'on saute au prochain jeu
+                    ElseIf valeurselection = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value Then
+                        GoTo prochainj
+                    End If
+                End If
+            Next
+prochainj:
+        Next
+
+        'Check des Doublons
+        Supdoublon(listboxMaSelection)
+
+        'On lance un calcul par securité
+        Call UpdatelesChiffreRoms()
+
+    End Sub
+
+    Private Sub ButtonParcourirRecalCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonParcourirRecalCopy.Click
+        If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+            txt_CopyFolder.Text = FolderBrowserDialog1.SelectedPath
+            'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
+            My.Settings.CopyFolder = txt_CopyFolder.Text
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Private Sub ButtonSonVid_Click(sender As Object, e As EventArgs) Handles ButtonSonVid.Click
+        vid_romvid.settings.mute = Not vid_romvid.settings.mute
+
+        If vid_romvid.settings.mute = True Then
+            ButtonSonVid.BackgroundImage = My.Resources.iconsound
+        Else
+            ButtonSonVid.BackgroundImage = My.Resources.iconsound_off
+        End If
+    End Sub
+
 End Class
