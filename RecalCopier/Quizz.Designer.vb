@@ -25,6 +25,7 @@ Partial Class Quizz
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Quizz))
         Me.GroupParamComplet = New System.Windows.Forms.GroupBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.ButtonDoRandom1 = New System.Windows.Forms.Button()
         Me.CheckAvecFiltres = New System.Windows.Forms.CheckBox()
         Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
@@ -69,10 +70,16 @@ Partial Class Quizz
         Me.Label6 = New System.Windows.Forms.Label()
         Me.ConsoleList = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupSansFiltres = New System.Windows.Forms.GroupBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.txtRules = New System.Windows.Forms.TextBox()
         Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.TempGrid = New System.Windows.Forms.DataGridView()
         Me.TitleBox = New System.Windows.Forms.PictureBox()
         Me.QuizzBoxRep = New System.Windows.Forms.GroupBox()
+        Me.ListTitreDesJeux = New System.Windows.Forms.ListBox()
+        Me.ListConsoleDesJeux = New System.Windows.Forms.ListBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtpositionend = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -81,33 +88,26 @@ Partial Class Quizz
         Me.PlayerAudio = New AxWMPLib.AxWindowsMediaPlayer()
         Me.HiddenButton = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.txtRules = New System.Windows.Forms.TextBox()
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
-        Me.GroupSansFiltres = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PlayerNext = New System.Windows.Forms.Button()
         Me.PlayerPlay = New System.Windows.Forms.Button()
         Me.PlayerStop = New System.Windows.Forms.Button()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.ListConsoleDesJeux = New System.Windows.Forms.ListBox()
-        Me.ListTitreDesJeux = New System.Windows.Forms.ListBox()
         Me.PlayerPrev = New System.Windows.Forms.Button()
         Me.TimeBox = New System.Windows.Forms.TextBox()
         Me.PanelVideo = New System.Windows.Forms.Panel()
         Me.GroupParamComplet.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupConfigPartie.SuspendLayout()
         Me.GroupFiltres.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupSansFiltres.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.QuizzBoxRep.SuspendLayout()
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HiddenButton, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupSansFiltres.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelVideo.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -115,7 +115,6 @@ Partial Class Quizz
         '
         Me.GroupParamComplet.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
         Me.GroupParamComplet.Controls.Add(Me.PictureBox2)
-        Me.GroupParamComplet.Controls.Add(Me.GroupSansFiltres)
         Me.GroupParamComplet.Controls.Add(Me.ButtonDoRandom1)
         Me.GroupParamComplet.Controls.Add(Me.CheckAvecFiltres)
         Me.GroupParamComplet.Controls.Add(Me.GroupConfigPartie)
@@ -126,6 +125,7 @@ Partial Class Quizz
         Me.GroupParamComplet.Controls.Add(Me.GroupFiltres)
         Me.GroupParamComplet.Controls.Add(Me.ConsoleList)
         Me.GroupParamComplet.Controls.Add(Me.Label1)
+        Me.GroupParamComplet.Controls.Add(Me.GroupSansFiltres)
         Me.GroupParamComplet.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupParamComplet.Location = New System.Drawing.Point(12, 39)
         Me.GroupParamComplet.Name = "GroupParamComplet"
@@ -133,6 +133,17 @@ Partial Class Quizz
         Me.GroupParamComplet.TabIndex = 10
         Me.GroupParamComplet.TabStop = False
         Me.GroupParamComplet.Text = "Parametres :"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(9, 12)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(129, 88)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 42
+        Me.PictureBox2.TabStop = False
         '
         'ButtonDoRandom1
         '
@@ -209,7 +220,7 @@ Partial Class Quizz
         Me.ModeHardcore.Checked = True
         Me.ModeHardcore.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ModeHardcore.ForeColor = System.Drawing.Color.White
-        Me.ModeHardcore.Location = New System.Drawing.Point(155, 77)
+        Me.ModeHardcore.Location = New System.Drawing.Point(167, 77)
         Me.ModeHardcore.Name = "ModeHardcore"
         Me.ModeHardcore.Size = New System.Drawing.Size(152, 17)
         Me.ModeHardcore.TabIndex = 34
@@ -612,6 +623,53 @@ Partial Class Quizz
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Selection des Consoles :"
         '
+        'GroupSansFiltres
+        '
+        Me.GroupSansFiltres.BackColor = System.Drawing.Color.MistyRose
+        Me.GroupSansFiltres.Controls.Add(Me.TextBox1)
+        Me.GroupSansFiltres.Controls.Add(Me.PictureBox1)
+        Me.GroupSansFiltres.Controls.Add(Me.txtRules)
+        Me.GroupSansFiltres.Location = New System.Drawing.Point(147, 202)
+        Me.GroupSansFiltres.Name = "GroupSansFiltres"
+        Me.GroupSansFiltres.Size = New System.Drawing.Size(320, 343)
+        Me.GroupSansFiltres.TabIndex = 46
+        Me.GroupSansFiltres.TabStop = False
+        Me.GroupSansFiltres.Text = "Mode Sans Filtres : Instructions"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(6, 14)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(309, 190)
+        Me.TextBox1.TabIndex = 0
+        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(182, 198)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(133, 144)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
+        'txtRules
+        '
+        Me.txtRules.BackColor = System.Drawing.Color.White
+        Me.txtRules.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRules.ForeColor = System.Drawing.Color.Blue
+        Me.txtRules.Location = New System.Drawing.Point(6, 215)
+        Me.txtRules.Multiline = True
+        Me.txtRules.Name = "txtRules"
+        Me.txtRules.ReadOnly = True
+        Me.txtRules.Size = New System.Drawing.Size(170, 107)
+        Me.txtRules.TabIndex = 40
+        Me.txtRules.Text = "*1ère Phase :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Concentrez-vous," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Souvenez-vous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase :" &
+    "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Des propositions apparaissent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Validez votre choix !"
+        '
         'listrandobox
         '
         Me.listrandobox.BackColor = System.Drawing.SystemColors.Info
@@ -655,6 +713,26 @@ Partial Class Quizz
         Me.QuizzBoxRep.TabIndex = 36
         Me.QuizzBoxRep.TabStop = False
         Me.QuizzBoxRep.Text = "Propositions et Reponses :"
+        '
+        'ListTitreDesJeux
+        '
+        Me.ListTitreDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.ListTitreDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListTitreDesJeux.FormattingEnabled = True
+        Me.ListTitreDesJeux.Location = New System.Drawing.Point(119, 16)
+        Me.ListTitreDesJeux.Name = "ListTitreDesJeux"
+        Me.ListTitreDesJeux.Size = New System.Drawing.Size(286, 186)
+        Me.ListTitreDesJeux.TabIndex = 23
+        '
+        'ListConsoleDesJeux
+        '
+        Me.ListConsoleDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.ListConsoleDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListConsoleDesJeux.FormattingEnabled = True
+        Me.ListConsoleDesJeux.Location = New System.Drawing.Point(6, 17)
+        Me.ListConsoleDesJeux.Name = "ListConsoleDesJeux"
+        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 186)
+        Me.ListConsoleDesJeux.TabIndex = 24
         '
         'Label15
         '
@@ -736,20 +814,6 @@ Partial Class Quizz
         'Timer1
         '
         '
-        'txtRules
-        '
-        Me.txtRules.BackColor = System.Drawing.Color.White
-        Me.txtRules.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRules.ForeColor = System.Drawing.Color.Blue
-        Me.txtRules.Location = New System.Drawing.Point(6, 215)
-        Me.txtRules.Multiline = True
-        Me.txtRules.Name = "txtRules"
-        Me.txtRules.ReadOnly = True
-        Me.txtRules.Size = New System.Drawing.Size(170, 107)
-        Me.txtRules.TabIndex = 40
-        Me.txtRules.Text = "*1ère Phase :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Concentrez-vous," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Souvenez-vous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase :" &
-    "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Des propositions apparaissent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Validez votre choix !"
-        '
         'ButtonGetBack1
         '
         Me.ButtonGetBack1.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
@@ -766,50 +830,6 @@ Partial Class Quizz
         Me.ButtonGetBack1.TabIndex = 41
         Me.ButtonGetBack1.Text = "Retour Au Menu"
         Me.ButtonGetBack1.UseVisualStyleBackColor = False
-        '
-        'GroupSansFiltres
-        '
-        Me.GroupSansFiltres.BackColor = System.Drawing.Color.MistyRose
-        Me.GroupSansFiltres.Controls.Add(Me.TextBox1)
-        Me.GroupSansFiltres.Controls.Add(Me.PictureBox1)
-        Me.GroupSansFiltres.Controls.Add(Me.txtRules)
-        Me.GroupSansFiltres.Location = New System.Drawing.Point(147, 202)
-        Me.GroupSansFiltres.Name = "GroupSansFiltres"
-        Me.GroupSansFiltres.Size = New System.Drawing.Size(320, 343)
-        Me.GroupSansFiltres.TabIndex = 46
-        Me.GroupSansFiltres.TabStop = False
-        Me.GroupSansFiltres.Text = "Mode Sans Filtres : Instructions"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 14)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(309, 190)
-        Me.TextBox1.TabIndex = 0
-        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(182, 198)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(133, 144)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(9, 12)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(129, 88)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 42
-        Me.PictureBox2.TabStop = False
         '
         'PlayerNext
         '
@@ -858,26 +878,6 @@ Partial Class Quizz
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(399, 23)
         Me.ProgressBar1.TabIndex = 27
-        '
-        'ListConsoleDesJeux
-        '
-        Me.ListConsoleDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.ListConsoleDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListConsoleDesJeux.FormattingEnabled = True
-        Me.ListConsoleDesJeux.Location = New System.Drawing.Point(6, 17)
-        Me.ListConsoleDesJeux.Name = "ListConsoleDesJeux"
-        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 186)
-        Me.ListConsoleDesJeux.TabIndex = 24
-        '
-        'ListTitreDesJeux
-        '
-        Me.ListTitreDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.ListTitreDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListTitreDesJeux.FormattingEnabled = True
-        Me.ListTitreDesJeux.Location = New System.Drawing.Point(119, 16)
-        Me.ListTitreDesJeux.Name = "ListTitreDesJeux"
-        Me.ListTitreDesJeux.Size = New System.Drawing.Size(286, 186)
-        Me.ListTitreDesJeux.TabIndex = 23
         '
         'PlayerPrev
         '
@@ -943,20 +943,20 @@ Partial Class Quizz
         Me.Text = "Quizz"
         Me.GroupParamComplet.ResumeLayout(False)
         Me.GroupParamComplet.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupConfigPartie.ResumeLayout(False)
         Me.GroupConfigPartie.PerformLayout()
         Me.GroupFiltres.ResumeLayout(False)
         Me.GroupFiltres.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupSansFiltres.ResumeLayout(False)
+        Me.GroupSansFiltres.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.QuizzBoxRep.ResumeLayout(False)
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HiddenButton, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupSansFiltres.ResumeLayout(False)
-        Me.GroupSansFiltres.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelVideo.ResumeLayout(False)
         Me.PanelVideo.PerformLayout()
         Me.ResumeLayout(False)

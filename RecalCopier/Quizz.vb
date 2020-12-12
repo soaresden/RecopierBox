@@ -452,11 +452,8 @@ suite6:
         Next
     End Sub
 
-
-
-
     'Ensemble Got Focus et Leave Focus pour les listboxes
-    Private Sub Txtgenre_GotFocus(sender As Object, e As EventArgs)
+    Private Sub Txtgenre_GotFocus(sender As Object, e As EventArgs) Handles txtgenre.GotFocus
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -473,7 +470,7 @@ suite6:
         listhelpingboxGenre.Location = New Point(2, 15)
         listhelpingboxGenre.Size = New Point(145, 300)
     End Sub
-    Private Sub Txtdev_GotFocus(sender As Object, e As EventArgs)
+    Private Sub Txtdev_GotFocus(sender As Object, e As EventArgs) Handles txtdev.GotFocus
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -490,7 +487,7 @@ suite6:
         listhelpingboxDev.Location = New Point(2, 15)
         listhelpingboxDev.Size = New Point(145, 300)
     End Sub
-    Private Sub Txtpub_GotFocus(sender As Object, e As EventArgs)
+    Private Sub Txtpub_GotFocus(sender As Object, e As EventArgs) Handles txtpub.GotFocus
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -507,7 +504,7 @@ suite6:
         listhelpingboxPubl.Location = New Point(2, 15)
         listhelpingboxPubl.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtAnnee_GotFocus(sender As Object, e As EventArgs)
+    Private Sub TxtAnnee_GotFocus(sender As Object, e As EventArgs) Handles TxtAnnee.GotFocus
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -524,7 +521,7 @@ suite6:
         listhelpingboxAnnee.Location = New Point(2, 15)
         listhelpingboxAnnee.Size = New Point(145, 300)
     End Sub
-    Private Sub Txtplayers_GotFocus(sender As Object, e As EventArgs)
+    Private Sub Txtplayers_GotFocus(sender As Object, e As EventArgs) Handles txtplayers.GotFocus
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -541,7 +538,7 @@ suite6:
         listhelpingboxPlayers.Location = New Point(2, 15)
         listhelpingboxPlayers.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtPlayCount_GotFocus(sender As Object, e As EventArgs)
+    Private Sub TxtPlayCount_GotFocus(sender As Object, e As EventArgs) Handles TxtPlayCount.GotFocus
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -558,7 +555,7 @@ suite6:
         listhelpingboxPlayCount.Location = New Point(2, 15)
         listhelpingboxPlayCount.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtSynopsis_GotFocus(sender As Object, e As EventArgs)
+    Private Sub TxtSynopsis_GotFocus(sender As Object, e As EventArgs) Handles TxtSynopsis.GotFocus
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -568,7 +565,7 @@ suite6:
         listhelpingboxPlayCount.Hide()
         listhelpingboxNote.Hide()
     End Sub
-    Private Sub TxtRating_GotFocus(sender As Object, e As EventArgs)
+    Private Sub TxtRating_GotFocus(sender As Object, e As EventArgs) Handles TxtRating.GotFocus
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -585,7 +582,7 @@ suite6:
         listhelpingboxNote.Location = New Point(2, 15)
         listhelpingboxNote.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtSynopsis_LostFocus(sender As Object, e As EventArgs)
+    Private Sub TxtSynopsis_LostFocus(sender As Object, e As EventArgs) Handles TxtSynopsis.GotFocus
         listhelpingboxGenre.Show()
         listhelpingboxDev.Show()
         listhelpingboxPubl.Show()
@@ -594,7 +591,6 @@ suite6:
         listhelpingboxPlayCount.Show()
         listhelpingboxNote.Show()
     End Sub
-
 
     Private Sub TitreOnly_CheckedChanged(sender As Object, e As EventArgs) Handles TitreOnly.CheckedChanged
         If TitreOnly.Checked = True Then ConsoleTitre.Checked = False
@@ -775,7 +771,6 @@ recalculrando:
         PlayerAudio.Ctlcontrols.stop()
         RandomList.SelectedIndex = selectionactuelle + 1
         ListTitreDesJeux.Items.Clear()
-        ListConsoleDesJeux.Items.Clear()
         'On securise en mettant le player en hide
         PlayerAudio.uiMode = "none"
     End Sub
@@ -786,7 +781,6 @@ recalculrando:
         PlayerAudio.Ctlcontrols.stop()
         RandomList.SelectedIndex = selectionactuelle - 1
         ListTitreDesJeux.Items.Clear()
-        ListConsoleDesJeux.Items.Clear()
         'On securise en mettant le player en hide
         PlayerAudio.uiMode = "none"
     End Sub
@@ -801,7 +795,6 @@ recalculrando:
             If ModeEasy.Checked = True Then PlayerAudio.uiMode = "none"
             If ModeHardcore.Checked = True Then PlayerAudio.uiMode = "invisible"
             PlayerAudio.Ctlcontrols.play()
-
 
             ProgressBar1.Minimum = 0
             ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
@@ -1002,7 +995,7 @@ finboucle:
         e.DrawFocusRectangle()
     End Sub
 
-    Private Sub txtnbmanches_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtnbmanches.KeyPress
+    Private Sub Txtnbmanches_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtnbmanches.KeyPress
         '97 - 122 = Ascii codes for simple letters
         '65 - 90  = Ascii codes for capital letters
         '48 - 57  = Ascii codes for numbers
@@ -1013,6 +1006,8 @@ finboucle:
             End If
         End If
     End Sub
+
+
 
     Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" _
 (ByVal hWnd As IntPtr, ByVal wCmd As Integer,
