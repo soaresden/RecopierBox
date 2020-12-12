@@ -52,8 +52,9 @@ Partial Class CopyRoms
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_USBGo = New System.Windows.Forms.TextBox()
-        Me.Buttongetback = New System.Windows.Forms.Button()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txt_romname = New System.Windows.Forms.Label()
         Me.listboxMaSelection = New System.Windows.Forms.ListBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.romscreeno = New System.Windows.Forms.Button()
@@ -101,8 +102,7 @@ Partial Class CopyRoms
         Me.TutoHideOutilsP6 = New System.Windows.Forms.PictureBox()
         Me.TutoHideOutilsP4 = New System.Windows.Forms.PictureBox()
         Me.CheckBoxARRM = New System.Windows.Forms.CheckBox()
-        Me.txt_romname = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ButtonGetBack = New System.Windows.Forms.Button()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -110,6 +110,7 @@ Partial Class CopyRoms
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.grp_RomInfos.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -129,14 +130,13 @@ Partial Class CopyRoms
         CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ButtonImportXML
         '
-        Me.ButtonImportXML.Location = New System.Drawing.Point(48, 51)
+        Me.ButtonImportXML.Location = New System.Drawing.Point(47, 51)
         Me.ButtonImportXML.Name = "ButtonImportXML"
-        Me.ButtonImportXML.Size = New System.Drawing.Size(145, 32)
+        Me.ButtonImportXML.Size = New System.Drawing.Size(146, 32)
         Me.ButtonImportXML.TabIndex = 1
         Me.ButtonImportXML.Text = "Importer les Gamelist.xml"
         Me.ButtonImportXML.UseVisualStyleBackColor = True
@@ -462,16 +462,6 @@ Partial Class CopyRoms
         Me.txt_USBGo.TabIndex = 0
         Me.txt_USBGo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Buttongetback
-        '
-        Me.Buttongetback.Location = New System.Drawing.Point(8, 2)
-        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2)
-        Me.Buttongetback.Name = "Buttongetback"
-        Me.Buttongetback.Size = New System.Drawing.Size(101, 23)
-        Me.Buttongetback.TabIndex = 8
-        Me.Buttongetback.Text = "Revenir au Menu"
-        Me.Buttongetback.UseVisualStyleBackColor = True
-        '
         'grp_RomInfos
         '
         Me.grp_RomInfos.BackColor = System.Drawing.Color.SkyBlue
@@ -490,6 +480,25 @@ Partial Class CopyRoms
         Me.grp_RomInfos.TabIndex = 10
         Me.grp_RomInfos.TabStop = False
         Me.grp_RomInfos.Text = "Rom Infos"
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.txt_romname)
+        Me.Panel1.Location = New System.Drawing.Point(5, 12)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(382, 26)
+        Me.Panel1.TabIndex = 23
+        '
+        'txt_romname
+        '
+        Me.txt_romname.AutoSize = True
+        Me.txt_romname.Font = New System.Drawing.Font("VAGRounded BT", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txt_romname.ForeColor = System.Drawing.Color.Black
+        Me.txt_romname.Location = New System.Drawing.Point(1, 0)
+        Me.txt_romname.Name = "txt_romname"
+        Me.txt_romname.Size = New System.Drawing.Size(290, 26)
+        Me.txt_romname.TabIndex = 22
+        Me.txt_romname.Text = "Veuillez cliquer sur une Rom"
         '
         'listboxMaSelection
         '
@@ -950,31 +959,30 @@ Partial Class CopyRoms
         Me.CheckBoxARRM.Text = "Utiliser les gamelist ARRM en priorité"
         Me.CheckBoxARRM.UseVisualStyleBackColor = True
         '
-        'txt_romname
+        'ButtonGetBack
         '
-        Me.txt_romname.AutoSize = True
-        Me.txt_romname.Font = New System.Drawing.Font("VAGRounded BT", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_romname.ForeColor = System.Drawing.Color.Black
-        Me.txt_romname.Location = New System.Drawing.Point(1, 0)
-        Me.txt_romname.Name = "txt_romname"
-        Me.txt_romname.Size = New System.Drawing.Size(290, 26)
-        Me.txt_romname.TabIndex = 22
-        Me.txt_romname.Text = "Veuillez cliquer sur une Rom"
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.txt_romname)
-        Me.Panel1.Location = New System.Drawing.Point(5, 12)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(382, 26)
-        Me.Panel1.TabIndex = 23
+        Me.ButtonGetBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ButtonGetBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonGetBack.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonGetBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonGetBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.ButtonGetBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonGetBack.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonGetBack.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ButtonGetBack.Location = New System.Drawing.Point(15, 2)
+        Me.ButtonGetBack.Name = "ButtonGetBack"
+        Me.ButtonGetBack.Size = New System.Drawing.Size(94, 23)
+        Me.ButtonGetBack.TabIndex = 33
+        Me.ButtonGetBack.Text = "Retour Au Menu"
+        Me.ButtonGetBack.UseVisualStyleBackColor = False
         '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(55, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.ButtonGetBack)
         Me.Controls.Add(Me.CheckBoxARRM)
         Me.Controls.Add(Me.TutoHideOutilsP4)
         Me.Controls.Add(Me.TutoHideOutilsP6)
@@ -994,7 +1002,6 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.minipic1)
         Me.Controls.Add(Me.GroupFiltresAvances)
         Me.Controls.Add(Me.grp_RomInfos)
-        Me.Controls.Add(Me.Buttongetback)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ButtonShowGames)
         Me.Controls.Add(Me.ListGameLists)
@@ -1017,6 +1024,8 @@ Partial Class CopyRoms
         Me.GroupBox3.PerformLayout()
         Me.grp_RomInfos.ResumeLayout(False)
         Me.grp_RomInfos.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1037,8 +1046,6 @@ Partial Class CopyRoms
         CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1048,7 +1055,6 @@ Partial Class CopyRoms
     Friend WithEvents ButtonShowGames As Button
     Friend WithEvents FinalGrid As DataGridView
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Buttongetback As Button
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents lbl_GoAPrevoir As Label
     Friend WithEvents txt_GoAPrevoir As TextBox
@@ -1122,4 +1128,5 @@ Partial Class CopyRoms
     Friend WithEvents CheckBoxARRM As CheckBox
     Friend WithEvents txt_romname As Label
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents ButtonGetBack As Button
 End Class

@@ -708,7 +708,7 @@ consolesanssaves:
         FinalGrid.Columns("CocheSave").ReadOnly = True
 
     End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Form1.Show()
         Me.Close()
     End Sub
@@ -2405,5 +2405,10 @@ prochainj:
         TutoHideOutilsP5.Hide()
         TutoHideOutilsP6.Hide()
 
+    End Sub
+
+    Private Sub ButtonGetBack_Click(sender As Object, e As EventArgs) Handles ButtonGetBack.Click
+        Me.Close()
+        Form1.Show()
     End Sub
 End Class

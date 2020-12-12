@@ -49,7 +49,6 @@ Partial Class Form1
         Me.ButtonCopy = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.PanelHaut = New System.Windows.Forms.Panel()
-        Me.PanelInfo = New System.Windows.Forms.Panel()
         Me.PanelDroite = New System.Windows.Forms.Panel()
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
@@ -58,7 +57,6 @@ Partial Class Form1
         Me.WhyGameList.SuspendLayout()
         Me.PanelGauche.SuspendLayout()
         Me.PanelHaut.SuspendLayout()
-        Me.PanelInfo.SuspendLayout()
         Me.PanelDroite.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -73,10 +71,10 @@ Partial Class Form1
         Me.groupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.groupBox2.Name = "groupBox2"
         Me.groupBox2.Padding = New System.Windows.Forms.Padding(2)
-        Me.groupBox2.Size = New System.Drawing.Size(246, 91)
+        Me.groupBox2.Size = New System.Drawing.Size(245, 91)
         Me.groupBox2.TabIndex = 12
         Me.groupBox2.TabStop = False
-        Me.groupBox2.Text = "Configuration Initiale"
+        Me.groupBox2.Text = "Configuration du Dossier :"
         '
         'ButtonBrowseRecalboxFolder
         '
@@ -94,7 +92,7 @@ Partial Class Form1
         '
         Me.label4.AutoSize = True
         Me.label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.label4.Location = New System.Drawing.Point(3, 17)
+        Me.label4.Location = New System.Drawing.Point(3, 15)
         Me.label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label4.Name = "label4"
         Me.label4.Size = New System.Drawing.Size(241, 45)
@@ -109,6 +107,7 @@ Partial Class Form1
         Me.TxtRecalfolderPath.Name = "TxtRecalfolderPath"
         Me.TxtRecalfolderPath.Size = New System.Drawing.Size(144, 20)
         Me.TxtRecalfolderPath.TabIndex = 0
+        Me.TxtRecalfolderPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'label2
         '
@@ -116,12 +115,12 @@ Partial Class Form1
         Me.label2.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.label2.Font = New System.Drawing.Font("Equinox Com", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label2.ForeColor = System.Drawing.Color.White
-        Me.label2.Location = New System.Drawing.Point(99, 44)
+        Me.label2.Location = New System.Drawing.Point(162, 39)
         Me.label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label2.Name = "label2"
-        Me.label2.Size = New System.Drawing.Size(301, 18)
+        Me.label2.Size = New System.Drawing.Size(405, 18)
         Me.label2.TabIndex = 10
-        Me.label2.Text = "Votre Builder de Pack Personnalisé pour votre RecalBox"
+        Me.label2.Text = "Votre Builder de Pack Personnalisé pour votre FrontEnd Recalbox/Batocera"
         '
         'label1
         '
@@ -129,7 +128,7 @@ Partial Class Form1
         Me.label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.label1.Font = New System.Drawing.Font("VAGRounded BT", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label1.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.label1.Location = New System.Drawing.Point(2, 0)
+        Me.label1.Location = New System.Drawing.Point(122, -1)
         Me.label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label1.Name = "label1"
         Me.label1.Size = New System.Drawing.Size(473, 40)
@@ -142,12 +141,12 @@ Partial Class Form1
         Me.label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.label3.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label3.ForeColor = System.Drawing.Color.Yellow
-        Me.label3.Location = New System.Drawing.Point(140, 68)
+        Me.label3.Location = New System.Drawing.Point(146, 67)
         Me.label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label3.Name = "label3"
-        Me.label3.Size = New System.Drawing.Size(98, 14)
+        Me.label3.Size = New System.Drawing.Size(92, 14)
         Me.label3.TabIndex = 14
-        Me.label3.Text = "v3.1 by Soaresden"
+        Me.label3.Text = "v4 by Soaresden"
         '
         'Disclaimer
         '
@@ -157,7 +156,7 @@ Partial Class Form1
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Disclaimer.Location = New System.Drawing.Point(254, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(469, 468)
+        Me.Disclaimer.Size = New System.Drawing.Size(695, 468)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Pourquoi cet Outil ?"
@@ -170,7 +169,7 @@ Partial Class Form1
         Me.TxtDisclaimer.Location = New System.Drawing.Point(6, 47)
         Me.TxtDisclaimer.Name = "TxtDisclaimer"
         Me.TxtDisclaimer.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtDisclaimer.Size = New System.Drawing.Size(457, 279)
+        Me.TxtDisclaimer.Size = New System.Drawing.Size(683, 235)
         Me.TxtDisclaimer.TabIndex = 18
         Me.TxtDisclaimer.Text = resources.GetString("TxtDisclaimer.Text")
         '
@@ -179,14 +178,14 @@ Partial Class Form1
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(144, Byte), Integer), CType(CType(249, Byte), Integer))
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.Button1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Button1.Location = New System.Drawing.Point(6, 366)
+        Me.Button1.Location = New System.Drawing.Point(146, 362)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(457, 83)
+        Me.Button1.Size = New System.Drawing.Size(438, 83)
         Me.Button1.TabIndex = 17
         Me.Button1.Text = "J'accepte que cet Outil n'effectue" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "QUE" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "des opérations sur des GameList déja scr" &
     "appés"
@@ -194,10 +193,10 @@ Partial Class Form1
         '
         'RichTextBox1
         '
-        Me.RichTextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(196, Byte), Integer))
+        Me.RichTextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.RichTextBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.RichTextBox1.Location = New System.Drawing.Point(1, 36)
+        Me.RichTextBox1.Location = New System.Drawing.Point(4, 367)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.Size = New System.Drawing.Size(216, 16)
         Me.RichTextBox1.TabIndex = 17
@@ -218,7 +217,7 @@ Partial Class Form1
         Me.VersionNetFramework.AutoSize = True
         Me.VersionNetFramework.Font = New System.Drawing.Font("Equinox Com", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.VersionNetFramework.ForeColor = System.Drawing.Color.Lime
-        Me.VersionNetFramework.Location = New System.Drawing.Point(-1, 15)
+        Me.VersionNetFramework.Location = New System.Drawing.Point(2, 346)
         Me.VersionNetFramework.Name = "VersionNetFramework"
         Me.VersionNetFramework.Size = New System.Drawing.Size(134, 18)
         Me.VersionNetFramework.TabIndex = 21
@@ -241,7 +240,7 @@ Partial Class Form1
         Me.WhyGameList.Controls.Add(Me.txtWhyGamelist)
         Me.WhyGameList.Controls.Add(Me.PictureBox3)
         Me.WhyGameList.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.WhyGameList.Location = New System.Drawing.Point(2, 67)
+        Me.WhyGameList.Location = New System.Drawing.Point(3, 3)
         Me.WhyGameList.Name = "WhyGameList"
         Me.WhyGameList.Size = New System.Drawing.Size(216, 340)
         Me.WhyGameList.TabIndex = 23
@@ -266,6 +265,7 @@ Partial Class Form1
         Me.txtWhyGamelist.Location = New System.Drawing.Point(7, 19)
         Me.txtWhyGamelist.Multiline = True
         Me.txtWhyGamelist.Name = "txtWhyGamelist"
+        Me.txtWhyGamelist.ReadOnly = True
         Me.txtWhyGamelist.Size = New System.Drawing.Size(203, 215)
         Me.txtWhyGamelist.TabIndex = 0
         Me.txtWhyGamelist.Text = resources.GetString("txtWhyGamelist.Text")
@@ -293,8 +293,8 @@ Partial Class Form1
         Me.Quitter.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.Quitter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.Quitter.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Quitter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.Quitter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.Quitter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.Quitter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(47, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.Quitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Quitter.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Quitter.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -310,8 +310,8 @@ Partial Class Form1
         Me.ButtonOverlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(23, Byte), Integer))
         Me.ButtonOverlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonOverlay.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonOverlay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.ButtonOverlay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.ButtonOverlay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonOverlay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(49, Byte), Integer))
         Me.ButtonOverlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonOverlay.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonOverlay.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -330,8 +330,8 @@ Partial Class Form1
         Me.ButtonSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
         Me.ButtonSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonSave.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.ButtonSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.ButtonSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(44, Byte), Integer))
         Me.ButtonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSave.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -350,8 +350,8 @@ Partial Class Form1
         Me.ButtonQuizz.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.ButtonQuizz.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonQuizz.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonQuizz.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.ButtonQuizz.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.ButtonQuizz.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonQuizz.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.ButtonQuizz.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonQuizz.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonQuizz.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -367,11 +367,11 @@ Partial Class Form1
         '
         'ButtonCopy
         '
-        Me.ButtonCopy.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(144, Byte), Integer), CType(CType(249, Byte), Integer))
+        Me.ButtonCopy.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.ButtonCopy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonCopy.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.ButtonCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.ButtonCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
         Me.ButtonCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonCopy.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCopy.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -406,28 +406,19 @@ Partial Class Form1
         Me.PanelHaut.Controls.Add(Me.label2)
         Me.PanelHaut.Location = New System.Drawing.Point(254, -1)
         Me.PanelHaut.Name = "PanelHaut"
-        Me.PanelHaut.Size = New System.Drawing.Size(469, 62)
+        Me.PanelHaut.Size = New System.Drawing.Size(696, 62)
         Me.PanelHaut.TabIndex = 25
-        '
-        'PanelInfo
-        '
-        Me.PanelInfo.BackColor = System.Drawing.Color.DimGray
-        Me.PanelInfo.Controls.Add(Me.RichTextBox1)
-        Me.PanelInfo.Controls.Add(Me.VersionNetFramework)
-        Me.PanelInfo.Location = New System.Drawing.Point(3, 479)
-        Me.PanelInfo.Name = "PanelInfo"
-        Me.PanelInfo.Size = New System.Drawing.Size(215, 55)
-        Me.PanelInfo.TabIndex = 26
         '
         'PanelDroite
         '
         Me.PanelDroite.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.PanelDroite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelDroite.Controls.Add(Me.RichTextBox1)
         Me.PanelDroite.Controls.Add(Me.WhyGameList)
-        Me.PanelDroite.Controls.Add(Me.PanelInfo)
-        Me.PanelDroite.Location = New System.Drawing.Point(729, 0)
+        Me.PanelDroite.Controls.Add(Me.VersionNetFramework)
+        Me.PanelDroite.Location = New System.Drawing.Point(729, 150)
         Me.PanelDroite.Name = "PanelDroite"
-        Me.PanelDroite.Size = New System.Drawing.Size(225, 541)
+        Me.PanelDroite.Size = New System.Drawing.Size(225, 391)
         Me.PanelDroite.TabIndex = 25
         '
         'Form1
@@ -438,10 +429,10 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(950, 536)
+        Me.Controls.Add(Me.Disclaimer)
         Me.Controls.Add(Me.PanelDroite)
         Me.Controls.Add(Me.PanelHaut)
         Me.Controls.Add(Me.PanelGauche)
-        Me.Controls.Add(Me.Disclaimer)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(966, 575)
@@ -459,9 +450,8 @@ Partial Class Form1
         Me.PanelGauche.PerformLayout()
         Me.PanelHaut.ResumeLayout(False)
         Me.PanelHaut.PerformLayout()
-        Me.PanelInfo.ResumeLayout(False)
-        Me.PanelInfo.PerformLayout()
         Me.PanelDroite.ResumeLayout(False)
+        Me.PanelDroite.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -491,6 +481,5 @@ Partial Class Form1
     Friend WithEvents ButtonCopy As Button
     Private WithEvents Label5 As Label
     Friend WithEvents PanelHaut As Panel
-    Friend WithEvents PanelInfo As Panel
     Friend WithEvents PanelDroite As Panel
 End Class
