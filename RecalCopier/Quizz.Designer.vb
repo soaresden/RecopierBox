@@ -24,12 +24,25 @@ Partial Class Quizz
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Quizz))
-        Me.Buttongetback = New System.Windows.Forms.Button()
         Me.GroupParamComplet = New System.Windows.Forms.GroupBox()
+        Me.ButtonDoRandom1 = New System.Windows.Forms.Button()
+        Me.CheckAvecFiltres = New System.Windows.Forms.CheckBox()
+        Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txttempsaffichprop = New System.Windows.Forms.TextBox()
+        Me.ModeHardcore = New System.Windows.Forms.CheckBox()
+        Me.ModeEasy = New System.Windows.Forms.CheckBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.ConsoleTitre = New System.Windows.Forms.RadioButton()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TitreOnly = New System.Windows.Forms.RadioButton()
+        Me.txtnbmanches = New System.Windows.Forms.TextBox()
+        Me.CheckSansFiltres = New System.Windows.Forms.CheckBox()
+        Me.ButtonValidConsole1 = New System.Windows.Forms.Button()
         Me.TxtTotalEntrees = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.GroupParametres = New System.Windows.Forms.GroupBox()
-        Me.GroupInfoRoms = New System.Windows.Forms.GroupBox()
+        Me.GroupFiltres = New System.Windows.Forms.GroupBox()
         Me.TxtRating = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.listhelpingboxPlayCount = New System.Windows.Forms.ListBox()
@@ -54,35 +67,13 @@ Partial Class Quizz
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.txttempsaffichprop = New System.Windows.Forms.TextBox()
-        Me.ModeHardcore = New System.Windows.Forms.CheckBox()
-        Me.ModeEasy = New System.Windows.Forms.CheckBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.ConsoleTitre = New System.Windows.Forms.RadioButton()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.TitreOnly = New System.Windows.Forms.RadioButton()
-        Me.txtnbmanches = New System.Windows.Forms.TextBox()
-        Me.ButtonValidConsole = New System.Windows.Forms.Button()
-        Me.ButtonDoRandom = New System.Windows.Forms.Button()
         Me.ConsoleList = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.TempGrid = New System.Windows.Forms.DataGridView()
-        Me.ListTitreDesJeux = New System.Windows.Forms.ListBox()
-        Me.ListConsoleDesJeux = New System.Windows.Forms.ListBox()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.PlayerNext = New System.Windows.Forms.Button()
-        Me.PlayerPlay = New System.Windows.Forms.Button()
-        Me.PlayerStop = New System.Windows.Forms.Button()
         Me.TitleBox = New System.Windows.Forms.PictureBox()
-        Me.QuizzBox = New System.Windows.Forms.GroupBox()
-        Me.TimeBox = New System.Windows.Forms.TextBox()
+        Me.QuizzBoxRep = New System.Windows.Forms.GroupBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.ButtonShowVid = New System.Windows.Forms.Button()
-        Me.PlayerPrev = New System.Windows.Forms.Button()
         Me.txtpositionend = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtpositionrandom = New System.Windows.Forms.TextBox()
@@ -91,36 +82,48 @@ Partial Class Quizz
         Me.HiddenButton = New System.Windows.Forms.PictureBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.txtRules = New System.Windows.Forms.TextBox()
+        Me.ButtonGetBack1 = New System.Windows.Forms.Button()
+        Me.GroupSansFiltres = New System.Windows.Forms.GroupBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PlayerNext = New System.Windows.Forms.Button()
+        Me.PlayerPlay = New System.Windows.Forms.Button()
+        Me.PlayerStop = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.ListConsoleDesJeux = New System.Windows.Forms.ListBox()
+        Me.ListTitreDesJeux = New System.Windows.Forms.ListBox()
+        Me.PlayerPrev = New System.Windows.Forms.Button()
+        Me.TimeBox = New System.Windows.Forms.TextBox()
+        Me.PanelVideo = New System.Windows.Forms.Panel()
         Me.GroupParamComplet.SuspendLayout()
-        Me.GroupParametres.SuspendLayout()
-        Me.GroupInfoRoms.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.GroupConfigPartie.SuspendLayout()
+        Me.GroupFiltres.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.QuizzBox.SuspendLayout()
+        Me.QuizzBoxRep.SuspendLayout()
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HiddenButton, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupSansFiltres.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelVideo.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Buttongetback
-        '
-        Me.Buttongetback.Location = New System.Drawing.Point(11, 11)
-        Me.Buttongetback.Margin = New System.Windows.Forms.Padding(2)
-        Me.Buttongetback.Name = "Buttongetback"
-        Me.Buttongetback.Size = New System.Drawing.Size(101, 23)
-        Me.Buttongetback.TabIndex = 9
-        Me.Buttongetback.Text = "Revenir au Menu"
-        Me.Buttongetback.UseVisualStyleBackColor = True
         '
         'GroupParamComplet
         '
-        Me.GroupParamComplet.BackColor = System.Drawing.Color.Maroon
+        Me.GroupParamComplet.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
+        Me.GroupParamComplet.Controls.Add(Me.PictureBox2)
+        Me.GroupParamComplet.Controls.Add(Me.GroupSansFiltres)
+        Me.GroupParamComplet.Controls.Add(Me.ButtonDoRandom1)
+        Me.GroupParamComplet.Controls.Add(Me.CheckAvecFiltres)
+        Me.GroupParamComplet.Controls.Add(Me.GroupConfigPartie)
+        Me.GroupParamComplet.Controls.Add(Me.CheckSansFiltres)
+        Me.GroupParamComplet.Controls.Add(Me.ButtonValidConsole1)
         Me.GroupParamComplet.Controls.Add(Me.TxtTotalEntrees)
         Me.GroupParamComplet.Controls.Add(Me.Label10)
-        Me.GroupParamComplet.Controls.Add(Me.GroupParametres)
-        Me.GroupParamComplet.Controls.Add(Me.ButtonValidConsole)
-        Me.GroupParamComplet.Controls.Add(Me.ButtonDoRandom)
+        Me.GroupParamComplet.Controls.Add(Me.GroupFiltres)
         Me.GroupParamComplet.Controls.Add(Me.ConsoleList)
         Me.GroupParamComplet.Controls.Add(Me.Label1)
         Me.GroupParamComplet.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -131,12 +134,196 @@ Partial Class Quizz
         Me.GroupParamComplet.TabStop = False
         Me.GroupParamComplet.Text = "Parametres :"
         '
+        'ButtonDoRandom1
+        '
+        Me.ButtonDoRandom1.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.ButtonDoRandom1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonDoRandom1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonDoRandom1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonDoRandom1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.ButtonDoRandom1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonDoRandom1.Font = New System.Drawing.Font("Equinox Com", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonDoRandom1.ForeColor = System.Drawing.Color.White
+        Me.ButtonDoRandom1.Location = New System.Drawing.Point(285, 35)
+        Me.ButtonDoRandom1.Name = "ButtonDoRandom1"
+        Me.ButtonDoRandom1.Size = New System.Drawing.Size(183, 45)
+        Me.ButtonDoRandom1.TabIndex = 45
+        Me.ButtonDoRandom1.Text = "Générer Nouveau Jeu"
+        Me.ButtonDoRandom1.UseVisualStyleBackColor = False
+        '
+        'CheckAvecFiltres
+        '
+        Me.CheckAvecFiltres.AutoSize = True
+        Me.CheckAvecFiltres.Location = New System.Drawing.Point(333, 12)
+        Me.CheckAvecFiltres.Name = "CheckAvecFiltres"
+        Me.CheckAvecFiltres.Size = New System.Drawing.Size(81, 17)
+        Me.CheckAvecFiltres.TabIndex = 44
+        Me.CheckAvecFiltres.Text = "Avec Filtres"
+        Me.CheckAvecFiltres.UseVisualStyleBackColor = True
+        '
+        'GroupConfigPartie
+        '
+        Me.GroupConfigPartie.BackColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.GroupConfigPartie.Controls.Add(Me.Label16)
+        Me.GroupConfigPartie.Controls.Add(Me.txttempsaffichprop)
+        Me.GroupConfigPartie.Controls.Add(Me.ModeHardcore)
+        Me.GroupConfigPartie.Controls.Add(Me.ModeEasy)
+        Me.GroupConfigPartie.Controls.Add(Me.Label14)
+        Me.GroupConfigPartie.Controls.Add(Me.Label13)
+        Me.GroupConfigPartie.Controls.Add(Me.ConsoleTitre)
+        Me.GroupConfigPartie.Controls.Add(Me.Label11)
+        Me.GroupConfigPartie.Controls.Add(Me.TitreOnly)
+        Me.GroupConfigPartie.Controls.Add(Me.txtnbmanches)
+        Me.GroupConfigPartie.ForeColor = System.Drawing.Color.White
+        Me.GroupConfigPartie.Location = New System.Drawing.Point(147, 86)
+        Me.GroupConfigPartie.Name = "GroupConfigPartie"
+        Me.GroupConfigPartie.Size = New System.Drawing.Size(321, 102)
+        Me.GroupConfigPartie.TabIndex = 27
+        Me.GroupConfigPartie.TabStop = False
+        Me.GroupConfigPartie.Text = "Config Partie :"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.ForeColor = System.Drawing.Color.Aqua
+        Me.Label16.Location = New System.Drawing.Point(143, 31)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(124, 13)
+        Me.Label16.TabIndex = 36
+        Me.Label16.Text = "_ sec avant Proposition :"
+        '
+        'txttempsaffichprop
+        '
+        Me.txttempsaffichprop.BackColor = System.Drawing.SystemColors.MenuHighlight
+        Me.txttempsaffichprop.ForeColor = System.Drawing.SystemColors.Window
+        Me.txttempsaffichprop.Location = New System.Drawing.Point(267, 28)
+        Me.txttempsaffichprop.Name = "txttempsaffichprop"
+        Me.txttempsaffichprop.Size = New System.Drawing.Size(48, 20)
+        Me.txttempsaffichprop.TabIndex = 35
+        Me.txttempsaffichprop.Text = "15"
+        Me.txttempsaffichprop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'ModeHardcore
+        '
+        Me.ModeHardcore.AutoSize = True
+        Me.ModeHardcore.Checked = True
+        Me.ModeHardcore.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.ModeHardcore.ForeColor = System.Drawing.Color.White
+        Me.ModeHardcore.Location = New System.Drawing.Point(155, 77)
+        Me.ModeHardcore.Name = "ModeHardcore"
+        Me.ModeHardcore.Size = New System.Drawing.Size(152, 17)
+        Me.ModeHardcore.TabIndex = 34
+        Me.ModeHardcore.Text = "Mode Hardcore (Son Only)"
+        Me.ModeHardcore.UseVisualStyleBackColor = True
+        '
+        'ModeEasy
+        '
+        Me.ModeEasy.AutoSize = True
+        Me.ModeEasy.ForeColor = System.Drawing.Color.White
+        Me.ModeEasy.Location = New System.Drawing.Point(9, 77)
+        Me.ModeEasy.Name = "ModeEasy"
+        Me.ModeEasy.Size = New System.Drawing.Size(143, 17)
+        Me.ModeEasy.TabIndex = 33
+        Me.ModeEasy.Text = "Mode Easy (Avec Video)"
+        Me.ModeEasy.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.ForeColor = System.Drawing.Color.Lime
+        Me.Label14.Location = New System.Drawing.Point(24, 11)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(72, 13)
+        Me.Label14.TabIndex = 32
+        Me.Label14.Text = "Type de Jeu :"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.ForeColor = System.Drawing.Color.Yellow
+        Me.Label13.Location = New System.Drawing.Point(24, 61)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(54, 13)
+        Me.Label13.TabIndex = 31
+        Me.Label13.Text = "Difficulté :"
+        '
+        'ConsoleTitre
+        '
+        Me.ConsoleTitre.AutoSize = True
+        Me.ConsoleTitre.ForeColor = System.Drawing.Color.White
+        Me.ConsoleTitre.Location = New System.Drawing.Point(9, 41)
+        Me.ConsoleTitre.Name = "ConsoleTitre"
+        Me.ConsoleTitre.Size = New System.Drawing.Size(96, 17)
+        Me.ConsoleTitre.TabIndex = 26
+        Me.ConsoleTitre.TabStop = True
+        Me.ConsoleTitre.Text = "Console + Titre"
+        Me.ConsoleTitre.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.ForeColor = System.Drawing.Color.Aqua
+        Me.Label11.Location = New System.Drawing.Point(161, 11)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(106, 13)
+        Me.Label11.TabIndex = 26
+        Me.Label11.Text = "Générer _ manches :"
+        '
+        'TitreOnly
+        '
+        Me.TitreOnly.AutoSize = True
+        Me.TitreOnly.ForeColor = System.Drawing.Color.White
+        Me.TitreOnly.Location = New System.Drawing.Point(9, 24)
+        Me.TitreOnly.Name = "TitreOnly"
+        Me.TitreOnly.Size = New System.Drawing.Size(97, 17)
+        Me.TitreOnly.TabIndex = 25
+        Me.TitreOnly.TabStop = True
+        Me.TitreOnly.Text = "Deviner le Titre"
+        Me.TitreOnly.UseVisualStyleBackColor = True
+        '
+        'txtnbmanches
+        '
+        Me.txtnbmanches.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.txtnbmanches.ForeColor = System.Drawing.SystemColors.Window
+        Me.txtnbmanches.Location = New System.Drawing.Point(267, 8)
+        Me.txtnbmanches.Name = "txtnbmanches"
+        Me.txtnbmanches.Size = New System.Drawing.Size(48, 20)
+        Me.txtnbmanches.TabIndex = 25
+        Me.txtnbmanches.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'CheckSansFiltres
+        '
+        Me.CheckSansFiltres.AutoSize = True
+        Me.CheckSansFiltres.Location = New System.Drawing.Point(216, 12)
+        Me.CheckSansFiltres.Name = "CheckSansFiltres"
+        Me.CheckSansFiltres.Size = New System.Drawing.Size(80, 17)
+        Me.CheckSansFiltres.TabIndex = 43
+        Me.CheckSansFiltres.Text = "Sans Filtres"
+        Me.CheckSansFiltres.UseVisualStyleBackColor = True
+        '
+        'ButtonValidConsole1
+        '
+        Me.ButtonValidConsole1.BackColor = System.Drawing.Color.FromArgb(CType(CType(202, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(25, Byte), Integer))
+        Me.ButtonValidConsole1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonValidConsole1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonValidConsole1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonValidConsole1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(44, Byte), Integer))
+        Me.ButtonValidConsole1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonValidConsole1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonValidConsole1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonValidConsole1.Location = New System.Drawing.Point(6, 490)
+        Me.ButtonValidConsole1.Name = "ButtonValidConsole1"
+        Me.ButtonValidConsole1.Size = New System.Drawing.Size(135, 55)
+        Me.ButtonValidConsole1.TabIndex = 42
+        Me.ButtonValidConsole1.Text = "Valider la Selection"
+        Me.ButtonValidConsole1.UseVisualStyleBackColor = False
+        '
         'TxtTotalEntrees
         '
         Me.TxtTotalEntrees.BackColor = System.Drawing.Color.Tomato
         Me.TxtTotalEntrees.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtTotalEntrees.ForeColor = System.Drawing.SystemColors.Window
-        Me.TxtTotalEntrees.Location = New System.Drawing.Point(147, 514)
+        Me.TxtTotalEntrees.Location = New System.Drawing.Point(147, 49)
         Me.TxtTotalEntrees.Name = "TxtTotalEntrees"
         Me.TxtTotalEntrees.ReadOnly = True
         Me.TxtTotalEntrees.Size = New System.Drawing.Size(120, 31)
@@ -147,59 +334,46 @@ Partial Class Quizz
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label10.Location = New System.Drawing.Point(147, 495)
+        Me.Label10.Location = New System.Drawing.Point(144, 35)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(120, 13)
+        Me.Label10.Size = New System.Drawing.Size(115, 13)
         Me.Label10.TabIndex = 21
-        Me.Label10.Text = "Nombre de Jeux Filtrés :"
+        Me.Label10.Text = "Nb de Jeux à Piocher :"
         '
-        'GroupParametres
+        'GroupFiltres
         '
-        Me.GroupParametres.BackColor = System.Drawing.Color.Chocolate
-        Me.GroupParametres.Controls.Add(Me.GroupInfoRoms)
-        Me.GroupParametres.Controls.Add(Me.GroupConfigPartie)
-        Me.GroupParametres.ForeColor = System.Drawing.SystemColors.Control
-        Me.GroupParametres.Location = New System.Drawing.Point(147, 16)
-        Me.GroupParametres.Name = "GroupParametres"
-        Me.GroupParametres.Size = New System.Drawing.Size(321, 464)
-        Me.GroupParametres.TabIndex = 29
-        Me.GroupParametres.TabStop = False
-        Me.GroupParametres.Text = "Selection des Filtres :"
-        '
-        'GroupInfoRoms
-        '
-        Me.GroupInfoRoms.BackColor = System.Drawing.Color.MistyRose
-        Me.GroupInfoRoms.Controls.Add(Me.TxtRating)
-        Me.GroupInfoRoms.Controls.Add(Me.GroupBox1)
-        Me.GroupInfoRoms.Controls.Add(Me.TxtSynopsis)
-        Me.GroupInfoRoms.Controls.Add(Me.txtplayers)
-        Me.GroupInfoRoms.Controls.Add(Me.Label9)
-        Me.GroupInfoRoms.Controls.Add(Me.TxtPlayCount)
-        Me.GroupInfoRoms.Controls.Add(Me.txtpub)
-        Me.GroupInfoRoms.Controls.Add(Me.Label3)
-        Me.GroupInfoRoms.Controls.Add(Me.txtdev)
-        Me.GroupInfoRoms.Controls.Add(Me.txtgenre)
-        Me.GroupInfoRoms.Controls.Add(Me.Label4)
-        Me.GroupInfoRoms.Controls.Add(Me.Label2)
-        Me.GroupInfoRoms.Controls.Add(Me.TxtAnnee)
-        Me.GroupInfoRoms.Controls.Add(Me.Label7)
-        Me.GroupInfoRoms.Controls.Add(Me.Label5)
-        Me.GroupInfoRoms.Controls.Add(Me.Label8)
-        Me.GroupInfoRoms.Controls.Add(Me.Label6)
-        Me.GroupInfoRoms.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.GroupInfoRoms.Location = New System.Drawing.Point(6, 19)
-        Me.GroupInfoRoms.Name = "GroupInfoRoms"
-        Me.GroupInfoRoms.Size = New System.Drawing.Size(309, 333)
-        Me.GroupInfoRoms.TabIndex = 22
-        Me.GroupInfoRoms.TabStop = False
-        Me.GroupInfoRoms.Text = "Définir un/plusieurs Filtres sur Votre Selection :"
+        Me.GroupFiltres.BackColor = System.Drawing.Color.MistyRose
+        Me.GroupFiltres.Controls.Add(Me.TxtRating)
+        Me.GroupFiltres.Controls.Add(Me.GroupBox1)
+        Me.GroupFiltres.Controls.Add(Me.TxtSynopsis)
+        Me.GroupFiltres.Controls.Add(Me.txtplayers)
+        Me.GroupFiltres.Controls.Add(Me.Label9)
+        Me.GroupFiltres.Controls.Add(Me.TxtPlayCount)
+        Me.GroupFiltres.Controls.Add(Me.txtpub)
+        Me.GroupFiltres.Controls.Add(Me.Label3)
+        Me.GroupFiltres.Controls.Add(Me.txtdev)
+        Me.GroupFiltres.Controls.Add(Me.txtgenre)
+        Me.GroupFiltres.Controls.Add(Me.Label4)
+        Me.GroupFiltres.Controls.Add(Me.Label2)
+        Me.GroupFiltres.Controls.Add(Me.TxtAnnee)
+        Me.GroupFiltres.Controls.Add(Me.Label7)
+        Me.GroupFiltres.Controls.Add(Me.Label5)
+        Me.GroupFiltres.Controls.Add(Me.Label8)
+        Me.GroupFiltres.Controls.Add(Me.Label6)
+        Me.GroupFiltres.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.GroupFiltres.Location = New System.Drawing.Point(147, 202)
+        Me.GroupFiltres.Name = "GroupFiltres"
+        Me.GroupFiltres.Size = New System.Drawing.Size(321, 343)
+        Me.GroupFiltres.TabIndex = 29
+        Me.GroupFiltres.TabStop = False
+        Me.GroupFiltres.Text = "Selection des Filtres :"
         '
         'TxtRating
         '
-        Me.TxtRating.Location = New System.Drawing.Point(6, 307)
+        Me.TxtRating.Location = New System.Drawing.Point(6, 308)
         Me.TxtRating.Name = "TxtRating"
-        Me.TxtRating.Size = New System.Drawing.Size(121, 20)
-        Me.TxtRating.TabIndex = 27
+        Me.TxtRating.Size = New System.Drawing.Size(146, 20)
+        Me.TxtRating.TabIndex = 44
         '
         'GroupBox1
         '
@@ -212,10 +386,10 @@ Partial Class Quizz
         Me.GroupBox1.Controls.Add(Me.listhelpingboxPlayers)
         Me.GroupBox1.Controls.Add(Me.listhelpingboxDev)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupBox1.Location = New System.Drawing.Point(155, 16)
+        Me.GroupBox1.Location = New System.Drawing.Point(167, 17)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(148, 311)
-        Me.GroupBox1.TabIndex = 26
+        Me.GroupBox1.TabIndex = 43
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Catégories Trouvées :"
         '
@@ -291,304 +465,162 @@ Partial Class Quizz
         '
         'TxtSynopsis
         '
-        Me.TxtSynopsis.Location = New System.Drawing.Point(6, 266)
+        Me.TxtSynopsis.Location = New System.Drawing.Point(6, 267)
         Me.TxtSynopsis.Name = "TxtSynopsis"
-        Me.TxtSynopsis.Size = New System.Drawing.Size(121, 20)
-        Me.TxtSynopsis.TabIndex = 22
+        Me.TxtSynopsis.Size = New System.Drawing.Size(146, 20)
+        Me.TxtSynopsis.TabIndex = 38
         '
         'txtplayers
         '
-        Me.txtplayers.Location = New System.Drawing.Point(6, 188)
+        Me.txtplayers.Location = New System.Drawing.Point(6, 189)
         Me.txtplayers.Name = "txtplayers"
-        Me.txtplayers.Size = New System.Drawing.Size(121, 20)
-        Me.txtplayers.TabIndex = 25
+        Me.txtplayers.Size = New System.Drawing.Size(146, 20)
+        Me.txtplayers.TabIndex = 42
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 211)
+        Me.Label9.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.Label9.Location = New System.Drawing.Point(6, 212)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(113, 13)
-        Me.Label9.TabIndex = 19
+        Me.Label9.TabIndex = 35
         Me.Label9.Text = "Nombre de Fois Joué :"
         '
         'TxtPlayCount
         '
-        Me.TxtPlayCount.Location = New System.Drawing.Point(6, 227)
+        Me.TxtPlayCount.Location = New System.Drawing.Point(6, 228)
         Me.TxtPlayCount.Name = "TxtPlayCount"
-        Me.TxtPlayCount.Size = New System.Drawing.Size(121, 20)
-        Me.TxtPlayCount.TabIndex = 20
+        Me.TxtPlayCount.Size = New System.Drawing.Size(146, 20)
+        Me.TxtPlayCount.TabIndex = 36
         '
         'txtpub
         '
-        Me.txtpub.Location = New System.Drawing.Point(6, 110)
+        Me.txtpub.Location = New System.Drawing.Point(6, 111)
         Me.txtpub.Name = "txtpub"
-        Me.txtpub.Size = New System.Drawing.Size(121, 20)
-        Me.txtpub.TabIndex = 24
+        Me.txtpub.Size = New System.Drawing.Size(146, 20)
+        Me.txtpub.TabIndex = 41
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 250)
+        Me.Label3.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.Label3.Location = New System.Drawing.Point(6, 251)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(120, 13)
-        Me.Label3.TabIndex = 7
+        Me.Label3.TabIndex = 29
         Me.Label3.Text = "Mot Clé dans Synopsis :"
         '
         'txtdev
         '
-        Me.txtdev.Location = New System.Drawing.Point(6, 71)
+        Me.txtdev.Location = New System.Drawing.Point(6, 72)
         Me.txtdev.Name = "txtdev"
-        Me.txtdev.Size = New System.Drawing.Size(121, 20)
-        Me.txtdev.TabIndex = 23
+        Me.txtdev.Size = New System.Drawing.Size(146, 20)
+        Me.txtdev.TabIndex = 40
         '
         'txtgenre
         '
-        Me.txtgenre.Location = New System.Drawing.Point(6, 32)
+        Me.txtgenre.Location = New System.Drawing.Point(6, 33)
         Me.txtgenre.Name = "txtgenre"
-        Me.txtgenre.Size = New System.Drawing.Size(121, 20)
-        Me.txtgenre.TabIndex = 22
+        Me.txtgenre.Size = New System.Drawing.Size(146, 20)
+        Me.txtgenre.TabIndex = 39
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 291)
+        Me.Label4.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.Label4.Location = New System.Drawing.Point(6, 292)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(36, 13)
-        Me.Label4.TabIndex = 9
+        Me.Label4.TabIndex = 30
         Me.Label4.Text = "Note :"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 16)
+        Me.Label2.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.Label2.Location = New System.Drawing.Point(6, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(42, 13)
-        Me.Label2.TabIndex = 3
+        Me.Label2.TabIndex = 28
         Me.Label2.Text = "Genre :"
         '
         'TxtAnnee
         '
-        Me.TxtAnnee.Location = New System.Drawing.Point(6, 149)
+        Me.TxtAnnee.Location = New System.Drawing.Point(6, 150)
         Me.TxtAnnee.Name = "TxtAnnee"
-        Me.TxtAnnee.Size = New System.Drawing.Size(121, 20)
-        Me.TxtAnnee.TabIndex = 21
+        Me.TxtAnnee.Size = New System.Drawing.Size(146, 20)
+        Me.TxtAnnee.TabIndex = 37
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(3, 172)
+        Me.Label7.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.Label7.Location = New System.Drawing.Point(3, 173)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(105, 13)
-        Me.Label7.TabIndex = 15
+        Me.Label7.TabIndex = 33
         Me.Label7.Text = "Nombre de Joueurs :"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 55)
+        Me.Label5.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.Label5.Location = New System.Drawing.Point(6, 56)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 13)
-        Me.Label5.TabIndex = 11
+        Me.Label5.TabIndex = 31
         Me.Label5.Text = "Developer :"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 133)
+        Me.Label8.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.Label8.Location = New System.Drawing.Point(6, 134)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(83, 13)
-        Me.Label8.TabIndex = 17
+        Me.Label8.TabIndex = 34
         Me.Label8.Text = "Annee de Sortie"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(6, 94)
+        Me.Label6.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.Label6.Location = New System.Drawing.Point(6, 95)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(56, 13)
-        Me.Label6.TabIndex = 13
+        Me.Label6.TabIndex = 32
         Me.Label6.Text = "Publisher :"
-        '
-        'GroupConfigPartie
-        '
-        Me.GroupConfigPartie.BackColor = System.Drawing.Color.Black
-        Me.GroupConfigPartie.Controls.Add(Me.Label16)
-        Me.GroupConfigPartie.Controls.Add(Me.txttempsaffichprop)
-        Me.GroupConfigPartie.Controls.Add(Me.ModeHardcore)
-        Me.GroupConfigPartie.Controls.Add(Me.ModeEasy)
-        Me.GroupConfigPartie.Controls.Add(Me.Label14)
-        Me.GroupConfigPartie.Controls.Add(Me.Label13)
-        Me.GroupConfigPartie.Controls.Add(Me.ConsoleTitre)
-        Me.GroupConfigPartie.Controls.Add(Me.Label11)
-        Me.GroupConfigPartie.Controls.Add(Me.TitreOnly)
-        Me.GroupConfigPartie.Controls.Add(Me.txtnbmanches)
-        Me.GroupConfigPartie.ForeColor = System.Drawing.Color.White
-        Me.GroupConfigPartie.Location = New System.Drawing.Point(6, 358)
-        Me.GroupConfigPartie.Name = "GroupConfigPartie"
-        Me.GroupConfigPartie.Size = New System.Drawing.Size(309, 100)
-        Me.GroupConfigPartie.TabIndex = 27
-        Me.GroupConfigPartie.TabStop = False
-        Me.GroupConfigPartie.Text = "Config Partie :"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.ForeColor = System.Drawing.Color.DeepSkyBlue
-        Me.Label16.Location = New System.Drawing.Point(125, 31)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(124, 13)
-        Me.Label16.TabIndex = 36
-        Me.Label16.Text = "_ sec avant Proposition :"
-        '
-        'txttempsaffichprop
-        '
-        Me.txttempsaffichprop.BackColor = System.Drawing.SystemColors.MenuHighlight
-        Me.txttempsaffichprop.ForeColor = System.Drawing.SystemColors.Window
-        Me.txttempsaffichprop.Location = New System.Drawing.Point(255, 28)
-        Me.txttempsaffichprop.Name = "txttempsaffichprop"
-        Me.txttempsaffichprop.Size = New System.Drawing.Size(48, 20)
-        Me.txttempsaffichprop.TabIndex = 35
-        Me.txttempsaffichprop.Text = "15"
-        Me.txttempsaffichprop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'ModeHardcore
-        '
-        Me.ModeHardcore.AutoSize = True
-        Me.ModeHardcore.Checked = True
-        Me.ModeHardcore.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ModeHardcore.ForeColor = System.Drawing.Color.Cornsilk
-        Me.ModeHardcore.Location = New System.Drawing.Point(155, 77)
-        Me.ModeHardcore.Name = "ModeHardcore"
-        Me.ModeHardcore.Size = New System.Drawing.Size(152, 17)
-        Me.ModeHardcore.TabIndex = 34
-        Me.ModeHardcore.Text = "Mode Hardcore (Son Only)"
-        Me.ModeHardcore.UseVisualStyleBackColor = True
-        '
-        'ModeEasy
-        '
-        Me.ModeEasy.AutoSize = True
-        Me.ModeEasy.ForeColor = System.Drawing.Color.Cornsilk
-        Me.ModeEasy.Location = New System.Drawing.Point(9, 77)
-        Me.ModeEasy.Name = "ModeEasy"
-        Me.ModeEasy.Size = New System.Drawing.Size(143, 17)
-        Me.ModeEasy.TabIndex = 33
-        Me.ModeEasy.Text = "Mode Easy (Avec Video)"
-        Me.ModeEasy.UseVisualStyleBackColor = True
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.ForeColor = System.Drawing.Color.Lime
-        Me.Label14.Location = New System.Drawing.Point(24, 11)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(72, 13)
-        Me.Label14.TabIndex = 32
-        Me.Label14.Text = "Type de Jeu :"
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.ForeColor = System.Drawing.Color.Yellow
-        Me.Label13.Location = New System.Drawing.Point(24, 61)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(54, 13)
-        Me.Label13.TabIndex = 31
-        Me.Label13.Text = "Difficulté :"
-        '
-        'ConsoleTitre
-        '
-        Me.ConsoleTitre.AutoSize = True
-        Me.ConsoleTitre.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.ConsoleTitre.Location = New System.Drawing.Point(9, 41)
-        Me.ConsoleTitre.Name = "ConsoleTitre"
-        Me.ConsoleTitre.Size = New System.Drawing.Size(96, 17)
-        Me.ConsoleTitre.TabIndex = 26
-        Me.ConsoleTitre.TabStop = True
-        Me.ConsoleTitre.Text = "Console + Titre"
-        Me.ConsoleTitre.UseVisualStyleBackColor = True
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.ForeColor = System.Drawing.Color.DeepSkyBlue
-        Me.Label11.Location = New System.Drawing.Point(143, 11)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(106, 13)
-        Me.Label11.TabIndex = 26
-        Me.Label11.Text = "Générer _ manches :"
-        '
-        'TitreOnly
-        '
-        Me.TitreOnly.AutoSize = True
-        Me.TitreOnly.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.TitreOnly.Location = New System.Drawing.Point(9, 24)
-        Me.TitreOnly.Name = "TitreOnly"
-        Me.TitreOnly.Size = New System.Drawing.Size(97, 17)
-        Me.TitreOnly.TabIndex = 25
-        Me.TitreOnly.TabStop = True
-        Me.TitreOnly.Text = "Deviner le Titre"
-        Me.TitreOnly.UseVisualStyleBackColor = True
-        '
-        'txtnbmanches
-        '
-        Me.txtnbmanches.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.txtnbmanches.ForeColor = System.Drawing.SystemColors.Window
-        Me.txtnbmanches.Location = New System.Drawing.Point(255, 8)
-        Me.txtnbmanches.Name = "txtnbmanches"
-        Me.txtnbmanches.Size = New System.Drawing.Size(48, 20)
-        Me.txtnbmanches.TabIndex = 25
-        Me.txtnbmanches.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'ButtonValidConsole
-        '
-        Me.ButtonValidConsole.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonValidConsole.Location = New System.Drawing.Point(6, 483)
-        Me.ButtonValidConsole.Name = "ButtonValidConsole"
-        Me.ButtonValidConsole.Size = New System.Drawing.Size(135, 38)
-        Me.ButtonValidConsole.TabIndex = 28
-        Me.ButtonValidConsole.Text = "Valider les Systèmes"
-        Me.ButtonValidConsole.UseVisualStyleBackColor = True
-        '
-        'ButtonDoRandom
-        '
-        Me.ButtonDoRandom.BackColor = System.Drawing.Color.Transparent
-        Me.ButtonDoRandom.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonDoRandom.Image = CType(resources.GetObject("ButtonDoRandom.Image"), System.Drawing.Image)
-        Me.ButtonDoRandom.Location = New System.Drawing.Point(274, 487)
-        Me.ButtonDoRandom.Name = "ButtonDoRandom"
-        Me.ButtonDoRandom.Size = New System.Drawing.Size(194, 46)
-        Me.ButtonDoRandom.TabIndex = 24
-        Me.ButtonDoRandom.UseVisualStyleBackColor = False
         '
         'ConsoleList
         '
         Me.ConsoleList.BackColor = System.Drawing.Color.PeachPuff
         Me.ConsoleList.ForeColor = System.Drawing.Color.SaddleBrown
         Me.ConsoleList.FormattingEnabled = True
-        Me.ConsoleList.Location = New System.Drawing.Point(6, 35)
+        Me.ConsoleList.Location = New System.Drawing.Point(6, 126)
         Me.ConsoleList.Name = "ConsoleList"
         Me.ConsoleList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ConsoleList.Size = New System.Drawing.Size(135, 420)
+        Me.ConsoleList.Size = New System.Drawing.Size(135, 355)
         Me.ConsoleList.TabIndex = 4
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(15, 16)
+        Me.Label1.Location = New System.Drawing.Point(6, 108)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(117, 13)
+        Me.Label1.Size = New System.Drawing.Size(123, 13)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Selection des Consoles"
+        Me.Label1.Text = "Selection des Consoles :"
         '
         'listrandobox
         '
         Me.listrandobox.BackColor = System.Drawing.SystemColors.Info
         Me.listrandobox.FormattingEnabled = True
-        Me.listrandobox.Location = New System.Drawing.Point(80, 19)
+        Me.listrandobox.Location = New System.Drawing.Point(14, 6)
         Me.listrandobox.Name = "listrandobox"
-        Me.listrandobox.Size = New System.Drawing.Size(72, 30)
+        Me.listrandobox.Size = New System.Drawing.Size(87, 30)
         Me.listrandobox.TabIndex = 41
+        Me.listrandobox.Visible = False
         '
         'TempGrid
         '
@@ -600,156 +632,48 @@ Partial Class Quizz
         Me.TempGrid.Size = New System.Drawing.Size(369, 30)
         Me.TempGrid.TabIndex = 11
         '
-        'ListTitreDesJeux
-        '
-        Me.ListTitreDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.ListTitreDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListTitreDesJeux.FormattingEnabled = True
-        Me.ListTitreDesJeux.Location = New System.Drawing.Point(121, 299)
-        Me.ListTitreDesJeux.Name = "ListTitreDesJeux"
-        Me.ListTitreDesJeux.Size = New System.Drawing.Size(286, 186)
-        Me.ListTitreDesJeux.TabIndex = 23
-        '
-        'ListConsoleDesJeux
-        '
-        Me.ListConsoleDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.ListConsoleDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListConsoleDesJeux.FormattingEnabled = True
-        Me.ListConsoleDesJeux.Location = New System.Drawing.Point(8, 300)
-        Me.ListConsoleDesJeux.Name = "ListConsoleDesJeux"
-        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 186)
-        Me.ListConsoleDesJeux.TabIndex = 24
-        '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.BackColor = System.Drawing.Color.White
-        Me.ProgressBar1.ForeColor = System.Drawing.Color.Lime
-        Me.ProgressBar1.Location = New System.Drawing.Point(8, 267)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(401, 23)
-        Me.ProgressBar1.TabIndex = 27
-        '
-        'PlayerNext
-        '
-        Me.PlayerNext.BackColor = System.Drawing.Color.RoyalBlue
-        Me.PlayerNext.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerNext.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerNext.Location = New System.Drawing.Point(364, 218)
-        Me.PlayerNext.Name = "PlayerNext"
-        Me.PlayerNext.Size = New System.Drawing.Size(49, 41)
-        Me.PlayerNext.TabIndex = 28
-        Me.PlayerNext.Text = ">>"
-        Me.PlayerNext.UseVisualStyleBackColor = False
-        '
-        'PlayerPlay
-        '
-        Me.PlayerPlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.PlayerPlay.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerPlay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPlay.Location = New System.Drawing.Point(170, 218)
-        Me.PlayerPlay.Name = "PlayerPlay"
-        Me.PlayerPlay.Size = New System.Drawing.Size(49, 41)
-        Me.PlayerPlay.TabIndex = 33
-        Me.PlayerPlay.Text = "|>"
-        Me.PlayerPlay.UseVisualStyleBackColor = False
-        '
-        'PlayerStop
-        '
-        Me.PlayerStop.BackColor = System.Drawing.Color.GhostWhite
-        Me.PlayerStop.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerStop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerStop.Location = New System.Drawing.Point(225, 218)
-        Me.PlayerStop.Name = "PlayerStop"
-        Me.PlayerStop.Size = New System.Drawing.Size(73, 41)
-        Me.PlayerStop.TabIndex = 34
-        Me.PlayerStop.Text = "[STOP]"
-        Me.PlayerStop.UseVisualStyleBackColor = False
-        '
         'TitleBox
         '
-        Me.TitleBox.BackColor = System.Drawing.Color.White
+        Me.TitleBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.TitleBox.Image = CType(resources.GetObject("TitleBox.Image"), System.Drawing.Image)
-        Me.TitleBox.Location = New System.Drawing.Point(492, 3)
+        Me.TitleBox.Location = New System.Drawing.Point(6, -10)
         Me.TitleBox.Name = "TitleBox"
-        Me.TitleBox.Size = New System.Drawing.Size(212, 89)
-        Me.TitleBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.TitleBox.Size = New System.Drawing.Size(416, 380)
+        Me.TitleBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.TitleBox.TabIndex = 35
         Me.TitleBox.TabStop = False
         '
-        'QuizzBox
+        'QuizzBoxRep
         '
-        Me.QuizzBox.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.QuizzBox.Controls.Add(Me.listrandobox)
-        Me.QuizzBox.Controls.Add(Me.TimeBox)
-        Me.QuizzBox.Controls.Add(Me.Label15)
-        Me.QuizzBox.Controls.Add(Me.ButtonShowVid)
-        Me.QuizzBox.Controls.Add(Me.PlayerPrev)
-        Me.QuizzBox.Controls.Add(Me.txtpositionend)
-        Me.QuizzBox.Controls.Add(Me.ListTitreDesJeux)
-        Me.QuizzBox.Controls.Add(Me.ListConsoleDesJeux)
-        Me.QuizzBox.Controls.Add(Me.ProgressBar1)
-        Me.QuizzBox.Controls.Add(Me.PlayerStop)
-        Me.QuizzBox.Controls.Add(Me.Label12)
-        Me.QuizzBox.Controls.Add(Me.PlayerPlay)
-        Me.QuizzBox.Controls.Add(Me.PlayerNext)
-        Me.QuizzBox.Controls.Add(Me.txtpositionrandom)
-        Me.QuizzBox.Controls.Add(Me.RandomList)
-        Me.QuizzBox.Controls.Add(Me.PlayerAudio)
-        Me.QuizzBox.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.QuizzBox.Location = New System.Drawing.Point(492, 98)
-        Me.QuizzBox.Name = "QuizzBox"
-        Me.QuizzBox.Size = New System.Drawing.Size(413, 491)
-        Me.QuizzBox.TabIndex = 36
-        Me.QuizzBox.TabStop = False
-        Me.QuizzBox.Text = "Menu QuizzBox :"
-        '
-        'TimeBox
-        '
-        Me.TimeBox.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.TimeBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TimeBox.ForeColor = System.Drawing.SystemColors.Window
-        Me.TimeBox.Location = New System.Drawing.Point(68, 217)
-        Me.TimeBox.Name = "TimeBox"
-        Me.TimeBox.ReadOnly = True
-        Me.TimeBox.Size = New System.Drawing.Size(96, 45)
-        Me.TimeBox.TabIndex = 40
-        Me.TimeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.QuizzBoxRep.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.QuizzBoxRep.Controls.Add(Me.ListTitreDesJeux)
+        Me.QuizzBoxRep.Controls.Add(Me.ListConsoleDesJeux)
+        Me.QuizzBoxRep.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.QuizzBoxRep.Location = New System.Drawing.Point(492, 375)
+        Me.QuizzBoxRep.Name = "QuizzBoxRep"
+        Me.QuizzBoxRep.Size = New System.Drawing.Size(416, 214)
+        Me.QuizzBoxRep.TabIndex = 36
+        Me.QuizzBoxRep.TabStop = False
+        Me.QuizzBoxRep.Text = "Propositions et Reponses :"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
+        Me.Label15.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.Label15.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label15.Location = New System.Drawing.Point(98, 50)
+        Me.Label15.Location = New System.Drawing.Point(193, 15)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(41, 13)
+        Me.Label15.Size = New System.Drawing.Size(62, 22)
         Me.Label15.TabIndex = 30
         Me.Label15.Text = "Titre n°"
         '
-        'ButtonShowVid
-        '
-        Me.ButtonShowVid.Location = New System.Drawing.Point(8, 218)
-        Me.ButtonShowVid.Name = "ButtonShowVid"
-        Me.ButtonShowVid.Size = New System.Drawing.Size(54, 43)
-        Me.ButtonShowVid.TabIndex = 39
-        Me.ButtonShowVid.UseVisualStyleBackColor = True
-        '
-        'PlayerPrev
-        '
-        Me.PlayerPrev.BackColor = System.Drawing.Color.RoyalBlue
-        Me.PlayerPrev.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerPrev.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPrev.Location = New System.Drawing.Point(309, 218)
-        Me.PlayerPrev.Name = "PlayerPrev"
-        Me.PlayerPrev.Size = New System.Drawing.Size(49, 41)
-        Me.PlayerPrev.TabIndex = 38
-        Me.PlayerPrev.Text = "<<"
-        Me.PlayerPrev.UseVisualStyleBackColor = False
-        '
         'txtpositionend
         '
+        Me.txtpositionend.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.txtpositionend.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtpositionend.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txtpositionend.Location = New System.Drawing.Point(80, 148)
+        Me.txtpositionend.ForeColor = System.Drawing.Color.White
+        Me.txtpositionend.Location = New System.Drawing.Point(280, 40)
         Me.txtpositionend.Name = "txtpositionend"
         Me.txtpositionend.ReadOnly = True
         Me.txtpositionend.Size = New System.Drawing.Size(72, 31)
@@ -759,18 +683,21 @@ Partial Class Quizz
         'Label12
         '
         Me.Label12.AutoSize = True
+        Me.Label12.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.Label12.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label12.Location = New System.Drawing.Point(108, 116)
+        Me.Label12.Location = New System.Drawing.Point(303, 14)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(21, 13)
+        Me.Label12.Size = New System.Drawing.Size(31, 22)
         Me.Label12.TabIndex = 36
         Me.Label12.Text = "sur"
         '
         'txtpositionrandom
         '
+        Me.txtpositionrandom.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.txtpositionrandom.Font = New System.Drawing.Font("VAGRounded BT", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtpositionrandom.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.txtpositionrandom.Location = New System.Drawing.Point(80, 70)
+        Me.txtpositionrandom.ForeColor = System.Drawing.Color.White
+        Me.txtpositionrandom.Location = New System.Drawing.Point(187, 40)
         Me.txtpositionrandom.Name = "txtpositionrandom"
         Me.txtpositionrandom.ReadOnly = True
         Me.txtpositionrandom.Size = New System.Drawing.Size(72, 31)
@@ -783,23 +710,24 @@ Partial Class Quizz
         Me.RandomList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.RandomList.ForeColor = System.Drawing.SystemColors.MenuBar
         Me.RandomList.FormattingEnabled = True
-        Me.RandomList.Location = New System.Drawing.Point(6, 17)
+        Me.RandomList.Location = New System.Drawing.Point(14, 76)
         Me.RandomList.Name = "RandomList"
-        Me.RandomList.Size = New System.Drawing.Size(56, 199)
+        Me.RandomList.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.RandomList.Size = New System.Drawing.Size(87, 212)
         Me.RandomList.TabIndex = 34
         '
         'PlayerAudio
         '
         Me.PlayerAudio.Enabled = True
-        Me.PlayerAudio.Location = New System.Drawing.Point(170, 8)
+        Me.PlayerAudio.Location = New System.Drawing.Point(107, 76)
         Me.PlayerAudio.Name = "PlayerAudio"
         Me.PlayerAudio.OcxState = CType(resources.GetObject("PlayerAudio.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.PlayerAudio.Size = New System.Drawing.Size(243, 203)
+        Me.PlayerAudio.Size = New System.Drawing.Size(312, 206)
         Me.PlayerAudio.TabIndex = 33
         '
         'HiddenButton
         '
-        Me.HiddenButton.Location = New System.Drawing.Point(683, 59)
+        Me.HiddenButton.Location = New System.Drawing.Point(197, 59)
         Me.HiddenButton.Name = "HiddenButton"
         Me.HiddenButton.Size = New System.Drawing.Size(5, 5)
         Me.HiddenButton.TabIndex = 39
@@ -810,100 +738,244 @@ Partial Class Quizz
         '
         'txtRules
         '
-        Me.txtRules.BackColor = System.Drawing.Color.BlueViolet
+        Me.txtRules.BackColor = System.Drawing.Color.White
         Me.txtRules.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRules.ForeColor = System.Drawing.SystemColors.Window
-        Me.txtRules.Location = New System.Drawing.Point(710, 3)
+        Me.txtRules.ForeColor = System.Drawing.Color.Blue
+        Me.txtRules.Location = New System.Drawing.Point(6, 215)
         Me.txtRules.Multiline = True
         Me.txtRules.Name = "txtRules"
         Me.txtRules.ReadOnly = True
-        Me.txtRules.Size = New System.Drawing.Size(195, 89)
+        Me.txtRules.Size = New System.Drawing.Size(170, 107)
         Me.txtRules.TabIndex = 40
-        Me.txtRules.Text = "Vous allez entendre ou voir une video." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*1ère Phase : Concentrez-vous, Souvenez-v" &
-    "ous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase : Des propositions apparaissent, Validez vo" &
-    "tre choix !"
+        Me.txtRules.Text = "*1ère Phase :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Concentrez-vous," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Souvenez-vous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase :" &
+    "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Des propositions apparaissent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Validez votre choix !"
+        '
+        'ButtonGetBack1
+        '
+        Me.ButtonGetBack1.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonGetBack1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonGetBack1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonGetBack1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonGetBack1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonGetBack1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonGetBack1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonGetBack1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonGetBack1.Location = New System.Drawing.Point(12, 10)
+        Me.ButtonGetBack1.Name = "ButtonGetBack1"
+        Me.ButtonGetBack1.Size = New System.Drawing.Size(94, 23)
+        Me.ButtonGetBack1.TabIndex = 41
+        Me.ButtonGetBack1.Text = "Retour Au Menu"
+        Me.ButtonGetBack1.UseVisualStyleBackColor = False
+        '
+        'GroupSansFiltres
+        '
+        Me.GroupSansFiltres.BackColor = System.Drawing.Color.MistyRose
+        Me.GroupSansFiltres.Controls.Add(Me.TextBox1)
+        Me.GroupSansFiltres.Controls.Add(Me.PictureBox1)
+        Me.GroupSansFiltres.Controls.Add(Me.txtRules)
+        Me.GroupSansFiltres.Location = New System.Drawing.Point(147, 202)
+        Me.GroupSansFiltres.Name = "GroupSansFiltres"
+        Me.GroupSansFiltres.Size = New System.Drawing.Size(320, 343)
+        Me.GroupSansFiltres.TabIndex = 46
+        Me.GroupSansFiltres.TabStop = False
+        Me.GroupSansFiltres.Text = "Mode Sans Filtres : Instructions"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(6, 14)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(309, 190)
+        Me.TextBox1.TabIndex = 0
+        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(182, 198)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(133, 144)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(9, 12)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(129, 88)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 42
+        Me.PictureBox2.TabStop = False
+        '
+        'PlayerNext
+        '
+        Me.PlayerNext.BackColor = System.Drawing.Color.Transparent
+        Me.PlayerNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
+        Me.PlayerNext.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerNext.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PlayerNext.Image = CType(resources.GetObject("PlayerNext.Image"), System.Drawing.Image)
+        Me.PlayerNext.Location = New System.Drawing.Point(369, 285)
+        Me.PlayerNext.Name = "PlayerNext"
+        Me.PlayerNext.Size = New System.Drawing.Size(50, 50)
+        Me.PlayerNext.TabIndex = 28
+        Me.PlayerNext.UseVisualStyleBackColor = False
+        '
+        'PlayerPlay
+        '
+        Me.PlayerPlay.BackColor = System.Drawing.Color.Transparent
+        Me.PlayerPlay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.PlayerPlay.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerPlay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PlayerPlay.Image = CType(resources.GetObject("PlayerPlay.Image"), System.Drawing.Image)
+        Me.PlayerPlay.Location = New System.Drawing.Point(197, 285)
+        Me.PlayerPlay.Name = "PlayerPlay"
+        Me.PlayerPlay.Size = New System.Drawing.Size(50, 50)
+        Me.PlayerPlay.TabIndex = 33
+        Me.PlayerPlay.UseVisualStyleBackColor = False
+        '
+        'PlayerStop
+        '
+        Me.PlayerStop.BackColor = System.Drawing.Color.GhostWhite
+        Me.PlayerStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red
+        Me.PlayerStop.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerStop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PlayerStop.Image = CType(resources.GetObject("PlayerStop.Image"), System.Drawing.Image)
+        Me.PlayerStop.Location = New System.Drawing.Point(284, 285)
+        Me.PlayerStop.Name = "PlayerStop"
+        Me.PlayerStop.Size = New System.Drawing.Size(50, 50)
+        Me.PlayerStop.TabIndex = 34
+        Me.PlayerStop.UseVisualStyleBackColor = False
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.BackColor = System.Drawing.Color.White
+        Me.ProgressBar1.ForeColor = System.Drawing.Color.Lime
+        Me.ProgressBar1.Location = New System.Drawing.Point(14, 339)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(399, 23)
+        Me.ProgressBar1.TabIndex = 27
+        '
+        'ListConsoleDesJeux
+        '
+        Me.ListConsoleDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.ListConsoleDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListConsoleDesJeux.FormattingEnabled = True
+        Me.ListConsoleDesJeux.Location = New System.Drawing.Point(6, 17)
+        Me.ListConsoleDesJeux.Name = "ListConsoleDesJeux"
+        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 186)
+        Me.ListConsoleDesJeux.TabIndex = 24
+        '
+        'ListTitreDesJeux
+        '
+        Me.ListTitreDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.ListTitreDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListTitreDesJeux.FormattingEnabled = True
+        Me.ListTitreDesJeux.Location = New System.Drawing.Point(119, 16)
+        Me.ListTitreDesJeux.Name = "ListTitreDesJeux"
+        Me.ListTitreDesJeux.Size = New System.Drawing.Size(286, 186)
+        Me.ListTitreDesJeux.TabIndex = 23
+        '
+        'PlayerPrev
+        '
+        Me.PlayerPrev.BackColor = System.Drawing.Color.Transparent
+        Me.PlayerPrev.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
+        Me.PlayerPrev.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerPrev.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PlayerPrev.Image = CType(resources.GetObject("PlayerPrev.Image"), System.Drawing.Image)
+        Me.PlayerPrev.Location = New System.Drawing.Point(107, 285)
+        Me.PlayerPrev.Name = "PlayerPrev"
+        Me.PlayerPrev.Size = New System.Drawing.Size(50, 50)
+        Me.PlayerPrev.TabIndex = 38
+        Me.PlayerPrev.UseVisualStyleBackColor = False
+        '
+        'TimeBox
+        '
+        Me.TimeBox.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.TimeBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TimeBox.ForeColor = System.Drawing.SystemColors.Window
+        Me.TimeBox.Location = New System.Drawing.Point(14, 291)
+        Me.TimeBox.Name = "TimeBox"
+        Me.TimeBox.ReadOnly = True
+        Me.TimeBox.Size = New System.Drawing.Size(87, 45)
+        Me.TimeBox.TabIndex = 40
+        Me.TimeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'PanelVideo
+        '
+        Me.PanelVideo.Controls.Add(Me.listrandobox)
+        Me.PanelVideo.Controls.Add(Me.TimeBox)
+        Me.PanelVideo.Controls.Add(Me.RandomList)
+        Me.PanelVideo.Controls.Add(Me.ProgressBar1)
+        Me.PanelVideo.Controls.Add(Me.txtpositionrandom)
+        Me.PanelVideo.Controls.Add(Me.Label12)
+        Me.PanelVideo.Controls.Add(Me.PlayerPrev)
+        Me.PanelVideo.Controls.Add(Me.txtpositionend)
+        Me.PanelVideo.Controls.Add(Me.Label15)
+        Me.PanelVideo.Controls.Add(Me.PlayerAudio)
+        Me.PanelVideo.Controls.Add(Me.HiddenButton)
+        Me.PanelVideo.Controls.Add(Me.PlayerNext)
+        Me.PanelVideo.Controls.Add(Me.PlayerPlay)
+        Me.PanelVideo.Controls.Add(Me.PlayerStop)
+        Me.PanelVideo.Controls.Add(Me.TitleBox)
+        Me.PanelVideo.Location = New System.Drawing.Point(486, 2)
+        Me.PanelVideo.Name = "PanelVideo"
+        Me.PanelVideo.Size = New System.Drawing.Size(422, 370)
+        Me.PanelVideo.TabIndex = 42
         '
         'Quizz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(73, Byte), Integer), CType(CType(4, Byte), Integer), CType(CType(153, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(908, 588)
-        Me.Controls.Add(Me.HiddenButton)
-        Me.Controls.Add(Me.QuizzBox)
-        Me.Controls.Add(Me.TitleBox)
+        Me.Controls.Add(Me.ButtonGetBack1)
         Me.Controls.Add(Me.TempGrid)
         Me.Controls.Add(Me.GroupParamComplet)
-        Me.Controls.Add(Me.Buttongetback)
-        Me.Controls.Add(Me.txtRules)
+        Me.Controls.Add(Me.QuizzBoxRep)
+        Me.Controls.Add(Me.PanelVideo)
         Me.MaximumSize = New System.Drawing.Size(924, 627)
         Me.MinimumSize = New System.Drawing.Size(924, 627)
         Me.Name = "Quizz"
         Me.Text = "Quizz"
         Me.GroupParamComplet.ResumeLayout(False)
         Me.GroupParamComplet.PerformLayout()
-        Me.GroupParametres.ResumeLayout(False)
-        Me.GroupInfoRoms.ResumeLayout(False)
-        Me.GroupInfoRoms.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
         Me.GroupConfigPartie.ResumeLayout(False)
         Me.GroupConfigPartie.PerformLayout()
+        Me.GroupFiltres.ResumeLayout(False)
+        Me.GroupFiltres.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.QuizzBox.ResumeLayout(False)
-        Me.QuizzBox.PerformLayout()
+        Me.QuizzBoxRep.ResumeLayout(False)
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HiddenButton, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupSansFiltres.ResumeLayout(False)
+        Me.GroupSansFiltres.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelVideo.ResumeLayout(False)
+        Me.PanelVideo.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Buttongetback As Button
     Friend WithEvents GroupParamComplet As GroupBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents ConsoleList As ListBox
-    Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents GroupConfigPartie As GroupBox
     Friend WithEvents Label11 As Label
     Friend WithEvents txtnbmanches As TextBox
-    Friend WithEvents ButtonDoRandom As Button
-    Friend WithEvents TxtSynopsis As TextBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents TxtPlayCount As TextBox
-    Friend WithEvents GroupInfoRoms As GroupBox
-    Friend WithEvents TxtAnnee As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label6 As Label
     Friend WithEvents TempGrid As DataGridView
     Friend WithEvents Label10 As Label
-    Friend WithEvents ButtonValidConsole As Button
-    Friend WithEvents GroupParametres As GroupBox
+    Friend WithEvents GroupFiltres As GroupBox
     Friend WithEvents TxtTotalEntrees As TextBox
     Friend WithEvents ConsoleTitre As RadioButton
     Friend WithEvents TitreOnly As RadioButton
-    Friend WithEvents ListTitreDesJeux As ListBox
-    Friend WithEvents ListConsoleDesJeux As ListBox
-    Friend WithEvents ProgressBar1 As ProgressBar
-    Friend WithEvents listhelpingboxGenre As ListBox
-    Friend WithEvents listhelpingboxPubl As ListBox
-    Friend WithEvents listhelpingboxNote As ListBox
-    Friend WithEvents listhelpingboxPlayers As ListBox
-    Friend WithEvents listhelpingboxDev As ListBox
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents txtplayers As TextBox
-    Friend WithEvents txtpub As TextBox
-    Friend WithEvents txtdev As TextBox
-    Friend WithEvents txtgenre As TextBox
-    Friend WithEvents PlayerNext As Button
-    Friend WithEvents PlayerPlay As Button
-    Friend WithEvents PlayerStop As Button
     Friend WithEvents TitleBox As PictureBox
-    Friend WithEvents QuizzBox As GroupBox
-    Friend WithEvents PlayerPrev As Button
+    Friend WithEvents QuizzBoxRep As GroupBox
     Friend WithEvents txtpositionend As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents txtpositionrandom As TextBox
@@ -911,18 +983,55 @@ Partial Class Quizz
     Friend WithEvents PlayerAudio As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents HiddenButton As PictureBox
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents TxtRating As TextBox
-    Friend WithEvents ButtonShowVid As Button
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents ModeHardcore As CheckBox
     Friend WithEvents ModeEasy As CheckBox
     Friend WithEvents txtRules As TextBox
-    Friend WithEvents listhelpingboxAnnee As ListBox
-    Friend WithEvents listhelpingboxPlayCount As ListBox
     Friend WithEvents Label16 As Label
     Friend WithEvents txttempsaffichprop As TextBox
     Friend WithEvents Label15 As Label
-    Friend WithEvents TimeBox As TextBox
     Friend WithEvents listrandobox As ListBox
+    Friend WithEvents ButtonGetBack1 As Button
+    Friend WithEvents ButtonValidConsole1 As Button
+    Friend WithEvents CheckAvecFiltres As CheckBox
+    Friend WithEvents CheckSansFiltres As CheckBox
+    Friend WithEvents ButtonDoRandom1 As Button
+    Friend WithEvents TxtRating As TextBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents listhelpingboxPlayCount As ListBox
+    Friend WithEvents listhelpingboxAnnee As ListBox
+    Friend WithEvents listhelpingboxGenre As ListBox
+    Friend WithEvents listhelpingboxNote As ListBox
+    Friend WithEvents listhelpingboxPubl As ListBox
+    Friend WithEvents listhelpingboxPlayers As ListBox
+    Friend WithEvents listhelpingboxDev As ListBox
+    Friend WithEvents TxtSynopsis As TextBox
+    Friend WithEvents txtplayers As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents TxtPlayCount As TextBox
+    Friend WithEvents txtpub As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtdev As TextBox
+    Friend WithEvents txtgenre As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents TxtAnnee As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents GroupSansFiltres As GroupBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents ListTitreDesJeux As ListBox
+    Friend WithEvents ListConsoleDesJeux As ListBox
+    Friend WithEvents PlayerNext As Button
+    Friend WithEvents PlayerPlay As Button
+    Friend WithEvents PlayerStop As Button
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents PlayerPrev As Button
+    Friend WithEvents TimeBox As TextBox
+    Friend WithEvents PanelVideo As Panel
 End Class

@@ -172,7 +172,7 @@ Partial Class CopyRoms
         Me.GroupBox1.Size = New System.Drawing.Size(999, 92)
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Actions"
+        Me.GroupBox1.Text = "Opérations :"
         '
         'GroupBox5
         '
@@ -198,7 +198,7 @@ Partial Class CopyRoms
         Me.ButtonParcourirRecalCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(40, Byte), Integer))
         Me.ButtonParcourirRecalCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonParcourirRecalCopy.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonParcourirRecalCopy.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonParcourirRecalCopy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(2, 42)
         Me.ButtonParcourirRecalCopy.Name = "ButtonParcourirRecalCopy"
         Me.ButtonParcourirRecalCopy.Size = New System.Drawing.Size(61, 25)
@@ -259,7 +259,7 @@ Partial Class CopyRoms
         Me.checksaves.AutoSize = True
         Me.checksaves.Checked = True
         Me.checksaves.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checksaves.ForeColor = System.Drawing.Color.Lime
+        Me.checksaves.ForeColor = System.Drawing.Color.Aqua
         Me.checksaves.Location = New System.Drawing.Point(102, 33)
         Me.checksaves.Name = "checksaves"
         Me.checksaves.Size = New System.Drawing.Size(56, 17)
@@ -311,7 +311,7 @@ Partial Class CopyRoms
         Me.checkmanuals.AutoSize = True
         Me.checkmanuals.Checked = True
         Me.checkmanuals.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkmanuals.ForeColor = System.Drawing.Color.Lime
+        Me.checkmanuals.ForeColor = System.Drawing.Color.Aqua
         Me.checkmanuals.Location = New System.Drawing.Point(37, 33)
         Me.checkmanuals.Name = "checkmanuals"
         Me.checkmanuals.Size = New System.Drawing.Size(66, 17)
@@ -431,7 +431,7 @@ Partial Class CopyRoms
         Me.GroupBox3.Size = New System.Drawing.Size(112, 70)
         Me.GroupBox3.TabIndex = 11
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Support USB :"
+        Me.GroupBox3.Text = "Taille USB :"
         '
         'Label3
         '
@@ -572,7 +572,7 @@ Partial Class CopyRoms
         '
         Me.txt_rompath.BackColor = System.Drawing.SystemColors.Info
         Me.txt_rompath.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt_rompath.Location = New System.Drawing.Point(5, 40)
+        Me.txt_rompath.Location = New System.Drawing.Point(5, 41)
         Me.txt_rompath.Name = "txt_rompath"
         Me.txt_rompath.ReadOnly = True
         Me.txt_rompath.Size = New System.Drawing.Size(382, 15)

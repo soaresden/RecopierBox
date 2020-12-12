@@ -3,8 +3,8 @@ Imports System.Threading
 Imports System.Linq
 
 Public Class Quizz
-    Private Sub Quizz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    Private Sub Quizz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'On alimente le gamelist
         For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
             If File.Exists(foundDirectory & "\gamelist.xml") Then
@@ -14,21 +14,53 @@ Public Class Quizz
         Next
         'On hide le groupe parametres
         'Afficher le groupParametres
-        GroupParametres.Hide()
-        ButtonDoRandom.Hide()
+        GroupFiltres.Hide()
+        PanelVideo.Hide()
+        GroupSansFiltres.Hide()
+        ButtonDoRandom1.Hide()
+        GroupConfigPartie.Hide()
         Label10.Hide()
         TxtTotalEntrees.Hide()
-        QuizzBox.Hide()
+        QuizzBoxRep.Hide()
         TempGrid.Hide()
-        txtRules.Hide()
-
+        CheckSansFiltres.Hide()
+        CheckAvecFiltres.Hide()
     End Sub
-    Private Sub ButtonValidConsole_Click(sender As Object, e As EventArgs) Handles ButtonValidConsole.Click
+    Private Sub CheckSansFiltres_CheckedChanged(sender As Object, e As EventArgs) Handles CheckSansFiltres.CheckedChanged
+        If CheckSansFiltres.Checked = True Then
+            CheckAvecFiltres.Checked = False
+            GroupFiltres.Hide()
+            GroupSansFiltres.Show()
+        ElseIf CheckAvecFiltres.Checked = False Then
+            CheckSansFiltres.Checked = True
+        End If
+        GroupConfigPartie.Show()
+        txtnbmanches.Focus()
+    End Sub
+
+    Private Sub CheckAvecFiltres_CheckedChanged(sender As Object, e As EventArgs) Handles CheckAvecFiltres.CheckedChanged
+        If CheckAvecFiltres.Checked = True Then
+            CheckSansFiltres.Checked = False
+            GroupFiltres.Show()
+            GroupSansFiltres.Hide()
+        ElseIf CheckSansFiltres.Checked = False Then
+            CheckAvecFiltres.Checked = True
+        End If
+        GroupConfigPartie.Show()
+        txtnbmanches.Focus()
+    End Sub
+
+    Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
+        Me.Close()
+        Form1.Show()
+    End Sub
+
+    Private Sub ButtonValidConsole1_Click(sender As Object, e As EventArgs) Handles ButtonValidConsole1.Click
         'On stop par securité
         PlayerStop.PerformClick()
 
         'Afficher le groupParametres
-        GroupParametres.Show()
+        GroupFiltres.Show()
 
         'On va hider le bouton des console + jeu si un seul systeme est selectionné
 
@@ -330,6 +362,10 @@ romsuivante:
         'On va alimenter les filtres de la combobox 
         PeuplerCombobox()
 
+        'On va Hide les filtres
+        CheckAvecFiltres.Show()
+        CheckSansFiltres.Show()
+        GroupFiltres.Hide()
     End Sub
     Sub PeuplerCombobox()
         Dim valeur As String
@@ -414,14 +450,13 @@ suite6:
 
 
         Next
-
     End Sub
 
 
 
 
     'Ensemble Got Focus et Leave Focus pour les listboxes
-    Private Sub Txtgenre_GotFocus(sender As Object, e As EventArgs) Handles txtgenre.GotFocus
+    Private Sub Txtgenre_GotFocus(sender As Object, e As EventArgs)
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -438,7 +473,7 @@ suite6:
         listhelpingboxGenre.Location = New Point(2, 15)
         listhelpingboxGenre.Size = New Point(145, 300)
     End Sub
-    Private Sub Txtdev_GotFocus(sender As Object, e As EventArgs) Handles txtdev.GotFocus
+    Private Sub Txtdev_GotFocus(sender As Object, e As EventArgs)
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -455,7 +490,7 @@ suite6:
         listhelpingboxDev.Location = New Point(2, 15)
         listhelpingboxDev.Size = New Point(145, 300)
     End Sub
-    Private Sub Txtpub_GotFocus(sender As Object, e As EventArgs) Handles txtpub.GotFocus
+    Private Sub Txtpub_GotFocus(sender As Object, e As EventArgs)
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -472,7 +507,7 @@ suite6:
         listhelpingboxPubl.Location = New Point(2, 15)
         listhelpingboxPubl.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtAnnee_GotFocus(sender As Object, e As EventArgs) Handles TxtAnnee.GotFocus
+    Private Sub TxtAnnee_GotFocus(sender As Object, e As EventArgs)
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -489,7 +524,7 @@ suite6:
         listhelpingboxAnnee.Location = New Point(2, 15)
         listhelpingboxAnnee.Size = New Point(145, 300)
     End Sub
-    Private Sub Txtplayers_GotFocus(sender As Object, e As EventArgs) Handles txtplayers.GotFocus
+    Private Sub Txtplayers_GotFocus(sender As Object, e As EventArgs)
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -506,7 +541,7 @@ suite6:
         listhelpingboxPlayers.Location = New Point(2, 15)
         listhelpingboxPlayers.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtPlayCount_GotFocus(sender As Object, e As EventArgs) Handles TxtPlayCount.GotFocus
+    Private Sub TxtPlayCount_GotFocus(sender As Object, e As EventArgs)
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -523,7 +558,7 @@ suite6:
         listhelpingboxPlayCount.Location = New Point(2, 15)
         listhelpingboxPlayCount.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtSynopsis_GotFocus(sender As Object, e As EventArgs) Handles TxtSynopsis.GotFocus
+    Private Sub TxtSynopsis_GotFocus(sender As Object, e As EventArgs)
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -533,7 +568,7 @@ suite6:
         listhelpingboxPlayCount.Hide()
         listhelpingboxNote.Hide()
     End Sub
-    Private Sub TxtRating_GotFocus(sender As Object, e As EventArgs) Handles TxtRating.GotFocus
+    Private Sub TxtRating_GotFocus(sender As Object, e As EventArgs)
         'On hide tout
         listhelpingboxGenre.Hide()
         listhelpingboxDev.Hide()
@@ -550,7 +585,7 @@ suite6:
         listhelpingboxNote.Location = New Point(2, 15)
         listhelpingboxNote.Size = New Point(145, 300)
     End Sub
-    Private Sub TxtSynopsis_LostFocus(sender As Object, e As EventArgs) Handles TxtSynopsis.LostFocus
+    Private Sub TxtSynopsis_LostFocus(sender As Object, e As EventArgs)
         listhelpingboxGenre.Show()
         listhelpingboxDev.Show()
         listhelpingboxPubl.Show()
@@ -575,36 +610,36 @@ suite6:
         'Recalcul des resultats
         TxtTotalEntrees.Text = TempGrid.RowCount - 1
     End Sub
-    Private Sub Txtgenre_KeyDown(sender As Object, e As KeyEventArgs) Handles txtgenre.KeyDown
+    Private Sub Txtgenre_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub Txtdev_KeyDown(sender As Object, e As KeyEventArgs) Handles txtdev.KeyDown
+    Private Sub Txtdev_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub Txtpub_KeyDown(sender As Object, e As KeyEventArgs) Handles txtpub.KeyDown
+    Private Sub Txtpub_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub TxtAnnee_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtAnnee.KeyDown
+    Private Sub TxtAnnee_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub Txtplayers_KeyDown(sender As Object, e As KeyEventArgs) Handles txtplayers.KeyDown
+    Private Sub Txtplayers_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
         End If
     End Sub
-    Private Sub TxtPlayCount_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtPlayCount.KeyDown
+    Private Sub TxtPlayCount_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub TxtSynopsis_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSynopsis.KeyDown
+    Private Sub TxtSynopsis_KeyDown(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
@@ -615,7 +650,8 @@ suite6:
         End If
     End Sub
 
-    Private Sub ButtonValidFilters_Click(sender As Object, e As EventArgs) Handles ButtonDoRandom.Click
+
+    Private Sub ButtonDoRandom1_Click(sender As Object, e As EventArgs) Handles ButtonDoRandom1.Click
 
         If txtnbmanches.Text <= 0 Then
             MsgBox("Impossible de Générer des Manches")
@@ -631,6 +667,10 @@ suite6:
             MsgBox("Votre Total Roms doit etre Superieur à 12")
             Exit Sub
         End If
+
+        'On affiche les elements
+        PanelVideo.Show()
+        QuizzBoxRep.Show()
 
         Dim nbdemanches As Integer = Val(txtnbmanches.Text)
         Dim nbroms As Integer = TxtTotalEntrees.Text
@@ -688,8 +728,8 @@ recalculrando:
         End If
 
         'On va maintenant Charger toute l'interface de jeu
-        QuizzBox.Show()
-        txtRules.Show()
+        QuizzBoxRep.Show()
+        PanelVideo.Show()
 
         If ConsoleTitre.Checked = True Then ListConsoleDesJeux.Show() Else ListConsoleDesJeux.Hide()
 
@@ -713,13 +753,13 @@ recalculrando:
         If txtnbmanches.Text Is Nothing Then
             Exit Sub
         Else
-            ButtonDoRandom.Show()
+            ButtonDoRandom1.Show()
             txtpositionend.Text = txtnbmanches.Text
         End If
     End Sub
     Private Sub Txtnbmanches_KeyDown(sender As Object, e As KeyEventArgs) Handles txtnbmanches.KeyDown
         If e.KeyCode = Keys.Enter Then
-            ButtonDoRandom.PerformClick()
+            ButtonDoRandom1.PerformClick()
         End If
     End Sub
 
@@ -736,8 +776,6 @@ recalculrando:
         RandomList.SelectedIndex = selectionactuelle + 1
         ListTitreDesJeux.Items.Clear()
         ListConsoleDesJeux.Items.Clear()
-        'On va hider le bouton video si jamais c'etait fini sur la precedente
-        ButtonShowVid.Hide()
         'On securise en mettant le player en hide
         PlayerAudio.uiMode = "none"
     End Sub
@@ -749,8 +787,6 @@ recalculrando:
         RandomList.SelectedIndex = selectionactuelle - 1
         ListTitreDesJeux.Items.Clear()
         ListConsoleDesJeux.Items.Clear()
-        'On va hider le bouton video si jamais c'etait fini sur la precedente
-        ButtonShowVid.Hide()
         'On securise en mettant le player en hide
         PlayerAudio.uiMode = "none"
     End Sub
@@ -771,7 +807,6 @@ recalculrando:
             ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
 
             ListTitreDesJeux.Items.Clear()
-            ButtonShowVid.Hide()
             Timer1.Start()
             TimeBox.Text = ""
 
@@ -790,14 +825,13 @@ recalculrando:
     End Sub
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
         PlayerAudio.Ctlcontrols.stop()
-        ButtonShowVid.Hide()
         TimeBox.Text = ""
         TimeBox.BackColor = Color.FromArgb(72, 61, 139)
     End Sub
 
     Private Sub HiddenButton_Click(sender As Object, e As EventArgs) Handles HiddenButton.Click
         ' Si le quizz est pas fait encore, on affiche juste
-        If QuizzBox.Visible = False Then
+        If QuizzBoxRep.Visible = False Then
             If TempGrid.Visible = True Then
                 TempGrid.Visible = False
             Else
@@ -918,18 +952,12 @@ finboucle:
         If IsNothing(ListTitreDesJeux.SelectedItem.ToString) Then Exit Sub
         If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
             PlayerAudio.uiMode = "full"
-            'On configure vite le bouton showvideo
-            Dim imgvideo As New Bitmap(My.Resources.OKvideo)
-            Dim imgvideo2 As New Bitmap(imgvideo, ButtonShowVid.Width, ButtonShowVid.Height)
-            ButtonShowVid.Image = imgvideo2
-            ButtonShowVid.Show()
-
             MsgBox("Bien Joué !")
         Else
             MsgBox("Nope !")
         End If
     End Sub
-    Private Sub ButtonShowVid_Click(sender As Object, e As EventArgs) Handles ButtonShowVid.Click
+    Private Sub ButtonShowVid_Click(sender As Object, e As EventArgs)
         Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
         Dim videoencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("CheminVideo").Index).Value
         System.Diagnostics.Process.Start(videoencours)
@@ -954,10 +982,7 @@ finboucle:
         End If
     End Sub
 
-    Private Sub Buttongetback_Click(sender As Object, e As EventArgs) Handles Buttongetback.Click
-        Me.Close()
-        Form1.Show()
-    End Sub
+
 
     Private Sub RandomList_DrawItem(sender As Object, e As DrawItemEventArgs) Handles RandomList.DrawItem
         Dim isItemSelected As Boolean = ((e.State And DrawItemState.Selected) = DrawItemState.Selected)
@@ -977,7 +1002,21 @@ finboucle:
         e.DrawFocusRectangle()
     End Sub
 
+    Private Sub txtnbmanches_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtnbmanches.KeyPress
+        '97 - 122 = Ascii codes for simple letters
+        '65 - 90  = Ascii codes for capital letters
+        '48 - 57  = Ascii codes for numbers
+
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
     Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" _
 (ByVal hWnd As IntPtr, ByVal wCmd As Integer,
 ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+
+
 End Class
