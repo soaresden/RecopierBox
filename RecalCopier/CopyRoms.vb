@@ -53,6 +53,10 @@ Public Class CopyRoms
         ButtonGenererList.Show()
         ButtonValider.Hide()
         CheckBoxARRM.Hide()
+
+        'Repositionning listbox
+        ListGameLists.Location = New Point(15, 32)
+        ListGameLists.Size = New Point(203, 329)
     End Sub
     Public Shared Function GetFilesRecursive(ByVal initial As String) As List(Of String)
         ' This list stores the results.
@@ -766,12 +770,14 @@ consolesanssaves:
         'VIDEO
         If cellulevideo = Nothing Then
             vid_romvid.Hide()
+            ButtonSonVid.Hide()
         Else
             vid_romvid.Show()
             vid_romvid.URL = row.Cells(FinalGrid.Columns("CheminVideo").Index).Value
             vid_romvid.settings.setMode("loop", True)
             vid_romvid.settings.volume = 80
             vid_romvid.settings.mute = True
+            ButtonSonVid.Show()
             ButtonSonVid.BackgroundImage = My.Resources.iconsound
             vid_romvid.Ctlcontrols.play()
         End If

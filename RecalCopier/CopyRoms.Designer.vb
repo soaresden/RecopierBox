@@ -198,7 +198,7 @@ Partial Class CopyRoms
         Me.ButtonParcourirRecalCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(40, Byte), Integer))
         Me.ButtonParcourirRecalCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonParcourirRecalCopy.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonParcourirRecalCopy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ButtonParcourirRecalCopy.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(2, 42)
         Me.ButtonParcourirRecalCopy.Name = "ButtonParcourirRecalCopy"
         Me.ButtonParcourirRecalCopy.Size = New System.Drawing.Size(61, 25)
@@ -1027,7 +1027,6 @@ Partial Class CopyRoms
         Me.ButtonSonVid.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSonVid.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSonVid.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonSonVid.Image = Global.RecalCopier.My.Resources.Resources.iconsound
         Me.ButtonSonVid.Location = New System.Drawing.Point(66, 194)
         Me.ButtonSonVid.Name = "ButtonSonVid"
         Me.ButtonSonVid.Size = New System.Drawing.Size(52, 49)
