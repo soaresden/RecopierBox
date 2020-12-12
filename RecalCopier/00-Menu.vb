@@ -8,6 +8,11 @@ Public Class Form1
         PanelGauche.Hide()
         PanelDroite.Hide()
         NetFourDotFiveAndHigher()
+
+        'On check si le Folder enregistré existe, sinon on le fout à zéro
+        If (Not System.IO.Directory.Exists(TxtRecalfolderPath.Text)) Then
+            TxtRecalfolderPath.Text = ""
+        End If
     End Sub
     Private Sub NetFourDotFiveAndHigher()
 
