@@ -31,6 +31,7 @@ Partial Class CopyRoms
         Me.ButtonParcourirRecalCopy = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txt_CopyFolder = New System.Windows.Forms.TextBox()
+        Me.ButtonCopy = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.checkbios = New System.Windows.Forms.CheckBox()
         Me.checksaves = New System.Windows.Forms.CheckBox()
@@ -50,6 +51,7 @@ Partial Class CopyRoms
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_USBGo = New System.Windows.Forms.TextBox()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
+        Me.ButtonSonVid = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txt_romname = New System.Windows.Forms.Label()
         Me.listboxMaSelection = New System.Windows.Forms.ListBox()
@@ -59,6 +61,7 @@ Partial Class CopyRoms
         Me.romsaveo = New System.Windows.Forms.Button()
         Me.rommanualo = New System.Windows.Forms.Button()
         Me.romoverlayo = New System.Windows.Forms.Button()
+        Me.RomImage = New System.Windows.Forms.PictureBox()
         Me.txt_romdesc = New System.Windows.Forms.RichTextBox()
         Me.txt_rompath = New System.Windows.Forms.TextBox()
         Me.vid_romvid = New AxWMPLib.AxWindowsMediaPlayer()
@@ -101,9 +104,6 @@ Partial Class CopyRoms
         Me.minipic3 = New System.Windows.Forms.PictureBox()
         Me.minipic2 = New System.Windows.Forms.PictureBox()
         Me.minipic1 = New System.Windows.Forms.PictureBox()
-        Me.ButtonSonVid = New System.Windows.Forms.Button()
-        Me.RomImage = New System.Windows.Forms.PictureBox()
-        Me.ButtonCopy = New System.Windows.Forms.Button()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -113,6 +113,7 @@ Partial Class CopyRoms
         Me.grp_RomInfos.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupFiltresAvances.SuspendLayout()
         CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -130,7 +131,6 @@ Partial Class CopyRoms
         CType(Me.minipic3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.minipic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.minipic1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ListGameLists
@@ -223,6 +223,15 @@ Partial Class CopyRoms
         Me.txt_CopyFolder.Size = New System.Drawing.Size(61, 20)
         Me.txt_CopyFolder.TabIndex = 0
         Me.txt_CopyFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'ButtonCopy
+        '
+        Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
+        Me.ButtonCopy.Location = New System.Drawing.Point(927, 15)
+        Me.ButtonCopy.Name = "ButtonCopy"
+        Me.ButtonCopy.Size = New System.Drawing.Size(69, 72)
+        Me.ButtonCopy.TabIndex = 14
+        Me.ButtonCopy.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -471,6 +480,22 @@ Partial Class CopyRoms
         Me.grp_RomInfos.TabStop = False
         Me.grp_RomInfos.Text = "Rom Infos"
         '
+        'ButtonSonVid
+        '
+        Me.ButtonSonVid.BackColor = System.Drawing.Color.White
+        Me.ButtonSonVid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonSonVid.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonSonVid.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonSonVid.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
+        Me.ButtonSonVid.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonSonVid.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonSonVid.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonSonVid.Location = New System.Drawing.Point(66, 194)
+        Me.ButtonSonVid.Name = "ButtonSonVid"
+        Me.ButtonSonVid.Size = New System.Drawing.Size(52, 49)
+        Me.ButtonSonVid.TabIndex = 40
+        Me.ButtonSonVid.UseVisualStyleBackColor = False
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.txt_romname)
@@ -557,6 +582,17 @@ Partial Class CopyRoms
         Me.romoverlayo.Size = New System.Drawing.Size(57, 54)
         Me.romoverlayo.TabIndex = 19
         Me.romoverlayo.UseVisualStyleBackColor = True
+        '
+        'RomImage
+        '
+        Me.RomImage.Image = CType(resources.GetObject("RomImage.Image"), System.Drawing.Image)
+        Me.RomImage.InitialImage = Nothing
+        Me.RomImage.Location = New System.Drawing.Point(5, 55)
+        Me.RomImage.Name = "RomImage"
+        Me.RomImage.Size = New System.Drawing.Size(173, 132)
+        Me.RomImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.RomImage.TabIndex = 0
+        Me.RomImage.TabStop = False
         '
         'txt_romdesc
         '
@@ -1017,42 +1053,6 @@ Partial Class CopyRoms
         Me.minipic1.TabIndex = 14
         Me.minipic1.TabStop = False
         '
-        'ButtonSonVid
-        '
-        Me.ButtonSonVid.BackColor = System.Drawing.Color.White
-        Me.ButtonSonVid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonSonVid.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonSonVid.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonSonVid.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
-        Me.ButtonSonVid.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonSonVid.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonSonVid.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonSonVid.Location = New System.Drawing.Point(66, 194)
-        Me.ButtonSonVid.Name = "ButtonSonVid"
-        Me.ButtonSonVid.Size = New System.Drawing.Size(52, 49)
-        Me.ButtonSonVid.TabIndex = 40
-        Me.ButtonSonVid.UseVisualStyleBackColor = False
-        '
-        'RomImage
-        '
-        Me.RomImage.Image = CType(resources.GetObject("RomImage.Image"), System.Drawing.Image)
-        Me.RomImage.InitialImage = Nothing
-        Me.RomImage.Location = New System.Drawing.Point(5, 55)
-        Me.RomImage.Name = "RomImage"
-        Me.RomImage.Size = New System.Drawing.Size(173, 132)
-        Me.RomImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.RomImage.TabIndex = 0
-        Me.RomImage.TabStop = False
-        '
-        'ButtonCopy
-        '
-        Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
-        Me.ButtonCopy.Location = New System.Drawing.Point(927, 15)
-        Me.ButtonCopy.Name = "ButtonCopy"
-        Me.ButtonCopy.Size = New System.Drawing.Size(69, 72)
-        Me.ButtonCopy.TabIndex = 14
-        Me.ButtonCopy.UseVisualStyleBackColor = True
-        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1104,6 +1104,7 @@ Partial Class CopyRoms
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
+        CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupFiltresAvances.ResumeLayout(False)
         Me.GroupFiltresAvances.PerformLayout()
@@ -1122,7 +1123,6 @@ Partial Class CopyRoms
         CType(Me.minipic3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.minipic2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.minipic1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

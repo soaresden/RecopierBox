@@ -1,10 +1,10 @@
 ﻿Imports System.IO
 Public Class SaveManager
     Private Sub SaveManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        GroupBox1.Hide()
-        GroupBox2.Hide()
         TextBox1.Hide()
         TextBox2.Hide()
+        GroupRoms.Hide()
+        GroupSaves.Hide()
         Call ImporterlesGamelists()
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -119,24 +119,30 @@ ProchainGamelist:
         }
         DataGridRoms.Columns.Add(chk)
 
+        'Et le nombre de Saves
+        DataGridRoms.Columns.Add("NbSaves", "NbSaves")
+
         'Width for columns
         DataGridRoms.RowHeadersWidth = 25
         DataGridRoms.Columns("Console").Width = 40
-        DataGridRoms.Columns("Titre").Width = 205
+        DataGridRoms.Columns("Titre").Width = 185
         DataGridRoms.Columns("CheminRom").Width = 20
         DataGridRoms.Columns("NomdeRom").Width = 10
-        DataGridRoms.Columns("CheminSave").Width = 50
+        DataGridRoms.Columns("CheminSave").Width = 40
         DataGridRoms.Columns("CocheSave").Width = 25
+        DataGridRoms.Columns("NbSaves").Width = 30
 
         'Hiding les colonnes
         DataGridRoms.Columns("CheminRom").Visible = False
         DataGridRoms.Columns("NomdeRom").Visible = False
         DataGridRoms.Columns("CheminSave").Visible = True
+        DataGridRoms.Columns("NbSaves").Visible = True
 
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, Titre asc"
 
         Dim compteurSave As Integer = 0
+
         'On remplit les Coches Saves
         Call CompletiondesSavesRoms()
 
@@ -145,7 +151,7 @@ ProchainGamelist:
 
         'on affiche les outils
         TextBox1.Show()
-        GroupBox1.Show()
+        GroupRoms.Show()
     End Sub
 
     Public Function FileNameWithoutExtension(ByVal FullPath _
@@ -183,9 +189,11 @@ ProchainGamelist:
             If compteurfiles > 0 Then
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = True
                 compteurSave += 1
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             Else
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = False
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = 0
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
         Next
@@ -228,14 +236,14 @@ ProchainGamelist:
         column = New DataColumn()
         With column
             .DataType = Type.GetType("System.String")
-            .ColumnName = "NomFichierCFG"
+            .ColumnName = "NomFichierSave"
         End With
         table.Columns.Add(column)
 
         column = New DataColumn()
         With column
             .DataType = Type.GetType("System.String")
-            .ColumnName = "CheminCFG"
+            .ColumnName = "CheminSave"
         End With
         table.Columns.Add(column)
 
@@ -244,31 +252,30 @@ ProchainGamelist:
         'Loop for every gamelists
         For Each i In GameLists.SelectedItems
             Dim nomconsole As String = i
-            Dim nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\Saves\" & nomconsole, "*.cfg").Count
+            Dim nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\saves\" & nomconsole, "*.*").Count
 
             If nbdansdossier = 0 Then
-                MsgBox("Pas d'Saves dans la console :" & nomconsole)
+                MsgBox("Pas de Saves dans la console :" & nomconsole)
                 Exit Sub
             End If
 
-            Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\Saves\" & nomconsole)
-            Dim aryFi As IO.FileInfo() = di.GetFiles("*.cfg")
+            Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\" & nomconsole)
+            Dim aryFi As IO.FileInfo() = di.GetFiles("*.*")
             Dim fi As IO.FileInfo
-            Dim nomfichiercfg As String
-            Dim cheminducfg As String
-            Dim pathdelarom As String
+            Dim nomfichierdelasave As String
+            Dim chemindelasave As String
+            Dim pathdelasave As String
 
             For Each fi In aryFi
-                If fi.Name = nomconsole & "_Save.cfg" Then GoTo fichiersuivant
-                cheminducfg = fi.FullName
-                nomfichiercfg = fi.Name
-                pathdelarom = Replace(Replace(cheminducfg, "\Saves\", "\roms\"), ".cfg", "")
+                chemindelasave = fi.FullName
+                nomfichierdelasave = fi.Name
+                pathdelasave = Replace(chemindelasave, "\saves\", "\roms\")
 
-                'On va rechercher le nom de la rom
-                Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
+                'On va rechercher le nom de la save
+                Dim romname = Recherchenomdelasave(nomconsole, pathdelasave)
 
                 'on ajoute au tableau
-                table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg)
+                table.Rows.Add(nomconsole, romname, nomfichierdelasave, chemindelasave)
 
 fichiersuivant:
             Next
@@ -282,8 +289,8 @@ fichiersuivant:
         DataGridSave.RowHeadersWidth = 25
         DataGridSave.Columns("Console").Width = 40
         DataGridSave.Columns("NomRomXML").Width = 90
-        DataGridSave.Columns("NomFichierCFG").Width = 140
-        DataGridSave.Columns("CheminCFG").Width = 25
+        DataGridSave.Columns("NomFichierSave").Width = 140
+        DataGridSave.Columns("CheminSave").Width = 25
 
         Dim compteurSave As Integer = 0
 
@@ -300,15 +307,15 @@ fichiersuivant:
 
         'On va vérifier si les cfg sont liés à une rom
         For row = 0 To DataGridSave.Rows.Count - 2
-            Dim cheminencours = DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminCFG").Index).Value
+            Dim cheminencours = DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value
             Dim consolerom = DataGridSave.Rows(row).Cells(DataGridSave.Columns("Console").Index).Value
 
             'on va colorer la colonne des coches
-            If DataGridSave.Rows(row).Cells(DataGridSave.Columns("NomRomXML").Index).Value = "#PASDANSXML#" Then
+            If DataGridSave.Rows(row).Cells(DataGridSave.Columns("NomRomXML").Index).Value = "#ORPHELIN#" Then
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = False
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
                 'et du coup on va ajouter à la listbox des CFG
-                Call FichiersCfgLies(cheminencours, consolerom)
+                ListdesFichiersEnTrop.Items.Add(DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value)
             Else
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = True
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
@@ -322,59 +329,53 @@ fichiersuivant:
         SaveTotal.Text = DataGridSave.Rows.Count - 1
         'on affiche les outils
         TextBox2.Show()
-        GroupBox2.Show()
+        GroupSaves.Show()
     End Sub
-    Function Recherchenomdelarom(console As String, pathdelarom As String)
+    Function Recherchenomdelasave(console As String, pathdelasave As String)
         Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
-        Dim nomdelarom = Path.GetFileName(pathdelarom)
-
+        Dim nomdelasave = FileNameWithoutExtension((Path.GetFileName(pathdelasave)))
 
         'Si il n'existe pas de gamelist, on va mettre les infos generique
         If Not System.IO.File.Exists(lagamelist) Then
-            Return "#NOGAMELIST#-" & nomdelarom
+            Return "#NOGAMELIST#-" & console
         End If
 
-        Dim gamelistXml As XElement = XElement.Load(lagamelist)
 
-        'getting the list for the xml with nodes
-        Dim query2 = From st In gamelistXml.Descendants("game") Select st
-        Dim genpathdelarom As String
-        genpathdelarom = My.Settings.RecalboxFolder & "\roms\" & console & "\" & nomdelarom
+        'On va essayer de trouver le nom de la rom avec le nom de la save
+        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\roms\" & console)
+        Dim aryFi As IO.FileInfo() = di.GetFiles(nomdelasave & ".*")
+        Dim fi As IO.FileInfo
+        Dim nomfichierdelasave As String
+        Dim chemindelasavetrouvee As String
+        Dim romtrouvee As Integer = 0
 
-        For Each xEle As XElement In query2
-            Dim romname As String = xEle.Element("name")
-            Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
-            Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & console & "\" & temprom
+        For Each fi In aryFi
+            chemindelasavetrouvee = fi.FullName
+            nomfichierdelasave = fi.Name
 
-            If console = nomdelarom Then
-                Return "#CONSOLE#"
-            End If
+            Dim gamelistXml As XElement = XElement.Load(lagamelist)
 
-            If rompath = pathdelarom Then
-                Return romname
-                GoTo lignesuivante
-            End If
+            'getting the list for the xml with nodes
+            Dim query2 = From st In gamelistXml.Descendants("game") Select st
+
+            For Each xEle As XElement In query2
+                Dim romname As String = xEle.Element("name")
+                Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
+                Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & console & "\" & temprom
+                Dim nomdelarompath As String = Path.GetFileName(rompath)
+
+                If nomdelarompath = nomfichierdelasave Then
+                    Return romname
+                End If
 lignesuivante:
+            Next
+            Exit Function
         Next
-        Return "#PASDANSXML#"
+        'Si il n' y a pas de rom trouvée on mets "Saves Orpheline"
+        Return "#ORPHELIN#"
     End Function
-    Sub FichiersCfgLies(cheminencours As String, consolerom As String)
-        Dim cheminducfg As String = cheminencours
-        Dim nomducfg As String = Path.GetFileName(cheminducfg)
-        Dim gamelistassocie As String = My.Settings.RecalboxFolder & "\roms\" & consolerom & "\gamelist.xml"
-        Dim genpathdelarom As String
 
-        'Verification du cfg console
-        If nomducfg = consolerom & ".cfg" Then
-            Exit Sub
-        End If
-
-        genpathdelarom = My.Settings.RecalboxFolder & "\roms\" & consolerom & "\" & nomducfg
-        'si on est arrivé ici, c'est que y'a pas de roms avec ce path donc on l'ajoute
-        Dim genpathducfg As String = My.Settings.RecalboxFolder & "\Saves\" & consolerom & "\" & nomducfg
-    End Sub
-
-    Private Sub ButtonMenage_Click(sender As Object, e As EventArgs) Handles ButtonMenage1.Click
+    Private Sub ButtonMenage_Click(sender As Object, e As EventArgs)
         If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-contre ?", vbYesNo) = vbNo Then Exit Sub
 
         For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
@@ -446,5 +447,35 @@ lignesuivante:
         Next
         'on ajoute a la listbox
         ListdesFichiersEnTrop.Items.Add(fichier3png)
+    End Sub
+
+    Private Sub DataGridRoms_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridRoms.CellClick
+        'check that row isn't -1, i.e. creating datagrid header
+        If e.RowIndex = -1 Then Exit Sub
+
+        'On recherche le numero de la colonne des Selections
+        Dim valeursaves = DataGridRoms.Rows(e.RowIndex).Cells(DataGridRoms.Columns("NbSaves").Index).Value
+
+        If valeursaves > 0 Then
+
+            Dim nomdelaromgamelist As String = Path.GetFileName(DataGridRoms.Rows(e.RowIndex).Cells(DataGridRoms.Columns("CheminSave").Index).Value)
+            'Si on est ici c'est qu'il y'a plusieurs saves à la rom. Donc on va selectionner les items dans la listbox
+            Dim columnindex As Integer = DataGridRoms.CurrentCell.ColumnIndex
+            Dim rowIndex As Integer = DataGridRoms.CurrentCell.RowIndex
+            Dim pathrom As String = DataGridRoms.Rows(rowIndex).Cells(DataGridRoms.Columns("CheminRom").Index).Value
+            Dim nomdelaromdanslistbox As String
+
+            ListSaves.ClearSelected()
+
+            'On va chercher le nom et selectionner
+            For i = 0 To ListSaves.Items.Count - 1
+                nomdelaromdanslistbox = FileNameWithoutExtension(ListSaves.Items(i).ToString)
+
+                If nomdelaromdanslistbox = nomdelaromgamelist Then
+                    ListSaves.SetSelected(i, True)
+                End If
+            Next
+
+        End If
     End Sub
 End Class
