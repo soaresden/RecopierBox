@@ -13,6 +13,15 @@ Public Class Form1
         If (Not System.IO.Directory.Exists(TxtRecalfolderPath.Text)) Then
             TxtRecalfolderPath.Text = ""
         End If
+
+        'Et on indique si y'a besoin d'écrire
+        If TxtRecalfolderPath Is Nothing Then
+            MsgBox("Merci de Choisir votre Dossier Mère d'abord !")
+            Exit Sub
+        End If
+
+        'On call le test des dossier
+        Call DetectTypeDossier(TxtRecalfolderPath.Text)
     End Sub
     Private Sub NetFourDotFiveAndHigher()
 
@@ -45,21 +54,40 @@ Public Class Form1
 
     End Function
 
+    Sub DetectTypeDossier(CheminDossierRecalbox As String)
+        If (System.IO.Directory.Exists(CheminDossierRecalbox & "\overlays")) Then
+            TypeRecalbox.Checked = True
+            TypeBatocera.Checked = False
+            My.Settings.DossierOverlay = CheminDossierRecalbox & "\overlays\"
+            My.Settings.Save()
+        Else
+            TypeRecalbox.Checked = False
+            TypeBatocera.Checked = True
+            My.Settings.DossierOverlay = CheminDossierRecalbox & "\decorations\"
+            My.Settings.Save()
+        End If
+    End Sub
+
+
     Private Sub ButtonBrowseRecalboxFolder_Click(sender As Object, e As EventArgs) Handles ButtonBrowseRecalboxFolder.Click
         'Au clic, on ouvre la selection du repertoire
-        If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
             'Check si un dossier Roms est present dedans
             Dim cheminsaisi As String = FolderBrowserDialog1.SelectedPath
             If (Not System.IO.Directory.Exists(cheminsaisi & "\Roms")) Then
-                MsgBox("Le Chemin saisi ne possede pas de dossier 'Roms'" & Chr(13) & "Selectionner votre dossier Recalbox Mère")
+                MsgBox("Le Chemin saisi ne possede pas de dossier 'Roms'" & Chr(13) & "Selectionner votre dossier Mère")
                 TxtRecalfolderPath.Text = Nothing
             Else
-                MsgBox("Chemin Recalbox OK !")
+                MsgBox("Chemin OK !")
+
+                TxtRecalfolderPath.Text = FolderBrowserDialog1.SelectedPath
+                'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
+                My.Settings.RecalboxFolder = TxtRecalfolderPath.Text
+                My.Settings.Save()
+
+                'On call le test des dossier
+                Call DetectTypeDossier(TxtRecalfolderPath.Text)
             End If
-            TxtRecalfolderPath.Text = FolderBrowserDialog1.SelectedPath
-            'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
-            My.Settings.RecalboxFolder = TxtRecalfolderPath.Text
-            My.Settings.Save()
         End If
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -88,10 +116,6 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonCopy.Click
-        If TxtRecalfolderPath Is Nothing Then
-            MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
-            Exit Sub
-        End If
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         CopyRoms.Show()
         Me.Hide()

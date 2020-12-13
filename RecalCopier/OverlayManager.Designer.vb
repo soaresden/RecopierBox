@@ -295,7 +295,7 @@ Partial Class OverlayManager
         Me.ImportBoth1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ImportBoth1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ImportBoth1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ImportBoth1.Location = New System.Drawing.Point(507, 0)
+        Me.ImportBoth1.Location = New System.Drawing.Point(134, 0)
         Me.ImportBoth1.Name = "ImportBoth1"
         Me.ImportBoth1.Size = New System.Drawing.Size(116, 30)
         Me.ImportBoth1.TabIndex = 38

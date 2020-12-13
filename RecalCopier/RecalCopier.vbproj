@@ -176,6 +176,8 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="Resources\Equinox Regular.otf" />
+    <None Include="Resources\EquinoxRg.TTF" />
     <None Include="Resources\Vag Rounded BT Normal.ttf" />
   </ItemGroup>
   <ItemGroup>

@@ -61,16 +61,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une ressource localisée de type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property Equinox_Bold() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Equinox_Bold", resourceCulture)
-                Return CType(obj,Byte())
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property iconlog() As System.Drawing.Bitmap
@@ -197,16 +187,6 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("OKvideo", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une ressource localisée de type System.Byte[].
-        '''</summary>
-        Friend ReadOnly Property Vag_Rounded_BT_Normal() As Byte()
-            Get
-                Dim obj As Object = ResourceManager.GetObject("Vag_Rounded_BT_Normal", resourceCulture)
-                Return CType(obj,Byte())
             End Get
         End Property
     End Module

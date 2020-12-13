@@ -50,6 +50,8 @@ Partial Class Form1
         Me.Label5 = New System.Windows.Forms.Label()
         Me.PanelHaut = New System.Windows.Forms.Panel()
         Me.PanelDroite = New System.Windows.Forms.Panel()
+        Me.TypeRecalbox = New System.Windows.Forms.CheckBox()
+        Me.TypeBatocera = New System.Windows.Forms.CheckBox()
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -156,7 +158,7 @@ Partial Class Form1
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Disclaimer.Location = New System.Drawing.Point(254, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(695, 468)
+        Me.Disclaimer.Size = New System.Drawing.Size(700, 468)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Pourquoi cet Outil ?"
@@ -169,7 +171,7 @@ Partial Class Form1
         Me.TxtDisclaimer.Location = New System.Drawing.Point(6, 47)
         Me.TxtDisclaimer.Name = "TxtDisclaimer"
         Me.TxtDisclaimer.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TxtDisclaimer.Size = New System.Drawing.Size(683, 235)
+        Me.TxtDisclaimer.Size = New System.Drawing.Size(683, 274)
         Me.TxtDisclaimer.TabIndex = 18
         Me.TxtDisclaimer.Text = resources.GetString("TxtDisclaimer.Text")
         '
@@ -251,7 +253,7 @@ Partial Class Form1
         '
         Me.RichTextBox2.BackColor = System.Drawing.Color.SteelBlue
         Me.RichTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.RichTextBox2.ForeColor = System.Drawing.SystemColors.InactiveBorder
+        Me.RichTextBox2.ForeColor = System.Drawing.Color.Aqua
         Me.RichTextBox2.Location = New System.Drawing.Point(3, 304)
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.Size = New System.Drawing.Size(210, 30)
@@ -274,6 +276,8 @@ Partial Class Form1
         '
         Me.PanelGauche.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.PanelGauche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelGauche.Controls.Add(Me.TypeBatocera)
+        Me.PanelGauche.Controls.Add(Me.TypeRecalbox)
         Me.PanelGauche.Controls.Add(Me.label3)
         Me.PanelGauche.Controls.Add(Me.Quitter)
         Me.PanelGauche.Controls.Add(Me.ButtonOverlay)
@@ -421,6 +425,30 @@ Partial Class Form1
         Me.PanelDroite.Size = New System.Drawing.Size(225, 391)
         Me.PanelDroite.TabIndex = 25
         '
+        'TypeRecalbox
+        '
+        Me.TypeRecalbox.AutoSize = True
+        Me.TypeRecalbox.Enabled = False
+        Me.TypeRecalbox.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.TypeRecalbox.Location = New System.Drawing.Point(16, 194)
+        Me.TypeRecalbox.Name = "TypeRecalbox"
+        Me.TypeRecalbox.Size = New System.Drawing.Size(109, 17)
+        Me.TypeRecalbox.TabIndex = 25
+        Me.TypeRecalbox.Text = "Dossier Recalbox"
+        Me.TypeRecalbox.UseVisualStyleBackColor = True
+        '
+        'TypeBatocera
+        '
+        Me.TypeBatocera.AutoSize = True
+        Me.TypeBatocera.Enabled = False
+        Me.TypeBatocera.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.TypeBatocera.Location = New System.Drawing.Point(131, 194)
+        Me.TypeBatocera.Name = "TypeBatocera"
+        Me.TypeBatocera.Size = New System.Drawing.Size(107, 17)
+        Me.TypeBatocera.TabIndex = 26
+        Me.TypeBatocera.Text = "Dossier Batocera"
+        Me.TypeBatocera.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -482,4 +510,6 @@ Partial Class Form1
     Private WithEvents Label5 As Label
     Friend WithEvents PanelHaut As Panel
     Friend WithEvents PanelDroite As Panel
+    Friend WithEvents TypeBatocera As CheckBox
+    Friend WithEvents TypeRecalbox As CheckBox
 End Class

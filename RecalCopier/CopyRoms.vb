@@ -624,8 +624,15 @@ labelapresfolder:
             Dim FileInfo As New FileInfo(cheminrom)
             Dim nomdelarom As String = FileInfo.Name
             Dim nomducfg As String = nomdelarom & ".cfg"
+            Dim cheminoverlay As String
 
-            Dim cheminoverlay As String = Replace(cheminrom, "\roms\", "\overlays\")
+            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                cheminoverlay = Replace(cheminrom, "\roms\", "\overlays\")
+            Else
+                cheminoverlay = Replace(cheminrom, "\roms\", "\decorations\")
+            End If
+
+
             Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
 
             If System.IO.File.Exists(testcheminoverlay) Then
@@ -1604,7 +1611,14 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
                             Dim cheminpropreoverlay2 As String
                             Dim console As String = FinalGrid.Rows(d).Cells(FinalGrid.Columns("Console").Index).Value
-                            Dim cheminoverlaycfg1 As String = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
+                            Dim cheminoverlaycfg1 As String
+
+                            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                                cheminoverlaycfg1 = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
+                            Else
+                                cheminoverlaycfg1 = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\decorations\") & ".cfg"
+                            End If
+
 
                             Dim justefichier2 As String
                             Dim cheminpng3 As String
@@ -1621,13 +1635,32 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                             Dim s As String
 
                             For Each s In readText
-                                Dim detectinputoverlay As String = InStr(s, "/overlays/")
+                                Dim detectinputoverlay As String
+
+                                If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                                    detectinputoverlay = InStr(s, "/overlays/")
+                                Else
+                                    detectinputoverlay = InStr(s, "/decorations/")
+                                End If
+
                                 If detectinputoverlay > 0 Then
                                     'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
                                     'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
                                     'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
-                                    Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
-                                    cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                                    Dim chemincfgoverlaydanscfg As String
+
+                                    If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                                        chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
+                                    Else
+                                        chemincfgoverlaydanscfg = s.Substring(InStr(s, "/decorations/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/decorations/") + 9), ".cfg") + 3)
+                                    End If
+
+                                    If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                                        cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                                    Else
+                                        cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\decorations\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                                    End If
+
                                     justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
                                     Exit For
                                 End If
@@ -1722,7 +1755,14 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                 On Error Resume Next
                 For overlaysys = 0 To ListGameLists.Items.Count - 1
                     Dim fulladresse As String = Path.GetDirectoryName(ListGameLists.Items(overlaysys))
-                    Dim overlayadresse As String = Replace(fulladresse, "\roms\", "\overlays\")
+                    Dim overlayadresse As String
+
+                    If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                        overlayadresse = Replace(fulladresse, "\roms\", "\overlays\")
+                    Else
+                        overlayadresse = Replace(fulladresse, "\roms\", "\decorations\")
+                    End If
+
                     Dim parentName As String = IO.Path.GetFileName(overlayadresse)
 
                     Dim fichier1cfg As String = overlayadresse & "\" & parentName & ".cfg"
@@ -1744,13 +1784,32 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                     Dim s As String
 
                     For Each s In readText
-                        Dim detectinputoverlay As String = InStr(s, "/overlays/")
+
+                        Dim detectinputoverlay As String
+                        If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                            detectinputoverlay = InStr(s, "/overlays/")
+                        Else
+                            detectinputoverlay = InStr(s, "/decorations/")
+                        End If
+
                         If detectinputoverlay > 0 Then
                             'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
                             'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
                             'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
-                            Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
-                            cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+
+                            Dim chemincfgoverlaydanscfg As String
+                            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                                chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
+                            Else
+                                chemincfgoverlaydanscfg = s.Substring(InStr(s, "/decorations/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/decorations/") + 9), ".cfg") + 3)
+                            End If
+
+                            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                                cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                            Else
+                                cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\decorations\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                            End If
+
                             justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
                             Exit For
                         End If
@@ -1795,7 +1854,14 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                 For ligne = 0 To listconsoleselected.Items.Count - 1
                     Dim consolename As String = listconsoleselected.Items(ligne)
                     Dim fulladresse As String = My.Settings.RecalboxFolder & "\roms\" & consolename
-                    Dim overlayadresse As String = Replace(fulladresse, "\roms\", "\overlays\")
+
+                    Dim overlayadresse As String
+                    If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                        overlayadresse = Replace(fulladresse, "\roms\", "\overlays\")
+                    Else
+                        overlayadresse = Replace(fulladresse, "\roms\", "\decorations\")
+                    End If
+
                     Dim parentName As String = IO.Path.GetFileName(overlayadresse)
 
                     Dim fichier1cfg As String = overlayadresse & "\" & parentName & ".cfg"
@@ -1817,13 +1883,32 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                     Dim s As String
 
                     For Each s In readText
-                        Dim detectinputoverlay As String = InStr(s, "/overlays/")
+                        Dim detectinputoverlay As String
+
+                        If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                            detectinputoverlay = InStr(s, "/overlays/")
+                        Else
+                            detectinputoverlay = InStr(s, "/decorations/")
+                        End If
+
                         If detectinputoverlay > 0 Then
                             'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
                             'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
                             'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
-                            Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
-                            cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                            Dim chemincfgoverlaydanscfg As String
+
+                            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                                chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
+                            Else
+                                chemincfgoverlaydanscfg = s.Substring(InStr(s, "/decorations/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/decorations/") + 9), ".cfg") + 3)
+                            End If
+
+                            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                                cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                            Else
+                                cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+                            End If
+
                             justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
                             Exit For
                         End If
@@ -2124,7 +2209,13 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
             Dim nomdelarom As String = FileInfo.Name
             Dim nomducfg As String = nomdelarom & ".cfg"
 
-            Dim cheminoverlay As String = Replace(cheminrom, "\roms\", "\overlays\")
+            Dim cheminoverlay As String
+            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                cheminoverlay = Replace(cheminrom, "\roms\", "\overlays\")
+            Else
+                cheminoverlay = Replace(cheminrom, "\roms\", "\decorations\")
+            End If
+
             Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
 
             Process.Start("explorer", Path.GetDirectoryName(testcheminoverlay).ToString)

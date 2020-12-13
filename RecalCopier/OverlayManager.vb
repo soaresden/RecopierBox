@@ -13,7 +13,7 @@ Public Class OverlayManager
     End Sub
     Sub ImporterlesGamelists()
         'On Importe toutes les GameLists
-        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.RecalboxFolder & "\overlays\", FileIO.SearchOption.SearchTopLevelOnly)
+        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.DossierOverlay, FileIO.SearchOption.SearchTopLevelOnly)
             GameLists.Items.Add(System.IO.Path.GetFileName(folder))
         Next
     End Sub
@@ -158,7 +158,14 @@ ProchainGamelist:
             Dim rompath = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminRom").Index).Value
             Dim romname = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value
             Dim nomducfg As String = romname & ".cfg"
-            Dim cheminoverlay As String = Replace(rompath, "\roms\", "\overlays\")
+            Dim cheminoverlay As String
+
+            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                cheminoverlay = Replace(rompath, "\roms\", "\overlays\")
+            Else
+                cheminoverlay = Replace(rompath, "\roms\", "\decorations\")
+            End If
+
             Dim testcheminoverlay As String = Replace(cheminoverlay, romname, nomducfg)
 
             DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminOverlay").Index).Value = testcheminoverlay
@@ -231,14 +238,20 @@ ProchainGamelist:
         'Loop for every gamelists
         For Each i In GameLists.SelectedItems
             Dim nomconsole As String = i
-            Dim nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\overlays\" & nomconsole, "*.cfg").Count
+            Dim nbdansdossier As Integer
+
+            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\overlays\" & nomconsole, "*.cfg").Count
+            Else
+                nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\decorations\" & nomconsole, "*.cfg").Count
+            End If
 
             If nbdansdossier = 0 Then
                 MsgBox("Pas d'Overlays dans la console :" & nomconsole)
                 Exit Sub
             End If
 
-            Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\overlays\" & nomconsole)
+            Dim di As New IO.DirectoryInfo(My.Settings.DossierOverlay & nomconsole)
             Dim aryFi As IO.FileInfo() = di.GetFiles("*.cfg")
             Dim fi As IO.FileInfo
             Dim nomfichiercfg As String
@@ -249,7 +262,12 @@ ProchainGamelist:
                 If fi.Name = nomconsole & "_overlay.cfg" Then GoTo fichiersuivant
                 cheminducfg = fi.FullName
                 nomfichiercfg = fi.Name
-                pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
+
+                If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                    pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
+                Else
+                    pathdelarom = Replace(Replace(cheminducfg, "\decorations\", "\roms\"), ".cfg", "")
+                End If
 
                 'On va rechercher le nom de la rom
                 Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
@@ -366,7 +384,15 @@ lignesuivante:
 
         genpathdelarom = My.Settings.RecalboxFolder & "\roms\" & consolerom & "\" & nomducfg
         'si on est arrivé ici, c'est que y'a pas de roms avec ce path donc on l'ajoute
-        Dim genpathducfg As String = My.Settings.RecalboxFolder & "\overlays\" & consolerom & "\" & nomducfg
+        Dim genpathducfg As String
+
+        If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+            genpathducfg = My.Settings.RecalboxFolder & "\overlays\" & consolerom & "\" & nomducfg
+        Else
+            genpathducfg = My.Settings.RecalboxFolder & "\decorations\" & consolerom & "\" & nomducfg
+        End If
+
+
         ListToSupp.Items.Add(genpathducfg)
     End Sub
 
@@ -402,7 +428,7 @@ lignesuivante:
     Sub LectureDesCfgs(consolerom As String, nomducfg As String)
         Dim modifgamelistenrom As String = nomducfg
 
-        Dim fichier1cfg As String = My.Settings.RecalboxFolder & "\overlays\" & consolerom & "\" & modifgamelistenrom
+        Dim fichier1cfg As String = My.Settings.DossierOverlay & consolerom & "\" & modifgamelistenrom
         Dim fichier2overlaycfg As String
         Dim fichier3png As String
 
@@ -423,13 +449,28 @@ lignesuivante:
         ListdesFichiersEnTrop.Items.Add(fichier1cfg)
 
         For Each s In readText
-            Dim detectinputoverlay As String = InStr(s, "/overlays/")
+            Dim detectinputoverlay As String
+
+            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                detectinputoverlay = InStr(s, "/overlays/")
+            Else
+                detectinputoverlay = InStr(s, "/decorations/")
+            End If
+
             If detectinputoverlay > 0 Then
                 'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
                 'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
                 'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
-                Dim chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
-                cheminpropreoverlay2 = My.Settings.RecalboxFolder & "\overlays\" & Replace(chemincfgoverlaydanscfg, "/", "\")
+
+                Dim chemincfgoverlaydanscfg As String
+
+                If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                    chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
+                Else
+                    chemincfgoverlaydanscfg = s.Substring(InStr(s, "/decorations/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/decorations/") + 9), ".cfg") + 3)
+                End If
+
+                cheminpropreoverlay2 = My.Settings.DossierOverlay & Replace(chemincfgoverlaydanscfg, "/", "\")
                 justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
                 Exit For
             End If

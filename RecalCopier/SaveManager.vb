@@ -563,7 +563,7 @@ lignesuivante:
             Exit Sub
         End If
 
-        If MsgBox("Etes vous sur de supprimer definitivement TOUTES les sauvegardes mentionnées comme Orphelines ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de supprimer DEFINITIVEMENT" & Chr(13) & "TOUTES les sauvegardes mentionnées comme Orphelines ?", vbYesNo) = vbNo Then Exit Sub
 
         For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
             System.IO.File.Delete(ListdesFichiersEnTrop.Items(i))
