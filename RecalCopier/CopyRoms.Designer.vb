@@ -87,7 +87,6 @@ Partial Class CopyRoms
         Me.CheckBoxARRM = New System.Windows.Forms.CheckBox()
         Me.ButtonGetBack = New System.Windows.Forms.Button()
         Me.ButtonTuto1 = New System.Windows.Forms.Button()
-        Me.ButtonValider = New System.Windows.Forms.Button()
         Me.ButtonGenererList = New System.Windows.Forms.Button()
         Me.TutoHideOutilsP4 = New System.Windows.Forms.PictureBox()
         Me.TutoHideOutilsP6 = New System.Windows.Forms.PictureBox()
@@ -136,11 +135,10 @@ Partial Class CopyRoms
         'ListGameLists
         '
         Me.ListGameLists.FormattingEnabled = True
-        Me.ListGameLists.Location = New System.Drawing.Point(15, 89)
+        Me.ListGameLists.Location = New System.Drawing.Point(15, 50)
         Me.ListGameLists.Name = "ListGameLists"
-        Me.ListGameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ListGameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListGameLists.Size = New System.Drawing.Size(206, 264)
+        Me.ListGameLists.Size = New System.Drawing.Size(206, 303)
         Me.ListGameLists.TabIndex = 2
         '
         'FinalGrid
@@ -884,23 +882,6 @@ Partial Class CopyRoms
         Me.ButtonTuto1.Text = "Help/Tutoriel"
         Me.ButtonTuto1.UseVisualStyleBackColor = False
         '
-        'ButtonValider
-        '
-        Me.ButtonValider.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(175, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.ButtonValider.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonValider.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonValider.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonValider.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(49, Byte), Integer))
-        Me.ButtonValider.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonValider.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonValider.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonValider.Location = New System.Drawing.Point(88, 53)
-        Me.ButtonValider.Name = "ButtonValider"
-        Me.ButtonValider.Size = New System.Drawing.Size(72, 30)
-        Me.ButtonValider.TabIndex = 36
-        Me.ButtonValider.Text = "Valider"
-        Me.ButtonValider.UseVisualStyleBackColor = False
-        '
         'ButtonGenererList
         '
         Me.ButtonGenererList.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(27, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -911,7 +892,7 @@ Partial Class CopyRoms
         Me.ButtonGenererList.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGenererList.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonGenererList.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonGenererList.Location = New System.Drawing.Point(76, 362)
+        Me.ButtonGenererList.Location = New System.Drawing.Point(76, 363)
         Me.ButtonGenererList.Name = "ButtonGenererList"
         Me.ButtonGenererList.Size = New System.Drawing.Size(105, 30)
         Me.ButtonGenererList.TabIndex = 37
@@ -1060,7 +1041,6 @@ Partial Class CopyRoms
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
         Me.Controls.Add(Me.ButtonGenererList)
-        Me.Controls.Add(Me.ButtonValider)
         Me.Controls.Add(Me.ButtonTuto1)
         Me.Controls.Add(Me.ButtonGetBack)
         Me.Controls.Add(Me.CheckBoxARRM)
@@ -1205,6 +1185,5 @@ Partial Class CopyRoms
     Friend WithEvents ButtonAfficherMaSelection As Button
     Friend WithEvents ButtonParcourirRecalCopy As Button
     Friend WithEvents ButtonSonVid As Button
-    Friend WithEvents ButtonValider As Button
     Friend WithEvents ButtonGenererList As Button
 End Class

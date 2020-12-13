@@ -472,7 +472,7 @@ lignesuivante:
             Dim columnindex As Integer = DataGridRoms.CurrentCell.ColumnIndex
             Dim rowIndex As Integer = DataGridRoms.CurrentCell.RowIndex
             Dim pathrom As String = DataGridRoms.Rows(rowIndex).Cells(DataGridRoms.Columns("CheminRom").Index).Value
-            Dim nomdelaromdanslistbox As String = Nothing
+            Dim nomdelaromdanslistbox As String
 
 
 

@@ -18,6 +18,19 @@ Public Class CopyRoms
         minipic4.Hide()
         minipic5.Hide()
         ButtonTuto1.Hide()
+
+        'On liste les dossiers
+        For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
+            Dim dossierconsole As String = System.IO.Path.GetFileName(foundDirectory)
+            ListGameLists.Items.Add(dossierconsole)
+        Next
+        '
+
+        'showing gridview2
+        FinalGrid.Show()
+        ButtonGenererList.Show()
+        CheckBoxARRM.Hide()
+
         'Et tout le Block Tuto
         TutoHideGameList.Hide()
         TutoHideFinalGrid.Hide()
@@ -30,33 +43,8 @@ Public Class CopyRoms
         TutoHideOutilsP5.Hide()
         TutoHideOutilsP6.Hide()
     End Sub
-    Private Sub ButtonValider_Click(sender As Object, e As EventArgs) Handles ButtonValider.Click
-        If CheckBoxARRM.Checked = True Then
-            For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
+    Private Sub ButtonValider_Click(sender As Object, e As EventArgs)
 
-                If File.Exists(foundDirectory & "\gamelist_ARRM.xml") Then
-                    ListGameLists.Items.Add(foundDirectory & "\gamelist_ARRM.xml")
-                Else
-                    ListGameLists.Items.Add(foundDirectory & "\gamelist.xml")
-                End If
-            Next
-        Else
-            For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
-                If File.Exists(foundDirectory & "\gamelist.xml") Then
-                    ListGameLists.Items.Add(foundDirectory & "\gamelist.xml")
-                End If
-            Next
-        End If
-        'showing gridview2
-        ButtonValider.Hide()
-        FinalGrid.Show()
-        ButtonGenererList.Show()
-        ButtonValider.Hide()
-        CheckBoxARRM.Hide()
-
-        'Repositionning listbox
-        ListGameLists.Location = New Point(15, 32)
-        ListGameLists.Size = New Point(203, 329)
     End Sub
     Public Shared Function GetFilesRecursive(ByVal initial As String) As List(Of String)
         ' This list stores the results.
@@ -90,6 +78,7 @@ Public Class CopyRoms
         Return result
     End Function
     Private Sub ButtonGenererList_Click_1(sender As Object, e As EventArgs) Handles ButtonGenererList.Click
+
 
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If ListGameLists.SelectedItems.Count = 0 Then
@@ -238,23 +227,22 @@ Public Class CopyRoms
 
         'Loop for every gamelists
         For Each i In ListGameLists.SelectedItems
+            Dim nomconsole As String = i
 
-            'generating the console name
-            'Dim console As String = i
-            'Dim chercheroms As String = InStr(console, "roms\",)
-            'Dim finphrase As String = console.Substring((chercheroms + 4))
-            'Dim detectedeuz As String = InStr(finphrase, "\gamelist.xml")
-            'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
-            Dim dettectarm As String = InStr(i, "ARRM")
-            Dim nomduxml As String
-            If dettectarm > 1 Then nomduxml = "\gamelist_ARRM.xml" Else nomduxml = "\gamelist.xml"
-            Dim nomconsole As String = i.Substring((InStr(i, "roms\",) + 4)).Substring(0, InStr(i.Substring((InStr(i, "roms\",) + 4)), nomduxml) - 1)
-
-            gamelist = i
+            If CheckBoxARRM.Checked = True Then
+                'on va verifier si ARRM ou non dans gamelist
+                If System.IO.File.Exists(My.Settings.RecalboxFolder & "\roms\" & i & "\" & "gamelist_ARRM.xml") Then
+                    gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist_ARRM.xml"
+                Else
+                    gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist.xml"
+                End If
+            Else
+                gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist.xml"
+            End If
 
             'On ajoute ensuite les consoles dans la listebox des console
             Dim consolederom As String = i
-            consolederom = consolederom.Substring(InStr(consolederom, "\roms\") + 5).Substring(0, InStr(consolederom.Substring(InStr(consolederom, "\roms\") + 5), "\") - 1)
+            consolederom = i
 
             listconsoleselected.Items.Add(consolederom)
 
@@ -285,7 +273,7 @@ Public Class CopyRoms
                 Dim romhidden As String = xEle.Element("hidden")
 
                 'Conditionnelles sur tous les champs
-                If romhidden = "true" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
+                If romhidden = "True" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
 
 
                 If xEle.Element("desc") Is Nothing Then
@@ -450,7 +438,6 @@ romsuivante:
         colromselection.Width = 30
 
         'Reajusting Interface and Showing Final Interface
-        ButtonValider.Hide()
         ListGameLists.Hide()
         FinalGrid.Location = New Point(8, 28)
         FinalGrid.Size = New Size(600, 365)
@@ -593,6 +580,7 @@ labelapresfolder:
             End If
 
             Dim cheminrom As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminRom").Index).Value
+            Dim consoleencours As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("Console").Index).Value
 
             'test sur le chemin des screens, si la cellule est complétée alors on coche
             If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
@@ -645,7 +633,10 @@ labelapresfolder:
 
             'test sur le chemin des saves
             Dim cheminsaves As String = Replace(cheminrom, "\roms\", "\saves\")
+            Dim detectdossierentredeux As String = InStr(cheminrom, consoleencours)
+            Dim enleveledossierentrop As String = cheminrom.Substring(detectdossierentredeux + Len(consoleencours))
             Dim romsansextension = FileNameWithoutExtension(nomdelarom)
+            Dim dossierentrop = Replace(enleveledossierentrop, Path.GetFileName(cheminrom), "")
 
             'test consoles qui n'ont pas de saves
             Dim consolesanssaves(34)
@@ -693,7 +684,10 @@ labelapresfolder:
             End If
 
             'on verifie si il y'a des sauvegardes avec le nom du jeu en racine
-            Dim savesCount As Integer = IO.Directory.GetFiles(Replace(cheminsaves, nomdelarom, ""), romsansextension & ".*").Length
+            Dim chemindelasavee As String = Replace(cheminsaves, nomdelarom, "")
+            Dim endeuxfois As String = Replace(chemindelasavee, dossierentrop, "") & FileNameWithoutExtension(cheminrom)
+            Dim savesCount As Integer = IO.Directory.GetFiles(Path.GetDirectoryName(endeuxfois), FileNameWithoutExtension(cheminrom) & ".*").Count
+
 
             If savesCount >= 1 Then
                 FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = True
@@ -963,7 +957,7 @@ consolesanssaves:
         'verif de l'espace disque
         If txt_GoAPrevoir.Text < 0 Then
             MsgBox("Trop d'espace est necessaire à la Copie" & Chr(13) & "ABANDON")
-            Exit Sub
+                        Exit Sub
         End If
 
         'Verification que le chemin est vide
