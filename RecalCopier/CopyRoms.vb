@@ -939,6 +939,7 @@ consolesanssaves:
 
     Private Sub GroupBox1_VisibleChanged(sender As Object, e As EventArgs) Handles GroupBox1.VisibleChanged
         txt_CopyFolder.Text = My.Settings.CopyFolder
+        txt_USBGo.Text = My.Settings.StockageSize
     End Sub
 
     Private Sub ButtonCopy_Click(sender As Object, e As EventArgs) Handles ButtonCopy.Click
@@ -967,8 +968,16 @@ consolesanssaves:
             sizedudossier += file.Length
         Next file
 
+        'Batocera ou Recalbox? 
+        Dim typedistri As String
+        If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+            typedistri = "\recalbox"
+        Else
+            typedistri = "\batocera"
+        End If
+
         If sizedudossier >= 0 Then
-            If MsgBox("Le Chemin de Copie : " & Chr(13) & txt_CopyFolder.Text & Chr(13) & "n'est pas vide" & Chr(13) & Chr(13) & "L'Assistant va creer un dossier : " & Chr(13) & txt_CopyFolder.Text & "\recalbox" & Chr(13) & "Continuer ?", vbYesNo) = vbNo Then Exit Sub
+            If MsgBox("Le Chemin de Copie : " & Chr(13) & txt_CopyFolder.Text & Chr(13) & "n'est pas vide" & Chr(13) & Chr(13) & "L'Assistant va creer un dossier : " & Chr(13) & txt_CopyFolder.Text & typedistri & Chr(13) & "Continuer ?", vbYesNo) = vbNo Then Exit Sub
         End If
 
         'msgbox pour un recap de la selection et des options
@@ -1034,7 +1043,7 @@ consolesanssaves:
 
         'On va boucler sur toutes les roms de la liste. 
         'COPIE DES ROMS
-        Dim newrecalbox As String = My.Settings.CopyFolder & "\recalbox"
+        Dim newrecalbox As String = My.Settings.CopyFolder & typedistri
         Directory.CreateDirectory(newrecalbox)
 
         For i = 0 To listboxMaSelection.Items.Count - 1
@@ -1608,9 +1617,9 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                             Dim cheminoverlaycfg1 As String
 
                             If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
-                                cheminoverlaycfg1 = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\overlays\") & ".cfg"
+                                cheminoverlaycfg1 = Replace(FinalGrid.Rows(d).Cells(FinalGrid.Columns("CheminRom").Index).Value, "\roms\", "\overlays\") & ".cfg"
                             Else
-                                cheminoverlaycfg1 = Replace(FinalGrid.Rows(d).Cells(2).Value, "\roms\", "\decorations\") & ".cfg"
+                                cheminoverlaycfg1 = Replace(FinalGrid.Rows(d).Cells(FinalGrid.Columns("CheminRom").Index).Value, "\roms\", "\decorations\") & ".cfg"
                             End If
 
 
@@ -1748,7 +1757,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
             If MsgBox("Vous avez coché la copie d'Overlays, Que souhaitez vous Copier ?" & Chr(13) & "Oui = Tous les Systemes" & Chr(13) & "Annuler = Uniquement les Consoles de la vue Actuelle" & Chr(13) & "Non = Aucune, Mauvaise saisie :) !", vbYesNoCancel) = vbYes Then
                 On Error Resume Next
                 For overlaysys = 0 To ListGameLists.Items.Count - 1
-                    Dim fulladresse As String = Path.GetDirectoryName(ListGameLists.Items(overlaysys))
+                    Dim fulladresse As String = My.Settings.RecalboxFolder & "\roms\" & ListGameLists.Items(overlaysys)
                     Dim overlayadresse As String
 
                     If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
@@ -1948,7 +1957,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         'on check si les BIOS a la fin 
         If checkbios.Checked = True Then
-            Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(My.Settings.RecalboxFolder & "\Bios", newrecalbox & "\Bios", True)
+            Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(My.Settings.RecalboxFolder & "\bios", newrecalbox & "\bios", True)
         End If
 
         'calcul taille total du dossier

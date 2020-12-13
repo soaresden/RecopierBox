@@ -51,10 +51,10 @@ Partial Class CopyRoms
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_USBGo = New System.Windows.Forms.TextBox()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
+        Me.listboxMaSelection = New System.Windows.Forms.ListBox()
         Me.ButtonSonVid = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txt_romname = New System.Windows.Forms.Label()
-        Me.listboxMaSelection = New System.Windows.Forms.ListBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.romscreeno = New System.Windows.Forms.Button()
         Me.romvideoo = New System.Windows.Forms.Button()
@@ -456,6 +456,7 @@ Partial Class CopyRoms
         Me.txt_USBGo.Name = "txt_USBGo"
         Me.txt_USBGo.Size = New System.Drawing.Size(52, 20)
         Me.txt_USBGo.TabIndex = 0
+        Me.txt_USBGo.Text = "128"
         Me.txt_USBGo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'grp_RomInfos
@@ -477,6 +478,18 @@ Partial Class CopyRoms
         Me.grp_RomInfos.TabIndex = 10
         Me.grp_RomInfos.TabStop = False
         Me.grp_RomInfos.Text = "Rom Infos"
+        '
+        'listboxMaSelection
+        '
+        Me.listboxMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(144, Byte), Integer), CType(CType(249, Byte), Integer))
+        Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.HighlightText
+        Me.listboxMaSelection.FormattingEnabled = True
+        Me.listboxMaSelection.Location = New System.Drawing.Point(184, 55)
+        Me.listboxMaSelection.Name = "listboxMaSelection"
+        Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.listboxMaSelection.Size = New System.Drawing.Size(203, 17)
+        Me.listboxMaSelection.TabIndex = 12
         '
         'ButtonSonVid
         '
@@ -512,18 +525,6 @@ Partial Class CopyRoms
         Me.txt_romname.Size = New System.Drawing.Size(290, 26)
         Me.txt_romname.TabIndex = 22
         Me.txt_romname.Text = "Veuillez cliquer sur une Rom"
-        '
-        'listboxMaSelection
-        '
-        Me.listboxMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(144, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.listboxMaSelection.FormattingEnabled = True
-        Me.listboxMaSelection.Location = New System.Drawing.Point(184, 55)
-        Me.listboxMaSelection.Name = "listboxMaSelection"
-        Me.listboxMaSelection.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.listboxMaSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.listboxMaSelection.Size = New System.Drawing.Size(203, 17)
-        Me.listboxMaSelection.TabIndex = 12
         '
         'GroupBox6
         '
