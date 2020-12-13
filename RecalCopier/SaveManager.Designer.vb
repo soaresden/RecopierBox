@@ -454,6 +454,7 @@ Partial Class SaveManager
         Me.PathActuel.ReadOnly = True
         Me.PathActuel.Size = New System.Drawing.Size(89, 20)
         Me.PathActuel.TabIndex = 66
+        Me.PathActuel.Visible = False
         '
         'SaveManager
         '

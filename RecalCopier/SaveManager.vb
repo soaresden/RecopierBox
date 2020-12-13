@@ -305,6 +305,9 @@ fichiersuivant:
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, NomRomXML asc"
 
+        'On supprime la liste au cas ou
+        ListdesFichiersEnTrop.Items.Clear()
+
         'On va vérifier si les cfg sont liés à une rom
         For row = 0 To DataGridSave.Rows.Count - 2
             Dim cheminencours = DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value
@@ -577,6 +580,11 @@ lignesuivante:
             Exit Sub
         End If
 
+        If ListdesFichiersEnTrop.SelectedItems.Count > 1 Then
+            MsgBox("Impossible de Traiter plusieurs Fichiers simultanament")
+            Exit Sub
+        End If
+
         'Detect du . de l'extension
         Dim nbpoint As String = InStr(NewName.Text, ".")
 
@@ -587,15 +595,20 @@ lignesuivante:
 
         'On prends l'extension attendue
         Dim extension As String = Path.GetExtension(ActualName.Text)
-        If MsgBox("Vous allez changer le nom de la sauvegarde : " & ActualName.Text & Chr(13) & "pour : " & NewName.Text & extension & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & ActualName.Text & Chr(13) & "pour : " & NewName.Text & extension & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
 
         Dim finaladresse As String = Replace(PathActuel.Text, ActualName.Text, (NewName.Text & extension))
 
         File.Move(PathActuel.Text, finaladresse)
 
-
         'on refresh le tout
+        ActualName.Text = Nothing
+        PathActuel.Text = Nothing
         ImportBoth1.PerformClick()
     End Sub
 
+    Private Sub ListdesFichiersEnTrop_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListdesFichiersEnTrop.SelectedIndexChanged
+        ActualName.Text = Path.GetFileName(ListdesFichiersEnTrop.SelectedItem)
+        PathActuel.Text = ListdesFichiersEnTrop.SelectedItem
+    End Sub
 End Class
