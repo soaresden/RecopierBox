@@ -503,4 +503,23 @@ lignesuivante:
         Next
 
     End Sub
+
+    Private Sub ButtonRomsDeleteSelected_Click(sender As Object, e As EventArgs) Handles ButtonRomsDeleteSelected.Click
+        If ListSaves.SelectedItem = Nothing Then
+            MsgBox("Aucune Selection")
+            Exit Sub
+        End If
+
+        If MsgBox("Etes vous sur de supprimer definitivement les sauvegardes selectionnées ci dessus ?", vbYesNo) = vbNo Then Exit Sub
+
+        On Error Resume Next
+        For Each item As Object In ListSaves.SelectedItems
+            ListSaves.Items.Remove(item.ToString)
+            System.IO.File.Delete(item.ToString)
+        Next
+        On Error GoTo 0
+
+        'On Refresh
+        buttonImportRoms1.PerformClick()
+    End Sub
 End Class

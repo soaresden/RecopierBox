@@ -51,7 +51,7 @@ Partial Class SaveManager
         Me.ListdesFichiersEnTrop = New System.Windows.Forms.ListBox()
         Me.ListSaves = New System.Windows.Forms.ListBox()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.ButtonRomsDeleteSelected = New System.Windows.Forms.Button()
         Me.GroupRoms = New System.Windows.Forms.GroupBox()
         Me.GroupSaves = New System.Windows.Forms.GroupBox()
         CType(Me.DataGridSave, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -400,27 +400,27 @@ Partial Class SaveManager
         Me.Button3.Text = "Supprimer les Saves Orphelines"
         Me.Button3.UseVisualStyleBackColor = False
         '
-        'Button1
+        'ButtonRomsDeleteSelected
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(117, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(200, Byte), Integer))
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Button1.Location = New System.Drawing.Point(6, 19)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(113, 47)
-        Me.Button1.TabIndex = 62
-        Me.Button1.Text = "Supprimer le(s)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Saves Selectionnées"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.ButtonRomsDeleteSelected.BackColor = System.Drawing.Color.FromArgb(CType(CType(117, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.ButtonRomsDeleteSelected.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonRomsDeleteSelected.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonRomsDeleteSelected.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonRomsDeleteSelected.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonRomsDeleteSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonRomsDeleteSelected.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonRomsDeleteSelected.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonRomsDeleteSelected.Location = New System.Drawing.Point(6, 19)
+        Me.ButtonRomsDeleteSelected.Name = "ButtonRomsDeleteSelected"
+        Me.ButtonRomsDeleteSelected.Size = New System.Drawing.Size(113, 47)
+        Me.ButtonRomsDeleteSelected.TabIndex = 62
+        Me.ButtonRomsDeleteSelected.Text = "Supprimer le(s)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Saves Selectionnées"
+        Me.ButtonRomsDeleteSelected.UseVisualStyleBackColor = False
         '
         'GroupRoms
         '
         Me.GroupRoms.BackColor = System.Drawing.Color.MediumPurple
-        Me.GroupRoms.Controls.Add(Me.Button1)
+        Me.GroupRoms.Controls.Add(Me.ButtonRomsDeleteSelected)
         Me.GroupRoms.Controls.Add(Me.ListSaves)
         Me.GroupRoms.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupRoms.Location = New System.Drawing.Point(134, 342)
@@ -514,7 +514,7 @@ Partial Class SaveManager
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents ActualName As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents ButtonRomsDeleteSelected As Button
     Friend WithEvents GroupRoms As GroupBox
     Friend WithEvents GroupSaves As GroupBox
 End Class
