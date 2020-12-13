@@ -50,7 +50,7 @@ Partial Class SaveManager
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ListdesFichiersEnTrop = New System.Windows.Forms.ListBox()
         Me.ListSaves = New System.Windows.Forms.ListBox()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.ButtonMenageOrphelin = New System.Windows.Forms.Button()
         Me.ButtonRomsDeleteSelected = New System.Windows.Forms.Button()
         Me.GroupRoms = New System.Windows.Forms.GroupBox()
         Me.GroupSaves = New System.Windows.Forms.GroupBox()
@@ -383,22 +383,22 @@ Partial Class SaveManager
         Me.ListSaves.Size = New System.Drawing.Size(239, 173)
         Me.ListSaves.TabIndex = 60
         '
-        'Button3
+        'ButtonMenageOrphelin
         '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button3.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(154, Byte), Integer), CType(CType(40, Byte), Integer))
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Button3.Location = New System.Drawing.Point(6, 14)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(209, 28)
-        Me.Button3.TabIndex = 42
-        Me.Button3.Text = "Supprimer les Saves Orphelines"
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.ButtonMenageOrphelin.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.ButtonMenageOrphelin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonMenageOrphelin.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonMenageOrphelin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonMenageOrphelin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(154, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.ButtonMenageOrphelin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonMenageOrphelin.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonMenageOrphelin.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonMenageOrphelin.Location = New System.Drawing.Point(6, 14)
+        Me.ButtonMenageOrphelin.Name = "ButtonMenageOrphelin"
+        Me.ButtonMenageOrphelin.Size = New System.Drawing.Size(209, 28)
+        Me.ButtonMenageOrphelin.TabIndex = 42
+        Me.ButtonMenageOrphelin.Text = "Supprimer les Saves Orphelines"
+        Me.ButtonMenageOrphelin.UseVisualStyleBackColor = False
         '
         'ButtonRomsDeleteSelected
         '
@@ -433,7 +433,7 @@ Partial Class SaveManager
         'GroupSaves
         '
         Me.GroupSaves.BackColor = System.Drawing.Color.SandyBrown
-        Me.GroupSaves.Controls.Add(Me.Button3)
+        Me.GroupSaves.Controls.Add(Me.ButtonMenageOrphelin)
         Me.GroupSaves.Controls.Add(Me.RenameSelection)
         Me.GroupSaves.Controls.Add(Me.ListdesFichiersEnTrop)
         Me.GroupSaves.Controls.Add(Me.ButtonSuppSave)
@@ -510,7 +510,7 @@ Partial Class SaveManager
     Friend WithEvents ButtonSuppSave As Button
     Friend WithEvents NewName As TextBox
     Friend WithEvents ButtonRenameSave As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents ButtonMenageOrphelin As Button
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents ActualName As TextBox

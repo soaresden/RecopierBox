@@ -510,7 +510,7 @@ lignesuivante:
             Exit Sub
         End If
 
-        If MsgBox("Etes vous sur de supprimer definitivement les sauvegardes selectionnées ci dessus ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de supprimer definitivement les sauvegardes selectionnées ci contre ?", vbYesNo) = vbNo Then Exit Sub
 
         On Error Resume Next
         For Each item As Object In ListSaves.SelectedItems
@@ -521,5 +521,41 @@ lignesuivante:
 
         'On Refresh
         buttonImportRoms1.PerformClick()
+    End Sub
+
+    Private Sub ButtonSuppSave_Click(sender As Object, e As EventArgs) Handles ButtonSuppSave.Click
+        If ListdesFichiersEnTrop.SelectedItem = Nothing Then
+            MsgBox("Aucune Selection")
+            Exit Sub
+        End If
+
+        If MsgBox("Etes vous sur de supprimer definitivement les sauvegardes selectionnées ci contre ?", vbYesNo) = vbNo Then Exit Sub
+
+        On Error Resume Next
+        For Each item As Object In ListdesFichiersEnTrop.SelectedItems
+            ListdesFichiersEnTrop.Items.Remove(item.ToString)
+            System.IO.File.Delete(item.ToString)
+        Next
+        On Error GoTo 0
+
+        'On Refresh
+        ButtonImportSaves1.PerformClick()
+    End Sub
+
+    Private Sub ButtonMenageOrphelin_Click(sender As Object, e As EventArgs) Handles ButtonMenageOrphelin.Click
+        If ListdesFichiersEnTrop.Items.Count = 0 Then
+            MsgBox("Aucune Saves Orpheline Detectée")
+            Exit Sub
+        End If
+
+        If MsgBox("Etes vous sur de supprimer definitivement TOUTES les sauvegardes mentionnées comme Orphelines ?", vbYesNo) = vbNo Then Exit Sub
+
+        For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
+            System.IO.File.Delete(ListdesFichiersEnTrop.Items(i))
+        Next
+
+        ListdesFichiersEnTrop.Items.Clear()
+        MsgBox("Fichiers Orphelins Supprimés")
+
     End Sub
 End Class
