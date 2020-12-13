@@ -22,6 +22,7 @@ Partial Class SaveManager
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SaveManager))
         Me.ButtonImportSaves1 = New System.Windows.Forms.Button()
         Me.buttonImportRoms1 = New System.Windows.Forms.Button()
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
@@ -54,6 +55,7 @@ Partial Class SaveManager
         Me.ButtonRomsDeleteSelected = New System.Windows.Forms.Button()
         Me.GroupRoms = New System.Windows.Forms.GroupBox()
         Me.GroupSaves = New System.Windows.Forms.GroupBox()
+        Me.PathActuel = New System.Windows.Forms.TextBox()
         CType(Me.DataGridSave, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,10 +136,10 @@ Partial Class SaveManager
         Me.DataGridSave.AllowUserToOrderColumns = True
         Me.DataGridSave.AllowUserToResizeRows = False
         Me.DataGridSave.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridSave.Location = New System.Drawing.Point(507, 128)
+        Me.DataGridSave.Location = New System.Drawing.Point(507, 140)
         Me.DataGridSave.Name = "DataGridSave"
         Me.DataGridSave.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridSave.Size = New System.Drawing.Size(453, 187)
+        Me.DataGridSave.Size = New System.Drawing.Size(453, 175)
         Me.DataGridSave.TabIndex = 50
         '
         'GameLists
@@ -229,6 +231,7 @@ Partial Class SaveManager
         'RenameSelection
         '
         Me.RenameSelection.BackColor = System.Drawing.Color.Sienna
+        Me.RenameSelection.Controls.Add(Me.PathActuel)
         Me.RenameSelection.Controls.Add(Me.Label8)
         Me.RenameSelection.Controls.Add(Me.Label7)
         Me.RenameSelection.Controls.Add(Me.ActualName)
@@ -315,11 +318,9 @@ Partial Class SaveManager
         Me.TextBox2.Location = New System.Drawing.Point(507, 77)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(453, 45)
+        Me.TextBox2.Size = New System.Drawing.Size(453, 57)
         Me.TextBox2.TabIndex = 46
-        Me.TextBox2.Text = "La liste de toutes les Saves." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "On appelle Save Orpheline, une save qui n'est pas " &
-    "assignée dans le gamelist." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "La coche à droite permets de savoir si une save est " &
-    "liée à une rom ou non." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.TextBox2.Text = resources.GetString("TextBox2.Text")
         '
         'TextBox1
         '
@@ -327,20 +328,21 @@ Partial Class SaveManager
         Me.TextBox1.Location = New System.Drawing.Point(134, 77)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(367, 45)
+        Me.TextBox1.Size = New System.Drawing.Size(367, 57)
         Me.TextBox1.TabIndex = 45
         Me.TextBox1.Text = "La liste de toutes vos roms" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "La coche à droite permet de savoir si une save est d" &
-    "isponible ou non."
+    "isponible ou non." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selectionner une ligne copie automatiquement le nom du fichie" &
+    "r dans le presse-papiers."
         '
         'DataGridRoms
         '
         Me.DataGridRoms.AllowUserToOrderColumns = True
         Me.DataGridRoms.AllowUserToResizeRows = False
         Me.DataGridRoms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridRoms.Location = New System.Drawing.Point(134, 128)
+        Me.DataGridRoms.Location = New System.Drawing.Point(134, 140)
         Me.DataGridRoms.Name = "DataGridRoms"
         Me.DataGridRoms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridRoms.Size = New System.Drawing.Size(367, 187)
+        Me.DataGridRoms.Size = New System.Drawing.Size(367, 175)
         Me.DataGridRoms.TabIndex = 44
         '
         'Label2
@@ -445,6 +447,14 @@ Partial Class SaveManager
         Me.GroupSaves.TabStop = False
         Me.GroupSaves.Text = "Operations sur tous les Fichiers Saves"
         '
+        'PathActuel
+        '
+        Me.PathActuel.Location = New System.Drawing.Point(6, 63)
+        Me.PathActuel.Name = "PathActuel"
+        Me.PathActuel.ReadOnly = True
+        Me.PathActuel.Size = New System.Drawing.Size(89, 20)
+        Me.PathActuel.TabIndex = 66
+        '
         'SaveManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -517,4 +527,5 @@ Partial Class SaveManager
     Friend WithEvents ButtonRomsDeleteSelected As Button
     Friend WithEvents GroupRoms As GroupBox
     Friend WithEvents GroupSaves As GroupBox
+    Friend WithEvents PathActuel As TextBox
 End Class

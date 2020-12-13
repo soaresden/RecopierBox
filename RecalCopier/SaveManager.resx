@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TextBox2.Text" xml:space="preserve">
+    <value>La liste de toutes les Saves.
+On appelle Save Orpheline, une save qui n'est pas assignée dans le gamelist.
+La coche à droite permets de savoir si une save est liée à une rom ou non.
+Utilisez le tableau des Roms pour "Reparer" des noms de fichiers pour les renommer </value>
+  </data>
 </root>

@@ -453,8 +453,14 @@ lignesuivante:
         'check that row isn't -1, i.e. creating datagrid header
         If e.RowIndex = -1 Then Exit Sub
 
+        'On copie le nom du fichier dans le fichier de renommage
+        Dim nomdufichier As String = Path.GetFileName(DataGridRoms.Rows(e.RowIndex).Cells(DataGridRoms.Columns("CheminRom").Index).Value)
+        NewName.Text = FileNameWithoutExtension(nomdufichier)
+
         'On recherche le numero de la colonne des Selections
         Dim valeursaves = DataGridRoms.Rows(e.RowIndex).Cells(DataGridRoms.Columns("NbSaves").Index).Value
+
+
 
         If valeursaves > 0 Then
 
@@ -463,7 +469,9 @@ lignesuivante:
             Dim columnindex As Integer = DataGridRoms.CurrentCell.ColumnIndex
             Dim rowIndex As Integer = DataGridRoms.CurrentCell.RowIndex
             Dim pathrom As String = DataGridRoms.Rows(rowIndex).Cells(DataGridRoms.Columns("CheminRom").Index).Value
-            Dim nomdelaromdanslistbox As String
+            Dim nomdelaromdanslistbox As String = Nothing
+
+
 
             ListSaves.ClearSelected()
 
@@ -484,7 +492,11 @@ lignesuivante:
         If e.RowIndex = -1 Then Exit Sub
 
 
+
         Dim nomdelasave As String = DataGridSave.Rows(e.RowIndex).Cells(DataGridSave.Columns("NomFichierSave").Index).Value
+        ActualName.Text = nomdelasave
+        PathActuel.Text = DataGridSave.Rows(e.RowIndex).Cells(DataGridSave.Columns("CheminSave").Index).Value
+
         'Si on est ici c'est qu'il y'a plusieurs saves à la rom. Donc on va selectionner les items dans la listbox
         Dim columnindex As Integer = DataGridSave.CurrentCell.ColumnIndex
         Dim rowIndex As Integer = DataGridSave.CurrentCell.RowIndex
@@ -558,4 +570,32 @@ lignesuivante:
         MsgBox("Fichiers Orphelins Supprimés")
 
     End Sub
+
+    Private Sub ButtonRenameSave_Click(sender As Object, e As EventArgs) Handles ButtonRenameSave.Click
+        If NewName.Text = Nothing Then
+            MsgBox("Aucun nom de fichier Saisi")
+            Exit Sub
+        End If
+
+        'Detect du . de l'extension
+        Dim nbpoint As String = InStr(NewName.Text, ".")
+
+        If nbpoint > 0 Then
+            MsgBox("Merci de retirer l'extension dans votre proposition")
+            Exit Sub
+        End If
+
+        'On prends l'extension attendue
+        Dim extension As String = Path.GetExtension(ActualName.Text)
+        If MsgBox("Vous allez changer le nom de la sauvegarde : " & ActualName.Text & Chr(13) & "pour : " & NewName.Text & extension & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
+
+        Dim finaladresse As String = Replace(PathActuel.Text, ActualName.Text, (NewName.Text & extension))
+
+        File.Move(PathActuel.Text, finaladresse)
+
+
+        'on refresh le tout
+        ImportBoth1.PerformClick()
+    End Sub
+
 End Class
