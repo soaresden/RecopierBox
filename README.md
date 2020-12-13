@@ -1,7 +1,7 @@
 # RecopierBox
 A Recalbox Copier program to be able to create custom library and play a Blind Test with your GameLists :)
 
-**TELECHARGEMENT: **
+**TELECHARGEMENT:**
 
 https://github.com/soaresden/RecopierBox/releases
 
