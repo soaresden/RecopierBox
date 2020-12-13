@@ -289,8 +289,8 @@ fichiersuivant:
         DataGridSave.RowHeadersWidth = 25
         DataGridSave.Columns("Console").Width = 40
         DataGridSave.Columns("NomRomXML").Width = 90
-        DataGridSave.Columns("NomFichierSave").Width = 140
-        DataGridSave.Columns("CheminSave").Width = 25
+        DataGridSave.Columns("NomFichierSave").Width = 190
+        DataGridSave.Columns("CheminSave").Width = 60
 
         Dim compteurSave As Integer = 0
 
@@ -477,5 +477,30 @@ lignesuivante:
             Next
 
         End If
+    End Sub
+
+    Private Sub DataGridSave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridSave.CellContentClick
+        'check that row isn't -1, i.e. creating datagrid header
+        If e.RowIndex = -1 Then Exit Sub
+
+
+        Dim nomdelasave As String = DataGridSave.Rows(e.RowIndex).Cells(DataGridSave.Columns("NomFichierSave").Index).Value
+        'Si on est ici c'est qu'il y'a plusieurs saves à la rom. Donc on va selectionner les items dans la listbox
+        Dim columnindex As Integer = DataGridSave.CurrentCell.ColumnIndex
+        Dim rowIndex As Integer = DataGridSave.CurrentCell.RowIndex
+        Dim pathrom As String = DataGridSave.Rows(rowIndex).Cells(DataGridSave.Columns("CheminSave").Index).Value
+        Dim nomdelaromdanslistbox As String
+
+            ListdesFichiersEnTrop.ClearSelected()
+
+            'On va chercher le nom et selectionner
+            For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
+            nomdelaromdanslistbox = Path.GetFileName(ListdesFichiersEnTrop.Items(i).ToString)
+
+            If nomdelaromdanslistbox = nomdelasave Then
+                ListdesFichiersEnTrop.SetSelected(i, True)
+            End If
+        Next
+
     End Sub
 End Class
