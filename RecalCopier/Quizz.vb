@@ -22,6 +22,7 @@ Public Class Quizz
         Label10.Hide()
         TxtTotalEntrees.Hide()
         QuizzBoxRep.Hide()
+        Cheat.Hide()
         TempGrid.Hide()
         CheckSansFiltres.Hide()
         CheckAvecFiltres.Hide()
@@ -318,7 +319,7 @@ romsuivante:
 
         'Width for columns
         TempGrid.Columns("Console").Width = 50
-        TempGrid.Columns("Titre").Width = 230
+        TempGrid.Columns("Titre").Width = 190
 
         TempGrid.Columns("CheminRom").Visible = False
         TempGrid.Columns("CheminRom").Width = 50
@@ -606,41 +607,41 @@ suite6:
         'Recalcul des resultats
         TxtTotalEntrees.Text = TempGrid.RowCount - 1
     End Sub
-    Private Sub Txtgenre_KeyDown(sender As Object, e As KeyEventArgs)
+    Private Sub Txtgenre_KeyDown(sender As Object, e As KeyEventArgs) Handles txtgenre.KeyDown
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub Txtdev_KeyDown(sender As Object, e As KeyEventArgs)
+    Private Sub Txtdev_KeyDown(sender As Object, e As KeyEventArgs) Handles txtdev.KeyDown
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub Txtpub_KeyDown(sender As Object, e As KeyEventArgs)
+    Private Sub Txtpub_KeyDown(sender As Object, e As KeyEventArgs) Handles txtpub.KeyDown
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub TxtAnnee_KeyDown(sender As Object, e As KeyEventArgs)
+    Private Sub TxtAnnee_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtAnnee.KeyDown
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub Txtplayers_KeyDown(sender As Object, e As KeyEventArgs)
+    Private Sub Txtplayers_KeyDown(sender As Object, e As KeyEventArgs) Handles txtplayers.KeyDown
         If e.KeyCode = Keys.Enter Then
         End If
     End Sub
-    Private Sub TxtPlayCount_KeyDown(sender As Object, e As KeyEventArgs)
-        If e.KeyCode = Keys.Enter Then
-            Call Entreesurfiltres()
-        End If
-    End Sub
-    Private Sub TxtSynopsis_KeyDown(sender As Object, e As KeyEventArgs)
+    Private Sub TxtPlayCount_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtPlayCount.KeyDown
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
     End Sub
-    Private Sub ComboRating_KeyDown(sender As Object, e As KeyEventArgs)
+    Private Sub TxtSynopsis_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtSynopsis.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Call Entreesurfiltres()
+        End If
+    End Sub
+    Private Sub ComboRating_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtRating.KeyDown
         If e.KeyCode = Keys.Enter Then
             Call Entreesurfiltres()
         End If
@@ -726,6 +727,7 @@ recalculrando:
         'On va maintenant Charger toute l'interface de jeu
         QuizzBoxRep.Show()
         PanelVideo.Show()
+        Cheat.Show()
 
         If ConsoleTitre.Checked = True Then ListConsoleDesJeux.Show() Else ListConsoleDesJeux.Hide()
 
@@ -761,6 +763,14 @@ recalculrando:
 
     Private Sub RandomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles RandomList.SelectedIndexChanged
         txtpositionrandom.Text = RandomList.SelectedIndex + 1
+        'calcul du vrai chiffre 
+        Dim chiffreactuel = RandomList.SelectedItem
+        Dim vraichiffre = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
+
+        TempGrid.ClearSelection()
+        TempGrid.CurrentCell = TempGrid.Item("Titre", CInt(vraichiffre))
+        TempGrid.BeginEdit(False)
+
         PlayerStop.PerformClick()
     End Sub
 
@@ -1013,5 +1023,13 @@ finboucle:
 (ByVal hWnd As IntPtr, ByVal wCmd As Integer,
 ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
+    Private Sub Cheat_Click(sender As Object, e As EventArgs) Handles Cheat.Click
+        If Cheat.Checked = False Then
+            TempGrid.Hide()
+        ElseIf Cheat.Checked = True Then
+            TempGrid.Size = New Point(369, 580)
+            TempGrid.Show()
+        End If
 
+    End Sub
 End Class

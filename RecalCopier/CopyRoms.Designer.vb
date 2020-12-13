@@ -461,9 +461,9 @@ Partial Class CopyRoms
         'grp_RomInfos
         '
         Me.grp_RomInfos.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.ButtonSonVid)
         Me.grp_RomInfos.Controls.Add(Me.Panel1)
-        Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.GroupBox6)
         Me.grp_RomInfos.Controls.Add(Me.RomImage)
         Me.grp_RomInfos.Controls.Add(Me.txt_romdesc)
