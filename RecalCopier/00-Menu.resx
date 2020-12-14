@@ -123,14 +123,21 @@
   <data name="TxtDisclaimer.Text" xml:space="preserve">
     <value>Cet outil a pour but de simplifier la creation de votre dossier Recalbox personnalisé selon des critères.
 
-Vous voulez un dossier Recalbox avec uniquement des jeux de combat
-avec une contrainte de stockage 16Go ?
-Générez le !
-
+DOSSIER PERSO:
 A partir de votre Dossier Mère principal, l'outil permet de creez des petits sets personnalisés selon vos choix.
+Vous voulez un dossier Recalbox avec uniquement des jeux de combat avec une contrainte de stockage 16Go ?
+Générez ce dossier Custom !
 
-Si vous avez un tas de Videos, n'hesitez pas à vous essayer au Blind Test!
+OVERLAYS:
+Gérez votre collection d'overlays
 
+SAVES:
+Maitrisez/renommer vos sauvegardes orphelines.
+
+BLIND TEST:
+Essayez de reconnaitre par video/son vos jeux favoris !
+
+N'Hesitez pas à soutenir le projet par le bouton Paypal :)
 PS: Pour une bonne visualisation, installez les 2 fonts du dossier</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -2087,6 +2094,84 @@ Il est donc impératif que vos Gamelists soient correctement scrappés !
 
 Pour cela, je vous recommande ARRM de NexusOne13 qui permets de scrapper 
 Infos/Images/Videos/Manuels/Maps/Overlays ...</value>
+  </data>
+  <data name="Paypal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        ULNQ8AAAAABJRU5ErkJggg==
+</value>
   </data>
   <data name="ButtonOverlay.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

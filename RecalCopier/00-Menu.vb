@@ -142,8 +142,8 @@ Public Class Form1
         OverlayManager.Show()
         Me.Hide()
     End Sub
-    Private Sub Quitter_Click_1(sender As Object, e As EventArgs) Handles Quitter.Click
-        'Au clic, on ferme le programme
-        Me.Close()
+
+    Private Sub Paypal_Click(sender As Object, e As EventArgs) Handles Paypal.Click
+        System.Diagnostics.Process.Start(String.Format("https://paypal.me/SoaresDenis?locale.x=fr_FR"))
     End Sub
 End Class

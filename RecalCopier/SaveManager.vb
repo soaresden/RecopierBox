@@ -402,6 +402,10 @@ lignesuivante:
     End Sub
 
     Private Sub ImportBoth_Click(sender As Object, e As EventArgs) Handles ImportBoth1.Click
+        'raz des lists
+        ListSaves.Items.Clear()
+        ListdesFichiersEnTrop.Items.Clear()
+
         buttonImportRoms1.PerformClick()
         ButtonImportSaves1.PerformClick()
     End Sub
@@ -590,7 +594,7 @@ lignesuivante:
 
         'On delete les fichiers
         For Each i In ListdesFichiersEnTrop.SelectedItems
-            ListdesFichiersEnTrop.Items.Remove(i)
+            System.IO.File.Delete(i)
             compteur = compteur + 1
         Next
 
@@ -621,7 +625,12 @@ lignesuivante:
             System.IO.File.Delete(ListdesFichiersEnTrop.Items(i))
         Next
 
-        ListdesFichiersEnTrop.Items.Clear()
+        'On refresh
+        ButtonImportSaves1.PerformClick()
+
+        'On enleve les doublons
+        Supdoublon(ListdesFichiersEnTrop)
+
         MsgBox("Fichiers Orphelins Supprimés")
 
     End Sub
@@ -652,9 +661,16 @@ lignesuivante:
 oncontinue:
         'On prends l'extension attendue
         Dim extension As String = Path.GetExtension(ActualName.Text)
+        Dim finaladresse As String = Replace(PathActuel.Text, ActualName.Text, (NewName.Text & extension))
+
+        'Test si ca existe deja
+        If System.IO.File.Exists(finaladresse) Then
+            MsgBox("Impossible de renommer ce fichier" & Chr(13) & "Le nom Final de votre fichier existe déjà")
+            Exit Sub
+        End If
+
         If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & NewName.Text & extension & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
 
-        Dim finaladresse As String = Replace(PathActuel.Text, ActualName.Text, (NewName.Text & extension))
 
         File.Move(PathActuel.Text, finaladresse)
 
