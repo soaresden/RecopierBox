@@ -526,16 +526,24 @@ lignesuivante:
         End If
 
         If MsgBox("Etes vous sur de supprimer definitivement les sauvegardes selectionnées ci contre ?", vbYesNo) = vbNo Then Exit Sub
+        Dim compteur As Integer = 0
 
-        On Error Resume Next
-        For Each item As Object In ListSaves.SelectedItems
-            ListSaves.Items.Remove(item.ToString)
-            System.IO.File.Delete(item.ToString)
+        'On delete les fichiers
+        For Each i In ListSaves.SelectedItems
+            System.IO.File.Delete(i)
+            compteur = compteur + 1
         Next
-        On Error GoTo 0
+
+        'on remove les entrees
+        For n As Integer = ListSaves.SelectedItems.Count - 1 To 0 Step -1
+            ListSaves.Items.Remove(ListSaves.SelectedItems(n))
+        Next n
 
         'On Refresh
         buttonImportRoms1.PerformClick()
+
+        'Recap
+        MsgBox(compteur & " fichiers supprimés")
     End Sub
 
     Private Sub ButtonSuppSave_Click(sender As Object, e As EventArgs) Handles ButtonSuppSave.Click
@@ -545,16 +553,24 @@ lignesuivante:
         End If
 
         If MsgBox("Etes vous sur de supprimer definitivement les sauvegardes selectionnées ci contre ?", vbYesNo) = vbNo Then Exit Sub
+        Dim compteur As Integer = 0
 
-        On Error Resume Next
-        For Each item As Object In ListdesFichiersEnTrop.SelectedItems
-            ListdesFichiersEnTrop.Items.Remove(item.ToString)
-            System.IO.File.Delete(item.ToString)
+        'On delete les fichiers
+        For Each i In ListdesFichiersEnTrop.SelectedItems
+            ListdesFichiersEnTrop.Items.Remove(i)
+            compteur = compteur + 1
         Next
-        On Error GoTo 0
+
+        'on remove les entrees
+        For n As Integer = ListdesFichiersEnTrop.SelectedItems.Count - 1 To 0 Step -1
+            ListdesFichiersEnTrop.Items.Remove(ListdesFichiersEnTrop.SelectedItems(n))
+        Next n
 
         'On Refresh
         ButtonImportSaves1.PerformClick()
+
+        'Recap
+        MsgBox(compteur & " fichiers supprimés")
     End Sub
 
     Private Sub ButtonMenageOrphelin_Click(sender As Object, e As EventArgs) Handles ButtonMenageOrphelin.Click

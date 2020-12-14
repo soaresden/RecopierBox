@@ -42,6 +42,8 @@ Partial Class Form1
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.txtWhyGamelist = New System.Windows.Forms.TextBox()
         Me.PanelGauche = New System.Windows.Forms.Panel()
+        Me.TypeBatocera = New System.Windows.Forms.CheckBox()
+        Me.TypeRecalbox = New System.Windows.Forms.CheckBox()
         Me.Quitter = New System.Windows.Forms.Button()
         Me.ButtonOverlay = New System.Windows.Forms.Button()
         Me.ButtonSave = New System.Windows.Forms.Button()
@@ -50,8 +52,6 @@ Partial Class Form1
         Me.Label5 = New System.Windows.Forms.Label()
         Me.PanelHaut = New System.Windows.Forms.Panel()
         Me.PanelDroite = New System.Windows.Forms.Panel()
-        Me.TypeRecalbox = New System.Windows.Forms.CheckBox()
-        Me.TypeBatocera = New System.Windows.Forms.CheckBox()
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -146,9 +146,9 @@ Partial Class Form1
         Me.label3.Location = New System.Drawing.Point(146, 67)
         Me.label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label3.Name = "label3"
-        Me.label3.Size = New System.Drawing.Size(92, 14)
+        Me.label3.Size = New System.Drawing.Size(99, 14)
         Me.label3.TabIndex = 14
-        Me.label3.Text = "v4 by Soaresden"
+        Me.label3.Text = "v4.1 by Soaresden"
         '
         'Disclaimer
         '
@@ -292,6 +292,30 @@ Partial Class Form1
         Me.PanelGauche.Size = New System.Drawing.Size(247, 542)
         Me.PanelGauche.TabIndex = 24
         '
+        'TypeBatocera
+        '
+        Me.TypeBatocera.AutoSize = True
+        Me.TypeBatocera.Enabled = False
+        Me.TypeBatocera.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.TypeBatocera.Location = New System.Drawing.Point(131, 194)
+        Me.TypeBatocera.Name = "TypeBatocera"
+        Me.TypeBatocera.Size = New System.Drawing.Size(107, 17)
+        Me.TypeBatocera.TabIndex = 26
+        Me.TypeBatocera.Text = "Dossier Batocera"
+        Me.TypeBatocera.UseVisualStyleBackColor = True
+        '
+        'TypeRecalbox
+        '
+        Me.TypeRecalbox.AutoSize = True
+        Me.TypeRecalbox.Enabled = False
+        Me.TypeRecalbox.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.TypeRecalbox.Location = New System.Drawing.Point(16, 194)
+        Me.TypeRecalbox.Name = "TypeRecalbox"
+        Me.TypeRecalbox.Size = New System.Drawing.Size(109, 17)
+        Me.TypeRecalbox.TabIndex = 25
+        Me.TypeRecalbox.Text = "Dossier Recalbox"
+        Me.TypeRecalbox.UseVisualStyleBackColor = True
+        '
         'Quitter
         '
         Me.Quitter.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
@@ -424,30 +448,6 @@ Partial Class Form1
         Me.PanelDroite.Name = "PanelDroite"
         Me.PanelDroite.Size = New System.Drawing.Size(225, 391)
         Me.PanelDroite.TabIndex = 25
-        '
-        'TypeRecalbox
-        '
-        Me.TypeRecalbox.AutoSize = True
-        Me.TypeRecalbox.Enabled = False
-        Me.TypeRecalbox.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.TypeRecalbox.Location = New System.Drawing.Point(16, 194)
-        Me.TypeRecalbox.Name = "TypeRecalbox"
-        Me.TypeRecalbox.Size = New System.Drawing.Size(109, 17)
-        Me.TypeRecalbox.TabIndex = 25
-        Me.TypeRecalbox.Text = "Dossier Recalbox"
-        Me.TypeRecalbox.UseVisualStyleBackColor = True
-        '
-        'TypeBatocera
-        '
-        Me.TypeBatocera.AutoSize = True
-        Me.TypeBatocera.Enabled = False
-        Me.TypeBatocera.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.TypeBatocera.Location = New System.Drawing.Point(131, 194)
-        Me.TypeBatocera.Name = "TypeBatocera"
-        Me.TypeBatocera.Size = New System.Drawing.Size(107, 17)
-        Me.TypeBatocera.TabIndex = 26
-        Me.TypeBatocera.Text = "Dossier Batocera"
-        Me.TypeBatocera.UseVisualStyleBackColor = True
         '
         'Form1
         '
