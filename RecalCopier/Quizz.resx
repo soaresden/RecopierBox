@@ -14030,7 +14030,10 @@ Bon Jeu :)</value>
         dewIThK47cTRX+Wou+8KjtAcvx7UE7VC23izQ9t4s0PbeFPDx+c/x8UAXFsUGUAAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="ToolTipNbJeux.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>106, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>28</value>
+    <value>39</value>
   </metadata>
 </root>

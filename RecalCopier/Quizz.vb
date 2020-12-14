@@ -32,6 +32,15 @@ Public Class Quizz
             CheckAvecFiltres.Checked = False
             GroupFiltres.Hide()
             GroupSansFiltres.Show()
+            'et on remet a zero tous les champs par securite
+            txtgenre.Text = Nothing
+            txtdev.Text = Nothing
+            txtpub.Text = Nothing
+            TxtAnnee.Text = Nothing
+            txtplayers.Text = Nothing
+            TxtPlayCount.Text = Nothing
+            TxtSynopsis.Text = Nothing
+            TxtRating.Text = Nothing
         ElseIf CheckAvecFiltres.Checked = False Then
             CheckSansFiltres.Checked = True
         End If
@@ -77,6 +86,8 @@ Public Class Quizz
         'Afficher les Totaux
         Label10.Show()
         TxtTotalEntrees.Show()
+        'On met le tooltip
+        ToolTipNbJeux.SetToolTip(TxtTotalEntrees, "Ce nombre représente le nombre de jeux total filtré. Plus vous avez un grand chiffre, Meilleur sera l'aléatoire")
 
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If ConsoleList.SelectedItems.Count = 0 Then

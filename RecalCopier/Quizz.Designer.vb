@@ -45,10 +45,6 @@ Partial Class Quizz
         Me.Label10 = New System.Windows.Forms.Label()
         Me.ConsoleList = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GroupSansFiltres = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.txtRules = New System.Windows.Forms.TextBox()
         Me.GroupFiltres = New System.Windows.Forms.GroupBox()
         Me.TxtRating = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -74,6 +70,10 @@ Partial Class Quizz
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.GroupSansFiltres = New System.Windows.Forms.GroupBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.txtRules = New System.Windows.Forms.TextBox()
         Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.TempGrid = New System.Windows.Forms.DataGridView()
         Me.TitleBox = New System.Windows.Forms.PictureBox()
@@ -97,13 +97,14 @@ Partial Class Quizz
         Me.TimeBox = New System.Windows.Forms.TextBox()
         Me.PanelVideo = New System.Windows.Forms.Panel()
         Me.Cheat = New System.Windows.Forms.CheckBox()
+        Me.ToolTipNbJeux = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupParamComplet.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupConfigPartie.SuspendLayout()
-        Me.GroupSansFiltres.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupFiltres.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupSansFiltres.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.QuizzBoxRep.SuspendLayout()
@@ -332,9 +333,9 @@ Partial Class Quizz
         '
         'TxtTotalEntrees
         '
-        Me.TxtTotalEntrees.BackColor = System.Drawing.Color.Tomato
+        Me.TxtTotalEntrees.BackColor = System.Drawing.Color.DarkViolet
         Me.TxtTotalEntrees.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtTotalEntrees.ForeColor = System.Drawing.SystemColors.Window
+        Me.TxtTotalEntrees.ForeColor = System.Drawing.Color.Yellow
         Me.TxtTotalEntrees.Location = New System.Drawing.Point(147, 49)
         Me.TxtTotalEntrees.Name = "TxtTotalEntrees"
         Me.TxtTotalEntrees.ReadOnly = True
@@ -346,16 +347,16 @@ Partial Class Quizz
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label10.Location = New System.Drawing.Point(144, 35)
+        Me.Label10.Location = New System.Drawing.Point(149, 32)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(115, 13)
+        Me.Label10.Size = New System.Drawing.Size(130, 13)
         Me.Label10.TabIndex = 21
-        Me.Label10.Text = "Nb de Jeux à Piocher :"
+        Me.Label10.Text = "__ Jeux dans la liste filtrée" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'ConsoleList
         '
-        Me.ConsoleList.BackColor = System.Drawing.Color.PeachPuff
-        Me.ConsoleList.ForeColor = System.Drawing.Color.SaddleBrown
+        Me.ConsoleList.BackColor = System.Drawing.Color.White
+        Me.ConsoleList.ForeColor = System.Drawing.Color.Crimson
         Me.ConsoleList.FormattingEnabled = True
         Me.ConsoleList.Location = New System.Drawing.Point(6, 126)
         Me.ConsoleList.Name = "ConsoleList"
@@ -371,53 +372,6 @@ Partial Class Quizz
         Me.Label1.Size = New System.Drawing.Size(123, 13)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Selection des Consoles :"
-        '
-        'GroupSansFiltres
-        '
-        Me.GroupSansFiltres.BackColor = System.Drawing.Color.MistyRose
-        Me.GroupSansFiltres.Controls.Add(Me.TextBox1)
-        Me.GroupSansFiltres.Controls.Add(Me.PictureBox1)
-        Me.GroupSansFiltres.Controls.Add(Me.txtRules)
-        Me.GroupSansFiltres.Location = New System.Drawing.Point(147, 202)
-        Me.GroupSansFiltres.Name = "GroupSansFiltres"
-        Me.GroupSansFiltres.Size = New System.Drawing.Size(320, 343)
-        Me.GroupSansFiltres.TabIndex = 46
-        Me.GroupSansFiltres.TabStop = False
-        Me.GroupSansFiltres.Text = "Mode Sans Filtres : Instructions"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 14)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(309, 208)
-        Me.TextBox1.TabIndex = 0
-        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(182, 215)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(133, 127)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
-        'txtRules
-        '
-        Me.txtRules.BackColor = System.Drawing.Color.White
-        Me.txtRules.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRules.ForeColor = System.Drawing.Color.Blue
-        Me.txtRules.Location = New System.Drawing.Point(6, 228)
-        Me.txtRules.Multiline = True
-        Me.txtRules.Name = "txtRules"
-        Me.txtRules.ReadOnly = True
-        Me.txtRules.Size = New System.Drawing.Size(170, 107)
-        Me.txtRules.TabIndex = 40
-        Me.txtRules.Text = "*1ère Phase :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Concentrez-vous," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Souvenez-vous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase :" &
-    "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Des propositions apparaissent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Validez votre choix !"
         '
         'GroupFiltres
         '
@@ -445,7 +399,7 @@ Partial Class Quizz
         Me.GroupFiltres.Size = New System.Drawing.Size(321, 343)
         Me.GroupFiltres.TabIndex = 29
         Me.GroupFiltres.TabStop = False
-        Me.GroupFiltres.Text = "Selection des Filtres :"
+        Me.GroupFiltres.Text = "Saisir des Filtres et appuyez sur Entree"
         '
         'TxtRating
         '
@@ -670,6 +624,53 @@ Partial Class Quizz
         Me.Label6.Size = New System.Drawing.Size(56, 13)
         Me.Label6.TabIndex = 32
         Me.Label6.Text = "Publisher :"
+        '
+        'GroupSansFiltres
+        '
+        Me.GroupSansFiltres.BackColor = System.Drawing.Color.MistyRose
+        Me.GroupSansFiltres.Controls.Add(Me.TextBox1)
+        Me.GroupSansFiltres.Controls.Add(Me.PictureBox1)
+        Me.GroupSansFiltres.Controls.Add(Me.txtRules)
+        Me.GroupSansFiltres.Location = New System.Drawing.Point(147, 202)
+        Me.GroupSansFiltres.Name = "GroupSansFiltres"
+        Me.GroupSansFiltres.Size = New System.Drawing.Size(320, 343)
+        Me.GroupSansFiltres.TabIndex = 46
+        Me.GroupSansFiltres.TabStop = False
+        Me.GroupSansFiltres.Text = "Mode Sans Filtres : Instructions"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(6, 14)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(309, 208)
+        Me.TextBox1.TabIndex = 0
+        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(182, 215)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(133, 127)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
+        'txtRules
+        '
+        Me.txtRules.BackColor = System.Drawing.Color.White
+        Me.txtRules.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRules.ForeColor = System.Drawing.Color.Blue
+        Me.txtRules.Location = New System.Drawing.Point(6, 228)
+        Me.txtRules.Multiline = True
+        Me.txtRules.Name = "txtRules"
+        Me.txtRules.ReadOnly = True
+        Me.txtRules.Size = New System.Drawing.Size(170, 107)
+        Me.txtRules.TabIndex = 40
+        Me.txtRules.Text = "*1ère Phase :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Concentrez-vous," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Souvenez-vous et Reflechissez !" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "*2ème Phase :" &
+    "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Des propositions apparaissent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Validez votre choix !"
         '
         'listrandobox
         '
@@ -957,12 +958,12 @@ Partial Class Quizz
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupConfigPartie.ResumeLayout(False)
         Me.GroupConfigPartie.PerformLayout()
-        Me.GroupSansFiltres.ResumeLayout(False)
-        Me.GroupSansFiltres.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupFiltres.ResumeLayout(False)
         Me.GroupFiltres.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupSansFiltres.ResumeLayout(False)
+        Me.GroupSansFiltres.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TitleBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.QuizzBoxRep.ResumeLayout(False)
@@ -1046,4 +1047,5 @@ Partial Class Quizz
     Friend WithEvents TimeBox As TextBox
     Friend WithEvents PanelVideo As Panel
     Friend WithEvents Cheat As CheckBox
+    Friend WithEvents ToolTipNbJeux As ToolTip
 End Class
