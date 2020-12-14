@@ -38,6 +38,7 @@ Partial Class SaveManager
         Me.Label3 = New System.Windows.Forms.Label()
         Me.RomTotalSave = New System.Windows.Forms.TextBox()
         Me.RenameSelection = New System.Windows.Forms.GroupBox()
+        Me.PathActuel = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ActualName = New System.Windows.Forms.TextBox()
@@ -55,7 +56,11 @@ Partial Class SaveManager
         Me.ButtonRomsDeleteSelected = New System.Windows.Forms.Button()
         Me.GroupRoms = New System.Windows.Forms.GroupBox()
         Me.GroupSaves = New System.Windows.Forms.GroupBox()
-        Me.PathActuel = New System.Windows.Forms.TextBox()
+        Me.textstate = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.prevplatform = New System.Windows.Forms.Button()
+        Me.nextplatform = New System.Windows.Forms.Button()
         CType(Me.DataGridSave, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -231,7 +236,8 @@ Partial Class SaveManager
         'RenameSelection
         '
         Me.RenameSelection.BackColor = System.Drawing.Color.Sienna
-        Me.RenameSelection.Controls.Add(Me.PathActuel)
+        Me.RenameSelection.Controls.Add(Me.Label9)
+        Me.RenameSelection.Controls.Add(Me.textstate)
         Me.RenameSelection.Controls.Add(Me.Label8)
         Me.RenameSelection.Controls.Add(Me.Label7)
         Me.RenameSelection.Controls.Add(Me.ActualName)
@@ -244,6 +250,15 @@ Partial Class SaveManager
         Me.RenameSelection.TabIndex = 48
         Me.RenameSelection.TabStop = False
         Me.RenameSelection.Text = "Travail sur Selection :"
+        '
+        'PathActuel
+        '
+        Me.PathActuel.Location = New System.Drawing.Point(231, 22)
+        Me.PathActuel.Name = "PathActuel"
+        Me.PathActuel.ReadOnly = True
+        Me.PathActuel.Size = New System.Drawing.Size(89, 20)
+        Me.PathActuel.TabIndex = 66
+        Me.PathActuel.Visible = False
         '
         'Label8
         '
@@ -435,6 +450,7 @@ Partial Class SaveManager
         'GroupSaves
         '
         Me.GroupSaves.BackColor = System.Drawing.Color.SandyBrown
+        Me.GroupSaves.Controls.Add(Me.PathActuel)
         Me.GroupSaves.Controls.Add(Me.ButtonMenageOrphelin)
         Me.GroupSaves.Controls.Add(Me.RenameSelection)
         Me.GroupSaves.Controls.Add(Me.ListdesFichiersEnTrop)
@@ -447,14 +463,66 @@ Partial Class SaveManager
         Me.GroupSaves.TabStop = False
         Me.GroupSaves.Text = "Operations sur tous les Fichiers Saves"
         '
-        'PathActuel
+        'textstate
         '
-        Me.PathActuel.Location = New System.Drawing.Point(6, 63)
-        Me.PathActuel.Name = "PathActuel"
-        Me.PathActuel.ReadOnly = True
-        Me.PathActuel.Size = New System.Drawing.Size(89, 20)
-        Me.PathActuel.TabIndex = 66
-        Me.PathActuel.Visible = False
+        Me.textstate.Location = New System.Drawing.Point(63, 63)
+        Me.textstate.Name = "textstate"
+        Me.textstate.Size = New System.Drawing.Size(32, 20)
+        Me.textstate.TabIndex = 62
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 67)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(51, 13)
+        Me.Label9.TabIndex = 66
+        Me.Label9.Text = "n° State :"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.Color.Yellow
+        Me.Label10.Location = New System.Drawing.Point(256, 12)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(393, 13)
+        Me.Label10.TabIndex = 65
+        Me.Label10.Text = "Je vous conseille de réaliser le travail par Systeme afin de maitriser vos opérat" &
+    "ions."
+        '
+        'prevplatform
+        '
+        Me.prevplatform.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.prevplatform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.prevplatform.Cursor = System.Windows.Forms.Cursors.Default
+        Me.prevplatform.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.prevplatform.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.prevplatform.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.prevplatform.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.prevplatform.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.prevplatform.Location = New System.Drawing.Point(12, 50)
+        Me.prevplatform.Name = "prevplatform"
+        Me.prevplatform.Size = New System.Drawing.Size(56, 23)
+        Me.prevplatform.TabIndex = 66
+        Me.prevplatform.Text = "<<"
+        Me.prevplatform.UseVisualStyleBackColor = False
+        '
+        'nextplatform
+        '
+        Me.nextplatform.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.nextplatform.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.nextplatform.Cursor = System.Windows.Forms.Cursors.Default
+        Me.nextplatform.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.nextplatform.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.nextplatform.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.nextplatform.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nextplatform.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.nextplatform.Location = New System.Drawing.Point(72, 50)
+        Me.nextplatform.Name = "nextplatform"
+        Me.nextplatform.Size = New System.Drawing.Size(56, 23)
+        Me.nextplatform.TabIndex = 67
+        Me.nextplatform.Text = ">>"
+        Me.nextplatform.UseVisualStyleBackColor = False
         '
         'SaveManager
         '
@@ -462,6 +530,9 @@ Partial Class SaveManager
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(970, 545)
+        Me.Controls.Add(Me.nextplatform)
+        Me.Controls.Add(Me.prevplatform)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.GroupSaves)
         Me.Controls.Add(Me.GroupRoms)
         Me.Controls.Add(Me.Label6)
@@ -491,6 +562,7 @@ Partial Class SaveManager
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupRoms.ResumeLayout(False)
         Me.GroupSaves.ResumeLayout(False)
+        Me.GroupSaves.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -529,4 +601,9 @@ Partial Class SaveManager
     Friend WithEvents GroupRoms As GroupBox
     Friend WithEvents GroupSaves As GroupBox
     Friend WithEvents PathActuel As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents textstate As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents prevplatform As Button
+    Friend WithEvents nextplatform As Button
 End Class

@@ -14,6 +14,13 @@ Public Class Form1
             TxtRecalfolderPath.Text = ""
         End If
 
+        'On met les tooltip
+        ToolTipCopy.SetToolTip(ButtonCopy, "Générez votre dossier Custom !")
+        ToolTipOverlays.SetToolTip(ButtonOverlay, "Gérez votre collection d'overlays")
+        ToolTipSaves.SetToolTip(ButtonSave, "Maitrisez/renommer vos sauvegardes orphelines")
+        ToolTipBlindTest.SetToolTip(ButtonQuizz, "Essayez de reconnaitre par video/son vos jeux favoris !")
+        ToolTipPaypal.SetToolTip(Paypal, "N'Hesitez pas à soutenir le projet par ce bouton :) !")
+
         'Et on indique si y'a besoin d'écrire
         If TxtRecalfolderPath Is Nothing Then
             MsgBox("Merci de Choisir votre Dossier Mère d'abord !")
@@ -146,4 +153,5 @@ Public Class Form1
     Private Sub Paypal_Click(sender As Object, e As EventArgs) Handles Paypal.Click
         System.Diagnostics.Process.Start(String.Format("https://paypal.me/SoaresDenis?locale.x=fr_FR"))
     End Sub
+
 End Class

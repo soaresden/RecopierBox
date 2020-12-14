@@ -650,7 +650,6 @@ lignesuivante:
         Dim newextension As String = Path.GetExtension(NewName.Text)
 
         'Si .blablablabla a moins de 8 caracteres, c'est que c'est une vraie extension (.scummvm ?). Donc ca veut dire que c'est une extension qui est saisie
-
         If newextension = "" Then GoTo oncontinue
 
         If Len(newextension) < 8 Then
@@ -659,9 +658,17 @@ lignesuivante:
             End If
 
 oncontinue:
+
         'On prends l'extension attendue
         Dim extension As String = Path.GetExtension(ActualName.Text)
         Dim finaladresse As String = Replace(PathActuel.Text, ActualName.Text, (NewName.Text & extension))
+
+        'on verifie que c'est un state
+        If textstate.Visible = True Then
+            If textstate.Text = 1 Then textstate.Text = ""
+            finaladresse = Replace(finaladresse, extension, ".state" & textstate.Text)
+        End If
+        Dim newnamestate = Path.GetFileName(finaladresse)
 
         'Test si ca existe deja
         If System.IO.File.Exists(finaladresse) Then
@@ -669,7 +676,7 @@ oncontinue:
             Exit Sub
         End If
 
-        If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & NewName.Text & extension & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & newnamestate & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
 
 
         File.Move(PathActuel.Text, finaladresse)
@@ -677,7 +684,7 @@ oncontinue:
         'on refresh le tout
         ActualName.Text = Nothing
         PathActuel.Text = Nothing
-        ImportBoth1.PerformClick()
+        ButtonImportSaves1.PerformClick()
 
         'On enleve les doublons
         Supdoublon(ListdesFichiersEnTrop)
@@ -686,5 +693,47 @@ oncontinue:
     Private Sub ListdesFichiersEnTrop_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListdesFichiersEnTrop.SelectedIndexChanged
         ActualName.Text = Path.GetFileName(ListdesFichiersEnTrop.SelectedItem)
         PathActuel.Text = ListdesFichiersEnTrop.SelectedItem
+
+        'detect if state
+        Dim statenb As Integer = InStr(ActualName.Text, "state")
+        If statenb > 0 Then
+            textstate.Show()
+            Label9.Show()
+            Dim numero As String = ActualName.Text.Substring(statenb + 4)
+            textstate.Text = numero
+            If textstate.Text = "" Then textstate.Text = 1
+        Else
+            textstate.Hide()
+            Label9.Hide()
+            textstate.Text = Nothing
+        End If
+    End Sub
+
+
+
+    Private Sub GameLists_SelectedIndexChanged(sender As Object, e As EventArgs) Handles GameLists.SelectedIndexChanged
+        If GameLists.Items.Count = 0 Then
+            prevplatform.Hide()
+            nextplatform.Hide()
+            Exit Sub
+        ElseIf GameLists.SelectedIndex = 0 Then
+            prevplatform.Hide()
+            nextplatform.Show()
+        ElseIf GameLists.SelectedIndex = GameLists.Items.Count - 1 Then
+            prevplatform.Show()
+            nextplatform.Hide()
+        End If
+    End Sub
+    Private Sub prevplatform_Click(sender As Object, e As EventArgs) Handles prevplatform.Click
+        Dim num As Integer = GameLists.SelectedIndex
+        GameLists.ClearSelected()
+        GameLists.SelectedIndex = num - 1
+        ImportBoth1.PerformClick()
+    End Sub
+    Private Sub nextplatform_Click(sender As Object, e As EventArgs) Handles nextplatform.Click
+        Dim num As Integer = GameLists.SelectedIndex
+        GameLists.ClearSelected()
+        GameLists.SelectedIndex = num + 1
+        ImportBoth1.PerformClick()
     End Sub
 End Class

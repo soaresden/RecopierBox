@@ -132,7 +132,7 @@ OVERLAYS:
 Gérez votre collection d'overlays
 
 SAVES:
-Maitrisez/renommer vos sauvegardes orphelines.
+Maitrisez/renommer vos sauvegardes orphelines
 
 BLIND TEST:
 Essayez de reconnaitre par video/son vos jeux favoris !
@@ -2321,6 +2321,21 @@ Infos/Images/Videos/Manuels/Maps/Overlays ...</value>
         yMzM5A+6y8rK/n4CYggKO4DS0lKsWrXqf6d4ewgKXznIyf0bleHP8BqhP18AAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="ToolTipCopy.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>188, 17</value>
+  </metadata>
+  <metadata name="ToolTipOverlays.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>308, 17</value>
+  </metadata>
+  <metadata name="ToolTipSaves.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>447, 17</value>
+  </metadata>
+  <metadata name="ToolTipBlindTest.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>570, 17</value>
+  </metadata>
+  <metadata name="ToolTipPaypal.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>712, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>41</value>
   </metadata>

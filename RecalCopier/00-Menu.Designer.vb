@@ -22,6 +22,7 @@ Partial Class Form1
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.groupBox2 = New System.Windows.Forms.GroupBox()
         Me.ButtonBrowseRecalboxFolder = New System.Windows.Forms.Button()
@@ -52,6 +53,11 @@ Partial Class Form1
         Me.Label5 = New System.Windows.Forms.Label()
         Me.PanelHaut = New System.Windows.Forms.Panel()
         Me.PanelDroite = New System.Windows.Forms.Panel()
+        Me.ToolTipCopy = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipOverlays = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipSaves = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipBlindTest = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipPaypal = New System.Windows.Forms.ToolTip(Me.components)
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -158,7 +164,7 @@ Partial Class Form1
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Disclaimer.Location = New System.Drawing.Point(254, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(645, 468)
+        Me.Disclaimer.Size = New System.Drawing.Size(700, 468)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Fonctionnalités :"
@@ -322,7 +328,7 @@ Partial Class Form1
         Me.Paypal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.Paypal.Cursor = System.Windows.Forms.Cursors.Default
         Me.Paypal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.Paypal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LemonChiffon
+        Me.Paypal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue
         Me.Paypal.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Paypal.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Paypal.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -512,4 +518,9 @@ Partial Class Form1
     Friend WithEvents PanelDroite As Panel
     Friend WithEvents TypeBatocera As CheckBox
     Friend WithEvents TypeRecalbox As CheckBox
+    Friend WithEvents ToolTipCopy As ToolTip
+    Friend WithEvents ToolTipOverlays As ToolTip
+    Friend WithEvents ToolTipSaves As ToolTip
+    Friend WithEvents ToolTipBlindTest As ToolTip
+    Friend WithEvents ToolTipPaypal As ToolTip
 End Class
