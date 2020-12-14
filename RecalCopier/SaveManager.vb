@@ -164,9 +164,10 @@ ProchainGamelist:
             Dim rompath = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminRom").Index).Value
             Dim dossierparent = Path.GetDirectoryName(rompath)
             Dim romname = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value
+            Dim console = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("Console").Index).Value
             Dim romnamesansext = FileNameWithoutExtension(DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value)
             Dim nomducfg As String = romname & ".*"
-            Dim cheminsave As String = Replace(rompath, "\roms\", "\Saves\")
+            Dim cheminsave As String = Replace(rompath, "\roms\", "\saves\")
             Dim dossiersaveparent As String = Replace(dossierparent, "roms", "saves")
             Dim testcheminsave As String = Replace(cheminsave, romname, romnamesansext)
             Dim compteurfiles As Integer = 0
@@ -175,6 +176,18 @@ ProchainGamelist:
             DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminSave").Index).Value = testcheminsave
 
             Dim dir As DirectoryInfo = New DirectoryInfo(dossiersaveparent)
+            'on va enlever le dossier en trop si y'a
+            Dim detectdossierentrop As String = InStr(dossierparent, console)
+
+            Dim split As String() = rompath.Split("\")
+            Dim dossierdelafin As String = split(split.Length - 2)
+
+            If dossierdelafin <> console Then
+                Dim remadedossier As String = dossierparent.Substring(detectdossierentrop + Len(console))
+                Dim lenremadedossier As Integer = Len(remadedossier)
+                dir = New DirectoryInfo(Replace(dossiersaveparent, dossierdelafin, ""))
+            End If
+
             Dim files As FileInfo() = dir.GetFiles(romnamesansext & ".*")
 
             If files.Length > 0 Then
@@ -518,7 +531,24 @@ lignesuivante:
         Next
 
     End Sub
+    Function Supdoublon(ByVal listboxName As ListBox)
+        listboxName.Sorted = True
+        listboxName.Refresh()
+        Dim index As Integer
+        Dim itemcount As Integer = listboxName.Items.Count
 
+        If itemcount > 1 Then
+            Dim lastitem As String = listboxName.Items(itemcount - 1)
+
+            For index = itemcount - 2 To 0 Step -1
+                If listboxName.Items(index) = lastitem Then
+                    listboxName.Items.RemoveAt(index)
+                Else
+                    lastitem = listboxName.Items(index)
+                End If
+            Next
+        End If
+    End Function
     Private Sub ButtonRomsDeleteSelected_Click(sender As Object, e As EventArgs) Handles ButtonRomsDeleteSelected.Click
         If ListSaves.SelectedItem = Nothing Then
             MsgBox("Aucune Selection")
@@ -541,6 +571,9 @@ lignesuivante:
 
         'On Refresh
         buttonImportRoms1.PerformClick()
+
+        'On enleve les doublons
+        Supdoublon(ListSaves)
 
         'Recap
         MsgBox(compteur & " fichiers supprimés")
@@ -568,6 +601,9 @@ lignesuivante:
 
         'On Refresh
         ButtonImportSaves1.PerformClick()
+
+        'On enleve les doublons
+        Supdoublon(ListdesFichiersEnTrop)
 
         'Recap
         MsgBox(compteur & " fichiers supprimés")
@@ -601,17 +637,22 @@ lignesuivante:
             Exit Sub
         End If
 
-        'Detect du . de l'extension
-        Dim nbpoint As String = InStr(NewName.Text, ".")
+        'On detecte si y'a une extension.
+        Dim newextension As String = Path.GetExtension(NewName.Text)
 
-        If nbpoint > 0 Then
-            MsgBox("Merci de retirer l'extension dans votre proposition")
-            Exit Sub
-        End If
+        'Si .blablablabla a moins de 8 caracteres, c'est que c'est une vraie extension (.scummvm ?). Donc ca veut dire que c'est une extension qui est saisie
 
+        If newextension = "" Then GoTo oncontinue
+
+        If Len(newextension) < 8 Then
+                MsgBox("Merci de retirer l'extension dans votre proposition")
+                Exit Sub
+            End If
+
+oncontinue:
         'On prends l'extension attendue
         Dim extension As String = Path.GetExtension(ActualName.Text)
-        If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & ActualName.Text & Chr(13) & "pour : " & NewName.Text & extension & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & NewName.Text & extension & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
 
         Dim finaladresse As String = Replace(PathActuel.Text, ActualName.Text, (NewName.Text & extension))
 
@@ -621,6 +662,9 @@ lignesuivante:
         ActualName.Text = Nothing
         PathActuel.Text = Nothing
         ImportBoth1.PerformClick()
+
+        'On enleve les doublons
+        Supdoublon(ListdesFichiersEnTrop)
     End Sub
 
     Private Sub ListdesFichiersEnTrop_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListdesFichiersEnTrop.SelectedIndexChanged
