@@ -58,9 +58,9 @@ Partial Class SaveManager
         Me.GroupSaves = New System.Windows.Forms.GroupBox()
         Me.textstate = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.prevplatform = New System.Windows.Forms.Button()
         Me.nextplatform = New System.Windows.Forms.Button()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
         CType(Me.DataGridSave, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -253,10 +253,10 @@ Partial Class SaveManager
         '
         'PathActuel
         '
-        Me.PathActuel.Location = New System.Drawing.Point(231, 22)
+        Me.PathActuel.Location = New System.Drawing.Point(221, 162)
         Me.PathActuel.Name = "PathActuel"
         Me.PathActuel.ReadOnly = True
-        Me.PathActuel.Size = New System.Drawing.Size(89, 20)
+        Me.PathActuel.Size = New System.Drawing.Size(100, 20)
         Me.PathActuel.TabIndex = 66
         Me.PathActuel.Visible = False
         '
@@ -479,17 +479,6 @@ Partial Class SaveManager
         Me.Label9.TabIndex = 66
         Me.Label9.Text = "n° State :"
         '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.ForeColor = System.Drawing.Color.Yellow
-        Me.Label10.Location = New System.Drawing.Point(256, 12)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(393, 13)
-        Me.Label10.TabIndex = 65
-        Me.Label10.Text = "Je vous conseille de réaliser le travail par Systeme afin de maitriser vos opérat" &
-    "ions."
-        '
         'prevplatform
         '
         Me.prevplatform.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
@@ -524,15 +513,28 @@ Partial Class SaveManager
         Me.nextplatform.Text = ">>"
         Me.nextplatform.UseVisualStyleBackColor = False
         '
+        'TextBox3
+        '
+        Me.TextBox3.BackColor = System.Drawing.Color.White
+        Me.TextBox3.Location = New System.Drawing.Point(256, 5)
+        Me.TextBox3.Multiline = True
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.Size = New System.Drawing.Size(446, 30)
+        Me.TextBox3.TabIndex = 68
+        Me.TextBox3.Text = "Je vous conseille d'importer le travail ""par Systeme"" afin de maitriser vos opéra" &
+    "tions." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Verifiez également si vos dossiers ne sont pas ""pollué"" par des fichiers" &
+    " qui n'ont rien à y faire !"
+        '
         'SaveManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(970, 545)
+        Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.nextplatform)
         Me.Controls.Add(Me.prevplatform)
-        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.GroupSaves)
         Me.Controls.Add(Me.GroupRoms)
         Me.Controls.Add(Me.Label6)
@@ -554,6 +556,8 @@ Partial Class SaveManager
         Me.Controls.Add(Me.DataGridRoms)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
+        Me.MaximumSize = New System.Drawing.Size(986, 584)
+        Me.MinimumSize = New System.Drawing.Size(986, 584)
         Me.Name = "SaveManager"
         Me.Text = "SaveManager"
         CType(Me.DataGridSave, System.ComponentModel.ISupportInitialize).EndInit()
@@ -603,7 +607,7 @@ Partial Class SaveManager
     Friend WithEvents PathActuel As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents textstate As TextBox
-    Friend WithEvents Label10 As Label
     Friend WithEvents prevplatform As Button
     Friend WithEvents nextplatform As Button
+    Friend WithEvents TextBox3 As TextBox
 End Class

@@ -328,6 +328,7 @@ fichiersuivant:
 
             'on va colorer la colonne des coches
             If DataGridSave.Rows(row).Cells(DataGridSave.Columns("NomRomXML").Index).Value = "#ORPHELIN#" Then
+
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = False
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
                 'et du coup on va ajouter à la listbox des CFG
@@ -349,7 +350,7 @@ fichiersuivant:
     End Sub
     Function Recherchenomdelasave(console As String, pathdelasave As String)
         Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
-        Dim nomdelasave = FileNameWithoutExtension((Path.GetFileName(pathdelasave)))
+        Dim nomdelasave = FileNameWithoutExtension(FileNameWithoutExtension((Path.GetFileName(pathdelasave))))
 
         'Si il n'existe pas de gamelist, on va mettre les infos generique
         If Not System.IO.File.Exists(lagamelist) Then
@@ -412,7 +413,7 @@ lignesuivante:
     Sub LectureDesCfgs(consolerom As String, nomducfg As String)
         Dim modifgamelistenrom As String = nomducfg
 
-        Dim fichier1cfg As String = My.Settings.RecalboxFolder & "\Saves\" & consolerom & "\" & modifgamelistenrom
+        Dim fichier1cfg As String = My.Settings.RecalboxFolder & "\saves\" & consolerom & "\" & modifgamelistenrom
         Dim fichier2Savecfg As String
         Dim fichier3png As String
 
@@ -433,13 +434,13 @@ lignesuivante:
         ListdesFichiersEnTrop.Items.Add(fichier1cfg)
 
         For Each s In readText
-            Dim detectinputSave As String = InStr(s, "/Saves/")
+            Dim detectinputSave As String = InStr(s, "/saves/")
             If detectinputSave > 0 Then
                 'Dim cheminducfgSave = s.Substring(detectinputSave + 9)
                 'Dim detectdupointcfg = InStr(cheminducfgSave, ".cfg")
                 'Dim cheminfinalSavecfg = cheminducfgSave.Substring(0, detectdupointcfg + 3)
-                Dim chemincfgSavedanscfg = s.Substring(InStr(s, "/Saves/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/Saves/") + 9), ".cfg") + 3)
-                cheminpropreSave2 = My.Settings.RecalboxFolder & "\Saves\" & Replace(chemincfgSavedanscfg, "/", "\")
+                Dim chemincfgSavedanscfg = s.Substring(InStr(s, "/saves/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/saves/") + 9), ".cfg") + 3)
+                cheminpropreSave2 = My.Settings.RecalboxFolder & "\saves\" & Replace(chemincfgSavedanscfg, "/", "\")
                 justefichier2 = FileNameWithoutExtension(cheminpropreSave2) & ".cfg"
                 Exit For
             End If
