@@ -43,6 +43,7 @@ Partial Class Form1
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.txtWhyGamelist = New System.Windows.Forms.TextBox()
         Me.PanelGauche = New System.Windows.Forms.Panel()
+        Me.ButtonSetDossier = New System.Windows.Forms.Button()
         Me.TypeBatocera = New System.Windows.Forms.CheckBox()
         Me.TypeRecalbox = New System.Windows.Forms.CheckBox()
         Me.Paypal = New System.Windows.Forms.Button()
@@ -59,7 +60,6 @@ Partial Class Form1
         Me.ToolTipBlindTest = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipPaypal = New System.Windows.Forms.ToolTip(Me.components)
         Me.ButtonHideArrm = New System.Windows.Forms.Button()
-        Me.ButtonSetDossier = New System.Windows.Forms.Button()
         Me.PanelSettings = New System.Windows.Forms.Panel()
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
@@ -159,7 +159,7 @@ Partial Class Form1
         Me.label3.Name = "label3"
         Me.label3.Size = New System.Drawing.Size(101, 14)
         Me.label3.TabIndex = 14
-        Me.label3.Text = "v4.2 by Soaresden"
+        Me.label3.Text = "v4.3 by Soaresden"
         '
         'Disclaimer
         '
@@ -302,6 +302,26 @@ Partial Class Form1
         Me.PanelGauche.Name = "PanelGauche"
         Me.PanelGauche.Size = New System.Drawing.Size(247, 542)
         Me.PanelGauche.TabIndex = 24
+        '
+        'ButtonSetDossier
+        '
+        Me.ButtonSetDossier.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ButtonSetDossier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonSetDossier.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonSetDossier.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonSetDossier.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.ButtonSetDossier.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonSetDossier.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonSetDossier.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonSetDossier.Image = CType(resources.GetObject("ButtonSetDossier.Image"), System.Drawing.Image)
+        Me.ButtonSetDossier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonSetDossier.Location = New System.Drawing.Point(1, 122)
+        Me.ButtonSetDossier.Name = "ButtonSetDossier"
+        Me.ButtonSetDossier.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonSetDossier.TabIndex = 27
+        Me.ButtonSetDossier.Text = "DEFINIR LE DOSSIER"
+        Me.ButtonSetDossier.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonSetDossier.UseVisualStyleBackColor = False
         '
         'TypeBatocera
         '
@@ -478,26 +498,6 @@ Partial Class Form1
         Me.ButtonHideArrm.TabIndex = 27
         Me.ButtonHideArrm.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ButtonHideArrm.UseVisualStyleBackColor = False
-        '
-        'ButtonSetDossier
-        '
-        Me.ButtonSetDossier.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ButtonSetDossier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonSetDossier.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonSetDossier.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonSetDossier.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
-        Me.ButtonSetDossier.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonSetDossier.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonSetDossier.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonSetDossier.Image = CType(resources.GetObject("ButtonSetDossier.Image"), System.Drawing.Image)
-        Me.ButtonSetDossier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonSetDossier.Location = New System.Drawing.Point(1, 122)
-        Me.ButtonSetDossier.Name = "ButtonSetDossier"
-        Me.ButtonSetDossier.Size = New System.Drawing.Size(244, 60)
-        Me.ButtonSetDossier.TabIndex = 27
-        Me.ButtonSetDossier.Text = "DEFINIR LE DOSSIER"
-        Me.ButtonSetDossier.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ButtonSetDossier.UseVisualStyleBackColor = False
         '
         'PanelSettings
         '
