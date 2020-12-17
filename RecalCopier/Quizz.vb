@@ -1074,4 +1074,8 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         End If
 
     End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        MsgBox("Y'a pas d'Easter Egg ici !" & Chr(13) & Chr(13) & "Le Cheat Mode est dispo avec le n° du titre en cours et le restant")
+    End Sub
 End Class

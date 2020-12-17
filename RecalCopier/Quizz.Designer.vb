@@ -126,8 +126,8 @@ Partial Class Quizz
         Me.GroupParamComplet.Controls.Add(Me.Label10)
         Me.GroupParamComplet.Controls.Add(Me.ConsoleList)
         Me.GroupParamComplet.Controls.Add(Me.Label1)
-        Me.GroupParamComplet.Controls.Add(Me.GroupFiltres)
         Me.GroupParamComplet.Controls.Add(Me.GroupSansFiltres)
+        Me.GroupParamComplet.Controls.Add(Me.GroupFiltres)
         Me.GroupParamComplet.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupParamComplet.Location = New System.Drawing.Point(12, 39)
         Me.GroupParamComplet.Name = "GroupParamComplet"
@@ -932,7 +932,7 @@ Partial Class Quizz
         'Cheat
         '
         Me.Cheat.AutoSize = True
-        Me.Cheat.Location = New System.Drawing.Point(262, 15)
+        Me.Cheat.Location = New System.Drawing.Point(263, 50)
         Me.Cheat.Name = "Cheat"
         Me.Cheat.Size = New System.Drawing.Size(15, 14)
         Me.Cheat.TabIndex = 42
