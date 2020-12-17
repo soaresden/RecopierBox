@@ -103,6 +103,11 @@ Partial Class CopyRoms
         Me.minipic3 = New System.Windows.Forms.PictureBox()
         Me.minipic2 = New System.Windows.Forms.PictureBox()
         Me.minipic1 = New System.Windows.Forms.PictureBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -529,6 +534,11 @@ Partial Class CopyRoms
         'GroupBox6
         '
         Me.GroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(66, Byte), Integer), CType(CType(252, Byte), Integer))
+        Me.GroupBox6.Controls.Add(Me.Label14)
+        Me.GroupBox6.Controls.Add(Me.Label13)
+        Me.GroupBox6.Controls.Add(Me.Label12)
+        Me.GroupBox6.Controls.Add(Me.Label11)
+        Me.GroupBox6.Controls.Add(Me.Label2)
         Me.GroupBox6.Controls.Add(Me.romscreeno)
         Me.GroupBox6.Controls.Add(Me.romvideoo)
         Me.GroupBox6.Controls.Add(Me.romsaveo)
@@ -544,7 +554,7 @@ Partial Class CopyRoms
         '
         'romscreeno
         '
-        Me.romscreeno.Location = New System.Drawing.Point(8, 19)
+        Me.romscreeno.Location = New System.Drawing.Point(8, 12)
         Me.romscreeno.Name = "romscreeno"
         Me.romscreeno.Size = New System.Drawing.Size(57, 54)
         Me.romscreeno.TabIndex = 16
@@ -552,7 +562,7 @@ Partial Class CopyRoms
         '
         'romvideoo
         '
-        Me.romvideoo.Location = New System.Drawing.Point(80, 19)
+        Me.romvideoo.Location = New System.Drawing.Point(80, 12)
         Me.romvideoo.Name = "romvideoo"
         Me.romvideoo.Size = New System.Drawing.Size(57, 54)
         Me.romvideoo.TabIndex = 17
@@ -560,7 +570,7 @@ Partial Class CopyRoms
         '
         'romsaveo
         '
-        Me.romsaveo.Location = New System.Drawing.Point(317, 19)
+        Me.romsaveo.Location = New System.Drawing.Point(317, 12)
         Me.romsaveo.Name = "romsaveo"
         Me.romsaveo.Size = New System.Drawing.Size(57, 54)
         Me.romsaveo.TabIndex = 20
@@ -568,7 +578,7 @@ Partial Class CopyRoms
         '
         'rommanualo
         '
-        Me.rommanualo.Location = New System.Drawing.Point(160, 19)
+        Me.rommanualo.Location = New System.Drawing.Point(160, 12)
         Me.rommanualo.Name = "rommanualo"
         Me.rommanualo.Size = New System.Drawing.Size(57, 54)
         Me.rommanualo.TabIndex = 18
@@ -576,7 +586,7 @@ Partial Class CopyRoms
         '
         'romoverlayo
         '
-        Me.romoverlayo.Location = New System.Drawing.Point(237, 19)
+        Me.romoverlayo.Location = New System.Drawing.Point(237, 12)
         Me.romoverlayo.Name = "romoverlayo"
         Me.romoverlayo.Size = New System.Drawing.Size(57, 54)
         Me.romoverlayo.TabIndex = 19
@@ -1035,6 +1045,51 @@ Partial Class CopyRoms
         Me.minipic1.TabIndex = 14
         Me.minipic1.TabStop = False
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(6, 66)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(63, 13)
+        Me.Label2.TabIndex = 21
+        Me.Label2.Text = "ScreenShot"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(91, 66)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(34, 13)
+        Me.Label11.TabIndex = 22
+        Me.Label11.Text = "Video"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(168, 66)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(42, 13)
+        Me.Label12.TabIndex = 23
+        Me.Label12.Text = "Manuel"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(246, 66)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(43, 13)
+        Me.Label13.TabIndex = 24
+        Me.Label13.Text = "Overlay"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(330, 66)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(32, 13)
+        Me.Label14.TabIndex = 25
+        Me.Label14.Text = "Save"
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1085,6 +1140,7 @@ Partial Class CopyRoms
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupFiltresAvances.ResumeLayout(False)
@@ -1187,4 +1243,9 @@ Partial Class CopyRoms
     Friend WithEvents ButtonParcourirRecalCopy As Button
     Friend WithEvents ButtonSonVid As Button
     Friend WithEvents ButtonGenererList As Button
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label2 As Label
 End Class
