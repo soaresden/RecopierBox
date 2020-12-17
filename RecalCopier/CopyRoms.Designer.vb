@@ -86,7 +86,6 @@ Partial Class CopyRoms
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txt_nbrom = New System.Windows.Forms.TextBox()
         Me.DecocherTout = New System.Windows.Forms.CheckBox()
-        Me.CocherTout = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ComboFiltreColonnes = New System.Windows.Forms.ComboBox()
         Me.CheckBoxARRM = New System.Windows.Forms.CheckBox()
@@ -113,6 +112,7 @@ Partial Class CopyRoms
         Me.ChkAvance = New System.Windows.Forms.CheckBox()
         Me.ChkSimple = New System.Windows.Forms.CheckBox()
         Me.GroupBoxSelectionRoms = New System.Windows.Forms.GroupBox()
+        Me.CocherTout = New System.Windows.Forms.CheckBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -459,7 +459,7 @@ Partial Class CopyRoms
         Me.ButtonAfficherMaSelection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonAfficherMaSelection.Cursor = System.Windows.Forms.Cursors.Default
         Me.ButtonAfficherMaSelection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonAfficherMaSelection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.ButtonAfficherMaSelection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
         Me.ButtonAfficherMaSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonAfficherMaSelection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonAfficherMaSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -564,8 +564,8 @@ Partial Class CopyRoms
         Me.romsaveo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.romsaveo.Cursor = System.Windows.Forms.Cursors.Default
         Me.romsaveo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.romsaveo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.romsaveo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.romsaveo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
+        Me.romsaveo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.romsaveo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.romsaveo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.romsaveo.Location = New System.Drawing.Point(316, 13)
@@ -580,8 +580,8 @@ Partial Class CopyRoms
         Me.romoverlayo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.romoverlayo.Cursor = System.Windows.Forms.Cursors.Default
         Me.romoverlayo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.romoverlayo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.romoverlayo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.romoverlayo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
+        Me.romoverlayo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.romoverlayo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.romoverlayo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.romoverlayo.Location = New System.Drawing.Point(243, 13)
@@ -597,7 +597,7 @@ Partial Class CopyRoms
         Me.rommanualo.Cursor = System.Windows.Forms.Cursors.Default
         Me.rommanualo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
         Me.rommanualo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.rommanualo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rommanualo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.rommanualo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rommanualo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.rommanualo.Location = New System.Drawing.Point(160, 13)
@@ -612,8 +612,8 @@ Partial Class CopyRoms
         Me.romvideoo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.romvideoo.Cursor = System.Windows.Forms.Cursors.Default
         Me.romvideoo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.romvideoo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.romvideoo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.romvideoo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
+        Me.romvideoo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.romvideoo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.romvideoo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.romvideoo.Location = New System.Drawing.Point(86, 13)
@@ -628,8 +628,8 @@ Partial Class CopyRoms
         Me.romscreeno.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.romscreeno.Cursor = System.Windows.Forms.Cursors.Default
         Me.romscreeno.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.romscreeno.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.romscreeno.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.romscreeno.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White
+        Me.romscreeno.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.romscreeno.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.romscreeno.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.romscreeno.Location = New System.Drawing.Point(13, 14)
@@ -905,18 +905,6 @@ Partial Class CopyRoms
         Me.DecocherTout.Text = "Tout Décocher"
         Me.DecocherTout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.DecocherTout.UseVisualStyleBackColor = True
-        '
-        'CocherTout
-        '
-        Me.CocherTout.AutoSize = True
-        Me.CocherTout.Checked = True
-        Me.CocherTout.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CocherTout.Location = New System.Drawing.Point(385, 66)
-        Me.CocherTout.Name = "CocherTout"
-        Me.CocherTout.Size = New System.Drawing.Size(85, 17)
-        Me.CocherTout.TabIndex = 14
-        Me.CocherTout.Text = "Tout Cocher"
-        Me.CocherTout.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -1194,6 +1182,18 @@ Partial Class CopyRoms
         Me.GroupBoxSelectionRoms.TabStop = False
         Me.GroupBoxSelectionRoms.Text = "Selection"
         '
+        'CocherTout
+        '
+        Me.CocherTout.AutoSize = True
+        Me.CocherTout.Checked = True
+        Me.CocherTout.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CocherTout.Location = New System.Drawing.Point(385, 66)
+        Me.CocherTout.Name = "CocherTout"
+        Me.CocherTout.Size = New System.Drawing.Size(85, 17)
+        Me.CocherTout.TabIndex = 14
+        Me.CocherTout.Text = "Tout Cocher"
+        Me.CocherTout.UseVisualStyleBackColor = True
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1311,7 +1311,6 @@ Partial Class CopyRoms
     Friend WithEvents GroupFiltresAvances As GroupBox
     Friend WithEvents ComboFiltreColonnes As ComboBox
     Friend WithEvents DecocherTout As CheckBox
-    Friend WithEvents CocherTout As CheckBox
     Friend WithEvents Label4 As Label
     Friend WithEvents txtShownRoms As TextBox
     Friend WithEvents Label7 As Label
@@ -1363,4 +1362,5 @@ Partial Class CopyRoms
     Friend WithEvents rommanualo As Button
     Friend WithEvents romvideoo As Button
     Friend WithEvents romscreeno As Button
+    Friend WithEvents CocherTout As CheckBox
 End Class

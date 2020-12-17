@@ -493,6 +493,7 @@ romsuivante:
 
         'On compte le nombre total d'entrées
         txt_nbrom.Text = FinalGrid.Rows.Count - 1
+        txtShownRoms.Text = txt_nbrom.Text
 
         'On affiche les petites icones 
         minipic1.Show()
@@ -2174,6 +2175,10 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         'on relance le calcul des checkbox et de la taille des checkbox
         Call Completiondescheckbox()
         Call Calcultaillerom()
+
+        'On compte le nombre de lignes affichées
+        Dim visibleRowsCount = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible) - 1
+        txtShownRoms.Text = visibleRowsCount
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Dim rowindex As Integer = FinalGrid.CurrentCell.RowIndex
@@ -2271,11 +2276,19 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
     End Sub
 
     Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles CocherTout.CheckedChanged
-        For i = 0 To FinalGrid.Rows.Count - 2
-            If FinalGrid.Rows(i).Visible = True Then
-                FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = True
-            End If
+        Dim visibleRowsCount = FinalGrid.DisplayedRowCount(True)
+        Dim firstDisplayedRowIndex = 0
+        Dim lastvisibleRowIndex = FinalGrid.Rows.Count - 2
+
+        For rowIndex As Integer = firstDisplayedRowIndex To lastvisibleRowIndex
+            Dim cells = FinalGrid.Rows(rowIndex).Cells
+            For Each cell As DataGridViewCell In cells
+                If cell.Displayed Then
+                    FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True
+                End If
+            Next
         Next
+
         CocherTout.Checked = True
     End Sub
 
@@ -2286,14 +2299,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
             End If
         Next
         DecocherTout.Checked = False
-    End Sub
-
-    Private Sub ButtonShowColonne_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ButtonHideColonne_Click(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub Txt_romdesc_TextChanged(sender As Object, e As EventArgs) Handles txt_romdesc.TextChanged
@@ -2505,6 +2510,13 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
     End Sub
 
     Private Sub ButtonAfficherMaSelection_Click_1(sender As Object, e As EventArgs) Handles ButtonAfficherMaSelection.Click
+        'Si ma selection est vide ajouter une ligne avec pas de selection
+        If listboxMaSelection.Items.Count = 0 Then
+            listboxMaSelection.Items.Add("Merci de cocher votre Selection pour la voir apparaitre ici")
+        Else
+            listboxMaSelection.Items.Remove("Merci de cocher votre Selection pour la voir apparaitre ici")
+        End If
+
         'On affiche la Listbox a la bonne place ou on là referme
         If listboxMaSelection.Visible = True Then
             listboxMaSelection.Hide()
