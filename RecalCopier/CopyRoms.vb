@@ -3,12 +3,6 @@
 
 
 Public Class CopyRoms
-    Public Sub CloseIt()
-        System.Threading.Thread.Sleep(3000)
-        Microsoft.VisualBasic.Interaction.AppActivate(System.Diagnostics.Process.GetCurrentProcess().Id)
-        System.Windows.Forms.SendKeys.SendWait(" ")
-    End Sub
-
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
         txt_txtsearch.Hide()
@@ -43,7 +37,6 @@ Public Class CopyRoms
             Dim dossierconsole As String = System.IO.Path.GetFileName(foundDirectory)
             ListGameLists.Items.Add(dossierconsole)
         Next
-        '
 
         'showing gridview2
         FinalGrid.Show()
