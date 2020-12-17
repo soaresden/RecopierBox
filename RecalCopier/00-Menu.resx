@@ -2095,6 +2095,40 @@ Il est donc impératif que vos Gamelists soient correctement scrappés !
 Pour cela, je vous recommande ARRM de NexusOne13 qui permets de scrapper 
 Infos/Images/Videos/Manuels/Maps/Overlays ...</value>
   </data>
+  <data name="ButtonSetDossier.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        0eMfNmbiUWieNuoAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="Paypal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAKIAAAAyCAYAAADflABYAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -2336,6 +2370,22 @@ Infos/Images/Videos/Manuels/Maps/Overlays ...</value>
   <metadata name="ToolTipPaypal.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>712, 17</value>
   </metadata>
+  <data name="ButtonHideArrm.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJkSURBVFhH7ZhLTxRBFIWbGWAGHwvBjcaFogtRMLJB3OAP
+        wERd+AA1/gH8IeIrrtTxmRhiUNfqWgUGiO6M/pu2L6lqT1Wd7q4qOzomnORbzO17zj3JQJghSdKkt6HD
+        ACbGT6R9SaOQuSvzKfN5Q4cVjAzvpWWqeNx5Gl6WDgtgR2OYPDnpX5QOLRYWbtJDwuBAKy1Sd2OTejTs
+        lgMdAix4qL1DVQgTyzp/7kJ5UTpUsMA6ZGceOjhaXJIOM+yQ2dmzKp6rNdg29sveehHuClNT07wkGw7v
+        GTHMnz5/UbHFwn1NlXbt3G3ssy7uIANNi7fvqrhyoUfjI9vj9LEHuCxvm6/Qp/EVeuSm0QlfPH/x0lgO
+        VV1e7GQUxKXlt++U9e+o0dfMbzcb/b9LFhX8F8L7TsH9+w7kD69dv6Es1cJQm1Ch1ymID0OEPptQdZ48
+        y73yKannCorQX0tBLfTXlfN/FpRf9xhhsCZG6KcFhRihv66c7YIxQv92wVCdmj6dey9dvGwWvHf/Qf5Q
+        /liHSnuRUKFX98oLCrgQKvTWkVFZUAiR7f0T//zcVV5QwEUf4X4RVXq9/MbYNzoZLzJwUaiSvc+oEu6u
+        rW+UFxTQIJTJ3mWUyd51+jiDjPcfPhqm/uaAiqtXeENgXdyB4tXSkhNQl1a7604267AFHSoOjx5xgm4t
+        3lFn4tRuDTmZ33/8jCuosQOFsaPH1Ek/sQyB3TOgQwILR/CL1ubXb+n48Qm6p5HPneyOAx2WwI6FwnIL
+        oUMP2OEynH9p+EKHETx81Ml+Lse2PmjMzJxJV9a6cYVs6LBnSJJf+Mf4xrZ5MkkAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>41</value>
   </metadata>

@@ -58,6 +58,9 @@ Partial Class Form1
         Me.ToolTipSaves = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipBlindTest = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipPaypal = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ButtonHideArrm = New System.Windows.Forms.Button()
+        Me.ButtonSetDossier = New System.Windows.Forms.Button()
+        Me.PanelSettings = New System.Windows.Forms.Panel()
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,6 +69,7 @@ Partial Class Form1
         Me.PanelGauche.SuspendLayout()
         Me.PanelHaut.SuspendLayout()
         Me.PanelDroite.SuspendLayout()
+        Me.PanelSettings.SuspendLayout()
         Me.SuspendLayout()
         '
         'groupBox2
@@ -75,11 +79,11 @@ Partial Class Form1
         Me.groupBox2.Controls.Add(Me.label4)
         Me.groupBox2.Controls.Add(Me.TxtRecalfolderPath)
         Me.groupBox2.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.groupBox2.Location = New System.Drawing.Point(0, 98)
+        Me.groupBox2.Location = New System.Drawing.Point(8, 32)
         Me.groupBox2.Margin = New System.Windows.Forms.Padding(2)
         Me.groupBox2.Name = "groupBox2"
         Me.groupBox2.Padding = New System.Windows.Forms.Padding(2)
-        Me.groupBox2.Size = New System.Drawing.Size(245, 91)
+        Me.groupBox2.Size = New System.Drawing.Size(449, 91)
         Me.groupBox2.TabIndex = 12
         Me.groupBox2.TabStop = False
         Me.groupBox2.Text = "Configuration du Dossier :"
@@ -88,7 +92,7 @@ Partial Class Form1
         '
         Me.ButtonBrowseRecalboxFolder.Font = New System.Drawing.Font("VAG Rounded", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonBrowseRecalboxFolder.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.ButtonBrowseRecalboxFolder.Location = New System.Drawing.Point(177, 67)
+        Me.ButtonBrowseRecalboxFolder.Location = New System.Drawing.Point(384, 67)
         Me.ButtonBrowseRecalboxFolder.Margin = New System.Windows.Forms.Padding(2)
         Me.ButtonBrowseRecalboxFolder.Name = "ButtonBrowseRecalboxFolder"
         Me.ButtonBrowseRecalboxFolder.Size = New System.Drawing.Size(61, 19)
@@ -103,17 +107,18 @@ Partial Class Form1
         Me.label4.Location = New System.Drawing.Point(3, 15)
         Me.label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label4.Name = "label4"
-        Me.label4.Size = New System.Drawing.Size(241, 45)
+        Me.label4.Size = New System.Drawing.Size(309, 30)
         Me.label4.TabIndex = 1
-        Me.label4.Text = "Selectionner votre Dossier Mère" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Recalbox/Batocera" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(celui qui contient roms/over" &
-    "lays/saves..etc)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.label4.Text = "Selectionner votre Dossier Mère Recalbox/Batocera" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(celui qui contient les dossie" &
+    "rs roms/overlays/saves..etc)"
         '
         'TxtRecalfolderPath
         '
+        Me.TxtRecalfolderPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtRecalfolderPath.Location = New System.Drawing.Point(4, 67)
         Me.TxtRecalfolderPath.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtRecalfolderPath.Name = "TxtRecalfolderPath"
-        Me.TxtRecalfolderPath.Size = New System.Drawing.Size(144, 20)
+        Me.TxtRecalfolderPath.Size = New System.Drawing.Size(376, 20)
         Me.TxtRecalfolderPath.TabIndex = 0
         Me.TxtRecalfolderPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -162,9 +167,9 @@ Partial Class Form1
         Me.Disclaimer.Controls.Add(Me.TxtDisclaimer)
         Me.Disclaimer.Controls.Add(Me.Button1)
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Disclaimer.Location = New System.Drawing.Point(254, 67)
+        Me.Disclaimer.Location = New System.Drawing.Point(253, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(700, 468)
+        Me.Disclaimer.Size = New System.Drawing.Size(701, 468)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Fonctionnalités :"
@@ -282,6 +287,7 @@ Partial Class Form1
         '
         Me.PanelGauche.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.PanelGauche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelGauche.Controls.Add(Me.ButtonSetDossier)
         Me.PanelGauche.Controls.Add(Me.TypeBatocera)
         Me.PanelGauche.Controls.Add(Me.TypeRecalbox)
         Me.PanelGauche.Controls.Add(Me.label3)
@@ -291,7 +297,6 @@ Partial Class Form1
         Me.PanelGauche.Controls.Add(Me.ButtonQuizz)
         Me.PanelGauche.Controls.Add(Me.ButtonCopy)
         Me.PanelGauche.Controls.Add(Me.Label5)
-        Me.PanelGauche.Controls.Add(Me.groupBox2)
         Me.PanelGauche.Controls.Add(Me.PictureBox1)
         Me.PanelGauche.Location = New System.Drawing.Point(1, -1)
         Me.PanelGauche.Name = "PanelGauche"
@@ -455,6 +460,54 @@ Partial Class Form1
         Me.PanelDroite.Size = New System.Drawing.Size(225, 391)
         Me.PanelDroite.TabIndex = 25
         '
+        'ButtonHideArrm
+        '
+        Me.ButtonHideArrm.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonHideArrm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonHideArrm.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonHideArrm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonHideArrm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonHideArrm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonHideArrm.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonHideArrm.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonHideArrm.Image = CType(resources.GetObject("ButtonHideArrm.Image"), System.Drawing.Image)
+        Me.ButtonHideArrm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonHideArrm.Location = New System.Drawing.Point(897, 101)
+        Me.ButtonHideArrm.Name = "ButtonHideArrm"
+        Me.ButtonHideArrm.Size = New System.Drawing.Size(53, 43)
+        Me.ButtonHideArrm.TabIndex = 27
+        Me.ButtonHideArrm.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonHideArrm.UseVisualStyleBackColor = False
+        '
+        'ButtonSetDossier
+        '
+        Me.ButtonSetDossier.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ButtonSetDossier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonSetDossier.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonSetDossier.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonSetDossier.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.ButtonSetDossier.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonSetDossier.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonSetDossier.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonSetDossier.Image = CType(resources.GetObject("ButtonSetDossier.Image"), System.Drawing.Image)
+        Me.ButtonSetDossier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonSetDossier.Location = New System.Drawing.Point(1, 122)
+        Me.ButtonSetDossier.Name = "ButtonSetDossier"
+        Me.ButtonSetDossier.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonSetDossier.TabIndex = 27
+        Me.ButtonSetDossier.Text = "DEFINIR LE DOSSIER"
+        Me.ButtonSetDossier.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonSetDossier.UseVisualStyleBackColor = False
+        '
+        'PanelSettings
+        '
+        Me.PanelSettings.BackColor = System.Drawing.Color.Gray
+        Me.PanelSettings.Controls.Add(Me.groupBox2)
+        Me.PanelSettings.Location = New System.Drawing.Point(252, 122)
+        Me.PanelSettings.Name = "PanelSettings"
+        Me.PanelSettings.Size = New System.Drawing.Size(471, 155)
+        Me.PanelSettings.TabIndex = 28
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -464,6 +517,8 @@ Partial Class Form1
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(950, 536)
         Me.Controls.Add(Me.Disclaimer)
+        Me.Controls.Add(Me.PanelSettings)
+        Me.Controls.Add(Me.ButtonHideArrm)
         Me.Controls.Add(Me.PanelDroite)
         Me.Controls.Add(Me.PanelHaut)
         Me.Controls.Add(Me.PanelGauche)
@@ -486,6 +541,7 @@ Partial Class Form1
         Me.PanelHaut.PerformLayout()
         Me.PanelDroite.ResumeLayout(False)
         Me.PanelDroite.PerformLayout()
+        Me.PanelSettings.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -523,4 +579,7 @@ Partial Class Form1
     Friend WithEvents ToolTipSaves As ToolTip
     Friend WithEvents ToolTipBlindTest As ToolTip
     Friend WithEvents ToolTipPaypal As ToolTip
+    Friend WithEvents ButtonHideArrm As Button
+    Friend WithEvents ButtonSetDossier As Button
+    Friend WithEvents PanelSettings As Panel
 End Class

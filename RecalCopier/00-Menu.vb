@@ -7,12 +7,14 @@ Public Class Form1
         TxtRecalfolderPath.Text = My.Settings.RecalboxFolder
         PanelGauche.Hide()
         PanelDroite.Hide()
+        PanelSettings.Hide()
         NetFourDotFiveAndHigher()
 
         If My.Settings.Disclaimer = "ok" Then
             Disclaimer.Hide()
             PanelGauche.Show()
-            PanelDroite.Show()
+            PanelDroite.Hide()
+            PanelSettings.Hide()
         End If
 
         'On check si le Folder enregistré existe, sinon on le fout à zéro
@@ -30,6 +32,7 @@ Public Class Form1
         'Et on indique si y'a besoin d'écrire
         If TxtRecalfolderPath Is Nothing Then
             MsgBox("Merci de Choisir votre Dossier Mère d'abord !")
+            PanelSettings.Show()
             Exit Sub
         End If
 
@@ -107,7 +110,7 @@ Public Class Form1
         MsgBox("Merci de votre compréhension")
         Disclaimer.Hide()
         PanelGauche.Show()
-        PanelDroite.Show()
+        PanelDroite.Hide()
         My.Settings.Disclaimer = "ok"
         My.Settings.Save()
     End Sub
@@ -162,4 +165,11 @@ Public Class Form1
         System.Diagnostics.Process.Start(String.Format("https://paypal.me/SoaresDenis?locale.x=fr_FR"))
     End Sub
 
+    Private Sub ButtonHideArrm_Click(sender As Object, e As EventArgs) Handles ButtonHideArrm.Click
+        PanelDroite.Visible = Not PanelDroite.Visible
+    End Sub
+
+    Private Sub ButtonSetDossier_Click(sender As Object, e As EventArgs) Handles ButtonSetDossier.Click
+        PanelSettings.Visible = Not PanelSettings.Visible
+    End Sub
 End Class
