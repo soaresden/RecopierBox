@@ -40,22 +40,27 @@ Partial Class CopyRoms
         Me.checkvideos = New System.Windows.Forms.CheckBox()
         Me.checkmanuals = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.ButtonAfficherMaSelection = New System.Windows.Forms.Button()
-        Me.txt_morestant = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.lbl_GoAPrevoir = New System.Windows.Forms.Label()
         Me.txt_GoAPrevoir = New System.Windows.Forms.TextBox()
         Me.lbl_romSelected = New System.Windows.Forms.Label()
         Me.txt_NbRomSelected = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txt_morestant = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_USBGo = New System.Windows.Forms.TextBox()
+        Me.ButtonAfficherMaSelection = New System.Windows.Forms.Button()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
         Me.listboxMaSelection = New System.Windows.Forms.ListBox()
         Me.ButtonSonVid = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txt_romname = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.romscreeno = New System.Windows.Forms.Button()
         Me.romvideoo = New System.Windows.Forms.Button()
         Me.romsaveo = New System.Windows.Forms.Button()
@@ -103,11 +108,11 @@ Partial Class CopyRoms
         Me.minipic3 = New System.Windows.Forms.PictureBox()
         Me.minipic2 = New System.Windows.Forms.PictureBox()
         Me.minipic1 = New System.Windows.Forms.PictureBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.GroupMode = New System.Windows.Forms.GroupBox()
+        Me.ChkAvance = New System.Windows.Forms.CheckBox()
+        Me.ChkSimple = New System.Windows.Forms.CheckBox()
+        Me.GroupBoxSelectionRoms = New System.Windows.Forms.GroupBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -135,6 +140,8 @@ Partial Class CopyRoms
         CType(Me.minipic3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.minipic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.minipic1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupMode.SuspendLayout()
+        Me.GroupBoxSelectionRoms.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListGameLists
@@ -168,11 +175,11 @@ Partial Class CopyRoms
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
         Me.GroupBox1.Controls.Add(Me.GroupBox3)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 508)
+        Me.GroupBox1.Location = New System.Drawing.Point(140, 508)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(999, 92)
+        Me.GroupBox1.Size = New System.Drawing.Size(867, 92)
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Opérations :"
@@ -183,14 +190,14 @@ Partial Class CopyRoms
         Me.GroupBox5.Controls.Add(Me.ButtonParcourirRecalCopy)
         Me.GroupBox5.Controls.Add(Me.Label8)
         Me.GroupBox5.Controls.Add(Me.txt_CopyFolder)
-        Me.GroupBox5.Location = New System.Drawing.Point(699, 17)
+        Me.GroupBox5.Location = New System.Drawing.Point(561, 19)
         Me.GroupBox5.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox5.Size = New System.Drawing.Size(223, 70)
         Me.GroupBox5.TabIndex = 13
         Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Copie"
+        Me.GroupBox5.Text = "Repertoire Final de Copie :"
         '
         'ButtonParcourirRecalCopy
         '
@@ -230,7 +237,7 @@ Partial Class CopyRoms
         'ButtonCopy
         '
         Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
-        Me.ButtonCopy.Location = New System.Drawing.Point(927, 15)
+        Me.ButtonCopy.Location = New System.Drawing.Point(791, 17)
         Me.ButtonCopy.Name = "ButtonCopy"
         Me.ButtonCopy.Size = New System.Drawing.Size(69, 72)
         Me.ButtonCopy.TabIndex = 14
@@ -238,15 +245,15 @@ Partial Class CopyRoms
         '
         'GroupBox2
         '
-        Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(186, Byte), Integer), CType(CType(16, Byte), Integer))
         Me.GroupBox2.Controls.Add(Me.checkbios)
         Me.GroupBox2.Controls.Add(Me.checksaves)
         Me.GroupBox2.Controls.Add(Me.checkimgs)
         Me.GroupBox2.Controls.Add(Me.checkoverlays)
         Me.GroupBox2.Controls.Add(Me.checkvideos)
         Me.GroupBox2.Controls.Add(Me.checkmanuals)
-        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.GroupBox2.Location = New System.Drawing.Point(121, 17)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.GroupBox2.Location = New System.Drawing.Point(353, 19)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(190, 70)
         Me.GroupBox2.TabIndex = 13
@@ -258,7 +265,7 @@ Partial Class CopyRoms
         Me.checkbios.AutoSize = True
         Me.checkbios.Checked = True
         Me.checkbios.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkbios.ForeColor = System.Drawing.Color.Yellow
+        Me.checkbios.ForeColor = System.Drawing.Color.Maroon
         Me.checkbios.Location = New System.Drawing.Point(66, 50)
         Me.checkbios.Name = "checkbios"
         Me.checkbios.Size = New System.Drawing.Size(46, 17)
@@ -271,7 +278,7 @@ Partial Class CopyRoms
         Me.checksaves.AutoSize = True
         Me.checksaves.Checked = True
         Me.checksaves.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checksaves.ForeColor = System.Drawing.Color.Aqua
+        Me.checksaves.ForeColor = System.Drawing.Color.DarkGreen
         Me.checksaves.Location = New System.Drawing.Point(102, 33)
         Me.checksaves.Name = "checksaves"
         Me.checksaves.Size = New System.Drawing.Size(56, 17)
@@ -284,7 +291,7 @@ Partial Class CopyRoms
         Me.checkimgs.AutoSize = True
         Me.checkimgs.Checked = True
         Me.checkimgs.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkimgs.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.checkimgs.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.checkimgs.Location = New System.Drawing.Point(4, 16)
         Me.checkimgs.Name = "checkimgs"
         Me.checkimgs.Size = New System.Drawing.Size(60, 17)
@@ -297,7 +304,7 @@ Partial Class CopyRoms
         Me.checkoverlays.AutoSize = True
         Me.checkoverlays.Checked = True
         Me.checkoverlays.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkoverlays.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.checkoverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.checkoverlays.Location = New System.Drawing.Point(122, 16)
         Me.checkoverlays.Name = "checkoverlays"
         Me.checkoverlays.Size = New System.Drawing.Size(67, 17)
@@ -310,7 +317,7 @@ Partial Class CopyRoms
         Me.checkvideos.AutoSize = True
         Me.checkvideos.Checked = True
         Me.checkvideos.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkvideos.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.checkvideos.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.checkvideos.Location = New System.Drawing.Point(66, 16)
         Me.checkvideos.Name = "checkvideos"
         Me.checkvideos.Size = New System.Drawing.Size(58, 17)
@@ -323,7 +330,7 @@ Partial Class CopyRoms
         Me.checkmanuals.AutoSize = True
         Me.checkmanuals.Checked = True
         Me.checkmanuals.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkmanuals.ForeColor = System.Drawing.Color.Aqua
+        Me.checkmanuals.ForeColor = System.Drawing.Color.DarkGreen
         Me.checkmanuals.Location = New System.Drawing.Point(37, 33)
         Me.checkmanuals.Name = "checkmanuals"
         Me.checkmanuals.Size = New System.Drawing.Size(66, 17)
@@ -334,59 +341,19 @@ Partial Class CopyRoms
         'GroupBox4
         '
         Me.GroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
-        Me.GroupBox4.Controls.Add(Me.ButtonAfficherMaSelection)
-        Me.GroupBox4.Controls.Add(Me.txt_morestant)
-        Me.GroupBox4.Controls.Add(Me.Label5)
         Me.GroupBox4.Controls.Add(Me.lbl_GoAPrevoir)
         Me.GroupBox4.Controls.Add(Me.txt_GoAPrevoir)
         Me.GroupBox4.Controls.Add(Me.lbl_romSelected)
         Me.GroupBox4.Controls.Add(Me.txt_NbRomSelected)
         Me.GroupBox4.ForeColor = System.Drawing.Color.White
-        Me.GroupBox4.Location = New System.Drawing.Point(316, 17)
+        Me.GroupBox4.Location = New System.Drawing.Point(184, 19)
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox4.Size = New System.Drawing.Size(380, 70)
+        Me.GroupBox4.Size = New System.Drawing.Size(150, 70)
         Me.GroupBox4.TabIndex = 12
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Ma Selection"
-        '
-        'ButtonAfficherMaSelection
-        '
-        Me.ButtonAfficherMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
-        Me.ButtonAfficherMaSelection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonAfficherMaSelection.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonAfficherMaSelection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonAfficherMaSelection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
-        Me.ButtonAfficherMaSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonAfficherMaSelection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonAfficherMaSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonAfficherMaSelection.Location = New System.Drawing.Point(225, 10)
-        Me.ButtonAfficherMaSelection.Name = "ButtonAfficherMaSelection"
-        Me.ButtonAfficherMaSelection.Size = New System.Drawing.Size(153, 22)
-        Me.ButtonAfficherMaSelection.TabIndex = 39
-        Me.ButtonAfficherMaSelection.Text = "Afficher/Cacher ma Selection"
-        Me.ButtonAfficherMaSelection.UseVisualStyleBackColor = False
-        '
-        'txt_morestant
-        '
-        Me.txt_morestant.Location = New System.Drawing.Point(139, 46)
-        Me.txt_morestant.Name = "txt_morestant"
-        Me.txt_morestant.ReadOnly = True
-        Me.txt_morestant.Size = New System.Drawing.Size(65, 20)
-        Me.txt_morestant.TabIndex = 5
-        Me.txt_morestant.Text = "0"
-        Me.txt_morestant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label5.Location = New System.Drawing.Point(224, 38)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(138, 26)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Mo Théorique Restants" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Sans Images/Videos etc...)"
         '
         'lbl_GoAPrevoir
         '
@@ -433,23 +400,45 @@ Partial Class CopyRoms
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(23, Byte), Integer))
+        Me.GroupBox3.Controls.Add(Me.Label5)
+        Me.GroupBox3.Controls.Add(Me.txt_morestant)
         Me.GroupBox3.Controls.Add(Me.Label3)
         Me.GroupBox3.Controls.Add(Me.txt_USBGo)
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.GroupBox3.Location = New System.Drawing.Point(4, 17)
+        Me.GroupBox3.Location = New System.Drawing.Point(7, 17)
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox3.Size = New System.Drawing.Size(112, 70)
+        Me.GroupBox3.Size = New System.Drawing.Size(158, 70)
         Me.GroupBox3.TabIndex = 11
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Taille USB :"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label5.Location = New System.Drawing.Point(86, 48)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(67, 13)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "Mo Restants" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'txt_morestant
+        '
+        Me.txt_morestant.Location = New System.Drawing.Point(15, 45)
+        Me.txt_morestant.Name = "txt_morestant"
+        Me.txt_morestant.ReadOnly = True
+        Me.txt_morestant.Size = New System.Drawing.Size(65, 20)
+        Me.txt_morestant.TabIndex = 5
+        Me.txt_morestant.Text = "0"
+        Me.txt_morestant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label3.Location = New System.Drawing.Point(76, 30)
+        Me.Label3.Location = New System.Drawing.Point(86, 21)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(21, 13)
         Me.Label3.TabIndex = 1
@@ -457,12 +446,29 @@ Partial Class CopyRoms
         '
         'txt_USBGo
         '
-        Me.txt_USBGo.Location = New System.Drawing.Point(18, 27)
+        Me.txt_USBGo.Location = New System.Drawing.Point(15, 16)
         Me.txt_USBGo.Name = "txt_USBGo"
-        Me.txt_USBGo.Size = New System.Drawing.Size(52, 20)
+        Me.txt_USBGo.Size = New System.Drawing.Size(65, 20)
         Me.txt_USBGo.TabIndex = 0
         Me.txt_USBGo.Text = "128"
         Me.txt_USBGo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'ButtonAfficherMaSelection
+        '
+        Me.ButtonAfficherMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.ButtonAfficherMaSelection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonAfficherMaSelection.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonAfficherMaSelection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonAfficherMaSelection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.ButtonAfficherMaSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonAfficherMaSelection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonAfficherMaSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonAfficherMaSelection.Image = CType(resources.GetObject("ButtonAfficherMaSelection.Image"), System.Drawing.Image)
+        Me.ButtonAfficherMaSelection.Location = New System.Drawing.Point(10, 19)
+        Me.ButtonAfficherMaSelection.Name = "ButtonAfficherMaSelection"
+        Me.ButtonAfficherMaSelection.Size = New System.Drawing.Size(50, 49)
+        Me.ButtonAfficherMaSelection.TabIndex = 39
+        Me.ButtonAfficherMaSelection.UseVisualStyleBackColor = False
         '
         'grp_RomInfos
         '
@@ -551,6 +557,51 @@ Partial Class CopyRoms
         Me.GroupBox6.TabIndex = 21
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Fichiers Liés à la Rom :"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(330, 66)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(32, 13)
+        Me.Label14.TabIndex = 25
+        Me.Label14.Text = "Save"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(246, 66)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(43, 13)
+        Me.Label13.TabIndex = 24
+        Me.Label13.Text = "Overlay"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(168, 66)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(42, 13)
+        Me.Label12.TabIndex = 23
+        Me.Label12.Text = "Manuel"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(91, 66)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(34, 13)
+        Me.Label11.TabIndex = 22
+        Me.Label11.Text = "Video"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(6, 66)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(63, 13)
+        Me.Label2.TabIndex = 21
+        Me.Label2.Text = "ScreenShot"
         '
         'romscreeno
         '
@@ -673,7 +724,7 @@ Partial Class CopyRoms
         Me.GroupFiltresAvances.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupFiltresAvances.Location = New System.Drawing.Point(8, 398)
         Me.GroupFiltresAvances.Name = "GroupFiltresAvances"
-        Me.GroupFiltresAvances.Size = New System.Drawing.Size(600, 105)
+        Me.GroupFiltresAvances.Size = New System.Drawing.Size(525, 105)
         Me.GroupFiltresAvances.TabIndex = 13
         Me.GroupFiltresAvances.TabStop = False
         Me.GroupFiltresAvances.Text = "Filtres Avancés :"
@@ -761,7 +812,7 @@ Partial Class CopyRoms
         '
         Me.txtShownRoms.BackColor = System.Drawing.Color.Honeydew
         Me.txtShownRoms.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtShownRoms.Location = New System.Drawing.Point(549, 10)
+        Me.txtShownRoms.Location = New System.Drawing.Point(469, 10)
         Me.txtShownRoms.Name = "txtShownRoms"
         Me.txtShownRoms.ReadOnly = True
         Me.txtShownRoms.Size = New System.Drawing.Size(47, 20)
@@ -773,7 +824,7 @@ Partial Class CopyRoms
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label7.Location = New System.Drawing.Point(462, 38)
+        Me.Label7.Location = New System.Drawing.Point(382, 38)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(84, 13)
         Me.Label7.TabIndex = 18
@@ -784,7 +835,7 @@ Partial Class CopyRoms
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label6.Location = New System.Drawing.Point(442, 13)
+        Me.Label6.Location = New System.Drawing.Point(362, 13)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(104, 13)
         Me.Label6.TabIndex = 17
@@ -796,7 +847,7 @@ Partial Class CopyRoms
         Me.txt_nbrom.BackColor = System.Drawing.Color.ForestGreen
         Me.txt_nbrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt_nbrom.ForeColor = System.Drawing.SystemColors.Window
-        Me.txt_nbrom.Location = New System.Drawing.Point(549, 33)
+        Me.txt_nbrom.Location = New System.Drawing.Point(469, 33)
         Me.txt_nbrom.Name = "txt_nbrom"
         Me.txt_nbrom.ReadOnly = True
         Me.txt_nbrom.Size = New System.Drawing.Size(47, 22)
@@ -807,7 +858,7 @@ Partial Class CopyRoms
         'DecocherTout
         '
         Me.DecocherTout.AutoSize = True
-        Me.DecocherTout.Location = New System.Drawing.Point(493, 73)
+        Me.DecocherTout.Location = New System.Drawing.Point(385, 83)
         Me.DecocherTout.Name = "DecocherTout"
         Me.DecocherTout.Size = New System.Drawing.Size(98, 17)
         Me.DecocherTout.TabIndex = 15
@@ -820,7 +871,7 @@ Partial Class CopyRoms
         Me.CocherTout.AutoSize = True
         Me.CocherTout.Checked = True
         Me.CocherTout.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CocherTout.Location = New System.Drawing.Point(402, 73)
+        Me.CocherTout.Location = New System.Drawing.Point(385, 66)
         Me.CocherTout.Name = "CocherTout"
         Me.CocherTout.Size = New System.Drawing.Size(85, 17)
         Me.CocherTout.TabIndex = 14
@@ -1045,50 +1096,60 @@ Partial Class CopyRoms
         Me.minipic1.TabIndex = 14
         Me.minipic1.TabStop = False
         '
-        'Label2
+        'Label15
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 66)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 13)
-        Me.Label2.TabIndex = 21
-        Me.Label2.Text = "ScreenShot"
+        Me.Label15.AutoSize = True
+        Me.Label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label15.Location = New System.Drawing.Point(9, 73)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(54, 26)
+        Me.Label15.TabIndex = 40
+        Me.Label15.Text = "Afficher" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Selection"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label11
+        'GroupMode
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(91, 66)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(34, 13)
-        Me.Label11.TabIndex = 22
-        Me.Label11.Text = "Video"
+        Me.GroupMode.Controls.Add(Me.ChkAvance)
+        Me.GroupMode.Controls.Add(Me.ChkSimple)
+        Me.GroupMode.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.GroupMode.Location = New System.Drawing.Point(8, 510)
+        Me.GroupMode.Name = "GroupMode"
+        Me.GroupMode.Size = New System.Drawing.Size(127, 89)
+        Me.GroupMode.TabIndex = 41
+        Me.GroupMode.TabStop = False
+        Me.GroupMode.Text = "Simple/Expert Mode"
         '
-        'Label12
+        'ChkAvance
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(168, 66)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(42, 13)
-        Me.Label12.TabIndex = 23
-        Me.Label12.Text = "Manuel"
+        Me.ChkAvance.AutoSize = True
+        Me.ChkAvance.Location = New System.Drawing.Point(20, 59)
+        Me.ChkAvance.Name = "ChkAvance"
+        Me.ChkAvance.Size = New System.Drawing.Size(93, 17)
+        Me.ChkAvance.TabIndex = 1
+        Me.ChkAvance.Text = "Mode Avancé"
+        Me.ChkAvance.UseVisualStyleBackColor = True
         '
-        'Label13
+        'ChkSimple
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(246, 66)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(43, 13)
-        Me.Label13.TabIndex = 24
-        Me.Label13.Text = "Overlay"
+        Me.ChkSimple.AutoSize = True
+        Me.ChkSimple.Location = New System.Drawing.Point(20, 31)
+        Me.ChkSimple.Name = "ChkSimple"
+        Me.ChkSimple.Size = New System.Drawing.Size(87, 17)
+        Me.ChkSimple.TabIndex = 0
+        Me.ChkSimple.Text = "Mode Simple"
+        Me.ChkSimple.UseVisualStyleBackColor = True
         '
-        'Label14
+        'GroupBoxSelectionRoms
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(330, 66)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(32, 13)
-        Me.Label14.TabIndex = 25
-        Me.Label14.Text = "Save"
+        Me.GroupBoxSelectionRoms.Controls.Add(Me.ButtonAfficherMaSelection)
+        Me.GroupBoxSelectionRoms.Controls.Add(Me.Label15)
+        Me.GroupBoxSelectionRoms.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.GroupBoxSelectionRoms.Location = New System.Drawing.Point(539, 398)
+        Me.GroupBoxSelectionRoms.Name = "GroupBoxSelectionRoms"
+        Me.GroupBoxSelectionRoms.Size = New System.Drawing.Size(72, 105)
+        Me.GroupBoxSelectionRoms.TabIndex = 42
+        Me.GroupBoxSelectionRoms.TabStop = False
+        Me.GroupBoxSelectionRoms.Text = "Selection"
         '
         'CopyRoms
         '
@@ -1096,6 +1157,8 @@ Partial Class CopyRoms
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.GroupBoxSelectionRoms)
+        Me.Controls.Add(Me.GroupMode)
         Me.Controls.Add(Me.ButtonGenererList)
         Me.Controls.Add(Me.ButtonTuto1)
         Me.Controls.Add(Me.ButtonGetBack)
@@ -1160,6 +1223,10 @@ Partial Class CopyRoms
         CType(Me.minipic3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.minipic2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.minipic1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupMode.ResumeLayout(False)
+        Me.GroupMode.PerformLayout()
+        Me.GroupBoxSelectionRoms.ResumeLayout(False)
+        Me.GroupBoxSelectionRoms.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1248,4 +1315,9 @@ Partial Class CopyRoms
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents GroupMode As GroupBox
+    Friend WithEvents ChkAvance As CheckBox
+    Friend WithEvents ChkSimple As CheckBox
+    Friend WithEvents GroupBoxSelectionRoms As GroupBox
 End Class

@@ -12,12 +12,20 @@ Public Class CopyRoms
         listboxMaSelection.Hide()
         ButtonRazClickk.Hide()
         GroupFiltresAvances.Hide()
+        GroupBoxSelectionRoms.Hide()
         minipic1.Hide()
         minipic2.Hide()
         minipic3.Hide()
         minipic4.Hide()
         minipic5.Hide()
         ButtonTuto1.Hide()
+
+        'test sur la valeur modesimple
+        If My.Settings.SimpleMode = "simple" Or My.Settings.SimpleMode = Nothing Then
+            ChkSimple.Checked = True
+        Else
+            ChkAvance.Checked = True
+        End If
 
         'On liste les dossiers
         For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
@@ -439,6 +447,7 @@ romsuivante:
 
         'Reajusting Interface and Showing Final Interface
         ListGameLists.Hide()
+        GroupBoxSelectionRoms.Show()
         FinalGrid.Location = New Point(8, 28)
         FinalGrid.Size = New Size(600, 365)
         grp_RomInfos.Show()
@@ -2538,4 +2547,31 @@ prochainj:
         End If
     End Sub
 
+    Private Sub ChkSimple_CheckedChanged(sender As Object, e As EventArgs) Handles ChkSimple.CheckedChanged
+        If ChkSimple.Checked = True Then
+            ChkAvance.Checked = False
+
+            My.Settings.SimpleMode = "simple"
+            My.Settings.Save()
+        ElseIf ChkSimple.Checked = False Then
+            ChkAvance.Checked = True
+
+            My.Settings.SimpleMode = "avance"
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Private Sub ChkAvance_CheckedChanged(sender As Object, e As EventArgs) Handles ChkAvance.CheckedChanged
+        If ChkAvance.Checked = True Then
+            ChkSimple.Checked = False
+
+            My.Settings.SimpleMode = "avance"
+            My.Settings.Save()
+        ElseIf ChkAvance.Checked = False Then
+            ChkSimple.Checked = True
+
+            My.Settings.SimpleMode = "simple"
+            My.Settings.Save()
+        End If
+    End Sub
 End Class
