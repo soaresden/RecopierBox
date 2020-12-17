@@ -2275,24 +2275,21 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         End If
     End Sub
 
-    Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles CocherTout.CheckedChanged
+    Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs)
         Dim visibleRowsCount = FinalGrid.DisplayedRowCount(True)
         Dim firstDisplayedRowIndex = 0
         Dim lastvisibleRowIndex = FinalGrid.Rows.Count - 2
 
         For rowIndex As Integer = firstDisplayedRowIndex To lastvisibleRowIndex
-            Dim cells = FinalGrid.Rows(rowIndex).Cells
-            For Each cell As DataGridViewCell In cells
-                If cell.Displayed Then
-                    FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True
-                End If
-            Next
+            If FinalGrid.Rows(rowIndex).Visible = True Then
+                FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True
+            End If
         Next
 
         CocherTout.Checked = True
     End Sub
 
-    Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs) Handles DecocherTout.CheckedChanged
+    Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs)
         For i = 0 To FinalGrid.Rows.Count - 2
             If FinalGrid.Rows(i).Visible = True Then
                 FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = False

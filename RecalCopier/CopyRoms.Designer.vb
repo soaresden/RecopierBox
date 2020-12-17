@@ -85,7 +85,6 @@ Partial Class CopyRoms
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txt_nbrom = New System.Windows.Forms.TextBox()
-        Me.DecocherTout = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ComboFiltreColonnes = New System.Windows.Forms.ComboBox()
         Me.CheckBoxARRM = New System.Windows.Forms.CheckBox()
@@ -112,7 +111,6 @@ Partial Class CopyRoms
         Me.ChkAvance = New System.Windows.Forms.CheckBox()
         Me.ChkSimple = New System.Windows.Forms.CheckBox()
         Me.GroupBoxSelectionRoms = New System.Windows.Forms.GroupBox()
-        Me.CocherTout = New System.Windows.Forms.CheckBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -756,8 +754,6 @@ Partial Class CopyRoms
         Me.GroupFiltresAvances.Controls.Add(Me.Label7)
         Me.GroupFiltresAvances.Controls.Add(Me.Label6)
         Me.GroupFiltresAvances.Controls.Add(Me.txt_nbrom)
-        Me.GroupFiltresAvances.Controls.Add(Me.DecocherTout)
-        Me.GroupFiltresAvances.Controls.Add(Me.CocherTout)
         Me.GroupFiltresAvances.Controls.Add(Me.Label4)
         Me.GroupFiltresAvances.Controls.Add(Me.ComboFiltreColonnes)
         Me.GroupFiltresAvances.Controls.Add(Me.txt_txtsearch)
@@ -852,7 +848,7 @@ Partial Class CopyRoms
         '
         Me.txtShownRoms.BackColor = System.Drawing.Color.Honeydew
         Me.txtShownRoms.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtShownRoms.Location = New System.Drawing.Point(469, 10)
+        Me.txtShownRoms.Location = New System.Drawing.Point(472, 31)
         Me.txtShownRoms.Name = "txtShownRoms"
         Me.txtShownRoms.ReadOnly = True
         Me.txtShownRoms.Size = New System.Drawing.Size(47, 20)
@@ -864,7 +860,7 @@ Partial Class CopyRoms
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label7.Location = New System.Drawing.Point(382, 38)
+        Me.Label7.Location = New System.Drawing.Point(385, 77)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(84, 13)
         Me.Label7.TabIndex = 18
@@ -875,7 +871,7 @@ Partial Class CopyRoms
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label6.Location = New System.Drawing.Point(362, 13)
+        Me.Label6.Location = New System.Drawing.Point(365, 34)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(104, 13)
         Me.Label6.TabIndex = 17
@@ -887,24 +883,13 @@ Partial Class CopyRoms
         Me.txt_nbrom.BackColor = System.Drawing.Color.ForestGreen
         Me.txt_nbrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txt_nbrom.ForeColor = System.Drawing.SystemColors.Window
-        Me.txt_nbrom.Location = New System.Drawing.Point(469, 33)
+        Me.txt_nbrom.Location = New System.Drawing.Point(472, 72)
         Me.txt_nbrom.Name = "txt_nbrom"
         Me.txt_nbrom.ReadOnly = True
         Me.txt_nbrom.Size = New System.Drawing.Size(47, 22)
         Me.txt_nbrom.TabIndex = 16
         Me.txt_nbrom.Text = "0"
         Me.txt_nbrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'DecocherTout
-        '
-        Me.DecocherTout.AutoSize = True
-        Me.DecocherTout.Location = New System.Drawing.Point(385, 83)
-        Me.DecocherTout.Name = "DecocherTout"
-        Me.DecocherTout.Size = New System.Drawing.Size(98, 17)
-        Me.DecocherTout.TabIndex = 15
-        Me.DecocherTout.Text = "Tout Décocher"
-        Me.DecocherTout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.DecocherTout.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -1182,18 +1167,6 @@ Partial Class CopyRoms
         Me.GroupBoxSelectionRoms.TabStop = False
         Me.GroupBoxSelectionRoms.Text = "Selection"
         '
-        'CocherTout
-        '
-        Me.CocherTout.AutoSize = True
-        Me.CocherTout.Checked = True
-        Me.CocherTout.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CocherTout.Location = New System.Drawing.Point(385, 66)
-        Me.CocherTout.Name = "CocherTout"
-        Me.CocherTout.Size = New System.Drawing.Size(85, 17)
-        Me.CocherTout.TabIndex = 14
-        Me.CocherTout.Text = "Tout Cocher"
-        Me.CocherTout.UseVisualStyleBackColor = True
-        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1310,7 +1283,6 @@ Partial Class CopyRoms
     Friend WithEvents Timer1 As Timer
     Friend WithEvents GroupFiltresAvances As GroupBox
     Friend WithEvents ComboFiltreColonnes As ComboBox
-    Friend WithEvents DecocherTout As CheckBox
     Friend WithEvents Label4 As Label
     Friend WithEvents txtShownRoms As TextBox
     Friend WithEvents Label7 As Label
@@ -1362,5 +1334,4 @@ Partial Class CopyRoms
     Friend WithEvents rommanualo As Button
     Friend WithEvents romvideoo As Button
     Friend WithEvents romscreeno As Button
-    Friend WithEvents CocherTout As CheckBox
 End Class
