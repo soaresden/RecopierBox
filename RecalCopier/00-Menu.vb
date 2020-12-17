@@ -84,7 +84,6 @@ Public Class Form1
         End If
     End Sub
 
-
     Private Sub ButtonBrowseRecalboxFolder_Click(sender As Object, e As EventArgs) Handles ButtonBrowseRecalboxFolder.Click
         'Au clic, on ouvre la selection du repertoire
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
@@ -126,9 +125,6 @@ Public Class Form1
         System.Diagnostics.Process.Start(String.Format("https://github.com/soaresden/RecopierBox"))
     End Sub
 
-    Private Sub ButtonQuizz_Click(sender As Object, e As EventArgs)
-
-    End Sub
     Private Sub RichTextBox2_Click(sender As Object, e As EventArgs) Handles RichTextBox2.Click
         System.Diagnostics.Process.Start(String.Format("http://jujuvincebros.fr/telechargements2/file/10-arrm-another-recalbox-roms-manager"))
     End Sub

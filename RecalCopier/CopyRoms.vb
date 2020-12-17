@@ -2275,29 +2275,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         End If
     End Sub
 
-    Private Sub CocherTout_CheckedChanged(sender As Object, e As EventArgs)
-        Dim visibleRowsCount = FinalGrid.DisplayedRowCount(True)
-        Dim firstDisplayedRowIndex = 0
-        Dim lastvisibleRowIndex = FinalGrid.Rows.Count - 2
-
-        For rowIndex As Integer = firstDisplayedRowIndex To lastvisibleRowIndex
-            If FinalGrid.Rows(rowIndex).Visible = True Then
-                FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True
-            End If
-        Next
-
-        CocherTout.Checked = True
-    End Sub
-
-    Private Sub DécocherTout_CheckedChanged(sender As Object, e As EventArgs)
-        For i = 0 To FinalGrid.Rows.Count - 2
-            If FinalGrid.Rows(i).Visible = True Then
-                FinalGrid.Rows(i).Cells(FinalGrid.Columns("Selection").Index).Value = False
-            End If
-        Next
-        DecocherTout.Checked = False
-    End Sub
-
     Private Sub Txt_romdesc_TextChanged(sender As Object, e As EventArgs) Handles txt_romdesc.TextChanged
         'En travail, mettre en gras !
         If ComboFiltreColonnes.Text = "Synopsis" And txt_txtsearch.Text IsNot Nothing Then

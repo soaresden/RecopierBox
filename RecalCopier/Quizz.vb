@@ -808,7 +808,7 @@ recalculrando:
 
     Private Sub PlayerPlay_Click(sender As Object, e As EventArgs) Handles PlayerPlay.Click
         'test pour voir si c'est à l'arret ou en play
-        If (PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play on fait Pause
+        If (PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play 
             Exit Sub
         ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
             Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
@@ -839,8 +839,17 @@ recalculrando:
     End Sub
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
         PlayerAudio.Ctlcontrols.stop()
+        Timer1.Stop()
         TimeBox.Text = ""
         TimeBox.BackColor = Color.FromArgb(72, 61, 139)
+
+        'Remettre les champs en modifiable
+        txtnbmanches.ReadOnly = False
+        txtnbmanches.BackColor = Color.FromArgb(0, 102, 204)
+
+        txttempsaffichprop.ReadOnly = False
+        txttempsaffichprop.BackColor = Color.FromArgb(0, 102, 204)
+
     End Sub
 
     Private Sub HiddenButton_Click(sender As Object, e As EventArgs) Handles HiddenButton.Click
@@ -878,6 +887,15 @@ recalculrando:
         ProgressBar1.Increment(1)
         Dim tpsrestant As Double = PlayerAudio.currentMedia.duration - PlayerAudio.Ctlcontrols.currentPosition
         TimeBox.Text = tpsrestant.ToString("00.0")
+
+        'On va bloquer les nb manches et le temps
+        If PlayerAudio.playState.wmppsPlaying Then
+            txtnbmanches.ReadOnly = True
+            txtnbmanches.BackColor = Color.FromArgb(172, 172, 172)
+
+            txttempsaffichprop.ReadOnly = True
+            txttempsaffichprop.BackColor = Color.FromArgb(172, 172, 172)
+        End If
 
         'On check le temps des propositions
         Dim tempsprop As String = txttempsaffichprop.Text
@@ -978,11 +996,24 @@ finboucle:
     End Sub
 
     Private Sub ModeEasy_CheckedChanged(sender As Object, e As EventArgs) Handles ModeEasy.CheckedChanged
-        If ModeEasy.Checked = True Then ModeHardcore.Checked = False
+        If ModeEasy.Checked = True Then
+            ModeEasy.Checked = True
+            ModeHardcore.Checked = False
+        Else
+            ModeEasy.Checked = False
+            ModeHardcore.Checked = True
+        End If
     End Sub
 
     Private Sub ModeHardcore_CheckedChanged(sender As Object, e As EventArgs) Handles ModeHardcore.CheckedChanged
-        If ModeHardcore.Checked = True Then ModeEasy.Checked = False
+        If ModeHardcore.Checked = True Then
+            ModeEasy.Checked = False
+            ModeHardcore.Checked = True
+        Else
+            ModeEasy.Checked = True
+            ModeHardcore.Checked = False
+        End If
+
     End Sub
 
     Private Sub ListConsoleDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListConsoleDesJeux.SelectedIndexChanged
