@@ -27,6 +27,11 @@ Partial Class CopyRoms
         Me.ListGameLists = New System.Windows.Forms.ListBox()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TutoHideBoutonCopy = New System.Windows.Forms.PictureBox()
+        Me.TutoHideOuCopier = New System.Windows.Forms.PictureBox()
+        Me.TutoHideQuoiCopier = New System.Windows.Forms.PictureBox()
+        Me.TutoHideSelectionIndic = New System.Windows.Forms.PictureBox()
+        Me.TutoHideUSB = New System.Windows.Forms.PictureBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ButtonParcourirRecalCopy = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -91,15 +96,8 @@ Partial Class CopyRoms
         Me.ButtonGetBack = New System.Windows.Forms.Button()
         Me.ButtonTuto1 = New System.Windows.Forms.Button()
         Me.ButtonGenererList = New System.Windows.Forms.Button()
-        Me.TutoHideOutilsP4 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP6 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP2 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP3 = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP5 = New System.Windows.Forms.PictureBox()
         Me.TutoHideGameList = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOutilsP1 = New System.Windows.Forms.PictureBox()
         Me.TutoHideRomInfo = New System.Windows.Forms.PictureBox()
-        Me.TutoHideFiltres = New System.Windows.Forms.PictureBox()
         Me.TutoHideFinalGrid = New System.Windows.Forms.PictureBox()
         Me.minipic5 = New System.Windows.Forms.PictureBox()
         Me.minipic4 = New System.Windows.Forms.PictureBox()
@@ -111,8 +109,16 @@ Partial Class CopyRoms
         Me.ChkAvance = New System.Windows.Forms.CheckBox()
         Me.ChkSimple = New System.Windows.Forms.CheckBox()
         Me.GroupBoxSelectionRoms = New System.Windows.Forms.GroupBox()
+        Me.TutoHideSimpleMode = New System.Windows.Forms.PictureBox()
+        Me.TutoHideFiltresAvance = New System.Windows.Forms.PictureBox()
+        Me.TutoSelectionActuelle = New System.Windows.Forms.PictureBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -123,15 +129,8 @@ Partial Class CopyRoms
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupFiltresAvances.SuspendLayout()
-        CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOutilsP1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideFiltres, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.minipic5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.minipic4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -140,6 +139,9 @@ Partial Class CopyRoms
         CType(Me.minipic1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupMode.SuspendLayout()
         Me.GroupBoxSelectionRoms.SuspendLayout()
+        CType(Me.TutoHideSimpleMode, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideFiltresAvance, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoSelectionActuelle, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ListGameLists
@@ -181,6 +183,46 @@ Partial Class CopyRoms
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Opérations :"
+        '
+        'TutoHideBoutonCopy
+        '
+        Me.TutoHideBoutonCopy.Location = New System.Drawing.Point(839, 4)
+        Me.TutoHideBoutonCopy.Name = "TutoHideBoutonCopy"
+        Me.TutoHideBoutonCopy.Size = New System.Drawing.Size(32, 23)
+        Me.TutoHideBoutonCopy.TabIndex = 30
+        Me.TutoHideBoutonCopy.TabStop = False
+        '
+        'TutoHideOuCopier
+        '
+        Me.TutoHideOuCopier.Location = New System.Drawing.Point(725, 4)
+        Me.TutoHideOuCopier.Name = "TutoHideOuCopier"
+        Me.TutoHideOuCopier.Size = New System.Drawing.Size(87, 23)
+        Me.TutoHideOuCopier.TabIndex = 26
+        Me.TutoHideOuCopier.TabStop = False
+        '
+        'TutoHideQuoiCopier
+        '
+        Me.TutoHideQuoiCopier.Location = New System.Drawing.Point(657, 4)
+        Me.TutoHideQuoiCopier.Name = "TutoHideQuoiCopier"
+        Me.TutoHideQuoiCopier.Size = New System.Drawing.Size(62, 23)
+        Me.TutoHideQuoiCopier.TabIndex = 27
+        Me.TutoHideQuoiCopier.TabStop = False
+        '
+        'TutoHideSelectionIndic
+        '
+        Me.TutoHideSelectionIndic.Location = New System.Drawing.Point(617, 4)
+        Me.TutoHideSelectionIndic.Name = "TutoHideSelectionIndic"
+        Me.TutoHideSelectionIndic.Size = New System.Drawing.Size(34, 23)
+        Me.TutoHideSelectionIndic.TabIndex = 28
+        Me.TutoHideSelectionIndic.TabStop = False
+        '
+        'TutoHideUSB
+        '
+        Me.TutoHideUSB.Location = New System.Drawing.Point(583, 4)
+        Me.TutoHideUSB.Name = "TutoHideUSB"
+        Me.TutoHideUSB.Size = New System.Drawing.Size(28, 23)
+        Me.TutoHideUSB.TabIndex = 23
+        Me.TutoHideUSB.TabStop = False
         '
         'GroupBox5
         '
@@ -974,46 +1016,6 @@ Partial Class CopyRoms
         Me.ButtonGenererList.Text = "Valider les Systèmes Selectionnés"
         Me.ButtonGenererList.UseVisualStyleBackColor = False
         '
-        'TutoHideOutilsP4
-        '
-        Me.TutoHideOutilsP4.Location = New System.Drawing.Point(705, 2)
-        Me.TutoHideOutilsP4.Name = "TutoHideOutilsP4"
-        Me.TutoHideOutilsP4.Size = New System.Drawing.Size(39, 21)
-        Me.TutoHideOutilsP4.TabIndex = 31
-        Me.TutoHideOutilsP4.TabStop = False
-        '
-        'TutoHideOutilsP6
-        '
-        Me.TutoHideOutilsP6.Location = New System.Drawing.Point(796, 2)
-        Me.TutoHideOutilsP6.Name = "TutoHideOutilsP6"
-        Me.TutoHideOutilsP6.Size = New System.Drawing.Size(53, 23)
-        Me.TutoHideOutilsP6.TabIndex = 30
-        Me.TutoHideOutilsP6.TabStop = False
-        '
-        'TutoHideOutilsP2
-        '
-        Me.TutoHideOutilsP2.Location = New System.Drawing.Point(605, 2)
-        Me.TutoHideOutilsP2.Name = "TutoHideOutilsP2"
-        Me.TutoHideOutilsP2.Size = New System.Drawing.Size(52, 20)
-        Me.TutoHideOutilsP2.TabIndex = 28
-        Me.TutoHideOutilsP2.TabStop = False
-        '
-        'TutoHideOutilsP3
-        '
-        Me.TutoHideOutilsP3.Location = New System.Drawing.Point(663, 2)
-        Me.TutoHideOutilsP3.Name = "TutoHideOutilsP3"
-        Me.TutoHideOutilsP3.Size = New System.Drawing.Size(36, 21)
-        Me.TutoHideOutilsP3.TabIndex = 27
-        Me.TutoHideOutilsP3.TabStop = False
-        '
-        'TutoHideOutilsP5
-        '
-        Me.TutoHideOutilsP5.Location = New System.Drawing.Point(750, 2)
-        Me.TutoHideOutilsP5.Name = "TutoHideOutilsP5"
-        Me.TutoHideOutilsP5.Size = New System.Drawing.Size(40, 23)
-        Me.TutoHideOutilsP5.TabIndex = 26
-        Me.TutoHideOutilsP5.TabStop = False
-        '
         'TutoHideGameList
         '
         Me.TutoHideGameList.Location = New System.Drawing.Point(259, 2)
@@ -1022,29 +1024,13 @@ Partial Class CopyRoms
         Me.TutoHideGameList.TabIndex = 24
         Me.TutoHideGameList.TabStop = False
         '
-        'TutoHideOutilsP1
-        '
-        Me.TutoHideOutilsP1.Location = New System.Drawing.Point(551, 2)
-        Me.TutoHideOutilsP1.Name = "TutoHideOutilsP1"
-        Me.TutoHideOutilsP1.Size = New System.Drawing.Size(48, 23)
-        Me.TutoHideOutilsP1.TabIndex = 23
-        Me.TutoHideOutilsP1.TabStop = False
-        '
         'TutoHideRomInfo
         '
         Me.TutoHideRomInfo.Location = New System.Drawing.Point(409, 2)
         Me.TutoHideRomInfo.Name = "TutoHideRomInfo"
-        Me.TutoHideRomInfo.Size = New System.Drawing.Size(72, 21)
+        Me.TutoHideRomInfo.Size = New System.Drawing.Size(33, 21)
         Me.TutoHideRomInfo.TabIndex = 22
         Me.TutoHideRomInfo.TabStop = False
-        '
-        'TutoHideFiltres
-        '
-        Me.TutoHideFiltres.Location = New System.Drawing.Point(487, 2)
-        Me.TutoHideFiltres.Name = "TutoHideFiltres"
-        Me.TutoHideFiltres.Size = New System.Drawing.Size(58, 23)
-        Me.TutoHideFiltres.TabIndex = 21
-        Me.TutoHideFiltres.TabStop = False
         '
         'TutoHideFinalGrid
         '
@@ -1057,7 +1043,7 @@ Partial Class CopyRoms
         'minipic5
         '
         Me.minipic5.BackColor = System.Drawing.Color.White
-        Me.minipic5.Image = Global.RecalCopier.My.Resources.Resources.okmem
+        Me.minipic5.Image = CType(resources.GetObject("minipic5.Image"), System.Drawing.Image)
         Me.minipic5.Location = New System.Drawing.Point(473, 29)
         Me.minipic5.Name = "minipic5"
         Me.minipic5.Size = New System.Drawing.Size(24, 18)
@@ -1068,7 +1054,7 @@ Partial Class CopyRoms
         'minipic4
         '
         Me.minipic4.BackColor = System.Drawing.Color.White
-        Me.minipic4.Image = Global.RecalCopier.My.Resources.Resources.okoverlay
+        Me.minipic4.Image = CType(resources.GetObject("minipic4.Image"), System.Drawing.Image)
         Me.minipic4.Location = New System.Drawing.Point(448, 29)
         Me.minipic4.Name = "minipic4"
         Me.minipic4.Size = New System.Drawing.Size(24, 18)
@@ -1079,7 +1065,7 @@ Partial Class CopyRoms
         'minipic3
         '
         Me.minipic3.BackColor = System.Drawing.Color.White
-        Me.minipic3.Image = Global.RecalCopier.My.Resources.Resources.okmanual
+        Me.minipic3.Image = CType(resources.GetObject("minipic3.Image"), System.Drawing.Image)
         Me.minipic3.Location = New System.Drawing.Point(422, 29)
         Me.minipic3.Name = "minipic3"
         Me.minipic3.Size = New System.Drawing.Size(24, 18)
@@ -1090,7 +1076,7 @@ Partial Class CopyRoms
         'minipic2
         '
         Me.minipic2.BackColor = System.Drawing.Color.White
-        Me.minipic2.Image = Global.RecalCopier.My.Resources.Resources.okvideo
+        Me.minipic2.Image = CType(resources.GetObject("minipic2.Image"), System.Drawing.Image)
         Me.minipic2.Location = New System.Drawing.Point(396, 29)
         Me.minipic2.Name = "minipic2"
         Me.minipic2.Size = New System.Drawing.Size(24, 18)
@@ -1167,28 +1153,53 @@ Partial Class CopyRoms
         Me.GroupBoxSelectionRoms.TabStop = False
         Me.GroupBoxSelectionRoms.Text = "Selection"
         '
+        'TutoHideSimpleMode
+        '
+        Me.TutoHideSimpleMode.Location = New System.Drawing.Point(534, 2)
+        Me.TutoHideSimpleMode.Name = "TutoHideSimpleMode"
+        Me.TutoHideSimpleMode.Size = New System.Drawing.Size(42, 23)
+        Me.TutoHideSimpleMode.TabIndex = 43
+        Me.TutoHideSimpleMode.TabStop = False
+        '
+        'TutoHideFiltresAvance
+        '
+        Me.TutoHideFiltresAvance.Location = New System.Drawing.Point(483, 2)
+        Me.TutoHideFiltresAvance.Name = "TutoHideFiltresAvance"
+        Me.TutoHideFiltresAvance.Size = New System.Drawing.Size(27, 21)
+        Me.TutoHideFiltresAvance.TabIndex = 45
+        Me.TutoHideFiltresAvance.TabStop = False
+        '
+        'TutoSelectionActuelle
+        '
+        Me.TutoSelectionActuelle.Location = New System.Drawing.Point(448, 4)
+        Me.TutoSelectionActuelle.Name = "TutoSelectionActuelle"
+        Me.TutoSelectionActuelle.Size = New System.Drawing.Size(24, 21)
+        Me.TutoSelectionActuelle.TabIndex = 47
+        Me.TutoSelectionActuelle.TabStop = False
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.TutoSelectionActuelle)
+        Me.Controls.Add(Me.TutoHideFiltresAvance)
+        Me.Controls.Add(Me.TutoHideBoutonCopy)
+        Me.Controls.Add(Me.TutoHideOuCopier)
+        Me.Controls.Add(Me.TutoHideSimpleMode)
+        Me.Controls.Add(Me.TutoHideQuoiCopier)
+        Me.Controls.Add(Me.TutoHideSelectionIndic)
+        Me.Controls.Add(Me.TutoHideUSB)
+        Me.Controls.Add(Me.TutoHideGameList)
+        Me.Controls.Add(Me.TutoHideRomInfo)
+        Me.Controls.Add(Me.TutoHideFinalGrid)
         Me.Controls.Add(Me.GroupBoxSelectionRoms)
         Me.Controls.Add(Me.GroupMode)
         Me.Controls.Add(Me.ButtonGenererList)
         Me.Controls.Add(Me.ButtonTuto1)
         Me.Controls.Add(Me.ButtonGetBack)
         Me.Controls.Add(Me.CheckBoxARRM)
-        Me.Controls.Add(Me.TutoHideOutilsP4)
-        Me.Controls.Add(Me.TutoHideOutilsP6)
-        Me.Controls.Add(Me.TutoHideOutilsP2)
-        Me.Controls.Add(Me.TutoHideOutilsP3)
-        Me.Controls.Add(Me.TutoHideOutilsP5)
-        Me.Controls.Add(Me.TutoHideGameList)
-        Me.Controls.Add(Me.TutoHideOutilsP1)
-        Me.Controls.Add(Me.TutoHideRomInfo)
-        Me.Controls.Add(Me.TutoHideFiltres)
-        Me.Controls.Add(Me.TutoHideFinalGrid)
         Me.Controls.Add(Me.minipic5)
         Me.Controls.Add(Me.minipic4)
         Me.Controls.Add(Me.minipic3)
@@ -1206,6 +1217,11 @@ Partial Class CopyRoms
         Me.Text = "CopyRoms"
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
+        CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -1224,15 +1240,8 @@ Partial Class CopyRoms
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupFiltresAvances.ResumeLayout(False)
         Me.GroupFiltresAvances.PerformLayout()
-        CType(Me.TutoHideOutilsP4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOutilsP1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideFiltres, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.minipic5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.minipic4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1243,6 +1252,9 @@ Partial Class CopyRoms
         Me.GroupMode.PerformLayout()
         Me.GroupBoxSelectionRoms.ResumeLayout(False)
         Me.GroupBoxSelectionRoms.PerformLayout()
+        CType(Me.TutoHideSimpleMode, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideFiltresAvance, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoSelectionActuelle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1298,15 +1310,13 @@ Partial Class CopyRoms
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents Label10 As Label
     Friend WithEvents TutoHideFinalGrid As PictureBox
-    Friend WithEvents TutoHideFiltres As PictureBox
     Friend WithEvents TutoHideRomInfo As PictureBox
-    Friend WithEvents TutoHideOutilsP1 As PictureBox
+    Friend WithEvents TutoHideUSB As PictureBox
     Friend WithEvents TutoHideGameList As PictureBox
-    Friend WithEvents TutoHideOutilsP5 As PictureBox
-    Friend WithEvents TutoHideOutilsP3 As PictureBox
-    Friend WithEvents TutoHideOutilsP2 As PictureBox
-    Friend WithEvents TutoHideOutilsP6 As PictureBox
-    Friend WithEvents TutoHideOutilsP4 As PictureBox
+    Friend WithEvents TutoHideOuCopier As PictureBox
+    Friend WithEvents TutoHideQuoiCopier As PictureBox
+    Friend WithEvents TutoHideSelectionIndic As PictureBox
+    Friend WithEvents TutoHideBoutonCopy As PictureBox
     Friend WithEvents CheckBoxARRM As CheckBox
     Friend WithEvents txt_romname As Label
     Friend WithEvents Panel1 As Panel
@@ -1334,4 +1344,7 @@ Partial Class CopyRoms
     Friend WithEvents rommanualo As Button
     Friend WithEvents romvideoo As Button
     Friend WithEvents romscreeno As Button
+    Friend WithEvents TutoHideSimpleMode As PictureBox
+    Friend WithEvents TutoHideFiltresAvance As PictureBox
+    Friend WithEvents TutoSelectionActuelle As PictureBox
 End Class

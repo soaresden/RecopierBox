@@ -1,6 +1,14 @@
 ﻿Imports System.IO
 
+
+
 Public Class CopyRoms
+    Public Sub CloseIt()
+        System.Threading.Thread.Sleep(3000)
+        Microsoft.VisualBasic.Interaction.AppActivate(System.Diagnostics.Process.GetCurrentProcess().Id)
+        System.Windows.Forms.SendKeys.SendWait(" ")
+    End Sub
+
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Hiding buttons and datagrids
         txt_txtsearch.Hide()
@@ -46,13 +54,11 @@ Public Class CopyRoms
         TutoHideGameList.Hide()
         TutoHideFinalGrid.Hide()
         TutoHideRomInfo.Hide()
-        TutoHideFiltres.Hide()
-        TutoHideOutilsP1.Hide()
-        TutoHideOutilsP2.Hide()
-        TutoHideOutilsP3.Hide()
-        TutoHideOutilsP4.Hide()
-        TutoHideOutilsP5.Hide()
-        TutoHideOutilsP6.Hide()
+        TutoHideUSB.Hide()
+        TutoHideSelectionIndic.Hide()
+        TutoHideQuoiCopier.Hide()
+        TutoHideOuCopier.Hide()
+        TutoHideBoutonCopy.Hide()
     End Sub
     Private Sub ButtonValider_Click(sender As Object, e As EventArgs)
 
@@ -97,15 +103,10 @@ Public Class CopyRoms
             Exit Sub
         End If
 
-
-
-
         'Showing stuff
         FinalGrid.Show()
 
         If ListGameLists.Items.Count = 0 Then Exit Sub
-
-
 
         Dim gamelist As String = ListGameLists.Items(0)
         Dim table As New DataTable()
@@ -813,27 +814,27 @@ consolesanssaves:
         Dim checkboxoverlay As String = row.Cells(FinalGrid.Columns("CocheOverlay").Index).Value
         Dim checkboxsave As String = row.Cells(FinalGrid.Columns("CocheSave").Index).Value
 
-        Dim imgscreen As New Bitmap(My.Resources.Okscreen)
+        Dim imgscreen As New Bitmap(My.Resources.okscreen)
         Dim imgscreenno As New Bitmap(My.Resources.noscreen)
         Dim imgscreen2 As New Bitmap(imgscreen, romscreeno.Width, romscreeno.Height)
         Dim imgscreen2no As New Bitmap(imgscreenno, romscreeno.Width, romscreeno.Height)
 
-        Dim imgvideo As New Bitmap(My.Resources.OKvideo)
+        Dim imgvideo As New Bitmap(My.Resources.okvideo)
         Dim imgvideono As New Bitmap(My.Resources.novideo)
         Dim imgvideo2 As New Bitmap(imgvideo, romvideoo.Width, romvideoo.Height)
         Dim imgvideo2no As New Bitmap(imgvideono, romvideoo.Width, romvideoo.Height)
 
-        Dim imgmanual As New Bitmap(My.Resources.OKmanual)
+        Dim imgmanual As New Bitmap(My.Resources.okmanual)
         Dim imgmanualno As New Bitmap(My.Resources.nomanual)
         Dim imgmanual2 As New Bitmap(imgmanual, romvideoo.Width, romvideoo.Height)
         Dim imgmanual2no As New Bitmap(imgmanualno, romvideoo.Width, romvideoo.Height)
 
-        Dim imgoverlay As New Bitmap(My.Resources.OKoverlay)
+        Dim imgoverlay As New Bitmap(My.Resources.okoverlay)
         Dim imgoverlayno As New Bitmap(My.Resources.nooverlay)
         Dim imgoverlay2 As New Bitmap(imgoverlay, romoverlayo.Width, romoverlayo.Height)
         Dim imgoverlay2no As New Bitmap(imgoverlayno, romoverlayo.Width, romoverlayo.Height)
 
-        Dim imgsaves As New Bitmap(My.Resources.OKMem)
+        Dim imgsaves As New Bitmap(My.Resources.okmem)
         Dim imgsavesno As New Bitmap(My.Resources.nomem)
         Dim imgsaves2 As New Bitmap(imgsaves, romsaveo.Width, romsaveo.Height)
         Dim imgsaves2no As New Bitmap(imgsavesno, romsaveo.Width, romsaveo.Height)
@@ -980,7 +981,7 @@ consolesanssaves:
         'verif de l'espace disque
         If txt_GoAPrevoir.Text < 0 Then
             MsgBox("Trop d'espace est necessaire à la Copie" & Chr(13) & "ABANDON")
-                        Exit Sub
+            Exit Sub
         End If
 
         'Verification que le chemin est vide
@@ -2372,98 +2373,98 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         TutoHideFinalGrid.Size = New Point(391, 364)
         TutoHideFinalGrid.Location = New Point(217, 28)
 
-        TutoHideRomInfo.Size = New Point(395, 475)
+        TutoHideRomInfo.Size = New Point(395, 470)
         TutoHideRomInfo.Location = New Point(612, 28)
 
-        TutoHideFiltres.Size = New Point(624, 105)
-        TutoHideFiltres.Location = New Point(8, 398)
+        TutoSelectionActuelle.Size = New Point(78, 109)
+        TutoSelectionActuelle.Location = New Point(534, 394)
 
-        TutoHideOutilsP1.Size = New Point(129, 90)
-        TutoHideOutilsP1.Location = New Point(8, 509)
+        TutoHideSimpleMode.Size = New Point(126, 91)
+        TutoHideSimpleMode.Location = New Point(8, 509)
 
-        TutoHideOutilsP2.Size = New Point(194, 91)
-        TutoHideOutilsP2.Location = New Point(129, 509)
+        TutoHideFiltresAvance.Size = New Point(525, 105)
+        TutoHideFiltresAvance.Location = New Point(8, 399)
 
-        TutoHideOutilsP3.Size = New Point(203, 91)
-        TutoHideOutilsP3.Location = New Point(323, 509)
+        TutoHideUSB.Size = New Point(171, 77)
+        TutoHideUSB.Location = New Point(142, 523)
 
-        TutoHideOutilsP4.Size = New Point(179, 91)
-        TutoHideOutilsP4.Location = New Point(525, 509)
+        TutoHideSelectionIndic.Size = New Point(177, 77)
+        TutoHideSelectionIndic.Location = New Point(314, 523)
 
-        TutoHideOutilsP5.Size = New Point(223, 91)
-        TutoHideOutilsP5.Location = New Point(707, 509)
+        TutoHideQuoiCopier.Size = New Point(205, 77)
+        TutoHideQuoiCopier.Location = New Point(492, 523)
 
-        TutoHideOutilsP6.Size = New Point(77, 91)
-        TutoHideOutilsP6.Location = New Point(930, 509)
+        TutoHideOuCopier.Size = New Point(230, 77)
+        TutoHideOuCopier.Location = New Point(698, 523)
+
+        TutoHideBoutonCopy.Size = New Point(76, 77)
+        TutoHideBoutonCopy.Location = New Point(930, 523)
 
         'On reaffiche tout
         TutoHideGameList.Show()
         TutoHideFinalGrid.Show()
         TutoHideRomInfo.Show()
-        TutoHideFiltres.Show()
-        TutoHideOutilsP1.Show()
-        TutoHideOutilsP2.Show()
-        TutoHideOutilsP3.Show()
-        TutoHideOutilsP4.Show()
-        TutoHideOutilsP5.Show()
-        TutoHideOutilsP6.Show()
+        TutoSelectionActuelle.Show()
+        TutoHideSimpleMode.Show()
+        TutoHideFiltresAvance.Show()
+        TutoHideUSB.Show()
+        TutoHideSelectionIndic.Show()
+        TutoHideQuoiCopier.Show()
+        TutoHideOuCopier.Show()
+        TutoHideBoutonCopy.Show()
 
-        MsgBox("Bienvenue dans ce Petit Tuto pour Apprendre à Utiliser RecopierBox")
+        TutoHideSimpleMode.Hide()
+        CreateObject("WScript.Shell").popup("Avant toute chose : Reglez le mode simple ou avancé" & Chr(13) & Chr(13) & "Le mode avancé vous permet d'afficher des filtres supplémentaires", 2, "01/19 : Les Gamelists")
 
         TutoHideGameList.Hide()
         ListGameLists.Show()
         FinalGrid.Hide()
-        MsgBox("Ci-Contre, vos Gamelists" & Chr(13) & "Vous avez selectionné à la Souris ou en laissant enfoncé le clic" & Chr(13) & "Ou avec CTRL Enfoncé + Clic" & Chr(13) & "les systèmes qui vous interesse")
+        CreateObject("WScript.Shell").Popup("Ci-Contre, vos Gamelists :" & Chr(13) & "Que vous avez selectionné à la Souris ou en laissant enfoncé le clic" & Chr(13) & "Ou avec CTRL Enfoncé + Clic" & Chr(13) & "les systèmes que vous avez importés dans le tableau", 2, "01/19 : Les Gamelists")
 
         ListGameLists.Hide()
         TutoHideFinalGrid.Hide()
         FinalGrid.Show()
-        MsgBox("Une fois les Gamelists chargés, retrouvez l'intégralité de vos roms dans ce tableau")
-        MsgBox("Chaque ligne du tableau représente une Rom" & Chr(13) & "Les coches à sa droite representent les métadonnées")
-        MsgBox("Si la cellule est Verte : Info présente dans le Gamelist" & Chr(13) & "Si la cellule est Rouge : Info non présente" & Chr(13) & "Si la cellule est Noire : Non applicable à cette Console")
-        MsgBox("La dernière colonne est la SEULE colonne qui vous interesse" & Chr(13) & Chr(13) & "Elle permet de selectionner la Rom pour Copie")
+        CreateObject("WScript.Shell").Popup("Une fois les Gamelists chargés, retrouvez l'intégralité de vos roms dans ce tableau", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Chaque ligne du tableau représente une Rom" & Chr(13) & "Les coches à sa droite representent les métadonnées", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Si la cellule est Verte : Info présente dans le Gamelist" & Chr(13) & "Si la cellule est Rouge : Info non présente" & Chr(13) & "Si la cellule est Noire : Non applicable à cette Console", 2, "02/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("La dernière colonne est la SEULE colonne qui vous interesse" & Chr(13) & Chr(13) & "Elle permet de selectionner la Rom pour Copie", 2, "01/19 : Les Gamelists")
 
         TutoHideRomInfo.Hide()
-        MsgBox("Lors d'un clic sur une Rom du tableau précédent" & Chr(13) & "Les informations ici sont affichées")
-        MsgBox("Remarquez les 5 boutons ci dessous" & Chr(13) & Chr(13) & "Qui vous permettront d'ouvrir chacun des médias représentés en coche dans le tableau")
+        CreateObject("WScript.Shell").Popup("Lors d'un clic sur une Rom du tableau précédent" & Chr(13) & "Les informations ici sont affichées", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Remarquez les 2 boutons ci dessous" & Chr(13) & Chr(13) & "Qui vous permettront d'ouvrir chacun des médias représentés en coche dans le tableau", 2, "01/19 : Les Gamelists")
 
-        TutoHideFiltres.Hide()
-        MsgBox("Lire votre bibliothèque c'est bien" & Chr(13) & "Pouvoir réaliser votre selection, c'est mieux !" & Chr(13) & Chr(13) & "Ces filtres permettent de filtrer la vue de votre tableau grâce aux colonnes et à votre saisie")
-        MsgBox("N'oubliez pas de Selectionner les Roms que vous souhaitez copier !")
+        TutoHideFiltresAvance.Hide()
+        CreateObject("WScript.Shell").Popup("Si vous avez coché le mode avancé, voici les filtres qui vous permettre de n'afficher qu'une partie des élements chargés", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("N'oubliez pas de cocher les Roms que vous souhaitez copier via la coche en dernière colonne !", 2, "Bienvenue")
 
-        TutoHideOutilsP3.Hide()
-        MsgBox("Après Selection, surveillez les indicateurs qui vous permettent d'avoir un oeil sur l'espace necessaire à la copie")
+        TutoSelectionActuelle.Hide()
+        CreateObject("WScript.Shell").Popup("Vous pouvez à tout moment afficher votre selection via ce bouton", 2, "Bienvenue")
 
-        TutoHideOutilsP4.Hide()
-        MsgBox("Pendant ou à la fin de vos choix: " & Chr(13) & "Vous pouvez afficher cette selection à tout moment grâce à ce bouton")
+        TutoHideSelectionIndic.Hide()
+        CreateObject("WScript.Shell").Popup("Après Selection, surveillez les indicateurs qui vous permettent d'avoir un oeil sur l'espace necessaire à la copie", 2, "01/19 : Les Gamelists")
 
-        TutoHideOutilsP1.Hide()
-        MsgBox("N'oubliez pas de Saisir ici l'espace de stockage de votre média cible pour la réalisation de votre collection")
+        TutoHideUSB.Hide()
+        CreateObject("WScript.Shell").Popup("N'oubliez pas de Saisir ici l'espace de stockage de votre média cible pour la réalisation de votre collection", 2, "01/19 : Les Gamelists")
 
-        TutoHideOutilsP2.Hide()
-        MsgBox("Selectionner les elements que vous souhaitez retrouver dans votre copie personnalisée")
+        TutoHideQuoiCopier.Hide()
+        CreateObject("WScript.Shell").Popup("Selectionner les elements que vous souhaitez retrouver dans votre copie personnalisée", 2, "01/19 : Les Gamelists")
 
-        TutoHideOutilsP5.Hide()
-        MsgBox("Definissez ici votre repertoire de Sortie")
-        MsgBox("Je vous conseille de mettre ici un repertoire vide 'REMADE'" & Chr(13) & "de préference sur le support de stockage contenant" & Chr(13) & "les médias pour optimiser le temps de copie")
-
-        TutoHideOutilsP6.Hide()
-        MsgBox("Quand votre selection est complète, et que votre copie finale est parametrée" & "C'est ici qu'on lance le tout !")
-
-        MsgBox("En esperant que ces popups vous aient été utile")
-        MsgBox("Bonne Construction =)" & Chr(13) & Chr(13) & Chr(13) & "Soaresden")
+        TutoHideOuCopier.Hide()
+        CreateObject("WScript.Shell").Popup("Definissez ici votre repertoire de Sortie" & Chr(13) & Chr(13) & "Je vous conseille de mettre ici un repertoire vide 'REMADE'" & Chr(13) & "de préference sur le support de stockage contenant" & Chr(13) & "les médias pour optimiser le temps de copie", 2, "01/19 : Les Gamelists")
+        TutoHideBoutonCopy.Hide()
+        CreateObject("WScript.Shell").Popup("Quand votre selection est complète, et que votre copie finale est parametrée" & Chr(13) & Chr(13) & "C'est ici qu'on lance le tout !", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("En esperant que ces popups vous aient été utile", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Bonne Construction =)", 2, "Merci !")
 
         'Et tout le Block Tuto
         TutoHideGameList.Hide()
         TutoHideFinalGrid.Hide()
         TutoHideRomInfo.Hide()
-        TutoHideFiltres.Hide()
-        TutoHideOutilsP1.Hide()
-        TutoHideOutilsP2.Hide()
-        TutoHideOutilsP3.Hide()
-        TutoHideOutilsP4.Hide()
-        TutoHideOutilsP5.Hide()
-        TutoHideOutilsP6.Hide()
+        TutoHideUSB.Hide()
+        TutoHideSelectionIndic.Hide()
+        TutoHideQuoiCopier.Hide()
+        TutoHideOuCopier.Hide()
+        TutoHideBoutonCopy.Hide()
 
     End Sub
 
