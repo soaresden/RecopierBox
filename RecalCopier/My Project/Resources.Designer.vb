@@ -143,9 +143,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property OKmanual() As System.Drawing.Bitmap
+        Friend ReadOnly Property okmanual() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("OKmanual", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("okmanual", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -153,9 +153,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property OKMem() As System.Drawing.Bitmap
+        Friend ReadOnly Property okmem() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("OKMem", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("okmem", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -163,9 +163,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property OKoverlay() As System.Drawing.Bitmap
+        Friend ReadOnly Property okoverlay() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("OKoverlay", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("okoverlay", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -173,9 +173,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Okscreen() As System.Drawing.Bitmap
+        Friend ReadOnly Property okscreen() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Okscreen", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("okscreen", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -183,9 +183,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property OKvideo() As System.Drawing.Bitmap
+        Friend ReadOnly Property okvideo() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("OKvideo", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("okvideo", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

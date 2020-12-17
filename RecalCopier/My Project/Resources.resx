@@ -128,33 +128,33 @@
     <value>..\Resources\iconsound off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="nomanual" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nomanual.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\flatmanualno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="nomem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nomem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\flatsaveno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="nooverlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\nooverlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\flatoverlayno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\noscreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\flatscreenno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="novideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\novideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\flatvideono.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OKmanual" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OKmanual.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="okmanual" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flatmanual.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OKMem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OKMem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="okmem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flatsave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OKoverlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OKoverlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="okoverlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flatoverlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Okscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Okscreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="okscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flatscreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="OKvideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OKvideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="okvideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flatvideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

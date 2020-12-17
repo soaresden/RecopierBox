@@ -287,6 +287,16 @@
   <ItemGroup>
     <Content Include="IconeLog.ico" />
     <Content Include="iconlog2.ico" />
+    <None Include="Resources\flatsaveno.png" />
+    <None Include="Resources\flatsave.png" />
+    <None Include="Resources\flatoverlayno.png" />
+    <None Include="Resources\flatoverlay.png" />
+    <None Include="Resources\flatmanualno.png" />
+    <None Include="Resources\flatmanual.png" />
+    <None Include="Resources\flatvideono.png" />
+    <None Include="Resources\flatvideo.png" />
+    <None Include="Resources\flatscreenno.png" />
+    <None Include="Resources\flatscreen.png" />
     <None Include="Resources\iconsound.png" />
     <None Include="Resources\iconsound off.png" />
     <None Include="Resources\iconlog.png" />

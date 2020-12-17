@@ -56,16 +56,16 @@ Partial Class CopyRoms
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txt_romname = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.romsaveo = New System.Windows.Forms.Button()
+        Me.romoverlayo = New System.Windows.Forms.Button()
+        Me.rommanualo = New System.Windows.Forms.Button()
+        Me.romvideoo = New System.Windows.Forms.Button()
+        Me.romscreeno = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.romscreeno = New System.Windows.Forms.Button()
-        Me.romvideoo = New System.Windows.Forms.Button()
-        Me.romsaveo = New System.Windows.Forms.Button()
-        Me.rommanualo = New System.Windows.Forms.Button()
-        Me.romoverlayo = New System.Windows.Forms.Button()
         Me.RomImage = New System.Windows.Forms.PictureBox()
         Me.txt_romdesc = New System.Windows.Forms.RichTextBox()
         Me.txt_rompath = New System.Windows.Forms.TextBox()
@@ -175,11 +175,11 @@ Partial Class CopyRoms
         Me.GroupBox1.Controls.Add(Me.GroupBox4)
         Me.GroupBox1.Controls.Add(Me.GroupBox3)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupBox1.Location = New System.Drawing.Point(140, 508)
+        Me.GroupBox1.Location = New System.Drawing.Point(137, 508)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(867, 92)
+        Me.GroupBox1.Size = New System.Drawing.Size(868, 92)
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Opérations :"
@@ -190,7 +190,7 @@ Partial Class CopyRoms
         Me.GroupBox5.Controls.Add(Me.ButtonParcourirRecalCopy)
         Me.GroupBox5.Controls.Add(Me.Label8)
         Me.GroupBox5.Controls.Add(Me.txt_CopyFolder)
-        Me.GroupBox5.Location = New System.Drawing.Point(561, 19)
+        Me.GroupBox5.Location = New System.Drawing.Point(561, 16)
         Me.GroupBox5.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Padding = New System.Windows.Forms.Padding(2)
@@ -209,7 +209,7 @@ Partial Class CopyRoms
         Me.ButtonParcourirRecalCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonParcourirRecalCopy.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonParcourirRecalCopy.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(2, 42)
+        Me.ButtonParcourirRecalCopy.Location = New System.Drawing.Point(157, 41)
         Me.ButtonParcourirRecalCopy.Name = "ButtonParcourirRecalCopy"
         Me.ButtonParcourirRecalCopy.Size = New System.Drawing.Size(61, 25)
         Me.ButtonParcourirRecalCopy.TabIndex = 40
@@ -220,24 +220,24 @@ Partial Class CopyRoms
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label8.Location = New System.Drawing.Point(64, 20)
+        Me.Label8.Location = New System.Drawing.Point(5, 21)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(157, 39)
+        Me.Label8.Size = New System.Drawing.Size(179, 13)
         Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Lettre du Support USB" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ou " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Dossier où ""recalbox"" sera créé" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label8.Text = "Dossier où le dossier final sera créé :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'txt_CopyFolder
         '
-        Me.txt_CopyFolder.Location = New System.Drawing.Point(2, 16)
+        Me.txt_CopyFolder.Location = New System.Drawing.Point(5, 43)
         Me.txt_CopyFolder.Name = "txt_CopyFolder"
-        Me.txt_CopyFolder.Size = New System.Drawing.Size(61, 20)
+        Me.txt_CopyFolder.Size = New System.Drawing.Size(146, 20)
         Me.txt_CopyFolder.TabIndex = 0
         Me.txt_CopyFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'ButtonCopy
         '
         Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
-        Me.ButtonCopy.Location = New System.Drawing.Point(791, 17)
+        Me.ButtonCopy.Location = New System.Drawing.Point(793, 15)
         Me.ButtonCopy.Name = "ButtonCopy"
         Me.ButtonCopy.Size = New System.Drawing.Size(69, 72)
         Me.ButtonCopy.TabIndex = 14
@@ -253,7 +253,7 @@ Partial Class CopyRoms
         Me.GroupBox2.Controls.Add(Me.checkvideos)
         Me.GroupBox2.Controls.Add(Me.checkmanuals)
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.GroupBox2.Location = New System.Drawing.Point(353, 19)
+        Me.GroupBox2.Location = New System.Drawing.Point(360, 17)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(190, 70)
         Me.GroupBox2.TabIndex = 13
@@ -278,7 +278,7 @@ Partial Class CopyRoms
         Me.checksaves.AutoSize = True
         Me.checksaves.Checked = True
         Me.checksaves.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checksaves.ForeColor = System.Drawing.Color.DarkGreen
+        Me.checksaves.ForeColor = System.Drawing.Color.Blue
         Me.checksaves.Location = New System.Drawing.Point(102, 33)
         Me.checksaves.Name = "checksaves"
         Me.checksaves.Size = New System.Drawing.Size(56, 17)
@@ -330,7 +330,7 @@ Partial Class CopyRoms
         Me.checkmanuals.AutoSize = True
         Me.checkmanuals.Checked = True
         Me.checkmanuals.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.checkmanuals.ForeColor = System.Drawing.Color.DarkGreen
+        Me.checkmanuals.ForeColor = System.Drawing.Color.Blue
         Me.checkmanuals.Location = New System.Drawing.Point(37, 33)
         Me.checkmanuals.Name = "checkmanuals"
         Me.checkmanuals.Size = New System.Drawing.Size(66, 17)
@@ -346,11 +346,11 @@ Partial Class CopyRoms
         Me.GroupBox4.Controls.Add(Me.lbl_romSelected)
         Me.GroupBox4.Controls.Add(Me.txt_NbRomSelected)
         Me.GroupBox4.ForeColor = System.Drawing.Color.White
-        Me.GroupBox4.Location = New System.Drawing.Point(184, 19)
+        Me.GroupBox4.Location = New System.Drawing.Point(177, 17)
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox4.Size = New System.Drawing.Size(150, 70)
+        Me.GroupBox4.Size = New System.Drawing.Size(173, 70)
         Me.GroupBox4.TabIndex = 12
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Ma Selection"
@@ -359,7 +359,7 @@ Partial Class CopyRoms
         '
         Me.lbl_GoAPrevoir.AutoSize = True
         Me.lbl_GoAPrevoir.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lbl_GoAPrevoir.Location = New System.Drawing.Point(69, 46)
+        Me.lbl_GoAPrevoir.Location = New System.Drawing.Point(64, 46)
         Me.lbl_GoAPrevoir.Name = "lbl_GoAPrevoir"
         Me.lbl_GoAPrevoir.Size = New System.Drawing.Size(64, 13)
         Me.lbl_GoAPrevoir.TabIndex = 3
@@ -371,7 +371,7 @@ Partial Class CopyRoms
         Me.txt_GoAPrevoir.Location = New System.Drawing.Point(5, 42)
         Me.txt_GoAPrevoir.Name = "txt_GoAPrevoir"
         Me.txt_GoAPrevoir.ReadOnly = True
-        Me.txt_GoAPrevoir.Size = New System.Drawing.Size(65, 22)
+        Me.txt_GoAPrevoir.Size = New System.Drawing.Size(58, 22)
         Me.txt_GoAPrevoir.TabIndex = 2
         Me.txt_GoAPrevoir.Text = "0"
         Me.txt_GoAPrevoir.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -380,11 +380,11 @@ Partial Class CopyRoms
         '
         Me.lbl_romSelected.AutoSize = True
         Me.lbl_romSelected.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lbl_romSelected.Location = New System.Drawing.Point(69, 19)
+        Me.lbl_romSelected.Location = New System.Drawing.Point(64, 19)
         Me.lbl_romSelected.Name = "lbl_romSelected"
-        Me.lbl_romSelected.Size = New System.Drawing.Size(70, 13)
+        Me.lbl_romSelected.Size = New System.Drawing.Size(104, 13)
         Me.lbl_romSelected.TabIndex = 1
-        Me.lbl_romSelected.Text = "Roms Select."
+        Me.lbl_romSelected.Text = "Roms Selectionnées"
         '
         'txt_NbRomSelected
         '
@@ -392,7 +392,7 @@ Partial Class CopyRoms
         Me.txt_NbRomSelected.Location = New System.Drawing.Point(5, 16)
         Me.txt_NbRomSelected.Name = "txt_NbRomSelected"
         Me.txt_NbRomSelected.ReadOnly = True
-        Me.txt_NbRomSelected.Size = New System.Drawing.Size(65, 22)
+        Me.txt_NbRomSelected.Size = New System.Drawing.Size(58, 22)
         Me.txt_NbRomSelected.TabIndex = 0
         Me.txt_NbRomSelected.Text = "0"
         Me.txt_NbRomSelected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -405,7 +405,7 @@ Partial Class CopyRoms
         Me.GroupBox3.Controls.Add(Me.Label3)
         Me.GroupBox3.Controls.Add(Me.txt_USBGo)
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.GroupBox3.Location = New System.Drawing.Point(7, 17)
+        Me.GroupBox3.Location = New System.Drawing.Point(11, 17)
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(2)
@@ -492,7 +492,7 @@ Partial Class CopyRoms
         '
         'listboxMaSelection
         '
-        Me.listboxMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(144, Byte), Integer), CType(CType(249, Byte), Integer))
+        Me.listboxMaSelection.BackColor = System.Drawing.Color.Navy
         Me.listboxMaSelection.ForeColor = System.Drawing.SystemColors.HighlightText
         Me.listboxMaSelection.FormattingEnabled = True
         Me.listboxMaSelection.Location = New System.Drawing.Point(184, 55)
@@ -540,16 +540,16 @@ Partial Class CopyRoms
         'GroupBox6
         '
         Me.GroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(66, Byte), Integer), CType(CType(252, Byte), Integer))
+        Me.GroupBox6.Controls.Add(Me.romsaveo)
+        Me.GroupBox6.Controls.Add(Me.romoverlayo)
+        Me.GroupBox6.Controls.Add(Me.rommanualo)
+        Me.GroupBox6.Controls.Add(Me.romvideoo)
+        Me.GroupBox6.Controls.Add(Me.romscreeno)
         Me.GroupBox6.Controls.Add(Me.Label14)
         Me.GroupBox6.Controls.Add(Me.Label13)
         Me.GroupBox6.Controls.Add(Me.Label12)
         Me.GroupBox6.Controls.Add(Me.Label11)
         Me.GroupBox6.Controls.Add(Me.Label2)
-        Me.GroupBox6.Controls.Add(Me.romscreeno)
-        Me.GroupBox6.Controls.Add(Me.romvideoo)
-        Me.GroupBox6.Controls.Add(Me.romsaveo)
-        Me.GroupBox6.Controls.Add(Me.rommanualo)
-        Me.GroupBox6.Controls.Add(Me.romoverlayo)
         Me.GroupBox6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupBox6.Location = New System.Drawing.Point(6, 387)
         Me.GroupBox6.Name = "GroupBox6"
@@ -558,10 +558,90 @@ Partial Class CopyRoms
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Fichiers Liés à la Rom :"
         '
+        'romsaveo
+        '
+        Me.romsaveo.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.romsaveo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.romsaveo.Cursor = System.Windows.Forms.Cursors.Default
+        Me.romsaveo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.romsaveo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.romsaveo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.romsaveo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.romsaveo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.romsaveo.Location = New System.Drawing.Point(316, 13)
+        Me.romsaveo.Name = "romsaveo"
+        Me.romsaveo.Size = New System.Drawing.Size(50, 49)
+        Me.romsaveo.TabIndex = 45
+        Me.romsaveo.UseVisualStyleBackColor = False
+        '
+        'romoverlayo
+        '
+        Me.romoverlayo.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.romoverlayo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.romoverlayo.Cursor = System.Windows.Forms.Cursors.Default
+        Me.romoverlayo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.romoverlayo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.romoverlayo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.romoverlayo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.romoverlayo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.romoverlayo.Location = New System.Drawing.Point(243, 13)
+        Me.romoverlayo.Name = "romoverlayo"
+        Me.romoverlayo.Size = New System.Drawing.Size(50, 49)
+        Me.romoverlayo.TabIndex = 44
+        Me.romoverlayo.UseVisualStyleBackColor = False
+        '
+        'rommanualo
+        '
+        Me.rommanualo.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.rommanualo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rommanualo.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rommanualo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.rommanualo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.rommanualo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rommanualo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rommanualo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.rommanualo.Location = New System.Drawing.Point(160, 13)
+        Me.rommanualo.Name = "rommanualo"
+        Me.rommanualo.Size = New System.Drawing.Size(50, 49)
+        Me.rommanualo.TabIndex = 43
+        Me.rommanualo.UseVisualStyleBackColor = False
+        '
+        'romvideoo
+        '
+        Me.romvideoo.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.romvideoo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.romvideoo.Cursor = System.Windows.Forms.Cursors.Default
+        Me.romvideoo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.romvideoo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.romvideoo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.romvideoo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.romvideoo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.romvideoo.Location = New System.Drawing.Point(86, 13)
+        Me.romvideoo.Name = "romvideoo"
+        Me.romvideoo.Size = New System.Drawing.Size(50, 49)
+        Me.romvideoo.TabIndex = 42
+        Me.romvideoo.UseVisualStyleBackColor = False
+        '
+        'romscreeno
+        '
+        Me.romscreeno.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.romscreeno.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.romscreeno.Cursor = System.Windows.Forms.Cursors.Default
+        Me.romscreeno.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.romscreeno.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(137, Byte), Integer))
+        Me.romscreeno.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.romscreeno.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.romscreeno.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.romscreeno.Location = New System.Drawing.Point(13, 14)
+        Me.romscreeno.Name = "romscreeno"
+        Me.romscreeno.Size = New System.Drawing.Size(50, 49)
+        Me.romscreeno.TabIndex = 41
+        Me.romscreeno.UseVisualStyleBackColor = False
+        '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(330, 66)
+        Me.Label14.Location = New System.Drawing.Point(325, 64)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(32, 13)
         Me.Label14.TabIndex = 25
@@ -570,7 +650,7 @@ Partial Class CopyRoms
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(246, 66)
+        Me.Label13.Location = New System.Drawing.Point(249, 64)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(43, 13)
         Me.Label13.TabIndex = 24
@@ -579,7 +659,7 @@ Partial Class CopyRoms
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(168, 66)
+        Me.Label12.Location = New System.Drawing.Point(164, 64)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(42, 13)
         Me.Label12.TabIndex = 23
@@ -588,7 +668,7 @@ Partial Class CopyRoms
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(91, 66)
+        Me.Label11.Location = New System.Drawing.Point(95, 65)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(34, 13)
         Me.Label11.TabIndex = 22
@@ -597,51 +677,11 @@ Partial Class CopyRoms
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 66)
+        Me.Label2.Location = New System.Drawing.Point(8, 65)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(63, 13)
         Me.Label2.TabIndex = 21
         Me.Label2.Text = "ScreenShot"
-        '
-        'romscreeno
-        '
-        Me.romscreeno.Location = New System.Drawing.Point(8, 12)
-        Me.romscreeno.Name = "romscreeno"
-        Me.romscreeno.Size = New System.Drawing.Size(57, 54)
-        Me.romscreeno.TabIndex = 16
-        Me.romscreeno.UseVisualStyleBackColor = True
-        '
-        'romvideoo
-        '
-        Me.romvideoo.Location = New System.Drawing.Point(80, 12)
-        Me.romvideoo.Name = "romvideoo"
-        Me.romvideoo.Size = New System.Drawing.Size(57, 54)
-        Me.romvideoo.TabIndex = 17
-        Me.romvideoo.UseVisualStyleBackColor = True
-        '
-        'romsaveo
-        '
-        Me.romsaveo.Location = New System.Drawing.Point(317, 12)
-        Me.romsaveo.Name = "romsaveo"
-        Me.romsaveo.Size = New System.Drawing.Size(57, 54)
-        Me.romsaveo.TabIndex = 20
-        Me.romsaveo.UseVisualStyleBackColor = True
-        '
-        'rommanualo
-        '
-        Me.rommanualo.Location = New System.Drawing.Point(160, 12)
-        Me.rommanualo.Name = "rommanualo"
-        Me.rommanualo.Size = New System.Drawing.Size(57, 54)
-        Me.rommanualo.TabIndex = 18
-        Me.rommanualo.UseVisualStyleBackColor = True
-        '
-        'romoverlayo
-        '
-        Me.romoverlayo.Location = New System.Drawing.Point(237, 12)
-        Me.romoverlayo.Name = "romoverlayo"
-        Me.romoverlayo.Size = New System.Drawing.Size(57, 54)
-        Me.romoverlayo.TabIndex = 19
-        Me.romoverlayo.UseVisualStyleBackColor = True
         '
         'RomImage
         '
@@ -954,11 +994,11 @@ Partial Class CopyRoms
         Me.ButtonGenererList.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGenererList.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonGenererList.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonGenererList.Location = New System.Drawing.Point(76, 363)
+        Me.ButtonGenererList.Location = New System.Drawing.Point(15, 363)
         Me.ButtonGenererList.Name = "ButtonGenererList"
-        Me.ButtonGenererList.Size = New System.Drawing.Size(105, 30)
+        Me.ButtonGenererList.Size = New System.Drawing.Size(206, 30)
         Me.ButtonGenererList.TabIndex = 37
-        Me.ButtonGenererList.Text = "Valider la Selection"
+        Me.ButtonGenererList.Text = "Valider les Systèmes Selectionnés"
         Me.ButtonGenererList.UseVisualStyleBackColor = False
         '
         'TutoHideOutilsP4
@@ -1044,7 +1084,7 @@ Partial Class CopyRoms
         'minipic5
         '
         Me.minipic5.BackColor = System.Drawing.Color.White
-        Me.minipic5.Image = Global.RecalCopier.My.Resources.Resources.OKMem
+        Me.minipic5.Image = Global.RecalCopier.My.Resources.Resources.okmem
         Me.minipic5.Location = New System.Drawing.Point(473, 29)
         Me.minipic5.Name = "minipic5"
         Me.minipic5.Size = New System.Drawing.Size(24, 18)
@@ -1055,7 +1095,7 @@ Partial Class CopyRoms
         'minipic4
         '
         Me.minipic4.BackColor = System.Drawing.Color.White
-        Me.minipic4.Image = Global.RecalCopier.My.Resources.Resources.OKoverlay
+        Me.minipic4.Image = Global.RecalCopier.My.Resources.Resources.okoverlay
         Me.minipic4.Location = New System.Drawing.Point(448, 29)
         Me.minipic4.Name = "minipic4"
         Me.minipic4.Size = New System.Drawing.Size(24, 18)
@@ -1066,7 +1106,7 @@ Partial Class CopyRoms
         'minipic3
         '
         Me.minipic3.BackColor = System.Drawing.Color.White
-        Me.minipic3.Image = Global.RecalCopier.My.Resources.Resources.OKmanual
+        Me.minipic3.Image = Global.RecalCopier.My.Resources.Resources.okmanual
         Me.minipic3.Location = New System.Drawing.Point(422, 29)
         Me.minipic3.Name = "minipic3"
         Me.minipic3.Size = New System.Drawing.Size(24, 18)
@@ -1077,7 +1117,7 @@ Partial Class CopyRoms
         'minipic2
         '
         Me.minipic2.BackColor = System.Drawing.Color.White
-        Me.minipic2.Image = Global.RecalCopier.My.Resources.Resources.OKvideo
+        Me.minipic2.Image = Global.RecalCopier.My.Resources.Resources.okvideo
         Me.minipic2.Location = New System.Drawing.Point(396, 29)
         Me.minipic2.Name = "minipic2"
         Me.minipic2.Size = New System.Drawing.Size(24, 18)
@@ -1088,7 +1128,7 @@ Partial Class CopyRoms
         'minipic1
         '
         Me.minipic1.BackColor = System.Drawing.Color.White
-        Me.minipic1.Image = Global.RecalCopier.My.Resources.Resources.Okscreen
+        Me.minipic1.Image = CType(resources.GetObject("minipic1.Image"), System.Drawing.Image)
         Me.minipic1.Location = New System.Drawing.Point(370, 29)
         Me.minipic1.Name = "minipic1"
         Me.minipic1.Size = New System.Drawing.Size(24, 18)
@@ -1109,12 +1149,13 @@ Partial Class CopyRoms
         '
         'GroupMode
         '
+        Me.GroupMode.BackColor = System.Drawing.Color.Silver
         Me.GroupMode.Controls.Add(Me.ChkAvance)
         Me.GroupMode.Controls.Add(Me.ChkSimple)
-        Me.GroupMode.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.GroupMode.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.GroupMode.Location = New System.Drawing.Point(8, 510)
         Me.GroupMode.Name = "GroupMode"
-        Me.GroupMode.Size = New System.Drawing.Size(127, 89)
+        Me.GroupMode.Size = New System.Drawing.Size(124, 89)
         Me.GroupMode.TabIndex = 41
         Me.GroupMode.TabStop = False
         Me.GroupMode.Text = "Simple/Expert Mode"
@@ -1122,6 +1163,7 @@ Partial Class CopyRoms
         'ChkAvance
         '
         Me.ChkAvance.AutoSize = True
+        Me.ChkAvance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.ChkAvance.Location = New System.Drawing.Point(20, 59)
         Me.ChkAvance.Name = "ChkAvance"
         Me.ChkAvance.Size = New System.Drawing.Size(93, 17)
@@ -1132,6 +1174,7 @@ Partial Class CopyRoms
         'ChkSimple
         '
         Me.ChkSimple.AutoSize = True
+        Me.ChkSimple.ForeColor = System.Drawing.Color.Black
         Me.ChkSimple.Location = New System.Drawing.Point(20, 31)
         Me.ChkSimple.Name = "ChkSimple"
         Me.ChkSimple.Size = New System.Drawing.Size(87, 17)
@@ -1265,11 +1308,6 @@ Partial Class CopyRoms
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents listboxMaSelection As ListBox
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents romscreeno As Button
-    Friend WithEvents romsaveo As Button
-    Friend WithEvents romoverlayo As Button
-    Friend WithEvents rommanualo As Button
-    Friend WithEvents romvideoo As Button
     Friend WithEvents GroupFiltresAvances As GroupBox
     Friend WithEvents ComboFiltreColonnes As ComboBox
     Friend WithEvents DecocherTout As CheckBox
@@ -1320,4 +1358,9 @@ Partial Class CopyRoms
     Friend WithEvents ChkAvance As CheckBox
     Friend WithEvents ChkSimple As CheckBox
     Friend WithEvents GroupBoxSelectionRoms As GroupBox
+    Friend WithEvents romsaveo As Button
+    Friend WithEvents romoverlayo As Button
+    Friend WithEvents rommanualo As Button
+    Friend WithEvents romvideoo As Button
+    Friend WithEvents romscreeno As Button
 End Class

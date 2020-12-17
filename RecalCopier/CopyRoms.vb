@@ -27,6 +27,9 @@ Public Class CopyRoms
             ChkAvance.Checked = True
         End If
 
+        'coute que coute on hide de toute facon 
+        GroupFiltresAvances.Hide()
+
         'On liste les dossiers
         For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
             Dim dossierconsole As String = System.IO.Path.GetFileName(foundDirectory)
@@ -93,6 +96,9 @@ Public Class CopyRoms
             MsgBox("Merci de Selectionner des Gamelists")
             Exit Sub
         End If
+
+
+
 
         'Showing stuff
         FinalGrid.Show()
@@ -446,6 +452,7 @@ romsuivante:
         colromselection.Width = 30
 
         'Reajusting Interface and Showing Final Interface
+
         ListGameLists.Hide()
         GroupBoxSelectionRoms.Show()
         FinalGrid.Location = New Point(8, 28)
@@ -455,9 +462,14 @@ romsuivante:
         ButtonGenererList.Hide()
         txt_txtsearch.Show()
         ButtonRazClickk.Show()
-        GroupFiltresAvances.Show()
         dv.Sort = "Console asc, Titre asc"
 
+        'si c'est mode simple ou avancé
+        If ChkAvance.Checked = True Then
+            GroupFiltresAvances.Show()
+        Else
+            GroupFiltresAvances.Hide()
+        End If
 
         'On va alimenter les filtres de la combobox 
         ComboFiltreColonnes.Items.Add("Console")
@@ -2184,7 +2196,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         If txt_romname.Text = Nothing Then Exit Sub
 
         'Si pas d'image sur le jeu en cours
-        If IsDBNull(FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index)) Then
+        If IsDBNull(FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value) Then
         Else
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminImage").Index).Value.ToString)
         End If
@@ -2194,7 +2206,8 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         If txt_romname.Text = Nothing Then Exit Sub
 
         'Si pas d'image sur le jeu en cours
-        If IsDBNull(FinalGrid.SelectedCells(FinalGrid.Columns("CheminVideo").Index)) Then
+        If IsDBNull(FinalGrid.SelectedCells(FinalGrid.Columns("CheminVideo").Index).Value) Then
+            Exit Sub
         Else
             System.Diagnostics.Process.Start(FinalGrid.SelectedCells(FinalGrid.Columns("CheminVideo").Index).Value.ToString)
         End If
@@ -2553,11 +2566,13 @@ prochainj:
 
             My.Settings.SimpleMode = "simple"
             My.Settings.Save()
+            GroupFiltresAvances.Hide()
         ElseIf ChkSimple.Checked = False Then
             ChkAvance.Checked = True
 
             My.Settings.SimpleMode = "avance"
             My.Settings.Save()
+            GroupFiltresAvances.Show()
         End If
     End Sub
 
@@ -2567,11 +2582,14 @@ prochainj:
 
             My.Settings.SimpleMode = "avance"
             My.Settings.Save()
+            GroupFiltresAvances.Show()
         ElseIf ChkAvance.Checked = False Then
             ChkSimple.Checked = True
 
             My.Settings.SimpleMode = "simple"
             My.Settings.Save()
+            GroupFiltresAvances.Hide()
         End If
     End Sub
+
 End Class
