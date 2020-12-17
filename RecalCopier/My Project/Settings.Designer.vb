@@ -101,6 +101,18 @@ Namespace My
                 Me("DossierOverlay") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Disclaimer() As String
+            Get
+                Return CType(Me("Disclaimer"),String)
+            End Get
+            Set
+                Me("Disclaimer") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

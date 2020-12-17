@@ -9,6 +9,12 @@ Public Class Form1
         PanelDroite.Hide()
         NetFourDotFiveAndHigher()
 
+        If My.Settings.Disclaimer = "ok" Then
+            Disclaimer.Hide()
+            PanelGauche.Show()
+            PanelDroite.Show()
+        End If
+
         'On check si le Folder enregistré existe, sinon on le fout à zéro
         If (Not System.IO.Directory.Exists(TxtRecalfolderPath.Text)) Then
             TxtRecalfolderPath.Text = ""
@@ -102,6 +108,8 @@ Public Class Form1
         Disclaimer.Hide()
         PanelGauche.Show()
         PanelDroite.Show()
+        My.Settings.Disclaimer = "ok"
+        My.Settings.Save()
     End Sub
     Private Sub TxtRecalfolderPath_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtRecalfolderPath.KeyDown
         'Ajout d'un \ de securite si besoin
