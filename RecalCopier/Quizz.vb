@@ -32,6 +32,8 @@ Public Class Quizz
             CheckAvecFiltres.Checked = False
             GroupFiltres.Hide()
             GroupSansFiltres.Show()
+            TxtExplicationFiltres.Hide()
+            txtRules.Hide()
             'et on remet a zero tous les champs par securite
             txtgenre.Text = Nothing
             txtdev.Text = Nothing
@@ -1077,5 +1079,15 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         MsgBox("Y'a pas d'Easter Egg ici !" & Chr(13) & Chr(13) & "Le Cheat Mode est dispo avec le n° du titre en cours et le restant")
+    End Sub
+
+    Private Sub ButtonInfo_Click(sender As Object, e As EventArgs) Handles ButtonInfo.Click
+        If TxtExplicationFiltres.Visible = True Then
+            TxtExplicationFiltres.Hide()
+            txtRules.Hide()
+        Else
+            TxtExplicationFiltres.Show()
+            txtRules.Show()
+        End If
     End Sub
 End Class
