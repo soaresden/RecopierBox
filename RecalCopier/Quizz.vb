@@ -24,6 +24,7 @@ Public Class Quizz
         QuizzBoxRep.Hide()
         Cheat.Hide()
         TempGrid.Hide()
+        ButtonHideParam.Hide()
         CheckSansFiltres.Hide()
         CheckAvecFiltres.Hide()
     End Sub
@@ -681,6 +682,7 @@ suite6:
         'On affiche les elements
         PanelVideo.Show()
         QuizzBoxRep.Show()
+        ButtonHideParam.Show()
 
         Dim nbdemanches As Integer = Val(txtnbmanches.Text)
         Dim nbroms As Integer = TxtTotalEntrees.Text
@@ -1088,6 +1090,22 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         Else
             TxtExplicationFiltres.Show()
             txtRules.Show()
+        End If
+    End Sub
+
+    Private Sub ButtonHideParam_Click(sender As Object, e As EventArgs) Handles ButtonHideParam.Click
+        If GroupConfigPartie.Visible = True Then
+            GroupConfigPartie.Hide()
+            GroupSansFiltres.Hide()
+            GroupFiltres.Hide()
+        ElseIf groupconfigpartie.Visible = False And CheckAvecFiltres.Checked = True Then
+            GroupConfigPartie.Show()
+            GroupSansFiltres.Hide()
+            GroupFiltres.Show()
+        ElseIf groupconfigpartie.Visible = False And CheckSansFiltres.Checked = True Then
+            GroupConfigPartie.Show()
+            GroupSansFiltres.Show()
+            GroupFiltres.Hide()
         End If
     End Sub
 End Class

@@ -14047,6 +14047,22 @@ Si vous souhaitez ajouter une nouvelle plateforme, il est necessaire de regéné
   <metadata name="ToolTipNbJeux.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>106, 17</value>
   </metadata>
+  <data name="ButtonHideParam.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAmRJREFUWEftmEtPFEEUhZsZYAYfC8GNxoWiC1EwskHc4A/ARF34ADX+Afwh4iuu
+        1PGZGGJQ1+paBQaI7oz+m7YvqWpPVZ3urio7Oiac5FvM7XvOPclAmCFJ0qS3ocMAJsZPpH1Jo5C5K/Mp
+        83lDhxWMDO+lZap43HkaXpYOC2BHY5g8OelflA4tFhZu0kPC4EArLVJ3Y5N6NOyWAx0CLHiovUNVCBPL
+        On/uQnlROlSwwDpkZx46OFpckg4z7JDZ2bMqnqs12Db2y956Ee4KU1PTvCQbDu8ZMcyfPn9RscXCfU2V
+        du3cbeyzLu4gA02Lt++quHKhR+Mj2+P0sQe4LG+br9Cn8RV65KbRCV88f/HSWA5VXV7sZBTEpeW375T1
+        76jR18xvNxv9v0sWFfwXwvtOwf37DuQPr12/oSzVwlCbUKHXKYgPQ4Q+m1B1njzLvfIpqecKitBfS0Et
+        9NeV838WlF/3GGGwJkbopwWFGKG/rpztgjFC/3bBUJ2aPp17L128bBa8d/9B/lD+WIdKe5FQoVf3ygsK
+        uBAq9NaRUVlQCJHt/RP//NxVXlDARR/hfhFVer38xtg3OhkvMnBRqJK9z6gS7q6tb5QXFNAglMneZZTJ
+        3nX6OIOM9x8+Gqb+5oCKq1d4Q2Bd3IHi1dKSE1CXVrvrTjbrsAUdKg6PHnGCbi3eUWfi1G4NOZnff/yM
+        K6ixA4Wxo8fUST+xDIHdM6BDAgtH8IvW5tdv6fjxCbqnkc+d7I4DHZbAjoXCcguhQw/Y4TKcf2n4QocR
+        PHzUyX4ux7Y+aMzMnElX1rpxhWzosGdIkl/4x/jGtnkySQAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>39</value>
   </metadata>
