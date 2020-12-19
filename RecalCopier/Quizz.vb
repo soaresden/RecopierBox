@@ -27,6 +27,7 @@ Public Class Quizz
         ButtonHideParam.Hide()
         CheckSansFiltres.Hide()
         CheckAvecFiltres.Hide()
+        Cheat.Hide()
     End Sub
     Private Sub CheckSansFiltres_CheckedChanged(sender As Object, e As EventArgs) Handles CheckSansFiltres.CheckedChanged
         If CheckSansFiltres.Checked = True Then
@@ -742,7 +743,6 @@ recalculrando:
         'On va maintenant Charger toute l'interface de jeu
         QuizzBoxRep.Show()
         PanelVideo.Show()
-        Cheat.Show()
 
         If ConsoleTitre.Checked = True Then ListConsoleDesJeux.Show() Else ListConsoleDesJeux.Hide()
 
@@ -1080,7 +1080,8 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-        MsgBox("Y'a pas d'Easter Egg ici !" & Chr(13) & Chr(13) & "Le Cheat Mode est dispo avec le n° du titre en cours et le restant")
+        MsgBox("Le Cheat Mode est disponible !" & Chr(13) & Chr(13) & "Cochez la checkbox Entre le n° du titre en cours et le restant")
+        Cheat.Show()
     End Sub
 
     Private Sub ButtonInfo_Click(sender As Object, e As EventArgs) Handles ButtonInfo.Click
