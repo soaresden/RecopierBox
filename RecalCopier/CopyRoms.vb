@@ -587,7 +587,7 @@ labelapresfolder:
         On Error GoTo 0
     End Sub
     Sub Completiondescheckbox()
-
+        On Error Resume Next
         For orow = 0 To FinalGrid.RowCount - 2
             If orow = 0 And FinalGrid.RowCount - 1 = orow Then
                 MsgBox("Pas de Resultats")
@@ -721,7 +721,7 @@ consolesanssaves:
         FinalGrid.Columns("CocheManuel").ReadOnly = True
         FinalGrid.Columns("CocheOverlay").ReadOnly = True
         FinalGrid.Columns("CocheSave").ReadOnly = True
-
+        On Error GoTo 0
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         Form1.Show()

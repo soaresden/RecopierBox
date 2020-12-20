@@ -27,11 +27,6 @@ Partial Class CopyRoms
         Me.ListGameLists = New System.Windows.Forms.ListBox()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TutoHideBoutonCopy = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOuCopier = New System.Windows.Forms.PictureBox()
-        Me.TutoHideQuoiCopier = New System.Windows.Forms.PictureBox()
-        Me.TutoHideSelectionIndic = New System.Windows.Forms.PictureBox()
-        Me.TutoHideUSB = New System.Windows.Forms.PictureBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.ButtonParcourirRecalCopy = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -54,6 +49,11 @@ Partial Class CopyRoms
         Me.txt_morestant = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_USBGo = New System.Windows.Forms.TextBox()
+        Me.TutoHideBoutonCopy = New System.Windows.Forms.PictureBox()
+        Me.TutoHideOuCopier = New System.Windows.Forms.PictureBox()
+        Me.TutoHideQuoiCopier = New System.Windows.Forms.PictureBox()
+        Me.TutoHideSelectionIndic = New System.Windows.Forms.PictureBox()
+        Me.TutoHideUSB = New System.Windows.Forms.PictureBox()
         Me.ButtonAfficherMaSelection = New System.Windows.Forms.Button()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
         Me.listboxMaSelection = New System.Windows.Forms.ListBox()
@@ -114,15 +114,15 @@ Partial Class CopyRoms
         Me.TutoSelectionActuelle = New System.Windows.Forms.PictureBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox5.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.grp_RomInfos.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -183,46 +183,6 @@ Partial Class CopyRoms
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Opérations :"
-        '
-        'TutoHideBoutonCopy
-        '
-        Me.TutoHideBoutonCopy.Location = New System.Drawing.Point(839, 4)
-        Me.TutoHideBoutonCopy.Name = "TutoHideBoutonCopy"
-        Me.TutoHideBoutonCopy.Size = New System.Drawing.Size(32, 23)
-        Me.TutoHideBoutonCopy.TabIndex = 30
-        Me.TutoHideBoutonCopy.TabStop = False
-        '
-        'TutoHideOuCopier
-        '
-        Me.TutoHideOuCopier.Location = New System.Drawing.Point(725, 4)
-        Me.TutoHideOuCopier.Name = "TutoHideOuCopier"
-        Me.TutoHideOuCopier.Size = New System.Drawing.Size(87, 23)
-        Me.TutoHideOuCopier.TabIndex = 26
-        Me.TutoHideOuCopier.TabStop = False
-        '
-        'TutoHideQuoiCopier
-        '
-        Me.TutoHideQuoiCopier.Location = New System.Drawing.Point(657, 4)
-        Me.TutoHideQuoiCopier.Name = "TutoHideQuoiCopier"
-        Me.TutoHideQuoiCopier.Size = New System.Drawing.Size(62, 23)
-        Me.TutoHideQuoiCopier.TabIndex = 27
-        Me.TutoHideQuoiCopier.TabStop = False
-        '
-        'TutoHideSelectionIndic
-        '
-        Me.TutoHideSelectionIndic.Location = New System.Drawing.Point(617, 4)
-        Me.TutoHideSelectionIndic.Name = "TutoHideSelectionIndic"
-        Me.TutoHideSelectionIndic.Size = New System.Drawing.Size(34, 23)
-        Me.TutoHideSelectionIndic.TabIndex = 28
-        Me.TutoHideSelectionIndic.TabStop = False
-        '
-        'TutoHideUSB
-        '
-        Me.TutoHideUSB.Location = New System.Drawing.Point(583, 4)
-        Me.TutoHideUSB.Name = "TutoHideUSB"
-        Me.TutoHideUSB.Size = New System.Drawing.Size(28, 23)
-        Me.TutoHideUSB.TabIndex = 23
-        Me.TutoHideUSB.TabStop = False
         '
         'GroupBox5
         '
@@ -492,6 +452,46 @@ Partial Class CopyRoms
         Me.txt_USBGo.TabIndex = 0
         Me.txt_USBGo.Text = "128"
         Me.txt_USBGo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TutoHideBoutonCopy
+        '
+        Me.TutoHideBoutonCopy.Location = New System.Drawing.Point(839, 4)
+        Me.TutoHideBoutonCopy.Name = "TutoHideBoutonCopy"
+        Me.TutoHideBoutonCopy.Size = New System.Drawing.Size(32, 23)
+        Me.TutoHideBoutonCopy.TabIndex = 30
+        Me.TutoHideBoutonCopy.TabStop = False
+        '
+        'TutoHideOuCopier
+        '
+        Me.TutoHideOuCopier.Location = New System.Drawing.Point(725, 4)
+        Me.TutoHideOuCopier.Name = "TutoHideOuCopier"
+        Me.TutoHideOuCopier.Size = New System.Drawing.Size(87, 23)
+        Me.TutoHideOuCopier.TabIndex = 26
+        Me.TutoHideOuCopier.TabStop = False
+        '
+        'TutoHideQuoiCopier
+        '
+        Me.TutoHideQuoiCopier.Location = New System.Drawing.Point(657, 4)
+        Me.TutoHideQuoiCopier.Name = "TutoHideQuoiCopier"
+        Me.TutoHideQuoiCopier.Size = New System.Drawing.Size(62, 23)
+        Me.TutoHideQuoiCopier.TabIndex = 27
+        Me.TutoHideQuoiCopier.TabStop = False
+        '
+        'TutoHideSelectionIndic
+        '
+        Me.TutoHideSelectionIndic.Location = New System.Drawing.Point(617, 4)
+        Me.TutoHideSelectionIndic.Name = "TutoHideSelectionIndic"
+        Me.TutoHideSelectionIndic.Size = New System.Drawing.Size(34, 23)
+        Me.TutoHideSelectionIndic.TabIndex = 28
+        Me.TutoHideSelectionIndic.TabStop = False
+        '
+        'TutoHideUSB
+        '
+        Me.TutoHideUSB.Location = New System.Drawing.Point(583, 4)
+        Me.TutoHideUSB.Name = "TutoHideUSB"
+        Me.TutoHideUSB.Size = New System.Drawing.Size(28, 23)
+        Me.TutoHideUSB.TabIndex = 23
+        Me.TutoHideUSB.TabStop = False
         '
         'ButtonAfficherMaSelection
         '
@@ -1217,11 +1217,6 @@ Partial Class CopyRoms
         Me.Text = "CopyRoms"
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
-        CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -1230,6 +1225,11 @@ Partial Class CopyRoms
         Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_RomInfos.ResumeLayout(False)
         Me.grp_RomInfos.PerformLayout()
         Me.Panel1.ResumeLayout(False)
