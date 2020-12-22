@@ -33,7 +33,14 @@ Partial Class OverlayManager
         Me.RomTotalOverlay = New System.Windows.Forms.TextBox()
         Me.RomTotal = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.RenameSelection = New System.Windows.Forms.GroupBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.ActualName = New System.Windows.Forms.TextBox()
+        Me.NewName = New System.Windows.Forms.TextBox()
+        Me.ButtonRenameSave = New System.Windows.Forms.Button()
         Me.ButtonMenage1 = New System.Windows.Forms.Button()
+        Me.ButtonSuppSave = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.OverlaySingle = New System.Windows.Forms.TextBox()
@@ -51,6 +58,7 @@ Partial Class OverlayManager
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.RenameSelection.SuspendLayout()
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -118,7 +126,7 @@ Partial Class OverlayManager
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupBox1.Location = New System.Drawing.Point(134, 429)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(367, 89)
+        Me.GroupBox1.Size = New System.Drawing.Size(228, 87)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Outils Roms :"
@@ -126,7 +134,7 @@ Partial Class OverlayManager
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(146, 57)
+        Me.Label4.Location = New System.Drawing.Point(6, 39)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(142, 13)
         Me.Label4.TabIndex = 18
@@ -135,7 +143,7 @@ Partial Class OverlayManager
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(212, 22)
+        Me.Label3.Location = New System.Drawing.Point(6, 17)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(76, 13)
         Me.Label3.TabIndex = 17
@@ -143,7 +151,7 @@ Partial Class OverlayManager
         '
         'RomTotalOverlay
         '
-        Me.RomTotalOverlay.Location = New System.Drawing.Point(294, 54)
+        Me.RomTotalOverlay.Location = New System.Drawing.Point(149, 36)
         Me.RomTotalOverlay.Name = "RomTotalOverlay"
         Me.RomTotalOverlay.Size = New System.Drawing.Size(67, 20)
         Me.RomTotalOverlay.TabIndex = 16
@@ -151,7 +159,7 @@ Partial Class OverlayManager
         '
         'RomTotal
         '
-        Me.RomTotal.Location = New System.Drawing.Point(294, 18)
+        Me.RomTotal.Location = New System.Drawing.Point(149, 10)
         Me.RomTotal.Name = "RomTotal"
         Me.RomTotal.Size = New System.Drawing.Size(67, 20)
         Me.RomTotal.TabIndex = 15
@@ -160,18 +168,88 @@ Partial Class OverlayManager
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.GroupBox2.Controls.Add(Me.RenameSelection)
         Me.GroupBox2.Controls.Add(Me.ButtonMenage1)
+        Me.GroupBox2.Controls.Add(Me.ButtonSuppSave)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.OverlaySingle)
         Me.GroupBox2.Controls.Add(Me.OverlayTotal)
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupBox2.Location = New System.Drawing.Point(507, 429)
+        Me.GroupBox2.Location = New System.Drawing.Point(368, 429)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(367, 89)
+        Me.GroupBox2.Size = New System.Drawing.Size(506, 100)
         Me.GroupBox2.TabIndex = 9
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Outils Overlays :"
+        '
+        'RenameSelection
+        '
+        Me.RenameSelection.BackColor = System.Drawing.Color.Sienna
+        Me.RenameSelection.Controls.Add(Me.Label10)
+        Me.RenameSelection.Controls.Add(Me.Label11)
+        Me.RenameSelection.Controls.Add(Me.ActualName)
+        Me.RenameSelection.Controls.Add(Me.NewName)
+        Me.RenameSelection.Controls.Add(Me.ButtonRenameSave)
+        Me.RenameSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.RenameSelection.Location = New System.Drawing.Point(6, 33)
+        Me.RenameSelection.Name = "RenameSelection"
+        Me.RenameSelection.Size = New System.Drawing.Size(354, 61)
+        Me.RenameSelection.TabIndex = 62
+        Me.RenameSelection.TabStop = False
+        Me.RenameSelection.Text = "Travail sur Selection :"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(24, 34)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(82, 13)
+        Me.Label10.TabIndex = 65
+        Me.Label10.Text = "Nouveau Nom :"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(2, 16)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(104, 13)
+        Me.Label11.TabIndex = 64
+        Me.Label11.Text = "NomOverlay Actuel :"
+        '
+        'ActualName
+        '
+        Me.ActualName.Location = New System.Drawing.Point(112, 12)
+        Me.ActualName.Name = "ActualName"
+        Me.ActualName.ReadOnly = True
+        Me.ActualName.Size = New System.Drawing.Size(149, 20)
+        Me.ActualName.TabIndex = 63
+        Me.ActualName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'NewName
+        '
+        Me.NewName.Location = New System.Drawing.Point(112, 34)
+        Me.NewName.Name = "NewName"
+        Me.NewName.Size = New System.Drawing.Size(149, 20)
+        Me.NewName.TabIndex = 62
+        Me.NewName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'ButtonRenameSave
+        '
+        Me.ButtonRenameSave.BackColor = System.Drawing.Color.Sienna
+        Me.ButtonRenameSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonRenameSave.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonRenameSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonRenameSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PeachPuff
+        Me.ButtonRenameSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonRenameSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonRenameSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonRenameSave.Location = New System.Drawing.Point(267, 8)
+        Me.ButtonRenameSave.Name = "ButtonRenameSave"
+        Me.ButtonRenameSave.Size = New System.Drawing.Size(79, 46)
+        Me.ButtonRenameSave.TabIndex = 43
+        Me.ButtonRenameSave.Text = "Renommer l'overlay"
+        Me.ButtonRenameSave.UseVisualStyleBackColor = False
         '
         'ButtonMenage1
         '
@@ -183,17 +261,34 @@ Partial Class OverlayManager
         Me.ButtonMenage1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonMenage1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonMenage1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonMenage1.Location = New System.Drawing.Point(245, 18)
+        Me.ButtonMenage1.Location = New System.Drawing.Point(366, 49)
         Me.ButtonMenage1.Name = "ButtonMenage1"
-        Me.ButtonMenage1.Size = New System.Drawing.Size(116, 55)
+        Me.ButtonMenage1.Size = New System.Drawing.Size(138, 40)
         Me.ButtonMenage1.TabIndex = 42
-        Me.ButtonMenage1.Text = "Supprimer les Overlays Orphelins"
+        Me.ButtonMenage1.Text = "Supprimer les" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Overlays Orphelins"
         Me.ButtonMenage1.UseVisualStyleBackColor = False
+        '
+        'ButtonSuppSave
+        '
+        Me.ButtonSuppSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.ButtonSuppSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonSuppSave.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonSuppSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonSuppSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonSuppSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonSuppSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonSuppSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonSuppSave.Location = New System.Drawing.Point(366, 8)
+        Me.ButtonSuppSave.Name = "ButtonSuppSave"
+        Me.ButtonSuppSave.Size = New System.Drawing.Size(138, 44)
+        Me.ButtonSuppSave.TabIndex = 63
+        Me.ButtonSuppSave.Text = "Supprimer le(s)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Overlay(s) Selectionné(s)"
+        Me.ButtonSuppSave.UseVisualStyleBackColor = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(47, 25)
+        Me.Label6.Location = New System.Drawing.Point(8, 17)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(83, 13)
         Me.Label6.TabIndex = 20
@@ -202,7 +297,7 @@ Partial Class OverlayManager
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(9, 57)
+        Me.Label5.Location = New System.Drawing.Point(170, 17)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(125, 13)
         Me.Label5.TabIndex = 19
@@ -210,7 +305,7 @@ Partial Class OverlayManager
         '
         'OverlaySingle
         '
-        Me.OverlaySingle.Location = New System.Drawing.Point(150, 54)
+        Me.OverlaySingle.Location = New System.Drawing.Point(293, 10)
         Me.OverlaySingle.Name = "OverlaySingle"
         Me.OverlaySingle.Size = New System.Drawing.Size(67, 20)
         Me.OverlaySingle.TabIndex = 17
@@ -218,7 +313,7 @@ Partial Class OverlayManager
         '
         'OverlayTotal
         '
-        Me.OverlayTotal.Location = New System.Drawing.Point(150, 22)
+        Me.OverlayTotal.Location = New System.Drawing.Point(97, 10)
         Me.OverlayTotal.Name = "OverlayTotal"
         Me.OverlayTotal.Size = New System.Drawing.Size(67, 20)
         Me.OverlayTotal.TabIndex = 16
@@ -262,6 +357,7 @@ Partial Class OverlayManager
         Me.ListdesFichiersEnTrop.Location = New System.Drawing.Point(507, 351)
         Me.ListdesFichiersEnTrop.Name = "ListdesFichiersEnTrop"
         Me.ListdesFichiersEnTrop.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ListdesFichiersEnTrop.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.ListdesFichiersEnTrop.Size = New System.Drawing.Size(367, 69)
         Me.ListdesFichiersEnTrop.TabIndex = 18
         '
@@ -269,21 +365,21 @@ Partial Class OverlayManager
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label7.Location = New System.Drawing.Point(638, 260)
+        Me.Label7.Location = New System.Drawing.Point(707, 260)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(236, 13)
+        Me.Label7.Size = New System.Drawing.Size(167, 13)
         Me.Label7.TabIndex = 19
-        Me.Label7.Text = "Liste d'Overlays Principaux Sans Rom Associés :"
+        Me.Label7.Text = "Fichiers CFG sans roms associés :"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label8.Location = New System.Drawing.Point(558, 335)
+        Me.Label8.Location = New System.Drawing.Point(658, 335)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(322, 13)
+        Me.Label8.Size = New System.Drawing.Size(216, 13)
         Me.Label8.TabIndex = 20
-        Me.Label8.Text = "Liste des fichiers cités ci-dessus et qui deviennent donc Orphelins :"
+        Me.Label8.Text = "Liste des fichiers cité dans la liste ci dessus :"
         '
         'ImportBoth1
         '
@@ -358,7 +454,7 @@ Partial Class OverlayManager
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
-        Me.ClientSize = New System.Drawing.Size(884, 521)
+        Me.ClientSize = New System.Drawing.Size(884, 531)
         Me.Controls.Add(Me.ButtonImportOverlays1)
         Me.Controls.Add(Me.buttonImportRoms1)
         Me.Controls.Add(Me.ButtonGetBack1)
@@ -385,6 +481,8 @@ Partial Class OverlayManager
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.RenameSelection.ResumeLayout(False)
+        Me.RenameSelection.PerformLayout()
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -417,4 +515,11 @@ Partial Class OverlayManager
     Friend WithEvents buttonImportRoms1 As Button
     Friend WithEvents ButtonImportOverlays1 As Button
     Friend WithEvents ButtonMenage1 As Button
+    Friend WithEvents RenameSelection As GroupBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents ActualName As TextBox
+    Friend WithEvents NewName As TextBox
+    Friend WithEvents ButtonRenameSave As Button
+    Friend WithEvents ButtonSuppSave As Button
 End Class

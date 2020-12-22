@@ -248,7 +248,7 @@ ProchainGamelist:
 
             If nbdansdossier = 0 Then
                 MsgBox("Pas d'Overlays dans la console :" & nomconsole)
-                Exit Sub
+                GoTo nextconsole
             End If
 
             Dim di As New IO.DirectoryInfo(My.Settings.DossierOverlay & nomconsole)
@@ -277,6 +277,7 @@ ProchainGamelist:
 
 fichiersuivant:
             Next
+nextconsole:
         Next
 
         'Sorting A-Z the console
@@ -499,6 +500,112 @@ lignesuivante:
         'on ajoute a la listbox
         ListdesFichiersEnTrop.Items.Add(fichier3png)
 
+
+    End Sub
+
+    Private Sub DataGridRoms_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridRoms.SelectionChanged
+        Dim actualrow As Integer = DataGridRoms.CurrentRow.Index
+        Dim nomdufichier As String = DataGridRoms.Rows(actualrow).Cells(2).Value
+        NewName.Text = Path.GetFileName(nomdufichier) & ".cfg"
+    End Sub
+
+    Private Sub DataGridOverlay_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridOverlay.SelectionChanged
+        Dim actualrow As Integer = DataGridOverlay.CurrentRow.Index
+        Dim nomdufichier As String = DataGridOverlay.Rows(actualrow).Cells(2).Value
+        ActualName.Text = Path.GetFileName(nomdufichier)
+    End Sub
+
+    Private Sub ListdesFichiersEnTrop_DoubleClick(sender As Object, e As EventArgs) Handles ListdesFichiersEnTrop.DoubleClick
+        If ListdesFichiersEnTrop.SelectedItems.Count = 1 Then
+            Process.Start(ListdesFichiersEnTrop.SelectedItem)
+        Else
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub ListToSupp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListToSupp.SelectedIndexChanged
+        Dim fichier1 As String = ListToSupp.SelectedItem
+        Dim fichier2 As String = Nothing
+        Dim fichier3 As String = Nothing
+
+        Dim cheminpropreoverlay2 As String = Nothing
+        Dim justefichier2 As String = Nothing
+        Dim fichier3png As String = Nothing
+
+        'Generate the 3 files
+        Dim console As String = fichier1
+
+        If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+            ' console = fichier1.Substring(InStr(fichier1, "\overlays\") + 9)
+            '  Dim suite As String = InStr(console, "\")
+            ' Dim donc As String = console.Substring(0, suite - 1)
+            Dim consoleencourrs As String = fichier1.Substring(InStr(fichier1, "\overlays\") + 9).Substring(0, InStr(fichier1.Substring(InStr(fichier1, "\overlays\") + 9), "\") - 1)
+        Else
+            Dim consoleencourrs As String = fichier1.Substring(InStr(fichier1, "\decorations\") + 9).Substring(0, InStr(fichier1.Substring(InStr(fichier1, "\decorations\") + 9), "\") - 1)
+        End If
+
+        'on va lire le cfg pour trouver le cfg overlay
+        File.ReadAllLines(fichier1)
+
+        Dim readText() As String = File.ReadAllLines(fichier1)
+        Dim s As String
+        For Each s In readText
+            Dim detectinputoverlay As String
+
+            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                detectinputoverlay = InStr(s, "/overlays/")
+            Else
+                detectinputoverlay = InStr(s, "/decorations/")
+            End If
+
+            If detectinputoverlay > 0 Then
+                'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
+                'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
+                'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
+
+                Dim chemincfgoverlaydanscfg As String
+
+                If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+                    chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
+                Else
+                    chemincfgoverlaydanscfg = s.Substring(InStr(s, "/decorations/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/decorations/") + 9), ".cfg") + 3)
+                End If
+
+                fichier2 = My.Settings.DossierOverlay & Replace(chemincfgoverlaydanscfg, "/", "\")
+                Exit For
+            End If
+        Next
+
+        'on lit le deuxieme fichier overlay cfg pour trouver le png
+        If Not File.Exists(fichier2) Then GoTo skip
+        File.ReadAllLines(fichier2)
+        Dim readText2() As String = File.ReadAllLines(fichier2)
+        Dim t As String
+
+        For Each t In readText2
+            Dim detectoverlayzero As String = InStr(t, "overlay0_overlay")
+            If detectoverlayzero > 0 Then
+                Dim chemindupng = t.Substring(detectoverlayzero + 19)
+                Dim detectpng = InStr(chemindupng, "png")
+                Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
+                Dim cheminpng = t.Substring(InStr(t, "overlay0_overlay") + 19).Substring(0, InStr(t.Substring(InStr(t, "overlay0_overlay") + 19), "png") + 2)
+                fichier3 = Replace(fichier2, Path.GetFileName(fichier2), cheminpng)
+                Exit For
+            End If
+        Next
+
+skip:
+        'on a les 3 fichiers, on cherche leur emplacement
+        Dim fich1 As Integer = ListdesFichiersEnTrop.Items.IndexOf(fichier1)
+        Dim fich2 As Integer = ListdesFichiersEnTrop.Items.IndexOf(fichier2)
+        Dim fich3 As Integer = ListdesFichiersEnTrop.Items.IndexOf(fichier3)
+
+        ListdesFichiersEnTrop.SetSelected(fich1, True)
+        ListdesFichiersEnTrop.SetSelected(fich2, True)
+        ListdesFichiersEnTrop.SetSelected(fich3, True)
+    End Sub
+
+    Private Sub ListdesFichiersEnTrop_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListdesFichiersEnTrop.SelectedIndexChanged
 
     End Sub
 End Class

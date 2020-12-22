@@ -194,7 +194,7 @@ ProchainGamelist:
                 For Each file As FileInfo In files
                     chemindufichier = dossiersaveparent & "\" & file.ToString
                     ListSaves.Items.Add(chemindufichier)
-                    compteurfiles = compteurfiles + 1
+                    compteurfiles += 1
                 Next
             Else
             End If
@@ -566,7 +566,7 @@ lignesuivante:
         'On delete les fichiers
         For Each i In ListSaves.SelectedItems
             System.IO.File.Delete(i)
-            compteur = compteur + 1
+            compteur += 1
         Next
 
         'on remove les entrees
@@ -596,7 +596,7 @@ lignesuivante:
         'On delete les fichiers
         For Each i In ListdesFichiersEnTrop.SelectedItems
             System.IO.File.Delete(i)
-            compteur = compteur + 1
+            compteur += 1
         Next
 
         'on remove les entrees
@@ -609,9 +609,6 @@ lignesuivante:
 
         'On enleve les doublons
         Supdoublon(ListdesFichiersEnTrop)
-
-        'Recap
-        MsgBox(compteur & " fichiers supprimés")
     End Sub
 
     Private Sub ButtonMenageOrphelin_Click(sender As Object, e As EventArgs) Handles ButtonMenageOrphelin.Click
@@ -711,7 +708,6 @@ oncontinue:
     End Sub
 
 
-
     Private Sub GameLists_SelectedIndexChanged(sender As Object, e As EventArgs) Handles GameLists.SelectedIndexChanged
         If GameLists.Items.Count = 0 Then
             prevplatform.Hide()
@@ -725,16 +721,17 @@ oncontinue:
             nextplatform.Hide()
         End If
     End Sub
-    Private Sub prevplatform_Click(sender As Object, e As EventArgs) Handles prevplatform.Click
+    Private Sub Prevplatform_Click(sender As Object, e As EventArgs) Handles prevplatform.Click
         Dim num As Integer = GameLists.SelectedIndex
         GameLists.ClearSelected()
         GameLists.SelectedIndex = num - 1
         ImportBoth1.PerformClick()
     End Sub
-    Private Sub nextplatform_Click(sender As Object, e As EventArgs) Handles nextplatform.Click
+    Private Sub Nextplatform_Click(sender As Object, e As EventArgs) Handles nextplatform.Click
         Dim num As Integer = GameLists.SelectedIndex
         GameLists.ClearSelected()
         GameLists.SelectedIndex = num + 1
         ImportBoth1.PerformClick()
     End Sub
+
 End Class

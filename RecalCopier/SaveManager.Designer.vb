@@ -38,12 +38,14 @@ Partial Class SaveManager
         Me.Label3 = New System.Windows.Forms.Label()
         Me.RomTotalSave = New System.Windows.Forms.TextBox()
         Me.RenameSelection = New System.Windows.Forms.GroupBox()
-        Me.PathActuel = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.textstate = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ActualName = New System.Windows.Forms.TextBox()
         Me.NewName = New System.Windows.Forms.TextBox()
         Me.ButtonRenameSave = New System.Windows.Forms.Button()
+        Me.PathActuel = New System.Windows.Forms.TextBox()
         Me.ButtonSuppSave = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -56,8 +58,6 @@ Partial Class SaveManager
         Me.ButtonRomsDeleteSelected = New System.Windows.Forms.Button()
         Me.GroupRoms = New System.Windows.Forms.GroupBox()
         Me.GroupSaves = New System.Windows.Forms.GroupBox()
-        Me.textstate = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.prevplatform = New System.Windows.Forms.Button()
         Me.nextplatform = New System.Windows.Forms.Button()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
@@ -251,14 +251,21 @@ Partial Class SaveManager
         Me.RenameSelection.TabStop = False
         Me.RenameSelection.Text = "Travail sur Selection :"
         '
-        'PathActuel
+        'Label9
         '
-        Me.PathActuel.Location = New System.Drawing.Point(221, 162)
-        Me.PathActuel.Name = "PathActuel"
-        Me.PathActuel.ReadOnly = True
-        Me.PathActuel.Size = New System.Drawing.Size(100, 20)
-        Me.PathActuel.TabIndex = 66
-        Me.PathActuel.Visible = False
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 67)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(51, 13)
+        Me.Label9.TabIndex = 66
+        Me.Label9.Text = "n° State :"
+        '
+        'textstate
+        '
+        Me.textstate.Location = New System.Drawing.Point(63, 63)
+        Me.textstate.Name = "textstate"
+        Me.textstate.Size = New System.Drawing.Size(32, 20)
+        Me.textstate.TabIndex = 62
         '
         'Label8
         '
@@ -309,6 +316,15 @@ Partial Class SaveManager
         Me.ButtonRenameSave.TabIndex = 43
         Me.ButtonRenameSave.Text = "Renommer la save"
         Me.ButtonRenameSave.UseVisualStyleBackColor = False
+        '
+        'PathActuel
+        '
+        Me.PathActuel.Location = New System.Drawing.Point(221, 162)
+        Me.PathActuel.Name = "PathActuel"
+        Me.PathActuel.ReadOnly = True
+        Me.PathActuel.Size = New System.Drawing.Size(100, 20)
+        Me.PathActuel.TabIndex = 66
+        Me.PathActuel.Visible = False
         '
         'ButtonSuppSave
         '
@@ -462,22 +478,6 @@ Partial Class SaveManager
         Me.GroupSaves.TabIndex = 64
         Me.GroupSaves.TabStop = False
         Me.GroupSaves.Text = "Operations sur tous les Fichiers Saves"
-        '
-        'textstate
-        '
-        Me.textstate.Location = New System.Drawing.Point(63, 63)
-        Me.textstate.Name = "textstate"
-        Me.textstate.Size = New System.Drawing.Size(32, 20)
-        Me.textstate.TabIndex = 62
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 67)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(51, 13)
-        Me.Label9.TabIndex = 66
-        Me.Label9.Text = "n° State :"
         '
         'prevplatform
         '
