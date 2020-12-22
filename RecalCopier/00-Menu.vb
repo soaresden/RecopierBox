@@ -184,7 +184,7 @@ Public Class Form1
 
         'Github API
         Dim Client As HttpClient = New HttpClient()
-        Client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "5c25370fcf7db4a676d98d72700e2922654485ed")
+        Client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "tokendemerde")
         Dim res = Client.GetAsync("https://api.github.com/repos/soaresden/RecopierBox/releases/latest").Result.Content.ReadAsStringAsync().Result
 
         'Dim getversion = InStr(res, "tag_name")
@@ -218,8 +218,8 @@ Public Class Form1
             'My.Computer.Network.DownloadFile("https://github.com/soaresden/RecopierBox/releases/latest/download/release.zip", updateFiles, "", "")
             Dim remoteUri As String = "https://github.com/soaresden/RecopierBox/releases/latest/download/release.zip"
             Dim fileName As String = "release.zip"
-            Dim password As String = "5c25370fcf7db4a676d98d72700e2922654485ed"
-            Dim username As String = "5c25370fcf7db4a676d98d72700e2922654485ed"
+            Dim password As String = "tokendemerde"
+            Dim username As String = "tokendemerde"
             Using client As New WebClient()
                 client.Credentials = New NetworkCredential(username, password)
                 client.DownloadFile(remoteUri, updateFiles)
