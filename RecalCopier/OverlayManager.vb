@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Public Class OverlayManager
+
     Private Sub OverlayManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GroupBox1.Hide()
         GroupBox2.Hide()
@@ -247,7 +248,6 @@ ProchainGamelist:
             End If
 
             If nbdansdossier = 0 Then
-                MsgBox("Pas d'Overlays dans la console :" & nomconsole)
                 GoTo nextconsole
             End If
 
@@ -287,9 +287,9 @@ nextconsole:
         'Width for columns
         DataGridOverlay.RowHeadersWidth = 25
         DataGridOverlay.Columns("Console").Width = 40
-        DataGridOverlay.Columns("NomRomXML").Width = 90
-        DataGridOverlay.Columns("NomFichierCFG").Width = 140
-        DataGridOverlay.Columns("CheminCFG").Width = 25
+        DataGridOverlay.Columns("NomRomXML").Width = 140
+        DataGridOverlay.Columns("NomFichierCFG").Width = 190
+        DataGridOverlay.Columns("CheminCFG").Width = 45
 
         Dim compteuroverlay As Integer = 0
 
@@ -325,7 +325,7 @@ nextconsole:
         If ListToSupp.Items.Count > 0 Then
             Call Ecrireles3fichiers()
         Else
-            ListToSupp.Items.Add("(: Pas d'overlays en trop detecté dans votre dossier ")
+            ListToSupp.Items.Add("0 overlays en trop detecté dans votre dossier :)")
         End If
 
         'On met la derniere colonne coche en readonly
@@ -413,7 +413,7 @@ lignesuivante:
     End Sub
 
     Private Sub ButtonMenage_Click(sender As Object, e As EventArgs) Handles ButtonMenage1.Click
-        If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-contre ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-dessus ?", vbYesNo) = vbNo Then Exit Sub
 
         For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
             Dim pathdufichier As String = ListdesFichiersEnTrop.Items(i)
@@ -524,6 +524,16 @@ lignesuivante:
     End Sub
 
     Private Sub ListToSupp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListToSupp.SelectedIndexChanged
+
+        'on va changer le actual name
+        If ListToSupp.SelectedItems.Count = 1 Then
+            ActualName.Text = Path.GetFileName(ListToSupp.SelectedItem)
+        ElseIf ListToSupp.SelectedItems.Count = 0 Then
+            Exit Sub
+        End If
+
+
+
         Dim fichier1 As String = ListToSupp.SelectedItem
         Dim fichier2 As String = Nothing
         Dim fichier3 As String = Nothing
@@ -600,12 +610,106 @@ skip:
         Dim fich2 As Integer = ListdesFichiersEnTrop.Items.IndexOf(fichier2)
         Dim fich3 As Integer = ListdesFichiersEnTrop.Items.IndexOf(fichier3)
 
+        ListdesFichiersEnTrop.ClearSelected()
         ListdesFichiersEnTrop.SetSelected(fich1, True)
         ListdesFichiersEnTrop.SetSelected(fich2, True)
         ListdesFichiersEnTrop.SetSelected(fich3, True)
     End Sub
 
-    Private Sub ListdesFichiersEnTrop_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListdesFichiersEnTrop.SelectedIndexChanged
+    Private Sub ButtonRenameSave_Click(sender As Object, e As EventArgs) Handles ButtonRenameSave.Click
+        If NewName.Text = Nothing Or NewName.Text = ActualName.Text Then
+            MsgBox("Aucun nom de fichier Saisi")
+            Exit Sub
+        End If
+
+        'On detecte si y'a une extension.
+        Dim newextension As String = Path.GetExtension(NewName.Text)
+
+        'Si .blablablabla a moins de 8 caracteres, c'est que c'est une vraie extension (.scummvm ?). Donc ca veut dire que c'est une extension qui est saisie
+        If newextension = ".cfg" Then
+        Else
+            NewName.Text = NewName.Text & ".cfg"
+        End If
+
+        'On prends l'extension attendue
+        Dim finaladresse As String = Replace(ListToSupp.SelectedItem.ToString, ActualName.Text, NewName.Text)
+
+        'Test si le fichier overlay déjà 
+        If System.IO.File.Exists(finaladresse) Then
+            MsgBox("Impossible de renommer ce fichier" & Chr(13) & "Un Overlay existe déjà avec ce nom")
+            Exit Sub
+        End If
+
+        If MsgBox("Vous allez changer le nom de l'Overlay : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & NewName.Text & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
+
+        'On va devoir renommer dans les fichiers texte puis déplacer le tout
+        Dim fichieractuel As String = ListdesFichiersEnTrop.SelectedItem
+        Dim fichierfinal1 As String = Replace(fichieractuel, ActualName.Text, NewName.Text)
+
+        File.Move(fichieractuel, fichierfinal1)
+
+        'on refresh le tout
+        ActualName.Text = Path.GetFileName(fichierfinal1)
+        NewName.Text = ActualName.Text
+
+        ButtonImportOverlays1.PerformClick()
+
+        'On enleve les doublons
+        Supdoublon(ListdesFichiersEnTrop)
+    End Sub
+    Function Supdoublon(ByVal listboxName As ListBox)
+        listboxName.Sorted = True
+        listboxName.Refresh()
+        Dim index As Integer
+        Dim itemcount As Integer = listboxName.Items.Count
+
+        If itemcount > 1 Then
+            Dim lastitem As String = listboxName.Items(itemcount - 1)
+
+            For index = itemcount - 2 To 0 Step -1
+                If listboxName.Items(index) = lastitem Then
+                    listboxName.Items.RemoveAt(index)
+                Else
+                    lastitem = listboxName.Items(index)
+                End If
+            Next
+        End If
+    End Function
+
+    Private Sub ButtonSuppSave_Click(sender As Object, e As EventArgs) Handles ButtonSuppSave.Click
+        If MsgBox("Etes vous sur de supprimer les fichiers présents dans la liste en rouge ci dessous selectionnés ?" & Chr(13) & "Oui = Supprimer tous les fichiers CFG + _overlay + .png", vbYesNo) = vbNo Then Exit Sub
+
+        templisttosupp.ClearSelected()
+
+        For Each item In ListToSupp.SelectedItems
+            templisttosupp.Items.Add(item)
+        Next
+
+        For i = 0 To templisttosupp.Items.Count - 1
+            Dim fichiertosupp = templisttosupp.Items(i).ToString
+            Dim realindex As Integer = ListToSupp.Items.IndexOf(templisttosupp.Items(i))
+            ListToSupp.ClearSelected()
+            ListToSupp.SetSelected(realindex, True)
+
+            'Maintenant c'est selectionné on va les delete
+
+            For Each j In ListToSupp.SelectedItems
+                System.IO.File.Delete(j)
+            Next
+
+            'on remove les entrees
+            For n As Integer = ListToSupp.SelectedItems.Count - 1 To 0 Step -1
+                ListToSupp.Items.Remove(ListToSupp.SelectedItems(n))
+            Next n
+
+        Next
+
+        'On enleve les doublons
+        Supdoublon(ListToSupp)
+
+    End Sub
+
+    Private Sub RichTextBox1_Click(sender As Object, e As EventArgs) Handles RichTextBox1.Click
 
     End Sub
 End Class

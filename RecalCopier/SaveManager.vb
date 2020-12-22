@@ -268,7 +268,7 @@ ProchainGamelist:
             Dim nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\saves\" & nomconsole, "*.*").Count
 
             If nbdansdossier = 0 Then
-                MsgBox("Pas de Saves dans la console :" & nomconsole)
+                GoTo skip
                 Exit Sub
             End If
 
@@ -292,6 +292,7 @@ ProchainGamelist:
 
 fichiersuivant:
             Next
+skip:
         Next
 
         'Sorting A-Z the console
@@ -603,9 +604,6 @@ lignesuivante:
         For n As Integer = ListdesFichiersEnTrop.SelectedItems.Count - 1 To 0 Step -1
             ListdesFichiersEnTrop.Items.Remove(ListdesFichiersEnTrop.SelectedItems(n))
         Next n
-
-        'On Refresh
-        ButtonImportSaves1.PerformClick()
 
         'On enleve les doublons
         Supdoublon(ListdesFichiersEnTrop)
