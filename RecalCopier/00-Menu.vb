@@ -1,6 +1,10 @@
 ﻿Imports Microsoft.Win32
 Imports System
 Imports System.IO
+Imports System.Net
+Imports System.Text
+Imports System.Security.Cryptography
+Imports System.Net.Http
 
 Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -174,122 +178,65 @@ Public Class Form1
     End Sub
 
 
+    Function checkapiAsync() As Task
+
+    End Function
+
     Sub checkupdate()
-        Try
-            CheckForUpdates()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+        'check online
+        Dim versiononline = "result_post"
+        Dim versionnow = Replace(version.Text, "v", "")
+
+        'if is soaresden then exit sub
+        If Environment.UserName = "soare" Then Exit Sub
+
+        'Github API
+        Dim Client As HttpClient = New HttpClient()
+        Client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "https://github.com/settings/tokens/537248653")
+        Dim res = Client.GetAsync("https://api.github.com/repos/soaresden/RecopierBox/releases/latest").Result.Content.ReadAsStringAsync().Result
+
+        'Dim getversion = InStr(res, "tag_name")
+        'Dim getversion2 = res.Substring(getversion + 10)
+        'Dim slash = InStr(getversion2, ",")
+        'Dim final = getversion2.Substring(1, slash - 3)
+
+        versiononline = res.Substring(InStr(res, "tag_name") + 10).Substring(1, InStr(res.Substring(InStr(res, "tag_name") + 10), ",") - 3)
+
+        If versiononline > versionnow Then
+            Try
+                MsgBox("Update en cours de Telechargement")
+                doUpdate()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
     End Sub
 
     Private Sub doUpdate()
         Try
             'Declare application path
             Dim appPath As String = Application.StartupPath
-
             'Declare download directory path
             Dim downloadDir As String = Application.StartupPath & "\DownloadedUpdates"
-
             'Declare update files path
             Dim updateFiles As String = downloadDir & "\update.zip"
-
             'Create download directory
             Directory.CreateDirectory(downloadDir)
-
             'Download updates file in .zip file
             My.Computer.Network.DownloadFile("https://github.com/soaresden/RecopierBox/releases/latest/download/release.zip", updateFiles)
-
-            'TODO: Add handling of 404!!
-
             'Get windows default zip creator/extrator 
             Dim shObj As Object = Activator.CreateInstance(Type.GetTypeFromProgID("Shell.Application"))
-
             'Declare the folder where the items will be extracted.
             Dim output As Object = shObj.NameSpace((appPath))
-
             'Declare the input zip file.
             Dim input As Object = shObj.NameSpace((updateFiles))
-
             'Extract the items from the zip file.
             output.CopyHere((input.Items), 16)
-
             'Clean up
             Directory.Delete(downloadDir, True)
-
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-
-
-    End Sub
-
-
-
-    Private Sub CheckIfRunning_Then_update()
-        Try
-            Dim p() As Process
-            p = Process.GetProcessesByName("MainApp")
-            'check if process of main app running
-            If p.Count > 0 Then
-
-                If MsgBox("Application Is Running! Would you like to close it?", vbYesNo + vbInformation, "Process running") = MsgBoxResult.Yes Then
-                    Dim Processes() As Process = Process.GetProcessesByName("MainApp")
-                    For Each Process As Process In Processes
-                        'kill process of main app
-                        Process.Kill()
-                    Next
-                    MsgBox("Update now ready, click ok to continue.")
-                    'do update of main app
-                    doUpdate()
-                    MsgBox("Update Completed!")
-                    'start main app
-                    Process.Start("MainApp.exe")
-                    'exit updater
-                    Application.Exit()
-                Else
-                    MsgBox("Update could be run anytime.")
-                    Application.Exit()
-                End If
-
-            Else
-                doUpdate()
-                MsgBox("Update Completed!")
-                Process.Start("MainApp.exe")
-                Application.Exit()
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-
-
-    End Sub
-
-    Private Sub CheckForUpdates()
-        'TODO: Add handling of 404!!
-        Try
-            'check for updates to updater
-            Dim request As System.Net.HttpWebRequest = System.Net.HttpWebRequest.Create("http://www.yourwebsite.com/updater_version.txt")
-            Dim response As System.Net.HttpWebResponse = request.GetResponse()
-            Dim sr As System.IO.StreamReader = New System.IO.StreamReader(response.GetResponseStream())
-            Dim newestversion As String = sr.ReadToEnd()
-            Dim currentversion As String = Application.ProductVersion
-            If newestversion.Contains(currentversion) Then
-                'do update for main app if no update found for updater
-                MsgBox("No updates for updater found, main app update will continue") 'Do not show the user this...
-
-                CheckIfRunning_Then_update()
-            Else
-                'update found for updater
-                MsgBox("Update Found for updater, click Ok to update now. Updater will exit and restart", vbInformation)
-                'start daemon to perform update of updater
-                Process.Start("daemon.exe")
-
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-
-
     End Sub
 
 End Class

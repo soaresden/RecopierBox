@@ -30,7 +30,7 @@ Partial Class Form1
         Me.TxtRecalfolderPath = New System.Windows.Forms.TextBox()
         Me.label2 = New System.Windows.Forms.Label()
         Me.label1 = New System.Windows.Forms.Label()
-        Me.label3 = New System.Windows.Forms.Label()
+        Me.version = New System.Windows.Forms.Label()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Disclaimer = New System.Windows.Forms.GroupBox()
         Me.TxtDisclaimer = New System.Windows.Forms.RichTextBox()
@@ -43,6 +43,7 @@ Partial Class Form1
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.txtWhyGamelist = New System.Windows.Forms.TextBox()
         Me.PanelGauche = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.ButtonSetDossier = New System.Windows.Forms.Button()
         Me.TypeBatocera = New System.Windows.Forms.CheckBox()
         Me.TypeRecalbox = New System.Windows.Forms.CheckBox()
@@ -148,18 +149,18 @@ Partial Class Form1
         Me.label1.TabIndex = 9
         Me.label1.Text = "Bienvenue dans RecopierBox"
         '
-        'label3
+        'version
         '
-        Me.label3.AutoSize = True
-        Me.label3.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.label3.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.label3.ForeColor = System.Drawing.Color.Yellow
-        Me.label3.Location = New System.Drawing.Point(146, 67)
-        Me.label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.label3.Name = "label3"
-        Me.label3.Size = New System.Drawing.Size(102, 14)
-        Me.label3.TabIndex = 14
-        Me.label3.Text = "v4.4 by Soaresden"
+        Me.version.AutoSize = True
+        Me.version.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.version.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.version.ForeColor = System.Drawing.Color.Yellow
+        Me.version.Location = New System.Drawing.Point(129, 67)
+        Me.version.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.version.Name = "version"
+        Me.version.Size = New System.Drawing.Size(29, 14)
+        Me.version.TabIndex = 14
+        Me.version.Text = "v4.4"
         '
         'Disclaimer
         '
@@ -287,10 +288,11 @@ Partial Class Form1
         '
         Me.PanelGauche.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.PanelGauche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelGauche.Controls.Add(Me.Label6)
         Me.PanelGauche.Controls.Add(Me.ButtonSetDossier)
         Me.PanelGauche.Controls.Add(Me.TypeBatocera)
         Me.PanelGauche.Controls.Add(Me.TypeRecalbox)
-        Me.PanelGauche.Controls.Add(Me.label3)
+        Me.PanelGauche.Controls.Add(Me.version)
         Me.PanelGauche.Controls.Add(Me.Paypal)
         Me.PanelGauche.Controls.Add(Me.ButtonOverlay)
         Me.PanelGauche.Controls.Add(Me.ButtonSave)
@@ -302,6 +304,19 @@ Partial Class Form1
         Me.PanelGauche.Name = "PanelGauche"
         Me.PanelGauche.Size = New System.Drawing.Size(247, 542)
         Me.PanelGauche.TabIndex = 24
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.Label6.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Yellow
+        Me.Label6.Location = New System.Drawing.Point(162, 67)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(76, 14)
+        Me.Label6.TabIndex = 28
+        Me.Label6.Text = "by Soaresden"
         '
         'ButtonSetDossier
         '
@@ -551,7 +566,7 @@ Partial Class Form1
     Private WithEvents TxtRecalfolderPath As TextBox
     Private WithEvents label2 As Label
     Private WithEvents label1 As Label
-    Private WithEvents label3 As Label
+    Private WithEvents version As Label
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents Disclaimer As GroupBox
     Friend WithEvents Button1 As Button
@@ -582,4 +597,5 @@ Partial Class Form1
     Friend WithEvents ButtonHideArrm As Button
     Friend WithEvents ButtonSetDossier As Button
     Friend WithEvents PanelSettings As Panel
+    Private WithEvents Label6 As Label
 End Class
