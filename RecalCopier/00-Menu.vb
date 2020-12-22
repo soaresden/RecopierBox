@@ -184,7 +184,7 @@ Public Class Form1
 
         'Github API
         Dim Client As HttpClient = New HttpClient()
-        Client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "https://github.com/settings/tokens/537248653")
+        Client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "5c25370fcf7db4a676d98d72700e2922654485ed")
         Dim res = Client.GetAsync("https://api.github.com/repos/soaresden/RecopierBox/releases/latest").Result.Content.ReadAsStringAsync().Result
 
         'Dim getversion = InStr(res, "tag_name")
@@ -218,8 +218,8 @@ Public Class Form1
             'My.Computer.Network.DownloadFile("https://github.com/soaresden/RecopierBox/releases/latest/download/release.zip", updateFiles, "", "")
             Dim remoteUri As String = "https://github.com/soaresden/RecopierBox/releases/latest/download/release.zip"
             Dim fileName As String = "release.zip"
-            Dim password As String = "https://github.com/settings/tokens/537248653"
-            Dim username As String = "https://github.com/settings/tokens/537248653"
+            Dim password As String = "5c25370fcf7db4a676d98d72700e2922654485ed"
+            Dim username As String = "5c25370fcf7db4a676d98d72700e2922654485ed"
             Using client As New WebClient()
                 client.Credentials = New NetworkCredential(username, password)
                 client.DownloadFile(remoteUri, updateFiles)
@@ -232,7 +232,7 @@ Public Class Form1
             'Declare the input zip file.
             Dim input As Object = shObj.NameSpace((updateFiles))
             'msgbox
-            MsgBox("Update téléchargée dans le dossier Update, Vous pouvez dezipper :)")
+            MsgBox("Update téléchargée dans le dossier 'Updates'" & Chr(13) & "Vous devrez dezipper et remplacer vous même :)")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
