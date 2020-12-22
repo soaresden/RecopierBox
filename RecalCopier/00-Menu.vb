@@ -177,18 +177,10 @@ Public Class Form1
         PanelSettings.Visible = Not PanelSettings.Visible
     End Sub
 
-
-    Function checkapiAsync() As Task
-
-    End Function
-
     Sub checkupdate()
         'check online
-        Dim versiononline = "result_post"
-        Dim versionnow = Replace(version.Text, "v", "")
-
-        'if is soaresden then exit sub
-        If Environment.UserName = "soare" Then Exit Sub
+        Dim versiononline As Double
+        Dim versionnow As Double = Replace(Replace(version.Text, "v", ""), ".", ",")
 
         'Github API
         Dim Client As HttpClient = New HttpClient()
@@ -200,7 +192,7 @@ Public Class Form1
         'Dim slash = InStr(getversion2, ",")
         'Dim final = getversion2.Substring(1, slash - 3)
 
-        versiononline = res.Substring(InStr(res, "tag_name") + 10).Substring(1, InStr(res.Substring(InStr(res, "tag_name") + 10), ",") - 3)
+        versiononline = Replace(res.Substring(InStr(res, "tag_name") + 10).Substring(1, InStr(res.Substring(InStr(res, "tag_name") + 10), ",") - 3), ".", ",")
 
         If versiononline > versionnow Then
             Try
@@ -217,23 +209,30 @@ Public Class Form1
             'Declare application path
             Dim appPath As String = Application.StartupPath
             'Declare download directory path
-            Dim downloadDir As String = Application.StartupPath & "\DownloadedUpdates"
+            Dim downloadDir As String = Application.StartupPath & "\Updates"
             'Declare update files path
-            Dim updateFiles As String = downloadDir & "\update.zip"
+            Dim updateFiles As String = downloadDir & "\release.zip"
             'Create download directory
             Directory.CreateDirectory(downloadDir)
             'Download updates file in .zip file
-            My.Computer.Network.DownloadFile("https://github.com/soaresden/RecopierBox/releases/latest/download/release.zip", updateFiles)
+            'My.Computer.Network.DownloadFile("https://github.com/soaresden/RecopierBox/releases/latest/download/release.zip", updateFiles, "", "")
+            Dim remoteUri As String = "https://github.com/soaresden/RecopierBox/releases/latest/download/release.zip"
+            Dim fileName As String = "release.zip"
+            Dim password As String = "https://github.com/settings/tokens/537248653"
+            Dim username As String = "https://github.com/settings/tokens/537248653"
+            Using client As New WebClient()
+                client.Credentials = New NetworkCredential(username, password)
+                client.DownloadFile(remoteUri, updateFiles)
+            End Using
+
             'Get windows default zip creator/extrator 
             Dim shObj As Object = Activator.CreateInstance(Type.GetTypeFromProgID("Shell.Application"))
             'Declare the folder where the items will be extracted.
             Dim output As Object = shObj.NameSpace((appPath))
             'Declare the input zip file.
             Dim input As Object = shObj.NameSpace((updateFiles))
-            'Extract the items from the zip file.
-            output.CopyHere((input.Items), 16)
-            'Clean up
-            Directory.Delete(downloadDir, True)
+            'msgbox
+            MsgBox("Update téléchargée dans le dossier Update, Vous pouvez dezipper :)")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
