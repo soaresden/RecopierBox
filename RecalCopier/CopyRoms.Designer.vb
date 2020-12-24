@@ -1212,7 +1212,7 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.FinalGrid)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximumSize = New System.Drawing.Size(1034, 650)
-        Me.MinimumSize = New System.Drawing.Size(1034, 619)
+        Me.MinimumSize = New System.Drawing.Size(1034, 650)
         Me.Name = "CopyRoms"
         Me.Text = "CopyRoms"
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).EndInit()

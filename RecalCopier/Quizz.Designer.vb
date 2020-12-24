@@ -29,6 +29,7 @@ Partial Class Quizz
         Me.ButtonDoRandom1 = New System.Windows.Forms.Button()
         Me.CheckAvecFiltres = New System.Windows.Forms.CheckBox()
         Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txttempsaffichprop = New System.Windows.Forms.TextBox()
         Me.ModeHardcore = New System.Windows.Forms.CheckBox()
@@ -99,7 +100,6 @@ Partial Class Quizz
         Me.PanelVideo = New System.Windows.Forms.Panel()
         Me.Cheat = New System.Windows.Forms.CheckBox()
         Me.ToolTipNbJeux = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label17 = New System.Windows.Forms.Label()
         Me.ButtonHideParam = New System.Windows.Forms.Button()
         Me.GroupParamComplet.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -198,6 +198,16 @@ Partial Class Quizz
         Me.GroupConfigPartie.TabIndex = 27
         Me.GroupConfigPartie.TabStop = False
         Me.GroupConfigPartie.Text = "Config Partie :"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.ForeColor = System.Drawing.Color.Black
+        Me.Label17.Location = New System.Drawing.Point(218, 9)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(49, 13)
+        Me.Label17.TabIndex = 37
+        Me.Label17.Text = "Options :"
         '
         'Label16
         '
@@ -960,16 +970,6 @@ Partial Class Quizz
         Me.Cheat.Size = New System.Drawing.Size(15, 14)
         Me.Cheat.TabIndex = 42
         Me.Cheat.UseVisualStyleBackColor = True
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.ForeColor = System.Drawing.Color.Black
-        Me.Label17.Location = New System.Drawing.Point(218, 9)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(49, 13)
-        Me.Label17.TabIndex = 37
-        Me.Label17.Text = "Options :"
         '
         'ButtonHideParam
         '

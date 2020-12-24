@@ -41,11 +41,11 @@ Partial Class OverlayManager
         Me.NewName = New System.Windows.Forms.TextBox()
         Me.ButtonRenameSave = New System.Windows.Forms.Button()
         Me.ButtonMenage1 = New System.Windows.Forms.Button()
-        Me.ButtonSuppSave = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.OverlaySingle = New System.Windows.Forms.TextBox()
         Me.OverlayTotal = New System.Windows.Forms.TextBox()
+        Me.ButtonSuppSave = New System.Windows.Forms.Button()
         Me.GameLists = New System.Windows.Forms.ListBox()
         Me.DataGridOverlay = New System.Windows.Forms.DataGridView()
         Me.ListToSupp = New System.Windows.Forms.ListBox()
@@ -272,23 +272,6 @@ Partial Class OverlayManager
         Me.ButtonMenage1.Text = "Supprimer les" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Overlays Orphelins"
         Me.ButtonMenage1.UseVisualStyleBackColor = False
         '
-        'ButtonSuppSave
-        '
-        Me.ButtonSuppSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
-        Me.ButtonSuppSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonSuppSave.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonSuppSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonSuppSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.ButtonSuppSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonSuppSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonSuppSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonSuppSave.Location = New System.Drawing.Point(507, 412)
-        Me.ButtonSuppSave.Name = "ButtonSuppSave"
-        Me.ButtonSuppSave.Size = New System.Drawing.Size(245, 42)
-        Me.ButtonSuppSave.TabIndex = 63
-        Me.ButtonSuppSave.Text = "Supprimer en Cascade" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "La selection ci-dessus"
-        Me.ButtonSuppSave.UseVisualStyleBackColor = False
-        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -322,6 +305,23 @@ Partial Class OverlayManager
         Me.OverlayTotal.Size = New System.Drawing.Size(67, 20)
         Me.OverlayTotal.TabIndex = 16
         Me.OverlayTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'ButtonSuppSave
+        '
+        Me.ButtonSuppSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.ButtonSuppSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonSuppSave.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonSuppSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonSuppSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonSuppSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonSuppSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonSuppSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonSuppSave.Location = New System.Drawing.Point(507, 412)
+        Me.ButtonSuppSave.Name = "ButtonSuppSave"
+        Me.ButtonSuppSave.Size = New System.Drawing.Size(245, 42)
+        Me.ButtonSuppSave.TabIndex = 63
+        Me.ButtonSuppSave.Text = "Supprimer en Cascade" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "La selection ci-dessus"
+        Me.ButtonSuppSave.UseVisualStyleBackColor = False
         '
         'GameLists
         '
@@ -499,7 +499,7 @@ Partial Class OverlayManager
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.MaximumSize = New System.Drawing.Size(1000, 630)
-        Me.MinimumSize = New System.Drawing.Size(826, 560)
+        Me.MinimumSize = New System.Drawing.Size(1000, 630)
         Me.Name = "OverlayManager"
         Me.Text = "OverlayManager"
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).EndInit()
