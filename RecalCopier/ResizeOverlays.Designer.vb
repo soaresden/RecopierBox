@@ -27,7 +27,7 @@ Partial Class ResizeOverlays
         Me.DataGridOverlays = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxOriginalOverlay = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.HauteurOriginale = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -35,7 +35,7 @@ Partial Class ResizeOverlays
         Me.FutureOverlay = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ActualOverlay = New System.Windows.Forms.PictureBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxNewOverlay = New System.Windows.Forms.GroupBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
@@ -44,10 +44,10 @@ Partial Class ResizeOverlays
         Me.TotalOverlay = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
+        Me.GroupBoxOriginalOverlay.SuspendLayout()
         CType(Me.FutureOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ActualOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBoxNewOverlay.SuspendLayout()
         Me.SuspendLayout()
         '
         'buttonImport
@@ -115,19 +115,19 @@ Partial Class ResizeOverlays
         Me.ButtonGetBack1.Text = "Retour Aux Overlays"
         Me.ButtonGetBack1.UseVisualStyleBackColor = False
         '
-        'GroupBox1
+        'GroupBoxOriginalOverlay
         '
-        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.HauteurOriginale)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.LargeurOriginale)
-        Me.GroupBox1.Location = New System.Drawing.Point(624, 271)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(362, 71)
-        Me.GroupBox1.TabIndex = 46
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Parametre Overlay :"
+        Me.GroupBoxOriginalOverlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label4)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.HauteurOriginale)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label3)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.LargeurOriginale)
+        Me.GroupBoxOriginalOverlay.Location = New System.Drawing.Point(624, 271)
+        Me.GroupBoxOriginalOverlay.Name = "GroupBoxOriginalOverlay"
+        Me.GroupBoxOriginalOverlay.Size = New System.Drawing.Size(362, 71)
+        Me.GroupBoxOriginalOverlay.TabIndex = 46
+        Me.GroupBoxOriginalOverlay.TabStop = False
+        Me.GroupBoxOriginalOverlay.Text = "Parametre Overlay :"
         '
         'Label4
         '
@@ -192,20 +192,20 @@ Partial Class ResizeOverlays
         Me.ActualOverlay.TabIndex = 50
         Me.ActualOverlay.TabStop = False
         '
-        'GroupBox2
+        'GroupBoxNewOverlay
         '
-        Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.TextBox3)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.TextBox4)
-        Me.GroupBox2.Location = New System.Drawing.Point(450, 359)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(168, 207)
-        Me.GroupBox2.TabIndex = 47
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Parametre Overlay :"
+        Me.GroupBoxNewOverlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.GroupBoxNewOverlay.Controls.Add(Me.Label7)
+        Me.GroupBoxNewOverlay.Controls.Add(Me.Label5)
+        Me.GroupBoxNewOverlay.Controls.Add(Me.TextBox3)
+        Me.GroupBoxNewOverlay.Controls.Add(Me.Label6)
+        Me.GroupBoxNewOverlay.Controls.Add(Me.TextBox4)
+        Me.GroupBoxNewOverlay.Location = New System.Drawing.Point(450, 359)
+        Me.GroupBoxNewOverlay.Name = "GroupBoxNewOverlay"
+        Me.GroupBoxNewOverlay.Size = New System.Drawing.Size(168, 207)
+        Me.GroupBoxNewOverlay.TabIndex = 47
+        Me.GroupBoxNewOverlay.TabStop = False
+        Me.GroupBoxNewOverlay.Text = "Parametre Overlay :"
         '
         'Label7
         '
@@ -275,11 +275,11 @@ Partial Class ResizeOverlays
         Me.ClientSize = New System.Drawing.Size(998, 576)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.TotalOverlay)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBoxNewOverlay)
         Me.Controls.Add(Me.ActualOverlay)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.FutureOverlay)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBoxOriginalOverlay)
         Me.Controls.Add(Me.ButtonGetBack1)
         Me.Controls.Add(Me.buttonImport)
         Me.Controls.Add(Me.GameLists)
@@ -288,12 +288,12 @@ Partial Class ResizeOverlays
         Me.Name = "ResizeOverlays"
         Me.Text = "ResizeOverlays"
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GroupBoxOriginalOverlay.ResumeLayout(False)
+        Me.GroupBoxOriginalOverlay.PerformLayout()
         CType(Me.FutureOverlay, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ActualOverlay, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupBoxNewOverlay.ResumeLayout(False)
+        Me.GroupBoxNewOverlay.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -304,7 +304,7 @@ Partial Class ResizeOverlays
     Friend WithEvents DataGridOverlays As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents ButtonGetBack1 As Button
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GroupBoxOriginalOverlay As GroupBox
     Friend WithEvents Label4 As Label
     Friend WithEvents HauteurOriginale As TextBox
     Friend WithEvents Label3 As Label
@@ -312,7 +312,7 @@ Partial Class ResizeOverlays
     Friend WithEvents FutureOverlay As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents ActualOverlay As PictureBox
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupBoxNewOverlay As GroupBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents TextBox3 As TextBox

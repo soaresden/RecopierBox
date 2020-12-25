@@ -518,12 +518,14 @@ lignesuivante:
 
     Private Sub DataGridRoms_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridRoms.SelectionChanged
         Dim actualrow As Integer = DataGridRoms.CurrentRow.Index
+        If actualrow >= DataGridRoms.RowCount - 1 Then Exit Sub
         Dim nomdufichier As String = DataGridRoms.Rows(actualrow).Cells(2).Value
         NewName.Text = Path.GetFileName(nomdufichier) & ".cfg"
     End Sub
 
     Private Sub DataGridOverlay_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridOverlay.SelectionChanged
         Dim actualrow As Integer = DataGridOverlay.CurrentRow.Index
+        If actualrow >= DataGridOverlay.RowCount - 1 Then Exit Sub
         Dim nomdufichier As String = DataGridOverlay.Rows(actualrow).Cells(2).Value
         ActualName.Text = Path.GetFileName(nomdufichier)
     End Sub

@@ -25,6 +25,12 @@ Public Class ResizeOverlays
             Exit Sub
         End If
 
+        'Hide les groupbox
+        GroupBoxOriginalOverlay.Hide()
+        ActualOverlay.Hide()
+        GroupBoxNewOverlay.Hide()
+        FutureOverlay.Hide()
+
         'On clear par Securité
         DataGridOverlays.Columns.Clear()
         On Error Resume Next
@@ -183,6 +189,12 @@ nextconsole:
         'On remplit les Coches Overlays
         Call CompletiondesoverlaysRoms()
 
+        'Show les groupbox et l'image
+        GroupBoxOriginalOverlay.Show()
+        ActualOverlay.Show()
+        GroupBoxNewOverlay.Show()
+        FutureOverlay.Show()
+
     End Sub
     Function Recherchenomdelarom(console As String, pathdelarom As String)
         Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
@@ -334,9 +346,16 @@ As String) As String
     End Function
 
     Private Sub DataGridOverlays_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridOverlays.SelectionChanged
-        Dim totalline As Integer = DataGridOverlays.RowCount - 1
-        'Chargement de l'image
         Dim row As DataGridViewRow = DataGridOverlays.CurrentRow
+        Dim totalline As Integer = DataGridOverlays.RowCount - 1
+
+        If DataGridOverlays.SelectedRows.Count = 0 Then
+            Exit Sub
+        ElseIf DataGridOverlays.CurrentRow.Index >= totalline Then
+            Exit Sub
+        End If
+        'Chargement de l'image
+
         Dim console As String = row.Cells(DataGridOverlays.Columns("Console").Index).Value
         Dim adressecfg As String = row.Cells(DataGridOverlays.Columns("CheminOverlay").Index).Value
         Dim png As String = LectureDesCfgs(console, adressecfg)

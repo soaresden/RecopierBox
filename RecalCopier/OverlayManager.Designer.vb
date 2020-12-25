@@ -125,7 +125,6 @@ Partial Class OverlayManager
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.GroupBox1.Controls.Add(Me.ButtonResizeOverlays)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.RomTotalOverlay)
@@ -133,7 +132,7 @@ Partial Class OverlayManager
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupBox1.Location = New System.Drawing.Point(134, 460)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(228, 119)
+        Me.GroupBox1.Size = New System.Drawing.Size(228, 73)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Outils :"
@@ -484,9 +483,9 @@ Partial Class OverlayManager
         Me.ButtonResizeOverlays.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonResizeOverlays.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonResizeOverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonResizeOverlays.Location = New System.Drawing.Point(6, 81)
+        Me.ButtonResizeOverlays.Location = New System.Drawing.Point(134, 550)
         Me.ButtonResizeOverlays.Name = "ButtonResizeOverlays"
-        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(210, 33)
+        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(228, 33)
         Me.ButtonResizeOverlays.TabIndex = 64
         Me.ButtonResizeOverlays.Text = "Redimensionner des Overlays"
         Me.ButtonResizeOverlays.UseVisualStyleBackColor = False
@@ -497,6 +496,7 @@ Partial Class OverlayManager
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
         Me.ClientSize = New System.Drawing.Size(984, 591)
+        Me.Controls.Add(Me.ButtonResizeOverlays)
         Me.Controls.Add(Me.templisttosupp)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.ButtonSuppSave)
