@@ -1540,7 +1540,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                     If jeuencours = pathjeu Then ' on cherche la ligne du jeu
 
                         Dim estcequeimage As String
-                        estcequeimage = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CocheOverlay").Index).Value
+                        estcequeimage = FinalGrid.Rows(a).Cells(FinalGrid.Columns("CocheImage").Index).Value
                         If estcequeimage = True Then 'on verifie si le jeu a une image
 
                             Dim console As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Console").Index).Value

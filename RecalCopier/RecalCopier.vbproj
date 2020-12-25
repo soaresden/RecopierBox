@@ -132,6 +132,12 @@
     <Compile Include="Quizz.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ResizeOverlays.Designer.vb">
+      <DependentUpon>ResizeOverlays.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ResizeOverlays.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SaveManager.Designer.vb">
       <DependentUpon>SaveManager.vb</DependentUpon>
     </Compile>
@@ -157,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quizz.resx">
       <DependentUpon>Quizz.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResizeOverlays.resx">
+      <DependentUpon>ResizeOverlays.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SaveManager.resx">
       <DependentUpon>SaveManager.vb</DependentUpon>

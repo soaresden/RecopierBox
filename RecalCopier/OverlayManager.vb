@@ -6,6 +6,13 @@ Public Class OverlayManager
         GroupBox2.Hide()
         TextBox1.Hide()
         TextBox2.Hide()
+        ButtonSuppSave.Hide()
+
+        Label7.Hide()
+        ListToSupp.Hide()
+        Label8.Hide()
+        ListdesFichiersEnTrop.Hide()
+
         Call ImporterlesGamelists()
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -337,6 +344,12 @@ nextconsole:
         'on affiche les outils
         TextBox2.Show()
         GroupBox2.Show()
+        ButtonSuppSave.Show()
+        Label7.Show()
+        ListToSupp.Show()
+        Label8.Show()
+        ListdesFichiersEnTrop.Show()
+
     End Sub
     Function Recherchenomdelarom(console As String, pathdelarom As String)
         Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
@@ -526,13 +539,11 @@ lignesuivante:
     Private Sub ListToSupp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListToSupp.SelectedIndexChanged
 
         'on va changer le actual name
-        If ListToSupp.SelectedItems.Count = 1 Then
-            ActualName.Text = Path.GetFileName(ListToSupp.SelectedItem)
-        ElseIf ListToSupp.SelectedItems.Count = 0 Then
+        If ListToSupp.SelectedItems.Count = 0 Or ListToSupp.SelectedItem.ToString = "0 overlays en trop detecté dans votre dossier :)" Or ListToSupp.SelectedItem.ToString = Nothing Then
             Exit Sub
+        ElseIf ListToSupp.SelectedItems.Count = 1 Then
+            ActualName.Text = Path.GetFileName(ListToSupp.SelectedItem)
         End If
-
-
 
         Dim fichier1 As String = ListToSupp.SelectedItem
         Dim fichier2 As String = Nothing
@@ -545,7 +556,7 @@ lignesuivante:
         'Generate the 3 files
         Dim console As String = fichier1
 
-        If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+        If InStr(My.Settings.DossierOverlay, "Thenoverlays") > 0 Then
             ' console = fichier1.Substring(InStr(fichier1, "\overlays\") + 9)
             '  Dim suite As String = InStr(console, "\")
             ' Dim donc As String = console.Substring(0, suite - 1)
@@ -709,7 +720,8 @@ skip:
 
     End Sub
 
-    Private Sub RichTextBox1_Click(sender As Object, e As EventArgs) Handles RichTextBox1.Click
-
+    Private Sub ButtonResizeOverlays_Click(sender As Object, e As EventArgs) Handles ButtonResizeOverlays.Click
+        ResizeOverlays.Show()
+        Me.Close()
     End Sub
 End Class
