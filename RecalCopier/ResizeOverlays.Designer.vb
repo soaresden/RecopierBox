@@ -92,11 +92,11 @@ Partial Class ResizeOverlays
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label1.Location = New System.Drawing.Point(217, 42)
+        Me.Label1.Location = New System.Drawing.Point(127, 42)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(186, 13)
+        Me.Label1.Size = New System.Drawing.Size(192, 13)
         Me.Label1.TabIndex = 41
-        Me.Label1.Text = "Liste de Toutes les Roms Gamelistées"
+        Me.Label1.Text = "Liste de Toutes les Roms Gamelistées :"
         '
         'ButtonGetBack1
         '
@@ -254,8 +254,10 @@ Partial Class ResizeOverlays
         '
         Me.TotalOverlay.Location = New System.Drawing.Point(546, 35)
         Me.TotalOverlay.Name = "TotalOverlay"
+        Me.TotalOverlay.ReadOnly = True
         Me.TotalOverlay.Size = New System.Drawing.Size(72, 20)
         Me.TotalOverlay.TabIndex = 51
+        Me.TotalOverlay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label8
         '
