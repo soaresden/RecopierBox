@@ -364,7 +364,7 @@ As String) As String
 
         'Recuperer la taille du fichier
         LargeurOriginale.Text = Image.FromFile(png).Size.Width
-        HauteurOriginale.Text = Image.FromFile(png).Size.Width
+        HauteurOriginale.Text = Image.FromFile(png).Size.Height
 
     End Sub
 End Class
