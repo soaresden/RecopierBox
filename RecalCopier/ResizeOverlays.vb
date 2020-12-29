@@ -18,7 +18,7 @@ Public Class ResizeOverlays
         Next
     End Sub
 
-    Private Sub buttonImport_Click(sender As Object, e As EventArgs) Handles buttonImport.Click
+    Private Sub ButtonImport_Click(sender As Object, e As EventArgs) Handles buttonImport.Click
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If GameLists.SelectedItems.Count = 0 Then
             MsgBox("Merci de Selectionner des Plateformes")
@@ -28,8 +28,6 @@ Public Class ResizeOverlays
         'Hide les groupbox
         GroupBoxOriginalOverlay.Hide()
         ActualOverlay.Hide()
-        GroupBoxNewOverlay.Hide()
-        FutureOverlay.Hide()
 
         'On clear par Securité
         DataGridOverlays.Columns.Clear()
@@ -136,10 +134,10 @@ Public Class ResizeOverlays
                 Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
 
                 'On recupere les valeurs dans les overlay custom
-                Dim cvx As Integer = getcustomcfg(cheminducfg, nomconsole, "custom_viewport_x")
-                Dim cvy As Integer = getcustomcfg(cheminducfg, nomconsole, "custom_viewport_y")
-                Dim cvw As Integer = getcustomcfg(cheminducfg, nomconsole, "custom_viewport_width")
-                Dim cvh As Integer = getcustomcfg(cheminducfg, nomconsole, "custom_viewport_height")
+                Dim cvx As Integer = Getcustomcfg(cheminducfg, "custom_viewport_x")
+                Dim cvy As Integer = Getcustomcfg(cheminducfg, "custom_viewport_y")
+                Dim cvw As Integer = Getcustomcfg(cheminducfg, "custom_viewport_width")
+                Dim cvh As Integer = Getcustomcfg(cheminducfg, "custom_viewport_height")
 
                 'on ajoute au tableau
                 table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg, cvx, cvy, cvw, cvh)
@@ -192,8 +190,6 @@ nextconsole:
         'Show les groupbox et l'image
         GroupBoxOriginalOverlay.Show()
         ActualOverlay.Show()
-        GroupBoxNewOverlay.Show()
-        FutureOverlay.Show()
 
     End Sub
     Function Recherchenomdelarom(console As String, pathdelarom As String)
@@ -247,14 +243,13 @@ lignesuivante:
         Next
     End Sub
 
-    Function getcustomcfg(pathducfg As String, console As String, parametresouhaite As String)
+    Function Getcustomcfg(pathducfg As String, parametresouhaite As String)
         'on va lire le cfg pour trouver le cfg overlay
         File.ReadAllLines(pathducfg)
         Dim readText() As String = File.ReadAllLines(pathducfg)
         Dim s As String
 
         For Each s In readText
-            Dim detectinputoverlay As String
 
             If InStr(s, parametresouhaite) > 0 Then
                 Dim valeuregal As Integer = InStr(s, "=")
@@ -339,12 +334,10 @@ lignesuivante:
         'on ajoute a la listbox
         Return fichier3png
     End Function
-
     Public Function FileNameWithoutExtension(ByVal FullPath _
 As String) As String
         Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
     End Function
-
     Private Sub DataGridOverlays_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridOverlays.SelectionChanged
         Dim row As DataGridViewRow = DataGridOverlays.CurrentRow
         Dim totalline As Integer = DataGridOverlays.RowCount - 1
@@ -359,12 +352,145 @@ As String) As String
         Dim console As String = row.Cells(DataGridOverlays.Columns("Console").Index).Value
         Dim adressecfg As String = row.Cells(DataGridOverlays.Columns("CheminOverlay").Index).Value
         Dim png As String = LectureDesCfgs(console, adressecfg)
+        On Error Resume Next
 
         ActualOverlay.Image = Image.FromFile(png)
-
         'Recuperer la taille du fichier
         LargeurOriginale.Text = Image.FromFile(png).Size.Width
         HauteurOriginale.Text = Image.FromFile(png).Size.Height
 
+        On Error GoTo 0
     End Sub
+    Private Sub ChkOriginalReplace_CheckedChanged(sender As Object, e As EventArgs) Handles chkOriginalReplace.CheckedChanged
+        If chkOriginalReplace.Checked = True Then
+            chkOriginalReplace.Checked = True
+            chkcopysomewhere.Checked = False
+        Else
+            chkOriginalReplace.Checked = False
+            chkcopysomewhere.Checked = True
+        End If
+    End Sub
+    Private Sub Chkcopysomewhere_CheckedChanged(sender As Object, e As EventArgs) Handles chkcopysomewhere.CheckedChanged
+        If chkcopysomewhere.Checked = True Then
+            chkOriginalReplace.Checked = False
+            chkcopysomewhere.Checked = True
+        Else
+            chkOriginalReplace.Checked = True
+            chkcopysomewhere.Checked = False
+        End If
+    End Sub
+    Private Sub ButtonGoResize_Click(sender As Object, e As EventArgs) Handles ButtonGoResize.Click
+        If MsgBox("Etes vous sur de vouloir redimensionner l'intégralité du tableau ?", vbYesNo) = vbNo Then Exit Sub
+        Dim typedecopie As String
+
+        If chkOriginalReplace.Checked = True Then
+            typedecopie = "Replacement"
+        Else
+            typedecopie = "Nouveau"
+        End If
+
+        'On va boucler pour le tableau entier
+        For i = 0 To DataGridOverlays.Rows.Count - 2
+            'Lecture des values originales
+            Dim console As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("Console").Index).Value
+            Dim adressecfg As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminOverlay").Index).Value
+            Dim cvx As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_x").Index).Value
+            Dim cvy As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_y").Index).Value
+            Dim cvw As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_width").Index).Value
+            Dim cvh As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_height").Index).Value
+
+
+            'Si on est en mode Nouveau, il faut copier le fichier au prealable
+            If typedecopie = "Nouveau" Then
+                Dim nouveauchemincfg As String = My.Settings.DossierOverlay & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text
+                If (Not System.IO.Directory.Exists(nouveauchemincfg)) Then
+                    System.IO.Directory.CreateDirectory(nouveauchemincfg)
+                End If
+                'et on copie le fichier cfg vers le nouveau
+                If (Not System.IO.Directory.Exists(nouveauchemincfg & "\" & console)) Then
+                    System.IO.Directory.CreateDirectory(nouveauchemincfg & "\" & console)
+                End If
+
+                System.IO.File.Copy(adressecfg, nouveauchemincfg & "\" & console & "\" & Path.GetFileName(adressecfg), True)
+
+                adressecfg = nouveauchemincfg & "\" & console & "\" & Path.GetFileName(adressecfg)
+
+            End If
+
+            'On lit le fichier cfg
+            IO.File.ReadAllText(adressecfg)
+            Dim detectfullscreenx As Integer = InStr(IO.File.ReadAllText(adressecfg), "video_fullscreen_x")
+            Dim detectfullscreeny As Integer = InStr(IO.File.ReadAllText(adressecfg), "video_fullscreen_y")
+
+            'detect video fullscreen
+            If detectfullscreenx = 0 Then 'Si la ligne fullscreen n'existe pas on va la creer
+                Using file As StreamWriter = New StreamWriter(adressecfg, True)
+                    file.Write(vbNewLine & "video_fullscreen_x = " & " " & Chr(34) & LargeurOriginale.Text & Chr(34))
+                    file.Write(vbNewLine & "video_fullscreen_y = " & " " & Chr(34) & HauteurOriginale.Text & Chr(34))
+                End Using
+            Else
+                'On fait du ligne a ligne pour trouver la bonnne ligne et on remplace
+
+                Dim lines() As String = IO.File.ReadAllLines(adressecfg)
+                For j As Integer = 0 To lines.Length - 1
+                    If lines(j).Contains("video_fullscreen_x") Then
+                        Dim ligneoriginaleX = Integer.Parse(Regex.Replace(j.ToString, "[^\d]", ""))
+                        Dim nouvelleligneX = "video_fullscreen_x =" & Chr(34) & Replace(j, ligneoriginaleX, NouveauX.Text) & Chr(34)
+                        lines(j) = nouvelleligneX
+                    End If
+                    If lines(j).Contains("video_fullscreen_y") Then
+                        Dim ligneoriginaleY = Integer.Parse(Regex.Replace(j.ToString, "[^\d]", ""))
+                        Dim nouvelleligneY = "video_fullscreen_y =" & Chr(34) & Replace(j, ligneoriginaleY, NouveauY.Text) & Chr(34)
+                        lines(j) = nouvelleligneY
+                    End If
+                Next
+
+                IO.File.WriteAllLines(adressecfg, lines) 'assuming you want to write the file
+
+            End If
+
+            'On va maintenant remplacer les valeurs par les nouvelles calculées
+            Dim ratiodux As Double = LargeurOriginale.Text / NouveauX.Text
+            Dim ratioduy As Double = HauteurOriginale.Text / NouveauY.Text
+
+            Dim newvalx As Integer = Math.Round(cvx / ratiodux, 0)
+            Dim newvaly As Integer = Math.Round(cvy / ratioduy, 0)
+            Dim newvalw As Integer = Math.Round(cvw / ratiodux, 0)
+            Dim newvalh As Integer = Math.Round(cvh / ratioduy, 0)
+
+            Dim lines2() As String = IO.File.ReadAllLines(adressecfg)
+            For j As Integer = 0 To lines2.Length - 1
+                If lines2(j).Contains("custom_viewport_x") Then
+                    Dim ligneoriginaleX = Integer.Parse(Regex.Replace(lines2(j).ToString, "[^\d]", ""))
+                    Dim nouvelleligneX = "custom_viewport_x = " & Chr(34) & newvalx & Chr(34)
+                    lines2(j) = nouvelleligneX
+                End If
+                If lines2(j).Contains("custom_viewport_y") Then
+                    Dim ligneoriginaleY = Integer.Parse(Regex.Replace(lines2(j).ToString, "[^\d]", ""))
+                    Dim nouvelleligneY = "custom_viewport_y = " & Chr(34) & newvaly & Chr(34)
+                    lines2(j) = nouvelleligneY
+                End If
+                If lines2(j).Contains("custom_viewport_width") Then
+                    Dim ligneoriginaleW = Integer.Parse(Regex.Replace(lines2(j).ToString, "[^\d]", ""))
+                    Dim nouvelleligneW = "custom_viewport_width = " & Chr(34) & newvalw & Chr(34)
+                    lines2(j) = nouvelleligneW
+                End If
+                If lines2(j).Contains("custom_viewport_height") Then
+                    Dim ligneoriginaleH = Integer.Parse(Regex.Replace(lines2(j).ToString, "[^\d]", ""))
+                    Dim nouvelleligneH = "custom_viewport_height = " & Chr(34) & newvalh & Chr(34)
+                    lines2(j) = nouvelleligneH
+                End If
+            Next
+
+            IO.File.WriteAllLines(adressecfg, lines2)
+            'Fichier suivant
+        Next i
+
+        MsgBox("Terminé")
+        If typedecopie = "Nouveau" Then
+            MsgBox("Votre Dossier s'apelle : " & Chr(13) & Chr(13) & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text)
+        End If
+        Process.Start(Path.GetDirectoryName(My.Settings.DossierOverlay))
+    End Sub
+
 End Class

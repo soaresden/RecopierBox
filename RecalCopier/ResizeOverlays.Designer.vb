@@ -28,26 +28,24 @@ Partial Class ResizeOverlays
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
         Me.GroupBoxOriginalOverlay = New System.Windows.Forms.GroupBox()
+        Me.ButtonGoResize = New System.Windows.Forms.Button()
+        Me.chkcopysomewhere = New System.Windows.Forms.CheckBox()
+        Me.chkOriginalReplace = New System.Windows.Forms.CheckBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.HauteurOriginale = New System.Windows.Forms.TextBox()
+        Me.NouveauY = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.LargeurOriginale = New System.Windows.Forms.TextBox()
-        Me.FutureOverlay = New System.Windows.Forms.PictureBox()
+        Me.NouveauX = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ActualOverlay = New System.Windows.Forms.PictureBox()
-        Me.GroupBoxNewOverlay = New System.Windows.Forms.GroupBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.TotalOverlay = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBoxOriginalOverlay.SuspendLayout()
-        CType(Me.FutureOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ActualOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBoxNewOverlay.SuspendLayout()
         Me.SuspendLayout()
         '
         'buttonImport
@@ -85,7 +83,7 @@ Partial Class ResizeOverlays
         Me.DataGridOverlays.Location = New System.Drawing.Point(127, 58)
         Me.DataGridOverlays.Name = "DataGridOverlays"
         Me.DataGridOverlays.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridOverlays.Size = New System.Drawing.Size(491, 284)
+        Me.DataGridOverlays.Size = New System.Drawing.Size(491, 497)
         Me.DataGridOverlays.TabIndex = 42
         '
         'Label1
@@ -118,59 +116,134 @@ Partial Class ResizeOverlays
         'GroupBoxOriginalOverlay
         '
         Me.GroupBoxOriginalOverlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.ButtonGoResize)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.chkcopysomewhere)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.chkOriginalReplace)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label7)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label4)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label5)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.HauteurOriginale)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.NouveauY)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label3)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.LargeurOriginale)
-        Me.GroupBoxOriginalOverlay.Location = New System.Drawing.Point(624, 271)
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.NouveauX)
+        Me.GroupBoxOriginalOverlay.Location = New System.Drawing.Point(624, 351)
         Me.GroupBoxOriginalOverlay.Name = "GroupBoxOriginalOverlay"
-        Me.GroupBoxOriginalOverlay.Size = New System.Drawing.Size(362, 71)
+        Me.GroupBoxOriginalOverlay.Size = New System.Drawing.Size(362, 204)
         Me.GroupBoxOriginalOverlay.TabIndex = 46
         Me.GroupBoxOriginalOverlay.TabStop = False
         Me.GroupBoxOriginalOverlay.Text = "Parametre Overlay :"
         '
+        'ButtonGoResize
+        '
+        Me.ButtonGoResize.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonGoResize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonGoResize.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonGoResize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonGoResize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonGoResize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonGoResize.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonGoResize.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonGoResize.Location = New System.Drawing.Point(122, 175)
+        Me.ButtonGoResize.Name = "ButtonGoResize"
+        Me.ButtonGoResize.Size = New System.Drawing.Size(116, 23)
+        Me.ButtonGoResize.TabIndex = 53
+        Me.ButtonGoResize.Text = "Redimensionner"
+        Me.ButtonGoResize.UseVisualStyleBackColor = False
+        '
+        'chkcopysomewhere
+        '
+        Me.chkcopysomewhere.AutoSize = True
+        Me.chkcopysomewhere.Checked = True
+        Me.chkcopysomewhere.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkcopysomewhere.Location = New System.Drawing.Point(6, 132)
+        Me.chkcopysomewhere.Name = "chkcopysomewhere"
+        Me.chkcopysomewhere.Size = New System.Drawing.Size(310, 17)
+        Me.chkcopysomewhere.TabIndex = 6
+        Me.chkcopysomewhere.Text = "Copier les fichiers redimensionnés vers un autre Repertoire ?"
+        Me.chkcopysomewhere.UseVisualStyleBackColor = True
+        '
+        'chkOriginalReplace
+        '
+        Me.chkOriginalReplace.AutoSize = True
+        Me.chkOriginalReplace.Location = New System.Drawing.Point(6, 109)
+        Me.chkOriginalReplace.Name = "chkOriginalReplace"
+        Me.chkOriginalReplace.Size = New System.Drawing.Size(183, 17)
+        Me.chkOriginalReplace.TabIndex = 5
+        Me.chkOriginalReplace.Text = "Remplacer les fichiers originaux ?"
+        Me.chkOriginalReplace.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(199, 16)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(145, 13)
+        Me.Label7.TabIndex = 4
+        Me.Label7.Text = "Resolution Finale Souhaitée :"
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(54, 41)
+        Me.Label4.Location = New System.Drawing.Point(71, 41)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(12, 13)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "x"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(267, 40)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(12, 13)
+        Me.Label5.TabIndex = 3
+        Me.Label5.Text = "x"
+        '
         'HauteurOriginale
         '
-        Me.HauteurOriginale.Location = New System.Drawing.Point(67, 34)
+        Me.HauteurOriginale.Location = New System.Drawing.Point(99, 34)
         Me.HauteurOriginale.Name = "HauteurOriginale"
         Me.HauteurOriginale.ReadOnly = True
         Me.HauteurOriginale.Size = New System.Drawing.Size(47, 20)
         Me.HauteurOriginale.TabIndex = 2
         '
+        'NouveauY
+        '
+        Me.NouveauY.Location = New System.Drawing.Point(297, 33)
+        Me.NouveauY.Name = "NouveauY"
+        Me.NouveauY.ReadOnly = True
+        Me.NouveauY.Size = New System.Drawing.Size(47, 20)
+        Me.NouveauY.TabIndex = 2
+        Me.NouveauY.Text = "600"
+        Me.NouveauY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(25, 18)
+        Me.Label3.Location = New System.Drawing.Point(6, 18)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(71, 13)
+        Me.Label3.Size = New System.Drawing.Size(140, 13)
         Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Taille Overlay"
+        Me.Label3.Text = "Taille Originale des Overlays"
         '
         'LargeurOriginale
         '
-        Me.LargeurOriginale.Location = New System.Drawing.Point(6, 34)
+        Me.LargeurOriginale.Location = New System.Drawing.Point(9, 33)
         Me.LargeurOriginale.Name = "LargeurOriginale"
         Me.LargeurOriginale.ReadOnly = True
         Me.LargeurOriginale.Size = New System.Drawing.Size(47, 20)
         Me.LargeurOriginale.TabIndex = 0
         '
-        'FutureOverlay
+        'NouveauX
         '
-        Me.FutureOverlay.Location = New System.Drawing.Point(624, 359)
-        Me.FutureOverlay.Name = "FutureOverlay"
-        Me.FutureOverlay.Size = New System.Drawing.Size(362, 207)
-        Me.FutureOverlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.FutureOverlay.TabIndex = 47
-        Me.FutureOverlay.TabStop = False
+        Me.NouveauX.Location = New System.Drawing.Point(202, 33)
+        Me.NouveauX.Name = "NouveauX"
+        Me.NouveauX.ReadOnly = True
+        Me.NouveauX.Size = New System.Drawing.Size(47, 20)
+        Me.NouveauX.TabIndex = 0
+        Me.NouveauX.Text = "1024"
+        Me.NouveauX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label2
         '
@@ -178,77 +251,19 @@ Partial Class ResizeOverlays
         Me.Label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label2.Location = New System.Drawing.Point(770, 42)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(76, 13)
+        Me.Label2.Size = New System.Drawing.Size(82, 13)
         Me.Label2.TabIndex = 49
-        Me.Label2.Text = "Overlay Actuel"
+        Me.Label2.Text = "Overlay Actuel :"
         '
         'ActualOverlay
         '
         Me.ActualOverlay.BackColor = System.Drawing.Color.Black
         Me.ActualOverlay.Location = New System.Drawing.Point(624, 58)
         Me.ActualOverlay.Name = "ActualOverlay"
-        Me.ActualOverlay.Size = New System.Drawing.Size(362, 207)
+        Me.ActualOverlay.Size = New System.Drawing.Size(362, 284)
         Me.ActualOverlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.ActualOverlay.TabIndex = 50
         Me.ActualOverlay.TabStop = False
-        '
-        'GroupBoxNewOverlay
-        '
-        Me.GroupBoxNewOverlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.GroupBoxNewOverlay.Controls.Add(Me.Label7)
-        Me.GroupBoxNewOverlay.Controls.Add(Me.Label5)
-        Me.GroupBoxNewOverlay.Controls.Add(Me.TextBox3)
-        Me.GroupBoxNewOverlay.Controls.Add(Me.Label6)
-        Me.GroupBoxNewOverlay.Controls.Add(Me.TextBox4)
-        Me.GroupBoxNewOverlay.Location = New System.Drawing.Point(450, 359)
-        Me.GroupBoxNewOverlay.Name = "GroupBoxNewOverlay"
-        Me.GroupBoxNewOverlay.Size = New System.Drawing.Size(168, 207)
-        Me.GroupBoxNewOverlay.TabIndex = 47
-        Me.GroupBoxNewOverlay.TabStop = False
-        Me.GroupBoxNewOverlay.Text = "Parametre Overlay :"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(23, 28)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(117, 13)
-        Me.Label7.TabIndex = 4
-        Me.Label7.Text = "Nouvelles Dimensions :"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(74, 76)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(12, 13)
-        Me.Label5.TabIndex = 3
-        Me.Label5.Text = "x"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(87, 69)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(47, 20)
-        Me.TextBox3.TabIndex = 2
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(45, 53)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(71, 13)
-        Me.Label6.TabIndex = 1
-        Me.Label6.Text = "Taille Overlay"
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(26, 69)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.ReadOnly = True
-        Me.TextBox4.Size = New System.Drawing.Size(47, 20)
-        Me.TextBox4.TabIndex = 0
         '
         'TotalOverlay
         '
@@ -277,10 +292,8 @@ Partial Class ResizeOverlays
         Me.ClientSize = New System.Drawing.Size(998, 576)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.TotalOverlay)
-        Me.Controls.Add(Me.GroupBoxNewOverlay)
         Me.Controls.Add(Me.ActualOverlay)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.FutureOverlay)
         Me.Controls.Add(Me.GroupBoxOriginalOverlay)
         Me.Controls.Add(Me.ButtonGetBack1)
         Me.Controls.Add(Me.buttonImport)
@@ -292,10 +305,7 @@ Partial Class ResizeOverlays
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBoxOriginalOverlay.ResumeLayout(False)
         Me.GroupBoxOriginalOverlay.PerformLayout()
-        CType(Me.FutureOverlay, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ActualOverlay, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBoxNewOverlay.ResumeLayout(False)
-        Me.GroupBoxNewOverlay.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -311,15 +321,15 @@ Partial Class ResizeOverlays
     Friend WithEvents HauteurOriginale As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents LargeurOriginale As TextBox
-    Friend WithEvents FutureOverlay As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents ActualOverlay As PictureBox
-    Friend WithEvents GroupBoxNewOverlay As GroupBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents NouveauY As TextBox
+    Friend WithEvents NouveauX As TextBox
     Friend WithEvents TotalOverlay As TextBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents ButtonGoResize As Button
+    Friend WithEvents chkcopysomewhere As CheckBox
+    Friend WithEvents chkOriginalReplace As CheckBox
 End Class

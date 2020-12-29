@@ -1770,7 +1770,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         'Demande les Overlay systemes ?
         If checkoverlays.Checked = True Then
-            If MsgBox("Vous avez coché la copie d'Overlays, Que souhaitez vous Copier ?" & Chr(13) & "Oui = Tous les Systemes" & Chr(13) & "Annuler = Uniquement les Consoles de la vue Actuelle" & Chr(13) & "Non = Aucune, Mauvaise saisie :) !", vbYesNoCancel) = vbYes Then
+            If MsgBox("Overlays des Jeux copiés, Que souhaitez vous copier d'autres ?" & Chr(13) & "Oui = Overlays de tous les Systemes" & Chr(13) & "Annuler = Uniquement l'overlay Générique des Consoles choisies" & Chr(13) & "Non = Aucun Overlay générique d'Aucun Système", vbYesNoCancel) = vbYes Then
                 On Error Resume Next
                 For overlaysys = 0 To ListGameLists.Items.Count - 1
                     Dim fulladresse As String = My.Settings.RecalboxFolder & "\roms\" & ListGameLists.Items(overlaysys)
