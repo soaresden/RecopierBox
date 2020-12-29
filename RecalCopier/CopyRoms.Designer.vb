@@ -155,7 +155,7 @@ Partial Class CopyRoms
         '
         'FinalGrid
         '
-        Me.FinalGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.FinalGrid.Cursor = System.Windows.Forms.Cursors.Hand
         Me.FinalGrid.Location = New System.Drawing.Point(226, 28)
         Me.FinalGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.FinalGrid.MultiSelect = False

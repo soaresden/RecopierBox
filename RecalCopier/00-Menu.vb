@@ -177,7 +177,7 @@ Public Class Form1
         PanelSettings.Visible = Not PanelSettings.Visible
     End Sub
 
-    Sub checkupdate()
+    Sub Checkupdate()
         'check online
         Dim versiononline As Double
         Dim versionnow As Double = Replace(Replace(version.Text, "v", ""), ".", ",")
@@ -197,14 +197,14 @@ Public Class Form1
         If versiononline > versionnow Then
             Try
                 MsgBox("Update en cours de Telechargement")
-                doUpdate()
+                DoUpdate()
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
         End If
     End Sub
 
-    Private Sub doUpdate()
+    Private Sub DoUpdate()
         Try
             'Declare application path
             Dim appPath As String = Application.StartupPath
