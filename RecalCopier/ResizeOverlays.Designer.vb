@@ -29,6 +29,7 @@ Partial Class ResizeOverlays
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
         Me.GroupBoxOriginalOverlay = New System.Windows.Forms.GroupBox()
+        Me.ButtonKnowResolution = New System.Windows.Forms.Button()
         Me.ButtonGoResize = New System.Windows.Forms.Button()
         Me.chkcopysomewhere = New System.Windows.Forms.CheckBox()
         Me.chkOriginalReplace = New System.Windows.Forms.CheckBox()
@@ -45,7 +46,6 @@ Partial Class ResizeOverlays
         Me.TotalOverlay = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.PicXrandr = New System.Windows.Forms.PictureBox()
-        Me.ButtonKnowResolution = New System.Windows.Forms.Button()
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBoxOriginalOverlay.SuspendLayout()
         CType(Me.ActualOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,9 +96,9 @@ Partial Class ResizeOverlays
         Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label1.Location = New System.Drawing.Point(127, 42)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(192, 13)
+        Me.Label1.Size = New System.Drawing.Size(176, 13)
         Me.Label1.TabIndex = 41
-        Me.Label1.Text = "Liste de Toutes les Roms Gamelistées :"
+        Me.Label1.Text = "Liste de Tous les Fichiers Overlays :"
         '
         'ButtonGetBack1
         '
@@ -138,6 +138,23 @@ Partial Class ResizeOverlays
         Me.GroupBoxOriginalOverlay.TabIndex = 46
         Me.GroupBoxOriginalOverlay.TabStop = False
         Me.GroupBoxOriginalOverlay.Text = "Parametre Overlay :"
+        '
+        'ButtonKnowResolution
+        '
+        Me.ButtonKnowResolution.BackColor = System.Drawing.Color.Gray
+        Me.ButtonKnowResolution.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonKnowResolution.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonKnowResolution.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonKnowResolution.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ButtonKnowResolution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonKnowResolution.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonKnowResolution.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonKnowResolution.Location = New System.Drawing.Point(202, 59)
+        Me.ButtonKnowResolution.Name = "ButtonKnowResolution"
+        Me.ButtonKnowResolution.Size = New System.Drawing.Size(142, 30)
+        Me.ButtonKnowResolution.TabIndex = 54
+        Me.ButtonKnowResolution.Text = "Connaitre sa Resolution"
+        Me.ButtonKnowResolution.UseVisualStyleBackColor = False
         '
         'ButtonGoResize
         '
@@ -300,23 +317,6 @@ Partial Class ResizeOverlays
         Me.PicXrandr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicXrandr.TabIndex = 53
         Me.PicXrandr.TabStop = False
-        '
-        'ButtonKnowResolution
-        '
-        Me.ButtonKnowResolution.BackColor = System.Drawing.Color.Gray
-        Me.ButtonKnowResolution.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonKnowResolution.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonKnowResolution.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonKnowResolution.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ButtonKnowResolution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonKnowResolution.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonKnowResolution.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonKnowResolution.Location = New System.Drawing.Point(202, 59)
-        Me.ButtonKnowResolution.Name = "ButtonKnowResolution"
-        Me.ButtonKnowResolution.Size = New System.Drawing.Size(142, 30)
-        Me.ButtonKnowResolution.TabIndex = 54
-        Me.ButtonKnowResolution.Text = "Connaitre sa Resolution"
-        Me.ButtonKnowResolution.UseVisualStyleBackColor = False
         '
         'ResizeOverlays
         '

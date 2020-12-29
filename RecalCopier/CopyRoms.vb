@@ -15,11 +15,6 @@ Public Class CopyRoms
         ButtonRazClickk.Hide()
         GroupFiltresAvances.Hide()
         GroupBoxSelectionRoms.Hide()
-        minipic1.Hide()
-        minipic2.Hide()
-        minipic3.Hide()
-        minipic4.Hide()
-        minipic5.Hide()
         ButtonTuto1.Hide()
 
         'test sur la valeur modesimple
@@ -170,15 +165,6 @@ Public Class CopyRoms
         End With
         table.Columns.Add(column)
 
-
-        column = New DataColumn()
-        With column
-            .DataType = Type.GetType("System.String")
-            .ColumnName = "Adulte"
-        End With
-        table.Columns.Add(column)
-
-
         column = New DataColumn()
         With column
             .DataType = Type.GetType("System.String")
@@ -233,6 +219,49 @@ Public Class CopyRoms
         End With
         table.Columns.Add(column)
 
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Boolean")
+            .ColumnName = "CocheImage"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Boolean")
+            .ColumnName = "CocheVideo"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Boolean")
+            .ColumnName = "CocheManuel"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Boolean")
+            .ColumnName = "CocheOverlay"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Boolean")
+            .ColumnName = "CocheSaves"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Double")
+            .ColumnName = "Mo"
+        End With
+        table.Columns.Add(column)
+
+
         'Loop for every gamelists
         For Each i In ListGameLists.SelectedItems
             Dim nomconsole As String = i
@@ -270,7 +299,6 @@ Public Class CopyRoms
                 Dim romimage As String
                 Dim romvideo As String
                 Dim romanual As String
-                Dim romadult As String
                 Dim romnote As String
                 Dim romdev As String
                 Dim rompubl As String
@@ -282,7 +310,6 @@ Public Class CopyRoms
 
                 'Conditionnelles sur tous les champs
                 If romhidden = "True" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
-
 
                 If xEle.Element("desc") Is Nothing Then
                     romdesc = Nothing
@@ -320,12 +347,6 @@ Public Class CopyRoms
                     romgenre = Nothing
                 Else
                     romgenre = xEle.Element("genre")
-                End If
-
-                If xEle.Element("adult") Is Nothing Then
-                    romadult = Nothing
-                Else
-                    romadult = xEle.Element("adult")
                 End If
 
                 If xEle.Element("rating") Is Nothing Then
@@ -370,8 +391,20 @@ Public Class CopyRoms
                     romRegion = xEle.Element("region")
                 End If
 
+                Dim rommo As Double = GetSizeSelectedRom(rompath, romconsole)
+                Dim valeurcoche = Completioncheckboxligne(rompath, romconsole, romimage, romvideo, romanual)
+
+                Dim cocheimage = valeurcoche.item1
+                Dim cochevideo = valeurcoche.item2
+                Dim cochemanual = valeurcoche.item3
+                Dim cocheoverlay = valeurcoche.item4
+                Dim cochesaves = valeurcoche.item5
+
                 'on ajoute le tout dans une table
-                table.Rows.Add(romconsole, romname, romId, rompath, romdesc, romimage, romvideo, romanual, romgenre, romadult, romnote, romdev, rompubl, romnbplayers, romdate, romCompteur, romRegion)
+                table.Rows.Add(romconsole, romname, romId, rompath, romdesc, romimage, romvideo, romanual, romgenre, romnote, romdev, rompubl, romnbplayers, romdate, romCompteur, romRegion, cocheimage, cochevideo, cochemanual, cocheoverlay, cochesaves, rommo)
+
+
+
 romsuivante:
             Next
         Next
@@ -382,7 +415,15 @@ romsuivante:
 
         'Width for columns
         FinalGrid.Columns("Console").Width = 50
-        FinalGrid.Columns("Titre").Width = 260
+        FinalGrid.Columns("Titre").Width = 320
+
+        FinalGrid.Columns("CocheImage").Width = 20
+        FinalGrid.Columns("CocheVideo").Width = 20
+        FinalGrid.Columns("CocheManuel").Width = 20
+        FinalGrid.Columns("CocheOverlay").Width = 20
+        FinalGrid.Columns("CocheSaves").Width = 20
+
+        FinalGrid.Columns("Mo").Width = 60
         'Hiding les colonnes
         FinalGrid.Columns("GameId").Visible = False
         FinalGrid.Columns("CheminRom").Visible = False
@@ -392,7 +433,6 @@ romsuivante:
         FinalGrid.Columns("CheminManuel").Visible = False
         'Width for columns
         FinalGrid.Columns("Genre").Visible = False
-        FinalGrid.Columns("Adulte").Visible = False
         FinalGrid.Columns("Note").Visible = False
         FinalGrid.Columns("Developer").Visible = False
         FinalGrid.Columns("Publisher").Visible = False
@@ -402,51 +442,13 @@ romsuivante:
         FinalGrid.Columns("Region").Visible = False
 
         'add checkable columns at the end
-        Dim colromimage As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(colromimage)
-        colromimage.HeaderText = "CocheImage"
-        colromimage.Name = "CocheImage"
-        colromimage.Width = 25
-
-        Dim colromvideo As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(colromvideo)
-        colromvideo.HeaderText = "CocheVideo"
-        colromvideo.Name = "CocheVideo"
-        colromvideo.Width = 25
-
-        Dim colromanual As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(colromanual)
-        colromanual.HeaderText = "CocheManuel"
-        colromanual.Name = "CocheManuel"
-        colromanual.Width = 25
-
-        Dim colromoverlay As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(colromoverlay)
-        colromoverlay.HeaderText = "CocheOverlay"
-        colromoverlay.Name = "CocheOverlay"
-        colromoverlay.Width = 25
-
-        Dim colromsaves As New DataGridViewCheckBoxColumn()
-        FinalGrid.Columns.Add(colromsaves)
-        colromsaves.HeaderText = "CocheSave"
-        colromsaves.Name = "CocheSave"
-        colromsaves.Width = 25
-
-        'Ajout de la taille de la rom 
-        Dim colromSize As New DataGridViewTextBoxColumn()
-        FinalGrid.Columns.Add(colromSize)
-        colromSize.HeaderText = "Mo"
-        colromSize.Name = "Mo"
-        colromSize.Width = 60
-
         Dim colromselection As New DataGridViewCheckBoxColumn()
         FinalGrid.Columns.Add(colromselection)
         colromselection.HeaderText = "Selection"
         colromselection.Name = "Selection"
-        colromselection.Width = 30
+        colromselection.Width = 45
 
         'Reajusting Interface and Showing Final Interface
-
         ListGameLists.Hide()
         GroupBoxSelectionRoms.Show()
         FinalGrid.Location = New Point(8, 28)
@@ -476,7 +478,6 @@ romsuivante:
         ComboFiltreColonnes.Items.Add("CheminVideo")
         ComboFiltreColonnes.Items.Add("CheminManuel")
         ComboFiltreColonnes.Items.Add("Genre")
-        ComboFiltreColonnes.Items.Add("Adulte")
         ComboFiltreColonnes.Items.Add("Note")
         ComboFiltreColonnes.Items.Add("Developer")
         ComboFiltreColonnes.Items.Add("Publisher")
@@ -489,230 +490,224 @@ romsuivante:
         txt_nbrom.Text = FinalGrid.Rows.Count - 1
         txtShownRoms.Text = txt_nbrom.Text
 
-        'On affiche les petites icones 
-        minipic1.Show()
-        minipic2.Show()
-        minipic3.Show()
-        minipic4.Show()
-        minipic5.Show()
+        'On lance la coloration des checkbox
+        Call colorerlescoches()
 
-        'on va calculer la taille des roms
-        Call Calcultaillerom()
-        'On lance la completion des checkbox
-        Call Completiondescheckbox()
         'On appelle le stockage size
         txt_USBGo.Text = My.Settings.StockageSize
 
         'On affiche le bouton Tuto !
         ButtonTuto1.Show()
     End Sub
-    Sub Calcultaillerom()
-        On Error Resume Next
-        Dim valeursize As String
+    Function GetSizeSelectedRom(cheminrom As String, console As String)
 
-        Dim comptage As Integer = FinalGrid.Rows.Count - 1
-        If comptage = 0 Then Exit Sub
+        Dim sizefichier As Double
+        Dim attr As FileAttributes = File.GetAttributes(cheminrom)
 
-        For oRow = 0 To FinalGrid.Rows.Count - 2
-            valeursize = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Mo").Index).Value
-            Dim valeurrom As String = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Titre").Index).Value
-            Dim chemindelarom = FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("CheminRom").Index).Value
-            If valeursize Is Nothing Then ' si la cellule valeur size est vide on la calcule, sinon rien
+        If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
+            'si c'est un repertoire (daphne, dos ...etc) 
 
-                Dim sizefichier As Double
-                Dim attr As FileAttributes = File.GetAttributes(chemindelarom)
+            Dim folder As New IO.DirectoryInfo(cheminrom & "\")
+            For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
+                sizefichier += file.Length
+            Next file
+            GoTo labelapresfolder
+        Else
+            'si c'est un fichier...
+            Dim extensionrom As String = Path.GetExtension(cheminrom)
 
-                If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
-                    'si c'est un repertoire (daphne, dos ...etc) 
+            'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+            If extensionrom = ".m3u" Then
+                File.ReadAllLines(cheminrom)
 
-                    Dim folder As New IO.DirectoryInfo(chemindelarom & "\")
-                    For Each file As IO.FileInfo In folder.GetFiles("*.*", IO.SearchOption.AllDirectories)
-                        sizefichier += file.Length
-                    Next file
-                    GoTo labelapresfolder
-                Else
-                    'si c'est un fichier...
-                    Dim extensionrom As String = Path.GetExtension(chemindelarom)
-
-                    'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
-                    If extensionrom = ".m3u" Then
-                        File.ReadAllLines(chemindelarom)
-
-                        ' Open the m3u file to read from.
-                        Dim readText() As String = File.ReadAllLines(chemindelarom)
-                        Dim s As String
-                        sizefichier = 0
-                        For Each s In readText
-                            chemindelarom = My.Settings.RecalboxFolder & "\roms\" & FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Console").Index).Value & "\" & Replace(s, "/", "\")
-                            Dim info As New FileInfo(chemindelarom)
-                            sizefichier += info.Length
-                        Next
-                    ElseIf extensionrom = ".cue" Then 'si c'est un cue, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
-                        File.ReadAllLines(chemindelarom)
-
-                        ' Open the cue file to read from.
-                        Dim readText() As String = File.ReadAllLines(chemindelarom)
-                        Dim s As String
-                        sizefichier = 0
-                        For Each s In readText
-                            Dim detectfile = InStr(s, Chr(34))
-                            If detectfile >= 1 Then
-                                'Dim isolerome As String = s.Substring(detectfile)
-                                'Dim isolebinary As String = InStr(isolerome, Chr(34))
-                                'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
-
-                                Dim iso As String = s.Substring(detectfile).Substring(0, InStr(s.Substring(detectfile), Chr(34)) - 1)
-
-                                chemindelarom = My.Settings.RecalboxFolder & "\roms\" & FinalGrid.Rows(oRow).Cells(0).Value & "\" & Replace(iso, "/", "\")
-
-                                Dim info As New FileInfo(chemindelarom)
-                                sizefichier += info.Length
-                            End If
-                        Next
-
-                    Else
-
-                        'sinon c'est un fichier normal 
-                        Dim info As New FileInfo(chemindelarom)
-                        sizefichier = info.Length
-                    End If
-                End If
-labelapresfolder:
-                'Conversion en Mo
-                Dim tailleenmo As Double = sizefichier / 1048576
-                FinalGrid.Rows(oRow).Cells(FinalGrid.Columns("Mo").Index).Value = Math.Round(tailleenmo, 2)
+                ' Open the m3u file to read from.
+                Dim readText() As String = File.ReadAllLines(cheminrom)
+                Dim s As String
                 sizefichier = 0
-            End If
-        Next
-        On Error GoTo 0
-    End Sub
-    Sub Completiondescheckbox()
-        On Error Resume Next
-        For orow = 0 To FinalGrid.RowCount - 2
-            If orow = 0 And FinalGrid.RowCount - 1 = orow Then
-                MsgBox("Pas de Resultats")
-                ButtonRazClickk.PerformClick()
-                Exit Sub
-            End If
+                For Each s In readText
+                    cheminrom = My.Settings.RecalboxFolder & "\roms\" & console & "\" & Replace(s, "/", "\")
+                    Dim info As New FileInfo(cheminrom)
+                    sizefichier += info.Length
+                Next
+            ElseIf extensionrom = ".cue" Then 'si c'est un cue, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+                File.ReadAllLines(cheminrom)
 
-            Dim cheminrom As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminRom").Index).Value
-            Dim consoleencours As String = FinalGrid.Rows(orow).Cells(FinalGrid.Columns("Console").Index).Value
+                ' Open the cue file to read from.
+                Dim readText() As String = File.ReadAllLines(cheminrom)
+                Dim s As String
+                sizefichier = 0
+                For Each s In readText
+                    Dim detectfile = InStr(s, Chr(34))
+                    If detectfile >= 1 Then
+                        'Dim isolerome As String = s.Substring(detectfile)
+                        'Dim isolebinary As String = InStr(isolerome, Chr(34))
+                        'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
 
-            'test sur le chemin des screens, si la cellule est complétée alors on coche
-            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = False
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+                        Dim iso As String = s.Substring(detectfile).Substring(0, InStr(s.Substring(detectfile), Chr(34)) - 1)
+                        cheminrom = My.Settings.RecalboxFolder & "\roms\" & console & "\" & Replace(iso, "/", "\")
+                        Dim info As New FileInfo(cheminrom)
+                        sizefichier += info.Length
+                    End If
+                Next
+
             Else
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Value = True
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheImage").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+
+                'sinon c'est un fichier normal 
+                Dim info As New FileInfo(cheminrom)
+                sizefichier = info.Length
             End If
-            'test sur le chemin des videos
-            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Value = False
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-            Else
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Value = True
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheVideo").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            End If
-            'test sur le chemin des manuels
-            If IsDBNull(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Value = False
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-            Else
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Value = True
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheManuel").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            End If
+        End If
+labelapresfolder:
+        'Conversion en Mo
+        Dim tailleenmo As Double = sizefichier / 1048576
+        Return Math.Round(tailleenmo, 2)
+        sizefichier = 0
+    End Function
+    Function Completioncheckboxligne(cheminrom As String, console As String, cheminimage As String, cheminvideo As String, cheminmanuel As String)
 
-            'test sur le chemin des overlays
+        'test sur le chemin des screens, si la cellule est complétée alors on coche
+        Dim cocheimage As Boolean
+        If cheminimage = Nothing Then
+            cocheimage = False
+        Else
+            cocheimage = True
+        End If
 
-            Dim FileInfo As New FileInfo(cheminrom)
-            Dim nomdelarom As String = FileInfo.Name
-            Dim nomducfg As String = nomdelarom & ".cfg"
-            Dim cheminoverlay As String
+        'test sur le chemin des videos
+        Dim cochevideo As Boolean
+        If cheminvideo = Nothing Then
+            cochevideo = False
+        Else
+            cochevideo = True
+        End If
 
-            If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
-                cheminoverlay = Replace(cheminrom, "\roms\", "\overlays\")
-            Else
-                cheminoverlay = Replace(cheminrom, "\roms\", "\decorations\")
-            End If
+        'test sur le chemin des manuels
+        Dim cochemanuel As Boolean
+        If cheminmanuel = Nothing Then
+            cochemanuel = False
+        Else
+            cochemanuel = True
+        End If
 
+        'test sur le chemin des overlays
+        Dim FileInfo As New FileInfo(cheminrom)
+        Dim nomdelarom As String = FileInfo.Name
+        Dim nomducfg As String = nomdelarom & ".cfg"
+        Dim cheminoverlay As String
 
-            Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
+        If InStr(My.Settings.DossierOverlay, "overlays") > 0 Then
+            cheminoverlay = Replace(cheminrom, "\roms\", "\overlays\")
+        Else
+            cheminoverlay = Replace(cheminrom, "\roms\", "\decorations\")
+        End If
 
-            If System.IO.File.Exists(testcheminoverlay) Then
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Value = True
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            Else
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Value = False
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-            End If
+        Dim testcheminoverlay As String = Replace(cheminoverlay, nomdelarom, nomducfg)
 
-            'test sur le chemin des saves
-            Dim cheminsaves As String = Replace(cheminrom, "\roms\", "\saves\")
-            Dim detectdossierentredeux As String = InStr(cheminrom, consoleencours)
-            Dim enleveledossierentrop As String = cheminrom.Substring(detectdossierentredeux + Len(consoleencours))
-            Dim romsansextension = FileNameWithoutExtension(nomdelarom)
-            Dim dossierentrop = Replace(enleveledossierentrop, Path.GetFileName(cheminrom), "")
+        Dim cocheoverlay As Boolean
+        If System.IO.File.Exists(testcheminoverlay) Then
+            cocheoverlay = True
+        Else
+            cocheoverlay = False
+        End If
 
-            'test consoles qui n'ont pas de saves
-            Dim consolesanssaves(34)
-            consolesanssaves(0) = "3do"
-            consolesanssaves(1) = "64dd"
-            consolesanssaves(2) = "amigacd32"
-            consolesanssaves(3) = "amigacdtv"
-            consolesanssaves(4) = "apple2gs"
-            consolesanssaves(5) = "atari5200"
-            consolesanssaves(6) = "atarist"
-            consolesanssaves(7) = "channelf"
-            consolesanssaves(8) = "dos"
-            consolesanssaves(9) = "easyrpg"
-            consolesanssaves(10) = "fds"
-            consolesanssaves(11) = "intellivision"
-            consolesanssaves(12) = "moonlight"
-            consolesanssaves(13) = "msx"
-            consolesanssaves(14) = "msxturbor"
-            consolesanssaves(15) = "multivision"
-            consolesanssaves(16) = "neogeocd"
-            consolesanssaves(17) = "o2em"
-            consolesanssaves(18) = "oricatmos"
-            consolesanssaves(19) = "palm"
-            consolesanssaves(20) = "pc88"
-            consolesanssaves(21) = "pc98"
-            consolesanssaves(22) = "pcengine"
-            consolesanssaves(23) = "pcfx"
-            consolesanssaves(24) = "phillipscdi"
-            consolesanssaves(25) = "ports"
-            consolesanssaves(26) = "ps2"
-            consolesanssaves(27) = "samcoupe"
-            consolesanssaves(28) = "saturn"
-            consolesanssaves(29) = "spectravideo"
-            consolesanssaves(30) = "sufami"
-            consolesanssaves(31) = "thomson"
-            consolesanssaves(32) = "tic80"
-            consolesanssaves(33) = "x1"
-            consolesanssaves(34) = "x68000"
+        'test sur le chemin des saves
+        Dim cheminsaves As String = Replace(cheminrom, "\roms\", "\saves\")
+        Dim detectdossierentredeux As String = InStr(cheminrom, console)
+        Dim enleveledossierentrop As String = cheminrom.Substring(detectdossierentredeux + Len(console))
+        Dim romsansextension = FileNameWithoutExtension(nomdelarom)
+        Dim dossierentrop = Replace(enleveledossierentrop, Path.GetFileName(cheminrom), "")
 
-            'On test les saves, si c'est pas une console avec un dossier save, on passe au jeu suivant en mettant son fond en gris
-            If consolesanssaves.Contains(FinalGrid.Rows(orow).Cells(FinalGrid.Columns("Console").Index).Value) Then
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = False
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(50, 50, 50)
-                GoTo consolesanssaves
-            End If
+        'test consoles qui n'ont pas de saves
+        Dim consolesanssaves(34)
+        consolesanssaves(0) = "3do"
+        consolesanssaves(1) = "64dd"
+        consolesanssaves(2) = "amigacd32"
+        consolesanssaves(3) = "amigacdtv"
+        consolesanssaves(4) = "apple2gs"
+        consolesanssaves(5) = "atari5200"
+        consolesanssaves(6) = "atarist"
+        consolesanssaves(7) = "channelf"
+        consolesanssaves(8) = "dos"
+        consolesanssaves(9) = "easyrpg"
+        consolesanssaves(10) = "fds"
+        consolesanssaves(11) = "intellivision"
+        consolesanssaves(12) = "moonlight"
+        consolesanssaves(13) = "msx"
+        consolesanssaves(14) = "msxturbor"
+        consolesanssaves(15) = "multivision"
+        consolesanssaves(16) = "neogeocd"
+        consolesanssaves(17) = "o2em"
+        consolesanssaves(18) = "oricatmos"
+        consolesanssaves(19) = "palm"
+        consolesanssaves(20) = "pc88"
+        consolesanssaves(21) = "pc98"
+        consolesanssaves(22) = "pcengine"
+        consolesanssaves(23) = "pcfx"
+        consolesanssaves(24) = "phillipscdi"
+        consolesanssaves(25) = "ports"
+        consolesanssaves(26) = "ps2"
+        consolesanssaves(27) = "samcoupe"
+        consolesanssaves(28) = "saturn"
+        consolesanssaves(29) = "spectravideo"
+        consolesanssaves(30) = "sufami"
+        consolesanssaves(31) = "thomson"
+        consolesanssaves(32) = "tic80"
+        consolesanssaves(33) = "x1"
+        consolesanssaves(34) = "x68000"
 
-            'on verifie si il y'a des sauvegardes avec le nom du jeu en racine
-            Dim chemindelasavee As String = Replace(cheminsaves, nomdelarom, "")
-            Dim endeuxfois As String = Replace(chemindelasavee, dossierentrop, "") & FileNameWithoutExtension(cheminrom)
-            Dim savesCount As Integer = IO.Directory.GetFiles(Path.GetDirectoryName(endeuxfois), FileNameWithoutExtension(cheminrom) & ".*").Count
+        'On test les saves, si c'est pas une console avec un dossier save, on passe au jeu suivant en mettant son fond en gris
+        Dim cochesaves As Boolean
+        If consolesanssaves.Contains(console) Then
+            cochesaves = False
+            GoTo consolesanssaves
+        End If
 
+        'on verifie si il y'a des sauvegardes avec le nom du jeu en racine
+        Dim chemindelasavee As String = Replace(cheminsaves, nomdelarom, "")
+        Dim endeuxfois As String = Replace(chemindelasavee, dossierentrop, "") & FileNameWithoutExtension(cheminrom)
+        Dim savesCount As Integer = IO.Directory.GetFiles(Path.GetDirectoryName(endeuxfois), FileNameWithoutExtension(cheminrom) & ".*").Count
 
-            If savesCount >= 1 Then
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = True
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            Else
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Value = False
-                FinalGrid.Rows(orow).Cells(FinalGrid.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-            End If
+        If savesCount >= 1 Then
+            cochesaves = True
+        Else
+            cochesaves = False
+        End If
 consolesanssaves:
+
+        Return (cocheimage, cochevideo, cochemanuel, cocheoverlay, cochesaves)
+    End Function
+    Sub Colorerlescoches()
+        For i = 0 To FinalGrid.RowCount - 2
+            If FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheImage").Index).Value = True Then
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheImage").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            Else
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheImage").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+            End If
+
+            If FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheVideo").Index).Value = True Then
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheVideo").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            Else
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheVideo").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+            End If
+
+            If FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheManuel").Index).Value = True Then
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheManuel").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            Else
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheManuel").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+            End If
+
+            If FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheOverlay").Index).Value = True Then
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            Else
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+            End If
+
+            If FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheSaves").Index).Value = True Then
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheSaves").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            Else
+                FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheSaves").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+            End If
+
         Next
 
         'On met en ReadOnly les cases coches
@@ -720,9 +715,10 @@ consolesanssaves:
         FinalGrid.Columns("CocheVideo").ReadOnly = True
         FinalGrid.Columns("CocheManuel").ReadOnly = True
         FinalGrid.Columns("CocheOverlay").ReadOnly = True
-        FinalGrid.Columns("CocheSave").ReadOnly = True
-        On Error GoTo 0
+        FinalGrid.Columns("CocheSaves").ReadOnly = True
+
     End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         Form1.Show()
         Me.Close()
@@ -805,7 +801,7 @@ consolesanssaves:
         Dim checkboxvideo As String = row.Cells(FinalGrid.Columns("CocheVideo").Index).Value
         Dim checkboxmanual As String = row.Cells(FinalGrid.Columns("CocheManuel").Index).Value
         Dim checkboxoverlay As String = row.Cells(FinalGrid.Columns("CocheOverlay").Index).Value
-        Dim checkboxsave As String = row.Cells(FinalGrid.Columns("CocheSave").Index).Value
+        Dim checkboxsave As String = row.Cells(FinalGrid.Columns("CocheSaves").Index).Value
 
         Dim imgscreen As New Bitmap(My.Resources.okscreen)
         Dim imgscreenno As New Bitmap(My.Resources.noscreen)
@@ -1223,12 +1219,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                             xmlgenre = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value
                         End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Adulte").Index).Value) Then
-                            xmladult = Nothing
-                        Else
-                            xmladult = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Adulte").Index).Value
-                        End If
-
                         If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value) Then
                             xmlplayers = Nothing
                         Else
@@ -1317,13 +1307,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                             Dim genrEl As Xml.XmlElement = doctoupdate.CreateElement("genre")
                             genrEl.InnerText = xmlgenre
                             game.AppendChild(genrEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmladult <> Nothing Or xmladult = "true" Then
-                            Dim adultEl As Xml.XmlElement = doctoupdate.CreateElement("adult")
-                            adultEl.InnerText = xmladult
-                            game.AppendChild(adultEl)
                             doctoupdate.DocumentElement.AppendChild(game)
                         End If
 
@@ -1446,12 +1429,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                             xmlgenre = Nothing
                         Else
                             xmlgenre = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Adulte").Index).Value) Then
-                            xmladult = Nothing
-                        Else
-                            xmladult = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Adulte").Index).Value
                         End If
 
                         If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value) Then
@@ -1731,7 +1708,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                     If jeuencours = pathjeu Then ' colonne des path
 
                         Dim estcequesaves As String
-                        estcequesaves = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CocheSave").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
+                        estcequesaves = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("CocheSaves").Index).Value ' on check si le jeu a un overlay sinon on zappe le traitement
                         If estcequesaves = True Then 'on verifie si le jeu a des saves
 
                             Dim console As String = FinalGrid.Rows(e1).Cells(FinalGrid.Columns("Console").Index).Value
@@ -2166,9 +2143,8 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         'commande pour filtrer
         TryCast(FinalGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format(commanderecherche, txt_txtsearch.Text)
 
-        'on relance le calcul des checkbox et de la taille des checkbox
-        Call Completiondescheckbox()
-        Call Calcultaillerom()
+        'on relance la coloration des checkboxes
+        Call Colorerlescoches()
 
         'On compte le nombre de lignes affichées
         Dim visibleRowsCount = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible) - 1
@@ -2250,7 +2226,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
         If txt_romname.Text = Nothing Then Exit Sub
 
         'Si pas d'image sur le jeu en cours
-        If FinalGrid.SelectedCells(FinalGrid.Columns("CocheSave").Index).Value = False Then
+        If FinalGrid.SelectedCells(FinalGrid.Columns("CocheSaves").Index).Value = False Then
         Else
             Dim chemin As String = txt_rompath.Text.ToString
             Dim cheminsave As String = Path.GetDirectoryName(Replace(chemin, "\roms\", "\saves\"))
@@ -2344,10 +2320,10 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                 dgvr.Cells("CocheOverlay").ToolTipText = "Pas d'Overlay pour cette Rom"
             End If
 
-            If dgvr.Cells("CocheSave").Value = True Then
-                dgvr.Cells("CocheSave").ToolTipText = "Saves OK pour cette Rom"
+            If dgvr.Cells("CocheSaves").Value = True Then
+                dgvr.Cells("CocheSaves").ToolTipText = "Saves OK pour cette Rom"
             Else
-                dgvr.Cells("CocheSave").ToolTipText = "Pas de Saves pour cette Rom"
+                dgvr.Cells("CocheSaves").ToolTipText = "Pas de Saves pour cette Rom"
             End If
         Next
     End Sub
@@ -2572,4 +2548,7 @@ prochainj:
         End If
     End Sub
 
+    Private Sub FinalGrid_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles FinalGrid.ColumnHeaderMouseClick
+        Call Colorerlescoches()
+    End Sub
 End Class

@@ -99,11 +99,6 @@ Partial Class CopyRoms
         Me.TutoHideGameList = New System.Windows.Forms.PictureBox()
         Me.TutoHideRomInfo = New System.Windows.Forms.PictureBox()
         Me.TutoHideFinalGrid = New System.Windows.Forms.PictureBox()
-        Me.minipic5 = New System.Windows.Forms.PictureBox()
-        Me.minipic4 = New System.Windows.Forms.PictureBox()
-        Me.minipic3 = New System.Windows.Forms.PictureBox()
-        Me.minipic2 = New System.Windows.Forms.PictureBox()
-        Me.minipic1 = New System.Windows.Forms.PictureBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.GroupMode = New System.Windows.Forms.GroupBox()
         Me.ChkAvance = New System.Windows.Forms.CheckBox()
@@ -132,11 +127,6 @@ Partial Class CopyRoms
         CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.minipic1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupMode.SuspendLayout()
         Me.GroupBoxSelectionRoms.SuspendLayout()
         CType(Me.TutoHideSimpleMode, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -155,11 +145,13 @@ Partial Class CopyRoms
         '
         'FinalGrid
         '
+        Me.FinalGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.FinalGrid.Cursor = System.Windows.Forms.Cursors.Hand
         Me.FinalGrid.Location = New System.Drawing.Point(226, 28)
         Me.FinalGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.FinalGrid.MultiSelect = False
         Me.FinalGrid.Name = "FinalGrid"
+        Me.FinalGrid.RowHeadersVisible = False
         Me.FinalGrid.RowHeadersWidth = 51
         Me.FinalGrid.RowTemplate.Height = 24
         Me.FinalGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -1040,61 +1032,6 @@ Partial Class CopyRoms
         Me.TutoHideFinalGrid.TabIndex = 20
         Me.TutoHideFinalGrid.TabStop = False
         '
-        'minipic5
-        '
-        Me.minipic5.BackColor = System.Drawing.Color.White
-        Me.minipic5.Image = CType(resources.GetObject("minipic5.Image"), System.Drawing.Image)
-        Me.minipic5.Location = New System.Drawing.Point(473, 29)
-        Me.minipic5.Name = "minipic5"
-        Me.minipic5.Size = New System.Drawing.Size(24, 18)
-        Me.minipic5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic5.TabIndex = 18
-        Me.minipic5.TabStop = False
-        '
-        'minipic4
-        '
-        Me.minipic4.BackColor = System.Drawing.Color.White
-        Me.minipic4.Image = CType(resources.GetObject("minipic4.Image"), System.Drawing.Image)
-        Me.minipic4.Location = New System.Drawing.Point(448, 29)
-        Me.minipic4.Name = "minipic4"
-        Me.minipic4.Size = New System.Drawing.Size(24, 18)
-        Me.minipic4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic4.TabIndex = 17
-        Me.minipic4.TabStop = False
-        '
-        'minipic3
-        '
-        Me.minipic3.BackColor = System.Drawing.Color.White
-        Me.minipic3.Image = CType(resources.GetObject("minipic3.Image"), System.Drawing.Image)
-        Me.minipic3.Location = New System.Drawing.Point(422, 29)
-        Me.minipic3.Name = "minipic3"
-        Me.minipic3.Size = New System.Drawing.Size(24, 18)
-        Me.minipic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic3.TabIndex = 16
-        Me.minipic3.TabStop = False
-        '
-        'minipic2
-        '
-        Me.minipic2.BackColor = System.Drawing.Color.White
-        Me.minipic2.Image = CType(resources.GetObject("minipic2.Image"), System.Drawing.Image)
-        Me.minipic2.Location = New System.Drawing.Point(396, 29)
-        Me.minipic2.Name = "minipic2"
-        Me.minipic2.Size = New System.Drawing.Size(24, 18)
-        Me.minipic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic2.TabIndex = 15
-        Me.minipic2.TabStop = False
-        '
-        'minipic1
-        '
-        Me.minipic1.BackColor = System.Drawing.Color.White
-        Me.minipic1.Image = CType(resources.GetObject("minipic1.Image"), System.Drawing.Image)
-        Me.minipic1.Location = New System.Drawing.Point(370, 29)
-        Me.minipic1.Name = "minipic1"
-        Me.minipic1.Size = New System.Drawing.Size(24, 18)
-        Me.minipic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.minipic1.TabIndex = 14
-        Me.minipic1.TabStop = False
-        '
         'Label15
         '
         Me.Label15.AutoSize = True
@@ -1200,11 +1137,6 @@ Partial Class CopyRoms
         Me.Controls.Add(Me.ButtonTuto1)
         Me.Controls.Add(Me.ButtonGetBack)
         Me.Controls.Add(Me.CheckBoxARRM)
-        Me.Controls.Add(Me.minipic5)
-        Me.Controls.Add(Me.minipic4)
-        Me.Controls.Add(Me.minipic3)
-        Me.Controls.Add(Me.minipic2)
-        Me.Controls.Add(Me.minipic1)
         Me.Controls.Add(Me.GroupFiltresAvances)
         Me.Controls.Add(Me.grp_RomInfos)
         Me.Controls.Add(Me.GroupBox1)
@@ -1243,11 +1175,6 @@ Partial Class CopyRoms
         CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.minipic1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupMode.ResumeLayout(False)
         Me.GroupMode.PerformLayout()
         Me.GroupBoxSelectionRoms.ResumeLayout(False)
@@ -1300,11 +1227,6 @@ Partial Class CopyRoms
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents txt_nbrom As TextBox
-    Friend WithEvents minipic1 As PictureBox
-    Friend WithEvents minipic2 As PictureBox
-    Friend WithEvents minipic3 As PictureBox
-    Friend WithEvents minipic4 As PictureBox
-    Friend WithEvents minipic5 As PictureBox
     Friend WithEvents Label9 As Label
     Friend WithEvents listconsoleselected As ListBox
     Friend WithEvents GroupBox6 As GroupBox
