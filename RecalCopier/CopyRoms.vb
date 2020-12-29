@@ -309,7 +309,7 @@ Public Class CopyRoms
                 Dim romhidden As String = xEle.Element("hidden")
 
                 'Conditionnelles sur tous les champs
-                If romhidden = "True" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
+                If romhidden = "true" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
 
                 If xEle.Element("desc") Is Nothing Then
                     romdesc = Nothing
@@ -402,9 +402,6 @@ Public Class CopyRoms
 
                 'on ajoute le tout dans une table
                 table.Rows.Add(romconsole, romname, romId, rompath, romdesc, romimage, romvideo, romanual, romgenre, romnote, romdev, rompubl, romnbplayers, romdate, romCompteur, romRegion, cocheimage, cochevideo, cochemanual, cocheoverlay, cochesaves, rommo)
-
-
-
 romsuivante:
             Next
         Next
@@ -673,11 +670,10 @@ labelapresfolder:
             cochesaves = False
         End If
 consolesanssaves:
-
         Return (cocheimage, cochevideo, cochemanuel, cocheoverlay, cochesaves)
     End Function
     Sub Colorerlescoches()
-        For i = 0 To FinalGrid.RowCount - 2
+        For i = 0 To FinalGrid.RowCount - 1
             If FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheImage").Index).Value = True Then
                 FinalGrid.Rows(i).Cells(FinalGrid.Columns("CocheImage").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             Else
@@ -716,7 +712,6 @@ consolesanssaves:
         FinalGrid.Columns("CocheManuel").ReadOnly = True
         FinalGrid.Columns("CocheOverlay").ReadOnly = True
         FinalGrid.Columns("CocheSaves").ReadOnly = True
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -874,43 +869,30 @@ consolesanssaves:
     End Sub
 
     'Executes when Cell Value on a DataGridView changes
-    Private Sub DataGridCellValueChanged(sender As DataGridView,
-                                         e As DataGridViewCellEventArgs) Handles FinalGrid.CellValueChanged
+    Private Sub DataGridCellValueChanged(sender As DataGridView, e As DataGridViewCellEventArgs) Handles FinalGrid.CellValueChanged
         'check that row isn't -1, i.e. creating datagrid header
         If e.RowIndex = -1 Then Exit Sub
 
         'On recherche le numero de la colonne des Selections
         If e.ColumnIndex = FinalGrid.Columns("Selection").Index Then
-
             'Si on est ici c'est qu'on vient de cocher la case Selection
-
             Dim columnindex As Integer = FinalGrid.CurrentCell.ColumnIndex
             Dim rowIndex As Integer = FinalGrid.CurrentCell.RowIndex
             Dim pathrom As String = FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("CheminRom").Index).Value
 
-            'Verification de l'etat de la coche
-            'si la Case dans selection est cochée, alors on ajoute dans la listebox ma selection
+            'Verification de l'etat de la coche, si la Case dans selection est cochée, alors on ajoute dans la listbox MaSelection
             If FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = True Then
-                listboxMaSelection.Items.Add(pathrom)
-
-                Dim a As String = pathrom
-                'et on la selectionne dans la listbox pour l'avoir en bleue
-                If listboxMaSelection.Visible = False Then 'on reboucle pour ne laisser l'element selectionné que le dernier.
-
-                    listboxMaSelection.Show() 'si la listbox est invisible on l'affiche 
-                    Call Selectiondudernier(a)
-                    listboxMaSelection.Hide() 'et On la rehide
+                'Verif si c'est un doublon
+                If listboxMaSelection.Items.Contains(FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("CheminRom").Index).Value) Then
+                    'si elle y est deja on ne fait rien
                 Else
-                    Call Selectiondudernier(a)
+                    'sinon on l'ajoute
+                    listboxMaSelection.Items.Add(pathrom)
+                    FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = False
                 End If
-
-            Else 'ca veut dire que on va retirer un element là
-                listboxMaSelection.Items.Remove(pathrom)
             End If
-            'On va checker les doublons quand meme
-            Supdoublon(listboxMaSelection)
-            'On lance une update
-            Call UpdatelesChiffreRoms()
+                'On lance une update
+                Call UpdatelesChiffreRoms()
         End If
     End Sub
     Sub Selectiondudernier(RomPath As String)
@@ -944,9 +926,6 @@ consolesanssaves:
         'on refresh l'indicateurs de selectionné
         Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
         txt_NbRomSelected.Text = valeurnbselect
-    End Sub
-    Private Sub ButtonParcourirRecalCopy_Click(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub GroupBox1_VisibleChanged(sender As Object, e As EventArgs) Handles GroupBox1.VisibleChanged
@@ -1486,7 +1465,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                                      , xmldeveloper _
                                      , xmlpublisher _
                                      , xmlgenre _
-                                     , xmladult _
                                      , xmlplayers _
                                      , xmlreleasedate _
                                      , xmlimage _
@@ -1972,7 +1950,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                            , ByVal xmldeveloper As String _
                            , ByVal xmlpublisher As String _
                            , ByVal xmlgenre As String _
-                           , ByVal xmladult As String _
                            , ByVal xmlplayers As String _
                            , ByVal xmlreleasedate As String _
                            , ByVal xmlimage As String _
@@ -2027,12 +2004,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
             writer.WriteEndElement()
         End If
 
-        If xmladult <> Nothing Or xmladult = "true" Then
-            writer.WriteStartElement("adult")
-            writer.WriteString(xmladult)
-            writer.WriteEndElement()
-        End If
-
         If xmlplayers <> Nothing Then
             writer.WriteStartElement("players")
             writer.WriteString(xmlplayers)
@@ -2077,9 +2048,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         writer.WriteEndElement()
     End Sub
-    Private Sub Buttonaffichermaselection_Click(sender As Object, e As EventArgs)
-
-    End Sub
     Function Supdoublon(ByVal listboxName As ListBox)
         listboxName.Sorted = True
         listboxName.Refresh()
@@ -2106,11 +2074,12 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
             If FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value = pathrom Then ' colonne des path
                 listboxMaSelection.Items.Remove(pathrom)
                 FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value = False
-                Exit Sub
+                Exit For
             End If
         Next
-        'Check des Doublons
-        Supdoublon(listboxMaSelection)
+
+        'Update les chiffres
+        Call UpdatelesChiffreRoms()
     End Sub
 
     Private Sub Txt_txtsearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_txtsearch.KeyDown
@@ -2454,13 +2423,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
     End Sub
 
     Private Sub ButtonAfficherMaSelection_Click_1(sender As Object, e As EventArgs) Handles ButtonAfficherMaSelection.Click
-        'Si ma selection est vide ajouter une ligne avec pas de selection
-        If listboxMaSelection.Items.Count = 0 Then
-            listboxMaSelection.Items.Add("Merci de cocher votre Selection pour la voir apparaitre ici")
-        Else
-            listboxMaSelection.Items.Remove("Merci de cocher votre Selection pour la voir apparaitre ici")
-        End If
-
         'On affiche la Listbox a la bonne place ou on là referme
         If listboxMaSelection.Visible = True Then
             listboxMaSelection.Hide()
@@ -2469,32 +2431,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
             listboxMaSelection.Size = New Size(396, 433)
             listboxMaSelection.Show()
         End If
-
-        ' 'Verification de la listebox en coherence avec FinalGrid
-        For j = 0 To listboxMaSelection.Items.Count - 1 'toutes les lignes de la listbox
-
-            Dim romselected As String = listboxMaSelection.Items(j)
-            For a = 0 To FinalGrid.RowCount - 1 'Toutes les lignes du grid
-                If FinalGrid.Rows(a).Cells(FinalGrid.Columns("CheminRom").Index).Value = romselected Then ' colonne des path
-                    Dim valeurselection As String = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value
-
-                    If valeurselection = False Then 'Ici on est sur la bonne ligne du Final Grid, on verifie si c'est pas coché et on replique si besoin
-                        FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value = False
-                        GoTo prochainj 'on saute au prochain jeu
-                    ElseIf valeurselection = FinalGrid.Rows(a).Cells(FinalGrid.Columns("Selection").Index).Value Then
-                        GoTo prochainj
-                    End If
-                End If
-            Next
-prochainj:
-        Next
-
-        'Check des Doublons
-        Supdoublon(listboxMaSelection)
-
-        'On lance un calcul par securité
-        Call UpdatelesChiffreRoms()
-
     End Sub
 
     Private Sub ButtonParcourirRecalCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonParcourirRecalCopy.Click
@@ -2549,6 +2485,15 @@ prochainj:
     End Sub
 
     Private Sub FinalGrid_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles FinalGrid.ColumnHeaderMouseClick
+        'On colore les coches
         Call Colorerlescoches()
+
+        'Recalculselection
+        Call RecalculSelection()
+    End Sub
+
+    Sub RecalculSelection()
+        'RAZ
+        FinalGrid.Rows.Cast(Of DataGridViewRow).ToList.ForEach(Sub(r) r.Cells("Selection").Value = False)
     End Sub
 End Class

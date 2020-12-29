@@ -145,6 +145,10 @@ Partial Class CopyRoms
         '
         'FinalGrid
         '
+        Me.FinalGrid.AllowUserToAddRows = False
+        Me.FinalGrid.AllowUserToDeleteRows = False
+        Me.FinalGrid.AllowUserToOrderColumns = True
+        Me.FinalGrid.AllowUserToResizeRows = False
         Me.FinalGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.FinalGrid.Cursor = System.Windows.Forms.Cursors.Hand
         Me.FinalGrid.Location = New System.Drawing.Point(226, 28)
@@ -153,6 +157,7 @@ Partial Class CopyRoms
         Me.FinalGrid.Name = "FinalGrid"
         Me.FinalGrid.RowHeadersVisible = False
         Me.FinalGrid.RowHeadersWidth = 51
+        Me.FinalGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.FinalGrid.RowTemplate.Height = 24
         Me.FinalGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.FinalGrid.Size = New System.Drawing.Size(382, 365)
