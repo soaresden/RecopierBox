@@ -426,8 +426,8 @@ As String) As String
             'detect video fullscreen
             If detectfullscreenx = 0 Then 'Si la ligne fullscreen n'existe pas on va la creer
                 Using file As StreamWriter = New StreamWriter(adressecfg, True)
-                    file.Write(vbNewLine & "video_fullscreen_x = " & " " & Chr(34) & LargeurOriginale.Text & Chr(34))
-                    file.Write(vbNewLine & "video_fullscreen_y = " & " " & Chr(34) & HauteurOriginale.Text & Chr(34))
+                    file.Write(vbNewLine & "video_fullscreen_x = " & Chr(34) & NouveauX.Text & Chr(34))
+                    file.Write(vbNewLine & "video_fullscreen_y = " & Chr(34) & NouveauY.Text & Chr(34))
                 End Using
             Else
                 'On fait du ligne a ligne pour trouver la bonnne ligne et on remplace
@@ -504,5 +504,6 @@ As String) As String
             PicXrandr.Show()
             MsgBox("Ouvrir Putty en SSH (Putty)" & Chr(13) & "Apres avoir mis le mot de passe de votre distribution, ecrire" & Chr(13) & "xrandr" & Chr(13) & "on vous indique la resolution (en rose)")
         End If
+
     End Sub
 End Class
