@@ -9,6 +9,11 @@ Public Class ResizeOverlays
     End Sub
 
     Private Sub ResizeOverlays_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Hide des elements
+        GroupBoxOriginalOverlay.Hide()
+        ActualOverlay.Hide()
+        PicXrandr.Hide()
+
         Call ImporterlesGamelists()
     End Sub
     Sub ImporterlesGamelists()
@@ -18,16 +23,12 @@ Public Class ResizeOverlays
         Next
     End Sub
 
-    Private Sub ButtonImport_Click(sender As Object, e As EventArgs) Handles buttonImport.Click
+    Private Sub BouttonImport_Click(sender As Object, e As EventArgs) Handles buttonImport.Click
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If GameLists.SelectedItems.Count = 0 Then
             MsgBox("Merci de Selectionner des Plateformes")
             Exit Sub
         End If
-
-        'Hide les groupbox
-        GroupBoxOriginalOverlay.Hide()
-        ActualOverlay.Hide()
 
         'On clear par Securité
         DataGridOverlays.Columns.Clear()
@@ -493,4 +494,15 @@ As String) As String
         Process.Start(Path.GetDirectoryName(My.Settings.DossierOverlay))
     End Sub
 
+    Private Sub ButtonKnowResolution_Click(sender As Object, e As EventArgs) Handles ButtonKnowResolution.Click
+        If PicXrandr.Visible = True Then
+            PicXrandr.Hide()
+            Exit Sub
+        End If
+
+        If PicXrandr.Visible = False Then
+            PicXrandr.Show()
+            MsgBox("Ouvrir Putty en SSH (Putty)" & Chr(13) & "Apres avoir mis le mot de passe de votre distribution, ecrire" & Chr(13) & "xrandr" & Chr(13) & "on vous indique la resolution (en rose)")
+        End If
+    End Sub
 End Class

@@ -132,7 +132,7 @@ Partial Class OverlayManager
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupBox1.Location = New System.Drawing.Point(134, 460)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(228, 73)
+        Me.GroupBox1.Size = New System.Drawing.Size(228, 129)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Outils :"
@@ -140,7 +140,7 @@ Partial Class OverlayManager
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 50)
+        Me.Label4.Location = New System.Drawing.Point(6, 81)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(142, 13)
         Me.Label4.TabIndex = 18
@@ -149,7 +149,7 @@ Partial Class OverlayManager
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 19)
+        Me.Label3.Location = New System.Drawing.Point(6, 46)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(76, 13)
         Me.Label3.TabIndex = 17
@@ -157,7 +157,7 @@ Partial Class OverlayManager
         '
         'RomTotalOverlay
         '
-        Me.RomTotalOverlay.Location = New System.Drawing.Point(149, 47)
+        Me.RomTotalOverlay.Location = New System.Drawing.Point(149, 78)
         Me.RomTotalOverlay.Name = "RomTotalOverlay"
         Me.RomTotalOverlay.Size = New System.Drawing.Size(67, 20)
         Me.RomTotalOverlay.TabIndex = 16
@@ -165,7 +165,7 @@ Partial Class OverlayManager
         '
         'RomTotal
         '
-        Me.RomTotal.Location = New System.Drawing.Point(149, 12)
+        Me.RomTotal.Location = New System.Drawing.Point(149, 39)
         Me.RomTotal.Name = "RomTotal"
         Me.RomTotal.Size = New System.Drawing.Size(67, 20)
         Me.RomTotal.TabIndex = 15
@@ -483,11 +483,11 @@ Partial Class OverlayManager
         Me.ButtonResizeOverlays.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonResizeOverlays.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonResizeOverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonResizeOverlays.Location = New System.Drawing.Point(134, 550)
+        Me.ButtonResizeOverlays.Location = New System.Drawing.Point(12, 36)
         Me.ButtonResizeOverlays.Name = "ButtonResizeOverlays"
-        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(228, 33)
+        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(238, 33)
         Me.ButtonResizeOverlays.TabIndex = 64
-        Me.ButtonResizeOverlays.Text = "Redimensionner des Overlays"
+        Me.ButtonResizeOverlays.Text = "MENU : Redimensionner des Overlays"
         Me.ButtonResizeOverlays.UseVisualStyleBackColor = False
         '
         'OverlayManager

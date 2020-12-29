@@ -22,6 +22,7 @@ Partial Class ResizeOverlays
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ResizeOverlays))
         Me.buttonImport = New System.Windows.Forms.Button()
         Me.GameLists = New System.Windows.Forms.ListBox()
         Me.DataGridOverlays = New System.Windows.Forms.DataGridView()
@@ -43,9 +44,12 @@ Partial Class ResizeOverlays
         Me.ActualOverlay = New System.Windows.Forms.PictureBox()
         Me.TotalOverlay = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.PicXrandr = New System.Windows.Forms.PictureBox()
+        Me.ButtonKnowResolution = New System.Windows.Forms.Button()
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBoxOriginalOverlay.SuspendLayout()
         CType(Me.ActualOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicXrandr, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'buttonImport
@@ -116,6 +120,7 @@ Partial Class ResizeOverlays
         'GroupBoxOriginalOverlay
         '
         Me.GroupBoxOriginalOverlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.GroupBoxOriginalOverlay.Controls.Add(Me.ButtonKnowResolution)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.ButtonGoResize)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.chkcopysomewhere)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.chkOriginalReplace)
@@ -158,9 +163,10 @@ Partial Class ResizeOverlays
         Me.chkcopysomewhere.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkcopysomewhere.Location = New System.Drawing.Point(6, 132)
         Me.chkcopysomewhere.Name = "chkcopysomewhere"
-        Me.chkcopysomewhere.Size = New System.Drawing.Size(310, 17)
+        Me.chkcopysomewhere.Size = New System.Drawing.Size(310, 30)
         Me.chkcopysomewhere.TabIndex = 6
-        Me.chkcopysomewhere.Text = "Copier les fichiers redimensionnés vers un autre Repertoire ?"
+        Me.chkcopysomewhere.Text = "Copier les fichiers redimensionnés vers un autre Repertoire ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & """overlays\aCustom""" &
+    ""
         Me.chkcopysomewhere.UseVisualStyleBackColor = True
         '
         'chkOriginalReplace
@@ -284,12 +290,41 @@ Partial Class ResizeOverlays
         Me.Label8.TabIndex = 52
         Me.Label8.Text = "Total Overlays"
         '
+        'PicXrandr
+        '
+        Me.PicXrandr.BackColor = System.Drawing.Color.Black
+        Me.PicXrandr.Image = CType(resources.GetObject("PicXrandr.Image"), System.Drawing.Image)
+        Me.PicXrandr.Location = New System.Drawing.Point(127, 58)
+        Me.PicXrandr.Name = "PicXrandr"
+        Me.PicXrandr.Size = New System.Drawing.Size(859, 308)
+        Me.PicXrandr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PicXrandr.TabIndex = 53
+        Me.PicXrandr.TabStop = False
+        '
+        'ButtonKnowResolution
+        '
+        Me.ButtonKnowResolution.BackColor = System.Drawing.Color.Gray
+        Me.ButtonKnowResolution.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonKnowResolution.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonKnowResolution.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonKnowResolution.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ButtonKnowResolution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonKnowResolution.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonKnowResolution.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonKnowResolution.Location = New System.Drawing.Point(202, 59)
+        Me.ButtonKnowResolution.Name = "ButtonKnowResolution"
+        Me.ButtonKnowResolution.Size = New System.Drawing.Size(142, 30)
+        Me.ButtonKnowResolution.TabIndex = 54
+        Me.ButtonKnowResolution.Text = "Connaitre sa Resolution"
+        Me.ButtonKnowResolution.UseVisualStyleBackColor = False
+        '
         'ResizeOverlays
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(76, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(998, 576)
+        Me.Controls.Add(Me.PicXrandr)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.TotalOverlay)
         Me.Controls.Add(Me.ActualOverlay)
@@ -306,6 +341,7 @@ Partial Class ResizeOverlays
         Me.GroupBoxOriginalOverlay.ResumeLayout(False)
         Me.GroupBoxOriginalOverlay.PerformLayout()
         CType(Me.ActualOverlay, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicXrandr, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -332,4 +368,6 @@ Partial Class ResizeOverlays
     Friend WithEvents ButtonGoResize As Button
     Friend WithEvents chkcopysomewhere As CheckBox
     Friend WithEvents chkOriginalReplace As CheckBox
+    Friend WithEvents ButtonKnowResolution As Button
+    Friend WithEvents PicXrandr As PictureBox
 End Class
