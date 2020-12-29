@@ -486,9 +486,9 @@ As String) As String
             'Fichier suivant
         Next i
 
-        MsgBox("Terminé")
+        MsgBox("Redimensionnement des Fichiers CFG Terminé")
         If typedecopie = "Nouveau" Then
-            MsgBox("Votre Dossier s'apelle : " & Chr(13) & Chr(13) & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text)
+            MsgBox("Votre Dossier s'appelle : " & Chr(13) & Chr(13) & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text)
         End If
         Process.Start(Path.GetDirectoryName(My.Settings.DossierOverlay))
     End Sub
