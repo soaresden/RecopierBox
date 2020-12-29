@@ -1,6 +1,5 @@
 ﻿Imports System.IO
-
-
+Imports System.Xml
 
 Public Class CopyRoms
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -488,7 +487,7 @@ romsuivante:
         txtShownRoms.Text = txt_nbrom.Text
 
         'On lance la coloration des checkbox
-        Call colorerlescoches()
+        Call Colorerlescoches()
 
         'On appelle le stockage size
         txt_USBGo.Text = My.Settings.StockageSize
@@ -891,8 +890,8 @@ consolesanssaves:
                     FinalGrid.Rows(rowIndex).Cells(FinalGrid.Columns("Selection").Index).Value = False
                 End If
             End If
-                'On lance une update
-                Call UpdatelesChiffreRoms()
+            'On lance une update
+            Call UpdatelesChiffreRoms()
         End If
     End Sub
     Sub Selectiondudernier(RomPath As String)
@@ -1042,7 +1041,6 @@ consolesanssaves:
             Dim replacejeu As String = Replace(pathjeu, My.Settings.RecalboxFolder, newrecalbox)
             Dim repertoirefinal As String = Path.GetDirectoryName(replacejeu)
             Dim legamelist As String = Path.GetDirectoryName(pathjeu) & "\gamelist.xml"
-            Dim lenouvogamelist As String = Path.GetDirectoryName(replacejeu) & "\gamelist.xml"
             Dim extensionrom As String = Path.GetExtension(pathjeu)
 
             'Dim consola As String = InStr(pathjeu, "\roms\")
@@ -1050,6 +1048,16 @@ consolesanssaves:
             'Dim prochainslash As String = InStr(consoleu, "\")
             'Dim consoledelarom As String = consoleu.Substring(0, prochainslash - 1)
             Dim consolederom As String = pathjeu.Substring(InStr(pathjeu, "\roms\") + 5).Substring(0, InStr(pathjeu.Substring(InStr(pathjeu, "\roms\") + 5), "\") - 1)
+            Dim lenouvogamelist As String = newrecalbox & "\roms\" & consolederom & "\gamelist.xml"
+            Dim attr As FileAttributes = File.GetAttributes(pathjeu)
+
+            'On test si c'est un jeu en dossier ou non
+            If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
+                'si c'est un repertoire (daphne, dos ...etc) 
+                CopyDirectory(pathjeu, replacejeu)
+                GoTo alagamelist
+            End If
+
 
             'On check d'abord si c'est un m3u ou un cue pour recupérer les vrais jeux et le fichier
             'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
@@ -1125,7 +1133,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
             'GAMELIST:
             'Tentative ecriture gamelist
             'on va d'abord tester pour voir si y'a deja un gamelist 
-
+alagamelist:
             If System.IO.File.Exists(lenouvogamelist) Then
                 For xmline = 0 To FinalGrid.RowCount - 1
 
@@ -1246,8 +1254,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                         game.AppendChild(nameEl)
                         If xmlromId <> Nothing Then game.SetAttribute("id", xmlromId)
                         doctoupdate.DocumentElement.AppendChild(game)
-
-
 
                         Dim pathEl As Xml.XmlElement = doctoupdate.CreateElement("path")
                         pathEl.InnerText = xmlpath
@@ -1452,11 +1458,11 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                             xmlregion = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value
                         End If
 
-                        Dim wwriter As New Xml.XmlTextWriter(Path.GetDirectoryName(replacejeu) & "\gamelist.xml", System.Text.Encoding.UTF8)
-                        wwriter.WriteStartDocument(True)
-                        wwriter.Formatting = Xml.Formatting.Indented
-                        wwriter.Indentation = 2
-                        wwriter.WriteStartElement("gameList")
+                        Dim writer As New XmlTextWriter(lenouvogamelist.ToString, System.Text.Encoding.UTF8)
+                        writer.WriteStartDocument(True)
+                        writer.Formatting = Xml.Formatting.Indented
+                        writer.Indentation = 2
+                        writer.WriteStartElement("gameList")
 
                         CreateNode(xmlname _
                                      , xmlpath _
@@ -1472,20 +1478,15 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                                      , xmlmanual _
                                      , xmlregion _
                                      , xmlplaycount _
-                                     , wwriter, xmlromId)
+                                     , writer, xmlromId)
 
-                        wwriter.WriteEndElement()
-                        wwriter.WriteEndDocument()
-                        wwriter.Close()
+                        writer.WriteEndElement()
+                        writer.WriteEndDocument()
+                        writer.Close()
 
                     End If
                 Next
             End If
-
-            'a optimiser pour ecrire le gamelist en temps réel ...
-            'en attendant on copie le gamelist
-            'System.IO.File.Copy(legamelist, lenouvogamelist, True)
-
 
             'on check si la copie des image a été activée
             If checkimgs.Checked = True Then
@@ -1725,9 +1726,11 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         'Demande les Overlay systemes ?
         If checkoverlays.Checked = True Then
-            If MsgBox("Overlays des Jeux copiés, Que souhaitez vous copier d'autres ?" & Chr(13) & "Oui = Overlays de tous les Systemes" & Chr(13) & "Annuler = Uniquement l'overlay Générique des Consoles choisies" & Chr(13) & "Non = Aucun Overlay générique d'Aucun Système", vbYesNoCancel) = vbYes Then
-                On Error Resume Next
+            If MsgBox("Overlays : Que souhaitez vous copier ?" & Chr(13) & Chr(13) & "Oui = Jeux + Tous les Overlays Générique de tous les Systemes" & Chr(13) & Chr(13) & "Non = Jeux + Overlays Systèmes en cours", vbYesNo) = vbYes Then
+
                 For overlaysys = 0 To ListGameLists.Items.Count - 1
+
+
                     Dim fulladresse As String = My.Settings.RecalboxFolder & "\roms\" & ListGameLists.Items(overlaysys)
                     Dim overlayadresse As String
 
@@ -1742,6 +1745,9 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                     Dim fichier1cfg As String = overlayadresse & "\" & parentName & ".cfg"
                     Dim fichier2overlaycfg As String
                     Dim fichier3png As String
+
+                    'Test si ca existe 
+                    If Not File.Exists(fichier1cfg) Then GoTo lignesuiva
 
                     Dim cheminpropreoverlay2 As String
                     Dim justefichier2 As String
@@ -1820,12 +1826,14 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                     System.IO.File.Copy(fichier1cfg, nouvochemin1, True)
                     System.IO.File.Copy(cheminpropreoverlay2, nouvochemin2, True)
                     System.IO.File.Copy(fichier3png, nouvochemin3, True)
+lignesuiva:
                 Next
-                On Error GoTo 0
 
-            ElseIf vbCancel Then
+            ElseIf vbNo Then
 
                 For ligne = 0 To listconsoleselected.Items.Count - 1
+
+
                     Dim consolename As String = listconsoleselected.Items(ligne)
                     Dim fulladresse As String = My.Settings.RecalboxFolder & "\roms\" & consolename
 
@@ -1838,9 +1846,13 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
                     Dim parentName As String = IO.Path.GetFileName(overlayadresse)
 
+
                     Dim fichier1cfg As String = overlayadresse & "\" & parentName & ".cfg"
                     Dim fichier2overlaycfg As String
                     Dim fichier3png As String
+
+                    'test si ca existe
+                    If Not File.Exists(fichier1cfg) Then GoTo lignesuivb
 
                     Dim cheminpropreoverlay2 As String
                     Dim justefichier2 As String
@@ -1920,9 +1932,8 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
                     System.IO.File.Copy(cheminpropreoverlay2, nouvochemin2, True)
                     System.IO.File.Copy(fichier3png, nouvochemin3, True)
                     On Error GoTo 0
-
                 Next
-
+lignesuivb:
             End If
         End If
 
@@ -2048,24 +2059,6 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         writer.WriteEndElement()
     End Sub
-    Function Supdoublon(ByVal listboxName As ListBox)
-        listboxName.Sorted = True
-        listboxName.Refresh()
-        Dim index As Integer
-        Dim itemcount As Integer = listboxName.Items.Count
-
-        If itemcount > 1 Then
-            Dim lastitem As String = listboxName.Items(itemcount - 1)
-
-            For index = itemcount - 2 To 0 Step -1
-                If listboxName.Items(index) = lastitem Then
-                    listboxName.Items.RemoveAt(index)
-                Else
-                    lastitem = listboxName.Items(index)
-                End If
-            Next
-        End If
-    End Function
     Private Sub ListboxMaSelection_DoubleClick(sender As Object, e As EventArgs) Handles listboxMaSelection.DoubleClick
         'on enleve de la liste et on met a jour la checkbox dans la selection
         Dim pathrom As String = listboxMaSelection.Items(listboxMaSelection.SelectedIndex)
@@ -2495,5 +2488,28 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
     Sub RecalculSelection()
         'RAZ
         FinalGrid.Rows.Cast(Of DataGridViewRow).ToList.ForEach(Sub(r) r.Cells("Selection").Value = False)
+    End Sub
+
+    Public Sub CopyDirectory(ByVal sourcePath As String, ByVal destinationPath As String)
+        Dim sourceDirectoryInfo As New System.IO.DirectoryInfo(sourcePath)
+
+        ' If the destination folder don't exist then create it
+        If Not System.IO.Directory.Exists(destinationPath) Then
+            System.IO.Directory.CreateDirectory(destinationPath)
+        End If
+
+        Dim fileSystemInfo As System.IO.FileSystemInfo
+        For Each fileSystemInfo In sourceDirectoryInfo.GetFileSystemInfos
+            Dim destinationFileName As String =
+                System.IO.Path.Combine(destinationPath, fileSystemInfo.Name)
+
+            ' Now check whether its a file or a folder and take action accordingly
+            If TypeOf fileSystemInfo Is System.IO.FileInfo Then
+                System.IO.File.Copy(fileSystemInfo.FullName, destinationFileName, True)
+            Else
+                ' Recursively call the mothod to copy all the neste folders
+                CopyDirectory(fileSystemInfo.FullName, destinationFileName)
+            End If
+        Next
     End Sub
 End Class

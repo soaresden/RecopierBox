@@ -428,7 +428,7 @@ Partial Class CopyRoms
         Me.txt_morestant.ReadOnly = True
         Me.txt_morestant.Size = New System.Drawing.Size(65, 20)
         Me.txt_morestant.TabIndex = 5
-        Me.txt_morestant.Text = "0"
+        Me.txt_morestant.Text = "10240"
         Me.txt_morestant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label3
