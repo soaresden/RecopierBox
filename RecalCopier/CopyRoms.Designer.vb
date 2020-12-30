@@ -107,6 +107,7 @@ Partial Class CopyRoms
         Me.TutoHideSimpleMode = New System.Windows.Forms.PictureBox()
         Me.TutoHideFiltresAvance = New System.Windows.Forms.PictureBox()
         Me.TutoSelectionActuelle = New System.Windows.Forms.PictureBox()
+        Me.LabelSelection = New System.Windows.Forms.Label()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -557,6 +558,7 @@ Partial Class CopyRoms
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.LabelSelection)
         Me.Panel1.Controls.Add(Me.txt_romname)
         Me.Panel1.Location = New System.Drawing.Point(5, 12)
         Me.Panel1.Name = "Panel1"
@@ -1119,6 +1121,18 @@ Partial Class CopyRoms
         Me.TutoSelectionActuelle.TabIndex = 47
         Me.TutoSelectionActuelle.TabStop = False
         '
+        'LabelSelection
+        '
+        Me.LabelSelection.AutoSize = True
+        Me.LabelSelection.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelSelection.ForeColor = System.Drawing.Color.Yellow
+        Me.LabelSelection.Location = New System.Drawing.Point(3, 6)
+        Me.LabelSelection.Name = "LabelSelection"
+        Me.LabelSelection.Size = New System.Drawing.Size(377, 18)
+        Me.LabelSelection.TabIndex = 48
+        Me.LabelSelection.Text = "Ma Selection à Copier : (Double Cliquer pour supprimer)"
+        Me.LabelSelection.Visible = False
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1274,4 +1288,5 @@ Partial Class CopyRoms
     Friend WithEvents TutoHideSimpleMode As PictureBox
     Friend WithEvents TutoHideFiltresAvance As PictureBox
     Friend WithEvents TutoSelectionActuelle As PictureBox
+    Friend WithEvents LabelSelection As Label
 End Class

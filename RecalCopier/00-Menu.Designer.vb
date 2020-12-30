@@ -170,7 +170,7 @@ Partial Class Form1
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Disclaimer.Location = New System.Drawing.Point(253, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(701, 468)
+        Me.Disclaimer.Size = New System.Drawing.Size(696, 468)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Fonctionnalités :"
@@ -210,7 +210,7 @@ Partial Class Form1
         Me.RichTextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.RichTextBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.RichTextBox1.Location = New System.Drawing.Point(4, 367)
+        Me.RichTextBox1.Location = New System.Drawing.Point(22, 84)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.Size = New System.Drawing.Size(216, 16)
         Me.RichTextBox1.TabIndex = 17
@@ -231,7 +231,7 @@ Partial Class Form1
         Me.VersionNetFramework.AutoSize = True
         Me.VersionNetFramework.Font = New System.Drawing.Font("Equinox Com", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.VersionNetFramework.ForeColor = System.Drawing.Color.Lime
-        Me.VersionNetFramework.Location = New System.Drawing.Point(2, 346)
+        Me.VersionNetFramework.Location = New System.Drawing.Point(56, 358)
         Me.VersionNetFramework.Name = "VersionNetFramework"
         Me.VersionNetFramework.Size = New System.Drawing.Size(134, 18)
         Me.VersionNetFramework.TabIndex = 21
@@ -288,6 +288,7 @@ Partial Class Form1
         '
         Me.PanelGauche.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.PanelGauche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelGauche.Controls.Add(Me.RichTextBox1)
         Me.PanelGauche.Controls.Add(Me.Label6)
         Me.PanelGauche.Controls.Add(Me.ButtonSetDossier)
         Me.PanelGauche.Controls.Add(Me.TypeBatocera)
@@ -487,7 +488,6 @@ Partial Class Form1
         '
         Me.PanelDroite.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.PanelDroite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PanelDroite.Controls.Add(Me.RichTextBox1)
         Me.PanelDroite.Controls.Add(Me.WhyGameList)
         Me.PanelDroite.Controls.Add(Me.VersionNetFramework)
         Me.PanelDroite.Location = New System.Drawing.Point(729, 150)

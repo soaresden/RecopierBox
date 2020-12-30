@@ -905,7 +905,11 @@ consolesanssaves:
     End Sub
     Sub UpdatelesChiffreRoms()
         'On test d'abord si y'en a des roms dans la selection !
-        If listboxMaSelection.Items.Count = 0 Then Exit Sub
+        If listboxMaSelection.Items.Count = 0 Then
+            txt_NbRomSelected.Text = 0
+            txt_GoAPrevoir.Text = 0
+            Exit Sub
+        End If
 
         'On calcule la taille des roms cochées
         Dim sizecumulrom As Decimal
@@ -922,9 +926,14 @@ consolesanssaves:
 
         'On va Update les nombres de visibles et le nombre de roms selectionnées
         txtShownRoms.Text = FinalGrid.Rows.GetRowCount(DataGridViewElementStates.Visible) - 1
+
         'on refresh l'indicateurs de selectionné
         Dim valeurnbselect As Integer = listboxMaSelection.Items.Count
         txt_NbRomSelected.Text = valeurnbselect
+
+        'on refresh l'espace restant
+
+
     End Sub
 
     Private Sub GroupBox1_VisibleChanged(sender As Object, e As EventArgs) Handles GroupBox1.VisibleChanged
@@ -2235,7 +2244,7 @@ lignesuivb:
         Else ' Dire que c'est plein quand il reste moins de 1024 Mo ! (Securité)
             txt_morestant.BackColor = Color.FromArgb(255, 0, 0)
             txt_morestant.ForeColor = Color.FromArgb(255, 255, 255)
-            txt_morestant.Text = "USB PLEIN"
+            txt_morestant.Text = "ESPACE PLEIN"
         End If
     End Sub
     Private Sub Txt_USBGo_TextChanged(sender As Object, e As EventArgs) Handles txt_USBGo.TextChanged
@@ -2419,10 +2428,12 @@ lignesuivb:
         'On affiche la Listbox a la bonne place ou on là referme
         If listboxMaSelection.Visible = True Then
             listboxMaSelection.Hide()
+            LabelSelection.Hide()
         Else
             listboxMaSelection.Location = New Point(-2, 43)
             listboxMaSelection.Size = New Size(396, 433)
             listboxMaSelection.Show()
+            LabelSelection.Show()
         End If
     End Sub
 
