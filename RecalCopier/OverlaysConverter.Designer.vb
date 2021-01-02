@@ -22,6 +22,7 @@ Partial Class OverlaysConverter
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OverlaysConverter))
         Me.CheckBoxRecalbox = New System.Windows.Forms.CheckBox()
         Me.CheckBoxBatocera = New System.Windows.Forms.CheckBox()
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
@@ -33,13 +34,18 @@ Partial Class OverlaysConverter
         Me.TextCombobox = New System.Windows.Forms.Label()
         Me.ListErreurs = New System.Windows.Forms.ListBox()
         Me.RqtARRM = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Supp1 = New System.Windows.Forms.Button()
+        Me.Supp2 = New System.Windows.Forms.Button()
+        Me.Supp3 = New System.Windows.Forms.Button()
+        Me.Supp123 = New System.Windows.Forms.Button()
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CheckBoxRecalbox
         '
         Me.CheckBoxRecalbox.AutoSize = True
-        Me.CheckBoxRecalbox.Location = New System.Drawing.Point(8, 35)
+        Me.CheckBoxRecalbox.Location = New System.Drawing.Point(8, 54)
         Me.CheckBoxRecalbox.Name = "CheckBoxRecalbox"
         Me.CheckBoxRecalbox.Size = New System.Drawing.Size(220, 17)
         Me.CheckBoxRecalbox.TabIndex = 1
@@ -49,7 +55,7 @@ Partial Class OverlaysConverter
         'CheckBoxBatocera
         '
         Me.CheckBoxBatocera.AutoSize = True
-        Me.CheckBoxBatocera.Location = New System.Drawing.Point(8, 57)
+        Me.CheckBoxBatocera.Location = New System.Drawing.Point(8, 76)
         Me.CheckBoxBatocera.Name = "CheckBoxBatocera"
         Me.CheckBoxBatocera.Size = New System.Drawing.Size(220, 17)
         Me.CheckBoxBatocera.TabIndex = 2
@@ -76,10 +82,10 @@ Partial Class OverlaysConverter
         'GameLists
         '
         Me.GameLists.FormattingEnabled = True
-        Me.GameLists.Location = New System.Drawing.Point(8, 132)
+        Me.GameLists.Location = New System.Drawing.Point(8, 158)
         Me.GameLists.Name = "GameLists"
         Me.GameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.GameLists.Size = New System.Drawing.Size(121, 329)
+        Me.GameLists.Size = New System.Drawing.Size(121, 303)
         Me.GameLists.TabIndex = 41
         '
         'DataGridOverlays
@@ -89,12 +95,12 @@ Partial Class OverlaysConverter
         Me.DataGridOverlays.AllowUserToResizeRows = False
         Me.DataGridOverlays.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridOverlays.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.DataGridOverlays.Location = New System.Drawing.Point(135, 81)
+        Me.DataGridOverlays.Location = New System.Drawing.Point(135, 158)
         Me.DataGridOverlays.MultiSelect = False
         Me.DataGridOverlays.Name = "DataGridOverlays"
         Me.DataGridOverlays.ReadOnly = True
         Me.DataGridOverlays.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridOverlays.Size = New System.Drawing.Size(527, 380)
+        Me.DataGridOverlays.Size = New System.Drawing.Size(667, 270)
         Me.DataGridOverlays.TabIndex = 42
         '
         'ButtonImportAll
@@ -107,7 +113,7 @@ Partial Class OverlaysConverter
         Me.ButtonImportAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonImportAll.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonImportAll.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonImportAll.Location = New System.Drawing.Point(8, 79)
+        Me.ButtonImportAll.Location = New System.Drawing.Point(8, 105)
         Me.ButtonImportAll.Name = "ButtonImportAll"
         Me.ButtonImportAll.Size = New System.Drawing.Size(121, 47)
         Me.ButtonImportAll.TabIndex = 43
@@ -124,26 +130,26 @@ Partial Class OverlaysConverter
         Me.ButtonConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonConvert.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonConvert.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonConvert.Location = New System.Drawing.Point(668, 37)
+        Me.ButtonConvert.Location = New System.Drawing.Point(808, 76)
         Me.ButtonConvert.Name = "ButtonConvert"
         Me.ButtonConvert.Size = New System.Drawing.Size(120, 39)
         Me.ButtonConvert.TabIndex = 44
-        Me.ButtonConvert.Text = "Convert"
+        Me.ButtonConvert.Text = "Lancer la Conversion"
         Me.ButtonConvert.UseVisualStyleBackColor = False
         '
         'ComboBox1
         '
         Me.ComboBox1.Enabled = False
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(537, 53)
+        Me.ComboBox1.Location = New System.Drawing.Point(808, 31)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(125, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(120, 21)
         Me.ComboBox1.TabIndex = 45
         '
         'TextCombobox
         '
         Me.TextCombobox.AutoSize = True
-        Me.TextCombobox.Location = New System.Drawing.Point(534, 37)
+        Me.TextCombobox.Location = New System.Drawing.Point(805, 11)
         Me.TextCombobox.Name = "TextCombobox"
         Me.TextCombobox.Size = New System.Drawing.Size(128, 13)
         Me.TextCombobox.TabIndex = 46
@@ -152,10 +158,10 @@ Partial Class OverlaysConverter
         'ListErreurs
         '
         Me.ListErreurs.FormattingEnabled = True
-        Me.ListErreurs.Location = New System.Drawing.Point(668, 82)
+        Me.ListErreurs.Location = New System.Drawing.Point(808, 121)
         Me.ListErreurs.Name = "ListErreurs"
         Me.ListErreurs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListErreurs.Size = New System.Drawing.Size(120, 329)
+        Me.ListErreurs.Size = New System.Drawing.Size(120, 290)
         Me.ListErreurs.TabIndex = 47
         '
         'RqtARRM
@@ -168,18 +174,103 @@ Partial Class OverlaysConverter
         Me.RqtARRM.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.RqtARRM.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RqtARRM.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.RqtARRM.Location = New System.Drawing.Point(668, 413)
+        Me.RqtARRM.Location = New System.Drawing.Point(808, 413)
         Me.RqtARRM.Name = "RqtARRM"
         Me.RqtARRM.Size = New System.Drawing.Size(120, 48)
         Me.RqtARRM.TabIndex = 48
         Me.RqtARRM.Text = "Copier la Requete pour ARRM"
         Me.RqtARRM.UseVisualStyleBackColor = False
         '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.AntiqueWhite
+        Me.TextBox1.Location = New System.Drawing.Point(357, 6)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(445, 136)
+        Me.TextBox1.TabIndex = 49
+        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
+        '
+        'Supp1
+        '
+        Me.Supp1.BackColor = System.Drawing.Color.Coral
+        Me.Supp1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Supp1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Supp1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.Supp1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Supp1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Supp1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Supp1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Supp1.Location = New System.Drawing.Point(167, 434)
+        Me.Supp1.Name = "Supp1"
+        Me.Supp1.Size = New System.Drawing.Size(121, 27)
+        Me.Supp1.TabIndex = 50
+        Me.Supp1.Text = "Supprimer le fichier 1"
+        Me.Supp1.UseVisualStyleBackColor = False
+        '
+        'Supp2
+        '
+        Me.Supp2.BackColor = System.Drawing.Color.Coral
+        Me.Supp2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Supp2.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Supp2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.Supp2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Supp2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Supp2.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Supp2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Supp2.Location = New System.Drawing.Point(294, 434)
+        Me.Supp2.Name = "Supp2"
+        Me.Supp2.Size = New System.Drawing.Size(121, 27)
+        Me.Supp2.TabIndex = 51
+        Me.Supp2.Text = "Supprimer le fichier 2"
+        Me.Supp2.UseVisualStyleBackColor = False
+        '
+        'Supp3
+        '
+        Me.Supp3.BackColor = System.Drawing.Color.Coral
+        Me.Supp3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Supp3.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Supp3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.Supp3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Supp3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Supp3.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Supp3.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Supp3.Location = New System.Drawing.Point(421, 434)
+        Me.Supp3.Name = "Supp3"
+        Me.Supp3.Size = New System.Drawing.Size(121, 27)
+        Me.Supp3.TabIndex = 52
+        Me.Supp3.Text = "Supprimer le fichier 3"
+        Me.Supp3.UseVisualStyleBackColor = False
+        '
+        'Supp123
+        '
+        Me.Supp123.BackColor = System.Drawing.Color.Firebrick
+        Me.Supp123.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Supp123.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Supp123.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.Supp123.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Supp123.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Supp123.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Supp123.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Supp123.Location = New System.Drawing.Point(548, 434)
+        Me.Supp123.Name = "Supp123"
+        Me.Supp123.Size = New System.Drawing.Size(140, 27)
+        Me.Supp123.TabIndex = 53
+        Me.Supp123.Text = "Supprimer les 3 fichiers"
+        Me.Supp123.UseVisualStyleBackColor = False
+        '
         'OverlaysConverter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 482)
+        Me.BackColor = System.Drawing.Color.Beige
+        Me.ClientSize = New System.Drawing.Size(929, 467)
+        Me.Controls.Add(Me.Supp123)
+        Me.Controls.Add(Me.Supp3)
+        Me.Controls.Add(Me.Supp2)
+        Me.Controls.Add(Me.Supp1)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.RqtARRM)
         Me.Controls.Add(Me.ListErreurs)
         Me.Controls.Add(Me.TextCombobox)
@@ -191,6 +282,8 @@ Partial Class OverlaysConverter
         Me.Controls.Add(Me.ButtonGetBack1)
         Me.Controls.Add(Me.CheckBoxBatocera)
         Me.Controls.Add(Me.CheckBoxRecalbox)
+        Me.MaximumSize = New System.Drawing.Size(945, 506)
+        Me.MinimumSize = New System.Drawing.Size(945, 506)
         Me.Name = "OverlaysConverter"
         Me.Text = "OverlaysConverter"
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).EndInit()
@@ -209,4 +302,9 @@ Partial Class OverlaysConverter
     Friend WithEvents TextCombobox As Label
     Friend WithEvents ListErreurs As ListBox
     Friend WithEvents RqtARRM As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Supp1 As Button
+    Friend WithEvents Supp2 As Button
+    Friend WithEvents Supp3 As Button
+    Friend WithEvents Supp123 As Button
 End Class

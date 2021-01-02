@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TextBox1.Text" xml:space="preserve">
+    <value>Independemment de la conversion, cet outil est capable de reperer :
+RECALBOX:
+- Les fichiers cfg manquants
+- Les fichiers overlays manquants
+- Les fichiers PNG manquants
+BATOCERA:
+- Les fichiers info manquants
+- Les fichiers PNG manquants
+Il est peut etre interessant de "Reparer" ces fichiers avant de les supprimer !
+(Les causes sont multiples : Erreur Serveur, ScreenScrapper, Copie de pack Overlays .. etc)</value>
+  </data>
 </root>

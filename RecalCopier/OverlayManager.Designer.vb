@@ -505,7 +505,7 @@ Partial Class OverlayManager
         Me.ButtonConvert.Name = "ButtonConvert"
         Me.ButtonConvert.Size = New System.Drawing.Size(238, 23)
         Me.ButtonConvert.TabIndex = 65
-        Me.ButtonConvert.Text = "MENU : Conversion Recalbox<->Batocera"
+        Me.ButtonConvert.Text = "MENU : Verifier vos Scrapps et Convertisseur Recalbox <--> Batocera"
         Me.ButtonConvert.UseVisualStyleBackColor = False
         '
         'OverlayManager

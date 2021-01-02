@@ -158,9 +158,9 @@ nextconsole:
         DataGridOverlays.Columns("Console").Width = 40
         DataGridOverlays.Columns("NomRomXML").Width = 110
         DataGridOverlays.Columns("NomFichierCFG").Width = 110
-        DataGridOverlays.Columns("CheminCFG").Width = 85
-        DataGridOverlays.Columns("CheminCFG2").Width = 85
-        DataGridOverlays.Columns("CheminPNG").Width = 85
+        DataGridOverlays.Columns("CheminCFG").Width = 120
+        DataGridOverlays.Columns("CheminCFG2").Width = 120
+        DataGridOverlays.Columns("CheminPNG").Width = 120
         DataGridOverlays.Columns("CocheCFG").Visible = False
 
         Dim compteuroverlay As Integer = 0
@@ -517,23 +517,28 @@ findugame:
 
         For Each j In ListErreurs.SelectedItems
 
+            'A cause du caractere ', on va le tronquer sinon ca casse la requete
             If InStr(j, "'") > 0 Then
                 j = j.ToString.Substring(0, InStr(j, "'") - 1) & "*"
             End If
 
+            'Si y'a qu'un seul selectionné 
             If ListErreurs.SelectedItems.Count = 1 Then
                 rqt = rqt + "fichier_rom like '" & j & "'"
                 Clipboard.SetText(rqt)
                 GoTo Fin
             End If
 
+            'SI y'en a plusieurs de selectionné
             If ListErreurs.Items.Count > 1 Then
                 rqt = rqt + "fichier_rom like '" & j & "'"
-                If j = dernier Then
+
+                'si c'est le dernier selectionné, on va le mettre dans le presse papiers
+                If j <> dernier Then
+                    rqt = rqt + " or "
+                Else
                     Clipboard.SetText(rqt)
                     GoTo Fin
-                Else
-                    rqt = rqt + " or "
                 End If
             End If
         Next
@@ -541,4 +546,53 @@ Fin:
         MsgBox("Requete dans le presse papiers" & Chr(13) & "Collez ca dans la barre de Requete d'ARRM et filtrez")
     End Sub
 
+    Sub supplescfgs(num As Integer)
+        For Each i In DataGridOverlays.SelectedRows
+            Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
+            Dim fichier2 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG2").Index).Value
+            Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
+
+            If num = 123 Then
+                Directory.Delete(fichier1)
+                Directory.Delete(fichier2)
+                Directory.Delete(fichier3)
+            ElseIf num = 1 Then
+                Directory.Delete(fichier1)
+            ElseIf num = 2 Then
+                Directory.Delete(fichier2)
+            ElseIf num = 3 Then
+                Directory.Delete(fichier3)
+            End If
+        Next
+    End Sub
+    Private Sub Supp1_Click(sender As Object, e As EventArgs) Handles Supp1.Click
+        Call supplescfgs(1)
+    End Sub
+
+    Private Sub Supp2_Click(sender As Object, e As EventArgs) Handles Supp2.Click
+        Call supplescfgs(2)
+    End Sub
+
+    Private Sub Supp3_Click(sender As Object, e As EventArgs) Handles Supp3.Click
+        Call supplescfgs(3)
+    End Sub
+
+    Private Sub Supp123_Click(sender As Object, e As EventArgs) Handles Supp123.Click
+        Call supplescfgs(123)
+    End Sub
+
+    Private Sub DataGridOverlays_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridOverlays.CellContentDoubleClick
+        Dim numcolonne = e.ColumnIndex
+        Dim numligne = e.RowIndex
+
+        If numcolonne < 3 Then Exit Sub
+
+        Dim fichiercomplet = DataGridOverlays.Rows(numligne).Cells(numcolonne).Value
+
+        If DataGridOverlays.Rows(numligne).Cells(numcolonne).Value = "0" Then
+            Exit Sub
+        Else
+            Process.Start(fichiercomplet)
+        End If
+    End Sub
 End Class
