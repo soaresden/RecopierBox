@@ -78,6 +78,7 @@ Partial Class OverlaysConverter
         Me.GameLists.FormattingEnabled = True
         Me.GameLists.Location = New System.Drawing.Point(8, 132)
         Me.GameLists.Name = "GameLists"
+        Me.GameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.GameLists.Size = New System.Drawing.Size(121, 329)
         Me.GameLists.TabIndex = 41
         '
@@ -123,9 +124,9 @@ Partial Class OverlaysConverter
         Me.ButtonConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonConvert.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonConvert.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonConvert.Location = New System.Drawing.Point(689, 35)
+        Me.ButtonConvert.Location = New System.Drawing.Point(668, 37)
         Me.ButtonConvert.Name = "ButtonConvert"
-        Me.ButtonConvert.Size = New System.Drawing.Size(99, 39)
+        Me.ButtonConvert.Size = New System.Drawing.Size(120, 39)
         Me.ButtonConvert.TabIndex = 44
         Me.ButtonConvert.Text = "Convert"
         Me.ButtonConvert.UseVisualStyleBackColor = False
@@ -134,7 +135,7 @@ Partial Class OverlaysConverter
         '
         Me.ComboBox1.Enabled = False
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(549, 55)
+        Me.ComboBox1.Location = New System.Drawing.Point(537, 53)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(125, 21)
         Me.ComboBox1.TabIndex = 45
@@ -142,7 +143,7 @@ Partial Class OverlaysConverter
         'TextCombobox
         '
         Me.TextCombobox.AutoSize = True
-        Me.TextCombobox.Location = New System.Drawing.Point(546, 35)
+        Me.TextCombobox.Location = New System.Drawing.Point(534, 37)
         Me.TextCombobox.Name = "TextCombobox"
         Me.TextCombobox.Size = New System.Drawing.Size(128, 13)
         Me.TextCombobox.TabIndex = 46
@@ -153,6 +154,7 @@ Partial Class OverlaysConverter
         Me.ListErreurs.FormattingEnabled = True
         Me.ListErreurs.Location = New System.Drawing.Point(668, 82)
         Me.ListErreurs.Name = "ListErreurs"
+        Me.ListErreurs.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.ListErreurs.Size = New System.Drawing.Size(120, 329)
         Me.ListErreurs.TabIndex = 47
         '

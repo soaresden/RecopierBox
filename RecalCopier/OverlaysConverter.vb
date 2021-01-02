@@ -19,7 +19,6 @@ Public Class OverlaysConverter
     End Sub
 
     Sub CompletionRecalbox()
-        MsgBox("Ca va prendre un bout de temps selon la Quantité ...")
         'On clear par Securité
         DataGridOverlays.Columns.Clear()
         On Error Resume Next
@@ -167,9 +166,10 @@ nextconsole:
         Dim compteuroverlay As Integer = 0
 
         'Reajusting Interface and Showing Final Interface
-        dv.Sort = "Console asc, NomRomXML asc"
+        dv.Sort = "Console asc, CheminCFG2 asc"
 
-
+        'on colore les lignes
+        Call colorer()
     End Sub
     Function Recherchenomdelarom(console As String, pathdelarom As String)
         Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
@@ -222,7 +222,7 @@ lignesuivante:
             CheckBoxRecalbox.Checked = True
             CheckBoxBatocera.Checked = False
 
-            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED")
+            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
             ComboBox1.Items.Add(nomdossier)
             If nomdossier <> Nothing Then
                 Dim fullchemin = My.Settings.DossierOverlay & nomdossier
@@ -405,9 +405,7 @@ lignesuivante:
             sw.Close()
 fichiersuivant:
         Next
-
         Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
-
     End Sub
 
     Function Convertendecimal(ligne As String)
@@ -495,16 +493,37 @@ findugame:
 
     End Sub
 
+    Sub colorer()
+        For i = 0 To DataGridOverlays.Rows.Count - 1
+            Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
+            Dim fichier2 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG2").Index).Value
+            Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
+
+            If fichier1 = "0" Then
+                DataGridOverlays.Rows(i).DefaultCellStyle.BackColor = Color.FromArgb(255, 139, 139)
+            ElseIf fichier2 = "0" Then
+                DataGridOverlays.Rows(i).DefaultCellStyle.BackColor = Color.FromArgb(255, 139, 139)
+            ElseIf fichier3 = "0" Then
+                DataGridOverlays.Rows(i).DefaultCellStyle.BackColor = Color.FromArgb(255, 139, 139)
+            Else
+                DataGridOverlays.Rows(i).DefaultCellStyle.BackColor = Color.FromArgb(162, 255, 162)
+            End If
+        Next
+    End Sub
     Private Sub RqtARRM_Click(sender As Object, e As EventArgs) Handles RqtARRM.Click
         If ListErreurs.Items.Count = 0 Then Exit Sub
         Dim rqt As String = Nothing
+        Dim dernier As Integer = (ListErreurs.SelectedItems.Count - 1)
 
-        For j = 0 To ListErreurs.Items.Count - 1
-            If ListErreurs.Items.Count = 1 Or j = ListErreurs.Items.Count - 1 Then
-                rqt = rqt + "fichier_rom like '" & ListErreurs.Items(j) & "' "
+
+        For Each j In ListErreurs.SelectedItems
+            Dim ligneencours = ListErreurs.Items.IndexOf(j)
+
+            If ListErreurs.SelectedItems.Count = 1 Or ligneencours = dernier Then
+                rqt = rqt + "fichier_rom like '" & j & "' "
                 Clipboard.SetText(rqt)
             ElseIf ListErreurs.Items.Count > 1 Then
-                rqt = rqt + "fichier_rom like '" & ListErreurs.Items(j) & "' or "
+                rqt = rqt + "fichier_rom like '" & j & "' or "
             End If
         Next
 
