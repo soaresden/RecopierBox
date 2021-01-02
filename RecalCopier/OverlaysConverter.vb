@@ -493,7 +493,7 @@ findugame:
 
     End Sub
 
-    Sub colorer()
+    Sub Colorer()
         For i = 0 To DataGridOverlays.Rows.Count - 1
             Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
             Dim fichier2 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG2").Index).Value
@@ -513,20 +513,32 @@ findugame:
     Private Sub RqtARRM_Click(sender As Object, e As EventArgs) Handles RqtARRM.Click
         If ListErreurs.Items.Count = 0 Then Exit Sub
         Dim rqt As String = Nothing
-        Dim dernier As Integer = (ListErreurs.SelectedItems.Count - 1)
-
+        Dim dernier = ListErreurs.SelectedItems.Item(ListErreurs.SelectedItems.Count - 1)
 
         For Each j In ListErreurs.SelectedItems
-            Dim ligneencours = ListErreurs.Items.IndexOf(j)
 
-            If ListErreurs.SelectedItems.Count = 1 Or ligneencours = dernier Then
-                rqt = rqt + "fichier_rom like '" & j & "' "
+            If InStr(j, "'") > 0 Then
+                j = j.ToString.Substring(0, InStr(j, "'") - 1) & "*"
+            End If
+
+            If ListErreurs.SelectedItems.Count = 1 Then
+                rqt = rqt + "fichier_rom like '" & j & "'"
                 Clipboard.SetText(rqt)
-            ElseIf ListErreurs.Items.Count > 1 Then
-                rqt = rqt + "fichier_rom like '" & j & "' or "
+                GoTo Fin
+            End If
+
+            If ListErreurs.Items.Count > 1 Then
+                rqt = rqt + "fichier_rom like '" & j & "'"
+                If j = dernier Then
+                    Clipboard.SetText(rqt)
+                    GoTo Fin
+                Else
+                    rqt = rqt + " or "
+                End If
             End If
         Next
-
+Fin:
         MsgBox("Requete dans le presse papiers" & Chr(13) & "Collez ca dans la barre de Requete d'ARRM et filtrez")
     End Sub
+
 End Class
