@@ -696,4 +696,9 @@ skip:
         ResizeOverlays.Show()
         Me.Close()
     End Sub
+
+    Private Sub ButtonConvert_Click(sender As Object, e As EventArgs) Handles ButtonConvert.Click
+        OverlaysConverter.Show()
+        Me.Close()
+    End Sub
 End Class

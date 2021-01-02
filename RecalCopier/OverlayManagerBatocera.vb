@@ -13,6 +13,7 @@ Public Class OverlayManagerBatocera
         Label8.Hide()
         ListdesFichiersEnTrop.Hide()
 
+        Call completercombo
         Call ImporterlesGamelists()
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -80,22 +81,6 @@ Public Class OverlayManagerBatocera
             .ColumnName = "CocheOverlay"
         End With
         table.Columns.Add(column)
-
-        'Ajouter toutes les deco du dossier systems
-        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\decorations\mybezels16-9\systems\")
-        Dim aryFi As IO.FileInfo() = di.GetFiles("*.info")
-        Dim fi As IO.FileInfo
-        Dim nomfichierinfo As String
-        Dim chemininfo As String
-        Dim pathdelasave As String
-
-        For Each fi In aryFi
-            chemininfo = fi.FullName
-            nomfichierinfo = fi.Name
-            pathdelasave = Replace(chemininfo, "\saves\", "\roms\")
-            Dim console As String = FileNameWithoutExtension(nomfichierinfo)
-            table.Rows.Add(console, "###CONSOLE###", "Pas de Chemin Rom", "Pas de nom de Rom", chemininfo, True)
-        Next
 
         'Loop for every gamelists
         For Each i In GameLists.Items
@@ -166,6 +151,18 @@ ProchainGamelist:
         TextBox1.Show()
         GroupBox1.Show()
     End Sub
+    Sub Completercombo()
+        'On Importe les dossiers bezel
+        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.DossierOverlay, FileIO.SearchOption.SearchTopLevelOnly)
+            GameLists.Items.Add(System.IO.Path.GetFileName(folder))
+        Next
+        If ComboBox1.Items.Count = 0 Then
+            Exit Sub
+        Else
+            ComboBox1.SelectedIndex = 0
+        End If
+
+    End Sub
 
     Public Function FileNameWithoutExtension(ByVal FullPath _
     As String) As String
@@ -175,7 +172,7 @@ ProchainGamelist:
         Dim compteuroverlay As Integer = 0
         Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & console & "\" & nomfichierrom
         Dim nomducfg As String = FileNameWithoutExtension(nomfichierrom) & ".info"
-        Dim cheminoverlay As String = Replace(rompath, "\roms\" & console & "\", "\decorations\mybezels16-9\games\")
+        Dim cheminoverlay As String = Replace(rompath, "\roms\" & console & "\", "\decorations\" & ComboBox1.Text & "\games\")
         Dim testcheminoverlay As String = Replace(cheminoverlay, nomfichierrom, nomducfg)
 
         Dim cocheoverlay As Boolean
@@ -283,6 +280,10 @@ ProchainGamelist:
             table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg)
 fichiersuivant:
         Next
+
+
+
+
 
         'Sorting A-Z the console
         dv = table.DefaultView
@@ -653,6 +654,11 @@ skip:
 
     Private Sub ButtonResizeOverlays_Click(sender As Object, e As EventArgs) Handles ButtonResizeOverlays.Click
         ResizeOverlays.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub ButtonConvert_Click(sender As Object, e As EventArgs) Handles ButtonConvert.Click
+        OverlaysConverter.Show()
         Me.Close()
     End Sub
 End Class

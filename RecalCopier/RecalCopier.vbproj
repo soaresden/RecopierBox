@@ -132,6 +132,12 @@
     <Compile Include="OverlayManagerBatocera.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OverlaysConverter.Designer.vb">
+      <DependentUpon>OverlaysConverter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OverlaysConverter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Quizz.Designer.vb">
       <DependentUpon>Quizz.vb</DependentUpon>
     </Compile>
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OverlayManagerBatocera.resx">
       <DependentUpon>OverlayManagerBatocera.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverlaysConverter.resx">
+      <DependentUpon>OverlaysConverter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quizz.resx">
       <DependentUpon>Quizz.vb</DependentUpon>

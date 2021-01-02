@@ -60,6 +60,8 @@ Partial Class OverlayManagerBatocera
         Me.OverlayTotal = New System.Windows.Forms.TextBox()
         Me.GameLists = New System.Windows.Forms.ListBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ButtonConvert = New System.Windows.Forms.Button()
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -79,7 +81,7 @@ Partial Class OverlayManagerBatocera
         Me.ButtonResizeOverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.ButtonResizeOverlays.Location = New System.Drawing.Point(3, 39)
         Me.ButtonResizeOverlays.Name = "ButtonResizeOverlays"
-        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(238, 33)
+        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(238, 24)
         Me.ButtonResizeOverlays.TabIndex = 85
         Me.ButtonResizeOverlays.Text = "MENU : Redimensionner des Overlays"
         Me.ButtonResizeOverlays.UseVisualStyleBackColor = False
@@ -87,10 +89,10 @@ Partial Class OverlayManagerBatocera
         'RichTextBox1
         '
         Me.RichTextBox1.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.RichTextBox1.Location = New System.Drawing.Point(247, 3)
+        Me.RichTextBox1.Location = New System.Drawing.Point(498, 3)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
-        Me.RichTextBox1.Size = New System.Drawing.Size(496, 60)
+        Me.RichTextBox1.Size = New System.Drawing.Size(476, 60)
         Me.RichTextBox1.TabIndex = 82
         Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
         '
@@ -121,7 +123,7 @@ Partial Class OverlayManagerBatocera
         Me.buttonImportRoms1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.buttonImportRoms1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.buttonImportRoms1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.buttonImportRoms1.Location = New System.Drawing.Point(376, 69)
+        Me.buttonImportRoms1.Location = New System.Drawing.Point(376, 51)
         Me.buttonImportRoms1.Name = "buttonImportRoms1"
         Me.buttonImportRoms1.Size = New System.Drawing.Size(116, 30)
         Me.buttonImportRoms1.TabIndex = 80
@@ -424,7 +426,7 @@ Partial Class OverlayManagerBatocera
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label1.Location = New System.Drawing.Point(128, 84)
+        Me.Label1.Location = New System.Drawing.Point(306, 84)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(186, 13)
         Me.Label1.TabIndex = 65
@@ -485,22 +487,47 @@ Partial Class OverlayManagerBatocera
         '
         Me.GameLists.Enabled = False
         Me.GameLists.FormattingEnabled = True
-        Me.GameLists.Location = New System.Drawing.Point(3, 105)
+        Me.GameLists.Location = New System.Drawing.Point(3, 146)
         Me.GameLists.Name = "GameLists"
         Me.GameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.GameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.GameLists.Size = New System.Drawing.Size(116, 472)
+        Me.GameLists.Size = New System.Drawing.Size(116, 446)
         Me.GameLists.TabIndex = 72
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label9.Location = New System.Drawing.Point(30, 89)
+        Me.Label9.Location = New System.Drawing.Point(30, 129)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(89, 13)
         Me.Label9.TabIndex = 86
         Me.Label9.Text = "GameLists Roms:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(3, 105)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(116, 21)
+        Me.ComboBox1.TabIndex = 87
+        '
+        'ButtonConvert
+        '
+        Me.ButtonConvert.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.ButtonConvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonConvert.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonConvert.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonConvert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.ButtonConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonConvert.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonConvert.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ButtonConvert.Location = New System.Drawing.Point(3, 69)
+        Me.ButtonConvert.Name = "ButtonConvert"
+        Me.ButtonConvert.Size = New System.Drawing.Size(238, 23)
+        Me.ButtonConvert.TabIndex = 88
+        Me.ButtonConvert.Text = "MENU : Conversion Recalbox<->Batocera"
+        Me.ButtonConvert.UseVisualStyleBackColor = False
         '
         'OverlayManagerBatocera
         '
@@ -508,6 +535,8 @@ Partial Class OverlayManagerBatocera
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
         Me.ClientSize = New System.Drawing.Size(983, 604)
+        Me.Controls.Add(Me.ButtonConvert)
+        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.ButtonResizeOverlays)
         Me.Controls.Add(Me.RichTextBox1)
@@ -582,4 +611,6 @@ Partial Class OverlayManagerBatocera
     Friend WithEvents OverlayTotal As TextBox
     Friend WithEvents GameLists As ListBox
     Friend WithEvents Label9 As Label
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ButtonConvert As Button
 End Class

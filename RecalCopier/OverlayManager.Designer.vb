@@ -59,6 +59,7 @@ Partial Class OverlayManager
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.templisttosupp = New System.Windows.Forms.ListBox()
         Me.ButtonResizeOverlays = New System.Windows.Forms.Button()
+        Me.ButtonConvert = New System.Windows.Forms.Button()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -70,7 +71,7 @@ Partial Class OverlayManager
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label1.Location = New System.Drawing.Point(137, 81)
+        Me.Label1.Location = New System.Drawing.Point(256, 86)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(186, 13)
         Me.Label1.TabIndex = 2
@@ -430,7 +431,7 @@ Partial Class OverlayManager
         Me.buttonImportRoms1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.buttonImportRoms1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.buttonImportRoms1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.buttonImportRoms1.Location = New System.Drawing.Point(385, 66)
+        Me.buttonImportRoms1.Location = New System.Drawing.Point(385, 53)
         Me.buttonImportRoms1.Name = "buttonImportRoms1"
         Me.buttonImportRoms1.Size = New System.Drawing.Size(116, 30)
         Me.buttonImportRoms1.TabIndex = 40
@@ -457,10 +458,10 @@ Partial Class OverlayManager
         'RichTextBox1
         '
         Me.RichTextBox1.BackColor = System.Drawing.SystemColors.ControlDark
-        Me.RichTextBox1.Location = New System.Drawing.Point(256, 0)
+        Me.RichTextBox1.Location = New System.Drawing.Point(507, 0)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
-        Me.RichTextBox1.Size = New System.Drawing.Size(496, 60)
+        Me.RichTextBox1.Size = New System.Drawing.Size(476, 60)
         Me.RichTextBox1.TabIndex = 43
         Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
         '
@@ -485,10 +486,27 @@ Partial Class OverlayManager
         Me.ButtonResizeOverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.ButtonResizeOverlays.Location = New System.Drawing.Point(12, 36)
         Me.ButtonResizeOverlays.Name = "ButtonResizeOverlays"
-        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(238, 33)
+        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(238, 24)
         Me.ButtonResizeOverlays.TabIndex = 64
         Me.ButtonResizeOverlays.Text = "MENU : Redimensionner des Overlays"
         Me.ButtonResizeOverlays.UseVisualStyleBackColor = False
+        '
+        'ButtonConvert
+        '
+        Me.ButtonConvert.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.ButtonConvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonConvert.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonConvert.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonConvert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.ButtonConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonConvert.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonConvert.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ButtonConvert.Location = New System.Drawing.Point(12, 63)
+        Me.ButtonConvert.Name = "ButtonConvert"
+        Me.ButtonConvert.Size = New System.Drawing.Size(238, 23)
+        Me.ButtonConvert.TabIndex = 65
+        Me.ButtonConvert.Text = "MENU : Conversion Recalbox<->Batocera"
+        Me.ButtonConvert.UseVisualStyleBackColor = False
         '
         'OverlayManager
         '
@@ -496,6 +514,7 @@ Partial Class OverlayManager
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
         Me.ClientSize = New System.Drawing.Size(984, 591)
+        Me.Controls.Add(Me.ButtonConvert)
         Me.Controls.Add(Me.ButtonResizeOverlays)
         Me.Controls.Add(Me.templisttosupp)
         Me.Controls.Add(Me.RichTextBox1)
@@ -570,4 +589,5 @@ Partial Class OverlayManager
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents templisttosupp As ListBox
     Friend WithEvents ButtonResizeOverlays As Button
+    Friend WithEvents ButtonConvert As Button
 End Class

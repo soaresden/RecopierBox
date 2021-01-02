@@ -127,6 +127,8 @@ Public Class Form1
             If TxtRecalfolderPath.Text.Substring(Len(TxtRecalfolderPath.Text) - 1, 1) <> "\" Then
                 TxtRecalfolderPath.Text = TxtRecalfolderPath.Text + "\"
             End If
+            My.Settings.RecalboxFolder = TxtRecalfolderPath.Text
+            My.Settings.Save()
         End If
     End Sub
     Private Sub RichTextBox1_Click(sender As Object, e As EventArgs) Handles RichTextBox1.Click
@@ -244,4 +246,7 @@ Public Class Form1
         End Try
     End Sub
 
+    Private Sub TxtRecalfolderPath_TextChanged(sender As Object, e As EventArgs) Handles TxtRecalfolderPath.TextChanged
+
+    End Sub
 End Class
