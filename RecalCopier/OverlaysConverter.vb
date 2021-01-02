@@ -15,7 +15,7 @@ Public Class OverlaysConverter
             Next
             ComboBox1.SelectedIndex = 0
         End If
-
+        ButtonConvert.Hide()
     End Sub
 
     Sub CompletionRecalbox()
@@ -63,16 +63,30 @@ Public Class OverlaysConverter
 
         column = New DataColumn()
         With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "CheminCFG2"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "CheminPNG"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
             .DataType = Type.GetType("System.Boolean")
             .ColumnName = "CocheCFG"
         End With
         table.Columns.Add(column)
 
         Dim chemincfgoverlay As String = Nothing
-
+        Dim yauerreur As Integer = 0
         'Loop for every gamelists
-        For i = 0 To GameLists.Items.Count - 1
-            Dim nomconsole As String = GameLists.Items(i)
+        For Each i In GameLists.SelectedItems
+            Dim nomconsole As String = i
             Dim nbdansdossier As Integer
 
             Dim chemindudossier = My.Settings.DossierOverlay & nomconsole
@@ -89,25 +103,52 @@ Public Class OverlaysConverter
             Dim cheminducfg As String
             Dim pathdelarom As String
 
+
+
             For Each fi In aryFi
                 If fi.Name = nomconsole & "_overlay.cfg" Then GoTo fichiersuivant
                 cheminducfg = fi.FullName
                 nomfichiercfg = fi.Name
 
                 pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
+                Dim pathpourarrm As String = "*" & Path.GetFileName((pathdelarom))
 
                 'On va rechercher le nom de la rom
                 Dim results = Recherchenomdelarom(nomconsole, pathdelarom)
                 Dim romname = results.item1
                 Dim etatoverlay = results.item2
 
+                Dim results2 = LectureDesCfgs(nomconsole, nomfichiercfg)
+                Dim overlay2 = results2.item2
+                Dim fichierpng = results2.item3
+
+                'Test si le fichier cfg 2 existe et les fichier png
+                If overlay2 = "0" Then
+                    yauerreur = yauerreur + 1
+                    ListErreurs.Items.Add(pathpourarrm)
+                    GoTo ajout
+                End If
+
+                If fichierpng = "0" Then
+                    yauerreur = yauerreur + 1
+                    ListErreurs.Items.Add(pathpourarrm)
+                End If
+ajout:
                 'on ajoute au tableau
-                table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg, etatoverlay)
+                table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg, overlay2, fichierpng, etatoverlay)
 
 fichiersuivant:
             Next
 nextconsole:
         Next
+
+        'Si y'a eu des erreur faut avertir
+        If yauerreur > 0 Then
+            MsgBox("Des fichiers sont manquants" & Chr(13) & "Vérifiez leur dispo ou rescrappez les via le Bouton Requete ARRM" & Chr(13))
+            RqtARRM.Show()
+        Else
+            RqtARRM.Hide()
+        End If
 
         'Sorting A-Z the console
         dv = table.DefaultView
@@ -116,18 +157,18 @@ nextconsole:
         'Width for columns
         DataGridOverlays.RowHeadersWidth = 25
         DataGridOverlays.Columns("Console").Width = 40
-        DataGridOverlays.Columns("NomRomXML").Width = 140
-        DataGridOverlays.Columns("NomFichierCFG").Width = 205
-        DataGridOverlays.Columns("CheminCFG").Width = 190
-        DataGridOverlays.Columns("CocheCFG").Width = 20
+        DataGridOverlays.Columns("NomRomXML").Width = 110
+        DataGridOverlays.Columns("NomFichierCFG").Width = 110
+        DataGridOverlays.Columns("CheminCFG").Width = 85
+        DataGridOverlays.Columns("CheminCFG2").Width = 85
+        DataGridOverlays.Columns("CheminPNG").Width = 85
+        DataGridOverlays.Columns("CocheCFG").Visible = False
 
         Dim compteuroverlay As Integer = 0
 
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, NomRomXML asc"
 
-        'On met la derniere colonne coche en readonly
-        DataGridOverlays.Columns("CocheCFG").ReadOnly = True
 
     End Sub
     Function Recherchenomdelarom(console As String, pathdelarom As String)
@@ -168,18 +209,20 @@ lignesuivante:
         Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
     End Function
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ButtonImportAll.Click
+        ListErreurs.Items.Clear()
         If CheckBoxRecalbox.Checked = True Then
-            Call completionRecalbox()
+            Call CompletionRecalbox()
         Else
             Call completionBatocera()
         End If
+        ButtonConvert.Show()
     End Sub
     Private Sub CheckBoxRecalbox_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxRecalbox.CheckedChanged
         If CheckBoxRecalbox.Checked = True Then
             CheckBoxRecalbox.Checked = True
             CheckBoxBatocera.Checked = False
 
-            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme :" & Chr(13) & Chr(13) & "CONVERTED")
+            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED")
             ComboBox1.Items.Add(nomdossier)
             If nomdossier <> Nothing Then
                 Dim fullchemin = My.Settings.DossierOverlay & nomdossier
@@ -203,7 +246,7 @@ lignesuivante:
             CheckBoxRecalbox.Checked = True
             CheckBoxBatocera.Checked = False
 
-            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme :" & Chr(13) & Chr(13) & "CONVERTED")
+            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED")
             ComboBox1.Items.Add(nomdossier)
             If nomdossier <> Nothing Then
                 Dim fullchemin = My.Settings.DossierOverlay & nomdossier
@@ -231,16 +274,14 @@ lignesuivante:
         End If
 
         'On va lire toutes les lignes
-        For i = 0 To DataGridOverlays.Rows.Count - 2
+        For i = 0 To DataGridOverlays.Rows.Count - 1
             'on lit le fichier cfg
-            Dim console = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("Console").Index).Value
-            Dim nomducfg = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("NomFichierCFG").Index).Value
+            Dim console = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("Console").Index).Value.ToString
+            Dim nomducfg = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("NomFichierCFG").Index).Value.ToString
 
-            Dim resultats = LectureDesCfgs(console, nomducfg)
-
-            Dim fichier1 As String = resultats.item1
-            Dim fichier2 As String = resultats.item2
-            Dim fichier3 As String = resultats.item3
+            Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
+            Dim fichier2 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG2").Index).Value
+            Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
 
 
             If IsNumeric(fichier3) = True Then
@@ -364,6 +405,7 @@ lignesuivante:
             sw.Close()
 fichiersuivant:
         Next
+
         Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
 
     End Sub
@@ -407,20 +449,24 @@ fichiersuivant:
             detectinputoverlay = InStr(s, "/overlays/")
 
             If detectinputoverlay > 0 Then
-                'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
+                Dim sansguillemets = Replace(s, Chr(34), "")
+                'Dim cheminducfgoverlay = sansguillemets.Substring(detectinputoverlay + 8)
                 'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
-                'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 4)
+                'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
 
                 Dim chemincfgoverlaydanscfg As String
-                chemincfgoverlaydanscfg = s.Substring(detectinputoverlay + 8).Substring(0, InStr(s.Substring(detectinputoverlay + 9), ".cfg") + 4)
-                cheminpropreoverlay2 = Replace(My.Settings.DossierOverlay.Substring(0, Len(My.Settings.DossierOverlay) - 1) & Replace(chemincfgoverlaydanscfg, "/", "\"), "\\", "\")
+                chemincfgoverlaydanscfg = Replace(s, Chr(34), "").Substring(detectinputoverlay + 8).Substring(0, InStr(Replace(s, Chr(34), "").Substring(detectinputoverlay + 8), ".cfg") + 3)
+                cheminpropreoverlay2 = Replace(My.Settings.DossierOverlay.Substring(0, Len(My.Settings.DossierOverlay)) & Replace(chemincfgoverlaydanscfg, "/", "\"), "\\", "\")
                 justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
                 Exit For
             End If
         Next
 
         'on lit le deuxieme fichier overlay cfg pour trouver le png
-        If Not File.Exists(cheminpropreoverlay2) Then GoTo findugame
+        If Not File.Exists(cheminpropreoverlay2) Then
+            cheminpropreoverlay2 = "0"
+            GoTo findugame
+        End If
         File.ReadAllLines(cheminpropreoverlay2)
 
         Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
@@ -447,5 +493,21 @@ findugame:
 
     Sub Completionbatocera()
 
+    End Sub
+
+    Private Sub RqtARRM_Click(sender As Object, e As EventArgs) Handles RqtARRM.Click
+        If ListErreurs.Items.Count = 0 Then Exit Sub
+        Dim rqt As String = Nothing
+
+        For j = 0 To ListErreurs.Items.Count - 1
+            If ListErreurs.Items.Count = 1 Or j = ListErreurs.Items.Count - 1 Then
+                rqt = rqt + "fichier_rom like '" & ListErreurs.Items(j) & "' "
+                Clipboard.SetText(rqt)
+            ElseIf ListErreurs.Items.Count > 1 Then
+                rqt = rqt + "fichier_rom like '" & ListErreurs.Items(j) & "' or "
+            End If
+        Next
+
+        MsgBox("Requete dans le presse papiers" & Chr(13) & "Collez ca dans la barre de Requete d'ARRM et filtrez")
     End Sub
 End Class

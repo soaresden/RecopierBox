@@ -31,6 +31,8 @@ Partial Class OverlaysConverter
         Me.ButtonConvert = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TextCombobox = New System.Windows.Forms.Label()
+        Me.ListErreurs = New System.Windows.Forms.ListBox()
+        Me.RqtARRM = New System.Windows.Forms.Button()
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -73,19 +75,25 @@ Partial Class OverlaysConverter
         '
         'GameLists
         '
-        Me.GameLists.Enabled = False
         Me.GameLists.FormattingEnabled = True
         Me.GameLists.Location = New System.Drawing.Point(8, 132)
         Me.GameLists.Name = "GameLists"
-        Me.GameLists.Size = New System.Drawing.Size(107, 329)
+        Me.GameLists.Size = New System.Drawing.Size(121, 329)
         Me.GameLists.TabIndex = 41
         '
         'DataGridOverlays
         '
+        Me.DataGridOverlays.AllowUserToAddRows = False
+        Me.DataGridOverlays.AllowUserToDeleteRows = False
+        Me.DataGridOverlays.AllowUserToResizeRows = False
         Me.DataGridOverlays.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridOverlays.Cursor = System.Windows.Forms.Cursors.Hand
         Me.DataGridOverlays.Location = New System.Drawing.Point(135, 81)
+        Me.DataGridOverlays.MultiSelect = False
         Me.DataGridOverlays.Name = "DataGridOverlays"
-        Me.DataGridOverlays.Size = New System.Drawing.Size(653, 380)
+        Me.DataGridOverlays.ReadOnly = True
+        Me.DataGridOverlays.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridOverlays.Size = New System.Drawing.Size(527, 380)
         Me.DataGridOverlays.TabIndex = 42
         '
         'ButtonImportAll
@@ -98,11 +106,11 @@ Partial Class OverlaysConverter
         Me.ButtonImportAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonImportAll.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonImportAll.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonImportAll.Location = New System.Drawing.Point(8, 81)
+        Me.ButtonImportAll.Location = New System.Drawing.Point(8, 79)
         Me.ButtonImportAll.Name = "ButtonImportAll"
-        Me.ButtonImportAll.Size = New System.Drawing.Size(107, 40)
+        Me.ButtonImportAll.Size = New System.Drawing.Size(121, 47)
         Me.ButtonImportAll.TabIndex = 43
-        Me.ButtonImportAll.Text = "Importer tous les fichiers Configs"
+        Me.ButtonImportAll.Text = "Importer les fichiers Configs selectionnés"
         Me.ButtonImportAll.UseVisualStyleBackColor = False
         '
         'ButtonConvert
@@ -140,11 +148,38 @@ Partial Class OverlaysConverter
         Me.TextCombobox.TabIndex = 46
         Me.TextCombobox.Text = "Nom du Dossier Batocera"
         '
+        'ListErreurs
+        '
+        Me.ListErreurs.FormattingEnabled = True
+        Me.ListErreurs.Location = New System.Drawing.Point(668, 82)
+        Me.ListErreurs.Name = "ListErreurs"
+        Me.ListErreurs.Size = New System.Drawing.Size(120, 329)
+        Me.ListErreurs.TabIndex = 47
+        '
+        'RqtARRM
+        '
+        Me.RqtARRM.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.RqtARRM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.RqtARRM.Cursor = System.Windows.Forms.Cursors.Default
+        Me.RqtARRM.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.RqtARRM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.RqtARRM.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RqtARRM.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RqtARRM.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.RqtARRM.Location = New System.Drawing.Point(668, 413)
+        Me.RqtARRM.Name = "RqtARRM"
+        Me.RqtARRM.Size = New System.Drawing.Size(120, 48)
+        Me.RqtARRM.TabIndex = 48
+        Me.RqtARRM.Text = "Copier la Requete pour ARRM"
+        Me.RqtARRM.UseVisualStyleBackColor = False
+        '
         'OverlaysConverter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 482)
+        Me.Controls.Add(Me.RqtARRM)
+        Me.Controls.Add(Me.ListErreurs)
         Me.Controls.Add(Me.TextCombobox)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.ButtonConvert)
@@ -170,4 +205,6 @@ Partial Class OverlaysConverter
     Friend WithEvents ButtonConvert As Button
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents TextCombobox As Label
+    Friend WithEvents ListErreurs As ListBox
+    Friend WithEvents RqtARRM As Button
 End Class

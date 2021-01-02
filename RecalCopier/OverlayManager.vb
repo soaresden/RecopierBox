@@ -286,7 +286,7 @@ nextconsole:
         'Width for columns
         DataGridOverlay.RowHeadersWidth = 25
         DataGridOverlay.Columns("Console").Width = 40
-        DataGridOverlay.Columns("NomRomXML").Width = 140
+        DataGridOverlay.Columns("NomRomXML").Width = 130
         DataGridOverlay.Columns("NomFichierCFG").Width = 190
         DataGridOverlay.Columns("CheminCFG").Width = 45
 
