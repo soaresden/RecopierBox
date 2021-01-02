@@ -396,9 +396,9 @@ Partial Class OverlayManager
         Me.ImportBoth1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ImportBoth1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ImportBoth1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ImportBoth1.Location = New System.Drawing.Point(134, 0)
+        Me.ImportBoth1.Location = New System.Drawing.Point(134, 7)
         Me.ImportBoth1.Name = "ImportBoth1"
-        Me.ImportBoth1.Size = New System.Drawing.Size(116, 30)
+        Me.ImportBoth1.Size = New System.Drawing.Size(116, 23)
         Me.ImportBoth1.TabIndex = 38
         Me.ImportBoth1.Text = "Tout Importer"
         Me.ImportBoth1.UseVisualStyleBackColor = False
@@ -460,7 +460,7 @@ Partial Class OverlayManager
         Me.RichTextBox1.Location = New System.Drawing.Point(256, 0)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
-        Me.RichTextBox1.Size = New System.Drawing.Size(407, 45)
+        Me.RichTextBox1.Size = New System.Drawing.Size(496, 60)
         Me.RichTextBox1.TabIndex = 43
         Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
         '

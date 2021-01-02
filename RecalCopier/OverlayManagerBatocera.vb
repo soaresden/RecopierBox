@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Public Class OverlayManager
+Public Class OverlayManagerBatocera
 
     Private Sub OverlayManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         GroupBox1.Hide()
@@ -21,17 +21,11 @@ Public Class OverlayManager
     End Sub
     Sub ImporterlesGamelists()
         'On Importe toutes les GameLists
-        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.DossierOverlay, FileIO.SearchOption.SearchTopLevelOnly)
+        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.RecalboxFolder & "\roms\", FileIO.SearchOption.SearchTopLevelOnly)
             GameLists.Items.Add(System.IO.Path.GetFileName(folder))
         Next
     End Sub
     Private Sub ButtonImportRoms_Click(sender As Object, e As EventArgs) Handles buttonImportRoms1.Click
-        'Conditionnelle pour ne rien lancer si aucun selectionnés
-        If GameLists.SelectedItems.Count = 0 Then
-            MsgBox("Merci de Selectionner des Gamelists")
-            Exit Sub
-        End If
-
         'On clear par Securité
         DataGridRoms.Columns.Clear()
         On Error Resume Next
@@ -80,18 +74,34 @@ Public Class OverlayManager
         End With
         table.Columns.Add(column)
 
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Boolean")
+            .ColumnName = "CocheOverlay"
+        End With
+        table.Columns.Add(column)
+
+        'Ajouter toutes les deco du dossier systems
+        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\decorations\mybezels16-9\systems\")
+        Dim aryFi As IO.FileInfo() = di.GetFiles("*.info")
+        Dim fi As IO.FileInfo
+        Dim nomfichierinfo As String
+        Dim chemininfo As String
+        Dim pathdelasave As String
+
+        For Each fi In aryFi
+            chemininfo = fi.FullName
+            nomfichierinfo = fi.Name
+            pathdelasave = Replace(chemininfo, "\saves\", "\roms\")
+            Dim console As String = FileNameWithoutExtension(nomfichierinfo)
+            table.Rows.Add(console, "###CONSOLE###", "Pas de Chemin Rom", "Pas de nom de Rom", chemininfo, True)
+        Next
 
         'Loop for every gamelists
-        For Each i In GameLists.SelectedItems
-
+        For Each i In GameLists.Items
             'generating the console name
             Dim console As String = i
             gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist.xml"
-
-            'Si dans le dossier y'a pas de gamelist on va annuler l'ajout de roms parce que y'en a pas.
-            If Not System.IO.File.Exists(gamelist) Then
-                GoTo ProchainGamelist
-            End If
 
             'On ajoute ensuite les consoles dans la listebox des console
             Dim consolederom As String = i
@@ -110,8 +120,15 @@ Public Class OverlayManager
                 Dim romnomderom As String = Path.GetFileName(rompath)
                 If romhidden = "true" Then GoTo Romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
 
+                'On remplit les Coches Overlays
+                Dim results = CompletiondesoverlaysRoms(romconsole, romnomderom)
+
+                romoverlays = results.item1
+                Dim cheminoverlay As String = results.item2
+                RomTotalOverlay.Text = RomTotalOverlay.Text + results.item3.ToString
+
                 'on ajoute le tout dans une table
-                table.Rows.Add(romconsole, romname, rompath, romnomderom, romoverlays)
+                table.Rows.Add(romconsole, romname, rompath, romnomderom, cheminoverlay, romoverlays)
 Romsuivante:
             Next
 ProchainGamelist:
@@ -119,13 +136,6 @@ ProchainGamelist:
         'Sorting A-Z the console
         dv = table.DefaultView
         DataGridRoms.DataSource = table
-
-        'On ajoute la checkbox pour les overlays
-        Dim chk As DataGridViewCheckBoxColumn = New DataGridViewCheckBoxColumn With {
-    .HeaderText = "CocheOverlay",
-    .Name = "CocheOverlay"
-}
-        DataGridRoms.Columns.Add(chk)
 
         'Width for columns
         DataGridRoms.RowHeadersWidth = 25
@@ -144,9 +154,10 @@ ProchainGamelist:
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, Titre asc"
 
+        'On colore les coches
+        Call colorerlescoches()
+
         Dim compteuroverlay As Integer = 0
-        'On remplit les Coches Overlays
-        Call CompletiondesoverlaysRoms()
 
         'On compte le nombre total d'entrées
         RomTotal.Text = DataGridRoms.Rows.Count - 1
@@ -160,31 +171,34 @@ ProchainGamelist:
     As String) As String
         Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
     End Function
-    Sub CompletiondesoverlaysRoms()
+    Function CompletiondesoverlaysRoms(console As String, nomfichierrom As String)
         Dim compteuroverlay As Integer = 0
-        For ligne = 0 To DataGridRoms.RowCount - 2
-            Dim rompath = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminRom").Index).Value
-            Dim romname = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value
-            Dim nomducfg As String = romname & ".cfg"
-            Dim cheminoverlay As String
+        Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & console & "\" & nomfichierrom
+        Dim nomducfg As String = FileNameWithoutExtension(nomfichierrom) & ".info"
+        Dim cheminoverlay As String = Replace(rompath, "\roms\" & console & "\", "\decorations\mybezels16-9\games\")
+        Dim testcheminoverlay As String = Replace(cheminoverlay, nomfichierrom, nomducfg)
 
+        Dim cocheoverlay As Boolean
+        If System.IO.File.Exists(testcheminoverlay) Then
+            cocheoverlay = True
+            compteuroverlay += 1
+        Else
+            Return cocheoverlay = False
+        End If
 
-            cheminoverlay = Replace(rompath, "\roms\", "\overlays\")
-
-            Dim testcheminoverlay As String = Replace(cheminoverlay, romname, nomducfg)
-
-            DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminOverlay").Index).Value = testcheminoverlay
-
-            If System.IO.File.Exists(testcheminoverlay) Then
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheOverlay").Index).Value = True
-                compteuroverlay += 1
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+        Return (cocheoverlay, testcheminoverlay, compteuroverlay)
+    End Function
+    Sub Colorerlescoches()
+        For i = 0 To DataGridRoms.RowCount - 1
+            If DataGridRoms.Rows(i).Cells(DataGridRoms.Columns("CocheOverlay").Index).Value = True Then
+                DataGridRoms.Rows(i).Cells(DataGridRoms.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             Else
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheOverlay").Index).Value = False
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+                DataGridRoms.Rows(i).Cells(DataGridRoms.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
         Next
-        RomTotalOverlay.Text = compteuroverlay
+
+        'On met en ReadOnly les cases coches
+        DataGridRoms.Columns("CocheOverlay").ReadOnly = True
     End Sub
 
     Private Sub ButtonImportOverlays_Click(sender As Object, e As EventArgs) Handles ButtonImportOverlays1.Click
@@ -239,44 +253,35 @@ ProchainGamelist:
         table.Columns.Add(column)
 
         Dim chemincfgoverlay As String = Nothing
+        Dim nbdansdossier As Integer
 
-        'Loop for every gamelists
-        For Each i In GameLists.SelectedItems
-            Dim nomconsole As String = i
-            Dim nbdansdossier As Integer
+        nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\decorations\", "*.info").Count
 
+        If nbdansdossier = 0 Then
+            Exit Sub
+        End If
 
-            nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\overlays\" & nomconsole, "*.cfg").Count
+        Dim di As New IO.DirectoryInfo(My.Settings.DossierOverlay & "\decorations\")
+        Dim aryFi As IO.FileInfo() = di.GetFiles("*.info")
+        Dim fi As IO.FileInfo
+        Dim nomfichiercfg As String
+        Dim cheminducfg As String
+        Dim pathdelarom As String
 
+        For Each fi In aryFi
+            Dim nomconsole As String
+            If fi.Name = "_overlay.cfg" Then GoTo fichiersuivant
+            cheminducfg = fi.FullName
+            nomfichiercfg = fi.Name
 
-                If nbdansdossier = 0 Then
-                GoTo nextconsole
-            End If
+            pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
 
-            Dim di As New IO.DirectoryInfo(My.Settings.DossierOverlay & nomconsole)
-            Dim aryFi As IO.FileInfo() = di.GetFiles("*.cfg")
-            Dim fi As IO.FileInfo
-            Dim nomfichiercfg As String
-            Dim cheminducfg As String
-            Dim pathdelarom As String
+            'On va rechercher le nom de la rom
+            Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
 
-            For Each fi In aryFi
-                If fi.Name = nomconsole & "_overlay.cfg" Then GoTo fichiersuivant
-                cheminducfg = fi.FullName
-                nomfichiercfg = fi.Name
-
-                pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
-
-
-                    'On va rechercher le nom de la rom
-                    Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
-
-                'on ajoute au tableau
-                table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg)
-
+            'on ajoute au tableau
+            table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg)
 fichiersuivant:
-            Next
-nextconsole:
         Next
 
         'Sorting A-Z the console
@@ -285,7 +290,7 @@ nextconsole:
 
         'Width for columns
         DataGridOverlay.RowHeadersWidth = 25
-        DataGridOverlay.Columns("Console").Width = 40
+        'DataGridOverlay.Columns("Console").Width = 40
         DataGridOverlay.Columns("NomRomXML").Width = 140
         DataGridOverlay.Columns("NomFichierCFG").Width = 190
         DataGridOverlay.Columns("CheminCFG").Width = 45
@@ -293,10 +298,9 @@ nextconsole:
         Dim compteuroverlay As Integer = 0
 
         'On ajoute la checkbox pour les overlays
-        Dim chk As DataGridViewCheckBoxColumn = New DataGridViewCheckBoxColumn With {
-            .HeaderText = "CocheRom",
-            .Name = "CocheRom"
-        }
+        Dim chk As DataGridViewCheckBoxColumn = New DataGridViewCheckBoxColumn With
+           {.HeaderText = "CocheRom",
+          .Name = "CocheRom"}
         DataGridOverlay.Columns.Add(chk)
         DataGridOverlay.Columns("CocheRom").Width = 25
 
@@ -304,28 +308,6 @@ nextconsole:
         dv.Sort = "Console asc, NomRomXML asc"
 
         'On va vérifier si les cfg sont liés à une rom
-        For row = 0 To DataGridOverlay.Rows.Count - 2
-            Dim cheminencours = DataGridOverlay.Rows(row).Cells(DataGridOverlay.Columns("CheminCFG").Index).Value
-            Dim consolerom = DataGridOverlay.Rows(row).Cells(DataGridOverlay.Columns("Console").Index).Value
-
-            'on va colorer la colonne des coches
-            If DataGridOverlay.Rows(row).Cells(DataGridOverlay.Columns("NomRomXML").Index).Value = "#PASDANSXML#" Then
-                DataGridOverlay.Rows(row).Cells(DataGridOverlay.Columns("CocheRom").Index).Value = False
-                DataGridOverlay.Rows(row).Cells(DataGridOverlay.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-                'et du coup on va ajouter à la listbox des CFG
-                Call FichiersCfgLies(cheminencours, consolerom)
-            Else
-                DataGridOverlay.Rows(row).Cells(DataGridOverlay.Columns("CocheRom").Index).Value = True
-                DataGridOverlay.Rows(row).Cells(DataGridOverlay.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            End If
-        Next
-
-        'Si la liste est superieure à 1 alors on commence à ecrire tous les fichiers
-        If ListToSupp.Items.Count > 0 Then
-            Call Ecrireles3fichiers()
-        Else
-            ListToSupp.Items.Add("0 overlays en trop detecté dans votre dossier :)")
-        End If
 
         'On met la derniere colonne coche en readonly
         DataGridOverlay.Columns("CocheRom").ReadOnly = True
@@ -397,7 +379,7 @@ lignesuivante:
 
 
 
-            ListToSupp.Items.Add(genpathducfg)
+        ListToSupp.Items.Add(genpathducfg)
     End Sub
 
     Sub Ecrireles3fichiers()
@@ -458,7 +440,7 @@ lignesuivante:
             detectinputoverlay = InStr(s, "/overlays/")
 
 
-                If detectinputoverlay > 0 Then
+            If detectinputoverlay > 0 Then
                 'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
                 'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
                 'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
@@ -501,7 +483,7 @@ lignesuivante:
         Dim actualrow As Integer = DataGridRoms.CurrentRow.Index
         If actualrow >= DataGridRoms.RowCount - 1 Then Exit Sub
         Dim nomdufichier As String = DataGridRoms.Rows(actualrow).Cells(2).Value
-        NewName.Text = Path.GetFileName(nomdufichier) & ".cfg"
+        NewName.Text = Path.GetFileName(nomdufichier) & ".info"
     End Sub
 
     Private Sub DataGridOverlay_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridOverlay.SelectionChanged
@@ -556,7 +538,7 @@ lignesuivante:
             detectinputoverlay = InStr(s, "/overlays/")
 
 
-                If detectinputoverlay > 0 Then
+            If detectinputoverlay > 0 Then
                 'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
                 'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
                 'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
@@ -637,27 +619,7 @@ skip:
 
         ButtonImportOverlays1.PerformClick()
 
-        'On enleve les doublons
-        Supdoublon(ListdesFichiersEnTrop)
     End Sub
-    Function Supdoublon(ByVal listboxName As ListBox)
-        listboxName.Sorted = True
-        listboxName.Refresh()
-        Dim index As Integer
-        Dim itemcount As Integer = listboxName.Items.Count
-
-        If itemcount > 1 Then
-            Dim lastitem As String = listboxName.Items(itemcount - 1)
-
-            For index = itemcount - 2 To 0 Step -1
-                If listboxName.Items(index) = lastitem Then
-                    listboxName.Items.RemoveAt(index)
-                Else
-                    lastitem = listboxName.Items(index)
-                End If
-            Next
-        End If
-    End Function
 
     Private Sub ButtonSuppSave_Click(sender As Object, e As EventArgs) Handles ButtonSuppSave.Click
         If MsgBox("Etes vous sur de supprimer les fichiers présents dans la liste en rouge ci dessous selectionnés ?" & Chr(13) & "Oui = Supprimer tous les fichiers CFG + _overlay + .png", vbYesNo) = vbNo Then Exit Sub
@@ -686,9 +648,6 @@ skip:
             Next n
 
         Next
-
-        'On enleve les doublons
-        Supdoublon(ListToSupp)
 
     End Sub
 

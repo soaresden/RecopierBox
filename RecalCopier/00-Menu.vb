@@ -160,9 +160,15 @@ Public Class Form1
     End Sub
 
     Private Sub ButtonOverlay_Click_1(sender As Object, e As EventArgs) Handles ButtonOverlay.Click
+
         'Au clic, on ouvre le formulaire associé et on ferme le menu
-        OverlayManager.Show()
-        Me.Hide()
+        If TypeRecalbox.Checked = True Then
+            OverlayManager.Show()
+            Me.Hide()
+        Else
+            OverlayManagerBatocera.Show()
+            Me.Hide()
+        End If
     End Sub
 
     Private Sub Paypal_Click(sender As Object, e As EventArgs) Handles Paypal.Click
