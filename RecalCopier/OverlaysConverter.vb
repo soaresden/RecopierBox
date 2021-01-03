@@ -434,16 +434,6 @@ lignesuivante:
                         ligneleft = " " & Chr(34) & "left" & Chr(34) & ":" & left & ","
                     End If
 
-                    If detectw > 0 Then
-                        Dim width As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
-                        lignewidth = " " & Chr(34) & "width" & Chr(34) & ":" & width & ","
-                    End If
-
-                    If detecth > 0 Then
-                        Dim height As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
-                        ligneheight = " " & Chr(34) & "height" & Chr(34) & ":" & height & ","
-                    End If
-
                     If compteurlignedufichiercfg = lineCount Then
                         sw.WriteLine(ligneopacity)
                         sw.WriteLine(lignemsgx)
