@@ -258,7 +258,7 @@ Partial Class OverlaysConverter
         Me.Supp123.Name = "Supp123"
         Me.Supp123.Size = New System.Drawing.Size(140, 47)
         Me.Supp123.TabIndex = 53
-        Me.Supp123.Text = "Supprimer les 3 fichiers"
+        Me.Supp123.Text = "Supprimer Tout"
         Me.Supp123.UseVisualStyleBackColor = False
         '
         'Label1

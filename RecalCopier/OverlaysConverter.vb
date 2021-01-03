@@ -190,6 +190,11 @@ nextconsole:
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, CheminCFG2 asc"
 
+        'on affiche les boutons
+        Supp1.Show()
+        Supp2.Show()
+        Supp3.Show()
+
         'on colore les lignes
         Call colorer()
     End Sub
@@ -243,7 +248,6 @@ lignesuivante:
         DataGridOverlays.Show()
         ButtonConvert.Show()
         Supp1.Show()
-        Supp2.Show()
         Supp3.Show()
         Supp123.Show()
     End Sub
@@ -270,7 +274,10 @@ lignesuivante:
             CheckBoxRecalbox.Checked = False
             CheckBoxBatocera.Checked = True
             Call Importfichierbato()
-            MsgBox("Selectionnez votre dossier Batocera")
+            MsgBox("Selectionnez le dossier Batocera Source pour la Conversion")
+            ComboBox1.Focus()
+            'On hide les boutons supp du 2eme fichier
+            Supp2.Hide()
         End If
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -291,19 +298,21 @@ lignesuivante:
 
         'On verifie qu'un dossier Batocera est bien selectionné
         If ComboBox1.Text = Nothing Then
-            MsgBox("Aucun Dossier Final Réalisé" & Chr(13) & Chr(13) & "Abandon")
-            Exit Sub
+            If CheckBoxBatocera.Checked = True Then
+                MsgBox("Aucun Dossier Final Selectionné" & Chr(13) & Chr(13) & "Abandon")
+                Exit Sub
+            End If
         End If
 
+        Dim nomdossierquestion As String
         'Si c'est Recalbox, On va creer le dossier final juste avant de convertir
         If CheckBoxRecalbox.Checked = True Then
-
-            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
-            ComboBox1.Items.Add(nomdossier)
+            nomdossierquestion = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
+            ComboBox1.Items.Add(nomdossierquestion)
             ComboBox1.SelectedIndex = 0
 
             'Si on annule, on quitte tout
-            If nomdossier = Nothing Then
+            If nomdossierquestion = Nothing Then
                 MsgBox("Abandon")
                 Exit Sub
             Else
@@ -312,154 +321,342 @@ lignesuivante:
                     System.IO.Directory.CreateDirectory(fullchemin)
                 End If
             End If
+
+        Else 'si c'est Batocera, on va devoir creer un dossier pour Recalbox
+            nomdossierquestion = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier pour Recalbox " & Chr(13) & Chr(13) & "RECALBOXCONVERTED", "Conversion BATOCERA --> RECALBOX", "RECALBOXCONVERTED")
+
+            'Si on annule, on quitte tout
+            If nomdossierquestion = Nothing Then
+                MsgBox("Abandon")
+                Exit Sub
+            Else
+                Dim fullchemin = My.Settings.DossierOverlay & nomdossierquestion
+                If (Not System.IO.Directory.Exists(fullchemin)) Then
+                    System.IO.Directory.CreateDirectory(fullchemin)
+                End If
+            End If
+
         End If
 
-        'On va lire toutes les lignes
-        For i = 0 To DataGridOverlays.Rows.Count - 1
-            'on lit le fichier cfg
-            Dim console = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("Console").Index).Value.ToString
-            Dim nomducfg = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("NomFichierCFG").Index).Value.ToString
+        If CheckBoxRecalbox.Checked = True Then
+            'On va lire toutes les lignes
+            For i = 0 To DataGridOverlays.Rows.Count - 1
+                'on lit le fichier cfg
+                Dim console = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("Console").Index).Value.ToString
+                Dim nomducfg = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("NomFichierCFG").Index).Value.ToString
 
-            Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
-            Dim fichier2 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG2").Index).Value
-            Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
+                Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
+                Dim fichier2 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG2").Index).Value
+                Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
 
 
-            If IsNumeric(fichier3) = True Then
-                Process.Start(fichier1)
-                GoTo fichiersuivant
-            End If
-
-            'des le depart on va copier les fichiers PNG au bon endroit grace au fichier 3
-            'Si c'est overlay console ou jeu
-            Dim cheminfinalducfg As String
-
-            If GameLists.Items.Contains(FileNameWithoutExtension(fichier1.ToString)) Then
-                'c'est un overlay console donc on cree le dossier systems
-                If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & ComboBox1.Text & "\systems\")) Then
-                    Directory.CreateDirectory(My.Settings.DossierOverlay & ComboBox1.Text & "\systems\")
-                End If
-                cheminfinalducfg = My.Settings.DossierOverlay & ComboBox1.Text & "\systems\" & FileNameWithoutExtension(fichier1) & ".info"
-                File.Copy(fichier3, My.Settings.DossierOverlay & ComboBox1.Text & "\systems\" & Path.GetFileName(fichier3), True)
-            Else
-                'c'est un jeu donc on va le mettre dans son dossierr games puis console
-                If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console)) Then
-                    Directory.CreateDirectory(My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console)
-                End If
-                cheminfinalducfg = My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console & "\" & FileNameWithoutExtension(FileNameWithoutExtension(fichier1)) & ".info"
-                File.Copy(fichier3, My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console & "\" & Path.GetFileName(fichier3), True)
-            End If
-
-            'on ouvre le fichier 1 pour recuperer les infos
-            File.ReadAllLines(fichier1)
-
-            Dim readText() As String = File.ReadAllLines(fichier1)
-            Dim s As String
-            Dim lineCount = File.ReadAllLines(fichier1).Length
-
-            'Création d'un flux d'écriture
-            Dim compteurlignedufichiercfg As Integer = 0
-
-            Dim sw As New StreamWriter(cheminfinalducfg)
-            sw.WriteLine("{")
-
-            For Each s In readText
-                compteurlignedufichiercfg = compteurlignedufichiercfg + 1
-                'On lit notre fichier original
-                Dim detectopacity As String = InStr(s, "input_overlay_opacity")
-                Dim detectfullscreenx As String = InStr(s, "video_fullscreen_x")
-                Dim detectfullscreeny As String = InStr(s, "video_fullscreen_y")
-                Dim detectx As String = InStr(s, "custom_viewport_x")
-                Dim detecty As String = InStr(s, "custom_viewport_y")
-                Dim detectw As String = InStr(s, "custom_viewport_width")
-                Dim detecth As String = InStr(s, "custom_viewport_height")
-                Dim fullscreenx As Double
-                Dim fullscreeny As Double
-                Dim ligneopacity As String
-                Dim lignetop As String
-                Dim ligneleft As String
-                Dim lignewidth As String
-                Dim ligneheight As String
-
-                If detectopacity > 0 Then
-                    Dim opacity As Double = CDbl(Replace(Convertendecimal(s), ".", ","))
-                    ligneopacity = " " & Chr(34) & "opacity" & Chr(34) & ":" & FormatNumber(opacity, 7) & ","
+                If IsNumeric(fichier3) = True Then
+                    Process.Start(fichier1)
+                    GoTo fichiersuivant
                 End If
 
-                Dim lignemsgx As String = " " & Chr(34) & "messagex" & Chr(34) & ":" & "0.220000,"
-                Dim lignemsgy As String = " " & Chr(34) & "messagey" & Chr(34) & ":" & "0.120000,"
+                'des le depart on va copier les fichiers PNG au bon endroit grace au fichier 3
+                'Si c'est overlay console ou jeu
+                Dim cheminfinalducfg As String
 
-                If detectfullscreenx > 0 Then
-                    fullscreenx = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
-                    lignewidth = " " & Chr(34) & "width" & Chr(34) & ":" & fullscreenx & ","
+                If GameLists.Items.Contains(FileNameWithoutExtension(fichier1.ToString)) Then
+                    'c'est un overlay console donc on cree le dossier systems
+                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & ComboBox1.Text & "\systems\")) Then
+                        Directory.CreateDirectory(My.Settings.DossierOverlay & ComboBox1.Text & "\systems\")
+                    End If
+                    cheminfinalducfg = My.Settings.DossierOverlay & ComboBox1.Text & "\systems\" & FileNameWithoutExtension(fichier1) & ".info"
+                    File.Copy(fichier3, My.Settings.DossierOverlay & ComboBox1.Text & "\systems\" & Path.GetFileName(fichier3), True)
+                Else
+                    'c'est un jeu donc on va le mettre dans son dossierr games puis console
+                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console)) Then
+                        Directory.CreateDirectory(My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console)
+                    End If
+                    cheminfinalducfg = My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console & "\" & FileNameWithoutExtension(FileNameWithoutExtension(fichier1)) & ".info"
+                    File.Copy(fichier3, My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console & "\" & Path.GetFileName(fichier3), True)
                 End If
 
-                If detectfullscreeny > 0 Then
-                    fullscreeny = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
-                    ligneheight = " " & Chr(34) & "height" & Chr(34) & ":" & fullscreeny & ","
-                End If
+                'on ouvre le fichier 1 pour recuperer les infos
+                File.ReadAllLines(fichier1)
 
-                If detecty > 0 Then
-                    Dim top As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
-                    lignetop = " " & Chr(34) & "top" & Chr(34) & ":" & top & ","
-                End If
+                Dim readText() As String = File.ReadAllLines(fichier1)
+                Dim s As String
+                Dim lineCount = File.ReadAllLines(fichier1).Length
 
-                If detectx > 0 Then
-                    Dim left As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
-                    ligneleft = " " & Chr(34) & "left" & Chr(34) & ":" & left & ","
-                End If
+                'Création d'un flux d'écriture
+                Dim compteurlignedufichiercfg As Integer = 0
 
-                If compteurlignedufichiercfg = lineCount Then
-                    sw.WriteLine(ligneopacity)
-                    sw.WriteLine(lignemsgx)
-                    sw.WriteLine(lignemsgy)
+                Dim sw As New StreamWriter(cheminfinalducfg)
+                sw.WriteLine("{")
 
-                    If lignewidth = Nothing Then
-                        'Recuperer la taille du fichier
-                        fullscreenx = Image.FromFile(fichier3).Size.Width
+                For Each s In readText
+                    compteurlignedufichiercfg = compteurlignedufichiercfg + 1
+                    'On lit notre fichier original
+                    Dim detectopacity As String = InStr(s, "input_overlay_opacity")
+                    Dim detectfullscreenx As String = InStr(s, "video_fullscreen_x")
+                    Dim detectfullscreeny As String = InStr(s, "video_fullscreen_y")
+                    Dim detectx As String = InStr(s, "custom_viewport_x")
+                    Dim detecty As String = InStr(s, "custom_viewport_y")
+                    Dim detectw As String = InStr(s, "custom_viewport_width")
+                    Dim detecth As String = InStr(s, "custom_viewport_height")
+                    Dim fullscreenx As Double
+                    Dim fullscreeny As Double
+                    Dim ligneopacity As String
+                    Dim lignetop As String
+                    Dim ligneleft As String
+                    Dim lignewidth As String
+                    Dim ligneheight As String
+
+                    If detectopacity > 0 Then
+                        Dim opacity As Double = CDbl(Replace(Convertendecimal(s), ".", ","))
+                        ligneopacity = " " & Chr(34) & "opacity" & Chr(34) & ":" & FormatNumber(opacity, 7) & ","
+                    End If
+
+                    Dim lignemsgx As String = " " & Chr(34) & "messagex" & Chr(34) & ":" & "0.220000,"
+                    Dim lignemsgy As String = " " & Chr(34) & "messagey" & Chr(34) & ":" & "0.120000,"
+
+                    If detectfullscreenx > 0 Then
+                        fullscreenx = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
                         lignewidth = " " & Chr(34) & "width" & Chr(34) & ":" & fullscreenx & ","
                     End If
 
-                    If ligneheight = Nothing Then
-                        'Recuperer la taille du fichier
-                        fullscreeny = Image.FromFile(fichier3).Size.Height
+                    If detectfullscreeny > 0 Then
+                        fullscreeny = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
                         ligneheight = " " & Chr(34) & "height" & Chr(34) & ":" & fullscreeny & ","
                     End If
 
-                    Dim bottom As Double = fullscreeny - Top - 5
-                    Dim lignebottom As String = " " & Chr(34) & "bottom" & Chr(34) & ":" & bottom & ","
+                    If detecty > 0 Then
+                        Dim top As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
+                        lignetop = " " & Chr(34) & "top" & Chr(34) & ":" & top & ","
+                    End If
 
-                    Dim right As Double = fullscreenx - Top - 5
-                    Dim ligneright As String = " " & Chr(34) & "right" & Chr(34) & ":" & right
+                    If detectx > 0 Then
+                        Dim left As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
+                        ligneleft = " " & Chr(34) & "left" & Chr(34) & ":" & left & ","
+                    End If
 
-                    sw.WriteLine(lignewidth)
-                    sw.WriteLine(ligneheight)
-                    sw.WriteLine(lignetop)
-                    sw.WriteLine(ligneleft)
-                    sw.WriteLine(lignebottom)
-                    sw.WriteLine(ligneright)
-                    sw.WriteLine("}")
+                    If detectw > 0 Then
+                        Dim width As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
+                        lignewidth = " " & Chr(34) & "width" & Chr(34) & ":" & width & ","
+                    End If
+
+                    If detecth > 0 Then
+                        Dim height As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
+                        ligneheight = " " & Chr(34) & "height" & Chr(34) & ":" & height & ","
+                    End If
+
+                    If compteurlignedufichiercfg = lineCount Then
+                        sw.WriteLine(ligneopacity)
+                        sw.WriteLine(lignemsgx)
+                        sw.WriteLine(lignemsgy)
+
+                        If lignewidth = Nothing Then
+                            'Recuperer la taille du fichier
+                            fullscreenx = Image.FromFile(fichier3).Size.Width
+                            lignewidth = " " & Chr(34) & "width" & Chr(34) & ":" & fullscreenx & ","
+                        End If
+
+                        If ligneheight = Nothing Then
+                            'Recuperer la taille du fichier
+                            fullscreeny = Image.FromFile(fichier3).Size.Height
+                            ligneheight = " " & Chr(34) & "height" & Chr(34) & ":" & fullscreeny & ","
+                        End If
+
+                        Dim bottom As Double = fullscreeny - Height
+                        Dim lignebottom As String = " " & Chr(34) & "bottom" & Chr(34) & ":" & bottom & ","
+
+                        Dim right As Double = fullscreenx - (2 * Width)
+                        Dim ligneright As String = " " & Chr(34) & "right" & Chr(34) & ":" & right
+
+                        sw.WriteLine(lignewidth)
+                        sw.WriteLine(ligneheight)
+                        sw.WriteLine(lignetop)
+                        sw.WriteLine(ligneleft)
+                        sw.WriteLine(lignebottom)
+                        sw.WriteLine(ligneright)
+                        sw.WriteLine("}")
+                    End If
+                Next
+
+                'On ferme le fichier
+                sw.Close()
+fichiersuivant:
+            Next
+            MsgBox("Copiez/Deplacer votre dossier '" & ComboBox1.Text & "' dans le repertoire '/decorations' de Batocera")
+            Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
+        Else 'Si c'est Batocera 
+            'On va lire toutes les lignes
+            For i = 0 To DataGridOverlays.Rows.Count - 1
+                'on lit le fichier cfg
+                Dim console = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("Console").Index).Value.ToString
+                Dim nomducfg = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("NomFichierCFG").Index).Value.ToString
+
+                Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
+                Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
+
+
+                If IsNumeric(fichier3) = True Then
+                    Process.Start(fichier1)
+                    GoTo fichiersuivantbato
                 End If
+
+                'des le depart on va copier les fichiers PNG au bon endroit grace au fichier 3
+                'Si c'est overlay console ou jeu
+                Dim cheminfinalducfg As String
+                'Recuperer la taille du fichier
+                Dim largimg = Image.FromFile(fichier3).Size.Width
+                Dim hautimg = Image.FromFile(fichier3).Size.Height
+
+                If FileNameWithoutExtension(fichier1.ToString) = console Then
+                    'c'est un overlay console donc on cree le dossier systems
+                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & ComboBox1.Text & "\systems\")) Then
+                        Directory.CreateDirectory(My.Settings.DossierOverlay & ComboBox1.Text & "\systems\")
+                    End If
+                    cheminfinalducfg = My.Settings.DossierOverlay & ComboBox1.Text & "\systems\" & FileNameWithoutExtension(fichier1) & ".info"
+                    File.Copy(fichier3, My.Settings.DossierOverlay & ComboBox1.Text & "\systems\" & Path.GetFileName(fichier3), True)
+                Else
+                    'c'est un jeu donc on va le mettre dans son dossierr games puis console
+                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console)) Then
+                        Directory.CreateDirectory(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console)
+                    End If
+                    cheminfinalducfg = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & FileNameWithoutExtension(FileNameWithoutExtension(fichier1)) & ".cfg"
+                    File.Copy(fichier3, My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & Path.GetFileName(fichier3), True)
+                End If
+
+                'on ouvre le fichier 1 pour recuperer les infos
+                File.ReadAllLines(fichier1)
+
+                Dim readText() As String = File.ReadAllLines(fichier1)
+                Dim s As String
+                Dim lineCount = File.ReadAllLines(fichier1).Length
+
+                'Création d'un flux d'écriture
+                Dim compteurlignedufichiercfg As Integer = 0
+
+                Dim sw As New StreamWriter(cheminfinalducfg)
+                sw.WriteLine("# generated by RecopierBox by Soaresden")
+                sw.WriteLine("input_overlay = " & Chr(34) & "/recalbox/share/overlays/" & console & "/" & largimg & "x" & hautimg & "/" & FileNameWithoutExtension(fichier1) & "_overlay.cfg" & Chr(34))
+                sw.WriteLine("# aspect ratio")
+                sw.WriteLine("aspect_ratio_index = " & Chr(34) & "23" & Chr(34))
+                sw.WriteLine("video_force_aspect = " & Chr(34) & "true" & Chr(34))
+                sw.WriteLine("video_force_aspect = " & Chr(34) & "true" & Chr(34))
+                sw.WriteLine("video_scale_integer = " & Chr(34) & "false" & Chr(34))
+                sw.WriteLine("video_smooth = " & Chr(34) & "false" & Chr(34))
+                sw.WriteLine("video_font_size = " & Chr(34) & "28.000000" & Chr(34))
+                sw.WriteLine("video_message_color = " & Chr(34) & "ffff00" & Chr(34))
+                sw.WriteLine("# common overlay parameters")
+                sw.WriteLine("input_overlay_hide_in_menu = " & Chr(34) & "true" & Chr(34))
+                sw.WriteLine("input_overlay_enable = " & Chr(34) & "true" & Chr(34))
+                sw.WriteLine("input_overlay_scale = " & Chr(34) & "1.000000" & Chr(34))
+
+
+                For Each s In readText
+                    compteurlignedufichiercfg = compteurlignedufichiercfg + 1
+                    'On lit notre fichier original
+                    Dim detectopacity As Integer = InStr(s, "opacity")
+                    Dim detectmsgx As Integer = InStr(s, "messagex")
+                    Dim detectmsgy As Integer = InStr(s, "messagey")
+                    Dim detectw As Integer = InStr(s, "width")
+                    Dim detecth As Integer = InStr(s, "height")
+                    Dim detecttop As Integer = InStr(s, "top")
+                    Dim detectleft As Integer = InStr(s, "left")
+                    Dim detectbottom As Integer = InStr(s, "bottom")
+                    Dim detectright As Integer = InStr(s, "right")
+
+                    Dim ligneopacity As String
+                    Dim lignefullscreenx As String
+                    Dim lignefullscreeny As String
+                    Dim lignetop As String
+                    Dim ligneleft As String
+                    Dim lignewidth As String
+                    Dim ligneheight As String
+                    Dim fullscreenx As Integer
+                    Dim fullscreeny As Integer
+
+
+                    If detectmsgx > 0 Then GoTo lignesuivante
+                    If detectmsgy > 0 Then GoTo lignesuivante
+
+                    If detectopacity > 0 Then
+                        Dim opacity = Convertendecimal(s)
+                        ligneopacity = "input_overlay_opacity = " & Chr(34) & opacity & Chr(34)
+                        sw.WriteLine(ligneopacity)
+                    End If
+
+                    If detectw > 0 Then
+                        fullscreenx = Convertendecimal(s)
+                        lignefullscreenx = "video_fullscreen_x = " & Chr(34) & fullscreenx & Chr(34)
+                        sw.WriteLine(lignefullscreenx)
+                    End If
+
+                    If detecth > 0 Then
+                        fullscreeny = Convertendecimal(s)
+                        lignefullscreeny = "video_fullscreen_y = " & Chr(34) & fullscreeny & Chr(34)
+                        sw.WriteLine(lignefullscreeny)
+                    End If
+
+                    If detecttop > 0 Then
+                        Dim top = Convertendecimal(s)
+                        lignetop = "custom_viewport_y = " & Chr(34) & top & Chr(34)
+                        sw.WriteLine(lignetop)
+                    End If
+
+                    If detectleft > 0 Then
+                        Dim left = Convertendecimal(s)
+                        ligneleft = "custom_viewport_x = " & Chr(34) & left & Chr(34)
+                        sw.WriteLine(ligneleft)
+                    End If
+
+                    If detectbottom > 0 Then
+                        Dim bottomo = fullscreeny - Convertendecimal(s) - Top
+                        ligneheight = "custom_viewport_height = " & Chr(34) & bottomo & Chr(34)
+                        sw.WriteLine(ligneheight)
+                    End If
+
+                    If detectright > 0 Then
+                        Dim righto = fullscreenx - Left - Convertendecimal(s)
+                        lignewidth = "custom_viewport_width = " & Chr(34) & righto & Chr(34)
+                        sw.WriteLine(lignewidth)
+                    End If
+
+lignesuivante:
+                Next
+
+                'On ferme le fichier
+                sw.Close()
+
+
+
+                'On va creer le fichier _overlay
+                Dim dossierducfgoverlay2 As String = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & largimg & "x" & hautimg & "\"
+
+                If (Not System.IO.Directory.Exists(dossierducfgoverlay2)) Then
+                    Directory.CreateDirectory(dossierducfgoverlay2)
+                End If
+
+                Dim cheminoverlaycfg2 As String = dossierducfgoverlay2 & FileNameWithoutExtension(fichier1) & "_overlay.cfg"
+                Dim sw2 As New StreamWriter(cheminoverlaycfg2)
+                sw2.WriteLine("# generated by RecopierBox by Soaresden")
+                sw2.WriteLine("overlay0_overlay = " & Chr(34) & Path.GetFileName(fichier3) & Chr(34))
+                sw2.WriteLine("overlays = 1")
+                sw2.WriteLine("overlay0_full_screen = True")
+                sw2.WriteLine("overlay0_descs = 0")
+
+                'On ferme le fichier
+                sw2.Close()
+
+fichiersuivantbato:
             Next
 
-            'On ferme le fichier
-            sw.Close()
-fichiersuivant:
-        Next
+            MsgBox("Copiez/Deplacer votre dossier '" & ComboBox1.Text & "' dans le repertoire '/decorations' de Batocera")
+                Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
+        End If
 
-        MsgBox("Copiez/Deplacer votre dossier '" & ComboBox1.Text & "' dans le repertoire '/decorations' de Batocera")
-        Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
+
     End Sub
 
     Function Convertendecimal(ligne As String)
-        Dim regexx As String = "\d+?.\d+"
-        Dim matches As MatchCollection = Regex.Matches(ligne, regexx)
-        Dim resultats As String
-        For Each m As Match In matches
-            resultats = m.ToString
-        Next
+        Dim resultats = Regex.Replace(ligne, "[^-?\d+\.]", "")
         Return resultats
-
     End Function
     Function Lecturedescfgsbato(lagamelist As String, consolerom As String, nomducfg As String)
         If consolerom = Nothing Then Exit Function
@@ -742,16 +939,21 @@ fichiersuivant:
         'Width for columns
         DataGridOverlays.RowHeadersWidth = 25
         DataGridOverlays.Columns("Console").Width = 40
-        DataGridOverlays.Columns("NomRomXML").Width = 130
-        DataGridOverlays.Columns("NomFichierCFG").Width = 110
-        DataGridOverlays.Columns("CheminCFG").Width = 150
-        DataGridOverlays.Columns("CheminPNG").Width = 150
+        DataGridOverlays.Columns("NomRomXML").Width = 240
+        DataGridOverlays.Columns("NomFichierCFG").Width = 150
+        DataGridOverlays.Columns("CheminCFG").Width = 90
+        DataGridOverlays.Columns("CheminPNG").Width = 90
         DataGridOverlays.Columns("CocheCFG").Visible = False
 
         Dim compteuroverlay As Integer = 0
 
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, CheminCFG asc"
+
+        'on affiche les boutons
+        Supp1.Show()
+        Supp2.Hide()
+        Supp3.Show()
 
         'on colore les lignes
         Call Colorerbato()
@@ -848,7 +1050,9 @@ Fin:
 
             If num = 123 Then
                 Directory.Delete(fichier1)
-                Directory.Delete(fichier2)
+                If Supp2.Visible Then
+                    Directory.Delete(fichier2)
+                End If
                 Directory.Delete(fichier3)
             ElseIf num = 1 Then
                 Directory.Delete(fichier1)
@@ -899,6 +1103,7 @@ Fin:
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        If CheckBoxBatocera.Checked = True Then MsgBox("Import en Cours ...")
         ButtonImportAll.Show()
         ButtonImportAll.PerformClick()
         ButtonImportAll.Hide()
