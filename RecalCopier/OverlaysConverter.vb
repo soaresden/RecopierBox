@@ -647,8 +647,8 @@ lignesuivante:
 fichiersuivantbato:
             Next
 
-            MsgBox("Copiez/Deplacer votre dossier '" & ComboBox1.Text & "' dans le repertoire '/decorations' de Batocera")
-                Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
+            MsgBox("Copiez/Deplacer votre dossier '" & ComboBox1.Text & "' dans le repertoire '/overlays' de Recalbox")
+            Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
         End If
 
 
