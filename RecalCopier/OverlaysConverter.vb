@@ -3,19 +3,30 @@ Imports System.Text.RegularExpressions
 
 Public Class OverlaysConverter
     Private Sub OverlaysConverter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Import des noms de plateformes   
+        ButtonConvert.Hide()
+        Supp1.Hide()
+        Supp2.Hide()
+        Supp3.Hide()
+        Supp123.Hide()
+        GameLists.Hide()
+        ButtonImportAll.Hide()
+        DataGridOverlays.Hide()
+
+        ComboBox1.Enabled = False
+
+        'On Hide le choix impossile
+        If InStr(My.Settings.DossierOverlay, "overlays") > 1 Then
+            CheckBoxRecalbox.Show()
+            CheckBoxBatocera.Hide()
+        Else
+            CheckBoxRecalbox.Hide()
+            CheckBoxBatocera.Show()
+        End If
+
+        'On dresse la liste des consoles
         For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.RecalboxFolder & "\roms\", FileIO.SearchOption.SearchTopLevelOnly)
             GameLists.Items.Add(System.IO.Path.GetFileName(folder))
         Next
-
-        ComboBox1.Items.Clear()
-        If InStr(My.Settings.DossierOverlay, "decorations") > 1 Then
-            For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.DossierOverlay, FileIO.SearchOption.SearchTopLevelOnly)
-                ComboBox1.Items.Add(System.IO.Path.GetFileName(folder))
-            Next
-            ComboBox1.SelectedIndex = 0
-        End If
-        ButtonConvert.Hide()
     End Sub
 
     Sub CompletionRecalbox()
@@ -109,11 +120,22 @@ Public Class OverlaysConverter
                 cheminducfg = fi.FullName
                 nomfichiercfg = fi.Name
 
-                pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
+                Dim generegamelist As String
+
+                If nomfichiercfg = nomconsole & ".cfg" Then
+                    pathdelarom = Path.GetFileName(cheminducfg)
+                    Dim aenlever = "\" & nomfichiercfg
+                    generegamelist = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), aenlever, "\gamelist.xml")
+                Else
+                    pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
+                    generegamelist = Replace(Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", ""), Path.GetFileName(Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")), "") & "gamelist.xml"
+                End If
+
                 Dim pathpourarrm As String = "*" & Path.GetFileName((pathdelarom))
 
+
                 'On va rechercher le nom de la rom
-                Dim results = Recherchenomdelarom(nomconsole, pathdelarom)
+                Dim results = Recherchenomdelarom(generegamelist, nomconsole, pathdelarom)
                 Dim romname = results.item1
                 Dim etatoverlay = results.item2
 
@@ -171,9 +193,9 @@ nextconsole:
         'on colore les lignes
         Call colorer()
     End Sub
-    Function Recherchenomdelarom(console As String, pathdelarom As String)
-        Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
-        Dim nomdelarom = Path.GetFileName(pathdelarom)
+    Function Recherchenomdelarom(chemingamelist As String, console As String, nomdufichiercfg As String)
+        Dim lagamelist As String = chemingamelist
+        Dim nomdelarom = Path.GetFileName(nomdufichiercfg)
 
         'Si il n'existe pas de gamelist, on va mettre les infos generique
         If Not System.IO.File.Exists(lagamelist) Then
@@ -185,23 +207,24 @@ nextconsole:
         'getting the list for the xml with nodes
         Dim query2 = From st In gamelistXml.Descendants("game") Select st
         Dim genpathdelarom As String
-        genpathdelarom = My.Settings.RecalboxFolder & "\roms\" & console & "\" & nomdelarom
+        genpathdelarom = Path.GetDirectoryName(chemingamelist) & "\" & Path.GetFileName(nomdufichiercfg)
 
         For Each xEle As XElement In query2
             Dim romname As String = xEle.Element("name")
             Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
-            Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & console & "\" & temprom
+            Dim rompath As String = Replace(xEle.Element("path"), "./", "")
 
-            If console = nomdelarom Then
+            If console & ".cfg" = nomdelarom Then
                 Return ("#CONSOLE#", True)
             End If
 
-            If rompath = pathdelarom Then
+            If rompath = Path.GetFileName(nomdufichiercfg) Then
                 Return (romname, True)
                 GoTo lignesuivante
             End If
 lignesuivante:
         Next
+
         Return ("#PASDANSXML#", True)
     End Function
     Public Function FileNameWithoutExtension(ByVal FullPath _
@@ -210,51 +233,44 @@ lignesuivante:
     End Function
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles ButtonImportAll.Click
         ListErreurs.Items.Clear()
+
         If CheckBoxRecalbox.Checked = True Then
             Call CompletionRecalbox()
         Else
-            Call completionBatocera()
+            Call Completionbatocera()
         End If
+
+        DataGridOverlays.Show()
         ButtonConvert.Show()
+        Supp1.Show()
+        Supp2.Show()
+        Supp3.Show()
+        Supp123.Show()
     End Sub
+
+    Sub Importfichierbato()
+        'On importe le nom des dossiers et on met en editable la combobox
+        If InStr(My.Settings.DossierOverlay, "decorations") > 1 Then
+            For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.DossierOverlay, FileIO.SearchOption.SearchTopLevelOnly)
+                ComboBox1.Items.Add(System.IO.Path.GetFileName(folder))
+            Next
+            ComboBox1.Enabled = True
+        End If
+    End Sub
+
     Private Sub CheckBoxRecalbox_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxRecalbox.CheckedChanged
         If CheckBoxRecalbox.Checked = True Then
             CheckBoxRecalbox.Checked = True
             CheckBoxBatocera.Checked = False
-
-            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
-            ComboBox1.Items.Add(nomdossier)
-            If nomdossier <> Nothing Then
-                Dim fullchemin = My.Settings.DossierOverlay & nomdossier
-                If (Not System.IO.Directory.Exists(fullchemin)) Then
-                    System.IO.Directory.CreateDirectory(fullchemin)
-                End If
-                ComboBox1.SelectedIndex = 0
-            Else
-                Exit Sub
-            End If
-        Else
-            CheckBoxRecalbox.Checked = False
-            CheckBoxBatocera.Checked = True
+            GameLists.Show()
         End If
     End Sub
     Private Sub CheckBoxBatocera_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxBatocera.CheckedChanged
         If CheckBoxBatocera.Checked = True Then
             CheckBoxRecalbox.Checked = False
             CheckBoxBatocera.Checked = True
-        Else
-            CheckBoxRecalbox.Checked = True
-            CheckBoxBatocera.Checked = False
-
-            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED")
-            ComboBox1.Items.Add(nomdossier)
-            If nomdossier <> Nothing Then
-                Dim fullchemin = My.Settings.DossierOverlay & nomdossier
-                If (Not System.IO.Directory.Exists(fullchemin)) Then
-                    System.IO.Directory.CreateDirectory(fullchemin)
-                End If
-                ComboBox1.SelectedIndex = 0
-            End If
+            Call Importfichierbato()
+            MsgBox("Selectionnez votre dossier Batocera")
         End If
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -270,7 +286,32 @@ lignesuivante:
     Private Sub ButtonConvert_Click(sender As Object, e As EventArgs) Handles ButtonConvert.Click
         If DataGridOverlays.Rows.Count = 0 Then
             MsgBox("Merci d'Importer vos configs d'abord")
+        Exit Sub
+        End If
+
+        'On verifie qu'un dossier Batocera est bien selectionné
+        If ComboBox1.Text = Nothing Then
+            MsgBox("Aucun Dossier Final Réalisé" & Chr(13) & Chr(13) & "Abandon")
             Exit Sub
+        End If
+
+        'Si c'est Recalbox, On va creer le dossier final juste avant de convertir
+        If CheckBoxRecalbox.Checked = True Then
+
+            Dim nomdossier As String = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
+            ComboBox1.Items.Add(nomdossier)
+            ComboBox1.SelectedIndex = 0
+
+            'Si on annule, on quitte tout
+            If nomdossier = Nothing Then
+                MsgBox("Abandon")
+                Exit Sub
+            Else
+                Dim fullchemin = My.Settings.DossierOverlay & ComboBox1.Text
+                If (Not System.IO.Directory.Exists(fullchemin)) Then
+                    System.IO.Directory.CreateDirectory(fullchemin)
+                End If
+            End If
         End If
 
         'On va lire toutes les lignes
@@ -405,6 +446,8 @@ lignesuivante:
             sw.Close()
 fichiersuivant:
         Next
+
+        MsgBox("Copiez/Deplacer votre dossier '" & ComboBox1.Text & "' dans le repertoire '/decorations' de Batocera")
         Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
     End Sub
 
@@ -417,6 +460,75 @@ fichiersuivant:
         Next
         Return resultats
 
+    End Function
+    Function Lecturedescfgsbato(lagamelist As String, consolerom As String, nomducfg As String)
+        If consolerom = Nothing Then Exit Function
+
+        Dim modifgamelistenrom As String = nomducfg
+        Dim aenlever As String = "roms"
+        Dim fichier1cfg As String = nomducfg
+        Dim fichier2overlaycfg As String
+        Dim fichier3png As String
+
+        Dim cheminpropreoverlay2 As String
+        Dim justefichier2 As String
+
+        fichier3png = 0
+        justefichier2 = 0
+        fichier2overlaycfg = 0
+        cheminpropreoverlay2 = 0
+
+        'on va lire le cfg pour trouver le cfg overlay
+        File.ReadAllLines(nomducfg)
+
+        Dim readText() As String = File.ReadAllLines(fichier1cfg)
+        Dim s As String
+
+        For Each s In readText
+            Dim detectinputoverlay As String
+
+            detectinputoverlay = InStr(s, "/overlays/")
+
+            If detectinputoverlay > 0 Then
+                Dim sansguillemets = Replace(s, Chr(34), "")
+                'Dim cheminducfgoverlay = sansguillemets.Substring(detectinputoverlay + 8)
+                'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
+                'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
+
+                Dim chemincfgoverlaydanscfg As String
+                chemincfgoverlaydanscfg = Replace(s, Chr(34), "").Substring(detectinputoverlay + 8).Substring(0, InStr(Replace(s, Chr(34), "").Substring(detectinputoverlay + 8), ".cfg") + 3)
+                cheminpropreoverlay2 = Replace(My.Settings.DossierOverlay.Substring(0, Len(My.Settings.DossierOverlay)) & Replace(chemincfgoverlaydanscfg, "/", "\"), "\\", "\")
+                justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
+                Exit For
+            End If
+        Next
+
+        'on lit le deuxieme fichier overlay cfg pour trouver le png
+        If Not File.Exists(cheminpropreoverlay2) Then
+            cheminpropreoverlay2 = "0"
+            GoTo findugame
+        End If
+        File.ReadAllLines(cheminpropreoverlay2)
+
+        Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
+        Dim t As String
+
+        For Each t In readText2
+            Dim detectegal As String = InStr(t, "overlay =")
+            If detectegal > 0 Then
+                t = Replace(t, Chr(34), "")
+                'Dim chemindupng = t.Substring(detectegal + 9)
+                'Dim detectpng = InStr(chemindupng, "png")
+                'Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 3)
+                Dim cheminpng = t.Substring(detectegal + 9).Substring(0, InStr(t.Substring(detectegal + 10), "png") + 3)
+
+
+                fichier3png = Replace(cheminpropreoverlay2, justefichier2, cheminpng)
+            End If
+        Next
+
+findugame:
+        Return (fichier1cfg, cheminpropreoverlay2, fichier3png)
     End Function
     Function LectureDesCfgs(consolerom As String, nomducfg As String)
         If consolerom = Nothing Then Exit Function
@@ -490,7 +602,159 @@ findugame:
     End Function
 
     Sub Completionbatocera()
+        'On clear par Securité
+        DataGridOverlays.Columns.Clear()
+        On Error Resume Next
+        DataGridOverlays.Rows.Clear()
+        On Error GoTo 0
 
+        If GameLists.Items.Count = 0 Then Exit Sub
+
+        Dim gamelist As String = GameLists.Items(0)
+        Dim table As New DataTable()
+        Dim dv As DataView
+        Dim column As DataColumn
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Console"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "NomRomXML"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "NomFichierCFG"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "CheminCFG"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "CheminPNG"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Boolean")
+            .ColumnName = "CocheCFG"
+        End With
+        table.Columns.Add(column)
+
+        Dim chemincfgoverlay As String = Nothing
+        Dim yauerreur As Integer = 0
+
+        Dim di As New IO.DirectoryInfo(My.Settings.DossierOverlay & ComboBox1.Text)
+        Dim aryFi As IO.FileInfo() = di.GetFiles("*.info", SearchOption.AllDirectories)
+        Dim fi As IO.FileInfo
+
+        Dim nomfichiercfg As String
+        Dim cheminducfg As String
+        Dim pathdelarom As String
+
+        For Each fi In aryFi
+            Dim fichiercomplet As string = fi.FullName
+
+            'extraction de la console
+            Dim nomconsole As String = Path.GetFileName(Path.GetDirectoryName(fi.FullName))
+            Dim diroms As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\roms\" & nomconsole)
+
+            nomfichiercfg = fi.Name
+            Dim aremplacer As String = "decorations\" & ComboBox1.Text & "\"
+            pathdelarom = Replace(Replace(Replace(fichiercomplet, aremplacer, ""), "games", "roms"), nomfichiercfg, FileNameWithoutExtension(nomfichiercfg) & ".")
+
+            Dim romname
+            Dim etatoverlay
+
+            'Test si le dossier console existe 
+            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(pathdelarom))) Then
+                romname = ""
+                etatoverlay = True
+                romname = "##NO GAMELIST##"
+                GoTo saisie
+            End If
+
+            Dim vraieromfilecompte As Integer = diroms.GetFiles(FileNameWithoutExtension(nomfichiercfg) & ".*", SearchOption.AllDirectories).Count
+            If vraieromfilecompte = 0 Then
+                MsgBox("Pas de Roms trouvée à :" & Chr(13) & Chr(13) & nomfichiercfg & Chr(13) & "Abandon")
+                Exit Sub
+            End If
+            Dim vraieromfile As IO.FileInfo() = diroms.GetFiles(FileNameWithoutExtension(nomfichiercfg) & ".*", SearchOption.AllDirectories)
+            Dim realromfile As String = vraieromfile(0).ToString
+            Dim generegamelist As String = Path.GetDirectoryName(pathdelarom) & "\gamelist.xml"
+
+
+            'On va rechercher le nom de la rom
+
+            If realromfile <> Nothing Then
+                Dim results = Recherchenomdelarom(generegamelist, nomconsole, realromfile)
+                romname = results.item1
+                etatoverlay = results.item2
+            Else
+                romname = pathdelarom
+                etatoverlay = True
+            End If
+
+saisie:
+            'On prends le nom du fichier png
+            Dim fichierpng As String = Replace(fichiercomplet, ".info", ".png")
+            'test son existence
+            If Not File.Exists(fichierpng) Then
+                yauerreur = yauerreur + 1
+                fichierpng = "0"
+                ListErreurs.Items.Add(fichierpng)
+            End If
+
+            'on ajoute au tableau
+            table.Rows.Add(nomconsole, romname, nomfichiercfg, fichiercomplet, fichierpng, etatoverlay)
+
+fichiersuivant:
+            Next
+
+            'Si y'a eu des erreur faut avertir
+            If yauerreur > 0 Then
+            MsgBox("Des fichiers sont manquants" & Chr(13) & "Vérifiez leur dispo ou rescrappez les via le Bouton Requete ARRM" & Chr(13))
+            RqtARRM.Show()
+        Else
+            RqtARRM.Hide()
+        End If
+
+        'Sorting A-Z the console
+        dv = table.DefaultView
+        DataGridOverlays.DataSource = table
+
+        'Width for columns
+        DataGridOverlays.RowHeadersWidth = 25
+        DataGridOverlays.Columns("Console").Width = 40
+        DataGridOverlays.Columns("NomRomXML").Width = 130
+        DataGridOverlays.Columns("NomFichierCFG").Width = 110
+        DataGridOverlays.Columns("CheminCFG").Width = 150
+        DataGridOverlays.Columns("CheminPNG").Width = 150
+        DataGridOverlays.Columns("CocheCFG").Visible = False
+
+        Dim compteuroverlay As Integer = 0
+
+        'Reajusting Interface and Showing Final Interface
+        dv.Sort = "Console asc, CheminCFG asc"
+
+        'on colore les lignes
+        Call Colorerbato()
     End Sub
 
     Sub Colorer()
@@ -510,6 +774,36 @@ findugame:
             End If
         Next
     End Sub
+    Sub Colorerbato()
+        For i = 0 To DataGridOverlays.Rows.Count - 1
+            Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
+            Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
+
+            If fichier1 = "0" Then
+                DataGridOverlays.Rows(i).DefaultCellStyle.BackColor = Color.FromArgb(255, 139, 139)
+            ElseIf fichier3 = "0" Then
+                DataGridOverlays.Rows(i).DefaultCellStyle.BackColor = Color.FromArgb(255, 139, 139)
+            Else
+                DataGridOverlays.Rows(i).DefaultCellStyle.BackColor = Color.FromArgb(162, 255, 162)
+            End If
+        Next
+    End Sub
+    Function Extractconsole(cheminfichierinfo As String)
+        For i = 0 To GameLists.Items.Count - 1
+            Dim consolegamelist = GameLists.Items(i)
+            Dim detecteconsole = InStr(cheminfichierinfo, consolegamelist)
+            If detecteconsole > 1 Then
+                'ca veut dire qu'on a detecté une console
+                'Dim consoledetect As String = cheminfichierinfo.Substring(detecteconsole - 1)
+                'Dim detectleslash As Integer = InStr(consoledetect, "\")
+                'Dim laconsole As String = consoledetect.Substring(0, detectleslash - 1)
+                Dim laconsoledetectee As String = cheminfichierinfo.Substring(detecteconsole - 1).Substring(0, InStr(cheminfichierinfo.Substring(detecteconsole - 1), "\") - 1)
+                Return laconsoledetectee
+                Exit Function
+            End If
+        Next
+        Return "pasconsole"
+    End Function
     Private Sub RqtARRM_Click(sender As Object, e As EventArgs) Handles RqtARRM.Click
         If ListErreurs.Items.Count = 0 Then Exit Sub
         Dim rqt As String = Nothing
@@ -546,7 +840,7 @@ Fin:
         MsgBox("Requete dans le presse papiers" & Chr(13) & "Collez ca dans la barre de Requete d'ARRM et filtrez")
     End Sub
 
-    Sub supplescfgs(num As Integer)
+    Sub Supplescfgs(num As Integer)
         For Each i In DataGridOverlays.SelectedRows
             Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
             Dim fichier2 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG2").Index).Value
@@ -594,5 +888,19 @@ Fin:
         Else
             Process.Start(fichiercomplet)
         End If
+    End Sub
+
+    Private Sub GameLists_SelectedIndexChanged(sender As Object, e As EventArgs) Handles GameLists.SelectedIndexChanged
+        If GameLists.SelectedItems.Count > 0 Then
+            ButtonImportAll.Show()
+        Else
+            ButtonImportAll.Hide()
+        End If
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        ButtonImportAll.Show()
+        ButtonImportAll.PerformClick()
+        ButtonImportAll.Hide()
     End Sub
 End Class

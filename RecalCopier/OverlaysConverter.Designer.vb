@@ -39,6 +39,7 @@ Partial Class OverlaysConverter
         Me.Supp2 = New System.Windows.Forms.Button()
         Me.Supp3 = New System.Windows.Forms.Button()
         Me.Supp123 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -82,7 +83,7 @@ Partial Class OverlaysConverter
         'GameLists
         '
         Me.GameLists.FormattingEnabled = True
-        Me.GameLists.Location = New System.Drawing.Point(8, 158)
+        Me.GameLists.Location = New System.Drawing.Point(8, 99)
         Me.GameLists.Name = "GameLists"
         Me.GameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.GameLists.Size = New System.Drawing.Size(121, 303)
@@ -100,7 +101,7 @@ Partial Class OverlaysConverter
         Me.DataGridOverlays.Name = "DataGridOverlays"
         Me.DataGridOverlays.ReadOnly = True
         Me.DataGridOverlays.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridOverlays.Size = New System.Drawing.Size(667, 270)
+        Me.DataGridOverlays.Size = New System.Drawing.Size(667, 244)
         Me.DataGridOverlays.TabIndex = 42
         '
         'ButtonImportAll
@@ -113,7 +114,7 @@ Partial Class OverlaysConverter
         Me.ButtonImportAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonImportAll.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonImportAll.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonImportAll.Location = New System.Drawing.Point(8, 105)
+        Me.ButtonImportAll.Location = New System.Drawing.Point(8, 414)
         Me.ButtonImportAll.Name = "ButtonImportAll"
         Me.ButtonImportAll.Size = New System.Drawing.Size(121, 47)
         Me.ButtonImportAll.TabIndex = 43
@@ -130,7 +131,7 @@ Partial Class OverlaysConverter
         Me.ButtonConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonConvert.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonConvert.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonConvert.Location = New System.Drawing.Point(808, 76)
+        Me.ButtonConvert.Location = New System.Drawing.Point(808, 42)
         Me.ButtonConvert.Name = "ButtonConvert"
         Me.ButtonConvert.Size = New System.Drawing.Size(120, 39)
         Me.ButtonConvert.TabIndex = 44
@@ -141,7 +142,7 @@ Partial Class OverlaysConverter
         '
         Me.ComboBox1.Enabled = False
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(808, 31)
+        Me.ComboBox1.Location = New System.Drawing.Point(808, 19)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(120, 21)
         Me.ComboBox1.TabIndex = 45
@@ -149,7 +150,7 @@ Partial Class OverlaysConverter
         'TextCombobox
         '
         Me.TextCombobox.AutoSize = True
-        Me.TextCombobox.Location = New System.Drawing.Point(805, 11)
+        Me.TextCombobox.Location = New System.Drawing.Point(805, -1)
         Me.TextCombobox.Name = "TextCombobox"
         Me.TextCombobox.Size = New System.Drawing.Size(128, 13)
         Me.TextCombobox.TabIndex = 46
@@ -202,9 +203,9 @@ Partial Class OverlaysConverter
         Me.Supp1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Supp1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Supp1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Supp1.Location = New System.Drawing.Point(167, 434)
+        Me.Supp1.Location = New System.Drawing.Point(167, 414)
         Me.Supp1.Name = "Supp1"
-        Me.Supp1.Size = New System.Drawing.Size(121, 27)
+        Me.Supp1.Size = New System.Drawing.Size(121, 47)
         Me.Supp1.TabIndex = 50
         Me.Supp1.Text = "Supprimer le fichier 1"
         Me.Supp1.UseVisualStyleBackColor = False
@@ -219,9 +220,9 @@ Partial Class OverlaysConverter
         Me.Supp2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Supp2.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Supp2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Supp2.Location = New System.Drawing.Point(294, 434)
+        Me.Supp2.Location = New System.Drawing.Point(310, 414)
         Me.Supp2.Name = "Supp2"
-        Me.Supp2.Size = New System.Drawing.Size(121, 27)
+        Me.Supp2.Size = New System.Drawing.Size(121, 47)
         Me.Supp2.TabIndex = 51
         Me.Supp2.Text = "Supprimer le fichier 2"
         Me.Supp2.UseVisualStyleBackColor = False
@@ -236,9 +237,9 @@ Partial Class OverlaysConverter
         Me.Supp3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Supp3.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Supp3.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Supp3.Location = New System.Drawing.Point(421, 434)
+        Me.Supp3.Location = New System.Drawing.Point(450, 414)
         Me.Supp3.Name = "Supp3"
-        Me.Supp3.Size = New System.Drawing.Size(121, 27)
+        Me.Supp3.Size = New System.Drawing.Size(121, 47)
         Me.Supp3.TabIndex = 52
         Me.Supp3.Text = "Supprimer le fichier 3"
         Me.Supp3.UseVisualStyleBackColor = False
@@ -253,12 +254,21 @@ Partial Class OverlaysConverter
         Me.Supp123.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Supp123.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Supp123.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Supp123.Location = New System.Drawing.Point(548, 434)
+        Me.Supp123.Location = New System.Drawing.Point(627, 413)
         Me.Supp123.Name = "Supp123"
-        Me.Supp123.Size = New System.Drawing.Size(140, 27)
+        Me.Supp123.Size = New System.Drawing.Size(140, 47)
         Me.Supp123.TabIndex = 53
         Me.Supp123.Text = "Supprimer les 3 fichiers"
         Me.Supp123.UseVisualStyleBackColor = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(824, 92)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(93, 26)
+        Me.Label1.TabIndex = 54
+        Me.Label1.Text = "Liste Fichiers " & Global.Microsoft.VisualBasic.ChrW(13) & "avec Manquants :"
         '
         'OverlaysConverter
         '
@@ -266,6 +276,7 @@ Partial Class OverlaysConverter
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Beige
         Me.ClientSize = New System.Drawing.Size(929, 467)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Supp123)
         Me.Controls.Add(Me.Supp3)
         Me.Controls.Add(Me.Supp2)
@@ -307,4 +318,5 @@ Partial Class OverlaysConverter
     Friend WithEvents Supp2 As Button
     Friend WithEvents Supp3 As Button
     Friend WithEvents Supp123 As Button
+    Friend WithEvents Label1 As Label
 End Class
