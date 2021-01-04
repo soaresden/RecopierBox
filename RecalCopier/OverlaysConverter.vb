@@ -451,10 +451,10 @@ lignesuivante:
                             ligneheight = " " & Chr(34) & "height" & Chr(34) & ":" & fullscreeny & ","
                         End If
 
-                        Dim bottom As Double = fullscreeny - Height
+                        Dim bottom As Double = fullscreeny - Top
                         Dim lignebottom As String = " " & Chr(34) & "bottom" & Chr(34) & ":" & bottom & ","
 
-                        Dim right As Double = fullscreenx - (2 * Width)
+                        Dim right As Double = fullscreenx - Left
                         Dim ligneright As String = " " & Chr(34) & "right" & Chr(34) & ":" & right
 
                         sw.WriteLine(lignewidth)
@@ -597,13 +597,13 @@ fichiersuivant:
                     End If
 
                     If detectbottom > 0 Then
-                        Dim bottomo = fullscreeny - Convertendecimal(s) - Top
+                        Dim bottomo = fullscreeny - Top - Convertendecimal(s) 'bottom
                         ligneheight = "custom_viewport_height = " & Chr(34) & bottomo & Chr(34)
                         sw.WriteLine(ligneheight)
                     End If
 
                     If detectright > 0 Then
-                        Dim righto = fullscreenx - Left - Convertendecimal(s)
+                        Dim righto = fullscreenx - Left - Convertendecimal(s) 'right
                         lignewidth = "custom_viewport_width = " & Chr(34) & righto & Chr(34)
                         sw.WriteLine(lignewidth)
                     End If
