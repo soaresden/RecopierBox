@@ -2,6 +2,19 @@
 Public Class OverlayManagerBatocera
 
     Private Sub OverlayManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        PanelChoice.Show()
+        PanelChoice.Location = New Point(3, 39)
+        PanelChoice.Size = New Point(971, 553)
+        ImportBoth1.Hide()
+        RichTextBox1.Hide()
+    End Sub
+    Private Sub ButtonShowOverlayManager_Click(sender As Object, e As EventArgs) Handles ButtonShowOverlayManager.Click
+        PanelChoice.Hide()
+        ImportBoth1.Show()
+        RichTextBox1.Show()
+        Call beginning()
+    End Sub
+    Sub beginning()
         GroupBox1.Hide()
         GroupBox2.Hide()
         TextBox1.Hide()
@@ -13,7 +26,7 @@ Public Class OverlayManagerBatocera
         Label8.Hide()
         ListdesFichiersEnTrop.Hide()
 
-        Call completercombo
+        Call Completercombo()
         Call ImporterlesGamelists()
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -661,4 +674,6 @@ skip:
         OverlaysConverter.Show()
         Me.Close()
     End Sub
+
+
 End Class

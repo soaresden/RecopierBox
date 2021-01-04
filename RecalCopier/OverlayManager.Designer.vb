@@ -60,18 +60,21 @@ Partial Class OverlayManager
         Me.templisttosupp = New System.Windows.Forms.ListBox()
         Me.ButtonResizeOverlays = New System.Windows.Forms.Button()
         Me.ButtonConvert = New System.Windows.Forms.Button()
+        Me.PanelChoice = New System.Windows.Forms.Panel()
+        Me.ButtonShowOverlayManager = New System.Windows.Forms.Button()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.RenameSelection.SuspendLayout()
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelChoice.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label1.Location = New System.Drawing.Point(256, 86)
+        Me.Label1.Location = New System.Drawing.Point(318, 83)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(186, 13)
         Me.Label1.TabIndex = 2
@@ -484,11 +487,12 @@ Partial Class OverlayManager
         Me.ButtonResizeOverlays.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonResizeOverlays.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonResizeOverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonResizeOverlays.Location = New System.Drawing.Point(12, 36)
+        Me.ButtonResizeOverlays.Location = New System.Drawing.Point(315, 314)
         Me.ButtonResizeOverlays.Name = "ButtonResizeOverlays"
-        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(238, 24)
+        Me.ButtonResizeOverlays.Size = New System.Drawing.Size(347, 161)
         Me.ButtonResizeOverlays.TabIndex = 64
-        Me.ButtonResizeOverlays.Text = "MENU : Redimensionner des Overlays"
+        Me.ButtonResizeOverlays.Text = "Overlay Resizer" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Permet de Redimensionner vos overlays actuel en une résolution" &
+    " autre" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ex: 1920x1080 --> 1024x600"
         Me.ButtonResizeOverlays.UseVisualStyleBackColor = False
         '
         'ButtonConvert
@@ -501,12 +505,43 @@ Partial Class OverlayManager
         Me.ButtonConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonConvert.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonConvert.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ButtonConvert.Location = New System.Drawing.Point(12, 63)
+        Me.ButtonConvert.Location = New System.Drawing.Point(621, 149)
         Me.ButtonConvert.Name = "ButtonConvert"
-        Me.ButtonConvert.Size = New System.Drawing.Size(238, 23)
+        Me.ButtonConvert.Size = New System.Drawing.Size(344, 121)
         Me.ButtonConvert.TabIndex = 65
-        Me.ButtonConvert.Text = "MENU : Verifier vos Scrapps et Convertisseur Recalbox <--> Batocera"
+        Me.ButtonConvert.Text = "Overlay Converter" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Permet de convertir vos overlays au format Recalbox" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(*.cfg " &
+    "+ *_overlay.cfg +*.png)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "en overlay au format Batocera et vice versa" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(*.info + " &
+    "*.png)"
         Me.ButtonConvert.UseVisualStyleBackColor = False
+        '
+        'PanelChoice
+        '
+        Me.PanelChoice.Controls.Add(Me.ButtonConvert)
+        Me.PanelChoice.Controls.Add(Me.ButtonShowOverlayManager)
+        Me.PanelChoice.Controls.Add(Me.ButtonResizeOverlays)
+        Me.PanelChoice.Location = New System.Drawing.Point(269, 7)
+        Me.PanelChoice.Name = "PanelChoice"
+        Me.PanelChoice.Size = New System.Drawing.Size(232, 23)
+        Me.PanelChoice.TabIndex = 90
+        '
+        'ButtonShowOverlayManager
+        '
+        Me.ButtonShowOverlayManager.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonShowOverlayManager.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonShowOverlayManager.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonShowOverlayManager.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonShowOverlayManager.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonShowOverlayManager.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonShowOverlayManager.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonShowOverlayManager.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonShowOverlayManager.Location = New System.Drawing.Point(30, 151)
+        Me.ButtonShowOverlayManager.Name = "ButtonShowOverlayManager"
+        Me.ButtonShowOverlayManager.Size = New System.Drawing.Size(344, 119)
+        Me.ButtonShowOverlayManager.TabIndex = 90
+        Me.ButtonShowOverlayManager.Text = "Overlay Manager" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Permet de Gérer vos overlays actuels en affichant :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- dans " &
+    "votre gamelist, les roms avec et sans overlays" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "- dans votre dossier overlays, l" &
+    "es roms qui n'ont pas de roms associé."
+        Me.ButtonShowOverlayManager.UseVisualStyleBackColor = False
         '
         'OverlayManager
         '
@@ -514,8 +549,7 @@ Partial Class OverlayManager
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
         Me.ClientSize = New System.Drawing.Size(984, 591)
-        Me.Controls.Add(Me.ButtonConvert)
-        Me.Controls.Add(Me.ButtonResizeOverlays)
+        Me.Controls.Add(Me.PanelChoice)
         Me.Controls.Add(Me.templisttosupp)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.ButtonSuppSave)
@@ -548,6 +582,7 @@ Partial Class OverlayManager
         Me.RenameSelection.ResumeLayout(False)
         Me.RenameSelection.PerformLayout()
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelChoice.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -590,4 +625,6 @@ Partial Class OverlayManager
     Friend WithEvents templisttosupp As ListBox
     Friend WithEvents ButtonResizeOverlays As Button
     Friend WithEvents ButtonConvert As Button
+    Friend WithEvents PanelChoice As Panel
+    Friend WithEvents ButtonShowOverlayManager As Button
 End Class
