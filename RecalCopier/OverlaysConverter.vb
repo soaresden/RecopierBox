@@ -645,11 +645,9 @@ lignesuivante:
 fichiersuivantbato:
             Next
 
-            MsgBox("Copiez/Deplacer votre dossier '" & nomdossierquestion & "' dans le repertoire '/overlays' de Recalbox")
-            Process.Start(My.Settings.DossierOverlay)
+            MsgBox("Copiez/Deplacer le contenu de votre dossier '" & Chr(13) & Chr(13) & nomdossierquestion & Chr(13) & "dans le repertoire '/overlays' de votre Recalbox")
+            Process.Start(My.Settings.DossierOverlay & nomdossierquestion)
         End If
-
-
     End Sub
 
     Function Convertendecimal(ligne As String)

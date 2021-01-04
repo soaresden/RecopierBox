@@ -74,11 +74,11 @@ Partial Class OverlayManagerBatocera
         '
         'ButtonResizeOverlays
         '
-        Me.ButtonResizeOverlays.BackColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(203, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.ButtonResizeOverlays.BackColor = System.Drawing.Color.Beige
         Me.ButtonResizeOverlays.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonResizeOverlays.Cursor = System.Windows.Forms.Cursors.Default
         Me.ButtonResizeOverlays.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonResizeOverlays.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(247, Byte), Integer), CType(CType(234, Byte), Integer), CType(CType(40, Byte), Integer))
+        Me.ButtonResizeOverlays.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkKhaki
         Me.ButtonResizeOverlays.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonResizeOverlays.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonResizeOverlays.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
@@ -540,9 +540,9 @@ Partial Class OverlayManagerBatocera
         Me.PanelChoice.Controls.Add(Me.ButtonConvert)
         Me.PanelChoice.Controls.Add(Me.ButtonShowOverlayManager)
         Me.PanelChoice.Controls.Add(Me.ButtonResizeOverlays)
-        Me.PanelChoice.Location = New System.Drawing.Point(262, 10)
+        Me.PanelChoice.Location = New System.Drawing.Point(309, 12)
         Me.PanelChoice.Name = "PanelChoice"
-        Me.PanelChoice.Size = New System.Drawing.Size(230, 23)
+        Me.PanelChoice.Size = New System.Drawing.Size(183, 23)
         Me.PanelChoice.TabIndex = 89
         '
         'ButtonShowOverlayManager
