@@ -108,7 +108,7 @@ Public Class OverlayManagerBatocera
 
 
         'Loop for every gamelists
-        For Each i In GameLists.SelectedItems
+        For Each i In ListGamesFolder.SelectedItems
 
             'generating the console name
             Dim console As String = i
@@ -134,10 +134,32 @@ Public Class OverlayManagerBatocera
                 Dim romoverlays As String = Nothing
                 Dim romhidden As String = xEle.Element("hidden")
                 Dim romnomderom As String = Path.GetFileName(rompath)
-                Dim tempoverlay As String = My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & romconsole & Path.GetFileName(rompath)
-                Dim results As String = CompletiondesoverlaysRoms(romconsole, rompath)
-                Dim cocheoverlay As Boolean = results
+                Dim tempinfo As String = Path.GetFileName(FileNameWithoutExtension(rompath) & ".info")
+                Dim cocheoverlay As Boolean
 
+                'on va chercher si un .info existe
+                'on teste si il y'a des occurences
+                Dim dossierrom As String = My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console
+                Dim di As New IO.DirectoryInfo(dossierrom)
+
+                Dim nboccurences As Integer = di.GetFiles(tempinfo).Count
+                If nboccurences = 0 Then
+                    cocheoverlay = False
+                    romoverlays = "0"
+                Else
+                    cocheoverlay = True
+
+                    Dim aryFi As IO.FileInfo() = di.GetFiles("*.info")
+                    Dim fi As IO.FileInfo
+
+                    For Each fi In aryFi
+                        romoverlays = fi.FullName
+                        If Path.GetFileName(romoverlays) = tempinfo Then
+                            GoTo suivant
+                        End If
+                    Next
+                End If
+suivant:
                 If romhidden = "true" Then GoTo Romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
 
                 'on ajoute le tout dans une table
@@ -149,13 +171,6 @@ ProchainGamelist:
         'Sorting A-Z the console
         dv = table.DefaultView
         DataGridRoms.DataSource = table
-
-        'On ajoute la checkbox pour les overlays
-        Dim chk As DataGridViewCheckBoxColumn = New DataGridViewCheckBoxColumn With {
-    .HeaderText = "CocheOverlay",
-    .Name = "CocheOverlay"
-}
-        DataGridRoms.Columns.Add(chk)
 
         'Width for columns
         DataGridRoms.RowHeadersWidth = 25
@@ -178,6 +193,9 @@ ProchainGamelist:
 
         'On compte le nombre total d'entrées
         RomTotal.Text = DataGridRoms.Rows.Count - 1
+
+        'On colore
+        Call Colorerlescoches()
 
         'on affiche les outils
         TextBox1.Show()
@@ -217,15 +235,29 @@ ProchainGamelist:
         Return (cocheoverlay, testcheminoverlay, compteuroverlay)
     End Function
     Sub Colorerlescoches()
-        For i = 0 To DataGridOverlay.RowCount - 1
-            If DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CocheOverlay").Index).Value = True Then
-                DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            Else
-                DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-            End If
-        Next
-        'On met en ReadOnly les cases coches
-        DataGridOverlay.Columns("CocheOverlay").ReadOnly = True
+        If DataGridRoms.Rows.Count > 1 Then
+            For i = 0 To DataGridRoms.RowCount - 1
+                If DataGridRoms.Rows(i).Cells(DataGridRoms.Columns("CocheOverlay").Index).Value = True Then
+                    DataGridRoms.Rows(i).Cells(DataGridRoms.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+                Else
+                    DataGridRoms.Rows(i).Cells(DataGridRoms.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+                End If
+            Next
+            'On met en ReadOnly les cases coches
+            DataGridRoms.Columns("CocheOverlay").ReadOnly = True
+        End If
+
+        If DataGridOverlay.Rows.Count > 1 Then
+            For i = 0 To DataGridOverlay.RowCount - 1
+                If DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CocheOverlay").Index).Value = True Then
+                    DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+                Else
+                    DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CocheOverlay").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+                End If
+            Next
+            'On met en ReadOnly les cases coches
+            DataGridOverlay.Columns("CocheOverlay").ReadOnly = True
+        End If
     End Sub
 
     Private Sub ButtonImportOverlays_Click(sender As Object, e As EventArgs) Handles ButtonImportOverlays1.Click
@@ -597,7 +629,7 @@ lignesuivante:
         ActualName.Text = Path.GetFileName(nomdufichier)
     End Sub
 
-    Private Sub ListdesFichiersEnTrop_DoubleClick(sender As Object, e As EventArgs) Handles ListdesFichiersEnTrop.DoubleClick
+    Private Sub ListdesFichiersEnTrop_DoubleClick(sender As Object, e As EventArgs)
         If ListdesFichiersEnTrop.SelectedItems.Count = 1 Then
             Process.Start(ListdesFichiersEnTrop.SelectedItem)
         Else
@@ -605,7 +637,7 @@ lignesuivante:
         End If
     End Sub
 
-    Private Sub ListToSupp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListToSupp.SelectedIndexChanged
+    Private Sub ListToSupp_SelectedIndexChanged(sender As Object, e As EventArgs)
 
         'on va changer le actual name
         If ListToSupp.SelectedItems.Count = 0 Or ListToSupp.SelectedItem.ToString = "0 overlays en trop detecté dans votre dossier :)" Or ListToSupp.SelectedItem.ToString = Nothing Then

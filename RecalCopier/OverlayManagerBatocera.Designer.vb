@@ -29,10 +29,6 @@ Partial Class OverlayManagerBatocera
         Me.buttonImportRoms1 = New System.Windows.Forms.Button()
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
         Me.ImportBoth1 = New System.Windows.Forms.Button()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.ListdesFichiersEnTrop = New System.Windows.Forms.ListBox()
-        Me.ListToSupp = New System.Windows.Forms.ListBox()
         Me.DataGridOverlay = New System.Windows.Forms.DataGridView()
         Me.RenameSelection = New System.Windows.Forms.GroupBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -40,7 +36,6 @@ Partial Class OverlayManagerBatocera
         Me.ActualName = New System.Windows.Forms.TextBox()
         Me.NewName = New System.Windows.Forms.TextBox()
         Me.ButtonRenameSave = New System.Windows.Forms.Button()
-        Me.templisttosupp = New System.Windows.Forms.ListBox()
         Me.ButtonSuppSave = New System.Windows.Forms.Button()
         Me.ButtonMenage1 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -170,47 +165,6 @@ Partial Class OverlayManagerBatocera
         Me.ImportBoth1.Text = "Tout Importer"
         Me.ImportBoth1.UseVisualStyleBackColor = False
         '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label8.Location = New System.Drawing.Point(749, 294)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(216, 13)
-        Me.Label8.TabIndex = 77
-        Me.Label8.Text = "Liste des fichiers cité dans la liste ci dessus :"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label7.Location = New System.Drawing.Point(498, 294)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(167, 13)
-        Me.Label7.TabIndex = 76
-        Me.Label7.Text = "Fichiers CFG sans roms associés :"
-        '
-        'ListdesFichiersEnTrop
-        '
-        Me.ListdesFichiersEnTrop.BackColor = System.Drawing.Color.LightPink
-        Me.ListdesFichiersEnTrop.FormattingEnabled = True
-        Me.ListdesFichiersEnTrop.Location = New System.Drawing.Point(749, 310)
-        Me.ListdesFichiersEnTrop.Name = "ListdesFichiersEnTrop"
-        Me.ListdesFichiersEnTrop.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ListdesFichiersEnTrop.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListdesFichiersEnTrop.Size = New System.Drawing.Size(225, 147)
-        Me.ListdesFichiersEnTrop.TabIndex = 75
-        '
-        'ListToSupp
-        '
-        Me.ListToSupp.BackColor = System.Drawing.Color.MistyRose
-        Me.ListToSupp.FormattingEnabled = True
-        Me.ListToSupp.Location = New System.Drawing.Point(498, 310)
-        Me.ListToSupp.Name = "ListToSupp"
-        Me.ListToSupp.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListToSupp.Size = New System.Drawing.Size(245, 95)
-        Me.ListToSupp.TabIndex = 74
-        '
         'DataGridOverlay
         '
         Me.DataGridOverlay.AllowUserToOrderColumns = True
@@ -219,7 +173,7 @@ Partial Class OverlayManagerBatocera
         Me.DataGridOverlay.Location = New System.Drawing.Point(498, 105)
         Me.DataGridOverlay.Name = "DataGridOverlay"
         Me.DataGridOverlay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridOverlay.Size = New System.Drawing.Size(476, 118)
+        Me.DataGridOverlay.Size = New System.Drawing.Size(476, 236)
         Me.DataGridOverlay.TabIndex = 73
         '
         'RenameSelection
@@ -289,15 +243,6 @@ Partial Class OverlayManagerBatocera
         Me.ButtonRenameSave.TabIndex = 43
         Me.ButtonRenameSave.Text = "Renommer l'overlay avec le Nom ci-dessus"
         Me.ButtonRenameSave.UseVisualStyleBackColor = False
-        '
-        'templisttosupp
-        '
-        Me.templisttosupp.FormattingEnabled = True
-        Me.templisttosupp.Location = New System.Drawing.Point(871, 229)
-        Me.templisttosupp.Name = "templisttosupp"
-        Me.templisttosupp.Size = New System.Drawing.Size(103, 56)
-        Me.templisttosupp.TabIndex = 83
-        Me.templisttosupp.Visible = False
         '
         'ButtonSuppSave
         '
@@ -385,7 +330,7 @@ Partial Class OverlayManagerBatocera
         'TextBox2
         '
         Me.TextBox2.BackColor = System.Drawing.Color.Bisque
-        Me.TextBox2.Location = New System.Drawing.Point(498, 229)
+        Me.TextBox2.Location = New System.Drawing.Point(498, 347)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
@@ -601,12 +546,7 @@ Partial Class OverlayManagerBatocera
         Me.Controls.Add(Me.buttonImportRoms1)
         Me.Controls.Add(Me.ButtonGetBack1)
         Me.Controls.Add(Me.ImportBoth1)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.ListdesFichiersEnTrop)
-        Me.Controls.Add(Me.ListToSupp)
         Me.Controls.Add(Me.DataGridOverlay)
-        Me.Controls.Add(Me.templisttosupp)
         Me.Controls.Add(Me.ButtonSuppSave)
         Me.Controls.Add(Me.GameLists)
         Me.Controls.Add(Me.GroupBox1)
@@ -640,10 +580,6 @@ Partial Class OverlayManagerBatocera
     Friend WithEvents buttonImportRoms1 As Button
     Friend WithEvents ButtonGetBack1 As Button
     Friend WithEvents ImportBoth1 As Button
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents ListdesFichiersEnTrop As ListBox
-    Friend WithEvents ListToSupp As ListBox
     Friend WithEvents DataGridOverlay As DataGridView
     Friend WithEvents RenameSelection As GroupBox
     Friend WithEvents Label10 As Label
@@ -651,7 +587,6 @@ Partial Class OverlayManagerBatocera
     Friend WithEvents ActualName As TextBox
     Friend WithEvents NewName As TextBox
     Friend WithEvents ButtonRenameSave As Button
-    Friend WithEvents templisttosupp As ListBox
     Friend WithEvents ButtonSuppSave As Button
     Friend WithEvents ButtonMenage1 As Button
     Friend WithEvents GroupBox1 As GroupBox
