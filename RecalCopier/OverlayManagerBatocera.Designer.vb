@@ -64,6 +64,8 @@ Partial Class OverlayManagerBatocera
         Me.ButtonConvert = New System.Windows.Forms.Button()
         Me.PanelChoice = New System.Windows.Forms.Panel()
         Me.ButtonShowOverlayManager = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.ListGamesFolder = New System.Windows.Forms.ListBox()
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -489,24 +491,25 @@ Partial Class OverlayManagerBatocera
         '
         'GameLists
         '
+        Me.GameLists.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.GameLists.Enabled = False
         Me.GameLists.FormattingEnabled = True
-        Me.GameLists.Location = New System.Drawing.Point(3, 146)
+        Me.GameLists.Location = New System.Drawing.Point(3, 419)
         Me.GameLists.Name = "GameLists"
         Me.GameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.GameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.GameLists.Size = New System.Drawing.Size(116, 446)
+        Me.GameLists.Size = New System.Drawing.Size(116, 173)
         Me.GameLists.TabIndex = 72
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label9.Location = New System.Drawing.Point(30, 129)
+        Me.Label9.Location = New System.Drawing.Point(13, 403)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(89, 13)
+        Me.Label9.Size = New System.Drawing.Size(106, 13)
         Me.Label9.TabIndex = 86
-        Me.Label9.Text = "GameLists Roms:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.Label9.Text = "Dossiers dans Roms:"
         '
         'ComboBox1
         '
@@ -564,6 +567,26 @@ Partial Class OverlayManagerBatocera
     "es roms qui n'ont pas de roms associé."
         Me.ButtonShowOverlayManager.UseVisualStyleBackColor = False
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label12.Location = New System.Drawing.Point(15, 145)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(104, 13)
+        Me.Label12.TabIndex = 91
+        Me.Label12.Text = "decorations\games :"
+        '
+        'ListGamesFolder
+        '
+        Me.ListGamesFolder.FormattingEnabled = True
+        Me.ListGamesFolder.Location = New System.Drawing.Point(3, 161)
+        Me.ListGamesFolder.Name = "ListGamesFolder"
+        Me.ListGamesFolder.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.ListGamesFolder.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
+        Me.ListGamesFolder.Size = New System.Drawing.Size(116, 225)
+        Me.ListGamesFolder.TabIndex = 90
+        '
         'OverlayManagerBatocera
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -593,6 +616,8 @@ Partial Class OverlayManagerBatocera
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.ListGamesFolder)
         Me.Name = "OverlayManagerBatocera"
         Me.Text = "OverlayManagerBatocera"
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).EndInit()
@@ -650,4 +675,6 @@ Partial Class OverlayManagerBatocera
     Friend WithEvents ButtonConvert As Button
     Friend WithEvents PanelChoice As Panel
     Friend WithEvents ButtonShowOverlayManager As Button
+    Friend WithEvents Label12 As Label
+    Friend WithEvents ListGamesFolder As ListBox
 End Class
