@@ -434,7 +434,7 @@ Partial Class OverlayManager
         Me.buttonImportRoms1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.buttonImportRoms1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.buttonImportRoms1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.buttonImportRoms1.Location = New System.Drawing.Point(385, 53)
+        Me.buttonImportRoms1.Location = New System.Drawing.Point(134, 66)
         Me.buttonImportRoms1.Name = "buttonImportRoms1"
         Me.buttonImportRoms1.Size = New System.Drawing.Size(116, 30)
         Me.buttonImportRoms1.TabIndex = 40

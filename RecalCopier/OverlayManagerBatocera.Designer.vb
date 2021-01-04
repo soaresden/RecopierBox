@@ -127,7 +127,7 @@ Partial Class OverlayManagerBatocera
         Me.buttonImportRoms1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.buttonImportRoms1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.buttonImportRoms1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.buttonImportRoms1.Location = New System.Drawing.Point(376, 51)
+        Me.buttonImportRoms1.Location = New System.Drawing.Point(125, 69)
         Me.buttonImportRoms1.Name = "buttonImportRoms1"
         Me.buttonImportRoms1.Size = New System.Drawing.Size(116, 30)
         Me.buttonImportRoms1.TabIndex = 80
