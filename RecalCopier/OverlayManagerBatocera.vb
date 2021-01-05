@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Text.RegularExpressions
 Public Class OverlayManagerBatocera
 
     Private Sub OverlayManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -21,10 +22,6 @@ Public Class OverlayManagerBatocera
         TextBox2.Hide()
         ButtonSuppSave.Hide()
 
-        Label7.Hide()
-        ListToSupp.Hide()
-        Label8.Hide()
-        ListdesFichiersEnTrop.Hide()
         Label9.Hide()
         GameLists.Hide()
         ImportBoth1.Hide()
@@ -101,11 +98,19 @@ Public Class OverlayManagerBatocera
 
         column = New DataColumn()
         With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "CheminPNG"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
             .DataType = Type.GetType("System.Boolean")
             .ColumnName = "CocheOverlay"
         End With
         table.Columns.Add(column)
 
+        Dim compteuroverlay As Integer = 0
 
         'Loop for every gamelists
         For Each i In ListGamesFolder.SelectedItems
@@ -136,6 +141,8 @@ Public Class OverlayManagerBatocera
                 Dim romnomderom As String = Path.GetFileName(rompath)
                 Dim tempinfo As String = Path.GetFileName(FileNameWithoutExtension(rompath) & ".info")
                 Dim cocheoverlay As Boolean
+                Dim cheminpng As String
+
 
                 'on va chercher si un .info existe
                 'on teste si il y'a des occurences
@@ -146,15 +153,17 @@ Public Class OverlayManagerBatocera
                 If nboccurences = 0 Then
                     cocheoverlay = False
                     romoverlays = "0"
+                    cheminpng = "0"
                 Else
                     cocheoverlay = True
-
+                    compteuroverlay = compteuroverlay + 1
                     Dim aryFi As IO.FileInfo() = di.GetFiles("*.info")
                     Dim fi As IO.FileInfo
 
                     For Each fi In aryFi
                         romoverlays = fi.FullName
                         If Path.GetFileName(romoverlays) = tempinfo Then
+                            cheminpng = Replace(romoverlays, ".info", ".png")
                             GoTo suivant
                         End If
                     Next
@@ -162,8 +171,13 @@ Public Class OverlayManagerBatocera
 suivant:
                 If romhidden = "true" Then GoTo Romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
 
+                'Test si l'image existe
+                If Not System.IO.File.Exists(cheminpng) Then
+                    cheminpng = "0"
+                End If
+
                 'on ajoute le tout dans une table
-                table.Rows.Add(romconsole, romname, rompath, romnomderom, romoverlays, cocheoverlay)
+                table.Rows.Add(romconsole, romname, rompath, romnomderom, romoverlays, cheminpng, cocheoverlay)
 Romsuivante:
             Next
 ProchainGamelist:
@@ -174,11 +188,12 @@ ProchainGamelist:
 
         'Width for columns
         DataGridRoms.RowHeadersWidth = 25
-        DataGridRoms.Columns("Console").Width = 40
-        DataGridRoms.Columns("Titre").Width = 205
+        DataGridRoms.Columns("Console").Width = 50
+        DataGridRoms.Columns("Titre").Width = 150
         DataGridRoms.Columns("CheminRom").Width = 20
         DataGridRoms.Columns("NomdeRom").Width = 10
-        DataGridRoms.Columns("CheminOverlay").Width = 50
+        DataGridRoms.Columns("CheminOverlay").Width = 45
+        DataGridRoms.Columns("CheminPNG").Width = 45
         DataGridRoms.Columns("CocheOverlay").Width = 25
 
         'Hiding les colonnes
@@ -189,11 +204,9 @@ ProchainGamelist:
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, Titre asc"
 
-        Dim compteuroverlay As Integer = 0
-
         'On compte le nombre total d'entrées
         RomTotal.Text = DataGridRoms.Rows.Count - 1
-
+        RomTotalOverlay.Text = compteuroverlay
         'On colore
         Call Colorerlescoches()
 
@@ -323,6 +336,7 @@ ProchainGamelist:
         End With
         table.Columns.Add(column)
 
+        Dim compteuroverlays As Integer = 0
         'Loop for every gamelists selected
         For Each i In ListGamesFolder.SelectedItems
             'generating the console name
@@ -340,7 +354,15 @@ ProchainGamelist:
                 Dim results = recherchedansgamelist(console, nomfichiercfg)
                 Dim romname = results.item1
                 Dim rompath = results.item2
-                Dim presenceoverlays As Boolean = True
+
+                'On va mettre la presence a 0 si as de rom associée
+                Dim presenceoverlays As Boolean
+                If romname = "#PASDANSXML#" Then
+                    presenceoverlays = False
+                    compteuroverlays = compteuroverlays + 1
+                Else
+                    presenceoverlays = True
+                End If
 
                 'test presence png
                 Dim png As String = Replace(cheminducfg, ".info", ".png")
@@ -386,17 +408,17 @@ ProchainGamelist:
 
         'Width for columns
         DataGridOverlay.RowHeadersWidth = 25
-        DataGridOverlay.Columns("Console").Width = 80
-        DataGridOverlay.Columns("Titre").Width = 205
+        DataGridOverlay.Columns("Console").Width = 60
+        DataGridOverlay.Columns("Titre").Width = 80
         DataGridOverlay.Columns("CheminRom").Width = 20
-        DataGridOverlay.Columns("NomdeRom").Width = 10
+        DataGridOverlay.Columns("NomdeRom").Width = 150
         DataGridOverlay.Columns("CheminOverlay").Width = 65
         DataGridOverlay.Columns("CheminPNG").Width = 65
         DataGridOverlay.Columns("CocheOverlay").Width = 25
 
         'Hiding les colonnes
         DataGridOverlay.Columns("CheminRom").Visible = False
-        DataGridOverlay.Columns("NomdeRom").Visible = False
+        DataGridOverlay.Columns("NomdeRom").Visible = True
 
         'Reajusting Interface and Showing Final Interface
         dv.Sort = "Console asc, Titre asc"
@@ -404,14 +426,14 @@ ProchainGamelist:
         'On colore les coches
         Call Colorerlescoches()
 
-        Dim compteuroverlay As Integer = 0
-
         'On compte le nombre total d'entrées
         OverlayTotal.Text = DataGridOverlay.Rows.Count - 1
+        OverlaySingle.Text = compteuroverlays
 
         'on affiche les outils
-        TextBox1.Show()
-        GroupBox1.Show()
+        GroupBox2.Show()
+        TextBox2.Show()
+        ButtonSuppSave.Show()
 
     End Sub
     Function recherchedansgamelist(console As String, nomdufichierinfo As String)
@@ -430,7 +452,7 @@ ProchainGamelist:
         'on teste si il y'a des occurences
         Dim nboccurences As Integer = dia.GetFiles(FileNameWithoutExtension(nomdufichierinfo) & ".*").Count
         If nboccurences = 0 Then
-            Return ("#PASDANSXML#,#PASDANSXML")
+            Return ("#PASDANSXML#", "#PASDANSXML")
         End If
 
         Dim aryFia As IO.FileInfo() = dia.GetFiles(FileNameWithoutExtension(nomdufichierinfo) & ".*")
@@ -458,7 +480,7 @@ ProchainGamelist:
             End If
 lignesuivante:
         Next
-        Return ("#PASDANSXML#,#PASDANSXML#")
+        Return ("#PASDANSXML#", "#PASDANSXML#")
     End Function
 
     Function Recherchenomdelarom(console As String, pathdelarom As String)
@@ -495,126 +517,32 @@ lignesuivante:
         Next
         Return "#PASDANSXML#"
     End Function
-    Sub FichiersCfgLies(cheminencours As String, consolerom As String)
-        Dim cheminducfg As String = cheminencours
-        Dim nomducfg As String = Path.GetFileName(cheminducfg)
-        Dim gamelistassocie As String = My.Settings.RecalboxFolder & "\roms\" & consolerom & "\gamelist.xml"
-        Dim genpathdelarom As String
-
-        'Verification du cfg console
-        If nomducfg = consolerom & ".cfg" Then
-            Exit Sub
-        End If
-
-        genpathdelarom = My.Settings.RecalboxFolder & "\roms\" & consolerom & "\" & nomducfg
-        'si on est arrivé ici, c'est que y'a pas de roms avec ce path donc on l'ajoute
-        Dim genpathducfg As String
-
-
-        genpathducfg = My.Settings.RecalboxFolder & "\overlays\" & consolerom & "\" & nomducfg
-
-
-
-        ListToSupp.Items.Add(genpathducfg)
-    End Sub
-
-    Sub Ecrireles3fichiers()
-        For i = 0 To ListToSupp.Items.Count - 1
-            'Dim console As String = ListToSupp.Items(i)
-            'Dim chercheroms As String = InStr(console, "overlays\",)
-            'Dim finphrase As String = console.Substring((chercheroms + 8))
-            'Dim detectedeuz As String = InStr(finphrase, "\")
-            'Dim findugame As String = finphrase.Substring(0, detectedeuz - 1)
-
-            Dim consolename As String = ListToSupp.Items(i).Substring((InStr(ListToSupp.Items(i), "overlays\",) + 8)).Substring(0, InStr(ListToSupp.Items(i).Substring((InStr(ListToSupp.Items(i), "overlays\",) + 8)), "\") - 1)
-            Dim romnamecfg = Path.GetFileName(ListToSupp.Items(i))
-
-            Call LectureDesCfgs(consolename, romnamecfg)
-        Next
-    End Sub
-
     Private Sub ButtonMenage_Click(sender As Object, e As EventArgs) Handles ButtonMenage1.Click
-        If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-dessus ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers Orphelins (en rouge) du tableau ?", vbYesNo) = vbNo Then Exit Sub
+        Dim compteur As Integer = 0
 
-        For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
-            Dim pathdufichier As String = ListdesFichiersEnTrop.Items(i)
-            System.IO.File.Delete(pathdufichier)
+        'On delete les fichiers
+        For i = 0 To DataGridOverlay.Rows.Count - 1
+            If DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CocheOverlay").Index).Value = False Then
+                Dim fichierinfo = DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CheminOverlay").Index).Value
+                Dim fichierpng = DataGridOverlay.Rows(i).Cells(DataGridOverlay.Columns("CheminPNG").Index).Value
+
+                On Error Resume Next
+                System.IO.File.Delete(fichierinfo)
+                System.IO.File.Delete(fichierpng)
+                compteur += 1
+                On Error GoTo 0
+            End If
         Next
-        MsgBox("Fichiers Supprimés avec Succès")
+        MsgBox(compteur * 2 & " fichiers Supprimés avec Succès")
+
+        ButtonImportOverlays1.PerformClick()
     End Sub
 
     Private Sub ImportBoth_Click(sender As Object, e As EventArgs) Handles ImportBoth1.Click
         buttonImportRoms1.PerformClick()
         ButtonImportOverlays1.PerformClick()
     End Sub
-    Sub LectureDesCfgs(consolerom As String, nomducfg As String)
-        Dim modifgamelistenrom As String = nomducfg
-
-        Dim fichier1cfg As String = My.Settings.DossierOverlay & consolerom & "\" & modifgamelistenrom
-        Dim fichier2overlaycfg As String
-        Dim fichier3png As String
-
-        Dim cheminpropreoverlay2 As String
-        Dim justefichier2 As String
-
-        fichier3png = 0
-        justefichier2 = 0
-        fichier2overlaycfg = 0
-        cheminpropreoverlay2 = 0
-
-        'on va lire le cfg pour trouver le cfg overlay
-        File.ReadAllLines(fichier1cfg)
-
-        Dim readText() As String = File.ReadAllLines(fichier1cfg)
-        Dim s As String
-        'On ajoute a la listbox
-        ListdesFichiersEnTrop.Items.Add(fichier1cfg)
-
-        For Each s In readText
-            Dim detectinputoverlay As String
-
-            detectinputoverlay = InStr(s, "/overlays/")
-
-
-            If detectinputoverlay > 0 Then
-                'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
-                'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
-                'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
-
-                Dim chemincfgoverlaydanscfg As String
-                chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
-                cheminpropreoverlay2 = My.Settings.DossierOverlay & Replace(chemincfgoverlaydanscfg, "/", "\")
-                justefichier2 = FileNameWithoutExtension(cheminpropreoverlay2) & ".cfg"
-                Exit For
-            End If
-        Next
-
-        'on lit le deuxieme fichier overlay cfg pour trouver le png
-        If Not File.Exists(cheminpropreoverlay2) Then Exit Sub
-        File.ReadAllLines(cheminpropreoverlay2)
-        'On ajoute a la listbox
-        ListdesFichiersEnTrop.Items.Add(cheminpropreoverlay2)
-
-        Dim readText2() As String = File.ReadAllLines(cheminpropreoverlay2)
-        Dim t As String
-
-        For Each t In readText2
-            Dim detectoverlayzero As String = InStr(t, "overlay0_overlay")
-            If detectoverlayzero > 0 Then
-                Dim chemindupng = t.Substring(detectoverlayzero + 19)
-                Dim detectpng = InStr(chemindupng, "png")
-                Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
-                Dim cheminpng = t.Substring(InStr(t, "overlay0_overlay") + 19).Substring(0, InStr(t.Substring(InStr(t, "overlay0_overlay") + 19), "png") + 2)
-                fichier3png = Replace(cheminpropreoverlay2, justefichier2, cheminpng)
-                Exit For
-            End If
-        Next
-        'on ajoute a la listbox
-        ListdesFichiersEnTrop.Items.Add(fichier3png)
-
-
-    End Sub
-
     Private Sub DataGridRoms_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridRoms.SelectionChanged
         Dim actualrow As Integer = DataGridRoms.CurrentRow.Index
         If actualrow >= DataGridRoms.RowCount - 1 Then Exit Sub
@@ -623,98 +551,23 @@ lignesuivante:
     End Sub
 
     Private Sub DataGridOverlay_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridOverlay.SelectionChanged
+        'on met le total selectionné dans la textbox
+        nbselected.Text = DataGridOverlay.SelectedRows.Count
+
         Dim actualrow As Integer = DataGridOverlay.CurrentRow.Index
         If actualrow >= DataGridOverlay.RowCount - 1 Then Exit Sub
-        Dim nomdufichier As String = DataGridOverlay.Rows(actualrow).Cells(2).Value
-        ActualName.Text = Path.GetFileName(nomdufichier)
-    End Sub
-
-    Private Sub ListdesFichiersEnTrop_DoubleClick(sender As Object, e As EventArgs)
-        If ListdesFichiersEnTrop.SelectedItems.Count = 1 Then
-            Process.Start(ListdesFichiersEnTrop.SelectedItem)
+        Dim nomdufichier As String = DataGridOverlay.Rows(actualrow).Cells(DataGridOverlay.Columns("NomdeRom").Index).Value
+        Dim pathinfo As String = DataGridOverlay.Rows(actualrow).Cells(DataGridOverlay.Columns("CheminOverlay").Index).Value
+        'Si plus de Deux on affiche rien 
+        If nbselected.Text > 1 Then
+            ActualName.Text = Nothing
+            actualpath.Text = Nothing
         Else
-            Exit Sub
+            ActualName.Text = Path.GetFileName(nomdufichier)
+            actualpath.Text = pathinfo
+            NewName.SelectAll()
+            NewName.Focus()
         End If
-    End Sub
-
-    Private Sub ListToSupp_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-        'on va changer le actual name
-        If ListToSupp.SelectedItems.Count = 0 Or ListToSupp.SelectedItem.ToString = "0 overlays en trop detecté dans votre dossier :)" Or ListToSupp.SelectedItem.ToString = Nothing Then
-            Exit Sub
-        ElseIf ListToSupp.SelectedItems.Count = 1 Then
-            ActualName.Text = Path.GetFileName(ListToSupp.SelectedItem)
-        End If
-
-        Dim fichier1 As String = ListToSupp.SelectedItem
-        Dim fichier2 As String = Nothing
-        Dim fichier3 As String = Nothing
-
-        Dim cheminpropreoverlay2 As String = Nothing
-        Dim justefichier2 As String = Nothing
-        Dim fichier3png As String = Nothing
-
-        'Generate the 3 files
-        Dim console As String = fichier1
-
-
-        ' console = fichier1.Substring(InStr(fichier1, "\overlays\") + 9)
-        '  Dim suite As String = InStr(console, "\")
-        ' Dim donc As String = console.Substring(0, suite - 1)
-        Dim consoleencourrs As String = fichier1.Substring(InStr(fichier1, "\overlays\") + 9).Substring(0, InStr(fichier1.Substring(InStr(fichier1, "\overlays\") + 9), "\") - 1)
-
-        'on va lire le cfg pour trouver le cfg overlay
-        File.ReadAllLines(fichier1)
-
-        Dim readText() As String = File.ReadAllLines(fichier1)
-        Dim s As String
-        For Each s In readText
-            Dim detectinputoverlay As String
-
-            detectinputoverlay = InStr(s, "/overlays/")
-
-
-            If detectinputoverlay > 0 Then
-                'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
-                'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
-                'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
-
-                Dim chemincfgoverlaydanscfg As String
-
-                chemincfgoverlaydanscfg = s.Substring(InStr(s, "/overlays/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/overlays/") + 9), ".cfg") + 3)
-                fichier2 = My.Settings.DossierOverlay & Replace(chemincfgoverlaydanscfg, "/", "\")
-                Exit For
-            End If
-        Next
-
-        'on lit le deuxieme fichier overlay cfg pour trouver le png
-        If Not File.Exists(fichier2) Then GoTo skip
-        File.ReadAllLines(fichier2)
-        Dim readText2() As String = File.ReadAllLines(fichier2)
-        Dim t As String
-
-        For Each t In readText2
-            Dim detectoverlayzero As String = InStr(t, "overlay0_overlay")
-            If detectoverlayzero > 0 Then
-                Dim chemindupng = t.Substring(detectoverlayzero + 19)
-                Dim detectpng = InStr(chemindupng, "png")
-                Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
-                Dim cheminpng = t.Substring(InStr(t, "overlay0_overlay") + 19).Substring(0, InStr(t.Substring(InStr(t, "overlay0_overlay") + 19), "png") + 2)
-                fichier3 = Replace(fichier2, Path.GetFileName(fichier2), cheminpng)
-                Exit For
-            End If
-        Next
-
-skip:
-        'on a les 3 fichiers, on cherche leur emplacement
-        Dim fich1 As Integer = ListdesFichiersEnTrop.Items.IndexOf(fichier1)
-        Dim fich2 As Integer = ListdesFichiersEnTrop.Items.IndexOf(fichier2)
-        Dim fich3 As Integer = ListdesFichiersEnTrop.Items.IndexOf(fichier3)
-
-        ListdesFichiersEnTrop.ClearSelected()
-        ListdesFichiersEnTrop.SetSelected(fich1, True)
-        ListdesFichiersEnTrop.SetSelected(fich2, True)
-        ListdesFichiersEnTrop.SetSelected(fich3, True)
     End Sub
 
     Private Sub ButtonRenameSave_Click(sender As Object, e As EventArgs) Handles ButtonRenameSave.Click
@@ -727,13 +580,13 @@ skip:
         Dim newextension As String = Path.GetExtension(NewName.Text)
 
         'Si .blablablabla a moins de 8 caracteres, c'est que c'est une vraie extension (.scummvm ?). Donc ca veut dire que c'est une extension qui est saisie
-        If newextension = ".cfg" Then
+        If newextension = ".info" Then
         Else
-            NewName.Text = NewName.Text & ".cfg"
+            NewName.Text = NewName.Text & ".info"
         End If
 
         'On prends l'extension attendue
-        Dim finaladresse As String = Replace(ListToSupp.SelectedItem.ToString, ActualName.Text, NewName.Text)
+        Dim finaladresse As String = Replace(actualpath.Text, ActualName.Text, NewName.Text)
 
         'Test si le fichier overlay déjà 
         If System.IO.File.Exists(finaladresse) Then
@@ -742,51 +595,47 @@ skip:
         End If
 
         If MsgBox("Vous allez changer le nom de l'Overlay : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & NewName.Text & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
-
         'On va devoir renommer dans les fichiers texte puis déplacer le tout
-        Dim fichieractuel As String = ListdesFichiersEnTrop.SelectedItem
+        Dim fichieractuel As String = actualpath.Text
         Dim fichierfinal1 As String = Replace(fichieractuel, ActualName.Text, NewName.Text)
+        Dim fichieractuelpng As String = Replace(actualpath.Text, ".info", ".png")
+        Dim fichierfinalpng As String = Replace(fichieractuelpng, Replace(ActualName.Text, ".info", ".png"), Replace(NewName.Text, ".info", ".png"))
 
         File.Move(fichieractuel, fichierfinal1)
+        File.Move(fichieractuelpng, fichierfinalpng)
 
         'on refresh le tout
         ActualName.Text = Path.GetFileName(fichierfinal1)
         NewName.Text = ActualName.Text
-
-        ButtonImportOverlays1.PerformClick()
-
+        ImportBoth1.PerformClick()
     End Sub
-
+    Function Convertendecimal(ligne As String)
+        Dim resultats = Regex.Replace(ligne, "[^-?\d+\.]", "")
+        Return resultats
+    End Function
     Private Sub ButtonSuppSave_Click(sender As Object, e As EventArgs) Handles ButtonSuppSave.Click
-        If MsgBox("Etes vous sur de supprimer les fichiers présents dans la liste en rouge ci dessous selectionnés ?" & Chr(13) & "Oui = Supprimer tous les fichiers CFG + _overlay + .png", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de supprimer les fichiers selectionnés dans le tableau ci dessus ?" & Chr(13) & "Oui = Supprimer tous les fichiers *.info + *.png", vbYesNo) = vbNo Then Exit Sub
 
-        templisttosupp.ClearSelected()
-
-        For Each item In ListToSupp.SelectedItems
-            templisttosupp.Items.Add(item)
+        For Each item In DataGridOverlay.SelectedRows
+            Dim ligneencours = Convertendecimal(item.ToString)
+            Dim png = DataGridOverlay.Rows(ligneencours).Cells(DataGridOverlay.Columns("CheminPNG").Index).Value
+            Dim info = DataGridOverlay.Rows(ligneencours).Cells(DataGridOverlay.Columns("CheminOverlay").Index).Value
+            templisttosupp.Items.Add(png)
+            templisttosupp.Items.Add(info)
         Next
 
         For i = 0 To templisttosupp.Items.Count - 1
             Dim fichiertosupp = templisttosupp.Items(i).ToString
-            Dim realindex As Integer = ListToSupp.Items.IndexOf(templisttosupp.Items(i))
-            ListToSupp.ClearSelected()
-            ListToSupp.SetSelected(realindex, True)
-
-            'Maintenant c'est selectionné on va les delete
-
-            For Each j In ListToSupp.SelectedItems
-                System.IO.File.Delete(j)
-            Next
-
-            'on remove les entrees
-            For n As Integer = ListToSupp.SelectedItems.Count - 1 To 0 Step -1
-                ListToSupp.Items.Remove(ListToSupp.SelectedItems(n))
-            Next n
-
+            Dim realindex As Integer = templisttosupp.Items.IndexOf(templisttosupp.Items(i))
+            System.IO.File.Delete(templisttosupp.Items(i))
         Next
+        'on remove les entrees
+        templisttosupp.Items.Clear()
 
+        MsgBox("Fichiers Supprimés")
+
+        ButtonImportOverlays1.PerformClick()
     End Sub
-
     Private Sub ButtonResizeOverlays_Click(sender As Object, e As EventArgs) Handles ButtonResizeOverlays.Click
         ResizeOverlays.Show()
         Me.Close()
@@ -826,6 +675,41 @@ skip:
         Dim numligne = e.RowIndex
 
         If numcolonne < 2 Then Exit Sub
+
+        Dim fichiercomplet = DataGridOverlay.Rows(numligne).Cells(numcolonne).Value
+
+        If DataGridOverlay.Rows(numligne).Cells(numcolonne).Value = "0" Then
+            Exit Sub
+        Else
+            If File.Exists(fichiercomplet) = True Then
+                Process.Start(fichiercomplet)
+            Else
+                Exit Sub
+            End If
+
+        End If
+    End Sub
+
+    Private Sub DataGridRoms_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridRoms.CellContentClick
+        Dim numcolonne = e.ColumnIndex
+        Dim numligne = e.RowIndex
+
+        If numcolonne < 3 Then Exit Sub
+
+        Dim fichiercomplet = DataGridRoms.Rows(numligne).Cells(numcolonne).Value
+
+        If DataGridRoms.Rows(numligne).Cells(numcolonne).Value = "0" Then
+            Exit Sub
+        Else
+            Process.Start(fichiercomplet)
+        End If
+    End Sub
+
+    Private Sub DataGridOverlay_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridOverlay.CellDoubleClick
+        Dim numcolonne = e.ColumnIndex
+        Dim numligne = e.RowIndex
+
+        If numcolonne < 4 Then Exit Sub
 
         Dim fichiercomplet = DataGridOverlay.Rows(numligne).Cells(numcolonne).Value
 

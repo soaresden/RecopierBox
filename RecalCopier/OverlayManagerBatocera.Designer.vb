@@ -61,6 +61,10 @@ Partial Class OverlayManagerBatocera
         Me.ButtonShowOverlayManager = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ListGamesFolder = New System.Windows.Forms.ListBox()
+        Me.templisttosupp = New System.Windows.Forms.ListBox()
+        Me.nbselected = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.actualpath = New System.Windows.Forms.TextBox()
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -167,7 +171,8 @@ Partial Class OverlayManagerBatocera
         '
         'DataGridOverlay
         '
-        Me.DataGridOverlay.AllowUserToOrderColumns = True
+        Me.DataGridOverlay.AllowUserToAddRows = False
+        Me.DataGridOverlay.AllowUserToDeleteRows = False
         Me.DataGridOverlay.AllowUserToResizeRows = False
         Me.DataGridOverlay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridOverlay.Location = New System.Drawing.Point(498, 105)
@@ -179,6 +184,7 @@ Partial Class OverlayManagerBatocera
         'RenameSelection
         '
         Me.RenameSelection.BackColor = System.Drawing.Color.Sienna
+        Me.RenameSelection.Controls.Add(Me.actualpath)
         Me.RenameSelection.Controls.Add(Me.Label10)
         Me.RenameSelection.Controls.Add(Me.Label11)
         Me.RenameSelection.Controls.Add(Me.ActualName)
@@ -237,28 +243,28 @@ Partial Class OverlayManagerBatocera
         Me.ButtonRenameSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonRenameSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonRenameSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonRenameSave.Location = New System.Drawing.Point(112, 62)
+        Me.ButtonRenameSave.Location = New System.Drawing.Point(112, 71)
         Me.ButtonRenameSave.Name = "ButtonRenameSave"
-        Me.ButtonRenameSave.Size = New System.Drawing.Size(278, 36)
+        Me.ButtonRenameSave.Size = New System.Drawing.Size(278, 27)
         Me.ButtonRenameSave.TabIndex = 43
         Me.ButtonRenameSave.Text = "Renommer l'overlay avec le Nom ci-dessus"
         Me.ButtonRenameSave.UseVisualStyleBackColor = False
         '
         'ButtonSuppSave
         '
-        Me.ButtonSuppSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.ButtonSuppSave.BackColor = System.Drawing.Color.Teal
         Me.ButtonSuppSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonSuppSave.Cursor = System.Windows.Forms.Cursors.Default
         Me.ButtonSuppSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonSuppSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonSuppSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.ButtonSuppSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSuppSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSuppSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonSuppSave.Location = New System.Drawing.Point(498, 415)
+        Me.ButtonSuppSave.Location = New System.Drawing.Point(768, 411)
         Me.ButtonSuppSave.Name = "ButtonSuppSave"
-        Me.ButtonSuppSave.Size = New System.Drawing.Size(245, 42)
+        Me.ButtonSuppSave.Size = New System.Drawing.Size(206, 46)
         Me.ButtonSuppSave.TabIndex = 84
-        Me.ButtonSuppSave.Text = "Supprimer en Cascade" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "La selection ci-dessus"
+        Me.ButtonSuppSave.Text = "Supprimer les 2 fichiers " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & ".info et png des roms selectionnés"
         Me.ButtonSuppSave.UseVisualStyleBackColor = False
         '
         'ButtonMenage1
@@ -271,11 +277,11 @@ Partial Class OverlayManagerBatocera
         Me.ButtonMenage1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonMenage1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonMenage1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonMenage1.Location = New System.Drawing.Point(471, 66)
+        Me.ButtonMenage1.Location = New System.Drawing.Point(409, 91)
         Me.ButtonMenage1.Name = "ButtonMenage1"
-        Me.ButtonMenage1.Size = New System.Drawing.Size(138, 40)
+        Me.ButtonMenage1.Size = New System.Drawing.Size(204, 26)
         Me.ButtonMenage1.TabIndex = 42
-        Me.ButtonMenage1.Text = "Supprimer les" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Overlays Orphelins"
+        Me.ButtonMenage1.Text = "Supprimer les Overlays Orphelins"
         Me.ButtonMenage1.UseVisualStyleBackColor = False
         '
         'GroupBox1
@@ -334,7 +340,7 @@ Partial Class OverlayManagerBatocera
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(476, 62)
+        Me.TextBox2.Size = New System.Drawing.Size(476, 58)
         Me.TextBox2.TabIndex = 69
         Me.TextBox2.Text = "La liste de tous les Overlays." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "La coche à droite permets de savoir si une rom es" &
     "t associée ou non." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Si un overlay n'est pas associé, cela veut dire que vous ave" &
@@ -354,7 +360,8 @@ Partial Class OverlayManagerBatocera
         '
         'DataGridRoms
         '
-        Me.DataGridRoms.AllowUserToOrderColumns = True
+        Me.DataGridRoms.AllowUserToAddRows = False
+        Me.DataGridRoms.AllowUserToDeleteRows = False
         Me.DataGridRoms.AllowUserToResizeRows = False
         Me.DataGridRoms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridRoms.Location = New System.Drawing.Point(125, 105)
@@ -386,7 +393,9 @@ Partial Class OverlayManagerBatocera
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(118, Byte), Integer), CType(CType(16, Byte), Integer))
+        Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Controls.Add(Me.RenameSelection)
+        Me.GroupBox2.Controls.Add(Me.nbselected)
         Me.GroupBox2.Controls.Add(Me.ButtonMenage1)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.Label5)
@@ -403,7 +412,7 @@ Partial Class OverlayManagerBatocera
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(450, 16)
+        Me.Label6.Location = New System.Drawing.Point(451, 46)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(83, 13)
         Me.Label6.TabIndex = 20
@@ -412,7 +421,7 @@ Partial Class OverlayManagerBatocera
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(408, 39)
+        Me.Label5.Location = New System.Drawing.Point(409, 69)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(125, 13)
         Me.Label5.TabIndex = 19
@@ -420,7 +429,7 @@ Partial Class OverlayManagerBatocera
         '
         'OverlaySingle
         '
-        Me.OverlaySingle.Location = New System.Drawing.Point(539, 37)
+        Me.OverlaySingle.Location = New System.Drawing.Point(540, 67)
         Me.OverlaySingle.Name = "OverlaySingle"
         Me.OverlaySingle.Size = New System.Drawing.Size(67, 20)
         Me.OverlaySingle.TabIndex = 17
@@ -428,7 +437,7 @@ Partial Class OverlayManagerBatocera
         '
         'OverlayTotal
         '
-        Me.OverlayTotal.Location = New System.Drawing.Point(539, 14)
+        Me.OverlayTotal.Location = New System.Drawing.Point(540, 44)
         Me.OverlayTotal.Name = "OverlayTotal"
         Me.OverlayTotal.Size = New System.Drawing.Size(67, 20)
         Me.OverlayTotal.TabIndex = 16
@@ -532,12 +541,48 @@ Partial Class OverlayManagerBatocera
         Me.ListGamesFolder.Size = New System.Drawing.Size(116, 225)
         Me.ListGamesFolder.TabIndex = 90
         '
+        'templisttosupp
+        '
+        Me.templisttosupp.FormattingEnabled = True
+        Me.templisttosupp.Location = New System.Drawing.Point(498, 414)
+        Me.templisttosupp.Name = "templisttosupp"
+        Me.templisttosupp.Size = New System.Drawing.Size(168, 43)
+        Me.templisttosupp.TabIndex = 92
+        Me.templisttosupp.Visible = False
+        '
+        'nbselected
+        '
+        Me.nbselected.Location = New System.Drawing.Point(540, 18)
+        Me.nbselected.Name = "nbselected"
+        Me.nbselected.Size = New System.Drawing.Size(67, 20)
+        Me.nbselected.TabIndex = 93
+        Me.nbselected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label7.Location = New System.Drawing.Point(422, 21)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(112, 13)
+        Me.Label7.TabIndex = 94
+        Me.Label7.Text = "Overlays Selectionnés"
+        '
+        'actualpath
+        '
+        Me.actualpath.Location = New System.Drawing.Point(6, 71)
+        Me.actualpath.Name = "actualpath"
+        Me.actualpath.Size = New System.Drawing.Size(100, 20)
+        Me.actualpath.TabIndex = 93
+        Me.actualpath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'OverlayManagerBatocera
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
         Me.ClientSize = New System.Drawing.Size(983, 604)
+        Me.Controls.Add(Me.templisttosupp)
         Me.Controls.Add(Me.PanelChoice)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label9)
@@ -612,4 +657,8 @@ Partial Class OverlayManagerBatocera
     Friend WithEvents ButtonShowOverlayManager As Button
     Friend WithEvents Label12 As Label
     Friend WithEvents ListGamesFolder As ListBox
+    Friend WithEvents templisttosupp As ListBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents nbselected As TextBox
+    Friend WithEvents actualpath As TextBox
 End Class
