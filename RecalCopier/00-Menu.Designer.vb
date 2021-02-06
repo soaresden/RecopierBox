@@ -91,12 +91,12 @@ Partial Class Form1
         '
         'ButtonBrowseRecalboxFolder
         '
-        Me.ButtonBrowseRecalboxFolder.Font = New System.Drawing.Font("VAG Rounded", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonBrowseRecalboxFolder.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonBrowseRecalboxFolder.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.ButtonBrowseRecalboxFolder.Location = New System.Drawing.Point(384, 67)
+        Me.ButtonBrowseRecalboxFolder.Location = New System.Drawing.Point(374, 67)
         Me.ButtonBrowseRecalboxFolder.Margin = New System.Windows.Forms.Padding(2)
         Me.ButtonBrowseRecalboxFolder.Name = "ButtonBrowseRecalboxFolder"
-        Me.ButtonBrowseRecalboxFolder.Size = New System.Drawing.Size(61, 19)
+        Me.ButtonBrowseRecalboxFolder.Size = New System.Drawing.Size(71, 19)
         Me.ButtonBrowseRecalboxFolder.TabIndex = 2
         Me.ButtonBrowseRecalboxFolder.Text = "Parcourir"
         Me.ButtonBrowseRecalboxFolder.UseVisualStyleBackColor = True
@@ -119,7 +119,7 @@ Partial Class Form1
         Me.TxtRecalfolderPath.Location = New System.Drawing.Point(4, 67)
         Me.TxtRecalfolderPath.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtRecalfolderPath.Name = "TxtRecalfolderPath"
-        Me.TxtRecalfolderPath.Size = New System.Drawing.Size(376, 20)
+        Me.TxtRecalfolderPath.Size = New System.Drawing.Size(366, 20)
         Me.TxtRecalfolderPath.TabIndex = 0
         Me.TxtRecalfolderPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -168,9 +168,9 @@ Partial Class Form1
         Me.Disclaimer.Controls.Add(Me.TxtDisclaimer)
         Me.Disclaimer.Controls.Add(Me.Button1)
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Disclaimer.Location = New System.Drawing.Point(253, 67)
+        Me.Disclaimer.Location = New System.Drawing.Point(254, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(696, 468)
+        Me.Disclaimer.Size = New System.Drawing.Size(695, 468)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Fonctionnalités :"
