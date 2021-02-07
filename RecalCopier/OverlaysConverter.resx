@@ -120,12 +120,12 @@
   <data name="TextBox1.Text" xml:space="preserve">
     <value>Independemment de la conversion, cet outil est capable de reperer :
 RECALBOX:
-- Les fichiers cfg manquants
+- Les fichiers .CFG manquants
 - Les fichiers overlays manquants
-- Les fichiers PNG manquants
+- Les fichiers .PNG manquants
 BATOCERA:
-- Les fichiers info manquants
-- Les fichiers PNG manquants
+- Les fichiers .INFO manquants
+- Les fichiers .PNG manquants
 Il est peut etre interessant de "Reparer" ces fichiers avant de les supprimer !
 (Les causes sont multiples : Erreur Serveur, ScreenScrapper, Copie de pack Overlays .. etc)</value>
   </data>

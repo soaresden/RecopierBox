@@ -245,8 +245,4 @@ Public Class Form1
             MsgBox(ex.Message)
         End Try
     End Sub
-
-    Private Sub TxtRecalfolderPath_TextChanged(sender As Object, e As EventArgs) Handles TxtRecalfolderPath.TextChanged
-
-    End Sub
 End Class
