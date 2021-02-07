@@ -80,14 +80,14 @@ Public Class Form1
 
     Sub DetectTypeDossier(CheminDossierRecalbox As String)
         If (System.IO.Directory.Exists(CheminDossierRecalbox & "\overlays")) Then
-            TypeRecalbox.Checked = True
-            TypeBatocera.Checked = False
-            My.Settings.DossierOverlay = CheminDossierRecalbox & "\overlays\"
-            My.Settings.Save()
-        Else
             TypeRecalbox.Checked = False
             TypeBatocera.Checked = True
             My.Settings.DossierOverlay = CheminDossierRecalbox & "\decorations\"
+            My.Settings.Save()
+        Else
+            TypeRecalbox.Checked = True
+            TypeBatocera.Checked = False
+            My.Settings.DossierOverlay = CheminDossierRecalbox & "\overlays\"
             My.Settings.Save()
         End If
     End Sub
