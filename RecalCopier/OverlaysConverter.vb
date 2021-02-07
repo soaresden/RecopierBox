@@ -14,21 +14,11 @@ Public Class OverlaysConverter
 
         ComboBox1.Enabled = False
 
-        'On Hide le choix impossile
-        If InStr(My.Settings.DossierOverlay, "overlays") > 1 Then
-            CheckBoxRecalbox.Show()
-            CheckBoxBatocera.Hide()
-        Else
-            CheckBoxRecalbox.Hide()
-            CheckBoxBatocera.Show()
-        End If
-
         'On dresse la liste des consoles
         For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.RecalboxFolder & "\roms\", FileIO.SearchOption.SearchTopLevelOnly)
             GameLists.Items.Add(System.IO.Path.GetFileName(folder))
         Next
     End Sub
-
     Sub CompletionRecalbox()
         'On clear par Securité
         DataGridOverlays.Columns.Clear()
@@ -196,7 +186,7 @@ nextconsole:
         Supp3.Show()
 
         'on colore les lignes
-        Call colorer()
+        Call Colorer()
     End Sub
     Function Recherchenomdelarom(chemingamelist As String, console As String, nomdufichiercfg As String)
         Dim lagamelist As String = chemingamelist
@@ -251,7 +241,6 @@ lignesuivante:
         Supp3.Show()
         Supp123.Show()
     End Sub
-
     Sub Importfichierbato()
         'On importe le nom des dossiers et on met en editable la combobox
         If InStr(My.Settings.DossierOverlay, "decorations") > 1 Then
@@ -261,7 +250,6 @@ lignesuivante:
             ComboBox1.Enabled = True
         End If
     End Sub
-
     Private Sub CheckBoxRecalbox_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxRecalbox.CheckedChanged
         If CheckBoxRecalbox.Checked = True Then
             CheckBoxRecalbox.Checked = True
@@ -289,11 +277,10 @@ lignesuivante:
 
         Me.Close()
     End Sub
-
     Private Sub ButtonConvert_Click(sender As Object, e As EventArgs) Handles ButtonConvert.Click
         If DataGridOverlays.Rows.Count = 0 Then
             MsgBox("Merci d'Importer vos configs d'abord")
-        Exit Sub
+            Exit Sub
         End If
 
         'On verifie qu'un dossier Batocera est bien selectionné
@@ -649,7 +636,6 @@ fichiersuivantbato:
             Process.Start(My.Settings.DossierOverlay & nomdossierquestion)
         End If
     End Sub
-
     Function Convertendecimal(ligne As String)
         Dim resultats = Regex.Replace(ligne, "[^-?\d+\.]", "")
         Return resultats
@@ -791,7 +777,6 @@ findugame:
 
 findugame:
         Return (fichier1cfg, cheminpropreoverlay2, fichier3png)
-
     End Function
 
     Sub Completionbatocera()
@@ -963,7 +948,6 @@ fichiersuivant:
         'on colore les lignes
         Call Colorerbato()
     End Sub
-
     Sub Colorer()
         For i = 0 To DataGridOverlays.Rows.Count - 1
             Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
@@ -1046,7 +1030,6 @@ fichiersuivant:
 Fin:
         MsgBox("Requete dans le presse papiers" & Chr(13) & "Collez ca dans la barre de Requete d'ARRM et filtrez")
     End Sub
-
     Sub Supplescfgs(num As Integer)
         For Each i In DataGridOverlays.SelectedRows
             Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
@@ -1071,25 +1054,20 @@ Fin:
     Private Sub Supp1_Click(sender As Object, e As EventArgs) Handles Supp1.Click
         Call supplescfgs(1)
     End Sub
-
     Private Sub Supp2_Click(sender As Object, e As EventArgs) Handles Supp2.Click
-        Call supplescfgs(2)
+        Call Supplescfgs(2)
     End Sub
-
     Private Sub Supp3_Click(sender As Object, e As EventArgs) Handles Supp3.Click
-        Call supplescfgs(3)
+        Call Supplescfgs(3)
     End Sub
-
     Private Sub Supp123_Click(sender As Object, e As EventArgs) Handles Supp123.Click
-        Call supplescfgs(123)
+        Call Supplescfgs(123)
     End Sub
-
     Private Sub DataGridOverlays_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridOverlays.CellContentDoubleClick
         Dim numcolonne = e.ColumnIndex
         Dim numligne = e.RowIndex
 
         If numcolonne < 3 Then Exit Sub
-
         Dim fichiercomplet = DataGridOverlays.Rows(numligne).Cells(numcolonne).Value
 
         If DataGridOverlays.Rows(numligne).Cells(numcolonne).Value = "0" Then
@@ -1098,7 +1076,6 @@ Fin:
             Process.Start(fichiercomplet)
         End If
     End Sub
-
     Private Sub GameLists_SelectedIndexChanged(sender As Object, e As EventArgs) Handles GameLists.SelectedIndexChanged
         If GameLists.SelectedItems.Count > 0 Then
             ButtonImportAll.Show()
@@ -1106,18 +1083,15 @@ Fin:
             ButtonImportAll.Hide()
         End If
     End Sub
-
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         If CheckBoxBatocera.Checked = True Then MsgBox("Import en Cours ...")
         ButtonImportAll.Show()
         ButtonImportAll.PerformClick()
         ButtonImportAll.Hide()
     End Sub
-
     Private Sub DataGridOverlays_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridOverlays.CellContentClick
         Call Colorerbato()
     End Sub
-
     Private Sub DataGridOverlays_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridOverlays.ColumnHeaderMouseClick
         Call Colorerbato()
     End Sub

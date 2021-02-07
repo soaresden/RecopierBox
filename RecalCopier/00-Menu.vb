@@ -45,10 +45,9 @@ Public Class Form1
         Call DetectTypeDossier(TxtRecalfolderPath.Text)
 
         'On affiche l'update si besoin
-        Call checkupdate()
+        Call Checkupdate()
     End Sub
     Private Sub NetFourDotFiveAndHigher()
-
         Const strSubKey As String = "SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
         Dim netKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(strSubKey)
 
@@ -59,11 +58,8 @@ Public Class Form1
             MsgBox("Votre .NET Framework : " & StrHigher(Integer.Parse(netKey.GetValue("Release"))) & Chr(13) & "Vous vous exposez à des bugs !" & Chr(13) & "Merci d'installer le Framework minimum de 4.7.2 et Réouvrir le Logiciel")
             System.Diagnostics.Process.Start(String.Format("https://dotnet.microsoft.com/download/dotnet-framework"))
         End If
-
     End Sub
-
     Private Function StrHigher(ByVal intRelease As Integer) As String
-
         If intRelease >= 461808 Then Return "4.8"
         If intRelease >= 461808 Then Return "4.7.1"
         If intRelease >= 461308 Then Return "4.7"
@@ -75,23 +71,20 @@ Public Class Form1
         If intRelease >= 378389 Then Return "4.5"
 
         Return ".Net Framework Non Installé"
-
     End Function
-
     Sub DetectTypeDossier(CheminDossierRecalbox As String)
         If (System.IO.Directory.Exists(CheminDossierRecalbox & "\overlays")) Then
-            TypeRecalbox.Checked = False
-            TypeBatocera.Checked = True
-            My.Settings.DossierOverlay = CheminDossierRecalbox & "\decorations\"
-            My.Settings.Save()
-        Else
             TypeRecalbox.Checked = True
             TypeBatocera.Checked = False
             My.Settings.DossierOverlay = CheminDossierRecalbox & "\overlays\"
             My.Settings.Save()
+        Else
+            TypeRecalbox.Checked = False
+            TypeBatocera.Checked = True
+            My.Settings.DossierOverlay = CheminDossierRecalbox & "\decorations\"
+            My.Settings.Save()
         End If
     End Sub
-
     Private Sub ButtonBrowseRecalboxFolder_Click(sender As Object, e As EventArgs) Handles ButtonBrowseRecalboxFolder.Click
         'Au clic, on ouvre la selection du repertoire
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
@@ -134,17 +127,14 @@ Public Class Form1
     Private Sub RichTextBox1_Click(sender As Object, e As EventArgs) Handles RichTextBox1.Click
         System.Diagnostics.Process.Start(String.Format("https://github.com/soaresden/RecopierBox"))
     End Sub
-
     Private Sub RichTextBox2_Click(sender As Object, e As EventArgs) Handles RichTextBox2.Click
         System.Diagnostics.Process.Start(String.Format("http://jujuvincebros.fr/telechargements2/file/10-arrm-another-recalbox-roms-manager"))
     End Sub
-
     Private Sub ButtonCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonCopy.Click
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         CopyRoms.Show()
         Me.Hide()
     End Sub
-
     Private Sub ButtonQuizz_Click_1(sender As Object, e As EventArgs) Handles ButtonQuizz.Click
         If TxtRecalfolderPath Is Nothing Then
             MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
@@ -154,15 +144,12 @@ Public Class Form1
         Quizz.Show()
         Me.Hide()
     End Sub
-
     Private Sub ButtonSave_Click_1(sender As Object, e As EventArgs) Handles ButtonSave.Click
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         SaveManager.Show()
         Me.Hide()
     End Sub
-
     Private Sub ButtonOverlay_Click_1(sender As Object, e As EventArgs) Handles ButtonOverlay.Click
-
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         If TypeRecalbox.Checked = True Then
             OverlayManager.Show()
@@ -172,19 +159,15 @@ Public Class Form1
             Me.Hide()
         End If
     End Sub
-
     Private Sub Paypal_Click(sender As Object, e As EventArgs) Handles Paypal.Click
         System.Diagnostics.Process.Start(String.Format("https://paypal.me/SoaresDenis?locale.x=fr_FR"))
     End Sub
-
     Private Sub ButtonHideArrm_Click(sender As Object, e As EventArgs) Handles ButtonHideArrm.Click
         PanelDroite.Visible = Not PanelDroite.Visible
     End Sub
-
     Private Sub ButtonSetDossier_Click(sender As Object, e As EventArgs) Handles ButtonSetDossier.Click
         PanelSettings.Visible = Not PanelSettings.Visible
     End Sub
-
     Sub Checkupdate()
         'check online
         Dim versiononline As Double
@@ -211,7 +194,6 @@ Public Class Form1
             End Try
         End If
     End Sub
-
     Private Sub DoUpdate()
         Try
             'Declare application path
@@ -240,7 +222,7 @@ Public Class Form1
             'Declare the input zip file.
             Dim input As Object = shObj.NameSpace((updateFiles))
             'msgbox
-            MsgBox("Update téléchargée dans le dossier 'Updates'" & Chr(13) & "Vous devrez dezipper et remplacer vous même :)")
+            MsgBox("Update téléchargée dans le dossier 'Updates'" & Chr(13) & "Vous devrez dezipper et remplacer par vous même :)")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
