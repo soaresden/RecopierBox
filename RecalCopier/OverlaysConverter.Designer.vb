@@ -123,19 +123,19 @@ Partial Class OverlaysConverter
         '
         'ButtonConvert
         '
-        Me.ButtonConvert.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonConvert.BackColor = System.Drawing.Color.Lime
         Me.ButtonConvert.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonConvert.Cursor = System.Windows.Forms.Cursors.Default
         Me.ButtonConvert.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonConvert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonConvert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green
         Me.ButtonConvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonConvert.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonConvert.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonConvert.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.ButtonConvert.Location = New System.Drawing.Point(808, 42)
         Me.ButtonConvert.Name = "ButtonConvert"
-        Me.ButtonConvert.Size = New System.Drawing.Size(120, 39)
+        Me.ButtonConvert.Size = New System.Drawing.Size(120, 47)
         Me.ButtonConvert.TabIndex = 44
-        Me.ButtonConvert.Text = "Lancer la Conversion"
+        Me.ButtonConvert.Text = "Lancer la Conversion" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "du Tableau"
         Me.ButtonConvert.UseVisualStyleBackColor = False
         '
         'ComboBox1
@@ -179,7 +179,7 @@ Partial Class OverlaysConverter
         Me.RqtARRM.Name = "RqtARRM"
         Me.RqtARRM.Size = New System.Drawing.Size(120, 48)
         Me.RqtARRM.TabIndex = 48
-        Me.RqtARRM.Text = "Copier la Requete pour ARRM"
+        Me.RqtARRM.Text = "Copier la Requete" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "pour ARRM"
         Me.RqtARRM.UseVisualStyleBackColor = False
         '
         'TextBox1
