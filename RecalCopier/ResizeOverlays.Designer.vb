@@ -235,7 +235,6 @@ Partial Class ResizeOverlays
         '
         Me.NouveauY.Location = New System.Drawing.Point(297, 33)
         Me.NouveauY.Name = "NouveauY"
-        Me.NouveauY.ReadOnly = True
         Me.NouveauY.Size = New System.Drawing.Size(47, 20)
         Me.NouveauY.TabIndex = 2
         Me.NouveauY.Text = "600"
@@ -262,7 +261,6 @@ Partial Class ResizeOverlays
         '
         Me.NouveauX.Location = New System.Drawing.Point(202, 33)
         Me.NouveauX.Name = "NouveauX"
-        Me.NouveauX.ReadOnly = True
         Me.NouveauX.Size = New System.Drawing.Size(47, 20)
         Me.NouveauX.TabIndex = 0
         Me.NouveauX.Text = "1024"
@@ -335,6 +333,8 @@ Partial Class ResizeOverlays
         Me.Controls.Add(Me.GameLists)
         Me.Controls.Add(Me.DataGridOverlays)
         Me.Controls.Add(Me.Label1)
+        Me.MaximumSize = New System.Drawing.Size(1014, 615)
+        Me.MinimumSize = New System.Drawing.Size(1014, 615)
         Me.Name = "ResizeOverlays"
         Me.Text = "ResizeOverlays"
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).EndInit()
