@@ -152,7 +152,7 @@ Partial Class ResizeOverlays
         Me.ButtonKnowResolution.Location = New System.Drawing.Point(202, 59)
         Me.ButtonKnowResolution.Name = "ButtonKnowResolution"
         Me.ButtonKnowResolution.Size = New System.Drawing.Size(142, 30)
-        Me.ButtonKnowResolution.TabIndex = 54
+        Me.ButtonKnowResolution.TabIndex = 4
         Me.ButtonKnowResolution.Text = "Connaitre sa Resolution"
         Me.ButtonKnowResolution.UseVisualStyleBackColor = False
         '
@@ -169,7 +169,7 @@ Partial Class ResizeOverlays
         Me.ButtonGoResize.Location = New System.Drawing.Point(122, 175)
         Me.ButtonGoResize.Name = "ButtonGoResize"
         Me.ButtonGoResize.Size = New System.Drawing.Size(116, 23)
-        Me.ButtonGoResize.TabIndex = 53
+        Me.ButtonGoResize.TabIndex = 7
         Me.ButtonGoResize.Text = "Redimensionner"
         Me.ButtonGoResize.UseVisualStyleBackColor = False
         '
@@ -229,14 +229,14 @@ Partial Class ResizeOverlays
         Me.HauteurOriginale.Name = "HauteurOriginale"
         Me.HauteurOriginale.ReadOnly = True
         Me.HauteurOriginale.Size = New System.Drawing.Size(47, 20)
-        Me.HauteurOriginale.TabIndex = 2
+        Me.HauteurOriginale.TabIndex = 1
         '
         'NouveauY
         '
         Me.NouveauY.Location = New System.Drawing.Point(297, 33)
         Me.NouveauY.Name = "NouveauY"
         Me.NouveauY.Size = New System.Drawing.Size(47, 20)
-        Me.NouveauY.TabIndex = 2
+        Me.NouveauY.TabIndex = 3
         Me.NouveauY.Text = "600"
         Me.NouveauY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -262,7 +262,7 @@ Partial Class ResizeOverlays
         Me.NouveauX.Location = New System.Drawing.Point(202, 33)
         Me.NouveauX.Name = "NouveauX"
         Me.NouveauX.Size = New System.Drawing.Size(47, 20)
-        Me.NouveauX.TabIndex = 0
+        Me.NouveauX.TabIndex = 2
         Me.NouveauX.Text = "1024"
         Me.NouveauX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
