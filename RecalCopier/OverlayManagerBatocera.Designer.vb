@@ -31,6 +31,7 @@ Partial Class OverlayManagerBatocera
         Me.ImportBoth1 = New System.Windows.Forms.Button()
         Me.DataGridOverlay = New System.Windows.Forms.DataGridView()
         Me.RenameSelection = New System.Windows.Forms.GroupBox()
+        Me.actualpath = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.ActualName = New System.Windows.Forms.TextBox()
@@ -49,6 +50,8 @@ Partial Class OverlayManagerBatocera
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.nbselected = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.OverlaySingle = New System.Windows.Forms.TextBox()
@@ -62,9 +65,6 @@ Partial Class OverlayManagerBatocera
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ListGamesFolder = New System.Windows.Forms.ListBox()
         Me.templisttosupp = New System.Windows.Forms.ListBox()
-        Me.nbselected = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.actualpath = New System.Windows.Forms.TextBox()
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -197,6 +197,14 @@ Partial Class OverlayManagerBatocera
         Me.RenameSelection.TabIndex = 62
         Me.RenameSelection.TabStop = False
         Me.RenameSelection.Text = "Renommer le fichier CFG principal : "
+        '
+        'actualpath
+        '
+        Me.actualpath.Location = New System.Drawing.Point(6, 71)
+        Me.actualpath.Name = "actualpath"
+        Me.actualpath.Size = New System.Drawing.Size(100, 20)
+        Me.actualpath.TabIndex = 93
+        Me.actualpath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label10
         '
@@ -409,6 +417,24 @@ Partial Class OverlayManagerBatocera
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Outils Overlays :"
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label7.Location = New System.Drawing.Point(422, 21)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(112, 13)
+        Me.Label7.TabIndex = 94
+        Me.Label7.Text = "Overlays Selectionnés"
+        '
+        'nbselected
+        '
+        Me.nbselected.Location = New System.Drawing.Point(540, 18)
+        Me.nbselected.Name = "nbselected"
+        Me.nbselected.Size = New System.Drawing.Size(67, 20)
+        Me.nbselected.TabIndex = 93
+        Me.nbselected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -550,32 +576,6 @@ Partial Class OverlayManagerBatocera
         Me.templisttosupp.TabIndex = 92
         Me.templisttosupp.Visible = False
         '
-        'nbselected
-        '
-        Me.nbselected.Location = New System.Drawing.Point(540, 18)
-        Me.nbselected.Name = "nbselected"
-        Me.nbselected.Size = New System.Drawing.Size(67, 20)
-        Me.nbselected.TabIndex = 93
-        Me.nbselected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label7.Location = New System.Drawing.Point(422, 21)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(112, 13)
-        Me.Label7.TabIndex = 94
-        Me.Label7.Text = "Overlays Selectionnés"
-        '
-        'actualpath
-        '
-        Me.actualpath.Location = New System.Drawing.Point(6, 71)
-        Me.actualpath.Name = "actualpath"
-        Me.actualpath.Size = New System.Drawing.Size(100, 20)
-        Me.actualpath.TabIndex = 93
-        Me.actualpath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'OverlayManagerBatocera
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -603,6 +603,8 @@ Partial Class OverlayManagerBatocera
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.ListGamesFolder)
+        Me.MaximumSize = New System.Drawing.Size(999, 643)
+        Me.MinimumSize = New System.Drawing.Size(999, 643)
         Me.Name = "OverlayManagerBatocera"
         Me.Text = "OverlayManagerBatocera"
         CType(Me.DataGridOverlay, System.ComponentModel.ISupportInitialize).EndInit()

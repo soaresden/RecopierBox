@@ -153,7 +153,7 @@ Partial Class ResizeOverlays
         Me.ButtonKnowResolution.Name = "ButtonKnowResolution"
         Me.ButtonKnowResolution.Size = New System.Drawing.Size(142, 30)
         Me.ButtonKnowResolution.TabIndex = 4
-        Me.ButtonKnowResolution.Text = "Connaitre sa Resolution"
+        Me.ButtonKnowResolution.Text = "Connaitre sa Resolution ?"
         Me.ButtonKnowResolution.UseVisualStyleBackColor = False
         '
         'ButtonGoResize
