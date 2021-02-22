@@ -39,10 +39,11 @@ Partial Class P2K
         Me.Label1 = New System.Windows.Forms.Label()
         Me.adressepad = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.DataGridViewExo = New System.Windows.Forms.DataGridView()
+        Me.FullNewadresseExo = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.NewAdresseExo = New System.Windows.Forms.TextBox()
+        Me.DoExoConverter = New System.Windows.Forms.Button()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.ParcourirExo = New System.Windows.Forms.Button()
         Me.adresseExo = New System.Windows.Forms.TextBox()
@@ -52,12 +53,11 @@ Partial Class P2K
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.FolderBrowserDialog2 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.DataGridViewExo = New System.Windows.Forms.DataGridView()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridViewExo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ButtonGetBack
@@ -240,10 +240,10 @@ Partial Class P2K
         '
         Me.Panel2.BackColor = System.Drawing.Color.PeachPuff
         Me.Panel2.Controls.Add(Me.DataGridViewExo)
-        Me.Panel2.Controls.Add(Me.TextBox6)
+        Me.Panel2.Controls.Add(Me.FullNewadresseExo)
         Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.TextBox7)
-        Me.Panel2.Controls.Add(Me.Button4)
+        Me.Panel2.Controls.Add(Me.NewAdresseExo)
+        Me.Panel2.Controls.Add(Me.DoExoConverter)
         Me.Panel2.Controls.Add(Me.TextBox5)
         Me.Panel2.Controls.Add(Me.ParcourirExo)
         Me.Panel2.Controls.Add(Me.adresseExo)
@@ -253,51 +253,65 @@ Partial Class P2K
         Me.Panel2.Controls.Add(Me.PictureBox1)
         Me.Panel2.Location = New System.Drawing.Point(446, 12)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(328, 546)
+        Me.Panel2.Size = New System.Drawing.Size(532, 546)
         Me.Panel2.TabIndex = 38
         '
-        'TextBox6
+        'DataGridViewExo
         '
-        Me.TextBox6.Location = New System.Drawing.Point(12, 473)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.ReadOnly = True
-        Me.TextBox6.Size = New System.Drawing.Size(312, 20)
-        Me.TextBox6.TabIndex = 58
-        Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.DataGridViewExo.AllowUserToAddRows = False
+        Me.DataGridViewExo.AllowUserToDeleteRows = False
+        Me.DataGridViewExo.AllowUserToResizeRows = False
+        Me.DataGridViewExo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewExo.Location = New System.Drawing.Point(6, 244)
+        Me.DataGridViewExo.MultiSelect = False
+        Me.DataGridViewExo.Name = "DataGridViewExo"
+        Me.DataGridViewExo.RowHeadersVisible = False
+        Me.DataGridViewExo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridViewExo.Size = New System.Drawing.Size(523, 202)
+        Me.DataGridViewExo.TabIndex = 59
+        '
+        'FullNewadresseExo
+        '
+        Me.FullNewadresseExo.Location = New System.Drawing.Point(7, 476)
+        Me.FullNewadresseExo.Name = "FullNewadresseExo"
+        Me.FullNewadresseExo.ReadOnly = True
+        Me.FullNewadresseExo.Size = New System.Drawing.Size(522, 20)
+        Me.FullNewadresseExo.TabIndex = 58
+        Me.FullNewadresseExo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(44, 453)
+        Me.Label5.Location = New System.Drawing.Point(67, 453)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(168, 13)
         Me.Label5.TabIndex = 57
         Me.Label5.Text = "Saisir un nom de Dossier de Sortie"
         '
-        'TextBox7
+        'NewAdresseExo
         '
-        Me.TextBox7.Location = New System.Drawing.Point(218, 450)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(105, 20)
-        Me.TextBox7.TabIndex = 56
-        Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NewAdresseExo.Location = New System.Drawing.Point(241, 450)
+        Me.NewAdresseExo.Name = "NewAdresseExo"
+        Me.NewAdresseExo.Size = New System.Drawing.Size(128, 20)
+        Me.NewAdresseExo.TabIndex = 56
+        Me.NewAdresseExo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Button4
+        'DoExoConverter
         '
-        Me.Button4.BackColor = System.Drawing.Color.IndianRed
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button4.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Button4.Location = New System.Drawing.Point(96, 511)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(161, 32)
-        Me.Button4.TabIndex = 51
-        Me.Button4.Text = "Valider le nouveau format"
-        Me.Button4.UseVisualStyleBackColor = False
+        Me.DoExoConverter.BackColor = System.Drawing.Color.IndianRed
+        Me.DoExoConverter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.DoExoConverter.Cursor = System.Windows.Forms.Cursors.Default
+        Me.DoExoConverter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.DoExoConverter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.DoExoConverter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DoExoConverter.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DoExoConverter.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.DoExoConverter.Location = New System.Drawing.Point(215, 511)
+        Me.DoExoConverter.Name = "DoExoConverter"
+        Me.DoExoConverter.Size = New System.Drawing.Size(154, 32)
+        Me.DoExoConverter.TabIndex = 51
+        Me.DoExoConverter.Text = "Valider le nouveau format"
+        Me.DoExoConverter.UseVisualStyleBackColor = False
         '
         'TextBox5
         '
@@ -308,7 +322,7 @@ Partial Class P2K
         Me.TextBox5.Multiline = True
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.ReadOnly = True
-        Me.TextBox5.Size = New System.Drawing.Size(218, 72)
+        Me.TextBox5.Size = New System.Drawing.Size(422, 72)
         Me.TextBox5.TabIndex = 50
         Me.TextBox5.Text = "CONVERTIR DES " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "EXODOS CONVERTER'S" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "AU FORMAT MEDIA"
         Me.TextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -323,7 +337,7 @@ Partial Class P2K
         Me.ParcourirExo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ParcourirExo.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ParcourirExo.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ParcourirExo.Location = New System.Drawing.Point(256, 214)
+        Me.ParcourirExo.Location = New System.Drawing.Point(455, 213)
         Me.ParcourirExo.Name = "ParcourirExo"
         Me.ParcourirExo.Size = New System.Drawing.Size(69, 23)
         Me.ParcourirExo.TabIndex = 41
@@ -332,16 +346,16 @@ Partial Class P2K
         '
         'adresseExo
         '
-        Me.adresseExo.Location = New System.Drawing.Point(6, 217)
+        Me.adresseExo.Location = New System.Drawing.Point(12, 216)
         Me.adresseExo.Name = "adresseExo"
-        Me.adresseExo.Size = New System.Drawing.Size(234, 20)
+        Me.adresseExo.Size = New System.Drawing.Size(437, 20)
         Me.adresseExo.TabIndex = 42
         Me.adresseExo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 188)
+        Me.Label4.Location = New System.Drawing.Point(9, 188)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(302, 13)
         Me.Label4.TabIndex = 41
@@ -350,7 +364,7 @@ Partial Class P2K
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(44, 100)
+        Me.Label3.Location = New System.Drawing.Point(189, 100)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(239, 52)
         Me.Label3.TabIndex = 41
@@ -360,7 +374,7 @@ Partial Class P2K
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(29, 78)
+        Me.LinkLabel1.Location = New System.Drawing.Point(173, 78)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(276, 13)
         Me.LinkLabel1.TabIndex = 36
@@ -377,20 +391,12 @@ Partial Class P2K
         Me.PictureBox1.TabIndex = 38
         Me.PictureBox1.TabStop = False
         '
-        'DataGridViewExo
-        '
-        Me.DataGridViewExo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewExo.Location = New System.Drawing.Point(6, 244)
-        Me.DataGridViewExo.Name = "DataGridViewExo"
-        Me.DataGridViewExo.Size = New System.Drawing.Size(317, 202)
-        Me.DataGridViewExo.TabIndex = 59
-        '
         'P2K
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LavenderBlush
-        Me.ClientSize = New System.Drawing.Size(777, 563)
+        Me.ClientSize = New System.Drawing.Size(990, 563)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.ButtonGetBack)
         Me.Controls.Add(Me.Panel1)
@@ -401,8 +407,8 @@ Partial Class P2K
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridViewExo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -426,10 +432,10 @@ Partial Class P2K
     Friend WithEvents ParcourirPad As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents FullNewadresseExo As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents Button4 As Button
+    Friend WithEvents NewAdresseExo As TextBox
+    Friend WithEvents DoExoConverter As Button
     Friend WithEvents TextBox5 As TextBox
     Friend WithEvents ParcourirExo As Button
     Friend WithEvents adresseExo As TextBox
