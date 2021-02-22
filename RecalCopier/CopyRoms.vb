@@ -47,9 +47,6 @@ Public Class CopyRoms
         TutoHideOuCopier.Hide()
         TutoHideBoutonCopy.Hide()
     End Sub
-    Private Sub ButtonValider_Click(sender As Object, e As EventArgs)
-
-    End Sub
     Public Shared Function GetFilesRecursive(ByVal initial As String) As List(Of String)
         ' This list stores the results.
         Dim result As New List(Of String)

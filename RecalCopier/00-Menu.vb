@@ -159,6 +159,11 @@ Public Class Form1
             Me.Hide()
         End If
     End Sub
+    Private Sub ButtonP2k_Click(sender As Object, e As EventArgs) Handles ButtonP2k.Click
+        'Au clic, on ouvre le formulaire associé et on ferme le menu
+        P2K.Show()
+        Me.Hide()
+    End Sub
     Private Sub Paypal_Click(sender As Object, e As EventArgs) Handles Paypal.Click
         System.Diagnostics.Process.Start(String.Format("https://paypal.me/SoaresDenis?locale.x=fr_FR"))
     End Sub

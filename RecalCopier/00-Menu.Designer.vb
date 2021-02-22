@@ -43,16 +43,17 @@ Partial Class Form1
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.txtWhyGamelist = New System.Windows.Forms.TextBox()
         Me.PanelGauche = New System.Windows.Forms.Panel()
+        Me.ButtonP2k = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.ButtonSetDossier = New System.Windows.Forms.Button()
         Me.TypeBatocera = New System.Windows.Forms.CheckBox()
         Me.TypeRecalbox = New System.Windows.Forms.CheckBox()
-        Me.Paypal = New System.Windows.Forms.Button()
         Me.ButtonOverlay = New System.Windows.Forms.Button()
         Me.ButtonSave = New System.Windows.Forms.Button()
         Me.ButtonQuizz = New System.Windows.Forms.Button()
         Me.ButtonCopy = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Paypal = New System.Windows.Forms.Button()
         Me.PanelHaut = New System.Windows.Forms.Panel()
         Me.PanelDroite = New System.Windows.Forms.Panel()
         Me.ToolTipCopy = New System.Windows.Forms.ToolTip(Me.components)
@@ -155,7 +156,7 @@ Partial Class Form1
         Me.version.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.version.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.version.ForeColor = System.Drawing.Color.Yellow
-        Me.version.Location = New System.Drawing.Point(129, 67)
+        Me.version.Location = New System.Drawing.Point(128, 51)
         Me.version.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.version.Name = "version"
         Me.version.Size = New System.Drawing.Size(25, 14)
@@ -168,9 +169,9 @@ Partial Class Form1
         Me.Disclaimer.Controls.Add(Me.TxtDisclaimer)
         Me.Disclaimer.Controls.Add(Me.Button1)
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Disclaimer.Location = New System.Drawing.Point(254, 67)
+        Me.Disclaimer.Location = New System.Drawing.Point(252, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(695, 468)
+        Me.Disclaimer.Size = New System.Drawing.Size(697, 470)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Fonctionnalités :"
@@ -210,7 +211,7 @@ Partial Class Form1
         Me.RichTextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.RichTextBox1.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.RichTextBox1.Location = New System.Drawing.Point(22, 84)
+        Me.RichTextBox1.Location = New System.Drawing.Point(21, 68)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.Size = New System.Drawing.Size(216, 16)
         Me.RichTextBox1.TabIndex = 17
@@ -219,7 +220,7 @@ Partial Class Form1
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.RecalCopier.My.Resources.Resources.iconlog
-        Me.PictureBox1.Location = New System.Drawing.Point(11, 19)
+        Me.PictureBox1.Location = New System.Drawing.Point(10, 3)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(69, 60)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -288,13 +289,13 @@ Partial Class Form1
         '
         Me.PanelGauche.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.PanelGauche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelGauche.Controls.Add(Me.ButtonP2k)
         Me.PanelGauche.Controls.Add(Me.RichTextBox1)
         Me.PanelGauche.Controls.Add(Me.Label6)
         Me.PanelGauche.Controls.Add(Me.ButtonSetDossier)
         Me.PanelGauche.Controls.Add(Me.TypeBatocera)
         Me.PanelGauche.Controls.Add(Me.TypeRecalbox)
         Me.PanelGauche.Controls.Add(Me.version)
-        Me.PanelGauche.Controls.Add(Me.Paypal)
         Me.PanelGauche.Controls.Add(Me.ButtonOverlay)
         Me.PanelGauche.Controls.Add(Me.ButtonSave)
         Me.PanelGauche.Controls.Add(Me.ButtonQuizz)
@@ -306,13 +307,33 @@ Partial Class Form1
         Me.PanelGauche.Size = New System.Drawing.Size(247, 542)
         Me.PanelGauche.TabIndex = 24
         '
+        'ButtonP2k
+        '
+        Me.ButtonP2k.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.ButtonP2k.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonP2k.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonP2k.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonP2k.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.ButtonP2k.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonP2k.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonP2k.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonP2k.Image = CType(resources.GetObject("ButtonP2k.Image"), System.Drawing.Image)
+        Me.ButtonP2k.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonP2k.Location = New System.Drawing.Point(2, 477)
+        Me.ButtonP2k.Name = "ButtonP2k"
+        Me.ButtonP2k.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonP2k.TabIndex = 29
+        Me.ButtonP2k.Text = "GESTION PAD2KEYBOARD"
+        Me.ButtonP2k.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonP2k.UseVisualStyleBackColor = False
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.Label6.Font = New System.Drawing.Font("VAGRounded BT", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Yellow
-        Me.Label6.Location = New System.Drawing.Point(162, 67)
+        Me.Label6.Location = New System.Drawing.Point(161, 51)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(76, 14)
@@ -362,23 +383,6 @@ Partial Class Form1
         Me.TypeRecalbox.TabIndex = 25
         Me.TypeRecalbox.Text = "Dossier Recalbox"
         Me.TypeRecalbox.UseVisualStyleBackColor = True
-        '
-        'Paypal
-        '
-        Me.Paypal.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.Paypal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Paypal.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Paypal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.Paypal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue
-        Me.Paypal.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Paypal.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Paypal.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Paypal.Image = CType(resources.GetObject("Paypal.Image"), System.Drawing.Image)
-        Me.Paypal.Location = New System.Drawing.Point(1, 478)
-        Me.Paypal.Name = "Paypal"
-        Me.Paypal.Size = New System.Drawing.Size(244, 58)
-        Me.Paypal.TabIndex = 24
-        Me.Paypal.UseVisualStyleBackColor = False
         '
         'ButtonOverlay
         '
@@ -466,12 +470,29 @@ Partial Class Form1
         Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.Label5.Font = New System.Drawing.Font("VAGRounded BT", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.Label5.Location = New System.Drawing.Point(85, 34)
+        Me.Label5.Location = New System.Drawing.Point(84, 18)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(160, 30)
         Me.Label5.TabIndex = 19
         Me.Label5.Text = "RecopierBox"
+        '
+        'Paypal
+        '
+        Me.Paypal.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.Paypal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Paypal.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Paypal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.Paypal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue
+        Me.Paypal.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Paypal.Font = New System.Drawing.Font("Equinox Com", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Paypal.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Paypal.Image = CType(resources.GetObject("Paypal.Image"), System.Drawing.Image)
+        Me.Paypal.Location = New System.Drawing.Point(403, 471)
+        Me.Paypal.Name = "Paypal"
+        Me.Paypal.Size = New System.Drawing.Size(184, 60)
+        Me.Paypal.TabIndex = 24
+        Me.Paypal.UseVisualStyleBackColor = False
         '
         'PanelHaut
         '
@@ -530,17 +551,18 @@ Partial Class Form1
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(11, Byte), Integer), CType(CType(52, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(950, 536)
+        Me.ClientSize = New System.Drawing.Size(950, 541)
         Me.Controls.Add(Me.Disclaimer)
         Me.Controls.Add(Me.PanelSettings)
         Me.Controls.Add(Me.ButtonHideArrm)
         Me.Controls.Add(Me.PanelDroite)
         Me.Controls.Add(Me.PanelHaut)
         Me.Controls.Add(Me.PanelGauche)
+        Me.Controls.Add(Me.Paypal)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(966, 575)
-        Me.MinimumSize = New System.Drawing.Size(966, 575)
+        Me.MaximumSize = New System.Drawing.Size(966, 580)
+        Me.MinimumSize = New System.Drawing.Size(966, 580)
         Me.Name = "Form1"
         Me.Text = "Menu RecopierBox"
         Me.groupBox2.ResumeLayout(False)
@@ -598,4 +620,5 @@ Partial Class Form1
     Friend WithEvents ButtonSetDossier As Button
     Friend WithEvents PanelSettings As Panel
     Private WithEvents Label6 As Label
+    Friend WithEvents ButtonP2k As Button
 End Class

@@ -138,6 +138,12 @@
     <Compile Include="OverlaysConverter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="P2K.Designer.vb">
+      <DependentUpon>P2K.vb</DependentUpon>
+    </Compile>
+    <Compile Include="P2K.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Quizz.Designer.vb">
       <DependentUpon>Quizz.vb</DependentUpon>
     </Compile>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OverlaysConverter.resx">
       <DependentUpon>OverlaysConverter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="P2K.resx">
+      <DependentUpon>P2K.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quizz.resx">
       <DependentUpon>Quizz.vb</DependentUpon>
