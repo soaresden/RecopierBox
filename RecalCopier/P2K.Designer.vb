@@ -25,21 +25,21 @@ Partial Class P2K
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(P2K))
         Me.ButtonGetBack = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ListingP2k = New System.Windows.Forms.DataGridView()
         Me.Title1 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Fulladressep2k = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.NewP2kFolder = New System.Windows.Forms.TextBox()
+        Me.ValidConvP2k = New System.Windows.Forms.Button()
         Me.BatoToRb = New System.Windows.Forms.Label()
         Me.RbtoBato = New System.Windows.Forms.Label()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.ParcourirPad = New System.Windows.Forms.Button()
+        Me.ValidDossierDos = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.adressepad = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.DataGridViewExo = New System.Windows.Forms.DataGridView()
+        Me.ExodosSheet = New System.Windows.Forms.DataGridView()
         Me.FullNewadresseExo = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.NewAdresseExo = New System.Windows.Forms.TextBox()
@@ -51,12 +51,12 @@ Partial Class P2K
         Me.Label3 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.FolderBrowserDialog2 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Panel1.SuspendLayout()
+        CType(Me.ListingP2k, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
-        CType(Me.DataGridViewExo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ExodosSheet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -80,15 +80,15 @@ Partial Class P2K
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkSeaGreen
+        Me.Panel1.Controls.Add(Me.ListingP2k)
         Me.Panel1.Controls.Add(Me.Title1)
-        Me.Panel1.Controls.Add(Me.TextBox4)
+        Me.Panel1.Controls.Add(Me.Fulladressep2k)
         Me.Panel1.Controls.Add(Me.Label7)
-        Me.Panel1.Controls.Add(Me.TextBox3)
-        Me.Panel1.Controls.Add(Me.Button3)
+        Me.Panel1.Controls.Add(Me.NewP2kFolder)
+        Me.Panel1.Controls.Add(Me.ValidConvP2k)
         Me.Panel1.Controls.Add(Me.BatoToRb)
         Me.Panel1.Controls.Add(Me.RbtoBato)
-        Me.Panel1.Controls.Add(Me.ListBox1)
-        Me.Panel1.Controls.Add(Me.ParcourirPad)
+        Me.Panel1.Controls.Add(Me.ValidDossierDos)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.PictureBox2)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -97,6 +97,20 @@ Partial Class P2K
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(328, 546)
         Me.Panel1.TabIndex = 37
+        '
+        'ListingP2k
+        '
+        Me.ListingP2k.AllowUserToAddRows = False
+        Me.ListingP2k.AllowUserToDeleteRows = False
+        Me.ListingP2k.AllowUserToResizeRows = False
+        Me.ListingP2k.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ListingP2k.Location = New System.Drawing.Point(3, 242)
+        Me.ListingP2k.MultiSelect = False
+        Me.ListingP2k.Name = "ListingP2k"
+        Me.ListingP2k.RowHeadersVisible = False
+        Me.ListingP2k.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.ListingP2k.Size = New System.Drawing.Size(322, 202)
+        Me.ListingP2k.TabIndex = 60
         '
         'Title1
         '
@@ -112,14 +126,14 @@ Partial Class P2K
         Me.Title1.Text = "CONVERTIR DES " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FICHIERS PAD2KEYBOARD" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P2K.CFG & .KEYS"
         Me.Title1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox4
+        'Fulladressep2k
         '
-        Me.TextBox4.Location = New System.Drawing.Point(3, 473)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.ReadOnly = True
-        Me.TextBox4.Size = New System.Drawing.Size(312, 20)
-        Me.TextBox4.TabIndex = 47
-        Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Fulladressep2k.Location = New System.Drawing.Point(3, 473)
+        Me.Fulladressep2k.Name = "Fulladressep2k"
+        Me.Fulladressep2k.ReadOnly = True
+        Me.Fulladressep2k.Size = New System.Drawing.Size(322, 20)
+        Me.Fulladressep2k.TabIndex = 47
+        Me.Fulladressep2k.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label7
         '
@@ -130,35 +144,35 @@ Partial Class P2K
         Me.Label7.TabIndex = 46
         Me.Label7.Text = "Saisir un nom de Dossier de Sortie"
         '
-        'TextBox3
+        'NewP2kFolder
         '
-        Me.TextBox3.Location = New System.Drawing.Point(209, 450)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(105, 20)
-        Me.TextBox3.TabIndex = 45
-        Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.NewP2kFolder.Location = New System.Drawing.Point(209, 450)
+        Me.NewP2kFolder.Name = "NewP2kFolder"
+        Me.NewP2kFolder.Size = New System.Drawing.Size(116, 20)
+        Me.NewP2kFolder.TabIndex = 45
+        Me.NewP2kFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Button3
+        'ValidConvP2k
         '
-        Me.Button3.BackColor = System.Drawing.Color.SeaGreen
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button3.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Button3.Location = New System.Drawing.Point(92, 511)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(161, 32)
-        Me.Button3.TabIndex = 44
-        Me.Button3.Text = "Confirmer la conversion"
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.ValidConvP2k.BackColor = System.Drawing.Color.SeaGreen
+        Me.ValidConvP2k.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ValidConvP2k.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ValidConvP2k.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ValidConvP2k.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.ValidConvP2k.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ValidConvP2k.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ValidConvP2k.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ValidConvP2k.Location = New System.Drawing.Point(92, 511)
+        Me.ValidConvP2k.Name = "ValidConvP2k"
+        Me.ValidConvP2k.Size = New System.Drawing.Size(161, 32)
+        Me.ValidConvP2k.TabIndex = 44
+        Me.ValidConvP2k.Text = "Confirmer la conversion"
+        Me.ValidConvP2k.UseVisualStyleBackColor = False
         '
         'BatoToRb
         '
         Me.BatoToRb.AutoSize = True
-        Me.BatoToRb.Location = New System.Drawing.Point(5, 253)
+        Me.BatoToRb.Location = New System.Drawing.Point(58, 268)
         Me.BatoToRb.Name = "BatoToRb"
         Me.BatoToRb.Size = New System.Drawing.Size(231, 13)
         Me.BatoToRb.TabIndex = 43
@@ -167,36 +181,28 @@ Partial Class P2K
         'RbtoBato
         '
         Me.RbtoBato.AutoSize = True
-        Me.RbtoBato.Location = New System.Drawing.Point(5, 240)
+        Me.RbtoBato.Location = New System.Drawing.Point(58, 255)
         Me.RbtoBato.Name = "RbtoBato"
         Me.RbtoBato.Size = New System.Drawing.Size(231, 13)
         Me.RbtoBato.TabIndex = 42
         Me.RbtoBato.Text = "Dossier Recalbox (p2k.cfg) --> Batocera's .keys"
         '
-        'ListBox1
+        'ValidDossierDos
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(3, 286)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(322, 160)
-        Me.ListBox1.TabIndex = 41
-        '
-        'ParcourirPad
-        '
-        Me.ParcourirPad.BackColor = System.Drawing.Color.SeaGreen
-        Me.ParcourirPad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ParcourirPad.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ParcourirPad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ParcourirPad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.ParcourirPad.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ParcourirPad.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ParcourirPad.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ParcourirPad.Location = New System.Drawing.Point(246, 214)
-        Me.ParcourirPad.Name = "ParcourirPad"
-        Me.ParcourirPad.Size = New System.Drawing.Size(69, 23)
-        Me.ParcourirPad.TabIndex = 39
-        Me.ParcourirPad.Text = "Parcourir"
-        Me.ParcourirPad.UseVisualStyleBackColor = False
+        Me.ValidDossierDos.BackColor = System.Drawing.Color.SeaGreen
+        Me.ValidDossierDos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ValidDossierDos.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ValidDossierDos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ValidDossierDos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.ValidDossierDos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ValidDossierDos.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ValidDossierDos.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ValidDossierDos.Location = New System.Drawing.Point(92, 188)
+        Me.ValidDossierDos.Name = "ValidDossierDos"
+        Me.ValidDossierDos.Size = New System.Drawing.Size(161, 23)
+        Me.ValidDossierDos.TabIndex = 39
+        Me.ValidDossierDos.Text = "Importer le Dossier 'Roms\Dos'"
+        Me.ValidDossierDos.UseVisualStyleBackColor = False
         '
         'Label2
         '
@@ -221,25 +227,25 @@ Partial Class P2K
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 188)
+        Me.Label1.Location = New System.Drawing.Point(58, 150)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(230, 26)
+        Me.Label1.Size = New System.Drawing.Size(237, 26)
         Me.Label1.TabIndex = 39
-        Me.Label1.Text = "Saisir le chemin roms/console souhaitée" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ps: tous les sous dossiers seront pris e" &
-    "n compte"
+        Me.Label1.Text = "Chemin de votre dossier Dos :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PS: Tous les sous-dossiers seront pris en compte"
         '
         'adressepad
         '
         Me.adressepad.Location = New System.Drawing.Point(3, 217)
         Me.adressepad.Name = "adressepad"
-        Me.adressepad.Size = New System.Drawing.Size(237, 20)
+        Me.adressepad.ReadOnly = True
+        Me.adressepad.Size = New System.Drawing.Size(322, 20)
         Me.adressepad.TabIndex = 37
         Me.adressepad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.PeachPuff
-        Me.Panel2.Controls.Add(Me.DataGridViewExo)
+        Me.Panel2.Controls.Add(Me.ExodosSheet)
         Me.Panel2.Controls.Add(Me.FullNewadresseExo)
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.NewAdresseExo)
@@ -256,19 +262,19 @@ Partial Class P2K
         Me.Panel2.Size = New System.Drawing.Size(532, 546)
         Me.Panel2.TabIndex = 38
         '
-        'DataGridViewExo
+        'ExodosSheet
         '
-        Me.DataGridViewExo.AllowUserToAddRows = False
-        Me.DataGridViewExo.AllowUserToDeleteRows = False
-        Me.DataGridViewExo.AllowUserToResizeRows = False
-        Me.DataGridViewExo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewExo.Location = New System.Drawing.Point(6, 244)
-        Me.DataGridViewExo.MultiSelect = False
-        Me.DataGridViewExo.Name = "DataGridViewExo"
-        Me.DataGridViewExo.RowHeadersVisible = False
-        Me.DataGridViewExo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridViewExo.Size = New System.Drawing.Size(523, 202)
-        Me.DataGridViewExo.TabIndex = 59
+        Me.ExodosSheet.AllowUserToAddRows = False
+        Me.ExodosSheet.AllowUserToDeleteRows = False
+        Me.ExodosSheet.AllowUserToResizeRows = False
+        Me.ExodosSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.ExodosSheet.Location = New System.Drawing.Point(6, 244)
+        Me.ExodosSheet.MultiSelect = False
+        Me.ExodosSheet.Name = "ExodosSheet"
+        Me.ExodosSheet.RowHeadersVisible = False
+        Me.ExodosSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.ExodosSheet.Size = New System.Drawing.Size(523, 202)
+        Me.ExodosSheet.TabIndex = 59
         '
         'FullNewadresseExo
         '
@@ -404,10 +410,11 @@ Partial Class P2K
         Me.Text = "P2K"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.ListingP2k, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.DataGridViewExo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ExodosSheet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -420,16 +427,14 @@ Partial Class P2K
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents adressepad As TextBox
     Friend WithEvents LinkLabel1 As LinkLabel
-    Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
     Friend WithEvents Title1 As TextBox
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Fulladressep2k As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Button3 As Button
+    Friend WithEvents NewP2kFolder As TextBox
+    Friend WithEvents ValidConvP2k As Button
     Friend WithEvents BatoToRb As Label
     Friend WithEvents RbtoBato As Label
-    Friend WithEvents ListBox1 As ListBox
-    Friend WithEvents ParcourirPad As Button
+    Friend WithEvents ValidDossierDos As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents FullNewadresseExo As TextBox
@@ -442,5 +447,6 @@ Partial Class P2K
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents FolderBrowserDialog2 As FolderBrowserDialog
-    Friend WithEvents DataGridViewExo As DataGridView
+    Friend WithEvents ExodosSheet As DataGridView
+    Friend WithEvents ListingP2k As DataGridView
 End Class

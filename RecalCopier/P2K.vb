@@ -20,9 +20,7 @@ Public Class P2K
             End If
         End If
     End Sub
-
     Sub validlecheminexo()
-
         'import de l'adresse
         Dim gamelistXml As XElement = XElement.Load(adresseExo.Text & "\gamelist.xml")
 
@@ -189,29 +187,29 @@ romsuivante:
 
         'Sorting A-Z the console
         dv = table.DefaultView
-        DataGridViewExo.DataSource = table
+        ExodosSheet.DataSource = table
 
         'Hiding les colonnes
-        DataGridViewExo.Columns("DOS").Visible = False
-        DataGridViewExo.Columns("Titre").Visible = True
-        DataGridViewExo.Columns("Chemin").Visible = False
-        DataGridViewExo.Columns("ID").Visible = False
-        DataGridViewExo.Columns("Synopsis").Visible = False
-        DataGridViewExo.Columns("Date").Visible = False
-        DataGridViewExo.Columns("Dev").Visible = True
-        DataGridViewExo.Columns("Publ").Visible = True
-        DataGridViewExo.Columns("Genre").Visible = True
-        DataGridViewExo.Columns("Manual").Visible = True
-        DataGridViewExo.Columns("Image").Visible = True
+        ExodosSheet.Columns("DOS").Visible = False
+        ExodosSheet.Columns("Titre").Visible = True
+        ExodosSheet.Columns("Chemin").Visible = False
+        ExodosSheet.Columns("ID").Visible = False
+        ExodosSheet.Columns("Synopsis").Visible = False
+        ExodosSheet.Columns("Date").Visible = False
+        ExodosSheet.Columns("Dev").Visible = True
+        ExodosSheet.Columns("Publ").Visible = True
+        ExodosSheet.Columns("Genre").Visible = True
+        ExodosSheet.Columns("Manual").Visible = True
+        ExodosSheet.Columns("Image").Visible = True
 
         'Width for columns
-        DataGridViewExo.Columns("Titre").Width = 110
-        DataGridViewExo.Columns("Date").Width = 80
-        DataGridViewExo.Columns("Dev").Width = 80
-        DataGridViewExo.Columns("Publ").Width = 80
-        DataGridViewExo.Columns("Genre").Width = 80
-        DataGridViewExo.Columns("Manual").Width = 80
-        DataGridViewExo.Columns("Image").Width = 70
+        ExodosSheet.Columns("Titre").Width = 110
+        ExodosSheet.Columns("Date").Width = 80
+        ExodosSheet.Columns("Dev").Width = 80
+        ExodosSheet.Columns("Publ").Width = 80
+        ExodosSheet.Columns("Genre").Width = 80
+        ExodosSheet.Columns("Manual").Width = 80
+        ExodosSheet.Columns("Image").Width = 70
 
 
     End Sub
@@ -226,10 +224,10 @@ romsuivante:
             Exit Sub
         End If
 
-        For i = 0 To DataGridViewExo.Rows.Count - 1
+        For i = 0 To ExodosSheet.Rows.Count - 1
             On Error Resume Next
-            Dim cheminimage As String = DataGridViewExo.Rows(i).Cells(DataGridViewExo.Columns("image").Index).Value
-            Dim cheminmanual As String = DataGridViewExo.Rows(i).Cells(DataGridViewExo.Columns("manual").Index).Value
+            Dim cheminimage As String = ExodosSheet.Rows(i).Cells(ExodosSheet.Columns("image").Index).Value
+            Dim cheminmanual As String = ExodosSheet.Rows(i).Cells(ExodosSheet.Columns("manual").Index).Value
             On Error GoTo 0
 
             'On va copier coller et creer les dossiers
@@ -244,7 +242,7 @@ romsuivante:
                 'on copie le fichier
                 FileCopy(cheminimage, finalfichier)
                 'et on mets le vrai chemin
-                DataGridViewExo.Rows(i).Cells(DataGridViewExo.Columns("image").Index).Value = finalfichier
+                ExodosSheet.Rows(i).Cells(ExodosSheet.Columns("image").Index).Value = finalfichier
             End If
 
             If cheminmanual <> "" Then
@@ -257,7 +255,7 @@ romsuivante:
                 'on copie le fichier
                 FileCopy(cheminimage, finalfichier)
                 'et on mets le vrai chemin
-                DataGridViewExo.Rows(i).Cells(DataGridViewExo.Columns("manual").Index).Value = finalfichier
+                ExodosSheet.Rows(i).Cells(ExodosSheet.Columns("manual").Index).Value = finalfichier
             End If
 
         Next
@@ -296,5 +294,94 @@ romsuivante:
         Process.Start(FullNewadresseExo.Text & "\media")
         MsgBox("Ecraser le contenu du dossier qui s'ouvre dans votre dossier roms\dos\")
         Process.Start(My.Settings.RecalboxFolder & "\roms\dos\")
+    End Sub
+
+    Private Sub ImporterDossierDos(sender As Object, e As EventArgs) Handles ValidDossierDos.Click
+        'Au clic, on rempli l'adresse des roms
+        adressepad.Text = My.Settings.RecalboxFolder & "\roms\dos"
+
+        'on check si c'est batocera ou Recalbox
+        Dim extension As String
+        If InStr(LCase(adressepad.Text), "recalbox") > 1 Then
+            RbtoBato.Visible = True
+            BatoToRb.Visible = False
+            extension = "p2k.cfg"
+        Else
+            RbtoBato.Visible = False
+            BatoToRb.Visible = True
+            extension = "info"
+        End If
+
+        Call ImportdesP2k(extension)
+
+
+    End Sub
+
+    Private Sub P2K_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        RbtoBato.Visible = False
+        BatoToRb.Visible = False
+    End Sub
+
+    Sub ImportdesP2k(extension As String)
+        Dim table As New DataTable()
+        Dim dv As DataView
+        Dim column As DataColumn
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "FichierP2k"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Cheminp2k"
+        End With
+        table.Columns.Add(column)
+
+        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\roms\dos\")
+        Dim aryFi As IO.FileInfo() = di.GetFiles("*." & extension, SearchOption.AllDirectories)
+        Dim fi As IO.FileInfo
+        Dim nomfichierdelasave As String
+        Dim chemindelasave As String
+
+        For Each fi In aryFi
+            chemindelasave = fi.FullName
+            nomfichierdelasave = fi.Name
+
+            'on ajoute au tableau
+            table.Rows.Add(nomfichierdelasave, chemindelasave)
+
+fichiersuivant:
+        Next
+
+        'Sorting A-Z the console
+        dv = table.DefaultView
+        ListingP2k.DataSource = table
+
+        'Width for columns
+        ListingP2k.RowHeadersWidth = 25
+        ListingP2k.Columns("FichierP2k").Width = 190
+        ListingP2k.Columns("Cheminp2k").Width = 100
+
+        NewP2kFolder.Focus()
+    End Sub
+
+    Private Sub NewP2kFolder_TextChanged(sender As Object, e As EventArgs) Handles NewP2kFolder.TextChanged
+        Fulladressep2k.Text = adressepad.Text & "\" & NewP2kFolder.Text
+    End Sub
+
+    Private Sub ValidConvP2k_Click(sender As Object, e As EventArgs) Handles ValidConvP2k.Click
+        If NewP2kFolder.Text = "" Then
+            MsgBox("Saisir un nom de dossier svp")
+            Exit Sub
+        End If
+
+        For i = 0 To ListingP2k.Rows.Count - 1
+
+
+        Next
     End Sub
 End Class
