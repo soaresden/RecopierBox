@@ -521,7 +521,7 @@ lignesuivante:
         Dim extensionfichier As String = Path.GetFileName(chemindufichiercomplet).Substring(InStr(Path.GetFileName(chemindufichiercomplet), ".") - 1)
         Dim cheminfinal As String
 
-        If extensionfichier = ".pc.p2k.cfg" Then
+        If extensionfichier = ".pc.p2k.cfg" Or extensionfichier = ".p2k.cfg" Then
             cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".rom.keys")
         Else
             cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".p2k.cfg")
@@ -548,9 +548,9 @@ lignesuivante:
             Call genererfichier()
             Call savelefichier()
         Next
-
-        MsgBox("Conversion Terminée" & Chr(13) & "Copiez ces dossiers dans votre repertoire")
         Process.Start(Fulladressep2k.Text)
+        MsgBox("Conversion Terminée" & Chr(13) & "Copiez ces dossiers dans votre repertoire")
+
     End Sub
 
 
