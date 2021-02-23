@@ -307,13 +307,13 @@ romsuivante:
             Dim di As New IO.DirectoryInfo(cheminsaisi)
 
             Dim aryFiP2K As IO.FileInfo() = di.GetFiles("*.p2k.cfg", SearchOption.AllDirectories)
-            Dim aryFiKEYS As IO.FileInfo() = di.GetFiles("*.rom.keys", SearchOption.AllDirectories)
+            Dim aryFiKEYS As IO.FileInfo() = di.GetFiles("*.pc.keys", SearchOption.AllDirectories)
 
             If (aryFiP2K.Count = 0 Or aryFiKEYS.Count > 1) Or (aryFiP2K.Count > 1 Or aryFiKEYS.Count > 0) Then
                 adressepad.Text = FolderBrowserDialog1.SelectedPath
                 NewAdresseExo.Focus()
             Else
-                MsgBox("Le Chemin saisi ne possede pas de fichiers .p2k.cfg ou .rom.keys" & Chr(13))
+                MsgBox("Le Chemin saisi ne possede pas de fichiers .p2k.cfg ou .pc.keys" & Chr(13))
                 adressepad.Text = Nothing
             End If
         End If
@@ -522,7 +522,7 @@ lignesuivante:
         Dim cheminfinal As String
 
         If extensionfichier = ".pc.p2k.cfg" Or extensionfichier = ".p2k.cfg" Then
-            cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".rom.keys")
+            cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".pc.keys")
         Else
             cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".p2k.cfg")
         End If
