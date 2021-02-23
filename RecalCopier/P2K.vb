@@ -522,9 +522,9 @@ lignesuivante:
         Dim cheminfinal As String
 
         If extensionfichier = ".pc.p2k.cfg" Then
-            cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".pc.keys")
+            cheminfinal = Replace(chemindufichiercomplet, ".p2k.cfg", "") & "\padto.keys"
         ElseIf extensionfichier = ".p2k.cfg" Then
-            cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".keys")
+            cheminfinal = Replace(chemindufichiercomplet, extensionfichier, "padto.keys")
         Else
             cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".p2k.cfg")
         End If
@@ -554,5 +554,8 @@ lignesuivante:
         MsgBox("Conversion Terminée" & Chr(13) & "Copiez ces dossiers dans votre repertoire")
     End Sub
 
-
+    Private Sub ButtonGetBack_Click(sender As Object, e As EventArgs) Handles ButtonGetBack.Click
+        Form1.Show()
+        Me.Close()
+    End Sub
 End Class
