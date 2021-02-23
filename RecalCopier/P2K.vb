@@ -408,6 +408,10 @@ fichiersuivant:
     End Function
 
     Function genererlatouche(inputpad, realkey)
+        If inputpad <> "j" Then
+            inputpad = Replace(inputpad, "j", "joystick")
+        End If
+
         Dim texte As String = vbTab & vbTab & "{" & Chr(13) &
             vbTab & vbTab & vbTab & Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
             vbTab & vbTab & vbTab & Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(13) &
@@ -497,6 +501,20 @@ lignesuivante:
 
         FinalRichText.Text = FinalRichText.Text.Substring(0, tailletexte) & Chr(13) & "}"
     End Sub
+    Sub savelefichier()
+        Dim chemindufichiercomplet As String = ListingP2k.SelectedRows(0).Cells(ListingP2k.Columns("Cheminp2k").Index).Value
+        Dim extension As String = Path.GetExtension(chemindufichiercomplet))
+        Dim cheminfinal As String
+
+        If extension = "p2k.cfg" Then
+            cheminfinal = Replace(chemindufichiercomplet, extension, ".info")
+        Else
+            cheminfinal = Replace(chemindufichiercomplet, extension, ".p2k.cfg")
+        End If
+
+        System.IO.File.WriteAllText(cheminfinal, FinalRichText.Text)
+
+    End Sub
     Private Sub ValidConvP2k_Click(sender As Object, e As EventArgs) Handles ValidConvP2k.Click
         If NewP2kFolder.Text = "" Then
             MsgBox("Saisir un nom de dossier svp")
@@ -505,7 +523,7 @@ lignesuivante:
         End If
 
         Call genererfichier()
-
+        Call savelefichier()
 
     End Sub
 
