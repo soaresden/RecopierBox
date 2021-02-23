@@ -25,6 +25,11 @@ Partial Class P2K
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(P2K))
         Me.ButtonGetBack = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.FinalRichText = New System.Windows.Forms.RichTextBox()
+        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.RichTextBox0 = New System.Windows.Forms.RichTextBox()
         Me.ListingP2k = New System.Windows.Forms.DataGridView()
         Me.Title1 = New System.Windows.Forms.TextBox()
         Me.Fulladressep2k = New System.Windows.Forms.TextBox()
@@ -53,6 +58,11 @@ Partial Class P2K
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.FolderBrowserDialog2 = New System.Windows.Forms.FolderBrowserDialog()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.ListingP2k, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -81,6 +91,16 @@ Partial Class P2K
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkSeaGreen
+        Me.Panel1.Controls.Add(Me.Label11)
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Controls.Add(Me.Label8)
+        Me.Panel1.Controls.Add(Me.Label6)
+        Me.Panel1.Controls.Add(Me.FinalRichText)
+        Me.Panel1.Controls.Add(Me.RichTextBox3)
+        Me.Panel1.Controls.Add(Me.RichTextBox2)
+        Me.Panel1.Controls.Add(Me.RichTextBox1)
+        Me.Panel1.Controls.Add(Me.RichTextBox0)
         Me.Panel1.Controls.Add(Me.ListingP2k)
         Me.Panel1.Controls.Add(Me.Title1)
         Me.Panel1.Controls.Add(Me.Fulladressep2k)
@@ -99,6 +119,51 @@ Partial Class P2K
         Me.Panel1.Size = New System.Drawing.Size(328, 546)
         Me.Panel1.TabIndex = 37
         '
+        'FinalRichText
+        '
+        Me.FinalRichText.Location = New System.Drawing.Point(4, 476)
+        Me.FinalRichText.Name = "FinalRichText"
+        Me.FinalRichText.ReadOnly = True
+        Me.FinalRichText.Size = New System.Drawing.Size(321, 29)
+        Me.FinalRichText.TabIndex = 65
+        Me.FinalRichText.Text = ""
+        '
+        'RichTextBox3
+        '
+        Me.RichTextBox3.Location = New System.Drawing.Point(254, 421)
+        Me.RichTextBox3.Name = "RichTextBox3"
+        Me.RichTextBox3.ReadOnly = True
+        Me.RichTextBox3.Size = New System.Drawing.Size(71, 36)
+        Me.RichTextBox3.TabIndex = 64
+        Me.RichTextBox3.Text = ""
+        '
+        'RichTextBox2
+        '
+        Me.RichTextBox2.Location = New System.Drawing.Point(171, 421)
+        Me.RichTextBox2.Name = "RichTextBox2"
+        Me.RichTextBox2.ReadOnly = True
+        Me.RichTextBox2.Size = New System.Drawing.Size(71, 36)
+        Me.RichTextBox2.TabIndex = 63
+        Me.RichTextBox2.Text = ""
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Location = New System.Drawing.Point(87, 421)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.ReadOnly = True
+        Me.RichTextBox1.Size = New System.Drawing.Size(71, 36)
+        Me.RichTextBox1.TabIndex = 62
+        Me.RichTextBox1.Text = ""
+        '
+        'RichTextBox0
+        '
+        Me.RichTextBox0.Location = New System.Drawing.Point(3, 421)
+        Me.RichTextBox0.Name = "RichTextBox0"
+        Me.RichTextBox0.ReadOnly = True
+        Me.RichTextBox0.Size = New System.Drawing.Size(71, 36)
+        Me.RichTextBox0.TabIndex = 61
+        Me.RichTextBox0.Text = ""
+        '
         'ListingP2k
         '
         Me.ListingP2k.AllowUserToAddRows = False
@@ -110,7 +175,7 @@ Partial Class P2K
         Me.ListingP2k.Name = "ListingP2k"
         Me.ListingP2k.RowHeadersVisible = False
         Me.ListingP2k.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.ListingP2k.Size = New System.Drawing.Size(322, 202)
+        Me.ListingP2k.Size = New System.Drawing.Size(322, 108)
         Me.ListingP2k.TabIndex = 60
         '
         'Title1
@@ -129,7 +194,7 @@ Partial Class P2K
         '
         'Fulladressep2k
         '
-        Me.Fulladressep2k.Location = New System.Drawing.Point(3, 473)
+        Me.Fulladressep2k.Location = New System.Drawing.Point(4, 381)
         Me.Fulladressep2k.Name = "Fulladressep2k"
         Me.Fulladressep2k.ReadOnly = True
         Me.Fulladressep2k.Size = New System.Drawing.Size(322, 20)
@@ -139,7 +204,7 @@ Partial Class P2K
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(35, 453)
+        Me.Label7.Location = New System.Drawing.Point(36, 361)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(168, 13)
         Me.Label7.TabIndex = 46
@@ -147,7 +212,7 @@ Partial Class P2K
         '
         'NewP2kFolder
         '
-        Me.NewP2kFolder.Location = New System.Drawing.Point(209, 450)
+        Me.NewP2kFolder.Location = New System.Drawing.Point(210, 358)
         Me.NewP2kFolder.Name = "NewP2kFolder"
         Me.NewP2kFolder.Size = New System.Drawing.Size(116, 20)
         Me.NewP2kFolder.TabIndex = 45
@@ -399,6 +464,51 @@ Partial Class P2K
         Me.PictureBox1.TabIndex = 38
         Me.PictureBox1.TabStop = False
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(16, 405)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(45, 13)
+        Me.Label6.TabIndex = 66
+        Me.Label6.Text = "Player 1"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(104, 405)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(45, 13)
+        Me.Label8.TabIndex = 67
+        Me.Label8.Text = "Player 2"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(184, 405)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(45, 13)
+        Me.Label9.TabIndex = 68
+        Me.Label9.Text = "Player 3"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(268, 405)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(45, 13)
+        Me.Label10.TabIndex = 69
+        Me.Label10.Text = "Player 4"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(143, 460)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(53, 13)
+        Me.Label11.TabIndex = 70
+        Me.Label11.Text = "Final Text"
+        '
         'P2K
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -452,4 +562,14 @@ Partial Class P2K
     Friend WithEvents ExodosSheet As DataGridView
     Friend WithEvents ListingP2k As DataGridView
     Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
+    Friend WithEvents RichTextBox3 As RichTextBox
+    Friend WithEvents RichTextBox2 As RichTextBox
+    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents RichTextBox0 As RichTextBox
+    Friend WithEvents FinalRichText As RichTextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label6 As Label
 End Class

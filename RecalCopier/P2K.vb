@@ -309,7 +309,6 @@ romsuivante:
             Dim aryFiP2K As IO.FileInfo() = di.GetFiles("*.p2k.cfg", SearchOption.AllDirectories)
             Dim aryFiINFO As IO.FileInfo() = di.GetFiles("*.info", SearchOption.AllDirectories)
 
-            Dim fi As IO.FileInfo
             If (aryFiP2K.Count = 0 Or aryFiINFO.Count > 1) Or (aryFiP2K.Count > 1 Or aryFiINFO.Count > 0) Then
                 adressepad.Text = FolderBrowserDialog1.SelectedPath
                 NewAdresseExo.Focus()
@@ -384,16 +383,114 @@ fichiersuivant:
     Private Sub NewP2kFolder_TextChanged(sender As Object, e As EventArgs) Handles NewP2kFolder.TextChanged
         Fulladressep2k.Text = adressepad.Text & "\" & NewP2kFolder.Text
     End Sub
+    Function p2kread(linetoread As String)
+        'read first number
+        Dim playernb As Integer = linetoread.Substring(0, 1)
 
+        'read inputpad
+        Dim detectegal As Integer = InStr(linetoread, "=")
+        Dim inputpad As String = linetoread.Substring(2, detectegal - 4)
+
+        'read realkey
+        Dim detectpointvirgule As Integer = InStr(linetoread, ";;")
+        Dim realkey As String
+        If detectpointvirgule > 1 Then
+            realkey = linetoread.Substring(detectegal + 1, detectpointvirgule - (detectegal + 3))
+        Else
+            If detectegal + 1 > Len(linetoread) Then
+                realkey = Nothing
+            Else
+                realkey = linetoread.Substring(detectegal + 1)
+            End If
+        End If
+
+        Return (playernb, inputpad, realkey)
+    End Function
+
+    Function genererlatouche(inputpad, realkey)
+        Dim texte As String = "{" & Chr(13) &
+            Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
+            Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(13) &
+            Chr(34) & "target" & Chr(34) & ": " & Chr(34) & "KEY_" & UCase(realkey) & Chr(34) & Chr(13) &
+            "}," & Chr(13)
+        Return texte
+    End Function
+    Private Sub ListingP2k_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles ListingP2k.CellClick
+        'on ouvre le fichier
+        Dim chemindufichier As String = ListingP2k.SelectedRows(0).Cells(ListingP2k.Columns("Cheminp2k").Index).Value
+        'on va lire le fichier en question
+        File.ReadAllLines(chemindufichier)
+
+        Dim readText() As String = File.ReadAllLines(chemindufichier)
+        Dim s As String
+
+        For Each s In readText
+            If s = "" Then
+                GoTo lignesuivante
+            ElseIf s.Substring(0, 1) = "#" Then
+                GoTo lignesuivante
+            ElseIf s.Substring(0, 1) = " " Then
+                GoTo lignesuivante
+            Else
+                Dim resultats = p2kread(s)
+                'on va mettre ces infos dans le bon textbox
+                Dim playernb = resultats.item1
+                Dim inputpad = resultats.item2
+                Dim realkey = resultats.item3
+                'Generer le texte
+                Dim newtext As String = genererlatouche(inputpad, realkey)
+                'on repointe vers le bon 
+                Select Case playernb
+                    Case 0
+                        RichTextBox0.Text = RichTextBox0.Text & newtext
+                    Case 1
+                        RichTextBox1.Text = RichTextBox1.Text & newtext
+                    Case 2
+                        RichTextBox2.Text = RichTextBox2.Text & newtext
+                    Case 3
+                        RichTextBox3.Text = RichTextBox3.Text & newtext
+                End Select
+
+            End If
+lignesuivante:
+        Next
+
+        'on enleve les sauts et les virgules de la fin
+        RichTextBox0.Text = RichTextBox0.Text.Substring(0, Len(RichTextBox0.Text) - 2)
+        RichTextBox1.Text = RichTextBox1.Text.Substring(0, Len(RichTextBox1.Text) - 2)
+        RichTextBox2.Text = RichTextBox2.Text.Substring(0, Len(RichTextBox2.Text) - 2)
+        RichTextBox3.Text = RichTextBox3.Text.Substring(0, Len(RichTextBox3.Text) - 2)
+    End Sub
+    Sub genererfichier()
+        'test sur les players
+        FinalRichText.Text = "{" & Chr(13)
+        FinalRichText.Text = FinalRichText.Text &
+            Chr(34) & "actions_player1" & Chr(34) & ": [" &
+            RichTextBox0.Text
+
+        If RichTextBox1.Text <> "" Then
+            FinalRichText.Text = FinalRichText.Text & Chr(13) & "," & RichTextBox1.Text
+        End If
+
+        If RichTextBox2.Text <> "" Then
+            FinalRichText.Text = FinalRichText.Text & RichTextBox2.Text
+        End If
+
+        If RichTextBox3.Text <> "" Then
+            FinalRichText.Text = FinalRichText.Text & RichTextBox3.Text
+        End If
+
+    End Sub
     Private Sub ValidConvP2k_Click(sender As Object, e As EventArgs) Handles ValidConvP2k.Click
         If NewP2kFolder.Text = "" Then
             MsgBox("Saisir un nom de dossier svp")
             Exit Sub
         End If
 
-        For i = 0 To ListingP2k.Rows.Count - 1
 
 
-        Next
+
     End Sub
+
+
 End Class
