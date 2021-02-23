@@ -413,6 +413,25 @@ fichiersuivant:
             inputpad = Replace(inputpad, "j", "joystick")
         End If
 
+        If realkey <> "s01" Then
+            realkey = Replace(realkey, "s01", "grave")
+        End If
+        If realkey <> "s05" Then
+            realkey = Replace(realkey, "s05", "rightbrace")
+        End If
+        If realkey <> "s07" Then
+            realkey = Replace(realkey, "s07", "apostrophe")
+        End If
+        If realkey <> "s09" Then
+            realkey = Replace(realkey, "s09", "dot")
+        End If
+        If realkey <> "s10" Then
+            realkey = Replace(realkey, "s10", "comma")
+        End If
+
+        'BTN_LEFT  (clic gauche)
+        'BTN_RIGHT (clic droit)
+
         Dim texte As String = vbTab & vbTab & "{" & Chr(13) &
             vbTab & vbTab & vbTab & Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
             vbTab & vbTab & vbTab & Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(13) &

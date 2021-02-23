@@ -63,6 +63,8 @@ Partial Class P2K
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.FolderBrowserDialog2 = New System.Windows.Forms.FolderBrowserDialog()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.ListingP2k, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -91,6 +93,8 @@ Partial Class P2K
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkSeaGreen
+        Me.Panel1.Controls.Add(Me.RichTextBox4)
+        Me.Panel1.Controls.Add(Me.Label12)
         Me.Panel1.Controls.Add(Me.Label11)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.Label9)
@@ -114,24 +118,24 @@ Partial Class P2K
         Me.Panel1.Controls.Add(Me.PictureBox2)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.adressepad)
-        Me.Panel1.Location = New System.Drawing.Point(112, 12)
+        Me.Panel1.Location = New System.Drawing.Point(12, 41)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(328, 546)
+        Me.Panel1.Size = New System.Drawing.Size(428, 517)
         Me.Panel1.TabIndex = 37
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(143, 460)
+        Me.Label11.Location = New System.Drawing.Point(33, 462)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(53, 13)
+        Me.Label11.Size = New System.Drawing.Size(107, 13)
         Me.Label11.TabIndex = 70
-        Me.Label11.Text = "Final Text"
+        Me.Label11.Text = "Texte à Sauvegarder"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(268, 405)
+        Me.Label10.Location = New System.Drawing.Point(96, 405)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(45, 13)
         Me.Label10.TabIndex = 69
@@ -140,7 +144,7 @@ Partial Class P2K
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(184, 405)
+        Me.Label9.Location = New System.Drawing.Point(95, 345)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(45, 13)
         Me.Label9.TabIndex = 68
@@ -149,7 +153,7 @@ Partial Class P2K
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(104, 405)
+        Me.Label8.Location = New System.Drawing.Point(23, 405)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(45, 13)
         Me.Label8.TabIndex = 67
@@ -158,7 +162,7 @@ Partial Class P2K
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(16, 405)
+        Me.Label6.Location = New System.Drawing.Point(19, 345)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(45, 13)
         Me.Label6.TabIndex = 66
@@ -166,16 +170,16 @@ Partial Class P2K
         '
         'FinalRichText
         '
-        Me.FinalRichText.Location = New System.Drawing.Point(4, 476)
+        Me.FinalRichText.Location = New System.Drawing.Point(6, 478)
         Me.FinalRichText.Name = "FinalRichText"
         Me.FinalRichText.ReadOnly = True
-        Me.FinalRichText.Size = New System.Drawing.Size(321, 29)
+        Me.FinalRichText.Size = New System.Drawing.Size(147, 36)
         Me.FinalRichText.TabIndex = 65
         Me.FinalRichText.Text = ""
         '
         'RichTextBox3
         '
-        Me.RichTextBox3.Location = New System.Drawing.Point(254, 421)
+        Me.RichTextBox3.Location = New System.Drawing.Point(82, 421)
         Me.RichTextBox3.Name = "RichTextBox3"
         Me.RichTextBox3.ReadOnly = True
         Me.RichTextBox3.Size = New System.Drawing.Size(71, 36)
@@ -184,7 +188,7 @@ Partial Class P2K
         '
         'RichTextBox2
         '
-        Me.RichTextBox2.Location = New System.Drawing.Point(171, 421)
+        Me.RichTextBox2.Location = New System.Drawing.Point(82, 361)
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.ReadOnly = True
         Me.RichTextBox2.Size = New System.Drawing.Size(71, 36)
@@ -193,7 +197,7 @@ Partial Class P2K
         '
         'RichTextBox1
         '
-        Me.RichTextBox1.Location = New System.Drawing.Point(87, 421)
+        Me.RichTextBox1.Location = New System.Drawing.Point(6, 421)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
         Me.RichTextBox1.Size = New System.Drawing.Size(71, 36)
@@ -202,7 +206,7 @@ Partial Class P2K
         '
         'RichTextBox0
         '
-        Me.RichTextBox0.Location = New System.Drawing.Point(3, 421)
+        Me.RichTextBox0.Location = New System.Drawing.Point(6, 361)
         Me.RichTextBox0.Name = "RichTextBox0"
         Me.RichTextBox0.ReadOnly = True
         Me.RichTextBox0.Size = New System.Drawing.Size(71, 36)
@@ -215,12 +219,12 @@ Partial Class P2K
         Me.ListingP2k.AllowUserToDeleteRows = False
         Me.ListingP2k.AllowUserToResizeRows = False
         Me.ListingP2k.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ListingP2k.Location = New System.Drawing.Point(3, 242)
+        Me.ListingP2k.Location = New System.Drawing.Point(3, 205)
         Me.ListingP2k.MultiSelect = False
         Me.ListingP2k.Name = "ListingP2k"
         Me.ListingP2k.RowHeadersVisible = False
         Me.ListingP2k.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.ListingP2k.Size = New System.Drawing.Size(322, 108)
+        Me.ListingP2k.Size = New System.Drawing.Size(286, 110)
         Me.ListingP2k.TabIndex = 60
         '
         'Title1
@@ -232,34 +236,34 @@ Partial Class P2K
         Me.Title1.Multiline = True
         Me.Title1.Name = "Title1"
         Me.Title1.ReadOnly = True
-        Me.Title1.Size = New System.Drawing.Size(218, 72)
+        Me.Title1.Size = New System.Drawing.Size(318, 72)
         Me.Title1.TabIndex = 49
         Me.Title1.Text = "CONVERTIR DES " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FICHIERS PAD2KEYBOARD" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P2K.CFG & .KEYS"
         Me.Title1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Fulladressep2k
         '
-        Me.Fulladressep2k.Location = New System.Drawing.Point(4, 381)
+        Me.Fulladressep2k.Location = New System.Drawing.Point(4, 321)
         Me.Fulladressep2k.Name = "Fulladressep2k"
         Me.Fulladressep2k.ReadOnly = True
-        Me.Fulladressep2k.Size = New System.Drawing.Size(322, 20)
+        Me.Fulladressep2k.Size = New System.Drawing.Size(421, 20)
         Me.Fulladressep2k.TabIndex = 47
         Me.Fulladressep2k.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(36, 361)
+        Me.Label7.Location = New System.Drawing.Point(62, 179)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(168, 13)
+        Me.Label7.Size = New System.Drawing.Size(127, 13)
         Me.Label7.TabIndex = 46
-        Me.Label7.Text = "Saisir un nom de Dossier de Sortie"
+        Me.Label7.Text = "Nom de Dossier de Sortie"
         '
         'NewP2kFolder
         '
-        Me.NewP2kFolder.Location = New System.Drawing.Point(210, 358)
+        Me.NewP2kFolder.Location = New System.Drawing.Point(195, 176)
         Me.NewP2kFolder.Name = "NewP2kFolder"
-        Me.NewP2kFolder.Size = New System.Drawing.Size(116, 20)
+        Me.NewP2kFolder.Size = New System.Drawing.Size(94, 20)
         Me.NewP2kFolder.TabIndex = 45
         Me.NewP2kFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -273,9 +277,9 @@ Partial Class P2K
         Me.ValidConvP2k.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ValidConvP2k.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ValidConvP2k.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ValidConvP2k.Location = New System.Drawing.Point(92, 511)
+        Me.ValidConvP2k.Location = New System.Drawing.Point(254, 482)
         Me.ValidConvP2k.Name = "ValidConvP2k"
-        Me.ValidConvP2k.Size = New System.Drawing.Size(161, 32)
+        Me.ValidConvP2k.Size = New System.Drawing.Size(145, 32)
         Me.ValidConvP2k.TabIndex = 44
         Me.ValidConvP2k.Text = "Confirmer la conversion"
         Me.ValidConvP2k.UseVisualStyleBackColor = False
@@ -308,17 +312,17 @@ Partial Class P2K
         Me.ValidDossierDos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ValidDossierDos.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ValidDossierDos.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ValidDossierDos.Location = New System.Drawing.Point(92, 188)
+        Me.ValidDossierDos.Location = New System.Drawing.Point(295, 81)
         Me.ValidDossierDos.Name = "ValidDossierDos"
-        Me.ValidDossierDos.Size = New System.Drawing.Size(161, 23)
+        Me.ValidDossierDos.Size = New System.Drawing.Size(130, 71)
         Me.ValidDossierDos.TabIndex = 39
-        Me.ValidDossierDos.Text = "Importer un dossier de P2K.CFG ou .INFO"
+        Me.ValidDossierDos.Text = "Importer un dossier de P2K.CFG ou .KEYS"
         Me.ValidDossierDos.UseVisualStyleBackColor = False
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(71, 100)
+        Me.Label2.Location = New System.Drawing.Point(3, 78)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(182, 39)
         Me.Label2.TabIndex = 40
@@ -338,7 +342,7 @@ Partial Class P2K
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(52, 150)
+        Me.Label1.Location = New System.Drawing.Point(5, 126)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(237, 26)
         Me.Label1.TabIndex = 39
@@ -347,10 +351,10 @@ Partial Class P2K
         '
         'adressepad
         '
-        Me.adressepad.Location = New System.Drawing.Point(3, 217)
+        Me.adressepad.Location = New System.Drawing.Point(6, 156)
         Me.adressepad.Name = "adressepad"
         Me.adressepad.ReadOnly = True
-        Me.adressepad.Size = New System.Drawing.Size(322, 20)
+        Me.adressepad.Size = New System.Drawing.Size(283, 20)
         Me.adressepad.TabIndex = 37
         Me.adressepad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -509,6 +513,24 @@ Partial Class P2K
         Me.PictureBox1.TabIndex = 38
         Me.PictureBox1.TabStop = False
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(225, 344)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(183, 39)
+        Me.Label12.TabIndex = 71
+        Me.Label12.Text = "Pour Batocera :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Assigner la souris à un joystick (1ou2)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "avec le texte suivant"
+        '
+        'RichTextBox4
+        '
+        Me.RichTextBox4.BackColor = System.Drawing.Color.Honeydew
+        Me.RichTextBox4.Location = New System.Drawing.Point(228, 386)
+        Me.RichTextBox4.Name = "RichTextBox4"
+        Me.RichTextBox4.Size = New System.Drawing.Size(197, 63)
+        Me.RichTextBox4.TabIndex = 72
+        Me.RichTextBox4.Text = "{" & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & """trigger"": ""joystick2""," & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & """type"": ""mouse""" & Global.Microsoft.VisualBasic.ChrW(10) & "},"
+        '
         'P2K
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -572,4 +594,6 @@ Partial Class P2K
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents RichTextBox4 As RichTextBox
+    Friend WithEvents Label12 As Label
 End Class
