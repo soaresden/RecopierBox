@@ -63,6 +63,7 @@ Partial Class Form1
         Me.ToolTipPaypal = New System.Windows.Forms.ToolTip(Me.components)
         Me.ButtonHideArrm = New System.Windows.Forms.Button()
         Me.PanelSettings = New System.Windows.Forms.Panel()
+        Me.ToolTipP2k = New System.Windows.Forms.ToolTip(Me.components)
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -621,4 +622,5 @@ Partial Class Form1
     Friend WithEvents PanelSettings As Panel
     Private WithEvents Label6 As Label
     Friend WithEvents ButtonP2k As Button
+    Friend WithEvents ToolTipP2k As ToolTip
 End Class

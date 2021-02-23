@@ -33,6 +33,7 @@ Public Class Form1
         ToolTipSaves.SetToolTip(ButtonSave, "Maitrisez/renommer vos sauvegardes orphelines")
         ToolTipBlindTest.SetToolTip(ButtonQuizz, "Essayez de reconnaitre par video/son vos jeux favoris !")
         ToolTipPaypal.SetToolTip(Paypal, "N'Hesitez pas à soutenir le projet par ce bouton :) !")
+        ToolTipP2k.SetToolTip(ButtonP2k, "Convertissez vos Roms ExoDos depuis Exodos Convert et Convertissez vos P2K-Info !")
 
         'Et on indique si y'a besoin d'écrire
         If TxtRecalfolderPath Is Nothing Then

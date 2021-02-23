@@ -2482,6 +2482,9 @@ Infos/Images/Videos/Manuels/Maps/Overlays ...</value>
         PHzUyX4ux7Y+aMzMnElX1rpxhWzosGdIkl/4x/jGtnkySQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="ToolTipP2k.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>840, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>41</value>
   </metadata>

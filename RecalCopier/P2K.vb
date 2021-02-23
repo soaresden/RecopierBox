@@ -307,13 +307,13 @@ romsuivante:
             Dim di As New IO.DirectoryInfo(cheminsaisi)
 
             Dim aryFiP2K As IO.FileInfo() = di.GetFiles("*.p2k.cfg", SearchOption.AllDirectories)
-            Dim aryFiINFO As IO.FileInfo() = di.GetFiles("*.info", SearchOption.AllDirectories)
+            Dim aryFiKEYS As IO.FileInfo() = di.GetFiles("*.rom.keys", SearchOption.AllDirectories)
 
-            If (aryFiP2K.Count = 0 Or aryFiINFO.Count > 1) Or (aryFiP2K.Count > 1 Or aryFiINFO.Count > 0) Then
+            If (aryFiP2K.Count = 0 Or aryFiKEYS.Count > 1) Or (aryFiP2K.Count > 1 Or aryFiKEYS.Count > 0) Then
                 adressepad.Text = FolderBrowserDialog1.SelectedPath
                 NewAdresseExo.Focus()
             Else
-                MsgBox("Le Chemin saisi ne possede pas de fichiers .P2K.CFG ou .INFO" & Chr(13))
+                MsgBox("Le Chemin saisi ne possede pas de fichiers .p2k.cfg ou .rom.keys" & Chr(13))
                 adressepad.Text = Nothing
             End If
         End If
@@ -327,7 +327,7 @@ romsuivante:
         Else
             RbtoBato.Visible = False
             BatoToRb.Visible = True
-            extension = "info"
+            extension = "rom.keys"
         End If
         Call ImportdesP2k(extension)
 
@@ -376,6 +376,7 @@ fichiersuivant:
         ListingP2k.RowHeadersWidth = 25
         ListingP2k.Columns("FichierP2k").Width = 190
         ListingP2k.Columns("Cheminp2k").Width = 100
+        ListingP2k.Columns("Cheminp2k").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         NewP2kFolder.Focus()
     End Sub
@@ -420,8 +421,19 @@ fichiersuivant:
         Return texte
     End Function
     Private Sub ListingP2k_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles ListingP2k.CellClick
+
+    End Sub
+    Private Sub ListingP2k_SelectionChanged(sender As Object, e As EventArgs) Handles ListingP2k.SelectionChanged
+        RichTextBox0.Clear()
+        RichTextBox1.Clear()
+        RichTextBox2.Clear()
+        RichTextBox3.Clear()
+
+        On Error Resume Next
+
         'on ouvre le fichier
         Dim chemindufichier As String = ListingP2k.SelectedRows(0).Cells(ListingP2k.Columns("Cheminp2k").Index).Value
+        If chemindufichier = Nothing Then Exit Sub
         'on va lire le fichier en question
         File.ReadAllLines(chemindufichier)
 
@@ -460,7 +472,6 @@ lignesuivante:
         Next
 
         'on enleve les sauts et les virgules de la fin
-        On Error Resume Next
         RichTextBox0.Text = RichTextBox0.Text.Substring(0, Len(RichTextBox0.Text) - 2)
         RichTextBox1.Text = RichTextBox1.Text.Substring(0, Len(RichTextBox1.Text) - 2)
         RichTextBox2.Text = RichTextBox2.Text.Substring(0, Len(RichTextBox2.Text) - 2)
@@ -503,17 +514,26 @@ lignesuivante:
     End Sub
     Sub savelefichier()
         Dim chemindufichiercomplet As String = ListingP2k.SelectedRows(0).Cells(ListingP2k.Columns("Cheminp2k").Index).Value
-        Dim extension As String = Path.GetExtension(chemindufichiercomplet))
+        'Dim extension As String = Path.GetFileName(chemindufichiercomplet)
+        'Dim premierpoint As Integer = InStr(extension, ".")
+        'Dim extensionfichier As String = extension.Substring(premierpoint - 1)
+
+        Dim extensionfichier As String = Path.GetFileName(chemindufichiercomplet).Substring(InStr(Path.GetFileName(chemindufichiercomplet), ".") - 1)
         Dim cheminfinal As String
 
-        If extension = "p2k.cfg" Then
-            cheminfinal = Replace(chemindufichiercomplet, extension, ".info")
+        If extensionfichier = ".pc.p2k.cfg" Then
+            cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".rom.keys")
         Else
-            cheminfinal = Replace(chemindufichiercomplet, extension, ".p2k.cfg")
+            cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".p2k.cfg")
         End If
 
-        System.IO.File.WriteAllText(cheminfinal, FinalRichText.Text)
+        Dim dossierfinal As String = Replace(cheminfinal, adressepad.Text, Fulladressep2k.Text)
 
+        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(dossierfinal))) Then
+            MkDir(Path.GetDirectoryName(dossierfinal))
+        End If
+
+        System.IO.File.WriteAllText(dossierfinal, FinalRichText.Text)
     End Sub
     Private Sub ValidConvP2k_Click(sender As Object, e As EventArgs) Handles ValidConvP2k.Click
         If NewP2kFolder.Text = "" Then
@@ -522,9 +542,15 @@ lignesuivante:
             Exit Sub
         End If
 
-        Call genererfichier()
-        Call savelefichier()
+        For i = 0 To ListingP2k.Rows.Count - 1
+            ListingP2k.ClearSelection()
+            ListingP2k.Rows(i).Selected = True
+            Call genererfichier()
+            Call savelefichier()
+        Next
 
+        MsgBox("Conversion Terminée" & Chr(13) & "Copiez ces dossiers dans votre repertoire")
+        Process.Start(Fulladressep2k.Text)
     End Sub
 
 
