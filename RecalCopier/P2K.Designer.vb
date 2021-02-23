@@ -52,6 +52,7 @@ Partial Class P2K
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.FolderBrowserDialog2 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Panel1.SuspendLayout()
         CType(Me.ListingP2k, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -201,7 +202,7 @@ Partial Class P2K
         Me.ValidDossierDos.Name = "ValidDossierDos"
         Me.ValidDossierDos.Size = New System.Drawing.Size(161, 23)
         Me.ValidDossierDos.TabIndex = 39
-        Me.ValidDossierDos.Text = "Importer le Dossier 'Roms\Dos'"
+        Me.ValidDossierDos.Text = "Importer un dossier de P2K.CFG ou .INFO"
         Me.ValidDossierDos.UseVisualStyleBackColor = False
         '
         'Label2
@@ -227,11 +228,12 @@ Partial Class P2K
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(58, 150)
+        Me.Label1.Location = New System.Drawing.Point(52, 150)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(237, 26)
         Me.Label1.TabIndex = 39
-        Me.Label1.Text = "Chemin de votre dossier Dos :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PS: Tous les sous-dossiers seront pris en compte"
+        Me.Label1.Text = "Chemin de votre dossier à traiter" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "PS: Tous les sous-dossiers seront pris en comp" &
+    "te"
         '
         'adressepad
         '
@@ -449,4 +451,5 @@ Partial Class P2K
     Friend WithEvents FolderBrowserDialog2 As FolderBrowserDialog
     Friend WithEvents ExodosSheet As DataGridView
     Friend WithEvents ListingP2k As DataGridView
+    Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
 End Class

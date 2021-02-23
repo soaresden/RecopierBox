@@ -1,10 +1,13 @@
 ﻿Imports System.IO
 
 Public Class P2K
+    Private Sub P2K_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        RbtoBato.Visible = False
+        BatoToRb.Visible = False
+    End Sub
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         System.Diagnostics.Process.Start(String.Format("https://github.com/Voljega/ExoDOSConverter/releases/"))
     End Sub
-
     Private Sub ParcourirExo_Click(sender As Object, e As EventArgs) Handles ParcourirExo.Click
         'Au clic, on ouvre la selection du repertoire
         If FolderBrowserDialog2.ShowDialog() = DialogResult.OK Then
@@ -297,8 +300,24 @@ romsuivante:
     End Sub
 
     Private Sub ImporterDossierDos(sender As Object, e As EventArgs) Handles ValidDossierDos.Click
-        'Au clic, on rempli l'adresse des roms
-        adressepad.Text = My.Settings.RecalboxFolder & "\roms\dos"
+        'Au clic, on ouvre la selection du repertoire
+        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
+            'Check si un dossier Roms est present dedans
+            Dim cheminsaisi As String = FolderBrowserDialog1.SelectedPath
+            Dim di As New IO.DirectoryInfo(cheminsaisi)
+
+            Dim aryFiP2K As IO.FileInfo() = di.GetFiles("*.p2k.cfg", SearchOption.AllDirectories)
+            Dim aryFiINFO As IO.FileInfo() = di.GetFiles("*.info", SearchOption.AllDirectories)
+
+            Dim fi As IO.FileInfo
+            If (aryFiP2K.Count = 0 Or aryFiINFO.Count > 1) Or (aryFiP2K.Count > 1 Or aryFiINFO.Count > 0) Then
+                adressepad.Text = FolderBrowserDialog1.SelectedPath
+                NewAdresseExo.Focus()
+            Else
+                MsgBox("Le Chemin saisi ne possede pas de fichiers .P2K.CFG ou .INFO" & Chr(13))
+                adressepad.Text = Nothing
+            End If
+        End If
 
         'on check si c'est batocera ou Recalbox
         Dim extension As String
@@ -311,15 +330,8 @@ romsuivante:
             BatoToRb.Visible = True
             extension = "info"
         End If
-
         Call ImportdesP2k(extension)
 
-
-    End Sub
-
-    Private Sub P2K_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        RbtoBato.Visible = False
-        BatoToRb.Visible = False
     End Sub
 
     Sub ImportdesP2k(extension As String)
