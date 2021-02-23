@@ -550,7 +550,6 @@ lignesuivante:
         Next
         Process.Start(Fulladressep2k.Text)
         MsgBox("Conversion Terminée" & Chr(13) & "Copiez ces dossiers dans votre repertoire")
-
     End Sub
 
 
