@@ -374,10 +374,8 @@ fichiersuivant:
 
         'Width for columns
         ListingP2k.RowHeadersWidth = 25
-        ListingP2k.Columns("FichierP2k").Width = 190
-        ListingP2k.Columns("Cheminp2k").Width = 100
-        ListingP2k.Columns("Cheminp2k").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
+        ListingP2k.Columns("FichierP2k").Width = 150
+        ListingP2k.Columns("Cheminp2k").Width = 245
         NewP2kFolder.Focus()
     End Sub
 

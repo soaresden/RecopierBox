@@ -170,6 +170,7 @@ Partial Class P2K
         '
         'FinalRichText
         '
+        Me.FinalRichText.BackColor = System.Drawing.Color.DarkGray
         Me.FinalRichText.Location = New System.Drawing.Point(6, 478)
         Me.FinalRichText.Name = "FinalRichText"
         Me.FinalRichText.ReadOnly = True
@@ -179,6 +180,7 @@ Partial Class P2K
         '
         'RichTextBox3
         '
+        Me.RichTextBox3.BackColor = System.Drawing.Color.DarkGray
         Me.RichTextBox3.Location = New System.Drawing.Point(82, 421)
         Me.RichTextBox3.Name = "RichTextBox3"
         Me.RichTextBox3.ReadOnly = True
@@ -188,6 +190,7 @@ Partial Class P2K
         '
         'RichTextBox2
         '
+        Me.RichTextBox2.BackColor = System.Drawing.Color.DarkGray
         Me.RichTextBox2.Location = New System.Drawing.Point(82, 361)
         Me.RichTextBox2.Name = "RichTextBox2"
         Me.RichTextBox2.ReadOnly = True
@@ -197,6 +200,7 @@ Partial Class P2K
         '
         'RichTextBox1
         '
+        Me.RichTextBox1.BackColor = System.Drawing.Color.DarkGray
         Me.RichTextBox1.Location = New System.Drawing.Point(6, 421)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True
@@ -206,6 +210,7 @@ Partial Class P2K
         '
         'RichTextBox0
         '
+        Me.RichTextBox0.BackColor = System.Drawing.Color.DarkGray
         Me.RichTextBox0.Location = New System.Drawing.Point(6, 361)
         Me.RichTextBox0.Name = "RichTextBox0"
         Me.RichTextBox0.ReadOnly = True
@@ -222,9 +227,10 @@ Partial Class P2K
         Me.ListingP2k.Location = New System.Drawing.Point(3, 205)
         Me.ListingP2k.MultiSelect = False
         Me.ListingP2k.Name = "ListingP2k"
+        Me.ListingP2k.ReadOnly = True
         Me.ListingP2k.RowHeadersVisible = False
         Me.ListingP2k.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.ListingP2k.Size = New System.Drawing.Size(286, 110)
+        Me.ListingP2k.Size = New System.Drawing.Size(422, 110)
         Me.ListingP2k.TabIndex = 60
         '
         'Title1
@@ -243,6 +249,7 @@ Partial Class P2K
         '
         'Fulladressep2k
         '
+        Me.Fulladressep2k.BackColor = System.Drawing.Color.DarkGray
         Me.Fulladressep2k.Location = New System.Drawing.Point(4, 321)
         Me.Fulladressep2k.Name = "Fulladressep2k"
         Me.Fulladressep2k.ReadOnly = True
@@ -253,17 +260,17 @@ Partial Class P2K
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(62, 179)
+        Me.Label7.Location = New System.Drawing.Point(5, 179)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(127, 13)
+        Me.Label7.Size = New System.Drawing.Size(170, 13)
         Me.Label7.TabIndex = 46
-        Me.Label7.Text = "Nom de Dossier de Sortie"
+        Me.Label7.Text = "Saisir un Nom de Dossier de Sortie"
         '
         'NewP2kFolder
         '
-        Me.NewP2kFolder.Location = New System.Drawing.Point(195, 176)
+        Me.NewP2kFolder.Location = New System.Drawing.Point(181, 176)
         Me.NewP2kFolder.Name = "NewP2kFolder"
-        Me.NewP2kFolder.Size = New System.Drawing.Size(94, 20)
+        Me.NewP2kFolder.Size = New System.Drawing.Size(108, 20)
         Me.NewP2kFolder.TabIndex = 45
         Me.NewP2kFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -312,9 +319,9 @@ Partial Class P2K
         Me.ValidDossierDos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ValidDossierDos.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ValidDossierDos.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ValidDossierDos.Location = New System.Drawing.Point(295, 81)
+        Me.ValidDossierDos.Location = New System.Drawing.Point(295, 153)
         Me.ValidDossierDos.Name = "ValidDossierDos"
-        Me.ValidDossierDos.Size = New System.Drawing.Size(130, 71)
+        Me.ValidDossierDos.Size = New System.Drawing.Size(130, 43)
         Me.ValidDossierDos.TabIndex = 39
         Me.ValidDossierDos.Text = "Importer un dossier de P2K.CFG ou .KEYS"
         Me.ValidDossierDos.UseVisualStyleBackColor = False
@@ -387,6 +394,7 @@ Partial Class P2K
         Me.ExodosSheet.Location = New System.Drawing.Point(6, 244)
         Me.ExodosSheet.MultiSelect = False
         Me.ExodosSheet.Name = "ExodosSheet"
+        Me.ExodosSheet.ReadOnly = True
         Me.ExodosSheet.RowHeadersVisible = False
         Me.ExodosSheet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.ExodosSheet.Size = New System.Drawing.Size(523, 202)
@@ -394,6 +402,7 @@ Partial Class P2K
         '
         'FullNewadresseExo
         '
+        Me.FullNewadresseExo.BackColor = System.Drawing.Color.DarkGray
         Me.FullNewadresseExo.Location = New System.Drawing.Point(7, 476)
         Me.FullNewadresseExo.Name = "FullNewadresseExo"
         Me.FullNewadresseExo.ReadOnly = True
