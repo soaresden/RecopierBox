@@ -408,11 +408,11 @@ fichiersuivant:
     End Function
 
     Function genererlatouche(inputpad, realkey)
-        Dim texte As String = "{" & Chr(13) &
-            Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
-            Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(13) &
-            Chr(34) & "target" & Chr(34) & ": " & Chr(34) & "KEY_" & UCase(realkey) & Chr(34) & Chr(13) &
-            "}," & Chr(13)
+        Dim texte As String = vbTab & vbTab & "{" & Chr(13) &
+            vbTab & vbTab & vbTab & Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
+            vbTab & vbTab & vbTab & Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(13) &
+            vbTab & vbTab & vbTab & Chr(34) & "target" & Chr(34) & ": " & Chr(34) & "KEY_" & UCase(realkey) & Chr(34) & Chr(13) &
+            vbTab & vbTab & "}," & Chr(13)
         Return texte
     End Function
     Private Sub ListingP2k_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles ListingP2k.CellClick
@@ -456,38 +456,55 @@ lignesuivante:
         Next
 
         'on enleve les sauts et les virgules de la fin
+        On Error Resume Next
         RichTextBox0.Text = RichTextBox0.Text.Substring(0, Len(RichTextBox0.Text) - 2)
         RichTextBox1.Text = RichTextBox1.Text.Substring(0, Len(RichTextBox1.Text) - 2)
         RichTextBox2.Text = RichTextBox2.Text.Substring(0, Len(RichTextBox2.Text) - 2)
         RichTextBox3.Text = RichTextBox3.Text.Substring(0, Len(RichTextBox3.Text) - 2)
+        On Error GoTo 0
     End Sub
     Sub genererfichier()
-        'test sur les players
-        FinalRichText.Text = "{" & Chr(13)
-        FinalRichText.Text = FinalRichText.Text &
-            Chr(34) & "actions_player1" & Chr(34) & ": [" &
-            RichTextBox0.Text
+        FinalRichText.Clear()
 
+        'On commence a ecrire la forme du fichier
+        FinalRichText.Text = "{" & Chr(13)
+
+        'On mets le player 1
+        FinalRichText.Text = FinalRichText.Text &
+             vbTab & Chr(34) & "actions_player1" & Chr(34) & ": [" & Chr(13) &
+        RichTextBox0.Text & Chr(13) & vbTab & "]"
+
+        'On teste le player 2
         If RichTextBox1.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & Chr(13) & "," & RichTextBox1.Text
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
+            vbTab & Chr(34) & "actions_player2" & Chr(34) & ": [" & Chr(13) &
+            RichTextBox1.Text & Chr(13) & vbTab & "]"
         End If
 
         If RichTextBox2.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & RichTextBox2.Text
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
+            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(13) &
+            RichTextBox2.Text & Chr(13) & vbTab & "]"
         End If
 
         If RichTextBox3.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & RichTextBox3.Text
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
+            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(13) &
+            RichTextBox3.Text & Chr(13) & vbTab & "]"
         End If
 
+        Dim tailletexte As Integer = Len(FinalRichText.Text)
+
+        FinalRichText.Text = FinalRichText.Text.Substring(0, tailletexte) & Chr(13) & "}"
     End Sub
     Private Sub ValidConvP2k_Click(sender As Object, e As EventArgs) Handles ValidConvP2k.Click
         If NewP2kFolder.Text = "" Then
             MsgBox("Saisir un nom de dossier svp")
+            NewP2kFolder.Focus()
             Exit Sub
         End If
 
-
+        Call genererfichier()
 
 
     End Sub
