@@ -137,7 +137,12 @@ Maitrisez/renommer vos sauvegardes orphelines
 BLIND TEST:
 Essayez de reconnaitre par video/son vos jeux favoris !
 
-N'Hesitez pas à soutenir le projet par le bouton Paypal :)
+GESTION PAD2KEYBOARD
+*Depuis le convertisseur Exodos, convertissez vos 'downloaded_images' en 'media\images\'
+*Convertissez vos p2k.cfg (Recalbox) en .keys(Batocera) et vice versa !
+
+Merci par avance de votre contribution Paypal pour le travail réalisé et les heures de casse-tête !
+
 PS: Pour une bonne visualisation, installez les 2 fonts du dossier</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

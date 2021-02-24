@@ -455,9 +455,6 @@ fichiersuivant:
             vbTab & vbTab & "}," & Chr(13)
         Return texte
     End Function
-    Private Sub ListingP2k_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles ListingP2k.CellClick
-
-    End Sub
     Private Sub ListingP2k_SelectionChanged(sender As Object, e As EventArgs) Handles ListingP2k.SelectionChanged
         RichTextBox0.Clear()
         RichTextBox1.Clear()
