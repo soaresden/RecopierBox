@@ -375,7 +375,7 @@ fichiersuivant:
         'Width for columns
         ListingP2k.RowHeadersWidth = 25
         ListingP2k.Columns("FichierP2k").Width = 150
-        ListingP2k.Columns("Cheminp2k").Width = 245
+        ListingP2k.Columns("Cheminp2k").Width = 40
         NewP2kFolder.Focus()
     End Sub
 
@@ -570,9 +570,158 @@ lignesuivante:
         Process.Start(Fulladressep2k.Text)
         MsgBox("Conversion Terminée" & Chr(13) & "Copiez ces dossiers dans votre repertoire")
     End Sub
-
+    Private Sub WriteFile_Click(sender As Object, e As EventArgs) Handles WriteFile.Click
+        If NewP2kFolder.Text = "" Then
+            MsgBox("Saisir un nom de dossier svp")
+            NewP2kFolder.Focus()
+            Exit Sub
+        End If
+        Call genererfichier()
+        Call savelefichier()
+        MsgBox("Conversion Terminée")
+    End Sub
     Private Sub ButtonGetBack_Click(sender As Object, e As EventArgs) Handles ButtonGetBack.Click
         Form1.Show()
         Me.Close()
+    End Sub
+    Private Sub RichTextBox0_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox0.GotFocus
+        RichTextBox0.Location = New Point(6, 348)
+        RichTextBox0.Size = New Point(419, 128)
+        RichTextBox0.Show()
+        RichTextBox1.Hide()
+        RichTextBox2.Hide()
+        RichTextBox3.Hide()
+        FinalRichText.Hide()
+        LabelP1.Show()
+        LabelP2.Hide()
+        LabelP3.Hide()
+        LabelP4.Hide()
+        LabelFT.Hide()
+    End Sub
+    Private Sub RichTextBox0_LostFocus(sender As Object, e As EventArgs) Handles RichTextBox0.LostFocus
+        RichTextBox0.Location = New Point(6, 348)
+        RichTextBox0.Size = New Point(71, 36)
+        RichTextBox0.Show()
+        RichTextBox1.Show()
+        RichTextBox2.Show()
+        RichTextBox3.Show()
+        FinalRichText.Show()
+        LabelP1.Show()
+        LabelP2.Show()
+        LabelP3.Show()
+        LabelP4.Show()
+        LabelFT.Show()
+    End Sub
+    Private Sub RichTextBox1_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox1.GotFocus
+        RichTextBox1.Location = New Point(6, 348)
+        RichTextBox1.Size = New Point(419, 128)
+        RichTextBox0.Hide()
+        RichTextBox1.Show()
+        RichTextBox2.Hide()
+        RichTextBox3.Hide()
+        FinalRichText.Hide()
+        LabelP1.Hide()
+        LabelP2.Show()
+        LabelP3.Hide()
+        LabelP4.Hide()
+        LabelFT.Hide()
+    End Sub
+    Private Sub RichTextBox1_LostFocus(sender As Object, e As EventArgs) Handles RichTextBox1.LostFocus
+        RichTextBox1.Location = New Point(6, 403)
+        RichTextBox1.Size = New Point(71, 36)
+        RichTextBox0.Show()
+        RichTextBox1.Show()
+        RichTextBox2.Show()
+        RichTextBox3.Show()
+        FinalRichText.Show()
+        LabelP1.Show()
+        LabelP2.Show()
+        LabelP3.Show()
+        LabelP4.Show()
+        LabelFT.Show()
+    End Sub
+    Private Sub RichTextBox2_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox2.GotFocus
+        RichTextBox2.Location = New Point(6, 348)
+        RichTextBox2.Size = New Point(419, 128)
+        RichTextBox0.Hide()
+        RichTextBox1.Hide()
+        RichTextBox2.Show()
+        RichTextBox3.Hide()
+        FinalRichText.Hide()
+        LabelP1.Hide()
+        LabelP2.Hide()
+        LabelP3.Show()
+        LabelP4.Hide()
+        LabelFT.Hide()
+    End Sub
+    Private Sub RichTextBox2_LostFocus(sender As Object, e As EventArgs) Handles RichTextBox2.LostFocus
+        RichTextBox2.Location = New Point(82, 348)
+        RichTextBox2.Size = New Point(71, 36)
+        RichTextBox0.Show()
+        RichTextBox1.Show()
+        RichTextBox2.Show()
+        RichTextBox3.Show()
+        FinalRichText.Show()
+        LabelP1.Show()
+        LabelP2.Show()
+        LabelP3.Show()
+        LabelP4.Show()
+        LabelFT.Show()
+    End Sub
+    Private Sub RichTextBox3_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox3.GotFocus
+        RichTextBox3.Location = New Point(6, 348)
+        RichTextBox3.Size = New Point(419, 128)
+        RichTextBox0.Hide()
+        RichTextBox1.Hide()
+        RichTextBox2.Hide()
+        RichTextBox3.Show()
+        FinalRichText.Hide()
+        LabelP1.Hide()
+        LabelP2.Hide()
+        LabelP3.Hide()
+        LabelP4.Show()
+        LabelFT.Hide()
+    End Sub
+    Private Sub RichTextBox3_LostFocus(sender As Object, e As EventArgs) Handles RichTextBox3.LostFocus
+        RichTextBox3.Location = New Point(82, 403)
+        RichTextBox3.Size = New Point(71, 36)
+        RichTextBox0.Show()
+        RichTextBox1.Show()
+        RichTextBox2.Show()
+        RichTextBox3.Show()
+        FinalRichText.Show()
+        LabelP1.Show()
+        LabelP2.Show()
+        LabelP3.Show()
+        LabelP4.Show()
+        LabelFT.Show()
+    End Sub
+    Private Sub FinalRichText_GotFocus(sender As Object, e As EventArgs) Handles FinalRichText.GotFocus
+        FinalRichText.Location = New Point(6, 348)
+        FinalRichText.Size = New Point(419, 128)
+        RichTextBox0.Hide()
+        RichTextBox1.Hide()
+        RichTextBox2.Hide()
+        RichTextBox3.Hide()
+        FinalRichText.Show()
+        LabelP1.Hide()
+        LabelP2.Hide()
+        LabelP3.Hide()
+        LabelP4.Hide()
+        LabelFT.Show()
+    End Sub
+    Private Sub FinalRichText_LostFocus(sender As Object, e As EventArgs) Handles FinalRichText.LostFocus
+        FinalRichText.Location = New Point(264, 348)
+        FinalRichText.Size = New Point(161, 89)
+        RichTextBox0.Show()
+        RichTextBox1.Show()
+        RichTextBox2.Show()
+        RichTextBox3.Show()
+        FinalRichText.Show()
+        LabelP1.Show()
+        LabelP2.Show()
+        LabelP3.Show()
+        LabelP4.Show()
+        LabelFT.Show()
     End Sub
 End Class
