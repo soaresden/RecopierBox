@@ -410,25 +410,43 @@ fichiersuivant:
         If inputpad <> "j" Then
             inputpad = Replace(inputpad, "j", "joystick")
         End If
+        If inputpad = "l1" Then
+            inputpad = Replace(inputpad, "l1", "pageup")
+        End If
+        If inputpad = "r1" Then
+            inputpad = Replace(inputpad, "r1", "pagedown")
+        End If
 
-        If realkey <> "s01" Then
+        If realkey = "s01" Then
             realkey = Replace(realkey, "s01", "grave")
         End If
-        If realkey <> "s05" Then
+        If realkey = "s02" Then
+            realkey = Replace(realkey, "s02", "minus")
+        End If
+        If realkey = "s03" Then
+            realkey = Replace(realkey, "s03", "equal")
+        End If
+        If realkey = "s04" Then
+            realkey = Replace(realkey, "s04", "leftbrace")
+        End If
+        If realkey = "s05" Then
             realkey = Replace(realkey, "s05", "rightbrace")
         End If
-        If realkey <> "s07" Then
+        If realkey = "s06" Then
+            realkey = Replace(realkey, "s06", "semicolon")
+        End If
+        If realkey = "s07" Then
             realkey = Replace(realkey, "s07", "apostrophe")
         End If
-        If realkey <> "s09" Then
-            realkey = Replace(realkey, "s09", "dot")
+        If realkey = "s08" Then
+            realkey = Replace(realkey, "s07", "backslash")
         End If
-        If realkey <> "s10" Then
-            realkey = Replace(realkey, "s10", "comma")
+        If realkey = "s09" Then
+            realkey = Replace(realkey, "s09", "comma")
         End If
-
-        'BTN_LEFT  (clic gauche)
-        'BTN_RIGHT (clic droit)
+        If realkey = "s10" Then
+            realkey = Replace(realkey, "s10", "dot")
+        End If
 
         Dim texte As String = vbTab & vbTab & "{" & Chr(13) &
             vbTab & vbTab & vbTab & Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
@@ -471,7 +489,7 @@ fichiersuivant:
                 Dim inputpad = resultats.item2
                 Dim realkey = resultats.item3
                 'Generer le texte
-                Dim newtext As String = genererlatouche(inputpad, realkey)
+                Dim newtext As String = genererlatouche(LCase(inputpad), UCase(realkey))
                 'on repointe vers le bon 
                 Select Case playernb
                     Case 0
