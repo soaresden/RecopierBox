@@ -375,7 +375,7 @@ fichiersuivant:
         'Width for columns
         ListingP2k.RowHeadersWidth = 25
         ListingP2k.Columns("FichierP2k").Width = 150
-        ListingP2k.Columns("Cheminp2k").Width = 40
+        ListingP2k.Columns("Cheminp2k").Width = 80
         NewP2kFolder.Focus()
     End Sub
 
@@ -596,7 +596,6 @@ lignesuivante:
         LabelP2.Hide()
         LabelP3.Hide()
         LabelP4.Hide()
-        LabelFT.Hide()
     End Sub
     Private Sub RichTextBox0_LostFocus(sender As Object, e As EventArgs) Handles RichTextBox0.LostFocus
         RichTextBox0.Location = New Point(6, 348)
@@ -610,7 +609,6 @@ lignesuivante:
         LabelP2.Show()
         LabelP3.Show()
         LabelP4.Show()
-        LabelFT.Show()
     End Sub
     Private Sub RichTextBox1_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox1.GotFocus
         RichTextBox1.Location = New Point(6, 348)
@@ -624,7 +622,6 @@ lignesuivante:
         LabelP2.Show()
         LabelP3.Hide()
         LabelP4.Hide()
-        LabelFT.Hide()
     End Sub
     Private Sub RichTextBox1_LostFocus(sender As Object, e As EventArgs) Handles RichTextBox1.LostFocus
         RichTextBox1.Location = New Point(6, 403)
@@ -638,7 +635,6 @@ lignesuivante:
         LabelP2.Show()
         LabelP3.Show()
         LabelP4.Show()
-        LabelFT.Show()
     End Sub
     Private Sub RichTextBox2_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox2.GotFocus
         RichTextBox2.Location = New Point(6, 348)
@@ -652,7 +648,6 @@ lignesuivante:
         LabelP2.Hide()
         LabelP3.Show()
         LabelP4.Hide()
-        LabelFT.Hide()
     End Sub
     Private Sub RichTextBox2_LostFocus(sender As Object, e As EventArgs) Handles RichTextBox2.LostFocus
         RichTextBox2.Location = New Point(82, 348)
@@ -666,7 +661,6 @@ lignesuivante:
         LabelP2.Show()
         LabelP3.Show()
         LabelP4.Show()
-        LabelFT.Show()
     End Sub
     Private Sub RichTextBox3_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox3.GotFocus
         RichTextBox3.Location = New Point(6, 348)
@@ -680,7 +674,6 @@ lignesuivante:
         LabelP2.Hide()
         LabelP3.Hide()
         LabelP4.Show()
-        LabelFT.Hide()
     End Sub
     Private Sub RichTextBox3_LostFocus(sender As Object, e As EventArgs) Handles RichTextBox3.LostFocus
         RichTextBox3.Location = New Point(82, 403)
@@ -694,7 +687,6 @@ lignesuivante:
         LabelP2.Show()
         LabelP3.Show()
         LabelP4.Show()
-        LabelFT.Show()
     End Sub
     Private Sub FinalRichText_GotFocus(sender As Object, e As EventArgs) Handles FinalRichText.GotFocus
         FinalRichText.Location = New Point(6, 348)
@@ -708,7 +700,6 @@ lignesuivante:
         LabelP2.Hide()
         LabelP3.Hide()
         LabelP4.Hide()
-        LabelFT.Show()
     End Sub
     Private Sub FinalRichText_LostFocus(sender As Object, e As EventArgs) Handles FinalRichText.LostFocus
         FinalRichText.Location = New Point(264, 348)
@@ -722,6 +713,10 @@ lignesuivante:
         LabelP2.Show()
         LabelP3.Show()
         LabelP4.Show()
-        LabelFT.Show()
+    End Sub
+
+    Private Sub RichTextBox4_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox4.GotFocus
+        RichTextBox4.SelectAll()
+        Clipboard.SetText(RichTextBox4.Text)
     End Sub
 End Class

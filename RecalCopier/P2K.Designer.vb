@@ -25,6 +25,7 @@ Partial Class P2K
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(P2K))
         Me.ButtonGetBack = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.WriteFile = New System.Windows.Forms.Button()
         Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.LabelFT = New System.Windows.Forms.Label()
@@ -65,7 +66,6 @@ Partial Class P2K
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.FolderBrowserDialog2 = New System.Windows.Forms.FolderBrowserDialog()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.WriteFile = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.ListingP2k, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,15 +125,33 @@ Partial Class P2K
         Me.Panel1.Size = New System.Drawing.Size(428, 517)
         Me.Panel1.TabIndex = 37
         '
+        'WriteFile
+        '
+        Me.WriteFile.BackColor = System.Drawing.Color.MediumSeaGreen
+        Me.WriteFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.WriteFile.Cursor = System.Windows.Forms.Cursors.Default
+        Me.WriteFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.WriteFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.WriteFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.WriteFile.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.WriteFile.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.WriteFile.Location = New System.Drawing.Point(34, 482)
+        Me.WriteFile.Name = "WriteFile"
+        Me.WriteFile.Size = New System.Drawing.Size(165, 32)
+        Me.WriteFile.TabIndex = 73
+        Me.WriteFile.Text = "3) Ecrire le Fichier Selectionné"
+        Me.WriteFile.UseVisualStyleBackColor = False
+        '
         'RichTextBox4
         '
         Me.RichTextBox4.BackColor = System.Drawing.Color.Honeydew
-        Me.RichTextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RichTextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RichTextBox4.Location = New System.Drawing.Point(264, 240)
         Me.RichTextBox4.Name = "RichTextBox4"
+        Me.RichTextBox4.ReadOnly = True
         Me.RichTextBox4.Size = New System.Drawing.Size(161, 63)
         Me.RichTextBox4.TabIndex = 72
-        Me.RichTextBox4.Text = "{" & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & """trigger"": ""joystick2""," & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & """type"": ""mouse""" & Global.Microsoft.VisualBasic.ChrW(10) & "},"
+        Me.RichTextBox4.Text = "" & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & "{" & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & """trigger"": ""joystick2""," & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & """type"": ""mouse""" & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & "}"
         '
         'Label12
         '
@@ -147,11 +165,11 @@ Partial Class P2K
         'LabelFT
         '
         Me.LabelFT.AutoSize = True
-        Me.LabelFT.Location = New System.Drawing.Point(206, 332)
+        Me.LabelFT.Location = New System.Drawing.Point(229, 332)
         Me.LabelFT.Name = "LabelFT"
-        Me.LabelFT.Size = New System.Drawing.Size(219, 13)
+        Me.LabelFT.Size = New System.Drawing.Size(196, 13)
         Me.LabelFT.TabIndex = 70
-        Me.LabelFT.Text = "3°) Modifier si Besoin le Texte à Sauvegarder"
+        Me.LabelFT.Text = "3°) Modifier le texte du Player# si Besoin"
         '
         'LabelP4
         '
@@ -198,6 +216,7 @@ Partial Class P2K
         Me.FinalRichText.BackColor = System.Drawing.Color.White
         Me.FinalRichText.Location = New System.Drawing.Point(264, 348)
         Me.FinalRichText.Name = "FinalRichText"
+        Me.FinalRichText.ReadOnly = True
         Me.FinalRichText.Size = New System.Drawing.Size(161, 89)
         Me.FinalRichText.TabIndex = 65
         Me.FinalRichText.Text = ""
@@ -207,7 +226,6 @@ Partial Class P2K
         Me.RichTextBox3.BackColor = System.Drawing.Color.Thistle
         Me.RichTextBox3.Location = New System.Drawing.Point(82, 403)
         Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.ReadOnly = True
         Me.RichTextBox3.Size = New System.Drawing.Size(71, 36)
         Me.RichTextBox3.TabIndex = 64
         Me.RichTextBox3.Text = ""
@@ -217,7 +235,6 @@ Partial Class P2K
         Me.RichTextBox2.BackColor = System.Drawing.Color.LightBlue
         Me.RichTextBox2.Location = New System.Drawing.Point(82, 348)
         Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.ReadOnly = True
         Me.RichTextBox2.Size = New System.Drawing.Size(71, 36)
         Me.RichTextBox2.TabIndex = 63
         Me.RichTextBox2.Text = ""
@@ -227,7 +244,6 @@ Partial Class P2K
         Me.RichTextBox1.BackColor = System.Drawing.Color.PeachPuff
         Me.RichTextBox1.Location = New System.Drawing.Point(6, 403)
         Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.ReadOnly = True
         Me.RichTextBox1.Size = New System.Drawing.Size(71, 36)
         Me.RichTextBox1.TabIndex = 62
         Me.RichTextBox1.Text = ""
@@ -237,7 +253,6 @@ Partial Class P2K
         Me.RichTextBox0.BackColor = System.Drawing.Color.Ivory
         Me.RichTextBox0.Location = New System.Drawing.Point(6, 348)
         Me.RichTextBox0.Name = "RichTextBox0"
-        Me.RichTextBox0.ReadOnly = True
         Me.RichTextBox0.Size = New System.Drawing.Size(71, 36)
         Me.RichTextBox0.TabIndex = 61
         Me.RichTextBox0.Text = ""
@@ -310,9 +325,9 @@ Partial Class P2K
         Me.ValidConvP2k.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ValidConvP2k.Location = New System.Drawing.Point(228, 482)
         Me.ValidConvP2k.Name = "ValidConvP2k"
-        Me.ValidConvP2k.Size = New System.Drawing.Size(162, 32)
+        Me.ValidConvP2k.Size = New System.Drawing.Size(169, 32)
         Me.ValidConvP2k.TabIndex = 44
-        Me.ValidConvP2k.Text = "3) Convertir le tableau Complet"
+        Me.ValidConvP2k.Text = "3) Convertir le Tableau Complet"
         Me.ValidConvP2k.UseVisualStyleBackColor = False
         '
         'BatoToRb
@@ -546,23 +561,6 @@ Partial Class P2K
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 38
         Me.PictureBox1.TabStop = False
-        '
-        'WriteFile
-        '
-        Me.WriteFile.BackColor = System.Drawing.Color.MediumSeaGreen
-        Me.WriteFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.WriteFile.Cursor = System.Windows.Forms.Cursors.Default
-        Me.WriteFile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.WriteFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.WriteFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.WriteFile.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WriteFile.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.WriteFile.Location = New System.Drawing.Point(68, 482)
-        Me.WriteFile.Name = "WriteFile"
-        Me.WriteFile.Size = New System.Drawing.Size(131, 32)
-        Me.WriteFile.TabIndex = 73
-        Me.WriteFile.Text = "3) Ecrire le Fichier"
-        Me.WriteFile.UseVisualStyleBackColor = False
         '
         'P2K
         '
