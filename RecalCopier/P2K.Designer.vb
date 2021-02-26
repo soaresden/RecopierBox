@@ -577,6 +577,8 @@ Partial Class P2K
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.ButtonGetBack)
         Me.Controls.Add(Me.Panel1)
+        Me.MaximumSize = New System.Drawing.Size(1006, 602)
+        Me.MinimumSize = New System.Drawing.Size(1006, 602)
         Me.Name = "P2K"
         Me.Text = "P2K"
         Me.Panel1.ResumeLayout(False)

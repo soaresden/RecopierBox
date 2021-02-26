@@ -354,6 +354,8 @@ romsuivante:
                 adressepad.Text = Nothing
                 Exit Sub
             End If
+
+        Else Exit Sub
         End If
 
         'on check si c'est batocera ou Recalbox
