@@ -2,8 +2,30 @@
 
 Public Class P2K
     Private Sub P2K_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        RbtoBato.Visible = False
-        BatoToRb.Visible = False
+        'hide le cote P2k
+        Label7.Hide()
+        NewP2kFolder.Hide()
+        TxtSourisBato.Hide()
+        RichTextBox4.Hide()
+        LabelP1.Hide()
+        LabelP2.Hide()
+        LabelP3.Hide()
+        LabelP4.Hide()
+        RichTextBox0.Hide()
+        RichTextBox1.Hide()
+        RichTextBox2.Hide()
+        RichTextBox3.Hide()
+        LabelFT.Hide()
+        FinalRichText.Hide()
+        WriteFile.Hide()
+        ValidConvP2k.Hide()
+        ValidDossierDos.Hide()
+
+        'Hide cote Exodos
+        Label5.Hide()
+        NewAdresseExo.Hide()
+        FullNewadresseExo.Hide()
+        DoExoConverter.Hide()
     End Sub
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         System.Diagnostics.Process.Start(String.Format("https://github.com/Voljega/ExoDOSConverter/releases/"))
@@ -20,6 +42,9 @@ Public Class P2K
                 adresseExo.Text = FolderBrowserDialog2.SelectedPath
                 Call validlecheminexo()
                 NewAdresseExo.Focus()
+                Label5.Show()
+                NewAdresseExo.Show()
+                FullNewadresseExo.Show()
             End If
         End If
     End Sub
@@ -219,6 +244,8 @@ romsuivante:
 
     Private Sub NewAdresseExo_TextChanged(sender As Object, e As EventArgs) Handles NewAdresseExo.TextChanged
         FullNewadresseExo.Text = adresseExo.Text & "\" & NewAdresseExo.Text
+        DoExoConverter.Show()
+        FullNewadresseExo.Show()
     End Sub
 
     Private Sub DoExoConverter_Click(sender As Object, e As EventArgs) Handles DoExoConverter.Click
@@ -298,6 +325,15 @@ romsuivante:
         MsgBox("Ecraser le contenu du dossier qui s'ouvre dans votre dossier roms\dos\")
         Process.Start(My.Settings.RecalboxFolder & "\roms\dos\")
     End Sub
+    Private Sub BatotoRB_CheckedChanged(sender As Object, e As EventArgs) Handles BatotoRB.CheckedChanged
+        ValidDossierDos.Show()
+        RbToBato.Checked = Not BatotoRB.Checked
+    End Sub
+
+    Private Sub RbToBato_CheckedChanged(sender As Object, e As EventArgs) Handles RbToBato.CheckedChanged
+        ValidDossierDos.Show()
+        BatotoRB.Checked = Not RbToBato.Checked
+    End Sub
 
     Private Sub ImporterDossierDos(sender As Object, e As EventArgs) Handles ValidDossierDos.Click
         'Au clic, on ouvre la selection du repertoire
@@ -315,21 +351,45 @@ romsuivante:
             Else
                 MsgBox("Le Chemin saisi ne possede pas de fichiers .p2k.cfg ou .keys" & Chr(13))
                 adressepad.Text = Nothing
+                Exit Sub
             End If
         End If
 
         'on check si c'est batocera ou Recalbox
         Dim extension As String
-        If InStr(LCase(adressepad.Text), "recalbox") > 1 Then
-            RbtoBato.Visible = True
-            BatoToRb.Visible = False
+
+        If RbToBato.Checked = True Then
+            RbToBato.Visible = True
+            BatotoRB.Visible = False
             extension = "p2k.cfg"
-        Else
-            RbtoBato.Visible = False
+        ElseIf BatotoRB.Checked = True Then
+            RbToBato.Visible = False
             BatoToRb.Visible = True
             extension = ".keys"
         End If
+
         Call ImportdesP2k(extension)
+
+        'on reshow tout
+        Fulladressep2k.Show()
+        LabelP1.Show()
+        LabelP2.Show()
+        LabelP3.Show()
+        LabelP4.Show()
+        RichTextBox0.Show()
+        RichTextBox1.Show()
+        RichTextBox2.Show()
+        RichTextBox3.Show()
+        LabelFT.Show()
+        FinalRichText.Show()
+
+        If RbToBato.Checked = True Then
+            TxtSourisBato.Show()
+            RichTextBox4.Show()
+        Else
+            TxtSourisBato.Hide()
+            RichTextBox4.Hide()
+        End If
 
     End Sub
 
@@ -352,16 +412,25 @@ romsuivante:
         End With
         table.Columns.Add(column)
 
-        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\roms\dos\")
-        Dim aryFi As IO.FileInfo() = di.GetFiles("*." & extension, SearchOption.AllDirectories)
+        Dim di As New IO.DirectoryInfo(adressepad.Text)
+        Dim aryFi As IO.FileInfo()
+        If RbToBato.Checked = True Then
+            aryfi = di.GetFiles("*." & extension, SearchOption.AllDirectories)
+        Else
+            aryFi = di.GetFiles("padto" & extension, SearchOption.AllDirectories)
+        End If
+
         Dim fi As IO.FileInfo
         Dim nomfichierdelasave As String
         Dim chemindelasave As String
 
         For Each fi In aryFi
             chemindelasave = fi.FullName
-            nomfichierdelasave = fi.Name
-
+            If RbToBato.Checked = True Then
+                nomfichierdelasave = fi.Name
+            Else
+                nomfichierdelasave = fi.Directory.Name
+            End If
             'on ajoute au tableau
             table.Rows.Add(nomfichierdelasave, chemindelasave)
 
@@ -378,83 +447,10 @@ fichiersuivant:
         ListingP2k.Columns("Cheminp2k").Width = 80
         NewP2kFolder.Focus()
     End Sub
-
     Private Sub NewP2kFolder_TextChanged(sender As Object, e As EventArgs) Handles NewP2kFolder.TextChanged
         Fulladressep2k.Text = adressepad.Text & "\" & NewP2kFolder.Text
     End Sub
-    Function p2kread(linetoread As String)
-        'read first number
-        Dim playernb As Integer = linetoread.Substring(0, 1)
 
-        'read inputpad
-        Dim detectegal As Integer = InStr(linetoread, "=")
-        Dim inputpad As String = linetoread.Substring(2, detectegal - 4)
-
-        'read realkey
-        Dim detectpointvirgule As Integer = InStr(linetoread, ";;")
-        Dim realkey As String
-        If detectpointvirgule > 1 Then
-            realkey = linetoread.Substring(detectegal + 1, detectpointvirgule - (detectegal + 3))
-        Else
-            If detectegal + 1 > Len(linetoread) Then
-                realkey = Nothing
-            Else
-                realkey = linetoread.Substring(detectegal + 1)
-            End If
-        End If
-
-        Return (playernb, inputpad, realkey)
-    End Function
-
-    Function genererlatouche(inputpad, realkey)
-        If inputpad <> "j" Then
-            inputpad = Replace(inputpad, "j", "joystick")
-        End If
-        If inputpad = "l1" Then
-            inputpad = Replace(inputpad, "l1", "pageup")
-        End If
-        If inputpad = "r1" Then
-            inputpad = Replace(inputpad, "r1", "pagedown")
-        End If
-
-        If realkey = "s01" Then
-            realkey = Replace(realkey, "s01", "grave")
-        End If
-        If realkey = "s02" Then
-            realkey = Replace(realkey, "s02", "minus")
-        End If
-        If realkey = "s03" Then
-            realkey = Replace(realkey, "s03", "equal")
-        End If
-        If realkey = "s04" Then
-            realkey = Replace(realkey, "s04", "leftbrace")
-        End If
-        If realkey = "s05" Then
-            realkey = Replace(realkey, "s05", "rightbrace")
-        End If
-        If realkey = "s06" Then
-            realkey = Replace(realkey, "s06", "semicolon")
-        End If
-        If realkey = "s07" Then
-            realkey = Replace(realkey, "s07", "apostrophe")
-        End If
-        If realkey = "s08" Then
-            realkey = Replace(realkey, "s07", "backslash")
-        End If
-        If realkey = "s09" Then
-            realkey = Replace(realkey, "s09", "comma")
-        End If
-        If realkey = "s10" Then
-            realkey = Replace(realkey, "s10", "dot")
-        End If
-
-        Dim texte As String = vbTab & vbTab & "{" & Chr(13) &
-            vbTab & vbTab & vbTab & Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
-            vbTab & vbTab & vbTab & Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(13) &
-            vbTab & vbTab & vbTab & Chr(34) & "target" & Chr(34) & ": " & Chr(34) & "KEY_" & UCase(realkey) & Chr(34) & Chr(13) &
-            vbTab & vbTab & "}," & Chr(13)
-        Return texte
-    End Function
     Private Sub ListingP2k_SelectionChanged(sender As Object, e As EventArgs) Handles ListingP2k.SelectionChanged
         RichTextBox0.Clear()
         RichTextBox1.Clear()
@@ -472,43 +468,111 @@ fichiersuivant:
         Dim readText() As String = File.ReadAllLines(chemindufichier)
         Dim s As String
 
-        For Each s In readText
-            If s = "" Then
-                GoTo lignesuivante
-            ElseIf s.Substring(0, 1) = "#" Then
-                GoTo lignesuivante
-            ElseIf s.Substring(0, 1) = " " Then
-                GoTo lignesuivante
-            Else
-                Dim resultats = p2kread(s)
-                'on va mettre ces infos dans le bon textbox
-                Dim playernb = resultats.item1
-                Dim inputpad = resultats.item2
-                Dim realkey = resultats.item3
-                'Generer le texte
-                Dim newtext As String = genererlatouche(LCase(inputpad), UCase(realkey))
-                'on repointe vers le bon 
-                Select Case playernb
-                    Case 0
-                        RichTextBox0.Text = RichTextBox0.Text & newtext
-                    Case 1
-                        RichTextBox1.Text = RichTextBox1.Text & newtext
-                    Case 2
-                        RichTextBox2.Text = RichTextBox2.Text & newtext
-                    Case 3
-                        RichTextBox3.Text = RichTextBox3.Text & newtext
-                End Select
 
+        For Each s In readText
+            If RbToBato.Checked = True Then
+                If s = "" Then
+                    GoTo lignesuivante
+                ElseIf s.Substring(0, 1) = "#" Then
+                    GoTo lignesuivante
+                ElseIf s.Substring(0, 1) = " " Then
+                    GoTo lignesuivante
+                Else
+
+                    Dim resultats = p2kread(s)
+
+
+                    'on va mettre ces infos dans le bon textbox
+                    Dim playernb = resultats.item1
+                    Dim inputpad = resultats.item2
+                    Dim realkey = resultats.item3
+
+                    'Generer le texte
+                    Dim newtext As String = genererlatouche(LCase(inputpad), UCase(realkey))
+                    'on repointe vers le bon 
+                    Select Case playernb
+                        Case 0
+                            RichTextBox0.Text = RichTextBox0.Text & newtext
+                        Case 1
+                            RichTextBox1.Text = RichTextBox1.Text & newtext
+                        Case 2
+                            RichTextBox2.Text = RichTextBox2.Text & newtext
+                        Case 3
+                            RichTextBox3.Text = RichTextBox3.Text & newtext
+                    End Select
+                End If
+
+            Else
+                Dim detectaccolade As Integer = InStr(s, "{")
+                Dim detectactionplayer As Integer = InStr(s, "actions_player")
+                Dim detecttrigger As Integer = InStr(s, "trigger")
+                Dim detecttype As Integer = InStr(s, "type")
+                Dim detectarget As Integer = InStr(s, "target")
+                Dim detectfincrochet As Integer = InStr(s, "]")
+                Dim detectfinaccolade As Integer = InStr(s, "}")
+
+                Dim numplayer As Integer
+                Dim trigger As String
+                Dim typebutton As String
+                Dim targetbutton As String
+
+                If detectaccolade >= 1 Then
+                    GoTo lignesuivante
+                ElseIf InStr(s, "actions_player") >= 1 Then
+                    'on va recuperer le numero du player 
+                    numplayer = s.Substring(detectactionplayer + 13, 1)
+                    GoTo lignesuivante
+                ElseIf detecttrigger >= 1 Then
+                    'dim temptrigger = s.Substring(detecttrigger + Len("trigger") + 3)
+                    'Dim detectapostrophe As Integer = InStr(trigger, Chr(34))
+                    'Dim buttontrigger As String = trigger.Substring(0, detectapostrophe - 1)
+                    trigger = s.Substring(detecttrigger + Len("trigger") + 3).Substring(0, InStr(s.Substring(detecttrigger + Len("trigger") + 3), Chr(34)) - 1)
+                    GoTo lignesuivante
+                ElseIf detecttype >= 1 Then
+                    If InStr(s, "mouse") > 1 Then
+                        trigger = Nothing
+                        GoTo lignesuivante
+                    End If
+                ElseIf detectarget > 1 Then 'on est sur la derniere ligne donc on peut generer
+                    targetbutton = s.Substring(detectarget + Len("target") + 3).Substring(0, InStr(s.Substring(detectarget + Len("target") + 3), Chr(34)) - 1)
+                    'on genere la ligne
+                    Dim touchesfinales As String = genererlignep2k(numplayer, trigger, targetbutton)
+
+                    'detection du joueur et on mets le texte
+                    Select Case numplayer
+                        Case 1
+                            RichTextBox0.Text = RichTextBox0.Text & touchesfinales & Chr(13)
+                        Case 2
+                            RichTextBox1.Text = RichTextBox1.Text & touchesfinales & Chr(13)
+                        Case 3
+                            RichTextBox2.Text = RichTextBox2.Text & touchesfinales & Chr(13)
+                        Case 4
+                            RichTextBox3.Text = RichTextBox3.Text & touchesfinales & Chr(13)
+                    End Select
+
+                    'on remet les variable à 0 puisque on va tout refaire
+                    trigger = Nothing
+                    typebutton = Nothing
+                    targetbutton = Nothing
+                    GoTo lignesuivante
+                ElseIf detectfincrochet >= 1 Then 'on est a la fin du joueur donc on met numplayer a rien du tout et le reste aussi
+                    numplayer = Nothing
+                    trigger = Nothing
+                    typebutton = Nothing
+                    targetbutton = Nothing
+                End If
             End If
 lignesuivante:
         Next
 
-        'on enleve les sauts et les virgules de la fin
-        RichTextBox0.Text = RichTextBox0.Text.Substring(0, Len(RichTextBox0.Text) - 2)
-        RichTextBox1.Text = RichTextBox1.Text.Substring(0, Len(RichTextBox1.Text) - 2)
-        RichTextBox2.Text = RichTextBox2.Text.Substring(0, Len(RichTextBox2.Text) - 2)
-        RichTextBox3.Text = RichTextBox3.Text.Substring(0, Len(RichTextBox3.Text) - 2)
-        On Error GoTo 0
+        If RbToBato.Checked = True Then
+            'on enleve les sauts et les virgules de la fin
+            RichTextBox0.Text = RichTextBox0.Text.Substring(0, Len(RichTextBox0.Text) - 2)
+            RichTextBox1.Text = RichTextBox1.Text.Substring(0, Len(RichTextBox1.Text) - 2)
+            RichTextBox2.Text = RichTextBox2.Text.Substring(0, Len(RichTextBox2.Text) - 2)
+            RichTextBox3.Text = RichTextBox3.Text.Substring(0, Len(RichTextBox3.Text) - 2)
+            On Error GoTo 0
+        End If
     End Sub
     Sub genererfichier()
         FinalRichText.Clear()
@@ -544,6 +608,129 @@ lignesuivante:
 
         FinalRichText.Text = FinalRichText.Text.Substring(0, tailletexte) & Chr(13) & "}"
     End Sub
+    Function p2kread(linetoread As String)
+        'read first number
+        Dim playernb As Integer = linetoread.Substring(0, 1)
+
+        'read inputpad
+        Dim detectegal As Integer = InStr(linetoread, "=")
+        Dim inputpad As String = linetoread.Substring(2, detectegal - 4)
+
+        'read realkey
+        Dim detectpointvirgule As Integer = InStr(linetoread, ";;")
+        Dim realkey As String
+        If detectpointvirgule > 1 Then
+            realkey = linetoread.Substring(detectegal + 1, detectpointvirgule - (detectegal + 3))
+        Else
+            If detectegal + 1 > Len(linetoread) Then
+                realkey = Nothing
+            Else
+                realkey = linetoread.Substring(detectegal + 1)
+            End If
+        End If
+
+        Return (playernb, inputpad, realkey)
+    End Function
+    Function genererlatouche(inputpad, realkey)
+        If inputpad <> "j" Then
+            inputpad = Replace(inputpad, "j", "joystick")
+        End If
+        If inputpad = "l1" Then
+            inputpad = Replace(inputpad, "l1", "pageup")
+        End If
+        If inputpad = "r1" Then
+            inputpad = Replace(inputpad, "r1", "pagedown")
+        End If
+
+        If realkey = "s01" Then
+            realkey = Replace(realkey, "s01", "grave")
+        End If
+        If realkey = "s02" Then
+            realkey = Replace(realkey, "s02", "minus")
+        End If
+        If realkey = "s03" Then
+            realkey = Replace(realkey, "s03", "equal")
+        End If
+        If realkey = "s04" Then
+            realkey = Replace(realkey, "s04", "leftbrace")
+        End If
+        If realkey = "s05" Then
+            realkey = Replace(realkey, "s05", "rightbrace")
+        End If
+        If realkey = "s06" Then
+            realkey = Replace(realkey, "s06", "semicolon")
+        End If
+        If realkey = "s07" Then
+            realkey = Replace(realkey, "s07", "apostrophe")
+        End If
+        If realkey = "s08" Then
+            realkey = Replace(realkey, "s08", "backslash")
+        End If
+        If realkey = "s09" Then
+            realkey = Replace(realkey, "s09", "comma")
+        End If
+        If realkey = "s10" Then
+            realkey = Replace(realkey, "s10", "dot")
+        End If
+
+        Dim texte As String = vbTab & vbTab & "{" & Chr(13) &
+            vbTab & vbTab & vbTab & Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
+            vbTab & vbTab & vbTab & Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(13) &
+            vbTab & vbTab & vbTab & Chr(34) & "target" & Chr(34) & ": " & Chr(34) & "KEY_" & UCase(realkey) & Chr(34) & Chr(13) &
+            vbTab & vbTab & "}," & Chr(13)
+        Return texte
+    End Function
+    Function genererlignep2k(numplayer As Integer, inputpad As String, realkey As String)
+        'on transforme l'input au cas ou
+        If inputpad <> "j" Then
+            inputpad = Replace(inputpad, "joystick", "j")
+        End If
+        If inputpad = "pageup" Then
+            inputpad = Replace(inputpad, "pageup", "l1")
+        End If
+        If inputpad = "pagedown" Then
+            inputpad = Replace(inputpad, "pagedown", "r1")
+        End If
+
+        'on transforme la realkey
+        realkey = Replace(realkey, "KEY_", "")
+        'et on met en minuscule 
+        realkey = LCase(realkey)
+
+        If realkey = "grave" Then
+            realkey = Replace(realkey, "grave", "s01")
+        End If
+        If realkey = "minus" Then
+            realkey = Replace(realkey, "minus", "s02")
+        End If
+        If realkey = "equal" Then
+            realkey = Replace(realkey, "equal", "s03")
+        End If
+        If realkey = "leftbrace" Then
+            realkey = Replace(realkey, "leftbrace", "s04")
+        End If
+        If realkey = "rightbrace" Then
+            realkey = Replace(realkey, "rightbrace", "s05")
+        End If
+        If realkey = "semicolon" Then
+            realkey = Replace(realkey, "semicolon", "s06")
+        End If
+        If realkey = "apostrophe" Then
+            realkey = Replace(realkey, "apostrophe", "s07")
+        End If
+        If realkey = "backslash" Then
+            realkey = Replace(realkey, "backslash", "s08")
+        End If
+        If realkey = "comma" Then
+            realkey = Replace(realkey, "comma", "s09")
+        End If
+        If realkey = "dot" Then
+            realkey = Replace(realkey, "dot", "s10")
+        End If
+
+        Dim ligneentiere As String = numplayer - 1 & ":" & inputpad & " = " & realkey
+        Return ligneentiere
+    End Function
     Sub savelefichier()
         Dim chemindufichiercomplet As String = ListingP2k.SelectedRows(0).Cells(ListingP2k.Columns("Cheminp2k").Index).Value
         'Dim extension As String = Path.GetFileName(chemindufichiercomplet)

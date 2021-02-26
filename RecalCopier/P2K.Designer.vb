@@ -27,7 +27,7 @@ Partial Class P2K
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.WriteFile = New System.Windows.Forms.Button()
         Me.RichTextBox4 = New System.Windows.Forms.RichTextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.TxtSourisBato = New System.Windows.Forms.Label()
         Me.LabelFT = New System.Windows.Forms.Label()
         Me.LabelP4 = New System.Windows.Forms.Label()
         Me.LabelP3 = New System.Windows.Forms.Label()
@@ -44,8 +44,6 @@ Partial Class P2K
         Me.Label7 = New System.Windows.Forms.Label()
         Me.NewP2kFolder = New System.Windows.Forms.TextBox()
         Me.ValidConvP2k = New System.Windows.Forms.Button()
-        Me.BatoToRb = New System.Windows.Forms.Label()
-        Me.RbtoBato = New System.Windows.Forms.Label()
         Me.ValidDossierDos = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
@@ -66,6 +64,8 @@ Partial Class P2K
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.FolderBrowserDialog2 = New System.Windows.Forms.FolderBrowserDialog()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.BatotoRB = New System.Windows.Forms.CheckBox()
+        Me.RbToBato = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         CType(Me.ListingP2k, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,9 +94,11 @@ Partial Class P2K
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkSeaGreen
+        Me.Panel1.Controls.Add(Me.RbToBato)
+        Me.Panel1.Controls.Add(Me.BatotoRB)
         Me.Panel1.Controls.Add(Me.WriteFile)
         Me.Panel1.Controls.Add(Me.RichTextBox4)
-        Me.Panel1.Controls.Add(Me.Label12)
+        Me.Panel1.Controls.Add(Me.TxtSourisBato)
         Me.Panel1.Controls.Add(Me.LabelFT)
         Me.Panel1.Controls.Add(Me.LabelP4)
         Me.Panel1.Controls.Add(Me.LabelP3)
@@ -113,8 +115,6 @@ Partial Class P2K
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.NewP2kFolder)
         Me.Panel1.Controls.Add(Me.ValidConvP2k)
-        Me.Panel1.Controls.Add(Me.BatoToRb)
-        Me.Panel1.Controls.Add(Me.RbtoBato)
         Me.Panel1.Controls.Add(Me.ValidDossierDos)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.PictureBox2)
@@ -155,14 +155,14 @@ Partial Class P2K
     "" & Global.Microsoft.VisualBasic.ChrW(9) & """type"": ""key""," & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & """target"": ""BTN_LEFT""" & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & "}," & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & "{" & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & """trigger"": ""r2""," & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & """type"": " &
     """key""," & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & """target"": ""BTN_RIGHT""" & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & "}"
         '
-        'Label12
+        'TxtSourisBato
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(261, 199)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(167, 39)
-        Me.Label12.TabIndex = 71
-        Me.Label12.Text = "Pour Batocera :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Assigner la souris à un Joy. (1ou2)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "avec le texte suivant :"
+        Me.TxtSourisBato.AutoSize = True
+        Me.TxtSourisBato.Location = New System.Drawing.Point(261, 199)
+        Me.TxtSourisBato.Name = "TxtSourisBato"
+        Me.TxtSourisBato.Size = New System.Drawing.Size(167, 39)
+        Me.TxtSourisBato.TabIndex = 71
+        Me.TxtSourisBato.Text = "Pour Batocera :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Assigner la souris à un Joy. (1ou2)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "avec le texte suivant :"
         '
         'LabelFT
         '
@@ -331,24 +331,6 @@ Partial Class P2K
         Me.ValidConvP2k.TabIndex = 44
         Me.ValidConvP2k.Text = "3) Convertir le Tableau Complet"
         Me.ValidConvP2k.UseVisualStyleBackColor = False
-        '
-        'BatoToRb
-        '
-        Me.BatoToRb.AutoSize = True
-        Me.BatoToRb.Location = New System.Drawing.Point(178, 104)
-        Me.BatoToRb.Name = "BatoToRb"
-        Me.BatoToRb.Size = New System.Drawing.Size(231, 13)
-        Me.BatoToRb.TabIndex = 43
-        Me.BatoToRb.Text = "Dossier Batocera (.keys) --> Recalbox's p2k.cfg"
-        '
-        'RbtoBato
-        '
-        Me.RbtoBato.AutoSize = True
-        Me.RbtoBato.Location = New System.Drawing.Point(178, 117)
-        Me.RbtoBato.Name = "RbtoBato"
-        Me.RbtoBato.Size = New System.Drawing.Size(231, 13)
-        Me.RbtoBato.TabIndex = 42
-        Me.RbtoBato.Text = "Dossier Recalbox (p2k.cfg) --> Batocera's .keys"
         '
         'ValidDossierDos
         '
@@ -564,6 +546,28 @@ Partial Class P2K
         Me.PictureBox1.TabIndex = 38
         Me.PictureBox1.TabStop = False
         '
+        'BatotoRB
+        '
+        Me.BatotoRB.AutoSize = True
+        Me.BatotoRB.ForeColor = System.Drawing.Color.Blue
+        Me.BatotoRB.Location = New System.Drawing.Point(178, 97)
+        Me.BatotoRB.Name = "BatotoRB"
+        Me.BatotoRB.Size = New System.Drawing.Size(250, 17)
+        Me.BatotoRB.TabIndex = 74
+        Me.BatotoRB.Text = "Dossier Batocera (.keys) --> Recalbox's p2k.cfg"
+        Me.BatotoRB.UseVisualStyleBackColor = True
+        '
+        'RbToBato
+        '
+        Me.RbToBato.AutoSize = True
+        Me.RbToBato.ForeColor = System.Drawing.Color.BlueViolet
+        Me.RbToBato.Location = New System.Drawing.Point(178, 120)
+        Me.RbToBato.Name = "RbToBato"
+        Me.RbToBato.Size = New System.Drawing.Size(250, 17)
+        Me.RbToBato.TabIndex = 75
+        Me.RbToBato.Text = "Dossier Recalbox (p2k.cfg) --> Batocera's .keys"
+        Me.RbToBato.UseVisualStyleBackColor = True
+        '
         'P2K
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -599,8 +603,6 @@ Partial Class P2K
     Friend WithEvents Label7 As Label
     Friend WithEvents NewP2kFolder As TextBox
     Friend WithEvents ValidConvP2k As Button
-    Friend WithEvents BatoToRb As Label
-    Friend WithEvents RbtoBato As Label
     Friend WithEvents ValidDossierDos As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox2 As PictureBox
@@ -628,6 +630,8 @@ Partial Class P2K
     Friend WithEvents LabelP2 As Label
     Friend WithEvents LabelP1 As Label
     Friend WithEvents RichTextBox4 As RichTextBox
-    Friend WithEvents Label12 As Label
+    Friend WithEvents TxtSourisBato As Label
     Friend WithEvents WriteFile As Button
+    Friend WithEvents RbToBato As CheckBox
+    Friend WithEvents BatotoRB As CheckBox
 End Class
