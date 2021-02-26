@@ -33,6 +33,7 @@ Partial Class Form1
         Me.version = New System.Windows.Forms.Label()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Disclaimer = New System.Windows.Forms.GroupBox()
+        Me.TxtDisclaimer = New System.Windows.Forms.RichTextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -63,7 +64,6 @@ Partial Class Form1
         Me.ButtonHideArrm = New System.Windows.Forms.Button()
         Me.PanelSettings = New System.Windows.Forms.Panel()
         Me.ToolTipP2k = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TxtDisclaimer = New System.Windows.Forms.RichTextBox()
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -162,7 +162,7 @@ Partial Class Form1
         Me.version.Name = "version"
         Me.version.Size = New System.Drawing.Size(27, 14)
         Me.version.TabIndex = 14
-        Me.version.Text = "v5.2"
+        Me.version.Text = "v5.3"
         '
         'Disclaimer
         '
@@ -176,6 +176,15 @@ Partial Class Form1
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Fonctionnalités :"
+        '
+        'TxtDisclaimer
+        '
+        Me.TxtDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDisclaimer.Location = New System.Drawing.Point(6, 19)
+        Me.TxtDisclaimer.Name = "TxtDisclaimer"
+        Me.TxtDisclaimer.Size = New System.Drawing.Size(680, 378)
+        Me.TxtDisclaimer.TabIndex = 19
+        Me.TxtDisclaimer.Text = resources.GetString("TxtDisclaimer.Text")
         '
         'Button1
         '
@@ -532,15 +541,6 @@ Partial Class Form1
         Me.PanelSettings.Name = "PanelSettings"
         Me.PanelSettings.Size = New System.Drawing.Size(471, 155)
         Me.PanelSettings.TabIndex = 28
-        '
-        'TxtDisclaimer
-        '
-        Me.TxtDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtDisclaimer.Location = New System.Drawing.Point(6, 19)
-        Me.TxtDisclaimer.Name = "TxtDisclaimer"
-        Me.TxtDisclaimer.Size = New System.Drawing.Size(680, 378)
-        Me.TxtDisclaimer.TabIndex = 19
-        Me.TxtDisclaimer.Text = resources.GetString("TxtDisclaimer.Text")
         '
         'Form1
         '
