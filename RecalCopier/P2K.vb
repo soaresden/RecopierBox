@@ -7,6 +7,7 @@ Public Class P2K
         NewP2kFolder.Hide()
         TxtSourisBato.Hide()
         RichTextBox4.Hide()
+        Fulladressep2k.Hide()
         LabelP1.Hide()
         LabelP2.Hide()
         LabelP3.Hide()
@@ -371,17 +372,8 @@ romsuivante:
         Call ImportdesP2k(extension)
 
         'on reshow tout
-        Fulladressep2k.Show()
-        LabelP1.Show()
-        LabelP2.Show()
-        LabelP3.Show()
-        LabelP4.Show()
-        RichTextBox0.Show()
-        RichTextBox1.Show()
-        RichTextBox2.Show()
-        RichTextBox3.Show()
-        LabelFT.Show()
-        FinalRichText.Show()
+        Label7.Show()
+        NewP2kFolder.Show()
 
         If RbToBato.Checked = True Then
             TxtSourisBato.Show()
@@ -391,6 +383,7 @@ romsuivante:
             RichTextBox4.Hide()
         End If
 
+        NewP2kFolder.Focus()
     End Sub
 
     Sub ImportdesP2k(extension As String)
@@ -448,6 +441,17 @@ fichiersuivant:
         NewP2kFolder.Focus()
     End Sub
     Private Sub NewP2kFolder_TextChanged(sender As Object, e As EventArgs) Handles NewP2kFolder.TextChanged
+        Fulladressep2k.Show()
+        LabelP1.Show()
+        LabelP2.Show()
+        LabelP3.Show()
+        LabelP4.Show()
+        RichTextBox0.Show()
+        RichTextBox1.Show()
+        RichTextBox2.Show()
+        RichTextBox3.Show()
+        LabelFT.Show()
+        FinalRichText.Show()
         Fulladressep2k.Text = adressepad.Text & "\" & NewP2kFolder.Text
     End Sub
 
@@ -573,40 +577,9 @@ lignesuivante:
             RichTextBox3.Text = RichTextBox3.Text.Substring(0, Len(RichTextBox3.Text) - 2)
             On Error GoTo 0
         End If
-    End Sub
-    Sub genererfichier()
-        FinalRichText.Clear()
 
-        'On commence a ecrire la forme du fichier
-        FinalRichText.Text = "{" & Chr(13)
-
-        'On mets le player 1
-        FinalRichText.Text = FinalRichText.Text &
-             vbTab & Chr(34) & "actions_player1" & Chr(34) & ": [" & Chr(13) &
-        RichTextBox0.Text & Chr(13) & vbTab & "]"
-
-        'On teste le player 2
-        If RichTextBox1.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
-            vbTab & Chr(34) & "actions_player2" & Chr(34) & ": [" & Chr(13) &
-            RichTextBox1.Text & Chr(13) & vbTab & "]"
-        End If
-
-        If RichTextBox2.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
-            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(13) &
-            RichTextBox2.Text & Chr(13) & vbTab & "]"
-        End If
-
-        If RichTextBox3.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
-            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(13) &
-            RichTextBox3.Text & Chr(13) & vbTab & "]"
-        End If
-
-        Dim tailletexte As Integer = Len(FinalRichText.Text)
-
-        FinalRichText.Text = FinalRichText.Text.Substring(0, tailletexte) & Chr(13) & "}"
+        WriteFile.Show()
+        ValidConvP2k.Show()
     End Sub
     Function p2kread(linetoread As String)
         'read first number
@@ -732,6 +705,7 @@ lignesuivante:
         Return ligneentiere
     End Function
     Sub savelefichier()
+
         Dim chemindufichiercomplet As String = ListingP2k.SelectedRows(0).Cells(ListingP2k.Columns("Cheminp2k").Index).Value
         'Dim extension As String = Path.GetFileName(chemindufichiercomplet)
         'Dim premierpoint As Integer = InStr(extension, ".")
@@ -744,6 +718,13 @@ lignesuivante:
             cheminfinal = Replace(chemindufichiercomplet, ".p2k.cfg", "") & "\padto.keys"
         ElseIf extensionfichier = ".p2k.cfg" Then
             cheminfinal = Replace(chemindufichiercomplet, extensionfichier, "padto.keys")
+        ElseIf instr(chemindufichiercomplet, ".pc") > 1 And extensionfichier = ".keys" Then
+            Dim dossierparent As String = Path.GetDirectoryName(chemindufichiercomplet)
+            Dim dossierfinalenreg As String = Path.GetDirectoryName(dossierparent)
+            Dim nomdufichierfinal As String = Path.GetFileName(dossierparent) & ".p2k.cfg"
+            cheminfinal = dossierfinalenreg & "\" & nomdufichierfinal
+        ElseIf extensionfichier = ".keys" Then
+            cheminfinal = Replace(chemindufichiercomplet, "padto.keys", ".p2k.cfg")
         Else
             cheminfinal = Replace(chemindufichiercomplet, extensionfichier, ".p2k.cfg")
         End If
@@ -753,7 +734,6 @@ lignesuivante:
         If (Not System.IO.Directory.Exists(Path.GetDirectoryName(dossierfinal))) Then
             MkDir(Path.GetDirectoryName(dossierfinal))
         End If
-
         System.IO.File.WriteAllText(dossierfinal, FinalRichText.Text)
     End Sub
     Private Sub ValidConvP2k_Click(sender As Object, e As EventArgs) Handles ValidConvP2k.Click
@@ -766,7 +746,7 @@ lignesuivante:
         For i = 0 To ListingP2k.Rows.Count - 1
             ListingP2k.ClearSelection()
             ListingP2k.Rows(i).Selected = True
-            Call genererfichier()
+            If RbToBato.Checked = True Then Call genererfichier()
             Call savelefichier()
         Next
         Process.Start(Fulladressep2k.Text)
@@ -778,13 +758,49 @@ lignesuivante:
             NewP2kFolder.Focus()
             Exit Sub
         End If
-        Call genererfichier()
+        If RbToBato.Checked = True Then
+            Call genererfichier()
+        End If
         Call savelefichier()
         MsgBox("Conversion Terminée")
     End Sub
     Private Sub ButtonGetBack_Click(sender As Object, e As EventArgs) Handles ButtonGetBack.Click
         Form1.Show()
         Me.Close()
+    End Sub
+    Sub genererfichier()
+        FinalRichText.Clear()
+
+        'On commence a ecrire la forme du fichier
+        FinalRichText.Text = "{" & Chr(13)
+
+        'On mets le player 1
+        FinalRichText.Text = FinalRichText.Text &
+             vbTab & Chr(34) & "actions_player1" & Chr(34) & ": [" & Chr(13) &
+        RichTextBox0.Text & Chr(13) & vbTab & "]"
+
+        'On teste le player 2
+        If RichTextBox1.Text <> "" Then
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
+            vbTab & Chr(34) & "actions_player2" & Chr(34) & ": [" & Chr(13) &
+            RichTextBox1.Text & Chr(13) & vbTab & "]"
+        End If
+
+        If RichTextBox2.Text <> "" Then
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
+            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(13) &
+            RichTextBox2.Text & Chr(13) & vbTab & "]"
+        End If
+
+        If RichTextBox3.Text <> "" Then
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
+            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(13) &
+            RichTextBox3.Text & Chr(13) & vbTab & "]"
+        End If
+
+        Dim tailletexte As Integer = Len(FinalRichText.Text)
+
+        FinalRichText.Text = FinalRichText.Text.Substring(0, tailletexte) & Chr(13) & "}"
     End Sub
     Private Sub RichTextBox0_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox0.GotFocus
         RichTextBox0.Location = New Point(6, 348)
@@ -920,5 +936,9 @@ lignesuivante:
     Private Sub RichTextBox4_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox4.GotFocus
         RichTextBox4.SelectAll()
         Clipboard.SetText(RichTextBox4.Text)
+    End Sub
+
+    Private Sub RichTextBox0_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox0.TextChanged
+        FinalRichText.Text = RichTextBox0.Text & RichTextBox1.Text & RichTextBox2.Text & RichTextBox3.Text
     End Sub
 End Class
