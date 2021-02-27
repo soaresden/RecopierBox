@@ -13,8 +13,7 @@ https://github.com/soaresden/RecopierBox/releases
 
 
 **Presentation et Tuto du Logiciel (v5.3)**
-https://youtu.be/32sStvhZxHY
-
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/32sStvhZxHY/0.jpg)](https://youtu.be/32sStvhZxHY)
 
 ** Chapitrage : ** (voir sur youtube)
 
