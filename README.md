@@ -12,7 +12,7 @@ Testez vos connaissances sur le blindtest généré à partir de vos gamelists :
 https://github.com/soaresden/RecopierBox/releases
 
 
-**Presentation et Tuto du Logiciel (v5.3)
+**Presentation et Tuto du Logiciel (v5.3)**
 
 Upload en cours ... (27/02/2021 - 16:01)
 
