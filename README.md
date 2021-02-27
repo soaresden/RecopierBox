@@ -13,16 +13,26 @@ https://github.com/soaresden/RecopierBox/releases
 
 
 **Presentation et Tuto du Logiciel (v5.3)
+
 Upload en cours ... (27/02/2021 - 16:01)
+
 
 ** Chapitrage : ** (voir sur youtube)
 
 Configuration Initiale de l'Outil
+
 Creer un Dossier Perso
+
 Overlays Manager:
+
  Manager
+ 
  Resizer
+ 
  Converter
+ 
 Saves Manager
+
 Blind Test
+
 Pad2Keyboard
