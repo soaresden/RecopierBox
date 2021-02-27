@@ -998,7 +998,6 @@ finboucle:
         Dim videoencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("CheminVideo").Index).Value
         System.Diagnostics.Process.Start(videoencours)
     End Sub
-
     Private Sub ModeEasy_CheckedChanged(sender As Object, e As EventArgs) Handles ModeEasy.CheckedChanged
         If ModeEasy.Checked = True Then
             ModeEasy.Checked = True
@@ -1008,7 +1007,6 @@ finboucle:
             ModeHardcore.Checked = True
         End If
     End Sub
-
     Private Sub ModeHardcore_CheckedChanged(sender As Object, e As EventArgs) Handles ModeHardcore.CheckedChanged
         If ModeHardcore.Checked = True Then
             ModeEasy.Checked = False
@@ -1019,7 +1017,6 @@ finboucle:
         End If
 
     End Sub
-
     Private Sub ListConsoleDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListConsoleDesJeux.SelectedIndexChanged
         Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
         Dim consoleencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Console").Index).Value
@@ -1030,9 +1027,6 @@ finboucle:
             MsgBox("Mauvaise Console !")
         End If
     End Sub
-
-
-
     Private Sub RandomList_DrawItem(sender As Object, e As DrawItemEventArgs) Handles RandomList.DrawItem
         Dim isItemSelected As Boolean = ((e.State And DrawItemState.Selected) = DrawItemState.Selected)
         Dim itemIndex As Integer = e.Index
