@@ -13,8 +13,7 @@ https://github.com/soaresden/RecopierBox/releases
 
 
 **Presentation et Tuto du Logiciel (v5.3)**
-
-Upload en cours ... (27/02/2021 - 16:01)
+https://youtu.be/32sStvhZxHY
 
 
 ** Chapitrage : ** (voir sur youtube)
