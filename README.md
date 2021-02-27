@@ -13,16 +13,16 @@ https://github.com/soaresden/RecopierBox/releases
 
 
 **Presentation et Tuto du Logiciel (v5.3)
+https://youtu.be/RZso8gSHU3A
 
-** Chapitrage : **
+** Chapitrage : ** (voir sur youtube)
 
-
-Configuration Initiale de l'Outil : 
-Creer un Dossier Perso : 
-Overlays Manager : 
- Manager: 
- Resizer: 
- Converter: 
-Saves Manager: 
-Blind Test: 
-Pad2Keyboard: 
+Configuration Initiale de l'Outil
+Creer un Dossier Perso
+Overlays Manager:
+ Manager
+ Resizer
+ Converter
+Saves Manager
+Blind Test
+Pad2Keyboard
