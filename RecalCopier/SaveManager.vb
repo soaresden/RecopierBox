@@ -328,7 +328,7 @@ skip:
             Dim consolerom = DataGridSave.Rows(row).Cells(DataGridSave.Columns("Console").Index).Value
 
             'on va colorer la colonne des coches
-            If DataGridSave.Rows(row).Cells(DataGridSave.Columns("NomRomXML").Index).Value = "#ORPHELIN#" Then
+            If DataGridSave.Rows(row).Cells(DataGridSave.Columns("NomRomXML").Index).Value Is "#ORPHELIN#" Then
 
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = False
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
@@ -641,19 +641,6 @@ lignesuivante:
             MsgBox("Impossible de Traiter plusieurs Fichiers simultanament")
             Exit Sub
         End If
-
-        'On detecte si y'a une extension.
-        Dim newextension As String = Path.GetExtension(NewName.Text)
-
-        'Si .blablablabla a moins de 8 caracteres, c'est que c'est une vraie extension (.scummvm ?). Donc ca veut dire que c'est une extension qui est saisie
-        If newextension = "" Then GoTo oncontinue
-
-        If Len(newextension) < 8 Then
-                MsgBox("Merci de retirer l'extension dans votre proposition")
-                Exit Sub
-            End If
-
-oncontinue:
 
         'On prends l'extension attendue
         Dim extension As String = Path.GetExtension(ActualName.Text)

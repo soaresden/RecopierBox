@@ -661,8 +661,6 @@ suite6:
             Call Entreesurfiltres()
         End If
     End Sub
-
-
     Private Sub ButtonDoRandom1_Click(sender As Object, e As EventArgs) Handles ButtonDoRandom1.Click
 
         If txtnbmanches.Text <= 0 Then
@@ -690,10 +688,9 @@ suite6:
 
         'On Clear par securité
         RandomList.Items.Clear()
-        'On refresh les reponses par securité
+        'On enleves toutes les listbox de reponses par securité
         ListTitreDesJeux.Items.Clear()
         ListConsoleDesJeux.Items.Clear()
-
 
         'On remplit la randobox de toutes les possibilités
         listrandobox.Items.Clear()
@@ -701,7 +698,6 @@ suite6:
         For rando = 0 To TxtTotalEntrees.Text - 1
             listrandobox.Items.Add(rando)
         Next
-
 
         'On va generer un chiffre et tester
         Dim rnd As New Random
@@ -744,7 +740,16 @@ recalculrando:
         QuizzBoxRep.Show()
         PanelVideo.Show()
 
-        If ConsoleTitre.Checked = True Then ListConsoleDesJeux.Show() Else ListConsoleDesJeux.Hide()
+        If ConsoleTitre.Checked = True Then
+            ListConsoleDesJeux.Show()
+            ListTitreDesJeux.Show()
+        ElseIf TitreOnly.Checked = True Then
+            ListConsoleDesJeux.Hide()
+            ListTitreDesJeux.Show()
+        Else
+            ListConsoleDesJeux.Hide()
+            ListTitreDesJeux.Hide()
+        End If
 
         'On Parametre le tout
         PlayerAudio.uiMode = "invisible"
@@ -752,7 +757,7 @@ recalculrando:
         PlayerAudio.settings.mute = False
         RandomList.SelectedIndex = 0
 
-        'Et enfin on cheeck si c'est Titre+Console pour Ajouter les console de base
+        'Et enfin on cheeck si c'est Titre+Console pour Ajouter les console a la listbox
         If ConsoleTitre.Checked = True Then
 
             For Each j In ConsoleList.SelectedItems
@@ -817,28 +822,32 @@ recalculrando:
         ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
             Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
             PlayerAudio.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
-            If ModeEasy.Checked = True Then PlayerAudio.uiMode = "none"
-            If ModeHardcore.Checked = True Then PlayerAudio.uiMode = "invisible"
-            PlayerAudio.Ctlcontrols.play()
 
+            If ModeEasy.Checked = True Then
+                PlayerAudio.uiMode = "none"
+            ElseIf ModeHardcore.Checked = True Then
+                PlayerAudio.uiMode = "invisible"
+            End If
+
+            PlayerAudio.Ctlcontrols.play()
             ProgressBar1.Minimum = 0
             ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
 
-            ListTitreDesJeux.Items.Clear()
             Timer1.Start()
             TimeBox.Text = ""
 
             'On enleve la liste des jeux par securite
             ListTitreDesJeux.Items.Clear()
-            'On remplit la randobox e toutes les possibilités
+
+            'On remplit la randobox de toutes les possibilités
             listrandobox.Items.Clear()
             Dim rando As Integer
             For rando = 0 To TxtTotalEntrees.Text - 1
                 listrandobox.Items.Add(rando)
             Next
+
             'et on enleve le bon chiffre
             listrandobox.Items.Remove(lavraieligne)
-
         End If
     End Sub
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
@@ -930,21 +939,16 @@ recalculrando:
         If TitreOnly.Checked = True Then ' Titre Et Consoles
             RandomizerPropositions(titreencours, consoleencours)
         End If
-
     End Sub
-    Function Parameterz(ByVal TitreEnCours As String, ByVal ConsoleEnCours As String) As String
-        RandomizerPropositions(TitreEnCours, ConsoleEnCours)
-    End Function
     Sub RandomizerPropositions(titreencours As String, consoleencours As String)
         Dim rnd As New Random
         Dim x As Integer
         Dim titlegen As String
 
-        'Si on a rien selectionné, on quitte
         If ConsoleTitre.Checked = True Then
-            If ListConsoleDesJeux.SelectedItem = Nothing Then Exit Sub
+            If ListConsoleDesJeux.SelectedItem = Nothing Then Exit Sub 'Si on a rien selectionné, on quitte
             'Check Pour les consoles+titres
-            If ListConsoleDesJeux.SelectedItem.ToString <> consoleencours Then
+            If ListConsoleDesJeux.SelectedItem.ToString <> consoleencours Then 'si on selectionne une mauvaise console, on quitte
                 Exit Sub
             End If
         End If
@@ -958,6 +962,7 @@ recalculrando:
             If nblistex = 0 Then GoTo finboucle
             x = listrandobox.Items(rnd.Next(0, nblistex)) 'generer un chiffre entre 0 et le nb de roms dans la liste random
             titlegen = TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
+
             'test de la presence d'un doublon 
             If x = RandomList.SelectedItem Or titlegen = titreencours Then
                 GoTo looping
@@ -979,7 +984,6 @@ finboucle:
         TempList.Sort()
         listBox.DataSource = TempList
     End Sub
-
     Private Sub ListTitreDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListTitreDesJeux.SelectedIndexChanged
         'on prend le titre en cours
         Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
@@ -988,9 +992,9 @@ finboucle:
         If IsNothing(ListTitreDesJeux.SelectedItem.ToString) Then Exit Sub
         If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
             PlayerAudio.uiMode = "full"
-            MsgBox("Bien Joué !")
+            MsgBox("BIEN JOUE !")
         Else
-            MsgBox("Nope !")
+            MsgBox("NOPE !")
         End If
     End Sub
     Private Sub ButtonShowVid_Click(sender As Object, e As EventArgs)
@@ -1015,16 +1019,14 @@ finboucle:
             ModeEasy.Checked = True
             ModeHardcore.Checked = False
         End If
-
     End Sub
     Private Sub ListConsoleDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListConsoleDesJeux.SelectedIndexChanged
         Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
         Dim consoleencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("Console").Index).Value
-
         If ListConsoleDesJeux.SelectedItem.ToString = consoleencours Then
-            MsgBox("Bravo pour la Console !")
+            MsgBox("BRAVO POUR LA CONSOLE !")
         Else
-            MsgBox("Mauvaise Console !")
+            MsgBox("MAUVAISE CONSOLE !")
         End If
     End Sub
     Private Sub RandomList_DrawItem(sender As Object, e As DrawItemEventArgs) Handles RandomList.DrawItem
@@ -1041,23 +1043,18 @@ finboucle:
             backgroundColorBrush.Dispose()
             itemTextColorBrush.Dispose()
         End If
-
         e.DrawFocusRectangle()
     End Sub
-
     Private Sub Txtnbmanches_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtnbmanches.KeyPress
         '97 - 122 = Ascii codes for simple letters
         '65 - 90  = Ascii codes for capital letters
         '48 - 57  = Ascii codes for numbers
-
         If Asc(e.KeyChar) <> 8 Then
             If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
                 e.Handled = True
             End If
         End If
     End Sub
-
-
 
     Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" _
 (ByVal hWnd As IntPtr, ByVal wCmd As Integer,
@@ -1070,14 +1067,11 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
             TempGrid.Size = New Point(369, 580)
             TempGrid.Show()
         End If
-
     End Sub
-
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         MsgBox("Le Cheat Mode est disponible !" & Chr(13) & Chr(13) & "Cochez la checkbox Entre le n° du titre en cours et le restant")
         Cheat.Show()
     End Sub
-
     Private Sub ButtonInfo_Click(sender As Object, e As EventArgs) Handles ButtonInfo.Click
         If TxtExplicationFiltres.Visible = True Then
             TxtExplicationFiltres.Hide()
@@ -1087,7 +1081,6 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
             txtRules.Show()
         End If
     End Sub
-
     Private Sub ButtonHideParam_Click(sender As Object, e As EventArgs) Handles ButtonHideParam.Click
         If GroupConfigPartie.Visible = True Then
             GroupConfigPartie.Hide()
