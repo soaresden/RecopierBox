@@ -5,6 +5,10 @@ Public Class SaveManager
         TextBox2.Hide()
         GroupRoms.Hide()
         GroupSaves.Hide()
+        GameLists.Focus()
+        ButtonRomsDeleteSelected.Hide()
+        ButtonSuppSave.Hide()
+        ButtonMenageOrphelin.Hide()
         Call ImporterlesGamelists()
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -125,7 +129,7 @@ ProchainGamelist:
         'Width for columns
         DataGridRoms.RowHeadersWidth = 25
         DataGridRoms.Columns("Console").Width = 40
-        DataGridRoms.Columns("Titre").Width = 185
+        DataGridRoms.Columns("Titre").Width = 180
         DataGridRoms.Columns("CheminRom").Width = 20
         DataGridRoms.Columns("NomdeRom").Width = 10
         DataGridRoms.Columns("CheminSave").Width = 40
@@ -150,6 +154,7 @@ ProchainGamelist:
         RomTotal.Text = DataGridRoms.Rows.Count - 1
 
         'on affiche les outils
+        ButtonRomsDeleteSelected.Show()
         TextBox1.Show()
         GroupRoms.Show()
     End Sub
@@ -211,6 +216,25 @@ ProchainGamelist:
             End If
         Next
         RomTotalSave.Text = compteurSave
+    End Sub
+
+    Sub completiondessaves()
+        For row = 0 To DataGridSave.Rows.Count - 2
+            Dim cheminencours = DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value
+            Dim consolerom = DataGridSave.Rows(row).Cells(DataGridSave.Columns("Console").Index).Value
+
+            'on va colorer la colonne des coches
+            If DataGridSave.Rows(row).Cells(DataGridSave.Columns("NomRomXML").Index).Value Is "#ORPHELIN#" Then
+
+                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = False
+                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+                'et du coup on va ajouter à la listbox des CFG
+                ListdesFichiersEnTrop.Items.Add(DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value)
+            Else
+                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = True
+                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            End If
+        Next
     End Sub
 
     Private Sub ButtonImportSaves_Click(sender As Object, e As EventArgs) Handles ButtonImportSaves1.Click
@@ -323,22 +347,7 @@ skip:
         ListdesFichiersEnTrop.Items.Clear()
 
         'On va vérifier si les cfg sont liés à une rom
-        For row = 0 To DataGridSave.Rows.Count - 2
-            Dim cheminencours = DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value
-            Dim consolerom = DataGridSave.Rows(row).Cells(DataGridSave.Columns("Console").Index).Value
-
-            'on va colorer la colonne des coches
-            If DataGridSave.Rows(row).Cells(DataGridSave.Columns("NomRomXML").Index).Value Is "#ORPHELIN#" Then
-
-                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = False
-                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-                'et du coup on va ajouter à la listbox des CFG
-                ListdesFichiersEnTrop.Items.Add(DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value)
-            Else
-                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = True
-                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            End If
-        Next
+        Call CompletiondesSaves
 
         'On met la derniere colonne coche en readonly
         DataGridSave.Columns("CocheRom").ReadOnly = True
@@ -346,6 +355,9 @@ skip:
         'On compte le nombre total d'entrées
         SaveTotal.Text = DataGridSave.Rows.Count - 1
         'on affiche les outils
+        ButtonSuppSave.Show()
+        ButtonMenageOrphelin.Show()
+        ButtonRomsDeleteSelected.Show()
         TextBox2.Show()
         GroupSaves.Show()
     End Sub
@@ -481,9 +493,6 @@ lignesuivante:
 
         'On recherche le numero de la colonne des Selections
         Dim valeursaves = DataGridRoms.Rows(e.RowIndex).Cells(DataGridRoms.Columns("NbSaves").Index).Value
-
-
-
         If valeursaves > 0 Then
 
             Dim nomdelaromgamelist As String = Path.GetFileName(DataGridRoms.Rows(e.RowIndex).Cells(DataGridRoms.Columns("CheminSave").Index).Value)
@@ -492,8 +501,6 @@ lignesuivante:
             Dim rowIndex As Integer = DataGridRoms.CurrentCell.RowIndex
             Dim pathrom As String = DataGridRoms.Rows(rowIndex).Cells(DataGridRoms.Columns("CheminRom").Index).Value
             Dim nomdelaromdanslistbox As String
-
-
 
             ListSaves.ClearSelected()
 
@@ -505,15 +512,20 @@ lignesuivante:
                     ListSaves.SetSelected(i, True)
                 End If
             Next
-
         End If
     End Sub
-
+    Private Sub DataGridRoms_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridRoms.ColumnHeaderMouseClick
+        Call CompletiondesSavesRoms()
+    End Sub
+    Private Sub DataGridSave_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridSave.ColumnHeaderMouseClick
+        Call completiondessaves()
+    End Sub
     Private Sub DataGridSave_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridSave.CellContentClick
         'check that row isn't -1, i.e. creating datagrid header
         If e.RowIndex = -1 Then Exit Sub
 
-
+        'on fait le graphisme
+        Call completiondessaves()
 
         Dim nomdelasave As String = DataGridSave.Rows(e.RowIndex).Cells(DataGridSave.Columns("NomFichierSave").Index).Value
         ActualName.Text = nomdelasave
@@ -654,16 +666,24 @@ lignesuivante:
         Dim newnamestate = Path.GetFileName(finaladresse)
 
         'Test si ca existe deja
+        Dim textaajouter As String
         If System.IO.File.Exists(finaladresse) Then
-            MsgBox("Impossible de renommer ce fichier" & Chr(13) & "Le nom Final de votre fichier existe déjà")
+            If textstate.Visible = True Then textaajouter = " , changez le n° de votre state"
+        End If
+
+        MsgBox("Ce nom de fichier final existe déjà dans votre dossier déjà" & textaajouter)
+
+        If textstate.Visible = True Then
+            textstate.Focus()
+            Exit Sub
+        Else
+            NewName.Focus()
             Exit Sub
         End If
 
         If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & newnamestate & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
 
-
         File.Move(PathActuel.Text, finaladresse)
-
         'on refresh le tout
         ActualName.Text = Nothing
         PathActuel.Text = Nothing
@@ -678,7 +698,7 @@ lignesuivante:
         PathActuel.Text = ListdesFichiersEnTrop.SelectedItem
 
         'detect if state
-        Dim statenb As Integer = InStr(ActualName.Text, "state")
+        Dim statenb As Integer = InStr(ActualName.Text, ".state")
         If statenb > 0 Then
             textstate.Show()
             Label9.Show()
@@ -691,8 +711,6 @@ lignesuivante:
             textstate.Text = Nothing
         End If
     End Sub
-
-
     Private Sub GameLists_SelectedIndexChanged(sender As Object, e As EventArgs) Handles GameLists.SelectedIndexChanged
         If GameLists.Items.Count = 0 Then
             prevplatform.Hide()
@@ -719,4 +737,20 @@ lignesuivante:
         ImportBoth1.PerformClick()
     End Sub
 
+    Private Sub DataGridSave_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridSave.SelectionChanged
+        Dim rowactuel As Integer = DataGridSave.CurrentRow.Index
+        Dim nomfichiersave As String = DataGridSave.Rows(rowactuel).Cells(DataGridSave.Columns("CheminSave").Index).Value
+
+        If InStr(nomfichiersave, ".state") > 1 Then
+            Label9.Show()
+            textstate.Show()
+            Dim getextension As String = Path.GetExtension(nomfichiersave)
+            Dim getnumber As String = getextension.Substring(6)
+            If getnumber = "" Then getnumber = 1
+            textstate.Text = getnumber
+        Else
+            Label9.Hide()
+            textstate.Hide()
+        End If
+    End Sub
 End Class
