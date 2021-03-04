@@ -11,6 +11,9 @@ Public Class OverlaysConverter
         GameLists.Hide()
         ButtonImportAll.Hide()
         DataGridOverlays.Hide()
+        Label1.Hide()
+        ListErreurs.Hide()
+        RqtARRM.Hide()
 
         ComboBox1.Enabled = False
 
@@ -240,6 +243,9 @@ lignesuivante:
         Supp1.Show()
         Supp3.Show()
         Supp123.Show()
+        Label1.Show()
+        ListErreurs.Show()
+        RqtARRM.Show()
     End Sub
     Sub Importfichierbato()
         'On importe le nom des dossiers et on met en editable la combobox
