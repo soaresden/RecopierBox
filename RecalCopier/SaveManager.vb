@@ -738,7 +738,14 @@ lignesuivante:
     End Sub
 
     Private Sub DataGridSave_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridSave.SelectionChanged
-        Dim rowactuel As Integer = DataGridSave.CurrentRow.Index
+        Dim rowactuel As Integer
+        If DataGridSave.SelectedRows.Count = 0 Then Exit Sub
+        Try
+            rowactuel = DataGridSave.CurrentRow.Index
+        Catch ex As Exception
+            If rowactuel = Nothing Then Exit Sub
+        End Try
+
         Dim nomfichiersave As String = DataGridSave.Rows(rowactuel).Cells(DataGridSave.Columns("CheminSave").Index).Value
 
         If InStr(nomfichiersave, ".state") > 1 Then

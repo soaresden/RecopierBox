@@ -256,7 +256,7 @@ Partial Class SaveManager
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 104)
+        Me.Label9.Location = New System.Drawing.Point(37, 123)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(51, 13)
         Me.Label9.TabIndex = 66
@@ -264,7 +264,7 @@ Partial Class SaveManager
         '
         'textstate
         '
-        Me.textstate.Location = New System.Drawing.Point(56, 106)
+        Me.textstate.Location = New System.Drawing.Point(92, 120)
         Me.textstate.Name = "textstate"
         Me.textstate.Size = New System.Drawing.Size(32, 20)
         Me.textstate.TabIndex = 62
@@ -273,20 +273,20 @@ Partial Class SaveManager
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 55)
+        Me.Label8.Location = New System.Drawing.Point(6, 64)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(82, 13)
+        Me.Label8.Size = New System.Drawing.Size(156, 13)
         Me.Label8.TabIndex = 65
-        Me.Label8.Text = "Nouveau Nom :"
+        Me.Label8.Text = "Nouveau Nom du fichier Save :"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(6, 16)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(99, 13)
+        Me.Label7.Size = New System.Drawing.Size(145, 13)
         Me.Label7.TabIndex = 64
-        Me.Label7.Text = "NomFichier Actuel :"
+        Me.Label7.Text = "Nom du Fichier Save Actuel :"
         '
         'ActualName
         '
@@ -298,7 +298,7 @@ Partial Class SaveManager
         '
         'NewName
         '
-        Me.NewName.Location = New System.Drawing.Point(6, 71)
+        Me.NewName.Location = New System.Drawing.Point(6, 80)
         Me.NewName.Name = "NewName"
         Me.NewName.Size = New System.Drawing.Size(262, 20)
         Me.NewName.TabIndex = 62
@@ -313,7 +313,7 @@ Partial Class SaveManager
         Me.ButtonRenameSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonRenameSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonRenameSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonRenameSave.Location = New System.Drawing.Point(168, 101)
+        Me.ButtonRenameSave.Location = New System.Drawing.Point(168, 115)
         Me.ButtonRenameSave.Name = "ButtonRenameSave"
         Me.ButtonRenameSave.Size = New System.Drawing.Size(100, 28)
         Me.ButtonRenameSave.TabIndex = 43
