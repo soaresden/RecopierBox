@@ -9,6 +9,9 @@ Public Class SaveManager
         ButtonRomsDeleteSelected.Hide()
         ButtonSuppSave.Hide()
         ButtonMenageOrphelin.Hide()
+        BatoPict.Hide()
+        RenameSelection.Hide()
+        ButtonRenommer.Hide()
         Call ImporterlesGamelists()
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -193,16 +196,13 @@ ProchainGamelist:
                 dir = New DirectoryInfo(Replace(dossiersaveparent, dossierdelafin, ""))
             End If
 
-            Dim files As FileInfo() = dir.GetFiles(romnamesansext & ".*")
+            'on va compter le nombredefichier avec la racine du nom et ajouter
+            Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\" & console)
+            Dim racinederom As String = Replace(romname, Path.GetExtension(romname), "")
+            Dim aryFi As IO.FileInfo() = di.GetFiles(racinederom & "*")
+            Dim fi As IO.FileInfo
 
-            If files.Length > 0 Then
-                For Each file As FileInfo In files
-                    chemindufichier = dossiersaveparent & "\" & file.ToString
-                    ListSaves.Items.Add(chemindufichier)
-                    compteurfiles += 1
-                Next
-            Else
-            End If
+            compteurfiles = aryFi.Length
 
             If compteurfiles > 0 Then
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = True
@@ -216,24 +216,57 @@ ProchainGamelist:
             End If
         Next
         RomTotalSave.Text = compteurSave
+
+        'Afficher la picture Batocera si
+        If InStr(My.Settings.RecalboxFolder, "batocera") > 1 Then
+            BatoPict.Show()
+        Else
+            BatoPict.Hide()
+        End If
     End Sub
 
     Sub completiondessaves()
+        ListdesFichiersEnTrop.Items.Clear()
         For row = 0 To DataGridSave.Rows.Count - 2
             Dim cheminencours = DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value
             Dim consolerom = DataGridSave.Rows(row).Cells(DataGridSave.Columns("Console").Index).Value
+            Dim extension = Path.GetExtension(cheminencours)
+            Dim racinesave = Replace(Path.GetFileName(cheminencours), Path.GetExtension(Path.GetFileName(cheminencours)), "")
+            'si c'est du mcd on va retirer les 2derniers caracteres
+            If extension = ".mcd" Then
+                racinesave = racinesave.Substring(0, Len(racinesave) - 2)
+            End If
 
-            'on va colorer la colonne des coches
-            If DataGridSave.Rows(row).Cells(DataGridSave.Columns("NomRomXML").Index).Value Is "#ORPHELIN#" Then
+            'on va boucler pour voir si un fichier a la meme racine
+            Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\roms\" & consolerom & "\")
+            Dim aryFi As IO.FileInfo() = di.GetFiles(racinesave & ".*")
+            Dim fi As IO.FileInfo
+            Dim chemindelasavetrouvee As String
+            Dim romtrouvee As Integer = aryFi.Length
 
-                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = False
-                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-                'et du coup on va ajouter à la listbox des CFG
-                ListdesFichiersEnTrop.Items.Add(DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value)
-            Else
+            'Si on a trouvé la rom, on va colorer en vert
+            If romtrouvee > 0 Then
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = True
                 DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+
+                For Each fi In aryFi
+                    Dim extensiondufichier = Path.GetExtension(fi.FullName)
+                    'Si c'est un png alors on le saute
+
+                    'on ajoute la rom trouvée au tableau
+                    DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminRomTrouvee").Index).Value = fi.FullName
+                    If extensiondufichier = ".png" Then GoTo fichiersuivant
+                Next
+            Else
+                'on colore en rouge
+                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Value = False
+                DataGridSave.Rows(row).Cells(DataGridSave.Columns("CocheRom").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+                'et on va ajouter à la listbox des en trop
+                If extension <> ".png" Then
+                    ListdesFichiersEnTrop.Items.Add(DataGridSave.Rows(row).Cells(DataGridSave.Columns("CheminSave").Index).Value)
+                End If
             End If
+fichiersuivant:
         Next
     End Sub
 
@@ -266,13 +299,6 @@ ProchainGamelist:
         column = New DataColumn()
         With column
             .DataType = Type.GetType("System.String")
-            .ColumnName = "NomRomXML"
-        End With
-        table.Columns.Add(column)
-
-        column = New DataColumn()
-        With column
-            .DataType = Type.GetType("System.String")
             .ColumnName = "NomFichierSave"
         End With
         table.Columns.Add(column)
@@ -281,6 +307,13 @@ ProchainGamelist:
         With column
             .DataType = Type.GetType("System.String")
             .ColumnName = "CheminSave"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "CheminRomTrouvee"
         End With
         table.Columns.Add(column)
 
@@ -308,11 +341,8 @@ ProchainGamelist:
                 nomfichierdelasave = fi.Name
                 pathdelasave = Replace(chemindelasave, "\saves\", "\roms\")
 
-                'On va rechercher le nom de la save
-                Dim romname = Recherchenomdelasave(nomconsole, pathdelasave)
-
                 'on ajoute au tableau
-                table.Rows.Add(nomconsole, romname, nomfichierdelasave, chemindelasave)
+                table.Rows.Add(nomconsole, nomfichierdelasave, chemindelasave, "")
 
 fichiersuivant:
             Next
@@ -326,9 +356,9 @@ skip:
         'Width for columns
         DataGridSave.RowHeadersWidth = 25
         DataGridSave.Columns("Console").Width = 40
-        DataGridSave.Columns("NomRomXML").Width = 90
-        DataGridSave.Columns("NomFichierSave").Width = 190
-        DataGridSave.Columns("CheminSave").Width = 60
+        DataGridSave.Columns("NomFichierSave").Width = 250
+        DataGridSave.Columns("CheminSave").Width = 45
+        DataGridSave.Columns("CheminRomTrouvee").Width = 45
 
         Dim compteurSave As Integer = 0
 
@@ -341,7 +371,7 @@ skip:
         DataGridSave.Columns("CocheRom").Width = 25
 
         'Reajusting Interface and Showing Final Interface
-        dv.Sort = "Console asc, NomRomXML asc"
+        dv.Sort = "Console asc, NomFichierSave asc"
 
         'On supprime la liste au cas ou
         ListdesFichiersEnTrop.Items.Clear()
@@ -360,51 +390,9 @@ skip:
         ButtonRomsDeleteSelected.Show()
         TextBox2.Show()
         GroupSaves.Show()
+        ButtonRenommer.Show()
+        RenameSelection.Hide()
     End Sub
-    Function Recherchenomdelasave(console As String, pathdelasave As String)
-        Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
-        Dim nomdelasave = FileNameWithoutExtension(FileNameWithoutExtension((Path.GetFileName(pathdelasave))))
-
-        'Si il n'existe pas de gamelist, on va mettre les infos generique
-        If Not System.IO.File.Exists(lagamelist) Then
-            Return "#NOGAMELIST#-" & console
-        End If
-
-
-        'On va essayer de trouver le nom de la rom avec le nom de la save
-        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\roms\" & console)
-        Dim aryFi As IO.FileInfo() = di.GetFiles(nomdelasave & ".*")
-        Dim fi As IO.FileInfo
-        Dim nomfichierdelasave As String
-        Dim chemindelasavetrouvee As String
-        Dim romtrouvee As Integer = 0
-
-        For Each fi In aryFi
-            chemindelasavetrouvee = fi.FullName
-            nomfichierdelasave = fi.Name
-
-            Dim gamelistXml As XElement = XElement.Load(lagamelist)
-
-            'getting the list for the xml with nodes
-            Dim query2 = From st In gamelistXml.Descendants("game") Select st
-
-            For Each xEle As XElement In query2
-                Dim romname As String = xEle.Element("name")
-                Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
-                Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & console & "\" & temprom
-                Dim nomdelarompath As String = Path.GetFileName(rompath)
-
-                If nomdelarompath = nomfichierdelasave Then
-                    Return romname
-                End If
-lignesuivante:
-            Next
-            Exit Function
-        Next
-        'Si il n' y a pas de rom trouvée on mets "Saves Orpheline"
-        Return "#ORPHELIN#"
-    End Function
-
     Private Sub ButtonMenage_Click(sender As Object, e As EventArgs)
         If MsgBox("Etes vous sur de vouloir supprimer tous les fichiers dans la listbox rosée ci-contre ?", vbYesNo) = vbNo Then Exit Sub
 
@@ -423,66 +411,6 @@ lignesuivante:
         buttonImportRoms1.PerformClick()
         ButtonImportSaves1.PerformClick()
     End Sub
-    Sub LectureDesCfgs(consolerom As String, nomducfg As String)
-        Dim modifgamelistenrom As String = nomducfg
-
-        Dim fichier1cfg As String = My.Settings.RecalboxFolder & "\saves\" & consolerom & "\" & modifgamelistenrom
-        Dim fichier2Savecfg As String
-        Dim fichier3png As String
-
-        Dim cheminpropreSave2 As String
-        Dim justefichier2 As String
-
-        fichier3png = 0
-        justefichier2 = 0
-        fichier2Savecfg = 0
-        cheminpropreSave2 = 0
-
-        'on va lire le cfg pour trouver le cfg Save
-        File.ReadAllLines(fichier1cfg)
-
-        Dim readText() As String = File.ReadAllLines(fichier1cfg)
-        Dim s As String
-        'On ajoute a la listbox
-        ListdesFichiersEnTrop.Items.Add(fichier1cfg)
-
-        For Each s In readText
-            Dim detectinputSave As String = InStr(s, "/saves/")
-            If detectinputSave > 0 Then
-                'Dim cheminducfgSave = s.Substring(detectinputSave + 9)
-                'Dim detectdupointcfg = InStr(cheminducfgSave, ".cfg")
-                'Dim cheminfinalSavecfg = cheminducfgSave.Substring(0, detectdupointcfg + 3)
-                Dim chemincfgSavedanscfg = s.Substring(InStr(s, "/saves/") + 9).Substring(0, InStr(s.Substring(InStr(s, "/saves/") + 9), ".cfg") + 3)
-                cheminpropreSave2 = My.Settings.RecalboxFolder & "\saves\" & Replace(chemincfgSavedanscfg, "/", "\")
-                justefichier2 = FileNameWithoutExtension(cheminpropreSave2) & ".cfg"
-                Exit For
-            End If
-        Next
-
-        'on lit le deuxieme fichier Save cfg pour trouver le png
-        If Not File.Exists(cheminpropreSave2) Then Exit Sub
-        File.ReadAllLines(cheminpropreSave2)
-        'On ajoute a la listbox
-        ListdesFichiersEnTrop.Items.Add(cheminpropreSave2)
-
-        Dim readText2() As String = File.ReadAllLines(cheminpropreSave2)
-        Dim t As String
-
-        For Each t In readText2
-            Dim detectSavezero As String = InStr(t, "Save0_Save")
-            If detectSavezero > 0 Then
-                Dim chemindupng = t.Substring(detectSavezero + 19)
-                Dim detectpng = InStr(chemindupng, "png")
-                Dim cheminfinalpng = chemindupng.Substring(0, detectpng + 2)
-                Dim cheminpng = t.Substring(InStr(t, "Save0_Save") + 19).Substring(0, InStr(t.Substring(InStr(t, "Save0_Save") + 19), "png") + 2)
-                fichier3png = Replace(cheminpropreSave2, justefichier2, cheminpng)
-                Exit For
-            End If
-        Next
-        'on ajoute a la listbox
-        ListdesFichiersEnTrop.Items.Add(fichier3png)
-    End Sub
-
     Private Sub DataGridRoms_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridRoms.CellClick
         'check that row isn't -1, i.e. creating datagrid header
         If e.RowIndex = -1 Then Exit Sub
@@ -503,15 +431,6 @@ lignesuivante:
             Dim nomdelaromdanslistbox As String
 
             ListSaves.ClearSelected()
-
-            'On va chercher le nom et selectionner
-            For i = 0 To ListSaves.Items.Count - 1
-                nomdelaromdanslistbox = FileNameWithoutExtension(ListSaves.Items(i).ToString)
-
-                If nomdelaromdanslistbox = nomdelaromgamelist Then
-                    ListSaves.SetSelected(i, True)
-                End If
-            Next
         End If
     End Sub
     Private Sub DataGridRoms_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridRoms.ColumnHeaderMouseClick
@@ -573,7 +492,7 @@ lignesuivante:
             Exit Sub
         End If
 
-        If MsgBox("Etes vous sur de supprimer definitivement les sauvegardes selectionnées ci contre ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de supprimer definitivement le(s) fichier(s) selectionnées ci contre ?", vbYesNo) = vbNo Then Exit Sub
         Dim compteur As Integer = 0
 
         'On delete les fichiers
@@ -669,16 +588,14 @@ lignesuivante:
         Dim textaajouter As String
         If System.IO.File.Exists(finaladresse) Then
             If textstate.Visible = True Then textaajouter = " , changez le n° de votre state"
+            MsgBox("Ce nom de fichier final existe déjà dans votre dossier déjà" & textaajouter)
+            Exit Sub
         End If
-
-        MsgBox("Ce nom de fichier final existe déjà dans votre dossier déjà" & textaajouter)
 
         If textstate.Visible = True Then
             textstate.Focus()
-            Exit Sub
         Else
             NewName.Focus()
-            Exit Sub
         End If
 
         If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & newnamestate & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
@@ -688,6 +605,7 @@ lignesuivante:
         ActualName.Text = Nothing
         PathActuel.Text = Nothing
         ButtonImportSaves1.PerformClick()
+        RenameSelection.Show()
 
         'On enleve les doublons
         Supdoublon(ListdesFichiersEnTrop)
@@ -697,12 +615,23 @@ lignesuivante:
         ActualName.Text = Path.GetFileName(ListdesFichiersEnTrop.SelectedItem)
         PathActuel.Text = ListdesFichiersEnTrop.SelectedItem
 
+        'on va selectionner dans le tableau du haut
+        Dim i As Integer
+        For i = 0 To DataGridSave.Rows.Count - 1
+            Dim cheminsave As String = DataGridSave.Rows(i).Cells(DataGridSave.Columns("CheminSave").Index).Value
+            If Path.GetFileName(cheminsave) = ActualName.Text Then
+                DataGridSave.Rows(i).Selected = True
+                Exit For
+            End If
+        Next
+
+
         'detect if state
         Dim statenb As Integer = InStr(ActualName.Text, ".state")
         If statenb > 0 Then
             textstate.Show()
             Label9.Show()
-            Dim numero As String = ActualName.Text.Substring(statenb + 4)
+            Dim numero As String = ActualName.Text.Substring(statenb + 5)
             textstate.Text = numero
             If textstate.Text = "" Then textstate.Text = 1
         Else
@@ -746,18 +675,102 @@ lignesuivante:
             If rowactuel = Nothing Then Exit Sub
         End Try
 
+        'On teste si y'a une save associée, si oui on select sinon, on enleve la selection
+        If DataGridSave.Rows(rowactuel).Cells(DataGridSave.Columns("CheminRomTrouvee").Index).Value = "" Then
+            If ListdesFichiersEnTrop.Items.Count = 0 Then Exit Sub
+            ListdesFichiersEnTrop.ClearSelected()
+            Dim i = DataGridSave.Rows(rowactuel).Cells(DataGridSave.Columns("CheminSave").Index).Value
+            Dim indextrouve = ListdesFichiersEnTrop.FindStringExact(i)
+
+            If indextrouve = -1 Then Exit Sub
+            ListdesFichiersEnTrop.SetSelected(indextrouve, True)
+        Else
+        End If
+
         Dim nomfichiersave As String = DataGridSave.Rows(rowactuel).Cells(DataGridSave.Columns("CheminSave").Index).Value
 
-        If InStr(nomfichiersave, ".state") > 1 Then
-            Label9.Show()
-            textstate.Show()
-            Dim getextension As String = Path.GetExtension(nomfichiersave)
-            Dim getnumber As String = getextension.Substring(6)
-            If getnumber = "" Then getnumber = 1
-            textstate.Text = getnumber
+            If InStr(nomfichiersave, ".state") > 1 Then
+                Label9.Show()
+                textstate.Show()
+                Dim getextension As String = Path.GetExtension(nomfichiersave)
+                Dim getnumber As String = getextension.Substring(6)
+                If getnumber = "" Then getnumber = 1
+                textstate.Text = getnumber
+            Else
+                Label9.Hide()
+                textstate.Hide()
+            End If
+    End Sub
+
+    Private Sub DataGridRoms_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridRoms.SelectionChanged
+        Dim rowactuelle As Integer
+        'on clear par securite
+        ListSaves.Items.Clear()
+
+        If DataGridRoms.SelectedRows.Count = 0 Then Exit Sub
+
+        If DataGridRoms.Rows.Count = 2 Then Exit Sub
+        Try
+            rowactuelle = DataGridRoms.CurrentRow.Index
+        Catch ex As Exception
+            If rowactuelle = Nothing Then Exit Sub
+        End Try
+
+
+        Dim nomfichiersave As String = DataGridRoms.Rows(rowactuelle).Cells(DataGridRoms.Columns("CheminSave").Index).Value
+        Dim racinesave As String = Path.GetFileName(nomfichiersave)
+        Dim console As String = DataGridRoms.Rows(rowactuelle).Cells(DataGridRoms.Columns("Console").Index).Value
+        'On va ajouter la liste des saves
+        'On va essayer de trouver le nom de la rom avec le nom de la save
+
+        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\" & console)
+        Dim aryFi As IO.FileInfo() = di.GetFiles(racinesave & ".*")
+        Dim fi As IO.FileInfo
+        Dim nomfichierdelasave As String
+        Dim chemindelasavetrouvee As String
+        Dim romtrouvee As Integer = 0
+
+        For Each fi In aryFi
+            chemindelasavetrouvee = fi.FullName
+            Dim extensiondufichier = Path.GetExtension(chemindelasavetrouvee)
+            If extensiondufichier = ".png" Then GoTo fichiersuivanttrouve
+
+            ListSaves.Items.Add(chemindelasavetrouvee)
+fichiersuivanttrouve:
+        Next
+    End Sub
+
+    Private Sub ListSaves_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListSaves.SelectedIndexChanged
+        Dim nomdufichierselectionne = ListSaves.SelectedItem.ToString
+        Dim extensionselected = Path.GetExtension(nomdufichierselectionne)
+
+        If ListSaves.SelectedItems.Count > 1 Then
+            BatoPict.Image = Nothing
+            Exit Sub
+        End If
+
+        If BatoPict.Visible = True And InStr(extensionselected, "state") >= 1 Then
+
+            'on test si le png de la racine existe
+            Dim testdupng = Replace(nomdufichierselectionne, Path.GetFileName(nomdufichierselectionne), Path.GetFileName(nomdufichierselectionne) & ".png")
+            If System.IO.File.Exists(testdupng) Then
+                BatoPict.Image = Image.FromFile(testdupng)
+            Else
+                BatoPict.Image = Nothing
+            End If
+
+        End If
+    End Sub
+
+    Private Sub ButtonRenommer_Click(sender As Object, e As EventArgs) Handles ButtonRenommer.Click
+        If RenameSelection.Visible = True Then
+            RenameSelection.Hide()
+            RenameSelection.Location = New Point(468, 454)
+            RenameSelection.Size = New Point(33, 20)
         Else
-            Label9.Hide()
-            textstate.Hide()
+            RenameSelection.Show()
+            RenameSelection.Location = New Point(134, 361)
+            RenameSelection.Size = New Point(367, 177)
         End If
     End Sub
 End Class
