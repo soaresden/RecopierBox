@@ -724,7 +724,7 @@ skip:
         'On va essayer de trouver le nom de la rom avec le nom de la save
 
         Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\" & console)
-        Dim aryFi As IO.FileInfo() = di.GetFiles(racinesave & ".*")
+        Dim aryFi As IO.FileInfo() = di.GetFiles(racinesave & "*")
         Dim fi As IO.FileInfo
         Dim nomfichierdelasave As String
         Dim chemindelasavetrouvee As String
