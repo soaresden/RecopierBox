@@ -251,7 +251,7 @@ Partial Class SaveManager
         Me.RenameSelection.Size = New System.Drawing.Size(22, 61)
         Me.RenameSelection.TabIndex = 48
         Me.RenameSelection.TabStop = False
-        Me.RenameSelection.Text = "Travail sur Selection :"
+        Me.RenameSelection.Text = "OUTIL RENOMMER VOS SAVES :"
         '
         'Label9
         '
@@ -285,9 +285,10 @@ Partial Class SaveManager
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(5, 14)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(211, 26)
+        Me.Label7.Size = New System.Drawing.Size(241, 26)
         Me.Label7.TabIndex = 64
-        Me.Label7.Text = "Nom du Fichier Save Actuel" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Cliquer sur la liste à droite pour Préremplir) :"
+        Me.Label7.Text = "Nom du Fichier Save Actuel" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Cliquer sur la liste Rose à Droite pour Préremplir) " &
+    ":"
         '
         'ActualName
         '
@@ -404,6 +405,7 @@ Partial Class SaveManager
         '
         'ListdesFichiersEnTrop
         '
+        Me.ListdesFichiersEnTrop.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(254, Byte), Integer))
         Me.ListdesFichiersEnTrop.FormattingEnabled = True
         Me.ListdesFichiersEnTrop.Location = New System.Drawing.Point(6, 18)
         Me.ListdesFichiersEnTrop.Name = "ListdesFichiersEnTrop"
@@ -420,7 +422,7 @@ Partial Class SaveManager
         Me.ListSaves.Name = "ListSaves"
         Me.ListSaves.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ListSaves.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListSaves.Size = New System.Drawing.Size(204, 147)
+        Me.ListSaves.Size = New System.Drawing.Size(198, 95)
         Me.ListSaves.TabIndex = 60
         '
         'ButtonMenageOrphelin
@@ -450,11 +452,11 @@ Partial Class SaveManager
         Me.ButtonRomsDeleteSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonRomsDeleteSelected.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonRomsDeleteSelected.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonRomsDeleteSelected.Location = New System.Drawing.Point(351, 478)
+        Me.ButtonRomsDeleteSelected.Location = New System.Drawing.Point(176, 494)
         Me.ButtonRomsDeleteSelected.Name = "ButtonRomsDeleteSelected"
-        Me.ButtonRomsDeleteSelected.Size = New System.Drawing.Size(144, 59)
+        Me.ButtonRomsDeleteSelected.Size = New System.Drawing.Size(145, 44)
         Me.ButtonRomsDeleteSelected.TabIndex = 62
-        Me.ButtonRomsDeleteSelected.Text = "Supp. le(s) " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Saves Selectionnées" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ci-contre"
+        Me.ButtonRomsDeleteSelected.Text = "Supprimer le(s) Saves" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selectionné(es) ci-dessus"
         Me.ButtonRomsDeleteSelected.UseVisualStyleBackColor = False
         '
         'GroupRoms
@@ -464,10 +466,10 @@ Partial Class SaveManager
         Me.GroupRoms.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupRoms.Location = New System.Drawing.Point(134, 364)
         Me.GroupRoms.Name = "GroupRoms"
-        Me.GroupRoms.Size = New System.Drawing.Size(216, 173)
+        Me.GroupRoms.Size = New System.Drawing.Size(210, 123)
         Me.GroupRoms.TabIndex = 63
         Me.GroupRoms.TabStop = False
-        Me.GroupRoms.Text = "Fichiers liés à la Rom Selectionné"
+        Me.GroupRoms.Text = "Fichiers liés à la Rom Select. ci-dessus :"
         '
         'GroupSaves
         '
@@ -538,9 +540,9 @@ Partial Class SaveManager
         '
         'BatoPict
         '
-        Me.BatoPict.Location = New System.Drawing.Point(386, 406)
+        Me.BatoPict.Location = New System.Drawing.Point(350, 406)
         Me.BatoPict.Name = "BatoPict"
-        Me.BatoPict.Size = New System.Drawing.Size(80, 68)
+        Me.BatoPict.Size = New System.Drawing.Size(116, 127)
         Me.BatoPict.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.BatoPict.TabIndex = 69
         Me.BatoPict.TabStop = False

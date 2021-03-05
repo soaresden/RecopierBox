@@ -206,11 +206,14 @@ ProchainGamelist:
 
             If compteurfiles > 0 Then
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = True
-                compteurSave += 1
+                If Path.GetExtension(romname) <> ".png" Then  ' on va pas inclure les png dans le dossier
+                    compteurSave += 1
+                End If
+
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            Else
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = False
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+                Else
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = False
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = 0
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
@@ -335,10 +338,15 @@ fichiersuivant:
             Dim nomfichierdelasave As String
             Dim chemindelasave As String
             Dim pathdelasave As String
+            Dim extensiondufichier As String
 
             For Each fi In aryFi
                 chemindelasave = fi.FullName
                 nomfichierdelasave = fi.Name
+                extensiondufichier = fi.Extension
+
+                'On s'occupe pas de fichier png !
+                If extensiondufichier = ".png" Then GoTo fichiersuivant
                 pathdelasave = Replace(chemindelasave, "\saves\", "\roms\")
 
                 'on ajoute au tableau
@@ -497,14 +505,21 @@ skip:
 
         'On delete les fichiers
         For Each i In ListSaves.SelectedItems
-            System.IO.File.Delete(i)
+            If BatoPict.Image IsNot Nothing Then 'si une image est affichée on va la déloader et la supprimer aussi
+                BatoPict.Image = Nothing
+                System.IO.File.Delete(i & ".png")
+                compteur += 1
+            End If
+            System.IO.File.Delete(i) 'et la on supprime 
             compteur += 1
         Next
 
         'on remove les entrees
+        On Error Resume Next
         For n As Integer = ListSaves.SelectedItems.Count - 1 To 0 Step -1
             ListSaves.Items.Remove(ListSaves.SelectedItems(n))
         Next n
+        On Error GoTo 0
 
         'On Refresh
         buttonImportRoms1.PerformClick()
@@ -741,6 +756,8 @@ fichiersuivanttrouve:
     End Sub
 
     Private Sub ListSaves_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListSaves.SelectedIndexChanged
+        If ListSaves.SelectedItems.Count = 0 Then Exit Sub
+
         Dim nomdufichierselectionne = ListSaves.SelectedItem.ToString
         Dim extensionselected = Path.GetExtension(nomdufichierselectionne)
 
@@ -754,7 +771,9 @@ fichiersuivanttrouve:
             'on test si le png de la racine existe
             Dim testdupng = Replace(nomdufichierselectionne, Path.GetFileName(nomdufichierselectionne), Path.GetFileName(nomdufichierselectionne) & ".png")
             If System.IO.File.Exists(testdupng) Then
-                BatoPict.Image = Image.FromFile(testdupng)
+                Dim img As Image = Image.FromFile(testdupng)
+                BatoPict.Image = New Bitmap(img)
+                img.Dispose()
             Else
                 BatoPict.Image = Nothing
             End If
