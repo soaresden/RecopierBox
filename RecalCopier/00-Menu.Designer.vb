@@ -160,9 +160,9 @@ Partial Class Form1
         Me.version.Location = New System.Drawing.Point(128, 51)
         Me.version.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.version.Name = "version"
-        Me.version.Size = New System.Drawing.Size(27, 14)
+        Me.version.Size = New System.Drawing.Size(28, 14)
         Me.version.TabIndex = 14
-        Me.version.Text = "v5.3"
+        Me.version.Text = "v5.4"
         '
         'Disclaimer
         '
