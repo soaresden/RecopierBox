@@ -323,6 +323,7 @@
   <ItemGroup>
     <Content Include="IconeLog.ico" />
     <Content Include="iconlog2.ico" />
+    <None Include="Resources\brouillardremade.png" />
     <None Include="Resources\flatsaveno.png" />
     <None Include="Resources\flatsave.png" />
     <None Include="Resources\flatoverlayno.png" />

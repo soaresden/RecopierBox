@@ -766,18 +766,25 @@ fichiersuivanttrouve:
             Exit Sub
         End If
 
+        Dim img As Image
+        Dim imgno As Image
         If BatoPict.Visible = True And InStr(extensionselected, "state") >= 1 Then
-
             'on test si le png de la racine existe
             Dim testdupng = Replace(nomdufichierselectionne, Path.GetFileName(nomdufichierselectionne), Path.GetFileName(nomdufichierselectionne) & ".png")
+
             If System.IO.File.Exists(testdupng) Then
-                Dim img As Image = Image.FromFile(testdupng)
+                img = Image.FromFile(testdupng)
                 BatoPict.Image = New Bitmap(img)
                 img.Dispose()
             Else
-                BatoPict.Image = Nothing
+                imgno = My.Resources.brouillardremade
+                BatoPict.Image = New Bitmap(imgno)
+                imgno.Dispose()
             End If
-
+        Else
+            imgno = My.Resources.brouillardremade
+            BatoPict.Image = Nothing
+            imgno.Dispose()
         End If
     End Sub
 

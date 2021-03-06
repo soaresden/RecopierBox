@@ -43,8 +43,8 @@ Partial Class SaveManager
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ActualName = New System.Windows.Forms.TextBox()
-        Me.NewName = New System.Windows.Forms.TextBox()
         Me.ButtonRenameSave = New System.Windows.Forms.Button()
+        Me.NewName = New System.Windows.Forms.TextBox()
         Me.PathActuel = New System.Windows.Forms.TextBox()
         Me.ButtonSuppSave = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -298,13 +298,6 @@ Partial Class SaveManager
         Me.ActualName.Size = New System.Drawing.Size(354, 20)
         Me.ActualName.TabIndex = 63
         '
-        'NewName
-        '
-        Me.NewName.Location = New System.Drawing.Point(6, 108)
-        Me.NewName.Name = "NewName"
-        Me.NewName.Size = New System.Drawing.Size(354, 20)
-        Me.NewName.TabIndex = 62
-        '
         'ButtonRenameSave
         '
         Me.ButtonRenameSave.BackColor = System.Drawing.Color.Sienna
@@ -321,6 +314,13 @@ Partial Class SaveManager
         Me.ButtonRenameSave.TabIndex = 43
         Me.ButtonRenameSave.Text = "Renommer la save"
         Me.ButtonRenameSave.UseVisualStyleBackColor = False
+        '
+        'NewName
+        '
+        Me.NewName.Location = New System.Drawing.Point(6, 108)
+        Me.NewName.Name = "NewName"
+        Me.NewName.Size = New System.Drawing.Size(354, 20)
+        Me.NewName.TabIndex = 62
         '
         'PathActuel
         '
@@ -384,22 +384,22 @@ Partial Class SaveManager
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("VAG Rounded", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label2.Location = New System.Drawing.Point(523, 121)
+        Me.Label2.Location = New System.Drawing.Point(575, 124)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(431, 18)
+        Me.Label2.Size = New System.Drawing.Size(345, 17)
         Me.Label2.TabIndex = 43
         Me.Label2.Text = "Liste COMPLETE de Toutes les Saves dans le Dossier :"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("VAG Rounded", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label1.Location = New System.Drawing.Point(162, 121)
+        Me.Label1.Location = New System.Drawing.Point(186, 124)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(310, 18)
+        Me.Label1.Size = New System.Drawing.Size(252, 17)
         Me.Label1.TabIndex = 42
         Me.Label1.Text = "Liste de Toutes les Roms Gamelistées :"
         '
@@ -452,11 +452,11 @@ Partial Class SaveManager
         Me.ButtonRomsDeleteSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonRomsDeleteSelected.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonRomsDeleteSelected.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonRomsDeleteSelected.Location = New System.Drawing.Point(176, 494)
+        Me.ButtonRomsDeleteSelected.Location = New System.Drawing.Point(164, 363)
         Me.ButtonRomsDeleteSelected.Name = "ButtonRomsDeleteSelected"
         Me.ButtonRomsDeleteSelected.Size = New System.Drawing.Size(145, 44)
         Me.ButtonRomsDeleteSelected.TabIndex = 62
-        Me.ButtonRomsDeleteSelected.Text = "Supprimer le(s) Saves" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selectionné(es) ci-dessus"
+        Me.ButtonRomsDeleteSelected.Text = "Supprimer le(s) Saves" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selectionné(es) ci-dessous"
         Me.ButtonRomsDeleteSelected.UseVisualStyleBackColor = False
         '
         'GroupRoms
@@ -464,7 +464,7 @@ Partial Class SaveManager
         Me.GroupRoms.BackColor = System.Drawing.Color.DarkBlue
         Me.GroupRoms.Controls.Add(Me.ListSaves)
         Me.GroupRoms.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupRoms.Location = New System.Drawing.Point(134, 364)
+        Me.GroupRoms.Location = New System.Drawing.Point(134, 413)
         Me.GroupRoms.Name = "GroupRoms"
         Me.GroupRoms.Size = New System.Drawing.Size(210, 123)
         Me.GroupRoms.TabIndex = 63
@@ -540,9 +540,9 @@ Partial Class SaveManager
         '
         'BatoPict
         '
-        Me.BatoPict.Location = New System.Drawing.Point(350, 406)
+        Me.BatoPict.Location = New System.Drawing.Point(350, 420)
         Me.BatoPict.Name = "BatoPict"
-        Me.BatoPict.Size = New System.Drawing.Size(116, 127)
+        Me.BatoPict.Size = New System.Drawing.Size(144, 113)
         Me.BatoPict.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.BatoPict.TabIndex = 69
         Me.BatoPict.TabStop = False
