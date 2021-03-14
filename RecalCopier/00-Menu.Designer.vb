@@ -162,7 +162,7 @@ Partial Class Form1
         Me.version.Name = "version"
         Me.version.Size = New System.Drawing.Size(28, 14)
         Me.version.TabIndex = 14
-        Me.version.Text = "v5.4"
+        Me.version.Text = "v6.0"
         '
         'Disclaimer
         '
