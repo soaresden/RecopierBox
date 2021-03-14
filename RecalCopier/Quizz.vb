@@ -739,6 +739,7 @@ recalculrando:
 
         'calcul du vrai chiffre 
         Dim chiffreactuel = RandomList.SelectedItem
+        If chiffreactuel = Nothing Then Exit Sub
         Dim vraichiffre = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
 
         TempGrid.ClearSelection()
@@ -1045,7 +1046,6 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
             Next
         End If
     End Sub
-
     Private Sub ExportTxt_Click(sender As Object, e As EventArgs) Handles ExportTxt.Click
         Dim sb As New System.Text.StringBuilder()
         For Each o As Object In Historique.Items
@@ -1054,5 +1054,44 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         Dim generefichier As String = My.Computer.FileSystem.SpecialDirectories.Desktop & "\" & "QuizzHistorique du " & Format(Now, "dd-MM-yy a HH-mm-ss") & ".txt"
         System.IO.File.WriteAllText(generefichier, sb.ToString())
         Process.Start(generefichier)
+    End Sub
+    Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
+        If SonSans.Checked = True Then Exit Sub
+        PlayerAudio.settings.volume = TrackBar1.Value
+    End Sub
+
+    Private Sub RemoveQuizz_Click(sender As Object, e As EventArgs) Handles RemoveQuizz.Click
+        Dim selectedrow = TempGrid.CurrentCell.RowIndex
+        Dim consoledujeu = TempGrid.Rows(selectedrow).Cells(TempGrid.Columns("Console").Index).Value
+        Dim anneedujeu = TempGrid.Rows(selectedrow).Cells(TempGrid.Columns("DateSortie").Index).Value.ToString.Substring(0, 4)
+        Dim nomdujeu = TempGrid.Rows(selectedrow).Cells(TempGrid.Columns("Titre").Index).Value
+        Dim genereformat = consoledujeu & " (" & anneedujeu & ") - " & nomdujeu
+
+        'on cherche si le tempgrid seleectionné est dans l'historique
+        If Historique.Items.Contains(genereformat) Then
+            'On cherche donc a quelle ligne il est
+            For i = 0 To TempGrid.Rows.Count - 1
+                Dim nomdujeutemp = TempGrid.Rows(i).Cells(TempGrid.Columns("Titre").Index).Value
+
+                'une fois qu'on le sait, on va aller faire le fakecalcul pour le retirer de la liste du haut
+                If nomdujeutemp = nomdujeu Then
+                    Dim vraix As Integer = i
+                    Dim fauxx = (i + 5) * 37
+
+                    'on enleve maintenant
+                    RandomList.Items.Remove(fauxx)
+                    Historique.Items.Remove(genereformat)
+                    Exit Sub
+                End If
+            Next
+
+        Else
+            'il est pas dedans du coup
+            MsgBox("Impossible ! " & Chr(13) & Chr(13) & nomdujeu & " n'est pas dans la liste du Quizz")
+        End If
+    End Sub
+
+    Private Sub AddQuizz_Click(sender As Object, e As EventArgs) Handles AddQuizz.Click
+
     End Sub
 End Class

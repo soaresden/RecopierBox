@@ -90,6 +90,9 @@ Partial Class Quizz
         Me.txtpositionrandom = New System.Windows.Forms.TextBox()
         Me.GroupDifficulty = New System.Windows.Forms.GroupBox()
         Me.ValidQuizz = New System.Windows.Forms.Button()
+        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.VidSans = New System.Windows.Forms.CheckBox()
         Me.PlayerOnce = New System.Windows.Forms.CheckBox()
         Me.PlayerRepeat = New System.Windows.Forms.CheckBox()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -102,10 +105,12 @@ Partial Class Quizz
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.ImportQuizz = New System.Windows.Forms.Button()
+        Me.RemoveQuizz = New System.Windows.Forms.Button()
+        Me.AddQuizz = New System.Windows.Forms.Button()
+        Me.ExportTxt = New System.Windows.Forms.Button()
         Me.Historique = New System.Windows.Forms.ListBox()
         Me.TempGrid = New System.Windows.Forms.DataGridView()
-        Me.VidSans = New System.Windows.Forms.CheckBox()
-        Me.ExportTxt = New System.Windows.Forms.Button()
         Me.GroupParamComplet.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupConfigPartie.SuspendLayout()
@@ -114,6 +119,7 @@ Partial Class Quizz
         Me.TitleBox.SuspendLayout()
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupDifficulty.SuspendLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -843,8 +849,10 @@ Partial Class Quizz
         'GroupDifficulty
         '
         Me.GroupDifficulty.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.GroupDifficulty.Controls.Add(Me.VidSans)
         Me.GroupDifficulty.Controls.Add(Me.ValidQuizz)
+        Me.GroupDifficulty.Controls.Add(Me.TrackBar1)
+        Me.GroupDifficulty.Controls.Add(Me.Label21)
+        Me.GroupDifficulty.Controls.Add(Me.VidSans)
         Me.GroupDifficulty.Controls.Add(Me.PlayerOnce)
         Me.GroupDifficulty.Controls.Add(Me.PlayerRepeat)
         Me.GroupDifficulty.Controls.Add(Me.Label19)
@@ -872,12 +880,42 @@ Partial Class Quizz
         Me.ValidQuizz.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ValidQuizz.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ValidQuizz.ForeColor = System.Drawing.Color.White
-        Me.ValidQuizz.Location = New System.Drawing.Point(330, 36)
+        Me.ValidQuizz.Location = New System.Drawing.Point(316, 55)
         Me.ValidQuizz.Name = "ValidQuizz"
         Me.ValidQuizz.Size = New System.Drawing.Size(45, 32)
         Me.ValidQuizz.TabIndex = 49
         Me.ValidQuizz.Text = "OK"
         Me.ValidQuizz.UseVisualStyleBackColor = False
+        '
+        'TrackBar1
+        '
+        Me.TrackBar1.Location = New System.Drawing.Point(273, 27)
+        Me.TrackBar1.Maximum = 100
+        Me.TrackBar1.Name = "TrackBar1"
+        Me.TrackBar1.Size = New System.Drawing.Size(139, 45)
+        Me.TrackBar1.TabIndex = 52
+        Me.TrackBar1.Value = 80
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.ForeColor = System.Drawing.Color.Aqua
+        Me.Label21.Location = New System.Drawing.Point(274, 11)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(42, 13)
+        Me.Label21.TabIndex = 51
+        Me.Label21.Text = "Volume"
+        '
+        'VidSans
+        '
+        Me.VidSans.AutoSize = True
+        Me.VidSans.ForeColor = System.Drawing.Color.White
+        Me.VidSans.Location = New System.Drawing.Point(9, 48)
+        Me.VidSans.Name = "VidSans"
+        Me.VidSans.Size = New System.Drawing.Size(80, 17)
+        Me.VidSans.TabIndex = 50
+        Me.VidSans.Text = "Sans Video"
+        Me.VidSans.UseVisualStyleBackColor = True
         '
         'PlayerOnce
         '
@@ -1006,6 +1044,9 @@ Partial Class Quizz
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.Cornsilk
+        Me.TabPage2.Controls.Add(Me.ImportQuizz)
+        Me.TabPage2.Controls.Add(Me.RemoveQuizz)
+        Me.TabPage2.Controls.Add(Me.AddQuizz)
         Me.TabPage2.Controls.Add(Me.ExportTxt)
         Me.TabPage2.Controls.Add(Me.Historique)
         Me.TabPage2.Controls.Add(Me.TempGrid)
@@ -1016,35 +1057,56 @@ Partial Class Quizz
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Historique"
         '
-        'Historique
+        'ImportQuizz
         '
-        Me.Historique.Enabled = False
-        Me.Historique.FormattingEnabled = True
-        Me.Historique.Location = New System.Drawing.Point(159, 9)
-        Me.Historique.Name = "Historique"
-        Me.Historique.Size = New System.Drawing.Size(246, 121)
-        Me.Historique.TabIndex = 12
+        Me.ImportQuizz.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(67, Byte), Integer))
+        Me.ImportQuizz.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ImportQuizz.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ImportQuizz.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ImportQuizz.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(89, Byte), Integer))
+        Me.ImportQuizz.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ImportQuizz.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ImportQuizz.ForeColor = System.Drawing.Color.White
+        Me.ImportQuizz.Location = New System.Drawing.Point(218, 1)
+        Me.ImportQuizz.Name = "ImportQuizz"
+        Me.ImportQuizz.Size = New System.Drawing.Size(187, 22)
+        Me.ImportQuizz.TabIndex = 49
+        Me.ImportQuizz.Text = "Importer un Quizz depuis .txt"
+        Me.ImportQuizz.UseVisualStyleBackColor = False
         '
-        'TempGrid
+        'RemoveQuizz
         '
-        Me.TempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TempGrid.Location = New System.Drawing.Point(6, 9)
-        Me.TempGrid.Name = "TempGrid"
-        Me.TempGrid.RowHeadersWidth = 51
-        Me.TempGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.TempGrid.Size = New System.Drawing.Size(147, 151)
-        Me.TempGrid.TabIndex = 11
+        Me.RemoveQuizz.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(67, Byte), Integer))
+        Me.RemoveQuizz.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.RemoveQuizz.Cursor = System.Windows.Forms.Cursors.Default
+        Me.RemoveQuizz.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.RemoveQuizz.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(89, Byte), Integer))
+        Me.RemoveQuizz.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.RemoveQuizz.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RemoveQuizz.ForeColor = System.Drawing.Color.White
+        Me.RemoveQuizz.Location = New System.Drawing.Point(6, 143)
+        Me.RemoveQuizz.Name = "RemoveQuizz"
+        Me.RemoveQuizz.Size = New System.Drawing.Size(91, 24)
+        Me.RemoveQuizz.TabIndex = 50
+        Me.RemoveQuizz.Text = "Retirer du Quizz"
+        Me.RemoveQuizz.UseVisualStyleBackColor = False
         '
-        'VidSans
+        'AddQuizz
         '
-        Me.VidSans.AutoSize = True
-        Me.VidSans.ForeColor = System.Drawing.Color.White
-        Me.VidSans.Location = New System.Drawing.Point(9, 48)
-        Me.VidSans.Name = "VidSans"
-        Me.VidSans.Size = New System.Drawing.Size(80, 17)
-        Me.VidSans.TabIndex = 50
-        Me.VidSans.Text = "Sans Video"
-        Me.VidSans.UseVisualStyleBackColor = True
+        Me.AddQuizz.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(67, Byte), Integer))
+        Me.AddQuizz.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.AddQuizz.Cursor = System.Windows.Forms.Cursors.Default
+        Me.AddQuizz.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.AddQuizz.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(89, Byte), Integer))
+        Me.AddQuizz.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.AddQuizz.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AddQuizz.ForeColor = System.Drawing.Color.White
+        Me.AddQuizz.Location = New System.Drawing.Point(103, 143)
+        Me.AddQuizz.Name = "AddQuizz"
+        Me.AddQuizz.Size = New System.Drawing.Size(109, 24)
+        Me.AddQuizz.TabIndex = 49
+        Me.AddQuizz.Text = "Ajouter au Quizz"
+        Me.AddQuizz.UseVisualStyleBackColor = False
         '
         'ExportTxt
         '
@@ -1056,12 +1118,33 @@ Partial Class Quizz
         Me.ExportTxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ExportTxt.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ExportTxt.ForeColor = System.Drawing.Color.White
-        Me.ExportTxt.Location = New System.Drawing.Point(200, 136)
+        Me.ExportTxt.Location = New System.Drawing.Point(218, 141)
         Me.ExportTxt.Name = "ExportTxt"
-        Me.ExportTxt.Size = New System.Drawing.Size(157, 28)
+        Me.ExportTxt.Size = New System.Drawing.Size(187, 28)
         Me.ExportTxt.TabIndex = 46
         Me.ExportTxt.Text = "Exporter l'historique en .txt"
         Me.ExportTxt.UseVisualStyleBackColor = False
+        '
+        'Historique
+        '
+        Me.Historique.BackColor = System.Drawing.Color.White
+        Me.Historique.Enabled = False
+        Me.Historique.FormattingEnabled = True
+        Me.Historique.Location = New System.Drawing.Point(218, 27)
+        Me.Historique.Name = "Historique"
+        Me.Historique.Size = New System.Drawing.Size(187, 108)
+        Me.Historique.TabIndex = 12
+        '
+        'TempGrid
+        '
+        Me.TempGrid.AllowUserToAddRows = False
+        Me.TempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TempGrid.Location = New System.Drawing.Point(6, 9)
+        Me.TempGrid.Name = "TempGrid"
+        Me.TempGrid.RowHeadersWidth = 51
+        Me.TempGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.TempGrid.Size = New System.Drawing.Size(206, 128)
+        Me.TempGrid.TabIndex = 11
         '
         'Quizz
         '
@@ -1091,6 +1174,7 @@ Partial Class Quizz
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupDifficulty.ResumeLayout(False)
         Me.GroupDifficulty.PerformLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
@@ -1180,4 +1264,9 @@ Partial Class Quizz
     Friend WithEvents TempGrid As DataGridView
     Friend WithEvents VidSans As CheckBox
     Friend WithEvents ExportTxt As Button
+    Friend WithEvents TrackBar1 As TrackBar
+    Friend WithEvents Label21 As Label
+    Friend WithEvents ImportQuizz As Button
+    Friend WithEvents RemoveQuizz As Button
+    Friend WithEvents AddQuizz As Button
 End Class
