@@ -725,7 +725,7 @@ recalculrando:
 
             ButtonDoRandom1.Show()
             txtpositionend.Text = txtnbmanches.Text
-            End If
+        End If
     End Sub
     Private Sub Txtnbmanches_KeyDown(sender As Object, e As KeyEventArgs) Handles txtnbmanches.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -1081,8 +1081,10 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
                     'on enleve maintenant
                     RandomList.Items.Remove(fauxx)
                     Historique.Items.Remove(genereformat)
+                    txtpositionend.Text = Historique.Items.Count
+                    If RandomList.Items.Count > 0 Then RandomList.SelectedIndex = 0
                     Exit Sub
-                End If
+                    End If
             Next
 
         Else
@@ -1092,6 +1094,26 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
     End Sub
 
     Private Sub AddQuizz_Click(sender As Object, e As EventArgs) Handles AddQuizz.Click
+        Dim selectedrow = TempGrid.CurrentCell.RowIndex
+        Dim consoledujeu = TempGrid.Rows(selectedrow).Cells(TempGrid.Columns("Console").Index).Value
+        Dim anneedujeu = TempGrid.Rows(selectedrow).Cells(TempGrid.Columns("DateSortie").Index).Value.ToString.Substring(0, 4)
+        Dim nomdujeu = TempGrid.Rows(selectedrow).Cells(TempGrid.Columns("Titre").Index).Value
+        Dim genereformat = consoledujeu & " (" & anneedujeu & ") - " & nomdujeu
+
+        'on cherche si le tempgrid selectionné est dans l'historique
+        If Historique.Items.Contains(genereformat) Then
+            MsgBox(nomdujeu & " est déja dans le Quizz !")
+            Exit Sub
+        Else
+            'On ajoute à la liste a la fin
+            RandomList.Items.Add((selectedrow + 5) * 37)
+            Historique.Items.Add(genereformat)
+            txtpositionend.Text = Historique.Items.Count
+            If RandomList.Items.Count > 0 Then RandomList.SelectedIndex = 0
+        End If
+    End Sub
+
+    Sub refreshcompteurtitre()
 
     End Sub
 End Class
