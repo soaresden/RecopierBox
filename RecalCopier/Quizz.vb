@@ -24,14 +24,9 @@ Public Class Quizz
         Label20.Hide()
         ButtonInfo.Hide()
 
-        QuizzBoxRep.Hide()
+        TabControl1.Hide()
         TitleBox.Hide()
         GroupDifficulty.Hide()
-
-        Cheat.Hide()
-        TempGrid.Hide()
-        ButtonHideParam.Hide()
-        Cheat.Hide()
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
         Me.Close()
@@ -661,6 +656,7 @@ suite6:
 
         'On clear par securité
         RandomList.Items.Clear()
+        Historique.Items.Clear()
 
         Do Until RandomList.Items.Count = nbdemanches
 recalculrando:
@@ -669,6 +665,10 @@ recalculrando:
 
             If Not RandomList.Items.Contains(xremade) Then
                 RandomList.Items.Add(xremade) 'si le titre n'est pas present, on l'ajoute dans la liste des titres
+
+                'on va creer le log historique
+                Dim nomdujeu = TempGrid.Rows(x).Cells(TempGrid.Columns("Console").Index).Value & " (" & TempGrid.Rows(x).Cells(TempGrid.Columns("DateSortie").Index).Value.ToString.Substring(0, 4) & ") - " & TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
+                Historique.Items.Add(nomdujeu) ' on ajoute a la liste
             End If
             listrandobox.Items.Remove(x)
         Loop
@@ -678,7 +678,6 @@ recalculrando:
 
         'On va maintenant Charger les options du jeu
         GroupDifficulty.Show()
-
     End Sub
     Sub afficherlesoptions()
         txtnbmanches.Show()
@@ -690,12 +689,15 @@ recalculrando:
     End Sub
     Private Sub TitreOnly_CheckedChanged(sender As Object, e As EventArgs) Handles TitreOnly.CheckedChanged
         Call afficherlesoptions()
+        Call PlayerStop.PerformClick()
     End Sub
     Private Sub ConsoleTitre_CheckedChanged(sender As Object, e As EventArgs) Handles ConsoleTitre.CheckedChanged
         Call afficherlesoptions()
+        Call PlayerStop.PerformClick()
     End Sub
     Private Sub PasTitreNiConsole_CheckedChanged(sender As Object, e As EventArgs) Handles PasTitreNiConsole.CheckedChanged
         Call afficherlesoptions()
+        Call PlayerStop.PerformClick()
     End Sub
     Private Sub Txtnbmanches_TextChanged(sender As Object, e As EventArgs) Handles txtnbmanches.TextChanged
         If txtnbmanches.Text Is Nothing Or txtnbmanches.Text = "" Then
@@ -733,6 +735,8 @@ recalculrando:
 
     Private Sub RandomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles RandomList.SelectedIndexChanged
         txtpositionrandom.Text = RandomList.SelectedIndex + 1
+        Historique.SelectedIndex = RandomList.SelectedIndex 'on change aussi celui qui est selectionné dans l'historique
+
         'calcul du vrai chiffre 
         Dim chiffreactuel = RandomList.SelectedItem
         Dim vraichiffre = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
@@ -773,32 +777,37 @@ recalculrando:
             Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
             PlayerAudio.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
 
-            If VidNormal.Checked = True Then
-                PlayerAudio.uiMode = "none"
-            ElseIf SonAvec.Checked = True Then
-                PlayerAudio.uiMode = "invisible"
-            End If
+            'En fonction des choix ci dessus
+            If VidNormal.Checked = True Then PlayerAudio.uiMode = "none"
+            If VidSans.Checked = True Then PlayerAudio.uiMode = "invisible"
+            'If VidPixel.Checked = True Then 
+
+            If SonAvec.Checked = True Then PlayerAudio.settings.mute = False
+            If SonSans.Checked = True Then PlayerAudio.settings.mute = True
+
+            If PlayerOnce.Checked = True Then PlayerAudio.settings.setMode("loop", False)
+            If PlayerRepeat.Checked = True Then PlayerAudio.settings.setMode("loop", True)
 
             PlayerAudio.Ctlcontrols.play()
-            ProgressBar1.Minimum = 0
-            ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
+                ProgressBar1.Minimum = 0
+                ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
 
-            Timer1.Start()
-            TimeBox.Text = ""
+                Timer1.Start()
+                TimeBox.Text = ""
 
-            'On enleve la liste des jeux par securite
-            ListTitreDesJeux.Items.Clear()
+                'On enleve la liste des jeux par securite
+                ListTitreDesJeux.Items.Clear()
 
-            'On remplit la randobox de toutes les possibilités
-            listrandobox.Items.Clear()
-            Dim rando As Integer
-            For rando = 0 To TxtTotalEntrees.Text - 1
-                listrandobox.Items.Add(rando)
-            Next
+                'On remplit la randobox de toutes les possibilités
+                listrandobox.Items.Clear()
+                Dim rando As Integer
+                For rando = 0 To TxtTotalEntrees.Text - 1
+                    listrandobox.Items.Add(rando)
+                Next
 
-            'et on enleve le bon chiffre
-            listrandobox.Items.Remove(lavraieligne)
-        End If
+                'et on enleve le bon chiffre
+                listrandobox.Items.Remove(lavraieligne)
+            End If
     End Sub
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
         PlayerAudio.Ctlcontrols.stop()
@@ -812,35 +821,6 @@ recalculrando:
 
         txttempsaffichprop.ReadOnly = False
         txttempsaffichprop.BackColor = Color.FromArgb(0, 102, 204)
-
-    End Sub
-
-    Private Sub HiddenButton_Click(sender As Object, e As EventArgs)
-        ' Si le quizz est pas fait encore, on affiche juste
-        If QuizzBoxRep.Visible = False Then
-            If TempGrid.Visible = True Then
-                TempGrid.Visible = False
-            Else
-                TempGrid.Visible = True
-                TempGrid.Size = New Point(369, 404)
-            End If
-
-        Else ' sinon on affiche et on va selectionner
-            If TempGrid.Visible = False Then
-                TempGrid.Visible = True
-                TempGrid.Size = New Point(369, 404)
-                Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
-                Dim nomdujeu As String = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("Titre").Index).Value
-                'on faire le focus sur la ligne
-                TempGrid.ClearSelection()
-                TempGrid.Rows(lavraieligne).Selected = True
-                TempGrid.CurrentCell = TempGrid.Rows(lavraieligne).Cells(1)
-            Else
-                TempGrid.Visible = False
-                TempGrid.Size = New Point(369, 30)
-            End If
-        End If
-
 
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -862,6 +842,9 @@ recalculrando:
 
         'On check le temps des propositions
         Dim tempsprop As String = txttempsaffichprop.Text
+
+        'si le mode pas de proposition, on fait juste la couleur donc on arrete
+        If PasTitreNiConsole.Checked = True Then Exit Sub
 
         'On envoie la couleur
         If ProgressBar1.Value <= tempsprop Then 'Si c'est avant les propositions c'est VERT
@@ -953,10 +936,22 @@ finboucle:
         System.Diagnostics.Process.Start(videoencours)
     End Sub
     Private Sub VidNormal_CheckedChanged(sender As Object, e As EventArgs) Handles VidNormal.CheckedChanged
-        VidPixel.Checked = Not VidNormal.Checked
+        If VidNormal.Checked = True Then
+            VidSans.Checked = Not VidNormal.Checked
+            VidPixel.Checked = Not VidNormal.Checked
+        End If
+    End Sub
+    Private Sub VidSans_CheckedChanged(sender As Object, e As EventArgs) Handles VidSans.CheckedChanged
+        If VidSans.Checked = True Then
+            VidNormal.Checked = Not VidSans.Checked
+            VidPixel.Checked = Not VidSans.Checked
+        End If
     End Sub
     Private Sub VidPixel_CheckedChanged(sender As Object, e As EventArgs) Handles VidPixel.CheckedChanged
-        VidNormal.Checked = Not VidPixel.Checked
+        If VidPixel.Checked = True Then
+            VidNormal.Checked = Not VidPixel.Checked
+            VidSans.Checked = Not VidPixel.Checked
+        End If
     End Sub
     Private Sub SonAvec_CheckedChanged(sender As Object, e As EventArgs) Handles SonAvec.CheckedChanged
         SonSans.Checked = Not SonAvec.Checked
@@ -1009,19 +1004,6 @@ finboucle:
     Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" _
 (ByVal hWnd As IntPtr, ByVal wCmd As Integer,
 ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
-
-    Private Sub Cheat_Click(sender As Object, e As EventArgs) Handles Cheat.Click
-        If Cheat.Checked = False Then
-            TempGrid.Hide()
-        ElseIf Cheat.Checked = True Then
-            TempGrid.Size = New Point(369, 580)
-            TempGrid.Show()
-        End If
-    End Sub
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-        MsgBox("Le Cheat Mode est disponible !" & Chr(13) & Chr(13) & "Cochez la checkbox Entre le n° du titre en cours et le restant")
-        Cheat.Show()
-    End Sub
     Private Sub ButtonInfo_Click(sender As Object, e As EventArgs) Handles ButtonInfo.Click
         If GroupFiltres.Visible = True Then
             GroupFiltres.Hide()
@@ -1029,15 +1011,18 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
             GroupFiltres.Show()
         End If
     End Sub
-
     Private Sub ValidQuizz_Click(sender As Object, e As EventArgs) Handles ValidQuizz.Click
+        If VidNormal.Checked = False And VidPixel.Checked = False And VidSans.Checked = False Then
+            MsgBox("Selectionner un Mode Video")
+            TitleBox.Hide()
+            TabControl1.Hide()
+            Exit Sub
+        End If
 
         TitleBox.Show()
-        If PasTitreNiConsole.Checked = True Then
-            QuizzBoxRep.Show()
-        Else
-            QuizzBoxRep.Hide()
-        End If
+        TabControl1.Show()
+
+        'si le mode pas de propositions
 
         If ConsoleTitre.Checked = True Then
             ListConsoleDesJeux.Show()
@@ -1051,9 +1036,6 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         End If
 
         'On Parametre le tout
-        PlayerAudio.uiMode = "invisible"
-        PlayerAudio.settings.setMode("loop", False)
-        PlayerAudio.settings.mute = False
         RandomList.SelectedIndex = 0
 
         'Et enfin on cheeck si c'est Titre+Console pour Ajouter les console a la listbox
@@ -1062,9 +1044,15 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
                 ListConsoleDesJeux.Items.Add(j)
             Next
         End If
+    End Sub
 
-        If PasTitreNiConsole.Checked = True Then
-            QuizzBoxRep.Hide()
-        End If
+    Private Sub ExportTxt_Click(sender As Object, e As EventArgs) Handles ExportTxt.Click
+        Dim sb As New System.Text.StringBuilder()
+        For Each o As Object In Historique.Items
+            sb.AppendLine(o)
+        Next
+        Dim generefichier As String = My.Computer.FileSystem.SpecialDirectories.Desktop & "\" & "QuizzHistorique du " & Format(Now, "dd-MM-yy a HH-mm-ss") & ".txt"
+        System.IO.File.WriteAllText(generefichier, sb.ToString())
+        Process.Start(generefichier)
     End Sub
 End Class

@@ -69,17 +69,12 @@ Partial Class Quizz
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.TempGrid = New System.Windows.Forms.DataGridView()
-        Me.QuizzBoxRep = New System.Windows.Forms.GroupBox()
         Me.ListTitreDesJeux = New System.Windows.Forms.ListBox()
         Me.ListConsoleDesJeux = New System.Windows.Forms.ListBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
         Me.ToolTipNbJeux = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ButtonHideParam = New System.Windows.Forms.Button()
         Me.TitleBox = New System.Windows.Forms.GroupBox()
-        Me.Cheat = New System.Windows.Forms.CheckBox()
         Me.PlayerAudio = New AxWMPLib.AxWindowsMediaPlayer()
         Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -104,17 +99,25 @@ Partial Class Quizz
         Me.Label13 = New System.Windows.Forms.Label()
         Me.VidNormal = New System.Windows.Forms.CheckBox()
         Me.SonAvec = New System.Windows.Forms.CheckBox()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Historique = New System.Windows.Forms.ListBox()
+        Me.TempGrid = New System.Windows.Forms.DataGridView()
+        Me.VidSans = New System.Windows.Forms.CheckBox()
+        Me.ExportTxt = New System.Windows.Forms.Button()
         Me.GroupParamComplet.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupConfigPartie.SuspendLayout()
         Me.GroupFiltres.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.QuizzBoxRep.SuspendLayout()
         Me.TitleBox.SuspendLayout()
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupDifficulty.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupParamComplet
@@ -134,7 +137,7 @@ Partial Class Quizz
         Me.GroupParamComplet.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GroupParamComplet.Location = New System.Drawing.Point(12, 39)
         Me.GroupParamComplet.Name = "GroupParamComplet"
-        Me.GroupParamComplet.Size = New System.Drawing.Size(474, 550)
+        Me.GroupParamComplet.Size = New System.Drawing.Size(474, 559)
         Me.GroupParamComplet.TabIndex = 10
         Me.GroupParamComplet.TabStop = False
         Me.GroupParamComplet.Text = "Parametres :"
@@ -187,7 +190,7 @@ Partial Class Quizz
         Me.ButtonDoRandom1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonDoRandom1.Font = New System.Drawing.Font("Equinox Com", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonDoRandom1.ForeColor = System.Drawing.Color.White
-        Me.ButtonDoRandom1.Location = New System.Drawing.Point(218, 498)
+        Me.ButtonDoRandom1.Location = New System.Drawing.Point(220, 506)
         Me.ButtonDoRandom1.Name = "ButtonDoRandom1"
         Me.ButtonDoRandom1.Size = New System.Drawing.Size(183, 45)
         Me.ButtonDoRandom1.TabIndex = 45
@@ -320,7 +323,7 @@ Partial Class Quizz
         Me.ButtonValidConsole1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonValidConsole1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonValidConsole1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonValidConsole1.Location = New System.Drawing.Point(6, 498)
+        Me.ButtonValidConsole1.Location = New System.Drawing.Point(6, 506)
         Me.ButtonValidConsole1.Name = "ButtonValidConsole1"
         Me.ButtonValidConsole1.Size = New System.Drawing.Size(135, 44)
         Me.ButtonValidConsole1.TabIndex = 42
@@ -621,47 +624,14 @@ Partial Class Quizz
         Me.Label6.TabIndex = 32
         Me.Label6.Text = "Publisher :"
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(4, 15)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(66, 70)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 1
-        Me.PictureBox1.TabStop = False
-        '
-        'TempGrid
-        '
-        Me.TempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TempGrid.Location = New System.Drawing.Point(117, 3)
-        Me.TempGrid.Name = "TempGrid"
-        Me.TempGrid.RowHeadersWidth = 51
-        Me.TempGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.TempGrid.Size = New System.Drawing.Size(369, 30)
-        Me.TempGrid.TabIndex = 11
-        '
-        'QuizzBoxRep
-        '
-        Me.QuizzBoxRep.BackColor = System.Drawing.Color.RoyalBlue
-        Me.QuizzBoxRep.Controls.Add(Me.ListTitreDesJeux)
-        Me.QuizzBoxRep.Controls.Add(Me.ListConsoleDesJeux)
-        Me.QuizzBoxRep.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.QuizzBoxRep.Location = New System.Drawing.Point(492, 405)
-        Me.QuizzBoxRep.Name = "QuizzBoxRep"
-        Me.QuizzBoxRep.Size = New System.Drawing.Size(413, 184)
-        Me.QuizzBoxRep.TabIndex = 36
-        Me.QuizzBoxRep.TabStop = False
-        Me.QuizzBoxRep.Text = "Propositions et Reponses :"
-        '
         'ListTitreDesJeux
         '
         Me.ListTitreDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.ListTitreDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListTitreDesJeux.FormattingEnabled = True
-        Me.ListTitreDesJeux.Location = New System.Drawing.Point(119, 16)
+        Me.ListTitreDesJeux.Location = New System.Drawing.Point(116, 2)
         Me.ListTitreDesJeux.Name = "ListTitreDesJeux"
-        Me.ListTitreDesJeux.Size = New System.Drawing.Size(286, 160)
+        Me.ListTitreDesJeux.Size = New System.Drawing.Size(286, 173)
         Me.ListTitreDesJeux.TabIndex = 23
         '
         'ListConsoleDesJeux
@@ -669,9 +639,9 @@ Partial Class Quizz
         Me.ListConsoleDesJeux.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.ListConsoleDesJeux.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListConsoleDesJeux.FormattingEnabled = True
-        Me.ListConsoleDesJeux.Location = New System.Drawing.Point(6, 17)
+        Me.ListConsoleDesJeux.Location = New System.Drawing.Point(3, 3)
         Me.ListConsoleDesJeux.Name = "ListConsoleDesJeux"
-        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 160)
+        Me.ListConsoleDesJeux.Size = New System.Drawing.Size(107, 173)
         Me.ListConsoleDesJeux.TabIndex = 24
         '
         'Timer1
@@ -694,26 +664,9 @@ Partial Class Quizz
         Me.ButtonGetBack1.Text = "Retour Au Menu"
         Me.ButtonGetBack1.UseVisualStyleBackColor = False
         '
-        'ButtonHideParam
-        '
-        Me.ButtonHideParam.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonHideParam.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonHideParam.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonHideParam.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(89, Byte), Integer))
-        Me.ButtonHideParam.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonHideParam.Font = New System.Drawing.Font("Equinox Com", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonHideParam.ForeColor = System.Drawing.Color.White
-        Me.ButtonHideParam.Image = CType(resources.GetObject("ButtonHideParam.Image"), System.Drawing.Image)
-        Me.ButtonHideParam.Location = New System.Drawing.Point(444, 2)
-        Me.ButtonHideParam.Name = "ButtonHideParam"
-        Me.ButtonHideParam.Size = New System.Drawing.Size(42, 37)
-        Me.ButtonHideParam.TabIndex = 48
-        Me.ButtonHideParam.UseVisualStyleBackColor = False
-        '
         'TitleBox
         '
         Me.TitleBox.BackColor = System.Drawing.Color.MidnightBlue
-        Me.TitleBox.Controls.Add(Me.Cheat)
         Me.TitleBox.Controls.Add(Me.PlayerAudio)
         Me.TitleBox.Controls.Add(Me.listrandobox)
         Me.TitleBox.Controls.Add(Me.Label15)
@@ -734,16 +687,6 @@ Partial Class Quizz
         Me.TitleBox.TabIndex = 50
         Me.TitleBox.TabStop = False
         Me.TitleBox.Text = "VideoPlayerBox"
-        '
-        'Cheat
-        '
-        Me.Cheat.AutoSize = True
-        Me.Cheat.BackColor = System.Drawing.Color.MidnightBlue
-        Me.Cheat.Location = New System.Drawing.Point(259, 43)
-        Me.Cheat.Name = "Cheat"
-        Me.Cheat.Size = New System.Drawing.Size(15, 14)
-        Me.Cheat.TabIndex = 42
-        Me.Cheat.UseVisualStyleBackColor = False
         '
         'PlayerAudio
         '
@@ -900,11 +843,11 @@ Partial Class Quizz
         'GroupDifficulty
         '
         Me.GroupDifficulty.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.GroupDifficulty.Controls.Add(Me.VidSans)
         Me.GroupDifficulty.Controls.Add(Me.ValidQuizz)
         Me.GroupDifficulty.Controls.Add(Me.PlayerOnce)
         Me.GroupDifficulty.Controls.Add(Me.PlayerRepeat)
         Me.GroupDifficulty.Controls.Add(Me.Label19)
-        Me.GroupDifficulty.Controls.Add(Me.PictureBox1)
         Me.GroupDifficulty.Controls.Add(Me.SonSans)
         Me.GroupDifficulty.Controls.Add(Me.Label18)
         Me.GroupDifficulty.Controls.Add(Me.VidPixel)
@@ -929,7 +872,7 @@ Partial Class Quizz
         Me.ValidQuizz.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ValidQuizz.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ValidQuizz.ForeColor = System.Drawing.Color.White
-        Me.ValidQuizz.Location = New System.Drawing.Point(362, 38)
+        Me.ValidQuizz.Location = New System.Drawing.Point(330, 36)
         Me.ValidQuizz.Name = "ValidQuizz"
         Me.ValidQuizz.Size = New System.Drawing.Size(45, 32)
         Me.ValidQuizz.TabIndex = 49
@@ -942,7 +885,7 @@ Partial Class Quizz
         Me.PlayerOnce.Checked = True
         Me.PlayerOnce.CheckState = System.Windows.Forms.CheckState.Checked
         Me.PlayerOnce.ForeColor = System.Drawing.Color.White
-        Me.PlayerOnce.Location = New System.Drawing.Point(234, 41)
+        Me.PlayerOnce.Location = New System.Drawing.Point(168, 30)
         Me.PlayerOnce.Name = "PlayerOnce"
         Me.PlayerOnce.Size = New System.Drawing.Size(98, 17)
         Me.PlayerOnce.TabIndex = 43
@@ -953,7 +896,7 @@ Partial Class Quizz
         '
         Me.PlayerRepeat.AutoSize = True
         Me.PlayerRepeat.ForeColor = System.Drawing.Color.White
-        Me.PlayerRepeat.Location = New System.Drawing.Point(234, 64)
+        Me.PlayerRepeat.Location = New System.Drawing.Point(168, 64)
         Me.PlayerRepeat.Name = "PlayerRepeat"
         Me.PlayerRepeat.Size = New System.Drawing.Size(98, 17)
         Me.PlayerRepeat.TabIndex = 42
@@ -964,7 +907,7 @@ Partial Class Quizz
         '
         Me.Label19.AutoSize = True
         Me.Label19.ForeColor = System.Drawing.Color.Aqua
-        Me.Label19.Location = New System.Drawing.Point(232, 17)
+        Me.Label19.Location = New System.Drawing.Point(166, 11)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(91, 13)
         Me.Label19.TabIndex = 41
@@ -974,7 +917,7 @@ Partial Class Quizz
         '
         Me.SonSans.AutoSize = True
         Me.SonSans.ForeColor = System.Drawing.Color.White
-        Me.SonSans.Location = New System.Drawing.Point(152, 64)
+        Me.SonSans.Location = New System.Drawing.Point(86, 64)
         Me.SonSans.Name = "SonSans"
         Me.SonSans.Size = New System.Drawing.Size(72, 17)
         Me.SonSans.TabIndex = 40
@@ -985,7 +928,7 @@ Partial Class Quizz
         '
         Me.Label18.AutoSize = True
         Me.Label18.ForeColor = System.Drawing.Color.Aqua
-        Me.Label18.Location = New System.Drawing.Point(149, 18)
+        Me.Label18.Location = New System.Drawing.Point(83, 12)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(74, 13)
         Me.Label18.TabIndex = 39
@@ -995,7 +938,7 @@ Partial Class Quizz
         '
         Me.VidPixel.AutoSize = True
         Me.VidPixel.ForeColor = System.Drawing.Color.White
-        Me.VidPixel.Location = New System.Drawing.Point(75, 64)
+        Me.VidPixel.Location = New System.Drawing.Point(9, 64)
         Me.VidPixel.Name = "VidPixel"
         Me.VidPixel.Size = New System.Drawing.Size(48, 17)
         Me.VidPixel.TabIndex = 38
@@ -1006,7 +949,7 @@ Partial Class Quizz
         '
         Me.Label13.AutoSize = True
         Me.Label13.ForeColor = System.Drawing.Color.Aqua
-        Me.Label13.Location = New System.Drawing.Point(72, 18)
+        Me.Label13.Location = New System.Drawing.Point(6, 12)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(74, 13)
         Me.Label13.TabIndex = 31
@@ -1018,7 +961,7 @@ Partial Class Quizz
         Me.VidNormal.Checked = True
         Me.VidNormal.CheckState = System.Windows.Forms.CheckState.Checked
         Me.VidNormal.ForeColor = System.Drawing.Color.White
-        Me.VidNormal.Location = New System.Drawing.Point(75, 41)
+        Me.VidNormal.Location = New System.Drawing.Point(9, 30)
         Me.VidNormal.Name = "VidNormal"
         Me.VidNormal.Size = New System.Drawing.Size(65, 17)
         Me.VidNormal.TabIndex = 33
@@ -1031,28 +974,108 @@ Partial Class Quizz
         Me.SonAvec.Checked = True
         Me.SonAvec.CheckState = System.Windows.Forms.CheckState.Checked
         Me.SonAvec.ForeColor = System.Drawing.Color.White
-        Me.SonAvec.Location = New System.Drawing.Point(152, 41)
+        Me.SonAvec.Location = New System.Drawing.Point(86, 30)
         Me.SonAvec.Name = "SonAvec"
         Me.SonAvec.Size = New System.Drawing.Size(73, 17)
         Me.SonAvec.TabIndex = 34
         Me.SonAvec.Text = "Avec Son"
         Me.SonAvec.UseVisualStyleBackColor = True
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(489, 397)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(416, 201)
+        Me.TabControl1.TabIndex = 51
+        '
+        'TabPage1
+        '
+        Me.TabPage1.BackColor = System.Drawing.Color.Cornsilk
+        Me.TabPage1.Controls.Add(Me.ListTitreDesJeux)
+        Me.TabPage1.Controls.Add(Me.ListConsoleDesJeux)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(408, 175)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Propositions"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.BackColor = System.Drawing.Color.Cornsilk
+        Me.TabPage2.Controls.Add(Me.ExportTxt)
+        Me.TabPage2.Controls.Add(Me.Historique)
+        Me.TabPage2.Controls.Add(Me.TempGrid)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(408, 175)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Historique"
+        '
+        'Historique
+        '
+        Me.Historique.Enabled = False
+        Me.Historique.FormattingEnabled = True
+        Me.Historique.Location = New System.Drawing.Point(159, 9)
+        Me.Historique.Name = "Historique"
+        Me.Historique.Size = New System.Drawing.Size(246, 121)
+        Me.Historique.TabIndex = 12
+        '
+        'TempGrid
+        '
+        Me.TempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.TempGrid.Location = New System.Drawing.Point(6, 9)
+        Me.TempGrid.Name = "TempGrid"
+        Me.TempGrid.RowHeadersWidth = 51
+        Me.TempGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.TempGrid.Size = New System.Drawing.Size(147, 151)
+        Me.TempGrid.TabIndex = 11
+        '
+        'VidSans
+        '
+        Me.VidSans.AutoSize = True
+        Me.VidSans.ForeColor = System.Drawing.Color.White
+        Me.VidSans.Location = New System.Drawing.Point(9, 48)
+        Me.VidSans.Name = "VidSans"
+        Me.VidSans.Size = New System.Drawing.Size(80, 17)
+        Me.VidSans.TabIndex = 50
+        Me.VidSans.Text = "Sans Video"
+        Me.VidSans.UseVisualStyleBackColor = True
+        '
+        'ExportTxt
+        '
+        Me.ExportTxt.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(67, Byte), Integer))
+        Me.ExportTxt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ExportTxt.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ExportTxt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ExportTxt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(89, Byte), Integer))
+        Me.ExportTxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ExportTxt.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ExportTxt.ForeColor = System.Drawing.Color.White
+        Me.ExportTxt.Location = New System.Drawing.Point(200, 136)
+        Me.ExportTxt.Name = "ExportTxt"
+        Me.ExportTxt.Size = New System.Drawing.Size(157, 28)
+        Me.ExportTxt.TabIndex = 46
+        Me.ExportTxt.Text = "Exporter l'historique en .txt"
+        Me.ExportTxt.UseVisualStyleBackColor = False
+        '
         'Quizz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(908, 596)
+        Me.ClientSize = New System.Drawing.Size(908, 601)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.GroupDifficulty)
-        Me.Controls.Add(Me.ButtonHideParam)
         Me.Controls.Add(Me.TitleBox)
-        Me.Controls.Add(Me.TempGrid)
         Me.Controls.Add(Me.ButtonGetBack1)
         Me.Controls.Add(Me.GroupParamComplet)
-        Me.Controls.Add(Me.QuizzBoxRep)
-        Me.MaximumSize = New System.Drawing.Size(924, 635)
-        Me.MinimumSize = New System.Drawing.Size(924, 635)
+        Me.MaximumSize = New System.Drawing.Size(924, 640)
+        Me.MinimumSize = New System.Drawing.Size(924, 640)
         Me.Name = "Quizz"
         Me.Text = "Quizz"
         Me.GroupParamComplet.ResumeLayout(False)
@@ -1063,14 +1086,15 @@ Partial Class Quizz
         Me.GroupFiltres.ResumeLayout(False)
         Me.GroupFiltres.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.QuizzBoxRep.ResumeLayout(False)
         Me.TitleBox.ResumeLayout(False)
         Me.TitleBox.PerformLayout()
         CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupDifficulty.ResumeLayout(False)
         Me.GroupDifficulty.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1080,13 +1104,11 @@ Partial Class Quizz
     Friend WithEvents GroupConfigPartie As GroupBox
     Friend WithEvents Label11 As Label
     Friend WithEvents txtnbmanches As TextBox
-    Friend WithEvents TempGrid As DataGridView
     Friend WithEvents Label10 As Label
     Friend WithEvents GroupFiltres As GroupBox
     Friend WithEvents TxtTotalEntrees As TextBox
     Friend WithEvents ConsoleTitre As RadioButton
     Friend WithEvents TitreOnly As RadioButton
-    Friend WithEvents QuizzBoxRep As GroupBox
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Label14 As Label
     Friend WithEvents Label16 As Label
@@ -1118,18 +1140,15 @@ Partial Class Quizz
     Friend WithEvents Label5 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents ListTitreDesJeux As ListBox
     Friend WithEvents ListConsoleDesJeux As ListBox
     Friend WithEvents ToolTipNbJeux As ToolTip
     Friend WithEvents Label17 As Label
-    Friend WithEvents ButtonHideParam As Button
     Friend WithEvents Label20 As Label
     Friend WithEvents ButtonInfo As Button
     Friend WithEvents PasTitreNiConsole As RadioButton
     Friend WithEvents TitleBox As GroupBox
-    Friend WithEvents Cheat As CheckBox
     Friend WithEvents PlayerAudio As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents listrandobox As ListBox
     Friend WithEvents Label15 As Label
@@ -1154,4 +1173,11 @@ Partial Class Quizz
     Friend WithEvents VidNormal As CheckBox
     Friend WithEvents SonAvec As CheckBox
     Friend WithEvents ValidQuizz As Button
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents Historique As ListBox
+    Friend WithEvents TempGrid As DataGridView
+    Friend WithEvents VidSans As CheckBox
+    Friend WithEvents ExportTxt As Button
 End Class
