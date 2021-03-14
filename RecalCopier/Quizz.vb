@@ -736,17 +736,18 @@ recalculrando:
     Private Sub RandomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles RandomList.SelectedIndexChanged
         txtpositionrandom.Text = RandomList.SelectedIndex + 1
         Historique.SelectedIndex = RandomList.SelectedIndex 'on change aussi celui qui est selectionné dans l'historique
+        PlayerStop.PerformClick()
 
         'calcul du vrai chiffre 
         Dim chiffreactuel = RandomList.SelectedItem
         If chiffreactuel = Nothing Then Exit Sub
-        Dim vraichiffre = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
+        Dim vraichiffre As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
 
+        TabControl1.SelectedTab = TabPage2
         TempGrid.ClearSelection()
         TempGrid.CurrentCell = TempGrid.Item("Titre", CInt(vraichiffre))
-        TempGrid.BeginEdit(False)
+        TabControl1.SelectedTab = TabPage1
 
-        PlayerStop.PerformClick()
     End Sub
 
 
