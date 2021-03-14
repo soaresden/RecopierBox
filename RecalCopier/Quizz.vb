@@ -14,56 +14,25 @@ Public Class Quizz
         Next
         'On hide le groupe parametres
         'Afficher le groupParametres
+
         GroupFiltres.Hide()
-        PanelVideo.Hide()
-        GroupSansFiltres.Hide()
+        GroupConfigPartie.Hide()
         ButtonDoRandom1.Hide()
         GroupConfigPartie.Hide()
         Label10.Hide()
         TxtTotalEntrees.Hide()
+        Label20.Hide()
+        ButtonInfo.Hide()
+
         QuizzBoxRep.Hide()
+        TitleBox.Hide()
+        GroupDifficulty.Hide()
+
         Cheat.Hide()
         TempGrid.Hide()
         ButtonHideParam.Hide()
-        CheckSansFiltres.Hide()
-        CheckAvecFiltres.Hide()
         Cheat.Hide()
     End Sub
-    Private Sub CheckSansFiltres_CheckedChanged(sender As Object, e As EventArgs) Handles CheckSansFiltres.CheckedChanged
-        If CheckSansFiltres.Checked = True Then
-            CheckAvecFiltres.Checked = False
-            GroupFiltres.Hide()
-            GroupSansFiltres.Show()
-            TxtExplicationFiltres.Hide()
-            txtRules.Hide()
-            'et on remet a zero tous les champs par securite
-            txtgenre.Text = Nothing
-            txtdev.Text = Nothing
-            txtpub.Text = Nothing
-            TxtAnnee.Text = Nothing
-            txtplayers.Text = Nothing
-            TxtPlayCount.Text = Nothing
-            TxtSynopsis.Text = Nothing
-            TxtRating.Text = Nothing
-        ElseIf CheckAvecFiltres.Checked = False Then
-            CheckSansFiltres.Checked = True
-        End If
-        GroupConfigPartie.Show()
-        txtnbmanches.Focus()
-    End Sub
-
-    Private Sub CheckAvecFiltres_CheckedChanged(sender As Object, e As EventArgs) Handles CheckAvecFiltres.CheckedChanged
-        If CheckAvecFiltres.Checked = True Then
-            CheckSansFiltres.Checked = False
-            GroupFiltres.Show()
-            GroupSansFiltres.Hide()
-        ElseIf CheckSansFiltres.Checked = False Then
-            CheckAvecFiltres.Checked = True
-        End If
-        GroupConfigPartie.Show()
-        txtnbmanches.Focus()
-    End Sub
-
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
         Me.Close()
         Form1.Show()
@@ -74,22 +43,19 @@ Public Class Quizz
         PlayerStop.PerformClick()
 
         'Afficher le groupParametres
-        GroupFiltres.Show()
+        GroupConfigPartie.Show()
 
         'On va hider le bouton des console + jeu si un seul systeme est selectionné
-
         If ConsoleList.SelectedItems.Count = 1 Then
             ConsoleTitre.Hide()
             ListConsoleDesJeux.Hide()
-            TitreOnly.Checked = True
+            PasTitreNiConsole.Show()
         Else
             ConsoleTitre.Show()
             ListConsoleDesJeux.Show()
+            PasTitreNiConsole.Show()
         End If
 
-        'Afficher les Totaux
-        Label10.Show()
-        TxtTotalEntrees.Show()
         'On met le tooltip
         ToolTipNbJeux.SetToolTip(TxtTotalEntrees, "Ce nombre représente le nombre de jeux total filtré. Plus vous avez un grand chiffre, Meilleur sera l'aléatoire")
 
@@ -378,10 +344,14 @@ romsuivante:
         'On va alimenter les filtres de la combobox 
         PeuplerCombobox()
 
-        'On va Hide les filtres
-        CheckAvecFiltres.Show()
-        CheckSansFiltres.Show()
-        GroupFiltres.Hide()
+        'On affiche pas la partie des options pour forcer la saisie
+        Label17.Hide()
+        Label11.Hide()
+        txtnbmanches.Hide()
+        Label16.Hide()
+        txttempsaffichprop.Hide()
+        'Focus sur le nombre de parties
+        txtnbmanches.Focus()
     End Sub
     Sub PeuplerCombobox()
         Dim valeur As String
@@ -607,15 +577,6 @@ suite6:
         listhelpingboxPlayCount.Show()
         listhelpingboxNote.Show()
     End Sub
-
-    Private Sub TitreOnly_CheckedChanged(sender As Object, e As EventArgs) Handles TitreOnly.CheckedChanged
-        If TitreOnly.Checked = True Then ConsoleTitre.Checked = False
-    End Sub
-
-    Private Sub ConsoleTitre_CheckedChanged(sender As Object, e As EventArgs) Handles ConsoleTitre.CheckedChanged
-        If TitreOnly.Checked = False Then ConsoleTitre.Checked = True
-    End Sub
-
     Sub Entreesurfiltres()
         'commande pour filtrer
         TryCast(TempGrid.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Genre] Like '%{0}%' AND [Developer] like '%{1}%' AND [Publisher] like '%{2}%' AND [DateSortie] like '%{3}%' AND [NbPlayers] like '%{4}%' AND [NbLancé] like '%{5}%' AND [Synopsis] like '%{6}%' AND [Note] like '%{7}%'", txtgenre.Text, txtdev.Text, txtpub.Text, TxtAnnee.Text, txtplayers.Text, TxtPlayCount.Text, TxtSynopsis.Text, TxtRating.Text)
@@ -662,14 +623,14 @@ suite6:
         End If
     End Sub
     Private Sub ButtonDoRandom1_Click(sender As Object, e As EventArgs) Handles ButtonDoRandom1.Click
-
         If txtnbmanches.Text <= 0 Then
             MsgBox("Impossible de Générer des Manches")
+            txtnbmanches.Focus()
             Exit Sub
         End If
 
         If Val(txtnbmanches.Text) > Val(TxtTotalEntrees.Text) Then
-            MsgBox("Trop de Manches > Nb Roms")
+            MsgBox("Trop de Manches > Nb Roms dans le(s) Gamelist(s)")
             Exit Sub
         End If
 
@@ -677,11 +638,6 @@ suite6:
             MsgBox("Votre Total Roms doit etre Superieur à 12")
             Exit Sub
         End If
-
-        'On affiche les elements
-        PanelVideo.Show()
-        QuizzBoxRep.Show()
-        ButtonHideParam.Show()
 
         Dim nbdemanches As Integer = Val(txtnbmanches.Text)
         Dim nbroms As Integer = TxtTotalEntrees.Text
@@ -720,60 +676,54 @@ recalculrando:
         'On Remet la temp listbox en vide
         listrandobox.Items.Clear()
 
-        'on controle que tout est bien OK
-        If TitreOnly.Checked = False And ConsoleTitre.Checked = False Then
-            MsgBox("Merci de Selectionner un Type de Partie")
-            Exit Sub
-        End If
+        'On va maintenant Charger les options du jeu
+        GroupDifficulty.Show()
 
-        If ModeEasy.Checked = False And ModeHardcore.Checked = False Then
-            MsgBox("Merci de choisir la Difficulté")
-            Exit Sub
-        End If
-
-        If RandomList.Items.Count = 0 Then
-            MsgBox("Merci de Générer un Random")
-            Exit Sub
-        End If
-
-        'On va maintenant Charger toute l'interface de jeu
-        QuizzBoxRep.Show()
-        PanelVideo.Show()
-
-        If ConsoleTitre.Checked = True Then
-            ListConsoleDesJeux.Show()
-            ListTitreDesJeux.Show()
-        ElseIf TitreOnly.Checked = True Then
-            ListConsoleDesJeux.Hide()
-            ListTitreDesJeux.Show()
-        Else
-            ListConsoleDesJeux.Hide()
-            ListTitreDesJeux.Hide()
-        End If
-
-        'On Parametre le tout
-        PlayerAudio.uiMode = "invisible"
-        PlayerAudio.settings.setMode("loop", False)
-        PlayerAudio.settings.mute = False
-        RandomList.SelectedIndex = 0
-
-        'Et enfin on cheeck si c'est Titre+Console pour Ajouter les console a la listbox
-        If ConsoleTitre.Checked = True Then
-
-            For Each j In ConsoleList.SelectedItems
-                ListConsoleDesJeux.Items.Add(j)
-            Next
-        End If
-
-        MsgBox("Veuiller Appuyer sur le Bouton pour Commencer")
+    End Sub
+    Sub afficherlesoptions()
+        txtnbmanches.Show()
+        txtnbmanches.Focus()
+        Label16.Show()
+        Label17.Show()
+        Label11.Show()
+        txttempsaffichprop.Show()
+    End Sub
+    Private Sub TitreOnly_CheckedChanged(sender As Object, e As EventArgs) Handles TitreOnly.CheckedChanged
+        Call afficherlesoptions()
+    End Sub
+    Private Sub ConsoleTitre_CheckedChanged(sender As Object, e As EventArgs) Handles ConsoleTitre.CheckedChanged
+        Call afficherlesoptions()
+    End Sub
+    Private Sub PasTitreNiConsole_CheckedChanged(sender As Object, e As EventArgs) Handles PasTitreNiConsole.CheckedChanged
+        Call afficherlesoptions()
     End Sub
     Private Sub Txtnbmanches_TextChanged(sender As Object, e As EventArgs) Handles txtnbmanches.TextChanged
-        If txtnbmanches.Text Is Nothing Then
+        If txtnbmanches.Text Is Nothing Or txtnbmanches.Text = "" Then
+            Label20.Hide()
+            ButtonInfo.Hide()
+            Label10.Hide()
+            TxtTotalEntrees.Hide()
+            ButtonDoRandom1.Hide()
             Exit Sub
         Else
+            If TitreOnly.Checked = False And ConsoleTitre.Checked = False And PasTitreNiConsole.Checked = False Then
+                Label20.Hide()
+                ButtonInfo.Hide()
+                Label10.Hide()
+                TxtTotalEntrees.Hide()
+                ButtonDoRandom1.Hide()
+                Exit Sub
+            End If
+
+            'On a tout, on peut afficher
+            Label20.Show()
+            ButtonInfo.Show()
+            Label10.Show()
+            TxtTotalEntrees.Show()
+
             ButtonDoRandom1.Show()
             txtpositionend.Text = txtnbmanches.Text
-        End If
+            End If
     End Sub
     Private Sub Txtnbmanches_KeyDown(sender As Object, e As KeyEventArgs) Handles txtnbmanches.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -823,9 +773,9 @@ recalculrando:
             Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
             PlayerAudio.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
 
-            If ModeEasy.Checked = True Then
+            If VidNormal.Checked = True Then
                 PlayerAudio.uiMode = "none"
-            ElseIf ModeHardcore.Checked = True Then
+            ElseIf SonAvec.Checked = True Then
                 PlayerAudio.uiMode = "invisible"
             End If
 
@@ -865,7 +815,7 @@ recalculrando:
 
     End Sub
 
-    Private Sub HiddenButton_Click(sender As Object, e As EventArgs) Handles HiddenButton.Click
+    Private Sub HiddenButton_Click(sender As Object, e As EventArgs)
         ' Si le quizz est pas fait encore, on affiche juste
         If QuizzBoxRep.Visible = False Then
             If TempGrid.Visible = True Then
@@ -1002,23 +952,23 @@ finboucle:
         Dim videoencours As String = TempGrid.Rows(lignefakeremade).Cells(TempGrid.Columns("CheminVideo").Index).Value
         System.Diagnostics.Process.Start(videoencours)
     End Sub
-    Private Sub ModeEasy_CheckedChanged(sender As Object, e As EventArgs) Handles ModeEasy.CheckedChanged
-        If ModeEasy.Checked = True Then
-            ModeEasy.Checked = True
-            ModeHardcore.Checked = False
-        Else
-            ModeEasy.Checked = False
-            ModeHardcore.Checked = True
-        End If
+    Private Sub VidNormal_CheckedChanged(sender As Object, e As EventArgs) Handles VidNormal.CheckedChanged
+        VidPixel.Checked = Not VidNormal.Checked
     End Sub
-    Private Sub ModeHardcore_CheckedChanged(sender As Object, e As EventArgs) Handles ModeHardcore.CheckedChanged
-        If ModeHardcore.Checked = True Then
-            ModeEasy.Checked = False
-            ModeHardcore.Checked = True
-        Else
-            ModeEasy.Checked = True
-            ModeHardcore.Checked = False
-        End If
+    Private Sub VidPixel_CheckedChanged(sender As Object, e As EventArgs) Handles VidPixel.CheckedChanged
+        VidNormal.Checked = Not VidPixel.Checked
+    End Sub
+    Private Sub SonAvec_CheckedChanged(sender As Object, e As EventArgs) Handles SonAvec.CheckedChanged
+        SonSans.Checked = Not SonAvec.Checked
+    End Sub
+    Private Sub SonSans_CheckedChanged(sender As Object, e As EventArgs) Handles SonSans.CheckedChanged
+        SonAvec.Checked = Not SonSans.Checked
+    End Sub
+    Private Sub PlayerOnce_CheckedChanged(sender As Object, e As EventArgs) Handles PlayerOnce.CheckedChanged
+        PlayerRepeat.Checked = Not PlayerOnce.Checked
+    End Sub
+    Private Sub PlayerRepeat_CheckedChanged(sender As Object, e As EventArgs) Handles PlayerRepeat.CheckedChanged
+        PlayerOnce.Checked = Not PlayerRepeat.Checked
     End Sub
     Private Sub ListConsoleDesJeux_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListConsoleDesJeux.SelectedIndexChanged
         Dim lignefakeremade As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
@@ -1073,27 +1023,48 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         Cheat.Show()
     End Sub
     Private Sub ButtonInfo_Click(sender As Object, e As EventArgs) Handles ButtonInfo.Click
-        If TxtExplicationFiltres.Visible = True Then
-            TxtExplicationFiltres.Hide()
-            txtRules.Hide()
+        If GroupFiltres.Visible = True Then
+            GroupFiltres.Hide()
         Else
-            TxtExplicationFiltres.Show()
-            txtRules.Show()
+            GroupFiltres.Show()
         End If
     End Sub
-    Private Sub ButtonHideParam_Click(sender As Object, e As EventArgs) Handles ButtonHideParam.Click
-        If GroupConfigPartie.Visible = True Then
-            GroupConfigPartie.Hide()
-            GroupSansFiltres.Hide()
-            GroupFiltres.Hide()
-        ElseIf groupconfigpartie.Visible = False And CheckAvecFiltres.Checked = True Then
-            GroupConfigPartie.Show()
-            GroupSansFiltres.Hide()
-            GroupFiltres.Show()
-        ElseIf groupconfigpartie.Visible = False And CheckSansFiltres.Checked = True Then
-            GroupConfigPartie.Show()
-            GroupSansFiltres.Show()
-            GroupFiltres.Hide()
+
+    Private Sub ValidQuizz_Click(sender As Object, e As EventArgs) Handles ValidQuizz.Click
+
+        TitleBox.Show()
+        If PasTitreNiConsole.Checked = True Then
+            QuizzBoxRep.Show()
+        Else
+            QuizzBoxRep.Hide()
+        End If
+
+        If ConsoleTitre.Checked = True Then
+            ListConsoleDesJeux.Show()
+            ListTitreDesJeux.Show()
+        ElseIf TitreOnly.Checked = True Then
+            ListConsoleDesJeux.Hide()
+            ListTitreDesJeux.Show()
+        ElseIf PasTitreNiConsole.Checked = True Then
+            ListConsoleDesJeux.Hide()
+            ListTitreDesJeux.Hide()
+        End If
+
+        'On Parametre le tout
+        PlayerAudio.uiMode = "invisible"
+        PlayerAudio.settings.setMode("loop", False)
+        PlayerAudio.settings.mute = False
+        RandomList.SelectedIndex = 0
+
+        'Et enfin on cheeck si c'est Titre+Console pour Ajouter les console a la listbox
+        If ConsoleTitre.Checked = True Then
+            For Each j In ConsoleList.SelectedItems
+                ListConsoleDesJeux.Items.Add(j)
+            Next
+        End If
+
+        If PasTitreNiConsole.Checked = True Then
+            QuizzBoxRep.Hide()
         End If
     End Sub
 End Class
