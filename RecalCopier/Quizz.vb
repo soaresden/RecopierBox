@@ -1112,8 +1112,424 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
             If RandomList.Items.Count > 0 Then RandomList.SelectedIndex = 0
         End If
     End Sub
+    Private Sub ImportQuizz_Click(sender As Object, e As EventArgs) Handles ImportQuizz.Click
+        If MsgBox("Vous allez supprimer le Quizz actuel, Continuer ?", vbYesNo) = vbNo Then
+            Me.Close()
+            Form1.Show()
+            Exit Sub
+        End If
 
-    Sub refreshcompteurtitre()
+        Dim result As DialogResult = OpenFileDialog1.ShowDialog()
+        Dim importing = 1
+        If result = Windows.Forms.DialogResult.OK Then
+            Dim adresse As String = OpenFileDialog1.FileName
+            If Path.GetExtension(adresse) <> ".txt" Then
+                MsgBox("Ce n'est pas un .txt")
+            End If
 
+            'On clear les listbox
+            RandomList.Items.Clear()
+            Historique.Items.Clear()
+            ConsoleList.ClearSelected()
+
+            Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(adresse)
+            Dim line As String
+            Dim nblignes = 0
+            Do
+                line = reader.ReadLine
+                If line = Nothing Then GoTo Findufichier
+                nblignes = nblignes + 1
+
+                Dim detectparenthese = InStr(line, "(")
+                Dim detectetiret = InStr(line, "-")
+
+                If detectetiret = 0 Or detectparenthese = 0 Then
+                    MsgBox("Txt Incomplet")
+                    Exit Sub
+                End If
+
+                Dim consolass = line.Substring(0, detectparenthese - 2)
+                'on la selectionne dans la consolelist
+                ConsoleList.SelectedItem = consolass
+
+                Dim annee = line.Substring(detectparenthese, 4)
+                Dim titre = line.Substring(detectetiret + 1)
+
+                'On ajoute à la liste a la fin
+                Historique.Items.Add(line)
+                txtpositionend.Text = Historique.Items.Count
+                If RandomList.Items.Count > 0 Then RandomList.SelectedIndex = 0
+
+            Loop Until line Is Nothing
+Findufichier:
+            reader.Close()
+
+            'on ouvre maintenant les fichiers donc c'est le performclick
+            'On stop par securité
+            PlayerStop.PerformClick()
+
+            'Afficher le groupParametres
+            GroupConfigPartie.Show()
+
+            'On va hider le bouton des console + jeu si un seul systeme est selectionné
+            If ConsoleList.SelectedItems.Count = 1 Then
+                ConsoleTitre.Hide()
+                ListConsoleDesJeux.Hide()
+                PasTitreNiConsole.Show()
+            Else
+                ConsoleTitre.Show()
+                ListConsoleDesJeux.Show()
+                PasTitreNiConsole.Show()
+            End If
+
+            'On met le tooltip
+            ToolTipNbJeux.SetToolTip(TxtTotalEntrees, "Ce nombre représente le nombre de jeux total filtré. Plus vous avez un grand chiffre, Meilleur sera l'aléatoire")
+
+            'On affiche les listboxhelpers
+            listhelpingboxGenre.Show()
+            listhelpingboxDev.Show()
+            listhelpingboxPubl.Show()
+            listhelpingboxAnnee.Show()
+            listhelpingboxPlayers.Show()
+            listhelpingboxPlayCount.Show()
+            listhelpingboxNote.Show()
+            'Showing stuff
+
+            Dim gamelist As String = ConsoleList.Items(0)
+            Dim table As New DataTable()
+            Dim dv As DataView
+
+            Dim column As DataColumn
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "Console"
+            End With
+            table.Columns.Add(column)
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "Titre"
+            End With
+            table.Columns.Add(column)
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "CheminRom"
+            End With
+            table.Columns.Add(column)
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "Synopsis"
+            End With
+            table.Columns.Add(column)
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "CheminImage"
+            End With
+            table.Columns.Add(column)
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "CheminVideo"
+            End With
+            table.Columns.Add(column)
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "Genre"
+            End With
+            table.Columns.Add(column)
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "Note"
+            End With
+            table.Columns.Add(column)
+
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "Developer"
+            End With
+            table.Columns.Add(column)
+
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "Publisher"
+            End With
+            table.Columns.Add(column)
+
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "NbPlayers"
+            End With
+            table.Columns.Add(column)
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "DateSortie"
+            End With
+            table.Columns.Add(column)
+
+
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = "NbLancé"
+            End With
+            table.Columns.Add(column)
+
+            'Loop for every gamelists
+            For Each i In ConsoleList.SelectedItems
+
+                'generating the console name
+                Dim nomconsole As String = i
+                Dim consolederom As String = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\gamelist.xml"
+                gamelist = consolederom
+
+                Dim gamelistXml As XElement = XElement.Load(gamelist)
+
+                'getting the list for the xml with nodes
+                Dim query2 = From st In gamelistXml.Descendants("game") Select st
+
+                For Each xEle As XElement In query2
+                    Dim romconsole As String = nomconsole
+                    Dim romname As String = xEle.Element("name")
+                    Dim romId As String
+                    Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
+                    Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & temprom
+                    Dim romgenre As String
+                    Dim romdesc As String
+                    Dim romimage As String
+                    Dim romvideo As String
+                    Dim romnote As String
+                    Dim romdev As String
+                    Dim rompubl As String
+                    Dim romnbplayers As String
+                    Dim romdate As String
+                    Dim romCompteur As String
+                    Dim romhidden As String = xEle.Element("hidden")
+
+                    'Conditionnelles sur tous les champs
+                    If romhidden = "true" Then GoTo romsuivante 'si la rom est hidden, on l'affiche pas (Roms multicd)
+
+                    If xEle.Element("video") Is Nothing Then
+                        GoTo romsuivante
+                    Else
+                        romvideo = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(Replace(xEle.Element("video"), "/", "\"), "./", ""), ".\", "")
+                    End If
+
+                    Dim ExistGameId As Boolean = xEle.Attributes("id").Any
+
+                    If ExistGameId = True Then
+                        romId = xEle.Attribute("id").Value
+                    Else
+                        romId = Nothing
+                    End If
+
+                    If xEle.Element("desc") Is Nothing Then
+                        romdesc = Nothing
+                    Else
+                        romdesc = xEle.Element("desc")
+                    End If
+
+                    If xEle.Element("image") Is Nothing Then
+                        romimage = Nothing
+                    Else
+                        romimage = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(Replace(xEle.Element("image"), "/", "\"), "./", ""), ".\", "")
+                    End If
+
+                    If xEle.Element("genre") Is Nothing Then
+                        romgenre = Nothing
+                    Else
+                        romgenre = xEle.Element("genre")
+                    End If
+
+                    If xEle.Element("rating") Is Nothing Then
+                        romnote = Nothing
+                    Else
+                        romnote = xEle.Element("rating")
+                    End If
+
+                    If xEle.Element("rating") Is Nothing Then
+                        romnote = Nothing
+                    Else
+                        romnote = xEle.Element("rating")
+                    End If
+
+                    If xEle.Element("developer") Is Nothing Then
+                        romdev = Nothing
+                    Else
+                        romdev = xEle.Element("developer")
+                    End If
+
+                    If xEle.Element("publisher") Is Nothing Then
+                        rompubl = Nothing
+                    Else
+                        rompubl = xEle.Element("publisher")
+                    End If
+
+                    If xEle.Element("players") Is Nothing Then
+                        romnbplayers = Nothing
+                    Else
+                        romnbplayers = xEle.Element("players")
+                    End If
+
+                    If xEle.Element("releasedate") Is Nothing Then
+                        romdate = Nothing
+                    Else
+                        romdate = xEle.Element("releasedate")
+                    End If
+
+                    If xEle.Element("playcount") Is Nothing Then
+                        romCompteur = Nothing
+                    Else
+                        romCompteur = xEle.Element("playcount")
+                    End If
+
+                    'on ajoute le tout dans une table
+                    table.Rows.Add(romconsole, romname, rompath, romdesc, romimage, romvideo, romgenre, romnote, romdev, rompubl, romnbplayers, romdate, romCompteur)
+romsuivante:
+                Next
+            Next
+
+            'Sorting A-Z the console
+            dv = table.DefaultView
+            TempGrid.DataSource = table
+
+            'Width for columns
+            TempGrid.Columns("Console").Width = 50
+            TempGrid.Columns("Titre").Width = 190
+
+            TempGrid.Columns("CheminRom").Visible = False
+            TempGrid.Columns("CheminRom").Width = 50
+
+            TempGrid.Columns("Synopsis").Visible = False
+            TempGrid.Columns("Synopsis").Width = 50
+
+            TempGrid.Columns("CheminImage").Visible = False
+            TempGrid.Columns("CheminImage").Width = 50
+
+            TempGrid.Columns("CheminVideo").Visible = False
+            TempGrid.Columns("CheminVideo").Width = 50
+
+            TempGrid.Columns("Genre").Visible = False
+            TempGrid.Columns("Genre").Width = 50
+
+            TempGrid.Columns("Note").Visible = False
+            TempGrid.Columns("Note").Width = 50
+
+            TempGrid.Columns("Developer").Visible = False
+            TempGrid.Columns("Developer").Width = 50
+
+            TempGrid.Columns("Publisher").Visible = False
+            TempGrid.Columns("Publisher").Width = 50
+
+            TempGrid.Columns("NbPlayers").Visible = False
+            TempGrid.Columns("NbPlayers").Width = 50
+
+            TempGrid.Columns("DateSortie").Visible = True
+            TempGrid.Columns("DateSortie").Width = 50
+
+            TempGrid.Columns("NbLancé").Visible = False
+            TempGrid.Columns("NbLancé").Width = 50
+
+            'Reajusting Interface and Showing Final Interface
+            dv.Sort = "Console asc, Titre asc"
+
+            'On compte le nombre total d'entrées
+            TxtTotalEntrees.Text = TempGrid.Rows.Count - 1
+
+            'On va alimenter les filtres de la combobox 
+            PeuplerCombobox()
+
+            'On affiche pas la partie des options pour forcer la saisie
+            Label17.Hide()
+            Label11.Hide()
+            txtnbmanches.Hide()
+            Label16.Hide()
+            txttempsaffichprop.Hide()
+            'Focus sur le nombre de parties
+            txtnbmanches.Focus()
+
+            TitreOnly.Checked = True
+            txtnbmanches.Text = nblignes
+
+            'on recherche les entrees et on remet tout
+            If txtnbmanches.Text <= 0 Then
+                MsgBox("Impossible de Générer des Manches")
+                txtnbmanches.Focus()
+                Exit Sub
+            End If
+
+            If Val(txtnbmanches.Text) > Val(TxtTotalEntrees.Text) Then
+                MsgBox("Trop de Manches > Nb Roms dans le(s) Gamelist(s)")
+                Exit Sub
+            End If
+
+            If TxtTotalEntrees.Text < 12 Then
+                MsgBox("Votre Total Roms doit etre Superieur à 12")
+                Exit Sub
+            End If
+
+            Dim nbdemanches As Integer = Val(txtnbmanches.Text)
+            Dim nbroms As Integer = TxtTotalEntrees.Text
+
+            'On Clear par securité
+            RandomList.Items.Clear()
+            'On enleves toutes les listbox de reponses par securité
+            ListTitreDesJeux.Items.Clear()
+            ListConsoleDesJeux.Items.Clear()
+
+            'On va maintenant Charger les options du jeu
+            GroupDifficulty.Show()
+
+            'on va devoir chercher chaque entrees
+            For p = 0 To Historique.Items.Count - 1
+                Dim lignoss = Historique.Items(p)
+                Dim tiret = InStr(lignoss, "-")
+                Dim titre = lignoss.Substring(tiret + 1)
+
+                Dim nouvox As Integer
+                'on cherche dans le grid
+                For gridoline = 0 To TempGrid.Rows.Count - 1
+                    Dim nomdujeu = TempGrid.Rows(gridoline).Cells(TempGrid.Columns("Titre").Index).Value
+
+                    If titre = nomdujeu Then
+                        nouvox = gridoline
+                        Exit For
+                    End If
+                Next
+
+                RandomList.Items.Add((nouvox + 5) * 37)
+                txtpositionend.Text = Historique.Items.Count
+                If RandomList.Items.Count > 0 Then RandomList.SelectedIndex = 0
+            Next
+        End If
+        ValidQuizz.PerformClick()
+        MsgBox("Import Terminé")
+    End Sub
+
+    Private Sub ImportDouble_Click(sender As Object, e As EventArgs) Handles ImportDouble.Click
+        TabControl1.Show()
+        TabControl1.SelectedTab = TabPage2
+        ImportQuizz.PerformClick()
     End Sub
 End Class

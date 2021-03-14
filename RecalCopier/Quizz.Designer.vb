@@ -111,6 +111,8 @@ Partial Class Quizz
         Me.ExportTxt = New System.Windows.Forms.Button()
         Me.Historique = New System.Windows.Forms.ListBox()
         Me.TempGrid = New System.Windows.Forms.DataGridView()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.ImportDouble = New System.Windows.Forms.Button()
         Me.GroupParamComplet.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupConfigPartie.SuspendLayout()
@@ -1146,12 +1148,34 @@ Partial Class Quizz
         Me.TempGrid.Size = New System.Drawing.Size(206, 128)
         Me.TempGrid.TabIndex = 11
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'ImportDouble
+        '
+        Me.ImportDouble.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(67, Byte), Integer))
+        Me.ImportDouble.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ImportDouble.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ImportDouble.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ImportDouble.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(89, Byte), Integer))
+        Me.ImportDouble.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ImportDouble.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ImportDouble.ForeColor = System.Drawing.Color.White
+        Me.ImportDouble.Location = New System.Drawing.Point(159, 10)
+        Me.ImportDouble.Name = "ImportDouble"
+        Me.ImportDouble.Size = New System.Drawing.Size(152, 23)
+        Me.ImportDouble.TabIndex = 50
+        Me.ImportDouble.Text = "Importer un Quizz depuis .txt"
+        Me.ImportDouble.UseVisualStyleBackColor = False
+        '
         'Quizz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(116, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(908, 601)
+        Me.Controls.Add(Me.ImportDouble)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.GroupDifficulty)
         Me.Controls.Add(Me.TitleBox)
@@ -1269,4 +1293,6 @@ Partial Class Quizz
     Friend WithEvents ImportQuizz As Button
     Friend WithEvents RemoveQuizz As Button
     Friend WithEvents AddQuizz As Button
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents ImportDouble As Button
 End Class
