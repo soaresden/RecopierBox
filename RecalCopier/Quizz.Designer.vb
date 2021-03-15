@@ -1141,11 +1141,16 @@ Partial Class Quizz
         'TempGrid
         '
         Me.TempGrid.AllowUserToAddRows = False
+        Me.TempGrid.AllowUserToDeleteRows = False
+        Me.TempGrid.AllowUserToResizeRows = False
         Me.TempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TempGrid.Location = New System.Drawing.Point(6, 9)
+        Me.TempGrid.MultiSelect = False
         Me.TempGrid.Name = "TempGrid"
+        Me.TempGrid.ReadOnly = True
         Me.TempGrid.RowHeadersWidth = 51
         Me.TempGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.TempGrid.ShowEditingIcon = False
         Me.TempGrid.Size = New System.Drawing.Size(206, 128)
         Me.TempGrid.TabIndex = 11
         '

@@ -777,12 +777,30 @@ recalculrando:
     End Sub
 
     Private Sub PlayerPlay_Click(sender As Object, e As EventArgs) Handles PlayerPlay.Click
+        'si y'a pas de jeux dans la liste msgbox
+        If Historique.Items.Count = 0 Then
+            MsgBox("Pas De Jeux dans Le Quizz !")
+            Exit Sub
+        End If
         'test pour voir si c'est à l'arret ou en play
         If (PlayerVideo.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play 
             Exit Sub
         ElseIf PlayerVideo.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerVideo.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
             Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
             PlayerVideo.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
+
+            'Afficher les propositions en fonctions du mode
+            If PasTitreNiConsole.Checked = True Then
+                ListConsoleDesJeux.Hide()
+                ListTitreDesJeux.Hide()
+            ElseIf TitreOnly.Checked = True Then
+                ListConsoleDesJeux.Hide()
+                ListTitreDesJeux.Show()
+            Else
+                ListConsoleDesJeux.Show()
+                ListTitreDesJeux.Show()
+            End If
+
             'En fonction des choix ci dessus
             If VidNormal.Checked = True Then
                 PlayerVideo.uiMode = "none"
@@ -815,18 +833,20 @@ recalculrando:
             Timer1.Start()
             TimeBox.Text = ""
 
-            'On enleve la liste des jeux par securite
-            ListTitreDesJeux.Items.Clear()
+            If PasTitreNiConsole.Checked <> True Then 'si il faut des propositions
+                'On enleve la liste des jeux par securite
+                ListTitreDesJeux.Items.Clear()
 
-            'On remplit la randobox de toutes les possibilités
-            listrandobox.Items.Clear()
-            Dim rando As Integer
-            For rando = 0 To TxtTotalEntrees.Text - 1
-                listrandobox.Items.Add(rando)
-            Next
+                'On remplit la randobox de toutes les possibilités
+                listrandobox.Items.Clear()
+                Dim rando As Integer
+                For rando = 0 To TxtTotalEntrees.Text - 1
+                    listrandobox.Items.Add(rando)
+                Next
 
-            'et on enleve le bon chiffre
-            listrandobox.Items.Remove(lavraieligne)
+                'et on enleve le bon chiffre
+                listrandobox.Items.Remove(lavraieligne)
+            End If
         End If
     End Sub
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
@@ -848,6 +868,7 @@ recalculrando:
         ProgressBar1.Maximum = PlayerVideo.currentMedia.duration
         ProgressBar1.Value = PlayerVideo.Ctlcontrols.currentPosition
         ProgressBar1.Increment(1)
+
         Dim tpsrestant As Double
         tpsrestant = PlayerVideo.currentMedia.duration - PlayerVideo.Ctlcontrols.currentPosition
         TimeBox.Text = tpsrestant.ToString("00.0")
@@ -856,22 +877,25 @@ recalculrando:
         If PlayerVideo.playState.wmppsPlaying = True Then
             txtnbmanches.ReadOnly = True
             txtnbmanches.BackColor = Color.FromArgb(172, 172, 172)
-
+            txttempsaffichprop.Show()
             txttempsaffichprop.ReadOnly = True
             txttempsaffichprop.BackColor = Color.FromArgb(172, 172, 172)
+        End If
+
+        'si le mode sans titre, on l'affiche pas
+        If PasTitreNiConsole.Checked = True Then
+            txtnbmanches.ReadOnly = True
+            txtnbmanches.BackColor = Color.FromArgb(172, 172, 172)
+            txttempsaffichprop.Hide()
         End If
 
         'On check le temps des propositions
         Dim tempsprop As String = txttempsaffichprop.Text
 
-        'si le mode pas de proposition, on fait juste la couleur donc on arrete
-        If PasTitreNiConsole.Checked = True Then Exit Sub
-
         'On envoie la couleur
         If ProgressBar1.Value <= tempsprop Then 'Si c'est avant les propositions c'est VERT
             SendMessage(ProgressBar1.Handle, 1040, 1, 0)
             TimeBox.BackColor = Color.FromArgb(6, 176, 37)
-
             'si c'est en mode pixel on va pixelliser à mesure
             If VidPixel.Checked = True Then
 
