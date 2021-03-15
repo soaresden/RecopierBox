@@ -29,6 +29,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,6 +69,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -119,6 +122,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="overlay.Designer.vb">
+      <DependentUpon>overlay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="overlay.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="OverlayManager.Designer.vb">
       <DependentUpon>OverlayManager.vb</DependentUpon>
@@ -175,6 +184,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="overlay.resx">
+      <DependentUpon>overlay.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OverlayManager.resx">
       <DependentUpon>OverlayManager.vb</DependentUpon>

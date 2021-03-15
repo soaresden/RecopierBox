@@ -26,8 +26,6 @@ Partial Class Quizz
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Quizz))
         Me.GroupParamComplet = New System.Windows.Forms.GroupBox()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.ButtonInfo = New System.Windows.Forms.Button()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.ButtonDoRandom1 = New System.Windows.Forms.Button()
         Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
         Me.PasTitreNiConsole = New System.Windows.Forms.RadioButton()
@@ -75,18 +73,14 @@ Partial Class Quizz
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
         Me.ToolTipNbJeux = New System.Windows.Forms.ToolTip(Me.components)
         Me.TitleBox = New System.Windows.Forms.GroupBox()
-        Me.PlayerAudio = New AxWMPLib.AxWindowsMediaPlayer()
+        Me.PlayerVideo = New AxWMPLib.AxWindowsMediaPlayer()
         Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.TimeBox = New System.Windows.Forms.TextBox()
-        Me.PlayerNext = New System.Windows.Forms.Button()
         Me.RandomList = New System.Windows.Forms.ListBox()
         Me.txtpositionend = New System.Windows.Forms.TextBox()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.PlayerPrev = New System.Windows.Forms.Button()
-        Me.PlayerStop = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.PlayerPlay = New System.Windows.Forms.Button()
         Me.txtpositionrandom = New System.Windows.Forms.TextBox()
         Me.GroupDifficulty = New System.Windows.Forms.GroupBox()
         Me.ValidQuizz = New System.Windows.Forms.Button()
@@ -113,19 +107,25 @@ Partial Class Quizz
         Me.TempGrid = New System.Windows.Forms.DataGridView()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ImportDouble = New System.Windows.Forms.Button()
+        Me.PlayerNext = New System.Windows.Forms.Button()
+        Me.PlayerPrev = New System.Windows.Forms.Button()
+        Me.PlayerStop = New System.Windows.Forms.Button()
+        Me.PlayerPlay = New System.Windows.Forms.Button()
+        Me.ButtonInfo = New System.Windows.Forms.Button()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.GroupParamComplet.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupConfigPartie.SuspendLayout()
         Me.GroupFiltres.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TitleBox.SuspendLayout()
-        CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PlayerVideo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupDifficulty.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupParamComplet
@@ -159,34 +159,6 @@ Partial Class Quizz
         Me.Label20.Size = New System.Drawing.Size(128, 13)
         Me.Label20.TabIndex = 48
         Me.Label20.Text = "Cacher/Afficher les Filtres"
-        '
-        'ButtonInfo
-        '
-        Me.ButtonInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(68, Byte), Integer))
-        Me.ButtonInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonInfo.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonInfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(89, Byte), Integer))
-        Me.ButtonInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonInfo.Font = New System.Drawing.Font("Equinox Com", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonInfo.ForeColor = System.Drawing.Color.White
-        Me.ButtonInfo.Image = CType(resources.GetObject("ButtonInfo.Image"), System.Drawing.Image)
-        Me.ButtonInfo.Location = New System.Drawing.Point(210, 111)
-        Me.ButtonInfo.Name = "ButtonInfo"
-        Me.ButtonInfo.Size = New System.Drawing.Size(42, 39)
-        Me.ButtonInfo.TabIndex = 47
-        Me.ButtonInfo.UseVisualStyleBackColor = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(9, 12)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(129, 88)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 42
-        Me.PictureBox2.TabStop = False
         '
         'ButtonDoRandom1
         '
@@ -675,7 +647,7 @@ Partial Class Quizz
         'TitleBox
         '
         Me.TitleBox.BackColor = System.Drawing.Color.MidnightBlue
-        Me.TitleBox.Controls.Add(Me.PlayerAudio)
+        Me.TitleBox.Controls.Add(Me.PlayerVideo)
         Me.TitleBox.Controls.Add(Me.listrandobox)
         Me.TitleBox.Controls.Add(Me.Label15)
         Me.TitleBox.Controls.Add(Me.TimeBox)
@@ -696,14 +668,14 @@ Partial Class Quizz
         Me.TitleBox.TabStop = False
         Me.TitleBox.Text = "VideoPlayerBox"
         '
-        'PlayerAudio
+        'PlayerVideo
         '
-        Me.PlayerAudio.Enabled = True
-        Me.PlayerAudio.Location = New System.Drawing.Point(111, 68)
-        Me.PlayerAudio.Name = "PlayerAudio"
-        Me.PlayerAudio.OcxState = CType(resources.GetObject("PlayerAudio.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.PlayerAudio.Size = New System.Drawing.Size(300, 181)
-        Me.PlayerAudio.TabIndex = 33
+        Me.PlayerVideo.Enabled = True
+        Me.PlayerVideo.Location = New System.Drawing.Point(111, 68)
+        Me.PlayerVideo.Name = "PlayerVideo"
+        Me.PlayerVideo.OcxState = CType(resources.GetObject("PlayerVideo.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.PlayerVideo.Size = New System.Drawing.Size(300, 181)
+        Me.PlayerVideo.TabIndex = 33
         '
         'listrandobox
         '
@@ -739,19 +711,6 @@ Partial Class Quizz
         Me.TimeBox.TabIndex = 40
         Me.TimeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'PlayerNext
-        '
-        Me.PlayerNext.BackColor = System.Drawing.Color.Transparent
-        Me.PlayerNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
-        Me.PlayerNext.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerNext.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerNext.Image = CType(resources.GetObject("PlayerNext.Image"), System.Drawing.Image)
-        Me.PlayerNext.Location = New System.Drawing.Point(57, 24)
-        Me.PlayerNext.Name = "PlayerNext"
-        Me.PlayerNext.Size = New System.Drawing.Size(50, 50)
-        Me.PlayerNext.TabIndex = 28
-        Me.PlayerNext.UseVisualStyleBackColor = False
-        '
         'RandomList
         '
         Me.RandomList.BackColor = System.Drawing.Color.DimGray
@@ -785,32 +744,6 @@ Partial Class Quizz
         Me.ProgressBar1.Size = New System.Drawing.Size(300, 27)
         Me.ProgressBar1.TabIndex = 27
         '
-        'PlayerPrev
-        '
-        Me.PlayerPrev.BackColor = System.Drawing.Color.Transparent
-        Me.PlayerPrev.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
-        Me.PlayerPrev.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerPrev.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPrev.Image = CType(resources.GetObject("PlayerPrev.Image"), System.Drawing.Image)
-        Me.PlayerPrev.Location = New System.Drawing.Point(6, 24)
-        Me.PlayerPrev.Name = "PlayerPrev"
-        Me.PlayerPrev.Size = New System.Drawing.Size(50, 50)
-        Me.PlayerPrev.TabIndex = 38
-        Me.PlayerPrev.UseVisualStyleBackColor = False
-        '
-        'PlayerStop
-        '
-        Me.PlayerStop.BackColor = System.Drawing.Color.GhostWhite
-        Me.PlayerStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red
-        Me.PlayerStop.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerStop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerStop.Image = CType(resources.GetObject("PlayerStop.Image"), System.Drawing.Image)
-        Me.PlayerStop.Location = New System.Drawing.Point(57, 191)
-        Me.PlayerStop.Name = "PlayerStop"
-        Me.PlayerStop.Size = New System.Drawing.Size(50, 50)
-        Me.PlayerStop.TabIndex = 34
-        Me.PlayerStop.UseVisualStyleBackColor = False
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -822,19 +755,6 @@ Partial Class Quizz
         Me.Label12.Size = New System.Drawing.Size(31, 22)
         Me.Label12.TabIndex = 36
         Me.Label12.Text = "sur"
-        '
-        'PlayerPlay
-        '
-        Me.PlayerPlay.BackColor = System.Drawing.Color.Transparent
-        Me.PlayerPlay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.PlayerPlay.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlayerPlay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlayerPlay.Image = CType(resources.GetObject("PlayerPlay.Image"), System.Drawing.Image)
-        Me.PlayerPlay.Location = New System.Drawing.Point(7, 191)
-        Me.PlayerPlay.Name = "PlayerPlay"
-        Me.PlayerPlay.Size = New System.Drawing.Size(50, 50)
-        Me.PlayerPlay.TabIndex = 33
-        Me.PlayerPlay.UseVisualStyleBackColor = False
         '
         'txtpositionrandom
         '
@@ -1169,6 +1089,86 @@ Partial Class Quizz
         Me.ImportDouble.Text = "Importer un Quizz depuis .txt"
         Me.ImportDouble.UseVisualStyleBackColor = False
         '
+        'PlayerNext
+        '
+        Me.PlayerNext.BackColor = System.Drawing.Color.Transparent
+        Me.PlayerNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
+        Me.PlayerNext.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerNext.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PlayerNext.Image = CType(resources.GetObject("PlayerNext.Image"), System.Drawing.Image)
+        Me.PlayerNext.Location = New System.Drawing.Point(57, 24)
+        Me.PlayerNext.Name = "PlayerNext"
+        Me.PlayerNext.Size = New System.Drawing.Size(50, 50)
+        Me.PlayerNext.TabIndex = 28
+        Me.PlayerNext.UseVisualStyleBackColor = False
+        '
+        'PlayerPrev
+        '
+        Me.PlayerPrev.BackColor = System.Drawing.Color.Transparent
+        Me.PlayerPrev.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Cyan
+        Me.PlayerPrev.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerPrev.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PlayerPrev.Image = CType(resources.GetObject("PlayerPrev.Image"), System.Drawing.Image)
+        Me.PlayerPrev.Location = New System.Drawing.Point(6, 24)
+        Me.PlayerPrev.Name = "PlayerPrev"
+        Me.PlayerPrev.Size = New System.Drawing.Size(50, 50)
+        Me.PlayerPrev.TabIndex = 38
+        Me.PlayerPrev.UseVisualStyleBackColor = False
+        '
+        'PlayerStop
+        '
+        Me.PlayerStop.BackColor = System.Drawing.Color.GhostWhite
+        Me.PlayerStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red
+        Me.PlayerStop.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerStop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PlayerStop.Image = CType(resources.GetObject("PlayerStop.Image"), System.Drawing.Image)
+        Me.PlayerStop.Location = New System.Drawing.Point(57, 191)
+        Me.PlayerStop.Name = "PlayerStop"
+        Me.PlayerStop.Size = New System.Drawing.Size(50, 50)
+        Me.PlayerStop.TabIndex = 34
+        Me.PlayerStop.UseVisualStyleBackColor = False
+        '
+        'PlayerPlay
+        '
+        Me.PlayerPlay.BackColor = System.Drawing.Color.Transparent
+        Me.PlayerPlay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.PlayerPlay.Font = New System.Drawing.Font("VAG Rundschrift D", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlayerPlay.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PlayerPlay.Image = CType(resources.GetObject("PlayerPlay.Image"), System.Drawing.Image)
+        Me.PlayerPlay.Location = New System.Drawing.Point(7, 191)
+        Me.PlayerPlay.Name = "PlayerPlay"
+        Me.PlayerPlay.Size = New System.Drawing.Size(50, 50)
+        Me.PlayerPlay.TabIndex = 33
+        Me.PlayerPlay.UseVisualStyleBackColor = False
+        '
+        'ButtonInfo
+        '
+        Me.ButtonInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(68, Byte), Integer))
+        Me.ButtonInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonInfo.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonInfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(201, Byte), Integer), CType(CType(89, Byte), Integer))
+        Me.ButtonInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonInfo.Font = New System.Drawing.Font("Equinox Com", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonInfo.ForeColor = System.Drawing.Color.White
+        Me.ButtonInfo.Image = CType(resources.GetObject("ButtonInfo.Image"), System.Drawing.Image)
+        Me.ButtonInfo.Location = New System.Drawing.Point(210, 111)
+        Me.ButtonInfo.Name = "ButtonInfo"
+        Me.ButtonInfo.Size = New System.Drawing.Size(42, 39)
+        Me.ButtonInfo.TabIndex = 47
+        Me.ButtonInfo.UseVisualStyleBackColor = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(9, 12)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(129, 88)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 42
+        Me.PictureBox2.TabStop = False
+        '
         'Quizz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1187,7 +1187,6 @@ Partial Class Quizz
         Me.Text = "Quizz"
         Me.GroupParamComplet.ResumeLayout(False)
         Me.GroupParamComplet.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupConfigPartie.ResumeLayout(False)
         Me.GroupConfigPartie.PerformLayout()
         Me.GroupFiltres.ResumeLayout(False)
@@ -1195,7 +1194,7 @@ Partial Class Quizz
         Me.GroupBox1.ResumeLayout(False)
         Me.TitleBox.ResumeLayout(False)
         Me.TitleBox.PerformLayout()
-        CType(Me.PlayerAudio, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PlayerVideo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupDifficulty.ResumeLayout(False)
         Me.GroupDifficulty.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1203,6 +1202,7 @@ Partial Class Quizz
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1257,7 +1257,7 @@ Partial Class Quizz
     Friend WithEvents ButtonInfo As Button
     Friend WithEvents PasTitreNiConsole As RadioButton
     Friend WithEvents TitleBox As GroupBox
-    Friend WithEvents PlayerAudio As AxWMPLib.AxWindowsMediaPlayer
+    Friend WithEvents PlayerVideo As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents listrandobox As ListBox
     Friend WithEvents Label15 As Label
     Friend WithEvents TimeBox As TextBox

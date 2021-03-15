@@ -1,6 +1,11 @@
 ﻿Imports System.IO
 Imports System.Threading
 Imports System.Linq
+Imports Emgu.CV
+Imports Emgu.CV.Util
+Imports Emgu.CV.Structure
+Imports Xabe.FFmpeg
+Imports System.Drawing.Imaging
 
 Public Class Quizz
 
@@ -754,65 +759,78 @@ recalculrando:
     Private Sub PlayerNext_Click(sender As Object, e As EventArgs) Handles PlayerNext.Click
         Dim selectionactuelle = RandomList.SelectedIndex
         If selectionactuelle >= txtpositionend.Text - 1 Then Exit Sub
-        PlayerAudio.Ctlcontrols.stop()
+        PlayerVideo.Ctlcontrols.stop()
         RandomList.SelectedIndex = selectionactuelle + 1
         ListTitreDesJeux.Items.Clear()
         'On securise en mettant le player en hide
-        PlayerAudio.uiMode = "none"
+        PlayerVideo.uiMode = "none"
     End Sub
 
     Private Sub PlayerPrev_Click(sender As Object, e As EventArgs) Handles PlayerPrev.Click
         Dim selectionactuelle = RandomList.SelectedIndex
         If selectionactuelle <= 0 Then Exit Sub
-        PlayerAudio.Ctlcontrols.stop()
+        PlayerVideo.Ctlcontrols.stop()
         RandomList.SelectedIndex = selectionactuelle - 1
         ListTitreDesJeux.Items.Clear()
         'On securise en mettant le player en hide
-        PlayerAudio.uiMode = "none"
+        PlayerVideo.uiMode = "none"
     End Sub
 
     Private Sub PlayerPlay_Click(sender As Object, e As EventArgs) Handles PlayerPlay.Click
         'test pour voir si c'est à l'arret ou en play
-        If (PlayerAudio.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play 
+        If (PlayerVideo.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play 
             Exit Sub
-        ElseIf PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerAudio.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
+        ElseIf PlayerVideo.playState = WMPLib.WMPPlayState.wmppsStopped Or PlayerVideo.playState = WMPLib.WMPPlayState.wmppsStopped = 0 Then 'Si c'est stoppé on load la video
             Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
-            PlayerAudio.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
-
+            PlayerVideo.URL = TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value
             'En fonction des choix ci dessus
-            If VidNormal.Checked = True Then PlayerAudio.uiMode = "none"
-            If VidSans.Checked = True Then PlayerAudio.uiMode = "invisible"
-            'If VidPixel.Checked = True Then 
-
-            If SonAvec.Checked = True Then PlayerAudio.settings.mute = False
-            If SonSans.Checked = True Then PlayerAudio.settings.mute = True
-
-            If PlayerOnce.Checked = True Then PlayerAudio.settings.setMode("loop", False)
-            If PlayerRepeat.Checked = True Then PlayerAudio.settings.setMode("loop", True)
-
-            PlayerAudio.Ctlcontrols.play()
-                ProgressBar1.Minimum = 0
-                ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
-
-                Timer1.Start()
-                TimeBox.Text = ""
-
-                'On enleve la liste des jeux par securite
-                ListTitreDesJeux.Items.Clear()
-
-                'On remplit la randobox de toutes les possibilités
-                listrandobox.Items.Clear()
-                Dim rando As Integer
-                For rando = 0 To TxtTotalEntrees.Text - 1
-                    listrandobox.Items.Add(rando)
-                Next
-
-                'et on enleve le bon chiffre
-                listrandobox.Items.Remove(lavraieligne)
+            If VidNormal.Checked = True Then
+                PlayerVideo.uiMode = "none"
             End If
+            If VidSans.Checked = True Then
+                PlayerVideo.uiMode = "invisible"
+            End If
+            If VidPixel.Checked = True Then
+                PlayerVideo.uiMode = "none"
+            End If
+
+            If SonAvec.Checked = True Then
+                PlayerVideo.settings.mute = False
+            End If
+            If SonSans.Checked = True Then
+                PlayerVideo.settings.mute = True
+            End If
+
+            If PlayerOnce.Checked = True Then
+                PlayerVideo.settings.setMode("loop", False)
+            End If
+            If PlayerRepeat.Checked = True Then
+                PlayerVideo.settings.setMode("loop", True)
+            End If
+
+            PlayerVideo.Ctlcontrols.play()
+            ProgressBar1.Minimum = 0
+            ProgressBar1.Maximum = PlayerVideo.currentMedia.duration
+
+            Timer1.Start()
+            TimeBox.Text = ""
+
+            'On enleve la liste des jeux par securite
+            ListTitreDesJeux.Items.Clear()
+
+            'On remplit la randobox de toutes les possibilités
+            listrandobox.Items.Clear()
+            Dim rando As Integer
+            For rando = 0 To TxtTotalEntrees.Text - 1
+                listrandobox.Items.Add(rando)
+            Next
+
+            'et on enleve le bon chiffre
+            listrandobox.Items.Remove(lavraieligne)
+        End If
     End Sub
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
-        PlayerAudio.Ctlcontrols.stop()
+        PlayerVideo.Ctlcontrols.stop()
         Timer1.Stop()
         TimeBox.Text = ""
         TimeBox.BackColor = Color.FromArgb(72, 61, 139)
@@ -827,14 +845,15 @@ recalculrando:
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         ProgressBar1.Minimum = 0
-        ProgressBar1.Maximum = PlayerAudio.currentMedia.duration
-        ProgressBar1.Value = PlayerAudio.Ctlcontrols.currentPosition
+        ProgressBar1.Maximum = PlayerVideo.currentMedia.duration
+        ProgressBar1.Value = PlayerVideo.Ctlcontrols.currentPosition
         ProgressBar1.Increment(1)
-        Dim tpsrestant As Double = PlayerAudio.currentMedia.duration - PlayerAudio.Ctlcontrols.currentPosition
+        Dim tpsrestant As Double
+        tpsrestant = PlayerVideo.currentMedia.duration - PlayerVideo.Ctlcontrols.currentPosition
         TimeBox.Text = tpsrestant.ToString("00.0")
 
         'On va bloquer les nb manches et le temps
-        If PlayerAudio.playState.wmppsPlaying Then
+        If PlayerVideo.playState.wmppsPlaying = True Then
             txtnbmanches.ReadOnly = True
             txtnbmanches.BackColor = Color.FromArgb(172, 172, 172)
 
@@ -852,6 +871,26 @@ recalculrando:
         If ProgressBar1.Value <= tempsprop Then 'Si c'est avant les propositions c'est VERT
             SendMessage(ProgressBar1.Handle, 1040, 1, 0)
             TimeBox.BackColor = Color.FromArgb(6, 176, 37)
+
+            'si c'est en mode pixel on va pixelliser à mesure
+            If VidPixel.Checked = True Then
+                With overlay
+                    .FormBorderStyle = Windows.Forms.FormBorderStyle.None
+                    .BackColor = Color.RoyalBlue
+                    .TransparencyKey = .BackColor
+                    .Opacity = 0.9
+                    .ShowInTaskbar = False
+                    .Visible = False
+                    .Left = 710
+                    .Top = 295
+                    .Width = 300
+                    .Height = 181
+                    .Show(Me)
+                End With
+            Else
+                overlay.Hide()
+            End If
+
         ElseIf ProgressBar1.Value >= tempsprop And ProgressBar1.Value < (0.8 * ProgressBar1.Maximum) Then 'Si c'est avant les propositions c'est ORANGE
             SendMessage(ProgressBar1.Handle, 1040, 3, 0)
             TimeBox.BackColor = Color.FromArgb(218, 203, 38)
@@ -869,7 +908,7 @@ recalculrando:
             RandomizerPropositions(titreencours, consoleencours)
         End If
         '########### CHECK DU TEMPS POUR LES TITRES ONLY ###############
-        If PlayerAudio.Ctlcontrols.currentPosition < tempsprop Then Exit Sub
+        If PlayerVideo.Ctlcontrols.currentPosition < tempsprop Then Exit Sub
         '############SI C'EST QUIZZ TITRE#################
         If TitreOnly.Checked = True Then ' Titre Et Consoles
             RandomizerPropositions(titreencours, consoleencours)
@@ -926,7 +965,7 @@ finboucle:
         'on verifie si la selection est bien celle ci
         If IsNothing(ListTitreDesJeux.SelectedItem.ToString) Then Exit Sub
         If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
-            PlayerAudio.uiMode = "full"
+            PlayerVideo.uiMode = "full"
             MsgBox("BIEN JOUE !")
         Else
             MsgBox("NOPE !")
@@ -951,6 +990,7 @@ finboucle:
     End Sub
     Private Sub VidPixel_CheckedChanged(sender As Object, e As EventArgs) Handles VidPixel.CheckedChanged
         If VidPixel.Checked = True Then
+            MsgBox("Marche pas pour l'instant ^^ !")
             VidNormal.Checked = Not VidPixel.Checked
             VidSans.Checked = Not VidPixel.Checked
         End If
@@ -1057,8 +1097,12 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         Process.Start(generefichier)
     End Sub
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
-        If SonSans.Checked = True Then Exit Sub
-        PlayerAudio.settings.volume = TrackBar1.Value
+        If SonSans.Checked = True Then
+            TrackBar1.Hide()
+            Exit Sub
+        End If
+        TrackBar1.Show()
+        PlayerVideo.settings.volume = TrackBar1.Value
     End Sub
 
     Private Sub RemoveQuizz_Click(sender As Object, e As EventArgs) Handles RemoveQuizz.Click
@@ -1085,7 +1129,7 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
                     txtpositionend.Text = Historique.Items.Count
                     If RandomList.Items.Count > 0 Then RandomList.SelectedIndex = 0
                     Exit Sub
-                    End If
+                End If
             Next
 
         Else
@@ -1527,10 +1571,21 @@ romsuivante:
         ValidQuizz.PerformClick()
         MsgBox("Import Terminé")
     End Sub
-
     Private Sub ImportDouble_Click(sender As Object, e As EventArgs) Handles ImportDouble.Click
         TabControl1.Show()
         TabControl1.SelectedTab = TabPage2
         ImportQuizz.PerformClick()
     End Sub
+    Public Function SetImgOpacity(ByVal imgPic As Image, ByVal imgOpac As Single) As Image
+        Dim bmpPic As New Bitmap(imgPic.Width, imgPic.Height)
+        Dim gfxPic As Graphics = Graphics.FromImage(bmpPic)
+        Dim cmxPic As New ColorMatrix()
+        Dim iaPic As New ImageAttributes()
+        cmxPic.Matrix33 = imgOpac
+        iaPic.SetColorMatrix(cmxPic, ColorMatrixFlag.[Default], ColorAdjustType.Bitmap)
+        gfxPic.DrawImage(imgPic, New Rectangle(0, 0, bmpPic.Width, bmpPic.Height), 0, 0, imgPic.Width, imgPic.Height, GraphicsUnit.Pixel, iaPic)
+        gfxPic.Dispose()
+        iaPic.Dispose()
+        Return bmpPic
+    End Function
 End Class
