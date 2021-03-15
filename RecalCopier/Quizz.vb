@@ -1,15 +1,12 @@
 ﻿Imports System.IO
 Imports System.Threading
 Imports System.Linq
-Imports Emgu.CV
-Imports Emgu.CV.Util
-Imports Emgu.CV.Structure
-Imports Xabe.FFmpeg
 Imports System.Drawing.Imaging
 
 Public Class Quizz
 
     Private Sub Quizz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'On alimente le gamelist
         For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
             If File.Exists(foundDirectory & "\gamelist.xml") Then
@@ -748,11 +745,14 @@ recalculrando:
         If chiffreactuel = Nothing Then Exit Sub
         Dim vraichiffre As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
 
-        TabControl1.SelectedTab = TabPage2
         TempGrid.ClearSelection()
         TempGrid.CurrentCell = TempGrid.Item("Titre", CInt(vraichiffre))
-        TabControl1.SelectedTab = TabPage1
 
+        If TabControl1.SelectedTab Is TabPage2 Then
+            TabControl1.SelectedTab = TabPage2
+        Else
+            TabControl1.SelectedTab = TabPage1
+        End If
     End Sub
 
 
@@ -874,7 +874,7 @@ recalculrando:
 
             'si c'est en mode pixel on va pixelliser à mesure
             If VidPixel.Checked = True Then
-                'BLABLA
+
             End If
 
         ElseIf ProgressBar1.Value >= tempsprop And ProgressBar1.Value < (0.8 * ProgressBar1.Maximum) Then 'Si c'est avant les propositions c'est ORANGE
@@ -977,7 +977,7 @@ finboucle:
     Private Sub VidPixel_CheckedChanged(sender As Object, e As EventArgs) Handles VidPixel.CheckedChanged
         If VidPixel.Checked = True Then
             MsgBox("Marche pas pour l'instant ^^ !")
-            VidNormal.Checked = Not VidPixel.Checked
+                VidNormal.Checked = Not VidPixel.Checked
             VidSans.Checked = Not VidPixel.Checked
         End If
     End Sub
@@ -1562,16 +1562,17 @@ romsuivante:
         TabControl1.SelectedTab = TabPage2
         ImportQuizz.PerformClick()
     End Sub
-    Public Function SetImgOpacity(ByVal imgPic As Image, ByVal imgOpac As Single) As Image
-        Dim bmpPic As New Bitmap(imgPic.Width, imgPic.Height)
-        Dim gfxPic As Graphics = Graphics.FromImage(bmpPic)
-        Dim cmxPic As New ColorMatrix()
-        Dim iaPic As New ImageAttributes()
-        cmxPic.Matrix33 = imgOpac
-        iaPic.SetColorMatrix(cmxPic, ColorMatrixFlag.[Default], ColorAdjustType.Bitmap)
-        gfxPic.DrawImage(imgPic, New Rectangle(0, 0, bmpPic.Width, bmpPic.Height), 0, 0, imgPic.Width, imgPic.Height, GraphicsUnit.Pixel, iaPic)
-        gfxPic.Dispose()
-        iaPic.Dispose()
-        Return bmpPic
-    End Function
+    Private Sub Historique_DrawItem(sender As Object, e As DrawItemEventArgs) Handles Historique.DrawItem
+        Dim mybrush As New System.Drawing.SolidBrush(Color.FromArgb(0, 177, 89))
+        mybrush.Color = Color.FromArgb(255, 0, 0)
+
+        e.DrawBackground()
+            If (e.State And DrawItemState.Selected) = DrawItemState.Selected Then
+                e.Graphics.FillRectangle(mybrush, e.Bounds)
+            End If
+            Using b As New SolidBrush(e.ForeColor)
+                e.Graphics.DrawString(Historique.GetItemText(Historique.Items(e.Index)), e.Font, b, e.Bounds)
+            End Using
+        e.DrawFocusRectangle()
+    End Sub
 End Class
