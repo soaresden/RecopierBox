@@ -680,6 +680,12 @@ recalculrando:
 
         'On va maintenant Charger les options du jeu
         GroupDifficulty.Show()
+
+        'Selectionner l'index 0
+        RandomList.SelectedIndex = 0
+
+        'Recalcul safety du total
+        txtpositionend.Text = RandomList.Items.Count
     End Sub
     Sub afficherlesoptions()
         txtnbmanches.Show()
@@ -975,7 +981,6 @@ finboucle:
         'on verifie si la selection est bien celle ci
         If IsNothing(ListTitreDesJeux.SelectedItem.ToString) Then Exit Sub
         If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
-            PlayerVideo.uiMode = "full"
             MsgBox("BIEN JOUE !")
         Else
             MsgBox("NOPE !")
@@ -1591,12 +1596,15 @@ romsuivante:
         mybrush.Color = Color.FromArgb(255, 0, 0)
 
         e.DrawBackground()
-            If (e.State And DrawItemState.Selected) = DrawItemState.Selected Then
-                e.Graphics.FillRectangle(mybrush, e.Bounds)
-            End If
-            Using b As New SolidBrush(e.ForeColor)
-                e.Graphics.DrawString(Historique.GetItemText(Historique.Items(e.Index)), e.Font, b, e.Bounds)
-            End Using
+        If (e.State And DrawItemState.Selected) = DrawItemState.Selected Then
+            e.Graphics.FillRectangle(mybrush, e.Bounds)
+        End If
+        Using b As New SolidBrush(e.ForeColor)
+            e.Graphics.DrawString(Historique.GetItemText(Historique.Items(e.Index)), e.Font, b, e.Bounds)
+        End Using
         e.DrawFocusRectangle()
+    End Sub
+    Private Sub txttempsaffichprop_GotFocus(sender As Object, e As EventArgs) Handles txttempsaffichprop.GotFocus
+        txttempsaffichprop.SelectAll()
     End Sub
 End Class
