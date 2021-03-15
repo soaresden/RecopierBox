@@ -874,21 +874,7 @@ recalculrando:
 
             'si c'est en mode pixel on va pixelliser à mesure
             If VidPixel.Checked = True Then
-                With overlay
-                    .FormBorderStyle = Windows.Forms.FormBorderStyle.None
-                    .BackColor = Color.RoyalBlue
-                    .TransparencyKey = .BackColor
-                    .Opacity = 0.9
-                    .ShowInTaskbar = False
-                    .Visible = False
-                    .Left = 710
-                    .Top = 295
-                    .Width = 300
-                    .Height = 181
-                    .Show(Me)
-                End With
-            Else
-                overlay.Hide()
+                'BLABLA
             End If
 
         ElseIf ProgressBar1.Value >= tempsprop And ProgressBar1.Value < (0.8 * ProgressBar1.Maximum) Then 'Si c'est avant les propositions c'est ORANGE
