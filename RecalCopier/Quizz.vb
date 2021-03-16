@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports System.Linq
 Imports System.Drawing.Imaging
+Imports AxWMPLib
 
 Public Class Quizz
     Private WithEvents Proc As New Process
@@ -31,10 +32,10 @@ Public Class Quizz
         GroupDifficulty.Hide()
 
         'on load le gifmaker
-        proc.StartInfo.UseShellExecute = False
-        proc.StartInfo.CreateNoWindow = True
-        proc.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) & "\ffmpeg.exe"
-        proc.EnableRaisingEvents = True
+        Proc.StartInfo.UseShellExecute = False
+        Proc.StartInfo.CreateNoWindow = True
+        Proc.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) & "\ffmpeg.exe"
+        Proc.EnableRaisingEvents = True
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
         Me.Close()
@@ -698,7 +699,7 @@ recalculrando:
 
         'On mets les tooltips
         ToolTipNormalVideo.SetToolTip(VidNormal, "La video sera lue normalement (Facile)")
-        ToolTipPartielVideo.SetToolTip(VidPixel, "La video se decouvrira au fil du temps jusqu'aux 10 dernières sec. (Moyen)")
+        ToolTipPartielVideo.SetToolTip(VidPartiel, "La video se decouvrira au fil du temps jusqu'aux 10 dernières sec. (Moyen)")
         ToolTipSansVideo.SetToolTip(VidSans, "Sans Video, concentrez vous sur le son ! (Difficile)")
 
         ToolTipRepeatOnce.SetToolTip(PlayerOnce, "La Video ne sera lue qu'une seule fois")
@@ -719,15 +720,15 @@ recalculrando:
         txttempsaffichprop.Show()
     End Sub
     Private Sub TitreOnly_CheckedChanged(sender As Object, e As EventArgs) Handles TitreOnly.CheckedChanged
-        Call afficherlesoptions()
+        Call Afficherlesoptions()
         Call PlayerStop.PerformClick()
     End Sub
     Private Sub ConsoleTitre_CheckedChanged(sender As Object, e As EventArgs) Handles ConsoleTitre.CheckedChanged
-        Call afficherlesoptions()
+        Call Afficherlesoptions()
         Call PlayerStop.PerformClick()
     End Sub
     Private Sub PasTitreNiConsole_CheckedChanged(sender As Object, e As EventArgs) Handles PasTitreNiConsole.CheckedChanged
-        Call afficherlesoptions()
+        Call Afficherlesoptions()
         Call PlayerStop.PerformClick()
     End Sub
     Private Sub Txtnbmanches_TextChanged(sender As Object, e As EventArgs) Handles txtnbmanches.TextChanged
@@ -811,6 +812,7 @@ recalculrando:
             MsgBox("Pas De Jeux dans Le Quizz !")
             Exit Sub
         End If
+
         'test pour voir si c'est à l'arret ou en play
         If (PlayerVideo.playState = WMPLib.WMPPlayState.wmppsPlaying) Then 'Si c'est play 
             Exit Sub
@@ -833,15 +835,11 @@ recalculrando:
             'En fonction des choix ci dessus
             If VidNormal.Checked = True Then
                 PlayerVideo.uiMode = "none"
-                PixelPicture.Hide()
+                'PixelPicture.Hide()
             End If
-            If VidSans.Checked = True Then
-                PlayerVideo.uiMode = "invisible"
-                PixelPicture.Hide()
-            End If
-            If VidPixel.Checked = True Then
+            If VidPartiel.Checked = True Then
                 PlayerVideo.uiMode = "none"
-                PixelPicture.Hide()
+                'PixelPicture.Hide()
 
                 ''on cree le gif
                 'Kill(Path.GetDirectoryName(Application.ExecutablePath) & "\temp.gif")
@@ -853,24 +851,17 @@ recalculrando:
                 'PixelPicture.Image = New Bitmap(img)
                 'img.Dispose()
 
-                'On met le filtre au dessus
-                PixelOverlay.Refresh()
-                With PixelOverlay
-                    .FormBorderStyle = Windows.Forms.FormBorderStyle.None
-                    .BackColor = Color.Black
-                    .TransparencyKey = .BackColor
-                    .Opacity = 1
-                    .ShowInTaskbar = False
-                    .Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
-                    .Location = New Point(Me.Location.X + 608, Me.Location.Y + 198)
-                    .Visible = False
-                    .Show()
-                End With
+                'On met le filtre au dessus, on deplace donc d'un petit peu pour forcer le truc
+                Me.Location = New Point(Me.Location.X + 1, Me.Location.Y)
 
                 'on tente une depixelisation
                 'fillpixeltab(PixelPicture.Width, PixelPicture.Height)
-
             End If
+            If VidSans.Checked = True Then
+                PlayerVideo.uiMode = "invisible"
+                'PixelPicture.Hide()
+            End If
+
 
             If SonAvec.Checked = True Then
                 PlayerVideo.settings.mute = False
@@ -952,15 +943,24 @@ recalculrando:
         'On check le temps des propositions
         Dim tempsprop As String = txttempsaffichprop.Text
 
+        'On s'occupe du Partiel si applicable
+        If VidPartiel.Checked = True Then
+            Select Case ProgressBar1.Value
+                Case 0 To 8
+                    PixelOverlay.CacaGif.Image = My.Resources.Pixel_Full
+                Case 8 To 15
+                    PixelOverlay.CacaGif.Image = My.Resources.Pixel_19
+                Case 15 To 23
+                    PixelOverlay.CacaGif.Image = My.Resources.Pixel_14
+                Case >= 23
+                    PixelOverlay.CacaGif.Image = My.Resources.Pixel_vide
+            End Select
+        End If
+
         'On envoie la couleur
         If ProgressBar1.Value <= tempsprop Then 'Si c'est avant les propositions c'est VERT
             SendMessage(ProgressBar1.Handle, 1040, 1, 0)
             TimeBox.BackColor = Color.FromArgb(6, 176, 37)
-            'si c'est en mode pixel on va pixelliser à mesure
-            If VidPixel.Checked = True Then
-
-            End If
-
         ElseIf ProgressBar1.Value >= tempsprop And ProgressBar1.Value < (0.8 * ProgressBar1.Maximum) Then 'Si c'est avant les propositions c'est ORANGE
             SendMessage(ProgressBar1.Handle, 1040, 3, 0)
             TimeBox.BackColor = Color.FromArgb(218, 203, 38)
@@ -1048,22 +1048,23 @@ finboucle:
     Private Sub VidNormal_CheckedChanged(sender As Object, e As EventArgs) Handles VidNormal.CheckedChanged
         If VidNormal.Checked = True Then
             VidSans.Checked = Not VidNormal.Checked
-            VidPixel.Checked = Not VidNormal.Checked
+            VidPartiel.Checked = Not VidNormal.Checked
         End If
     End Sub
     Private Sub VidSans_CheckedChanged(sender As Object, e As EventArgs) Handles VidSans.CheckedChanged
         If VidSans.Checked = True Then
             VidNormal.Checked = Not VidSans.Checked
-            VidPixel.Checked = Not VidSans.Checked
+            VidPartiel.Checked = Not VidSans.Checked
             SonSans.Hide()
         Else
             SonSans.Show()
         End If
     End Sub
-    Private Sub VidPixel_CheckedChanged(sender As Object, e As EventArgs) Handles VidPixel.CheckedChanged
-        If VidPixel.Checked = True Then
-            VidNormal.Checked = Not VidPixel.Checked
-            VidSans.Checked = Not VidPixel.Checked
+    Private Sub VidPixel_CheckedChanged(sender As Object, e As EventArgs) Handles VidPartiel.CheckedChanged
+        If VidPartiel.Checked = True Then
+            VidNormal.Checked = Not VidPartiel.Checked
+            VidSans.Checked = Not VidPartiel.Checked
+
             'On va creer le tableau
             'pixellizegrid.ClearSelection()
             'createtablepixeltab(PixelPicture.Width, PixelPicture.Height)
@@ -1133,7 +1134,7 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         End If
     End Sub
     Private Sub ValidQuizz_Click(sender As Object, e As EventArgs) Handles ValidQuizz.Click
-        If VidNormal.Checked = False And VidPixel.Checked = False And VidSans.Checked = False Then
+        If VidNormal.Checked = False And VidPartiel.Checked = False And VidSans.Checked = False Then
             MsgBox("Selectionner un Mode Video")
             TitleBox.Hide()
             TabControl1.Hide()
@@ -1142,24 +1143,6 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
         TitleBox.Show()
         TabControl1.Show()
-
-        'On test si c'est le mode pixel
-        If VidPixel.Checked = True Then
-            With PixelOverlay
-                .FormBorderStyle = Windows.Forms.FormBorderStyle.None
-                .BackColor = Color.White
-                .TransparencyKey = .BackColor
-                .Opacity = 1
-                .ShowInTaskbar = False
-                .Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
-                .Visible = False
-                .Show(Me)
-                .Location = New Point(Me.Location.X + 608, Me.Location.Y + 198)
-            End With
-        Else
-            PixelOverlay.Hide()
-        End If
-
 
         'si le mode pas de propositions
 
@@ -1185,18 +1168,20 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         End If
     End Sub
     Private Sub Quizz_Move(sender As Object, e As EventArgs) Handles Me.Move
-        If PixelOverlay.Visible = False Then Exit Sub
-
-        With PixelOverlay
-            .FormBorderStyle = Windows.Forms.FormBorderStyle.None
-            .BackColor = Color.Black
-            .TransparencyKey = .BackColor
-            .Opacity = 1
-            .ShowInTaskbar = False
-            .Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
-            .Location = New Point(Me.Location.X + 608, Me.Location.Y + 198)
-            .Show()
-        End With
+        If VidPartiel.Checked = False Then
+            PixelOverlay.Hide()
+            Exit Sub
+        Else
+            PixelOverlay.Show()
+            PixelOverlay.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+            PixelOverlay.BackColor = Color.Black
+            PixelOverlay.ShowInTaskbar = False
+            PixelOverlay.TransparencyKey = Color.Black
+            PixelOverlay.Opacity = 1
+            PixelOverlay.TopMost = True
+            PixelOverlay.Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
+            PixelOverlay.Location = New Point(Me.Location.X + GroupParamComplet.Width + RandomList.Width + 35, Me.Location.Y + GroupDifficulty.Height + PlayerNext.Height + 60)
+        End If
     End Sub
     Private Sub ExportTxt_Click(sender As Object, e As EventArgs) Handles ExportTxt.Click
         Dim sb As New System.Text.StringBuilder()

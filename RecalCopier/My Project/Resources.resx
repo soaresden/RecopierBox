@@ -160,4 +160,16 @@
   <data name="okvideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flatvideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Pixel_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pixel-14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pixel_19" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pixel-19.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pixel_Full" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pixel-Full.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pixel_vide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pixel-6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

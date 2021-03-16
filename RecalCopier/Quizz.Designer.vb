@@ -75,7 +75,6 @@ Partial Class Quizz
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
         Me.ToolTipNbJeux = New System.Windows.Forms.ToolTip(Me.components)
         Me.TitleBox = New System.Windows.Forms.GroupBox()
-        Me.PixelPicture = New System.Windows.Forms.PictureBox()
         Me.PlayerVideo = New AxWMPLib.AxWindowsMediaPlayer()
         Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -99,7 +98,7 @@ Partial Class Quizz
         Me.Label19 = New System.Windows.Forms.Label()
         Me.SonSans = New System.Windows.Forms.CheckBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.VidPixel = New System.Windows.Forms.CheckBox()
+        Me.VidPartiel = New System.Windows.Forms.CheckBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.VidNormal = New System.Windows.Forms.CheckBox()
         Me.SonAvec = New System.Windows.Forms.CheckBox()
@@ -126,7 +125,6 @@ Partial Class Quizz
         Me.GroupFiltres.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TitleBox.SuspendLayout()
-        CType(Me.PixelPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PlayerVideo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupDifficulty.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -683,7 +681,6 @@ Partial Class Quizz
         'TitleBox
         '
         Me.TitleBox.BackColor = System.Drawing.Color.MidnightBlue
-        Me.TitleBox.Controls.Add(Me.PixelPicture)
         Me.TitleBox.Controls.Add(Me.PlayerVideo)
         Me.TitleBox.Controls.Add(Me.listrandobox)
         Me.TitleBox.Controls.Add(Me.Label15)
@@ -704,15 +701,6 @@ Partial Class Quizz
         Me.TitleBox.TabIndex = 50
         Me.TitleBox.TabStop = False
         Me.TitleBox.Text = "VideoPlayerBox"
-        '
-        'PixelPicture
-        '
-        Me.PixelPicture.Location = New System.Drawing.Point(120, 77)
-        Me.PixelPicture.Name = "PixelPicture"
-        Me.PixelPicture.Size = New System.Drawing.Size(286, 164)
-        Me.PixelPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PixelPicture.TabIndex = 50
-        Me.PixelPicture.TabStop = False
         '
         'PlayerVideo
         '
@@ -878,7 +866,7 @@ Partial Class Quizz
         Me.GroupDifficulty.Controls.Add(Me.Label19)
         Me.GroupDifficulty.Controls.Add(Me.SonSans)
         Me.GroupDifficulty.Controls.Add(Me.Label18)
-        Me.GroupDifficulty.Controls.Add(Me.VidPixel)
+        Me.GroupDifficulty.Controls.Add(Me.VidPartiel)
         Me.GroupDifficulty.Controls.Add(Me.Label13)
         Me.GroupDifficulty.Controls.Add(Me.VidNormal)
         Me.GroupDifficulty.Controls.Add(Me.SonAvec)
@@ -992,16 +980,16 @@ Partial Class Quizz
         Me.Label18.TabIndex = 39
         Me.Label18.Text = "Option Audio :"
         '
-        'VidPixel
+        'VidPartiel
         '
-        Me.VidPixel.AutoSize = True
-        Me.VidPixel.ForeColor = System.Drawing.Color.White
-        Me.VidPixel.Location = New System.Drawing.Point(6, 49)
-        Me.VidPixel.Name = "VidPixel"
-        Me.VidPixel.Size = New System.Drawing.Size(55, 17)
-        Me.VidPixel.TabIndex = 38
-        Me.VidPixel.Text = "Partiel"
-        Me.VidPixel.UseVisualStyleBackColor = True
+        Me.VidPartiel.AutoSize = True
+        Me.VidPartiel.ForeColor = System.Drawing.Color.White
+        Me.VidPartiel.Location = New System.Drawing.Point(6, 49)
+        Me.VidPartiel.Name = "VidPartiel"
+        Me.VidPartiel.Size = New System.Drawing.Size(55, 17)
+        Me.VidPartiel.TabIndex = 38
+        Me.VidPartiel.Text = "Partiel"
+        Me.VidPartiel.UseVisualStyleBackColor = True
         '
         'Label13
         '
@@ -1219,7 +1207,6 @@ Partial Class Quizz
         Me.GroupBox1.ResumeLayout(False)
         Me.TitleBox.ResumeLayout(False)
         Me.TitleBox.PerformLayout()
-        CType(Me.PixelPicture, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PlayerVideo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupDifficulty.ResumeLayout(False)
         Me.GroupDifficulty.PerformLayout()
@@ -1301,7 +1288,7 @@ Partial Class Quizz
     Friend WithEvents Label19 As Label
     Friend WithEvents SonSans As CheckBox
     Friend WithEvents Label18 As Label
-    Friend WithEvents VidPixel As CheckBox
+    Friend WithEvents VidPartiel As CheckBox
     Friend WithEvents Label13 As Label
     Friend WithEvents VidNormal As CheckBox
     Friend WithEvents SonAvec As CheckBox
@@ -1320,7 +1307,6 @@ Partial Class Quizz
     Friend WithEvents AddQuizz As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents ImportDouble As Button
-    Friend WithEvents PixelPicture As PictureBox
     Friend WithEvents ToolTipPartielVideo As ToolTip
     Friend WithEvents ToolTipSansVideo As ToolTip
     Friend WithEvents ToolTipNormalVideo As ToolTip
