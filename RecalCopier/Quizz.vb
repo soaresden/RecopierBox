@@ -4,7 +4,7 @@ Imports System.Linq
 Imports System.Drawing.Imaging
 
 Public Class Quizz
-    Private WithEvents proc As New Process
+    Private WithEvents Proc As New Process
 
     Private Sub Quizz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'On alimente le gamelist
@@ -696,13 +696,21 @@ recalculrando:
         'On va maintenant Charger les options du jeu
         GroupDifficulty.Show()
 
+        'On mets les tooltips
+        ToolTipNormalVideo.SetToolTip(VidNormal, "La video sera lue normalement (Facile)")
+        ToolTipPartielVideo.SetToolTip(VidPixel, "La video se decouvrira au fil du temps jusqu'aux 10 dernières sec. (Moyen)")
+        ToolTipSansVideo.SetToolTip(VidSans, "Sans Video, concentrez vous sur le son ! (Difficile)")
+
+        ToolTipRepeatOnce.SetToolTip(PlayerOnce, "La Video ne sera lue qu'une seule fois")
+        ToolTipRepeat.SetToolTip(PlayerRepeat, "La Video sera repétée à la fin")
+
         'Selectionner l'index 0
         RandomList.SelectedIndex = 0
 
         'Recalcul safety du total
         txtpositionend.Text = RandomList.Items.Count
     End Sub
-    Sub afficherlesoptions()
+    Sub Afficherlesoptions()
         txtnbmanches.Show()
         txtnbmanches.Focus()
         Label16.Show()
@@ -825,23 +833,43 @@ recalculrando:
             'En fonction des choix ci dessus
             If VidNormal.Checked = True Then
                 PlayerVideo.uiMode = "none"
-                PictureBox1.Hide()
+                PixelPicture.Hide()
             End If
             If VidSans.Checked = True Then
                 PlayerVideo.uiMode = "invisible"
-                PictureBox1.Hide()
+                PixelPicture.Hide()
             End If
             If VidPixel.Checked = True Then
                 PlayerVideo.uiMode = "none"
-                'on va remplir le tableau
-                'pixellizegrid.ClearSelection()
-                'fillpixeltab(PlayerVideo.Width, PlayerVideo.Height)
+                PixelPicture.Hide()
 
-                'on creer un gif
-                Kill(Path.GetDirectoryName(Application.ExecutablePath) & "\temp.gif")
-                convertgif(30, TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value)
-                PictureBox1.Show()
-                PictureBox1.Image = Image.FromFile(Path.GetDirectoryName(Application.ExecutablePath) & "\temp.gif")
+                ''on cree le gif
+                'Kill(Path.GetDirectoryName(Application.ExecutablePath) & "\temp.gif")
+                'Convertgif(30, TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value)
+                'PixelPicture.Show()
+
+                'on l'assigne a la box
+                'Dim img = Image.FromFile(Path.GetDirectoryName(Application.ExecutablePath) & "\temp.gif")
+                'PixelPicture.Image = New Bitmap(img)
+                'img.Dispose()
+
+                'On met le filtre au dessus
+                PixelOverlay.Refresh()
+                With PixelOverlay
+                    .FormBorderStyle = Windows.Forms.FormBorderStyle.None
+                    .BackColor = Color.Black
+                    .TransparencyKey = .BackColor
+                    .Opacity = 1
+                    .ShowInTaskbar = False
+                    .Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
+                    .Location = New Point(Me.Location.X + 608, Me.Location.Y + 198)
+                    .Visible = False
+                    .Show()
+                End With
+
+                'on tente une depixelisation
+                'fillpixeltab(PixelPicture.Width, PixelPicture.Height)
+
             End If
 
             If SonAvec.Checked = True Then
@@ -1027,6 +1055,9 @@ finboucle:
         If VidSans.Checked = True Then
             VidNormal.Checked = Not VidSans.Checked
             VidPixel.Checked = Not VidSans.Checked
+            SonSans.Hide()
+        Else
+            SonSans.Show()
         End If
     End Sub
     Private Sub VidPixel_CheckedChanged(sender As Object, e As EventArgs) Handles VidPixel.CheckedChanged
@@ -1035,7 +1066,7 @@ finboucle:
             VidSans.Checked = Not VidPixel.Checked
             'On va creer le tableau
             'pixellizegrid.ClearSelection()
-            'createtablepixeltab(301, 181)
+            'createtablepixeltab(PixelPicture.Width, PixelPicture.Height)
         End If
     End Sub
     Private Sub SonAvec_CheckedChanged(sender As Object, e As EventArgs) Handles SonAvec.CheckedChanged
@@ -1043,6 +1074,11 @@ finboucle:
     End Sub
     Private Sub SonSans_CheckedChanged(sender As Object, e As EventArgs) Handles SonSans.CheckedChanged
         SonAvec.Checked = Not SonSans.Checked
+        If SonSans.Checked = True Then
+            VidSans.Hide()
+        Else
+            VidSans.Show()
+        End If
     End Sub
     Private Sub PlayerOnce_CheckedChanged(sender As Object, e As EventArgs) Handles PlayerOnce.CheckedChanged
         PlayerRepeat.Checked = Not PlayerOnce.Checked
@@ -1149,14 +1185,17 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         End If
     End Sub
     Private Sub Quizz_Move(sender As Object, e As EventArgs) Handles Me.Move
+        If PixelOverlay.Visible = False Then Exit Sub
+
         With PixelOverlay
             .FormBorderStyle = Windows.Forms.FormBorderStyle.None
-            .BackColor = Color.White
+            .BackColor = Color.Black
             .TransparencyKey = .BackColor
             .Opacity = 1
             .ShowInTaskbar = False
             .Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
             .Location = New Point(Me.Location.X + 608, Me.Location.Y + 198)
+            .Show()
         End With
     End Sub
     Private Sub ExportTxt_Click(sender As Object, e As EventArgs) Handles ExportTxt.Click
@@ -1192,7 +1231,6 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
                 'une fois qu'on le sait, on va aller faire le fakecalcul pour le retirer de la liste du haut
                 If nomdujeutemp = nomdujeu Then
-                    Dim vraix As Integer = i
                     Dim fauxx = (i + 5) * 37
 
                     'on enleve maintenant
@@ -1287,6 +1325,9 @@ Findufichier:
 
             'Afficher le groupParametres
             GroupConfigPartie.Show()
+
+            'on mets les tooltip
+            ToolTipGenererManche.SetToolTip(txtnbmanches, "Nombre de Manches à Jouer")
 
             'On va hider le bouton des console + jeu si un seul systeme est selectionné
             If ConsoleList.SelectedItems.Count = 1 Then
@@ -1649,8 +1690,9 @@ romsuivante:
         ImportQuizz.PerformClick()
     End Sub
     Private Sub Historique_DrawItem(sender As Object, e As DrawItemEventArgs) Handles Historique.DrawItem
-        Dim mybrush As New System.Drawing.SolidBrush(Color.FromArgb(0, 177, 89))
-        mybrush.Color = Color.FromArgb(255, 0, 0)
+        Dim mybrush As New System.Drawing.SolidBrush(Color.FromArgb(0, 177, 89)) With {
+            .Color = Color.FromArgb(255, 0, 0)
+        }
 
         e.DrawBackground()
         If (e.State And DrawItemState.Selected) = DrawItemState.Selected Then
@@ -1661,18 +1703,18 @@ romsuivante:
         End Using
         e.DrawFocusRectangle()
     End Sub
-    Private Sub txttempsaffichprop_GotFocus(sender As Object, e As EventArgs) Handles txttempsaffichprop.GotFocus
+    Private Sub Txttempsaffichprop_GotFocus(sender As Object, e As EventArgs) Handles txttempsaffichprop.GotFocus
         txttempsaffichprop.SelectAll()
     End Sub
 
-    Function createtablepixeltab(width As Integer, height As Integer)
+    Function Createtablepixeltab(widthPixelBox As Integer, heightPixelBox As Integer)
         Dim table As New DataTable()
         Dim dv As DataView
         Dim compteurcolumn As Integer = 0
         Dim compteurrow As Integer = 0
 
         'loop for every pixels in column
-        Do Until compteurcolumn = width
+        Do Until compteurcolumn = widthPixelBox
             Dim column As DataColumn
             column = New DataColumn()
             With column
@@ -1683,7 +1725,7 @@ romsuivante:
             compteurcolumn = compteurcolumn + 1
         Loop
 
-        Do Until compteurrow = height
+        Do Until compteurrow = heightPixelBox
             table.Rows.Add()
             compteurrow = compteurrow + 1
         Loop
@@ -1691,38 +1733,36 @@ romsuivante:
         'on ajoute le tout dans une table
         'Sorting A-Z the console
         dv = table.DefaultView
-        pixellizegrid.DataSource = table
+        'pixellizegrid.DataSource = table
 
         'Redimensionnage
-        For column = 0 To pixellizegrid.Columns.Count - 1
-            pixellizegrid.Columns(column).Width = 1
-        Next
-        For row = 0 To pixellizegrid.Rows.Count - 1
-            pixellizegrid.Rows(row).Height = 1
-        Next
+        'For column = 0 To pixellizegrid.Columns.Count - 1
+        'pixellizegrid.Columns(column).Width = 1
+        'Next
+        'For row = 0 To pixellizegrid.Rows.Count - 1
+        ' pixellizegrid.Rows(row).Height = 1
+        'Next
     End Function
-    Function fillpixeltab(Width, Height)
+    Function Fillpixeltab(WidthPixelBox, HeightPixelBox)
         Dim screenSize As Size = New Size(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
         Using screenGrab As New Bitmap(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
             Using g As Graphics = Graphics.FromImage(screenGrab)
                 g.CopyFromScreen(New Point(0, 0), New Point(0, 0), screenSize)
-                PictureBox1.Image = screenGrab
+                'testbox.Image = screenGrab
 
-                'For rowo = 0 To (Height)
-                'For columno = 0 To (Width - 1)
-                ''This Is where you tell it WHAT PIXEL to check
-                'Dim pc As Color = screenGrab.GetPixel(Width + rowo, Height + columno)
-                'pixellizegrid.Rows(rowo).Cells(columno).Style.BackColor = pc
-                'Next
-                ' Next
+                For rowo = 0 To (HeightPixelBox)
+                    For columno = 0 To (WidthPixelBox - 1)
+                        'This Is where you tell it WHAT PIXEL to check
+                        'Me.Location.X + 608, Me.Location.Y + 198
+                        Dim pc As Color = screenGrab.GetPixel((Me.Location.X + 608) + rowo, (Me.Location.Y + 198) + columno)
+                        'pixellizegrid.Rows(rowo).Cells(columno).Style.BackColor = pc
+                    Next
+                Next
             End Using
         End Using
     End Function
 
-    Function convertgif(fps, cheminvid)
-        Dim savename As String = "temp.gif"
-        Dim vidname As String = cheminvid
-        Dim strtSec As String = 0
+    Function Convertgif(fps, cheminvid)
         Dim endSec As String
 
         Dim wmp As WMPLib.WindowsMediaPlayer = New WMPLib.WindowsMediaPlayer
@@ -1732,17 +1772,8 @@ romsuivante:
         End If
         wmp.close()
 
-        Dim frate As String = 0
-
-        Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
-
-        If fps > 0 Then
-            frate = " -r " & fps.ToString
-        End If
-
-
-        proc.StartInfo.Arguments = "-i " & Chr(34) & cheminvid & Chr(34) & " -vf " & Chr(34) & "fps=" & fps & ",scale=320:-1:flags = lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" & Chr(34) & " -loop 0 temp.gif"
-        proc.Start()
-        proc.WaitForExit()
+        Proc.StartInfo.Arguments = "-i " & Chr(34) & cheminvid & Chr(34) & " -vf " & Chr(34) & "fps=" & fps & ",scale=320:-1:flags = lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" & Chr(34) & " -loop 0 temp.gif"
+        Proc.Start()
+        Proc.WaitForExit()
     End Function
 End Class

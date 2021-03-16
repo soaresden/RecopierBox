@@ -27,7 +27,7 @@ Partial Class Quizz
         Me.GroupParamComplet = New System.Windows.Forms.GroupBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.ButtonInfo = New System.Windows.Forms.Button()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.QuizzLogo = New System.Windows.Forms.PictureBox()
         Me.ButtonDoRandom1 = New System.Windows.Forms.Button()
         Me.GroupConfigPartie = New System.Windows.Forms.GroupBox()
         Me.PasTitreNiConsole = New System.Windows.Forms.RadioButton()
@@ -75,6 +75,7 @@ Partial Class Quizz
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
         Me.ToolTipNbJeux = New System.Windows.Forms.ToolTip(Me.components)
         Me.TitleBox = New System.Windows.Forms.GroupBox()
+        Me.PixelPicture = New System.Windows.Forms.PictureBox()
         Me.PlayerVideo = New AxWMPLib.AxWindowsMediaPlayer()
         Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -113,14 +114,19 @@ Partial Class Quizz
         Me.TempGrid = New System.Windows.Forms.DataGridView()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ImportDouble = New System.Windows.Forms.Button()
-        Me.pixellizegrid = New System.Windows.Forms.DataGridView()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.ToolTipPartielVideo = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipSansVideo = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipNormalVideo = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipGenererManche = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipRepeatOnce = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipRepeat = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupParamComplet.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.QuizzLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupConfigPartie.SuspendLayout()
         Me.GroupFiltres.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TitleBox.SuspendLayout()
+        CType(Me.PixelPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PlayerVideo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupDifficulty.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -128,17 +134,14 @@ Partial Class Quizz
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pixellizegrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupParamComplet
         '
         Me.GroupParamComplet.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(68, Byte), Integer))
-        Me.GroupParamComplet.Controls.Add(Me.pixellizegrid)
         Me.GroupParamComplet.Controls.Add(Me.Label20)
         Me.GroupParamComplet.Controls.Add(Me.ButtonInfo)
-        Me.GroupParamComplet.Controls.Add(Me.PictureBox2)
+        Me.GroupParamComplet.Controls.Add(Me.QuizzLogo)
         Me.GroupParamComplet.Controls.Add(Me.ButtonDoRandom1)
         Me.GroupParamComplet.Controls.Add(Me.GroupConfigPartie)
         Me.GroupParamComplet.Controls.Add(Me.ButtonValidConsole1)
@@ -182,16 +185,16 @@ Partial Class Quizz
         Me.ButtonInfo.TabIndex = 47
         Me.ButtonInfo.UseVisualStyleBackColor = False
         '
-        'PictureBox2
+        'QuizzLogo
         '
-        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(9, 12)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(129, 88)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox2.TabIndex = 42
-        Me.PictureBox2.TabStop = False
+        Me.QuizzLogo.BackColor = System.Drawing.Color.Transparent
+        Me.QuizzLogo.Image = CType(resources.GetObject("QuizzLogo.Image"), System.Drawing.Image)
+        Me.QuizzLogo.Location = New System.Drawing.Point(9, 12)
+        Me.QuizzLogo.Name = "QuizzLogo"
+        Me.QuizzLogo.Size = New System.Drawing.Size(129, 88)
+        Me.QuizzLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.QuizzLogo.TabIndex = 42
+        Me.QuizzLogo.TabStop = False
         '
         'ButtonDoRandom1
         '
@@ -680,7 +683,7 @@ Partial Class Quizz
         'TitleBox
         '
         Me.TitleBox.BackColor = System.Drawing.Color.MidnightBlue
-        Me.TitleBox.Controls.Add(Me.PictureBox1)
+        Me.TitleBox.Controls.Add(Me.PixelPicture)
         Me.TitleBox.Controls.Add(Me.PlayerVideo)
         Me.TitleBox.Controls.Add(Me.listrandobox)
         Me.TitleBox.Controls.Add(Me.Label15)
@@ -701,6 +704,15 @@ Partial Class Quizz
         Me.TitleBox.TabIndex = 50
         Me.TitleBox.TabStop = False
         Me.TitleBox.Text = "VideoPlayerBox"
+        '
+        'PixelPicture
+        '
+        Me.PixelPicture.Location = New System.Drawing.Point(120, 77)
+        Me.PixelPicture.Name = "PixelPicture"
+        Me.PixelPicture.Size = New System.Drawing.Size(286, 164)
+        Me.PixelPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PixelPicture.TabIndex = 50
+        Me.PixelPicture.TabStop = False
         '
         'PlayerVideo
         '
@@ -918,7 +930,7 @@ Partial Class Quizz
         '
         Me.VidSans.AutoSize = True
         Me.VidSans.ForeColor = System.Drawing.Color.White
-        Me.VidSans.Location = New System.Drawing.Point(9, 48)
+        Me.VidSans.Location = New System.Drawing.Point(6, 67)
         Me.VidSans.Name = "VidSans"
         Me.VidSans.Size = New System.Drawing.Size(80, 17)
         Me.VidSans.TabIndex = 50
@@ -984,11 +996,11 @@ Partial Class Quizz
         '
         Me.VidPixel.AutoSize = True
         Me.VidPixel.ForeColor = System.Drawing.Color.White
-        Me.VidPixel.Location = New System.Drawing.Point(9, 64)
+        Me.VidPixel.Location = New System.Drawing.Point(6, 49)
         Me.VidPixel.Name = "VidPixel"
-        Me.VidPixel.Size = New System.Drawing.Size(48, 17)
+        Me.VidPixel.Size = New System.Drawing.Size(55, 17)
         Me.VidPixel.TabIndex = 38
-        Me.VidPixel.Text = "Pixel"
+        Me.VidPixel.Text = "Partiel"
         Me.VidPixel.UseVisualStyleBackColor = True
         '
         'Label13
@@ -1007,7 +1019,7 @@ Partial Class Quizz
         Me.VidNormal.Checked = True
         Me.VidNormal.CheckState = System.Windows.Forms.CheckState.Checked
         Me.VidNormal.ForeColor = System.Drawing.Color.White
-        Me.VidNormal.Location = New System.Drawing.Point(9, 30)
+        Me.VidNormal.Location = New System.Drawing.Point(6, 31)
         Me.VidNormal.Name = "VidNormal"
         Me.VidNormal.Size = New System.Drawing.Size(65, 17)
         Me.VidNormal.TabIndex = 33
@@ -1181,25 +1193,6 @@ Partial Class Quizz
         Me.ImportDouble.Text = "Importer un Quizz depuis .txt"
         Me.ImportDouble.UseVisualStyleBackColor = False
         '
-        'pixellizegrid
-        '
-        Me.pixellizegrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.pixellizegrid.ColumnHeadersVisible = False
-        Me.pixellizegrid.Location = New System.Drawing.Point(147, 151)
-        Me.pixellizegrid.Name = "pixellizegrid"
-        Me.pixellizegrid.RowHeadersVisible = False
-        Me.pixellizegrid.Size = New System.Drawing.Size(321, 349)
-        Me.pixellizegrid.TabIndex = 49
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(111, 68)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(299, 181)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 50
-        Me.PictureBox1.TabStop = False
-        '
         'Quizz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1218,7 +1211,7 @@ Partial Class Quizz
         Me.Text = "Quizz"
         Me.GroupParamComplet.ResumeLayout(False)
         Me.GroupParamComplet.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.QuizzLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupConfigPartie.ResumeLayout(False)
         Me.GroupConfigPartie.PerformLayout()
         Me.GroupFiltres.ResumeLayout(False)
@@ -1226,6 +1219,7 @@ Partial Class Quizz
         Me.GroupBox1.ResumeLayout(False)
         Me.TitleBox.ResumeLayout(False)
         Me.TitleBox.PerformLayout()
+        CType(Me.PixelPicture, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PlayerVideo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupDifficulty.ResumeLayout(False)
         Me.GroupDifficulty.PerformLayout()
@@ -1234,8 +1228,6 @@ Partial Class Quizz
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pixellizegrid, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1281,7 +1273,7 @@ Partial Class Quizz
     Friend WithEvents Label5 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents QuizzLogo As PictureBox
     Friend WithEvents ListTitreDesJeux As ListBox
     Friend WithEvents ListConsoleDesJeux As ListBox
     Friend WithEvents ToolTipNbJeux As ToolTip
@@ -1328,6 +1320,11 @@ Partial Class Quizz
     Friend WithEvents AddQuizz As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents ImportDouble As Button
-    Friend WithEvents pixellizegrid As DataGridView
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PixelPicture As PictureBox
+    Friend WithEvents ToolTipPartielVideo As ToolTip
+    Friend WithEvents ToolTipSansVideo As ToolTip
+    Friend WithEvents ToolTipNormalVideo As ToolTip
+    Friend WithEvents ToolTipGenererManche As ToolTip
+    Friend WithEvents ToolTipRepeatOnce As ToolTip
+    Friend WithEvents ToolTipRepeat As ToolTip
 End Class
