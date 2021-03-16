@@ -4,9 +4,9 @@ Imports System.Linq
 Imports System.Drawing.Imaging
 
 Public Class Quizz
+    Private WithEvents proc As New Process
 
     Private Sub Quizz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         'On alimente le gamelist
         For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
             If File.Exists(foundDirectory & "\gamelist.xml") Then
@@ -29,6 +29,12 @@ Public Class Quizz
         TabControl1.Hide()
         TitleBox.Hide()
         GroupDifficulty.Hide()
+
+        'on load le gifmaker
+        proc.StartInfo.UseShellExecute = False
+        proc.StartInfo.CreateNoWindow = True
+        proc.StartInfo.FileName = Path.GetDirectoryName(Application.ExecutablePath) & "\ffmpeg.exe"
+        proc.EnableRaisingEvents = True
     End Sub
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
         Me.Close()
@@ -669,7 +675,16 @@ recalculrando:
                 RandomList.Items.Add(xremade) 'si le titre n'est pas present, on l'ajoute dans la liste des titres
 
                 'on va creer le log historique
-                Dim nomdujeu = TempGrid.Rows(x).Cells(TempGrid.Columns("Console").Index).Value & " (" & TempGrid.Rows(x).Cells(TempGrid.Columns("DateSortie").Index).Value.ToString.Substring(0, 4) & ") - " & TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
+                Dim consoledujeu = TempGrid.Rows(x).Cells(TempGrid.Columns("Console").Index).Value
+                Dim anneedujeu = TempGrid.Rows(x).Cells(TempGrid.Columns("DateSortie").Index).Value
+                If IsDBNull(anneedujeu) = True Then
+                    anneedujeu = "0000"
+                Else
+                    anneedujeu = anneedujeu.ToString.Substring(0, 4)
+                End If
+                Dim titredujeu = TempGrid.Rows(x).Cells(TempGrid.Columns("Titre").Index).Value
+
+                Dim nomdujeu = consoledujeu & " (" & anneedujeu & ") - " & titredujeu
                 Historique.Items.Add(nomdujeu) ' on ajoute a la liste
             End If
             listrandobox.Items.Remove(x)
@@ -810,12 +825,23 @@ recalculrando:
             'En fonction des choix ci dessus
             If VidNormal.Checked = True Then
                 PlayerVideo.uiMode = "none"
+                PictureBox1.Hide()
             End If
             If VidSans.Checked = True Then
                 PlayerVideo.uiMode = "invisible"
+                PictureBox1.Hide()
             End If
             If VidPixel.Checked = True Then
                 PlayerVideo.uiMode = "none"
+                'on va remplir le tableau
+                'pixellizegrid.ClearSelection()
+                'fillpixeltab(PlayerVideo.Width, PlayerVideo.Height)
+
+                'on creer un gif
+                Kill(Path.GetDirectoryName(Application.ExecutablePath) & "\temp.gif")
+                convertgif(30, TempGrid.Rows(lavraieligne).Cells(TempGrid.Columns("CheminVideo").Index).Value)
+                PictureBox1.Show()
+                PictureBox1.Image = Image.FromFile(Path.GetDirectoryName(Application.ExecutablePath) & "\temp.gif")
             End If
 
             If SonAvec.Checked = True Then
@@ -1005,9 +1031,11 @@ finboucle:
     End Sub
     Private Sub VidPixel_CheckedChanged(sender As Object, e As EventArgs) Handles VidPixel.CheckedChanged
         If VidPixel.Checked = True Then
-            MsgBox("Marche pas pour l'instant ^^ !")
-                VidNormal.Checked = Not VidPixel.Checked
+            VidNormal.Checked = Not VidPixel.Checked
             VidSans.Checked = Not VidPixel.Checked
+            'On va creer le tableau
+            'pixellizegrid.ClearSelection()
+            'createtablepixeltab(301, 181)
         End If
     End Sub
     Private Sub SonAvec_CheckedChanged(sender As Object, e As EventArgs) Handles SonAvec.CheckedChanged
@@ -1079,6 +1107,24 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         TitleBox.Show()
         TabControl1.Show()
 
+        'On test si c'est le mode pixel
+        If VidPixel.Checked = True Then
+            With PixelOverlay
+                .FormBorderStyle = Windows.Forms.FormBorderStyle.None
+                .BackColor = Color.White
+                .TransparencyKey = .BackColor
+                .Opacity = 1
+                .ShowInTaskbar = False
+                .Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
+                .Visible = False
+                .Show(Me)
+                .Location = New Point(Me.Location.X + 608, Me.Location.Y + 198)
+            End With
+        Else
+            PixelOverlay.Hide()
+        End If
+
+
         'si le mode pas de propositions
 
         If ConsoleTitre.Checked = True Then
@@ -1101,6 +1147,17 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
                 ListConsoleDesJeux.Items.Add(j)
             Next
         End If
+    End Sub
+    Private Sub Quizz_Move(sender As Object, e As EventArgs) Handles Me.Move
+        With PixelOverlay
+            .FormBorderStyle = Windows.Forms.FormBorderStyle.None
+            .BackColor = Color.White
+            .TransparencyKey = .BackColor
+            .Opacity = 1
+            .ShowInTaskbar = False
+            .Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
+            .Location = New Point(Me.Location.X + 608, Me.Location.Y + 198)
+        End With
     End Sub
     Private Sub ExportTxt_Click(sender As Object, e As EventArgs) Handles ExportTxt.Click
         Dim sb As New System.Text.StringBuilder()
@@ -1607,4 +1664,85 @@ romsuivante:
     Private Sub txttempsaffichprop_GotFocus(sender As Object, e As EventArgs) Handles txttempsaffichprop.GotFocus
         txttempsaffichprop.SelectAll()
     End Sub
+
+    Function createtablepixeltab(width As Integer, height As Integer)
+        Dim table As New DataTable()
+        Dim dv As DataView
+        Dim compteurcolumn As Integer = 0
+        Dim compteurrow As Integer = 0
+
+        'loop for every pixels in column
+        Do Until compteurcolumn = width
+            Dim column As DataColumn
+            column = New DataColumn()
+            With column
+                .DataType = Type.GetType("System.String")
+                .ColumnName = compteurcolumn
+            End With
+            table.Columns.Add(column)
+            compteurcolumn = compteurcolumn + 1
+        Loop
+
+        Do Until compteurrow = height
+            table.Rows.Add()
+            compteurrow = compteurrow + 1
+        Loop
+
+        'on ajoute le tout dans une table
+        'Sorting A-Z the console
+        dv = table.DefaultView
+        pixellizegrid.DataSource = table
+
+        'Redimensionnage
+        For column = 0 To pixellizegrid.Columns.Count - 1
+            pixellizegrid.Columns(column).Width = 1
+        Next
+        For row = 0 To pixellizegrid.Rows.Count - 1
+            pixellizegrid.Rows(row).Height = 1
+        Next
+    End Function
+    Function fillpixeltab(Width, Height)
+        Dim screenSize As Size = New Size(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
+        Using screenGrab As New Bitmap(My.Computer.Screen.Bounds.Width, My.Computer.Screen.Bounds.Height)
+            Using g As Graphics = Graphics.FromImage(screenGrab)
+                g.CopyFromScreen(New Point(0, 0), New Point(0, 0), screenSize)
+                PictureBox1.Image = screenGrab
+
+                'For rowo = 0 To (Height)
+                'For columno = 0 To (Width - 1)
+                ''This Is where you tell it WHAT PIXEL to check
+                'Dim pc As Color = screenGrab.GetPixel(Width + rowo, Height + columno)
+                'pixellizegrid.Rows(rowo).Cells(columno).Style.BackColor = pc
+                'Next
+                ' Next
+            End Using
+        End Using
+    End Function
+
+    Function convertgif(fps, cheminvid)
+        Dim savename As String = "temp.gif"
+        Dim vidname As String = cheminvid
+        Dim strtSec As String = 0
+        Dim endSec As String
+
+        Dim wmp As WMPLib.WindowsMediaPlayer = New WMPLib.WindowsMediaPlayer
+        Dim media As WMPLib.IWMPMedia = wmp.newMedia(cheminvid)
+        If media IsNot Nothing Then
+            endSec = media.duration
+        End If
+        wmp.close()
+
+        Dim frate As String = 0
+
+        Dim lavraieligne As Integer = Convert.ToInt32(RandomList.SelectedItem.ToString) / 37 - 5
+
+        If fps > 0 Then
+            frate = " -r " & fps.ToString
+        End If
+
+
+        proc.StartInfo.Arguments = "-i " & Chr(34) & cheminvid & Chr(34) & " -vf " & Chr(34) & "fps=" & fps & ",scale=320:-1:flags = lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" & Chr(34) & " -loop 0 temp.gif"
+        proc.Start()
+        proc.WaitForExit()
+    End Function
 End Class

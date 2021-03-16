@@ -113,6 +113,8 @@ Partial Class Quizz
         Me.TempGrid = New System.Windows.Forms.DataGridView()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ImportDouble = New System.Windows.Forms.Button()
+        Me.pixellizegrid = New System.Windows.Forms.DataGridView()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupParamComplet.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupConfigPartie.SuspendLayout()
@@ -126,11 +128,14 @@ Partial Class Quizz
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pixellizegrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupParamComplet
         '
         Me.GroupParamComplet.BackColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(68, Byte), Integer))
+        Me.GroupParamComplet.Controls.Add(Me.pixellizegrid)
         Me.GroupParamComplet.Controls.Add(Me.Label20)
         Me.GroupParamComplet.Controls.Add(Me.ButtonInfo)
         Me.GroupParamComplet.Controls.Add(Me.PictureBox2)
@@ -675,6 +680,7 @@ Partial Class Quizz
         'TitleBox
         '
         Me.TitleBox.BackColor = System.Drawing.Color.MidnightBlue
+        Me.TitleBox.Controls.Add(Me.PictureBox1)
         Me.TitleBox.Controls.Add(Me.PlayerVideo)
         Me.TitleBox.Controls.Add(Me.listrandobox)
         Me.TitleBox.Controls.Add(Me.Label15)
@@ -1175,6 +1181,25 @@ Partial Class Quizz
         Me.ImportDouble.Text = "Importer un Quizz depuis .txt"
         Me.ImportDouble.UseVisualStyleBackColor = False
         '
+        'pixellizegrid
+        '
+        Me.pixellizegrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.pixellizegrid.ColumnHeadersVisible = False
+        Me.pixellizegrid.Location = New System.Drawing.Point(147, 151)
+        Me.pixellizegrid.Name = "pixellizegrid"
+        Me.pixellizegrid.RowHeadersVisible = False
+        Me.pixellizegrid.Size = New System.Drawing.Size(321, 349)
+        Me.pixellizegrid.TabIndex = 49
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(111, 68)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(299, 181)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 50
+        Me.PictureBox1.TabStop = False
+        '
         'Quizz
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1209,6 +1234,8 @@ Partial Class Quizz
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.TempGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pixellizegrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1301,4 +1328,6 @@ Partial Class Quizz
     Friend WithEvents AddQuizz As Button
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents ImportDouble As Button
+    Friend WithEvents pixellizegrid As DataGridView
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
