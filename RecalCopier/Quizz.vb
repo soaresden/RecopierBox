@@ -6,7 +6,6 @@ Imports AxWMPLib
 
 Public Class Quizz
     Private WithEvents Proc As New Process
-
     Private Sub Quizz_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'On alimente le gamelist
         For Each foundDirectory In Directory.GetDirectories(My.Settings.RecalboxFolder & "\roms", ".", SearchOption.TopDirectoryOnly)
@@ -952,7 +951,7 @@ recalculrando:
             PixelOverlay.TransparencyKey = Color.White
             PixelOverlay.Opacity = 1
             PixelOverlay.Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
-            PixelOverlay.Location = New Point(Me.Location.X + 608, Me.Location.Y + 200)
+            PixelOverlay.Location = New Point(Me.Location.X + 608, Me.Location.Y + 199)
             PixelOverlay.TopMost = True
 
             Select Case ProgressBar1.Value
@@ -1758,4 +1757,8 @@ romsuivante:
         Proc.Start()
         Proc.WaitForExit()
     End Function
+
+    Private Sub Quizz_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        PixelOverlay.Close()
+    End Sub
 End Class
