@@ -952,7 +952,7 @@ recalculrando:
             PixelOverlay.TransparencyKey = Color.White
             PixelOverlay.Opacity = 1
             PixelOverlay.Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
-            PixelOverlay.Location = New Point(Me.Location.X + 608, Me.Location.Y + 199)
+            PixelOverlay.Location = New Point(Me.Location.X + 608, Me.Location.Y + 200)
             PixelOverlay.TopMost = True
 
             Select Case ProgressBar1.Value
