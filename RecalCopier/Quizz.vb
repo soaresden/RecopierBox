@@ -851,9 +851,6 @@ recalculrando:
                 'PixelPicture.Image = New Bitmap(img)
                 'img.Dispose()
 
-                'On met le filtre au dessus, on deplace donc d'un petit peu pour forcer le truc
-                Me.Location = New Point(Me.Location.X + 1, Me.Location.Y)
-
                 'on tente une depixelisation
                 'fillpixeltab(PixelPicture.Width, PixelPicture.Height)
             End If
@@ -945,16 +942,33 @@ recalculrando:
 
         'On s'occupe du Partiel si applicable
         If VidPartiel.Checked = True Then
+            If PixelOverlay.Visible = False Then
+                PixelOverlay.Show()
+            End If
+
+            PixelOverlay.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+            PixelOverlay.BackColor = Color.Black
+            PixelOverlay.ShowInTaskbar = False
+            PixelOverlay.TransparencyKey = Color.White
+            PixelOverlay.Opacity = 1
+            PixelOverlay.Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
+            PixelOverlay.Location = New Point(Me.Location.X + 608, Me.Location.Y + 199)
+            PixelOverlay.TopMost = True
+
             Select Case ProgressBar1.Value
-                Case 0 To 8
-                    PixelOverlay.CacaGif.Image = My.Resources.Pixel_Full
-                Case 8 To 15
-                    PixelOverlay.CacaGif.Image = My.Resources.Pixel_19
-                Case 15 To 23
-                    PixelOverlay.CacaGif.Image = My.Resources.Pixel_14
-                Case >= 23
-                    PixelOverlay.CacaGif.Image = My.Resources.Pixel_vide
+                Case 0 To 7
+                    PixelOverlay.CacaGif.Image = My.Resources.pixelfull
+                Case 7 To 14
+                    PixelOverlay.CacaGif.Image = My.Resources.pixel1
+                Case 14 To 21
+                    PixelOverlay.CacaGif.Image = My.Resources.pixel2
+                Case 21 To 25
+                    PixelOverlay.CacaGif.Image = My.Resources.pixel3
+                Case >= 25
+                    PixelOverlay.CacaGif.Image = My.Resources.pixelempty
             End Select
+        Else
+            PixelOverlay.Hide()
         End If
 
         'On envoie la couleur
@@ -1165,22 +1179,6 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
             For Each j In ConsoleList.SelectedItems
                 ListConsoleDesJeux.Items.Add(j)
             Next
-        End If
-    End Sub
-    Private Sub Quizz_Move(sender As Object, e As EventArgs) Handles Me.Move
-        If VidPartiel.Checked = False Then
-            PixelOverlay.Hide()
-            Exit Sub
-        Else
-            PixelOverlay.Show()
-            PixelOverlay.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-            PixelOverlay.BackColor = Color.Black
-            PixelOverlay.ShowInTaskbar = False
-            PixelOverlay.TransparencyKey = Color.Black
-            PixelOverlay.Opacity = 1
-            PixelOverlay.TopMost = True
-            PixelOverlay.Size = New Point(PlayerVideo.Width, PlayerVideo.Height)
-            PixelOverlay.Location = New Point(Me.Location.X + GroupParamComplet.Width + RandomList.Width + 35, Me.Location.Y + GroupDifficulty.Height + PlayerNext.Height + 60)
         End If
     End Sub
     Private Sub ExportTxt_Click(sender As Object, e As EventArgs) Handles ExportTxt.Click
@@ -1746,7 +1744,6 @@ romsuivante:
             End Using
         End Using
     End Function
-
     Function Convertgif(fps, cheminvid)
         Dim endSec As String
 

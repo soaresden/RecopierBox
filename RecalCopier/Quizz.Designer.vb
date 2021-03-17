@@ -75,7 +75,6 @@ Partial Class Quizz
         Me.ButtonGetBack1 = New System.Windows.Forms.Button()
         Me.ToolTipNbJeux = New System.Windows.Forms.ToolTip(Me.components)
         Me.TitleBox = New System.Windows.Forms.GroupBox()
-        Me.PlayerVideo = New AxWMPLib.AxWindowsMediaPlayer()
         Me.listrandobox = New System.Windows.Forms.ListBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.TimeBox = New System.Windows.Forms.TextBox()
@@ -88,6 +87,7 @@ Partial Class Quizz
         Me.Label12 = New System.Windows.Forms.Label()
         Me.PlayerPlay = New System.Windows.Forms.Button()
         Me.txtpositionrandom = New System.Windows.Forms.TextBox()
+        Me.PlayerVideo = New AxWMPLib.AxWindowsMediaPlayer()
         Me.GroupDifficulty = New System.Windows.Forms.GroupBox()
         Me.ValidQuizz = New System.Windows.Forms.Button()
         Me.TrackBar1 = New System.Windows.Forms.TrackBar()
@@ -681,7 +681,6 @@ Partial Class Quizz
         'TitleBox
         '
         Me.TitleBox.BackColor = System.Drawing.Color.MidnightBlue
-        Me.TitleBox.Controls.Add(Me.PlayerVideo)
         Me.TitleBox.Controls.Add(Me.listrandobox)
         Me.TitleBox.Controls.Add(Me.Label15)
         Me.TitleBox.Controls.Add(Me.TimeBox)
@@ -694,6 +693,7 @@ Partial Class Quizz
         Me.TitleBox.Controls.Add(Me.Label12)
         Me.TitleBox.Controls.Add(Me.PlayerPlay)
         Me.TitleBox.Controls.Add(Me.txtpositionrandom)
+        Me.TitleBox.Controls.Add(Me.PlayerVideo)
         Me.TitleBox.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.TitleBox.Location = New System.Drawing.Point(489, 100)
         Me.TitleBox.Name = "TitleBox"
@@ -701,15 +701,6 @@ Partial Class Quizz
         Me.TitleBox.TabIndex = 50
         Me.TitleBox.TabStop = False
         Me.TitleBox.Text = "VideoPlayerBox"
-        '
-        'PlayerVideo
-        '
-        Me.PlayerVideo.Enabled = True
-        Me.PlayerVideo.Location = New System.Drawing.Point(111, 68)
-        Me.PlayerVideo.Name = "PlayerVideo"
-        Me.PlayerVideo.OcxState = CType(resources.GetObject("PlayerVideo.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.PlayerVideo.Size = New System.Drawing.Size(301, 181)
-        Me.PlayerVideo.TabIndex = 33
         '
         'listrandobox
         '
@@ -853,6 +844,15 @@ Partial Class Quizz
         Me.txtpositionrandom.Size = New System.Drawing.Size(72, 31)
         Me.txtpositionrandom.TabIndex = 35
         Me.txtpositionrandom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'PlayerVideo
+        '
+        Me.PlayerVideo.Enabled = True
+        Me.PlayerVideo.Location = New System.Drawing.Point(111, 68)
+        Me.PlayerVideo.Name = "PlayerVideo"
+        Me.PlayerVideo.OcxState = CType(resources.GetObject("PlayerVideo.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.PlayerVideo.Size = New System.Drawing.Size(301, 181)
+        Me.PlayerVideo.TabIndex = 33
         '
         'GroupDifficulty
         '
@@ -1193,10 +1193,13 @@ Partial Class Quizz
         Me.Controls.Add(Me.TitleBox)
         Me.Controls.Add(Me.ButtonGetBack1)
         Me.Controls.Add(Me.GroupParamComplet)
+        Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(924, 640)
+        Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(924, 640)
         Me.Name = "Quizz"
         Me.Text = "Quizz"
+        Me.TopMost = True
         Me.GroupParamComplet.ResumeLayout(False)
         Me.GroupParamComplet.PerformLayout()
         CType(Me.QuizzLogo, System.ComponentModel.ISupportInitialize).EndInit()

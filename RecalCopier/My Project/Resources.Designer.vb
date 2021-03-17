@@ -203,9 +203,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Pixel_14() As System.Drawing.Bitmap
+        Friend ReadOnly Property pixel1() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Pixel_14", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("pixel1", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -213,9 +213,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Pixel_19() As System.Drawing.Bitmap
+        Friend ReadOnly Property pixel2() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Pixel_19", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("pixel2", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -223,9 +223,9 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Pixel_Full() As System.Drawing.Bitmap
+        Friend ReadOnly Property pixel3() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Pixel_Full", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("pixel3", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -233,9 +233,19 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property Pixel_vide() As System.Drawing.Bitmap
+        Friend ReadOnly Property pixelempty() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("Pixel_vide", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("pixelempty", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property pixelfull() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("pixelfull", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

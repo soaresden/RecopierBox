@@ -336,6 +336,11 @@
   <ItemGroup>
     <Content Include="IconeLog.ico" />
     <Content Include="iconlog2.ico" />
+    <None Include="Resources\pixelfull.png" />
+    <None Include="Resources\pixel1.png" />
+    <None Include="Resources\pixel3.png" />
+    <None Include="Resources\pixel2.png" />
+    <None Include="Resources\pixelempty.png" />
     <None Include="Resources\Pixel-19.png" />
     <None Include="Resources\Pixel-9.png" />
     <None Include="Resources\Pixel-Full.png" />
