@@ -2322,13 +2322,13 @@ lignesuivb:
         TutoHideRomInfo.Size = New Point(395, 470)
         TutoHideRomInfo.Location = New Point(612, 28)
 
-        TutoSelectionActuelle.Size = New Point(78, 109)
-        TutoSelectionActuelle.Location = New Point(534, 394)
+        TutoSelectionActuelle.Size = New Point(128, 104)
+        TutoSelectionActuelle.Location = New Point(483, 399)
 
         TutoHideSimpleMode.Size = New Point(126, 91)
         TutoHideSimpleMode.Location = New Point(8, 509)
 
-        TutoHideFiltresAvance.Size = New Point(525, 105)
+        TutoHideFiltresAvance.Size = New Point(474, 104)
         TutoHideFiltresAvance.Location = New Point(8, 399)
 
         TutoHideUSB.Size = New Point(171, 77)
@@ -2365,42 +2365,43 @@ lignesuivb:
         TutoHideGameList.Hide()
         ListGameLists.Show()
         FinalGrid.Hide()
-        CreateObject("WScript.Shell").Popup("Ci-Contre, vos Gamelists :" & Chr(13) & "Que vous avez selectionné à la Souris ou en laissant enfoncé le clic" & Chr(13) & "Ou avec CTRL Enfoncé + Clic" & Chr(13) & "les systèmes que vous avez importés dans le tableau", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Ci-Contre, vos Gamelists :" & Chr(13) & "Que vous avez selectionné à la Souris ou en laissant enfoncé le clic" & Chr(13) & "Ou avec CTRL Enfoncé + Clic" & Chr(13) & "les systèmes que vous avez importés dans le tableau", 2, "02/19 : Les Gamelists")
 
         ListGameLists.Hide()
         TutoHideFinalGrid.Hide()
         FinalGrid.Show()
-        CreateObject("WScript.Shell").Popup("Une fois les Gamelists chargés, retrouvez l'intégralité de vos roms dans ce tableau", 2, "01/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("Chaque ligne du tableau représente une Rom" & Chr(13) & "Les coches à sa droite representent les métadonnées", 2, "01/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("Si la cellule est Verte : Info présente dans le Gamelist" & Chr(13) & "Si la cellule est Rouge : Info non présente" & Chr(13) & "Si la cellule est Noire : Non applicable à cette Console", 2, "02/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("La dernière colonne est la SEULE colonne qui vous interesse" & Chr(13) & Chr(13) & "Elle permet de selectionner la Rom pour Copie", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Une fois les Gamelists chargés, retrouvez l'intégralité de vos roms dans ce tableau", 2, "03/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Chaque ligne du tableau représente une Rom" & Chr(13) & "Les coches à sa droite representent les métadonnées", 2, "04/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Si la cellule est Verte : Info présente dans le Gamelist" & Chr(13) & "Si la cellule est Rouge : Info non présente" & Chr(13) & "Si la cellule est Noire : Non applicable à cette Console", 2, "05/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("La dernière colonne est la SEULE colonne qui vous interesse" & Chr(13) & Chr(13) & "Elle permet de selectionner la Rom pour Copie", 2, "06/19 : Les Gamelists")
 
         TutoHideRomInfo.Hide()
-        CreateObject("WScript.Shell").Popup("Lors d'un clic sur une Rom du tableau précédent" & Chr(13) & "Les informations ici sont affichées", 2, "01/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("Remarquez les 2 boutons ci dessous" & Chr(13) & Chr(13) & "Qui vous permettront d'ouvrir chacun des médias représentés en coche dans le tableau", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Lors d'un clic sur une Rom du tableau précédent" & Chr(13) & "Les informations ici sont affichées", 2, "07/19 : Rom Selectionnée")
+        CreateObject("WScript.Shell").Popup("Remarquez les boutons du dessous" & Chr(13) & Chr(13) & "Qui vous permettront d'ouvrir chacun des médias représentés en coche dans le tableau", 2, "08/19 : Rom Selectionnée")
 
         TutoHideFiltresAvance.Hide()
-        CreateObject("WScript.Shell").Popup("Si vous avez coché le mode avancé, voici les filtres qui vous permettre de n'afficher qu'une partie des élements chargés", 2, "01/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("N'oubliez pas de cocher les Roms que vous souhaitez copier via la coche en dernière colonne !", 2, "Bienvenue")
+        CreateObject("WScript.Shell").Popup("Si vous avez coché le mode avancé, voici les filtres qui vous permettre de n'afficher qu'une partie des élements chargés", 2, "09/19 : Filtres Avancés")
+        CreateObject("WScript.Shell").Popup("N'oubliez pas de cocher les Roms que vous souhaitez copier via la coche en dernière colonne !", 2, "10/19 : Filtres Avancés")
 
         TutoSelectionActuelle.Hide()
-        CreateObject("WScript.Shell").Popup("Vous pouvez à tout moment afficher votre selection via ce bouton", 2, "Bienvenue")
+        CreateObject("WScript.Shell").Popup("Vous pouvez à tout moment afficher votre selection via ce bouton.", 2, "11/19 : Selection et Collections")
+        CreateObject("WScript.Shell").Popup("Sous Batocera, vous pouvez également utiliser les filtres vu précedemment pour réaliser une collection 'Jeux de Combats' ou 'TombRaider's' !", 2, "12/19 : Selection et Collections")
 
         TutoHideSelectionIndic.Hide()
-        CreateObject("WScript.Shell").Popup("Après Selection, surveillez les indicateurs qui vous permettent d'avoir un oeil sur l'espace necessaire à la copie", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Après Selection, surveillez les indicateurs qui vous permettent d'avoir un oeil sur l'espace necessaire à la copie", 2, "13/19 : Indicateurs d'Espace Libre")
 
         TutoHideUSB.Hide()
-        CreateObject("WScript.Shell").Popup("N'oubliez pas de Saisir ici l'espace de stockage de votre média cible pour la réalisation de votre collection", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("N'oubliez pas de Saisir ici l'espace de stockage de votre média cible pour la réalisation de votre collection", 2, "14/19 : Config du Stockage")
 
         TutoHideQuoiCopier.Hide()
-        CreateObject("WScript.Shell").Popup("Selectionner les elements que vous souhaitez retrouver dans votre copie personnalisée", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Selectionner les elements que vous souhaitez retrouver dans votre copie personnalisée", 2, "15/19 : Detail du Copieur")
 
         TutoHideOuCopier.Hide()
-        CreateObject("WScript.Shell").Popup("Definissez ici votre repertoire de Sortie" & Chr(13) & Chr(13) & "Je vous conseille de mettre ici un repertoire vide 'REMADE'" & Chr(13) & "de préference sur le support de stockage contenant" & Chr(13) & "les médias pour optimiser le temps de copie", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Definissez ici votre repertoire de Sortie" & Chr(13) & Chr(13) & "Je vous conseille de mettre ici un repertoire vide 'REMADE'" & Chr(13) & "de préference sur le support de stockage contenant" & Chr(13) & "les médias pour optimiser le temps de copie", 2, "16/19 : Repertoire Final")
         TutoHideBoutonCopy.Hide()
-        CreateObject("WScript.Shell").Popup("Quand votre selection est complète, et que votre copie finale est parametrée" & Chr(13) & Chr(13) & "C'est ici qu'on lance le tout !", 2, "01/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("En esperant que ces popups vous aient été utile", 2, "01/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("Bonne Construction =)", 2, "Merci !")
+        CreateObject("WScript.Shell").Popup("Quand votre selection est complète, et que votre copie finale est parametrée" & Chr(13) & Chr(13) & "C'est ici qu'on lance le tout !", 2, "17/19 : Demarrer la Copie")
+        CreateObject("WScript.Shell").Popup("En esperant que ces popups vous aient été utile", 2, "18/19 : Tuto Utile ?")
+        CreateObject("WScript.Shell").Popup("Bonne Construction =)", 2, "19/19 Merci !")
 
         'Et tout le Block Tuto
         TutoHideGameList.Hide()
@@ -2532,6 +2533,13 @@ lignesuivb:
 
     Private Sub ButtonCollection_Click(sender As Object, e As EventArgs) Handles ButtonCollection.Click
         GroupCollections.Visible = Not GroupCollections.Visible
+        If GroupCollections.Visible = True Then
+            GroupCollections.Location = New Point(376, 1)
+            GroupCollections.Size = New Point(236, 192)
+        Else
+            GroupCollections.Location = New Point(141, 1)
+            GroupCollections.Size = New Point(80, 19)
+        End If
     End Sub
     Sub importdescollections()
         'reset la combobox et grid

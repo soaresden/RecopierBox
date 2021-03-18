@@ -1162,15 +1162,15 @@ Partial Class CopyRoms
         '
         'TutoHideFiltresAvance
         '
-        Me.TutoHideFiltresAvance.Location = New System.Drawing.Point(483, 2)
+        Me.TutoHideFiltresAvance.Location = New System.Drawing.Point(478, 2)
         Me.TutoHideFiltresAvance.Name = "TutoHideFiltresAvance"
-        Me.TutoHideFiltresAvance.Size = New System.Drawing.Size(27, 21)
+        Me.TutoHideFiltresAvance.Size = New System.Drawing.Size(50, 23)
         Me.TutoHideFiltresAvance.TabIndex = 45
         Me.TutoHideFiltresAvance.TabStop = False
         '
         'TutoSelectionActuelle
         '
-        Me.TutoSelectionActuelle.Location = New System.Drawing.Point(448, 4)
+        Me.TutoSelectionActuelle.Location = New System.Drawing.Point(448, 2)
         Me.TutoSelectionActuelle.Name = "TutoSelectionActuelle"
         Me.TutoSelectionActuelle.Size = New System.Drawing.Size(24, 21)
         Me.TutoSelectionActuelle.TabIndex = 47
@@ -1187,9 +1187,9 @@ Partial Class CopyRoms
         Me.GroupCollections.Controls.Add(Me.CollectionGrid)
         Me.GroupCollections.Controls.Add(Me.Label18)
         Me.GroupCollections.Controls.Add(Me.ComboCollection)
-        Me.GroupCollections.Location = New System.Drawing.Point(376, 1)
+        Me.GroupCollections.Location = New System.Drawing.Point(141, 2)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(236, 392)
+        Me.GroupCollections.Size = New System.Drawing.Size(80, 19)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
