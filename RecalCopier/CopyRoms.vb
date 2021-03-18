@@ -15,6 +15,7 @@ Public Class CopyRoms
         GroupFiltresAvances.Hide()
         GroupBoxSelectionRoms.Hide()
         ButtonTuto1.Hide()
+        GroupCollections.Hide()
 
         'test sur la valeur modesimple
         If My.Settings.SimpleMode = "simple" Or My.Settings.SimpleMode = Nothing Then
@@ -444,6 +445,14 @@ romsuivante:
         'Reajusting Interface and Showing Final Interface
         ListGameLists.Hide()
         GroupBoxSelectionRoms.Show()
+
+        'si c'est batocera, on affiche le bouton collection
+        If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
+            ButtonCollection.Show()
+        Else
+            ButtonCollection.Hide()
+        End If
+
         FinalGrid.Location = New Point(8, 28)
         FinalGrid.Size = New Size(600, 365)
         grp_RomInfos.Show()
@@ -2519,5 +2528,207 @@ lignesuivb:
                 CopyDirectory(fileSystemInfo.FullName, destinationFileName)
             End If
         Next
+    End Sub
+
+    Private Sub ButtonCollection_Click(sender As Object, e As EventArgs) Handles ButtonCollection.Click
+        GroupCollections.Visible = Not GroupCollections.Visible
+    End Sub
+    Sub importdescollections()
+        'reset la combobox et grid
+        ComboCollection.Items.Clear()
+        CollectionGrid.ClearSelection()
+        'import les fichiers
+        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\")
+        Dim aryFi As IO.FileInfo() = di.GetFiles("*.cfg")
+        Dim fi As IO.FileInfo
+        For Each fi In aryFi
+            ComboCollection.Items.Add(fi.Name)
+        Next
+    End Sub
+    Private Sub GroupCollections_VisibleChanged(sender As Object, e As EventArgs) Handles GroupCollections.VisibleChanged
+        Call importdescollections()
+        'focus sur le 1er
+        ComboCollection.SelectedIndex = 0
+        CollectionGrid.RowsDefaultCellStyle.SelectionBackColor = Color.Red
+    End Sub
+    Private Sub SupCollection_Click(sender As Object, e As EventArgs) Handles SupCollection.Click
+        If MsgBox("Etes vous sur de supprimer la collection : " & Chr(13) & ComboCollection.Text, vbYesNo) = vbNo Then Exit Sub
+        'on delete
+        Dim adressefinale = My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\" & ComboCollection.Text
+        Kill(adressefinale)
+        Call importdescollections()
+        ComboCollection.Text = ""
+    End Sub
+    Private Sub AjoutCollection_Click(sender As Object, e As EventArgs) Handles AjoutCollection.Click
+        Dim nomdelanouvellecollec = InputBox("Quel Nom pour cette nouvelle collection ?")
+
+        If nomdelanouvellecollec = Nothing Then
+            MsgBox("Erreur, Reessayer")
+        End If
+        If ComboCollection.Items.Contains(nomdelanouvellecollec) Then
+            MsgBox("Essayer un autre nom")
+            Exit Sub
+        End If
+
+        'On cree le fichier
+        File.Create(My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\custom-" & nomdelanouvellecollec & ".cfg").Dispose()
+        Call importdescollections()
+
+        'Focus sur lui
+        ComboCollection.SelectedItem = "custom-" & nomdelanouvellecollec & ".cfg"
+    End Sub
+    Private Sub CollectionGrid_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles CollectionGrid.RowsAdded
+        CollectionGrid.ClearSelection()
+        CollectionGrid.Rows(e.RowIndex).Selected = True
+    End Sub
+    Private Sub ComboCollection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboCollection.SelectedIndexChanged
+        'Securite RAZ
+        CollectionGrid.DataSource = Nothing
+        Call lirelacollection(ComboCollection.Text)
+    End Sub
+    Sub lirelacollection(filenamecollec As String)
+        'Creer le tableau
+        Dim table As New DataTable()
+        Dim dv As DataView
+
+        Dim column As DataColumn
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Console"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "FileName"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "CheminRom"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.Boolean")
+            .ColumnName = "Presence"
+        End With
+
+        table.Columns.Add(column)
+
+        'On lit le fichier cfg
+        Dim adressecomplete = My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\" & filenamecollec
+        Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(adressecomplete)
+        Dim a As String
+        Dim a2 As String
+
+        Dim romconsole As String
+        Dim romfilename As String
+        Dim rompath As String
+        Dim rompresence As Boolean
+
+        Do
+            a = reader.ReadLine
+            If a = Nothing Then Exit Do
+            a2 = Replace(Replace(a, "/", "\"), ".\", "\")
+            rompath = My.Settings.RecalboxFolder & a2
+            romfilename = Path.GetFileName(rompath)
+            'Dim detectconsole = InStr(rompath, "roms\")
+            'Dim donc = rompath.Substring(detectconsole + 4)
+            'Dim reslash = InStr(donc, "\")
+            'Dim finalconsole = donc.Substring(0, reslash - 1)
+            romconsole = rompath.Substring(InStr(rompath, "roms\") + 4).Substring(0, InStr(rompath.Substring(InStr(rompath, "roms\") + 4), "\") - 1)
+
+            If System.IO.File.Exists(rompath) Then
+                rompresence = True
+            Else
+                rompresence = False
+            End If
+
+            'on ajoute le tout dans la table
+            table.Rows.Add(romconsole, romfilename, rompath, rompresence)
+
+        Loop Until a Is Nothing
+        reader.Close()
+
+        'Sorting A-Z the console
+        dv = table.DefaultView
+        dv.Sort = "Console asc, FileName asc"
+        CollectionGrid.DataSource = table
+
+        'Width for columns
+        CollectionGrid.Columns("Console").Width = 80
+        CollectionGrid.Columns("FileName").Width = 100
+        CollectionGrid.Columns("CheminRom").Visible = False
+        CollectionGrid.Columns("Presence").Width = 30
+
+        Call colorercollectionlignes()
+    End Sub
+    Sub colorercollectionlignes()
+        For i = 0 To CollectionGrid.Rows.Count - 1
+            Dim presence = CollectionGrid.Rows(i).Cells(CollectionGrid.Columns("Presence").Index).Value
+
+            If presence = True Then
+                CollectionGrid.Rows(i).Cells(CollectionGrid.Columns("Presence").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            Else
+                CollectionGrid.Rows(i).Cells(CollectionGrid.Columns("Presence").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+            End If
+        Next
+    End Sub
+    Private Sub ButtonRemoveFromCollection_Click(sender As Object, e As EventArgs) Handles ButtonRemoveFromCollection.Click
+        For Each ligne In CollectionGrid.SelectedRows
+            CollectionGrid.Rows.Remove(ligne)
+        Next
+    End Sub
+    Private Sub ButtonAddCollection_Click(sender As Object, e As EventArgs) Handles ButtonAddCollection.Click
+        Dim data As DataTable = CType((CollectionGrid.DataSource), DataTable)
+        Dim dv As DataView
+        For Each line In FinalGrid.SelectedRows
+            Dim getindex = line.index
+            Dim consolass = FinalGrid.Rows(getindex).Cells(FinalGrid.Columns("Console").Index).Value
+            Dim pathrom = FinalGrid.Rows(getindex).Cells(FinalGrid.Columns("CheminRom").Index).Value
+            'test sur le doublon
+            For i = 0 To CollectionGrid.Rows.Count - 1
+                Dim chemindejasaisi = CollectionGrid.Rows(i).Cells(CollectionGrid.Columns("CheminRom").Index).Value
+                If chemindejasaisi = pathrom Then
+                    MsgBox("Déjà dans la Collection")
+                    CollectionGrid.ClearSelection()
+                    CollectionGrid.Rows(i).Selected = True
+                    Exit Sub
+                End If
+            Next
+
+            Dim filename = Path.GetFileName(pathrom)
+            Dim rompresence
+            'test si le fichier existe
+            If System.IO.File.Exists(pathrom) Then
+                rompresence = True
+            Else
+                rompresence = False
+            End If
+            data.Rows.Add(consolass, filename, pathrom, rompresence)
+        Next
+        CollectionGrid.DataSource = data
+    End Sub
+
+    Private Sub SaveCollection_Click(sender As Object, e As EventArgs) Handles SaveCollection.Click
+        Dim cheminfichier As String = My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\" & ComboCollection.Text
+        Kill(cheminfichier)
+
+        For i = 0 To CollectionGrid.Rows.Count - 1
+            Dim cheminrom = Replace(CollectionGrid.Rows(i).Cells(CollectionGrid.Columns("CheminRom").Index).Value, "\", "/")
+            Dim detectroms = InStr(cheminrom, "/roms")
+            Dim cheminfinal = "./" & cheminrom.Substring(detectroms)
+
+            System.IO.File.AppendAllText(cheminfichier, cheminfinal & vbCrLf)
+        Next
+lignesuivante:
+        MsgBox("Sauvegardé !")
     End Sub
 End Class

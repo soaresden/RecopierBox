@@ -1761,4 +1761,5 @@ romsuivante:
     Private Sub Quizz_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         PixelOverlay.Close()
     End Sub
+
 End Class
