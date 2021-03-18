@@ -1,8 +1,10 @@
 # RecopierBox
 A Recalbox/Batocera Copier program to be able to create custom library and many things !
+
 Test yourself with the blindtest made with your own GameLists :)
 
 Un Copieur de Recalbox/Batocera pour creer votre propre bibliotheque personnalisée et autres ! 
+
 Testez vos connaissances sur le blindtest généré à partir de vos gamelists :) !
 
 **ScreenShot du Menu**
