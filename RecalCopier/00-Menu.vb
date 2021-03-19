@@ -15,9 +15,25 @@ Public Class Form1
         Dim fontPathvag As String = Path.GetDirectoryName(Application.ExecutablePath) & "\font-vagRounded-BT-Normal.ttf"
         collection.AddFontFile(fontPathequinox)
         collection.AddFontFile(fontPathvag)
+
+        For Each cntrl As Control In Me.Controls
+            Dim lafont = cntrl.Font.Name
+
+            Select Case lafont
+                Case "Equinox Com"
+
+
+
+                Case "Vag"
+
+
+            End Select
+        Next
+
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Call SurroundingSub()
         'On load a l'ouverture le chemin initial
         TxtRecalfolderPath.Text = My.Settings.RecalboxFolder
         PanelGauche.Hide()

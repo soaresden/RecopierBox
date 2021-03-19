@@ -108,6 +108,9 @@
     <Compile Include="CopyRoms.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MyButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -123,6 +126,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="MyLabel.vb">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="OverlayManager.Designer.vb">
       <DependentUpon>OverlayManager.vb</DependentUpon>

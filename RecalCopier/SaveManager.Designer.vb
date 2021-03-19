@@ -384,22 +384,22 @@ Partial Class SaveManager
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("VAG Rounded", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Equinox Com", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label2.Location = New System.Drawing.Point(575, 124)
+        Me.Label2.Location = New System.Drawing.Point(599, 124)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(345, 17)
+        Me.Label2.Size = New System.Drawing.Size(286, 18)
         Me.Label2.TabIndex = 43
         Me.Label2.Text = "Liste COMPLETE de Toutes les Saves dans le Dossier :"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("VAG Rounded", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Equinox Com", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label1.Location = New System.Drawing.Point(186, 124)
+        Me.Label1.Location = New System.Drawing.Point(210, 124)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(252, 17)
+        Me.Label1.Size = New System.Drawing.Size(211, 18)
         Me.Label1.TabIndex = 42
         Me.Label1.Text = "Liste de Toutes les Roms Gamelistées :"
         '

@@ -149,11 +149,11 @@ Partial Class ResizeOverlays
         Me.ButtonKnowResolution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonKnowResolution.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonKnowResolution.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonKnowResolution.Location = New System.Drawing.Point(202, 59)
+        Me.ButtonKnowResolution.Location = New System.Drawing.Point(185, 59)
         Me.ButtonKnowResolution.Name = "ButtonKnowResolution"
-        Me.ButtonKnowResolution.Size = New System.Drawing.Size(142, 30)
+        Me.ButtonKnowResolution.Size = New System.Drawing.Size(171, 30)
         Me.ButtonKnowResolution.TabIndex = 4
-        Me.ButtonKnowResolution.Text = "Connaitre sa Resolution ?"
+        Me.ButtonKnowResolution.Text = "Connaitre sa Resolution sous PC ?"
         Me.ButtonKnowResolution.UseVisualStyleBackColor = False
         '
         'ButtonGoResize
@@ -237,7 +237,7 @@ Partial Class ResizeOverlays
         Me.NouveauY.Name = "NouveauY"
         Me.NouveauY.Size = New System.Drawing.Size(47, 20)
         Me.NouveauY.TabIndex = 3
-        Me.NouveauY.Text = "600"
+        Me.NouveauY.Text = "720"
         Me.NouveauY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label3
@@ -263,7 +263,7 @@ Partial Class ResizeOverlays
         Me.NouveauX.Name = "NouveauX"
         Me.NouveauX.Size = New System.Drawing.Size(47, 20)
         Me.NouveauX.TabIndex = 2
-        Me.NouveauX.Text = "1024"
+        Me.NouveauX.Text = "1280"
         Me.NouveauX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label2

@@ -120,7 +120,7 @@ Partial Class OverlayManagerBatocera
         '
         'buttonImportRoms1
         '
-        Me.buttonImportRoms1.BackColor = System.Drawing.Color.FromArgb(CType(CType(117, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(200, Byte), Integer))
+        Me.buttonImportRoms1.BackColor = System.Drawing.Color.Indigo
         Me.buttonImportRoms1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.buttonImportRoms1.Cursor = System.Windows.Forms.Cursors.Default
         Me.buttonImportRoms1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
@@ -294,7 +294,7 @@ Partial Class OverlayManagerBatocera
         '
         'GroupBox1
         '
-        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.GroupBox1.BackColor = System.Drawing.Color.Indigo
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.RomTotalOverlay)
