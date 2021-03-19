@@ -2736,7 +2736,7 @@ lignesuivb:
             Dim detectroms = InStr(cheminrom, "/roms")
             Dim cheminfinal = "./" & cheminrom.Substring(detectroms)
 
-            System.IO.File.AppendAllText(cheminfichier, cheminfinal & vbCrLf)
+            System.IO.File.AppendAllText(cheminfichier, cheminfinal & Chr(10))
         Next
 lignesuivante:
 
