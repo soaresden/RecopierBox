@@ -449,7 +449,9 @@ romsuivante:
         'si c'est batocera, on affiche le bouton collection
         If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
             ButtonCollection.Show()
+            Label16.Show()
         Else
+            Label16.Hide()
             ButtonCollection.Hide()
         End If
 
@@ -2535,7 +2537,7 @@ lignesuivb:
         GroupCollections.Visible = Not GroupCollections.Visible
         If GroupCollections.Visible = True Then
             GroupCollections.Location = New Point(376, 1)
-            GroupCollections.Size = New Point(236, 192)
+            GroupCollections.Size = New Point(236, 396)
         Else
             GroupCollections.Location = New Point(141, 1)
             GroupCollections.Size = New Point(80, 19)
@@ -2671,8 +2673,8 @@ lignesuivb:
         CollectionGrid.DataSource = table
 
         'Width for columns
-        CollectionGrid.Columns("Console").Width = 80
-        CollectionGrid.Columns("FileName").Width = 100
+        CollectionGrid.Columns("Console").Width = 70
+        CollectionGrid.Columns("FileName").Width = 95
         CollectionGrid.Columns("CheminRom").Visible = False
         CollectionGrid.Columns("Presence").Width = 30
 
@@ -2737,6 +2739,34 @@ lignesuivb:
             System.IO.File.AppendAllText(cheminfichier, cheminfinal & vbCrLf)
         Next
 lignesuivante:
+
+        'on doit maintenant remplacer la ligne dans le fichier 'system\configs\emulationstation\es_settings.cfg'
+        Dim fulltxt As String = ""
+        For fichier = 0 To ComboCollection.Items.Count - 1
+            Dim nomcollec = Replace(Replace(ComboCollection.Items(fichier), "custom-", ""), ".cfg", "")
+            fulltxt = fulltxt & nomcollec & ","
+        Next
+        Dim tailletxt As Integer = Len(fulltxt)
+        Dim txtaremplacer As String = fulltxt.Substring(0, tailletxt - 1)
+
+        'on va ouvrir le fichier 
+        Dim adressesettings = My.Settings.RecalboxFolder & "\system\configs\emulationstation\es_settings.cfg"
+        Dim reader As StreamReader = My.Computer.FileSystem.OpenTextFileReader(adressesettings)
+        Dim a As String
+
+        Dim compteur As String
+        Dim lines() As String = System.IO.File.ReadAllLines(adressesettings)
+
+        Do
+            compteur = compteur + 1
+            a = reader.ReadLine
+            If InStr(a, "CollectionSystemsCustom") > 1 Then
+                lines(compteur - 1) = "	<string name=" & Chr(34) & "CollectionSystemsCustom" & Chr(34) & " value=" & Chr(34) & txtaremplacer & Chr(34) & " />"
+                reader.Close()
+                System.IO.File.WriteAllLines(adressesettings, lines)
+                Exit Do
+            End If
+        Loop Until a Is Nothing
         MsgBox("Sauvegardé !")
     End Sub
 End Class

@@ -1178,7 +1178,7 @@ Partial Class CopyRoms
         '
         'GroupCollections
         '
-        Me.GroupCollections.BackColor = System.Drawing.Color.FloralWhite
+        Me.GroupCollections.BackColor = System.Drawing.Color.Plum
         Me.GroupCollections.Controls.Add(Me.ButtonAddCollection)
         Me.GroupCollections.Controls.Add(Me.ButtonRemoveFromCollection)
         Me.GroupCollections.Controls.Add(Me.AjoutCollection)
@@ -1187,9 +1187,9 @@ Partial Class CopyRoms
         Me.GroupCollections.Controls.Add(Me.CollectionGrid)
         Me.GroupCollections.Controls.Add(Me.Label18)
         Me.GroupCollections.Controls.Add(Me.ComboCollection)
-        Me.GroupCollections.Location = New System.Drawing.Point(141, 2)
+        Me.GroupCollections.Location = New System.Drawing.Point(163, 4)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(80, 19)
+        Me.GroupCollections.Size = New System.Drawing.Size(87, 23)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
@@ -1204,9 +1204,9 @@ Partial Class CopyRoms
         Me.ButtonAddCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonAddCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonAddCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonAddCollection.Location = New System.Drawing.Point(169, 355)
+        Me.ButtonAddCollection.Location = New System.Drawing.Point(173, 353)
         Me.ButtonAddCollection.Name = "ButtonAddCollection"
-        Me.ButtonAddCollection.Size = New System.Drawing.Size(67, 34)
+        Me.ButtonAddCollection.Size = New System.Drawing.Size(54, 34)
         Me.ButtonAddCollection.TabIndex = 43
         Me.ButtonAddCollection.Text = "Ajouter"
         Me.ButtonAddCollection.UseVisualStyleBackColor = False
@@ -1221,26 +1221,26 @@ Partial Class CopyRoms
         Me.ButtonRemoveFromCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonRemoveFromCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonRemoveFromCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonRemoveFromCollection.Location = New System.Drawing.Point(3, 355)
+        Me.ButtonRemoveFromCollection.Location = New System.Drawing.Point(9, 353)
         Me.ButtonRemoveFromCollection.Name = "ButtonRemoveFromCollection"
-        Me.ButtonRemoveFromCollection.Size = New System.Drawing.Size(65, 34)
+        Me.ButtonRemoveFromCollection.Size = New System.Drawing.Size(54, 34)
         Me.ButtonRemoveFromCollection.TabIndex = 42
         Me.ButtonRemoveFromCollection.Text = "Retirer"
         Me.ButtonRemoveFromCollection.UseVisualStyleBackColor = False
         '
         'AjoutCollection
         '
-        Me.AjoutCollection.BackColor = System.Drawing.Color.Gold
+        Me.AjoutCollection.BackColor = System.Drawing.Color.MediumVioletRed
         Me.AjoutCollection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.AjoutCollection.Cursor = System.Windows.Forms.Cursors.Default
         Me.AjoutCollection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.AjoutCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange
+        Me.AjoutCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Pink
         Me.AjoutCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.AjoutCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.AjoutCollection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.AjoutCollection.Location = New System.Drawing.Point(129, 14)
+        Me.AjoutCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.AjoutCollection.Location = New System.Drawing.Point(151, 8)
         Me.AjoutCollection.Name = "AjoutCollection"
-        Me.AjoutCollection.Size = New System.Drawing.Size(107, 44)
+        Me.AjoutCollection.Size = New System.Drawing.Size(76, 46)
         Me.AjoutCollection.TabIndex = 41
         Me.AjoutCollection.Text = "Creer une" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Collection"
         Me.AjoutCollection.UseVisualStyleBackColor = False
@@ -1255,7 +1255,7 @@ Partial Class CopyRoms
         Me.SaveCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SaveCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SaveCollection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.SaveCollection.Location = New System.Drawing.Point(86, 358)
+        Me.SaveCollection.Location = New System.Drawing.Point(80, 356)
         Me.SaveCollection.Name = "SaveCollection"
         Me.SaveCollection.Size = New System.Drawing.Size(77, 29)
         Me.SaveCollection.TabIndex = 40
@@ -1264,17 +1264,17 @@ Partial Class CopyRoms
         '
         'SupCollection
         '
-        Me.SupCollection.BackColor = System.Drawing.Color.Gold
+        Me.SupCollection.BackColor = System.Drawing.Color.MediumVioletRed
         Me.SupCollection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.SupCollection.Cursor = System.Windows.Forms.Cursors.Default
         Me.SupCollection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.SupCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange
+        Me.SupCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Pink
         Me.SupCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SupCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SupCollection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.SupCollection.Location = New System.Drawing.Point(9, 61)
+        Me.SupCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.SupCollection.Location = New System.Drawing.Point(9, 59)
         Me.SupCollection.Name = "SupCollection"
-        Me.SupCollection.Size = New System.Drawing.Size(226, 22)
+        Me.SupCollection.Size = New System.Drawing.Size(218, 31)
         Me.SupCollection.TabIndex = 39
         Me.SupCollection.Text = "Supprimer la collection ci dessus"
         Me.SupCollection.UseVisualStyleBackColor = False
@@ -1284,18 +1284,18 @@ Partial Class CopyRoms
         Me.CollectionGrid.AllowUserToAddRows = False
         Me.CollectionGrid.AllowUserToResizeRows = False
         Me.CollectionGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.CollectionGrid.Location = New System.Drawing.Point(3, 102)
+        Me.CollectionGrid.Location = New System.Drawing.Point(9, 117)
         Me.CollectionGrid.Name = "CollectionGrid"
         Me.CollectionGrid.ReadOnly = True
         Me.CollectionGrid.RowHeadersVisible = False
         Me.CollectionGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.CollectionGrid.Size = New System.Drawing.Size(232, 250)
+        Me.CollectionGrid.Size = New System.Drawing.Size(218, 232)
         Me.CollectionGrid.TabIndex = 4
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(6, 86)
+        Me.Label18.Location = New System.Drawing.Point(6, 96)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(118, 13)
         Me.Label18.TabIndex = 3
@@ -1306,7 +1306,7 @@ Partial Class CopyRoms
         Me.ComboCollection.FormattingEnabled = True
         Me.ComboCollection.Location = New System.Drawing.Point(9, 25)
         Me.ComboCollection.Name = "ComboCollection"
-        Me.ComboCollection.Size = New System.Drawing.Size(114, 21)
+        Me.ComboCollection.Size = New System.Drawing.Size(132, 21)
         Me.ComboCollection.TabIndex = 1
         '
         'CopyRoms
