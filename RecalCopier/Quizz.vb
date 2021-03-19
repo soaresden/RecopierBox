@@ -1049,6 +1049,7 @@ finboucle:
         If IsNothing(ListTitreDesJeux.SelectedItem.ToString) Then Exit Sub
         If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
             MsgBox("BIEN JOUE !")
+            PlayerVideo.uiMode = "none"
         Else
             MsgBox("NOPE !")
         End If

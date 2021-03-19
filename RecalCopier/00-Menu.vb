@@ -5,8 +5,18 @@ Imports System.Net
 Imports System.Text
 Imports System.Security.Cryptography
 Imports System.Net.Http
+Imports System.Drawing.Text
+Imports System.Reflection
 
 Public Class Form1
+    Private Sub SurroundingSub()
+        Dim collection As PrivateFontCollection = New PrivateFontCollection()
+        Dim fontPathequinox As String = Path.GetDirectoryName(Application.ExecutablePath) & "\font-EquinoxRg.ttf"
+        Dim fontPathvag As String = Path.GetDirectoryName(Application.ExecutablePath) & "\font-vagRounded-BT-Normal.ttf"
+        collection.AddFontFile(fontPathequinox)
+        collection.AddFontFile(fontPathvag)
+    End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'On load a l'ouverture le chemin initial
         TxtRecalfolderPath.Text = My.Settings.RecalboxFolder
@@ -132,11 +142,20 @@ Public Class Form1
         System.Diagnostics.Process.Start(String.Format("http://jujuvincebros.fr/telechargements2/file/10-arrm-another-recalbox-roms-manager"))
     End Sub
     Private Sub ButtonCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonCopy.Click
+        If My.Settings.RecalboxFolder Is Nothing Then
+            MsgBox("Pas de Chemin !")
+            ButtonSetDossier.PerformClick()
+        End If
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         CopyRoms.Show()
         Me.Hide()
     End Sub
     Private Sub ButtonQuizz_Click_1(sender As Object, e As EventArgs) Handles ButtonQuizz.Click
+        If My.Settings.RecalboxFolder Is Nothing Then
+            MsgBox("Pas de Chemin !")
+            ButtonSetDossier.PerformClick()
+        End If
+
         If TxtRecalfolderPath Is Nothing Then
             MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
             Exit Sub
@@ -146,11 +165,19 @@ Public Class Form1
         Me.Hide()
     End Sub
     Private Sub ButtonSave_Click_1(sender As Object, e As EventArgs) Handles ButtonSave.Click
+        If My.Settings.RecalboxFolder Is Nothing Then
+            MsgBox("Pas de Chemin !")
+            ButtonSetDossier.PerformClick()
+        End If
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         SaveManager.Show()
         Me.Hide()
     End Sub
     Private Sub ButtonOverlay_Click_1(sender As Object, e As EventArgs) Handles ButtonOverlay.Click
+        If My.Settings.RecalboxFolder Is Nothing Then
+            MsgBox("Pas de Chemin !")
+            ButtonSetDossier.PerformClick()
+        End If
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         If TypeRecalbox.Checked = True Then
             OverlayManager.Show()
@@ -161,6 +188,10 @@ Public Class Form1
         End If
     End Sub
     Private Sub ButtonP2k_Click(sender As Object, e As EventArgs) Handles ButtonP2k.Click
+        If My.Settings.RecalboxFolder Is Nothing Then
+            MsgBox("Pas de Chemin !")
+            ButtonSetDossier.PerformClick()
+        End If
         'Au clic, on ouvre le formulaire associé et on ferme le menu
         P2K.Show()
         Me.Hide()

@@ -134,7 +134,7 @@ Partial Class Form1
         Me.label2.Location = New System.Drawing.Point(162, 39)
         Me.label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label2.Name = "label2"
-        Me.label2.Size = New System.Drawing.Size(405, 18)
+        Me.label2.Size = New System.Drawing.Size(497, 17)
         Me.label2.TabIndex = 10
         Me.label2.Text = "Votre Builder de Pack Personnalisé pour votre FrontEnd Recalbox/Batocera"
         '
@@ -147,7 +147,7 @@ Partial Class Form1
         Me.label1.Location = New System.Drawing.Point(122, -1)
         Me.label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(473, 40)
+        Me.label1.Size = New System.Drawing.Size(465, 37)
         Me.label1.TabIndex = 9
         Me.label1.Text = "Bienvenue dans RecopierBox"
         '
@@ -160,7 +160,7 @@ Partial Class Form1
         Me.version.Location = New System.Drawing.Point(128, 51)
         Me.version.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.version.Name = "version"
-        Me.version.Size = New System.Drawing.Size(27, 14)
+        Me.version.Size = New System.Drawing.Size(28, 14)
         Me.version.TabIndex = 14
         Me.version.Text = "v6.2"
         '
@@ -232,7 +232,7 @@ Partial Class Form1
         Me.VersionNetFramework.ForeColor = System.Drawing.Color.Lime
         Me.VersionNetFramework.Location = New System.Drawing.Point(56, 358)
         Me.VersionNetFramework.Name = "VersionNetFramework"
-        Me.VersionNetFramework.Size = New System.Drawing.Size(134, 18)
+        Me.VersionNetFramework.Size = New System.Drawing.Size(161, 17)
         Me.VersionNetFramework.TabIndex = 21
         Me.VersionNetFramework.Text = ".net Framework version"
         '
@@ -334,7 +334,7 @@ Partial Class Form1
         Me.Label6.Location = New System.Drawing.Point(160, 51)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(76, 14)
+        Me.Label6.Size = New System.Drawing.Size(75, 14)
         Me.Label6.TabIndex = 28
         Me.Label6.Text = "by Soaresden"
         '

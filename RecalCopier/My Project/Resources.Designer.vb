@@ -71,6 +71,26 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property font_EquinoxRg() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("font_EquinoxRg", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une ressource localisée de type System.Byte[].
+        '''</summary>
+        Friend ReadOnly Property font_vagRounded_BT_Normal() As Byte()
+            Get
+                Dim obj As Object = ResourceManager.GetObject("font_vagRounded_BT_Normal", resourceCulture)
+                Return CType(obj,Byte())
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une ressource localisée de type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property iconlog() As System.Drawing.Bitmap

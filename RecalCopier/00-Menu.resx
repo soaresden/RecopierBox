@@ -124,9 +124,10 @@
     <value>Cet outil a pour but de simplifier la creation de votre dossier Recalbox personnalisé selon des critères.
 
 DOSSIER PERSO:
-A partir de votre Dossier Mère principal, l'outil permet de creez des petits sets personnalisés selon vos choix.
-Vous voulez un dossier Recalbox avec uniquement des jeux de combat avec une contrainte de stockage 16Go ?
+A partir de votre bibliothèque, l'outil permet de creez des petits sets personnalisés selon vos choix.
+Vous voulez un dossier avec uniquement des jeux de combat avec une contrainte de stockage 16Go ?
 Générez ce dossier Custom !
+Creez et Gérez également vos Collections !
 
 OVERLAYS/BEZELS:
 Gérez votre collection d'overlays, convertissez de Batocera&lt;-&gt;Recalbox, Réparez les fichiers Manquants
