@@ -280,7 +280,12 @@ Public Class CopyRoms
 
             listconsoleselected.Items.Add(consolederom)
 
-            Dim gamelistXml As XElement = XElement.Load(gamelist)
+            Dim gamelistXml As XElement
+            Try
+                gamelistXml = XElement.Load(gamelist)
+            Catch ex As Exception
+                GoTo consolesuivante
+            End Try
 
             'getting the list for the xml with nodes
             Dim query2 = From st In gamelistXml.Descendants("game") Select st
@@ -401,6 +406,7 @@ Public Class CopyRoms
                 table.Rows.Add(romconsole, romname, romId, rompath, romdesc, romimage, romvideo, romanual, romgenre, romnote, romdev, rompubl, romnbplayers, romdate, romCompteur, romRegion, cocheimage, cochevideo, cochemanual, cocheoverlay, cochesaves, rommo)
 romsuivante:
             Next
+consolesuivante:
         Next
 
         'Sorting A-Z the console
@@ -504,6 +510,10 @@ romsuivante:
         ButtonTuto1.Show()
     End Sub
     Function GetSizeSelectedRom(cheminrom As String, console As String)
+        'On check si le jeu existe
+        If (Not System.IO.File.Exists(cheminrom)) Then
+            Return (0)
+        End If
 
         Dim sizefichier As Double
         Dim attr As FileAttributes = File.GetAttributes(cheminrom)
@@ -667,9 +677,18 @@ labelapresfolder:
         End If
 
         'on verifie si il y'a des sauvegardes avec le nom du jeu en racine
+
         Dim chemindelasavee As String = Replace(cheminsaves, nomdelarom, "")
+        'On check si le dossier de la save existe, au cas ou on le cree
+        If (Not System.IO.Directory.Exists(chemindelasavee)) Then
+            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(chemindelasavee))
+        End If
         Dim endeuxfois As String = Replace(chemindelasavee, dossierentrop, "") & FileNameWithoutExtension(cheminrom)
         Dim savesCount As Integer = IO.Directory.GetFiles(Path.GetDirectoryName(endeuxfois), FileNameWithoutExtension(cheminrom) & ".*").Count
+
+
+
+
 
         If savesCount >= 1 Then
             cochesaves = True
