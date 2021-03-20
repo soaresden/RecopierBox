@@ -9,31 +9,7 @@ Imports System.Drawing.Text
 Imports System.Reflection
 
 Public Class Form1
-    Private Sub SurroundingSub()
-        Dim collection As PrivateFontCollection = New PrivateFontCollection()
-        Dim fontPathequinox As String = Path.GetDirectoryName(Application.ExecutablePath) & "\font-EquinoxRg.ttf"
-        Dim fontPathvag As String = Path.GetDirectoryName(Application.ExecutablePath) & "\font-vagRounded-BT-Normal.ttf"
-        collection.AddFontFile(fontPathequinox)
-        collection.AddFontFile(fontPathvag)
-
-        For Each cntrl As Control In Me.Controls
-            Dim lafont = cntrl.Font.Name
-
-            Select Case lafont
-                Case "Equinox Com"
-
-
-
-                Case "Vag"
-
-
-            End Select
-        Next
-
-    End Sub
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Call SurroundingSub()
         'On load a l'ouverture le chemin initial
         TxtRecalfolderPath.Text = My.Settings.RecalboxFolder
         PanelGauche.Hide()
@@ -127,7 +103,6 @@ Public Class Form1
                 'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
                 My.Settings.RecalboxFolder = TxtRecalfolderPath.Text
                 My.Settings.Save()
-
                 'On call le test des dossier
                 Call DetectTypeDossier(TxtRecalfolderPath.Text)
             End If
@@ -226,26 +201,33 @@ Public Class Form1
         Dim versiononline As Double
         Dim versionnow As Double = Replace(Replace(version.Text, "v", ""), ".", ",")
 
+
         'Github API
         Dim Client As HttpClient = New HttpClient()
         Client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "windows")
-        Dim res = Client.GetAsync("https://api.github.com/repos/soaresden/RecopierBox/releases/latest").Result.Content.ReadAsStringAsync().Result
+        Try
+            Dim res = Client.GetAsync("https://api.github.com/repos/soaresden/RecopierBox/releases/latest").Result.Content.ReadAsStringAsync().Result
+            versiononline = Replace(res.Substring(InStr(res, "tag_name") + 10).Substring(1, InStr(res.Substring(InStr(res, "tag_name") + 10), ",") - 3), ".", ",")
+
+            If versiononline > versionnow Then
+                Try
+                    MsgBox("Update en cours de Telechargement")
+                    DoUpdate()
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+            End If
+        Catch ex As exception
+            GoTo skipupdate
+        End Try
 
         'Dim getversion = InStr(res, "tag_name")
         'Dim getversion2 = res.Substring(getversion + 10)
         'Dim slash = InStr(getversion2, ",")
         'Dim final = getversion2.Substring(1, slash - 3)
 
-        versiononline = Replace(res.Substring(InStr(res, "tag_name") + 10).Substring(1, InStr(res.Substring(InStr(res, "tag_name") + 10), ",") - 3), ".", ",")
 
-        If versiononline > versionnow Then
-            Try
-                MsgBox("Update en cours de Telechargement")
-                DoUpdate()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
-        End If
+skipupdate:
     End Sub
     Private Sub DoUpdate()
         Try
@@ -279,5 +261,9 @@ Public Class Form1
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    Private Sub ReShowDisclaimer_Click(sender As Object, e As EventArgs) Handles ReShowDisclaimer.Click
+        Disclaimer.Visible = Not Disclaimer.Visible
     End Sub
 End Class

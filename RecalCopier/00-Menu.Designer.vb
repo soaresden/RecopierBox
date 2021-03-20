@@ -34,7 +34,6 @@ Partial Class Form1
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.Disclaimer = New System.Windows.Forms.GroupBox()
         Me.TxtDisclaimer = New System.Windows.Forms.RichTextBox()
-        Me.Button1 = New RecalCopier.MyButton()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.VersionNetFramework = New System.Windows.Forms.Label()
@@ -43,17 +42,10 @@ Partial Class Form1
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.txtWhyGamelist = New System.Windows.Forms.TextBox()
         Me.PanelGauche = New System.Windows.Forms.Panel()
-        Me.ButtonP2k = New RecalCopier.MyButton()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ButtonSetDossier = New RecalCopier.MyButton()
         Me.TypeBatocera = New System.Windows.Forms.CheckBox()
         Me.TypeRecalbox = New System.Windows.Forms.CheckBox()
-        Me.ButtonOverlay = New RecalCopier.MyButton()
-        Me.ButtonSave = New RecalCopier.MyButton()
-        Me.ButtonQuizz = New RecalCopier.MyButton()
-        Me.ButtonCopy = New RecalCopier.MyButton()
         Me.TitreGauche = New System.Windows.Forms.Label()
-        Me.Paypal = New RecalCopier.MyButton()
         Me.PanelHaut = New System.Windows.Forms.Panel()
         Me.PanelDroite = New System.Windows.Forms.Panel()
         Me.ToolTipCopy = New System.Windows.Forms.ToolTip(Me.components)
@@ -61,9 +53,18 @@ Partial Class Form1
         Me.ToolTipSaves = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipBlindTest = New System.Windows.Forms.ToolTip(Me.components)
         Me.ToolTipPaypal = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ButtonHideArrm = New RecalCopier.MyButton()
         Me.PanelSettings = New System.Windows.Forms.Panel()
         Me.ToolTipP2k = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button1 = New RecalCopier.MyButton()
+        Me.ButtonHideArrm = New RecalCopier.MyButton()
+        Me.ReShowDisclaimer = New RecalCopier.MyButton()
+        Me.ButtonP2k = New RecalCopier.MyButton()
+        Me.ButtonSetDossier = New RecalCopier.MyButton()
+        Me.ButtonOverlay = New RecalCopier.MyButton()
+        Me.ButtonSave = New RecalCopier.MyButton()
+        Me.ButtonQuizz = New RecalCopier.MyButton()
+        Me.ButtonCopy = New RecalCopier.MyButton()
+        Me.Paypal = New RecalCopier.MyButton()
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -154,12 +155,12 @@ Partial Class Form1
         '
         Me.version.AutoSize = True
         Me.version.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.version.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.version.Font = New System.Drawing.Font("Equinox Com", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.version.ForeColor = System.Drawing.Color.Yellow
-        Me.version.Location = New System.Drawing.Point(128, 51)
+        Me.version.Location = New System.Drawing.Point(116, 38)
         Me.version.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.version.Name = "version"
-        Me.version.Size = New System.Drawing.Size(28, 13)
+        Me.version.Size = New System.Drawing.Size(38, 19)
         Me.version.TabIndex = 14
         Me.version.Text = "v6.3"
         '
@@ -169,9 +170,9 @@ Partial Class Form1
         Me.Disclaimer.Controls.Add(Me.TxtDisclaimer)
         Me.Disclaimer.Controls.Add(Me.Button1)
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Disclaimer.Location = New System.Drawing.Point(252, 67)
+        Me.Disclaimer.Location = New System.Drawing.Point(255, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(698, 470)
+        Me.Disclaimer.Size = New System.Drawing.Size(695, 470)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Fonctionnalités :"
@@ -181,26 +182,9 @@ Partial Class Form1
         Me.TxtDisclaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtDisclaimer.Location = New System.Drawing.Point(6, 19)
         Me.TxtDisclaimer.Name = "TxtDisclaimer"
-        Me.TxtDisclaimer.Size = New System.Drawing.Size(680, 378)
+        Me.TxtDisclaimer.Size = New System.Drawing.Size(683, 378)
         Me.TxtDisclaimer.TabIndex = 19
         Me.TxtDisclaimer.Text = resources.GetString("TxtDisclaimer.Text")
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(144, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Button1.Location = New System.Drawing.Point(149, 403)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(431, 59)
-        Me.Button1.TabIndex = 17
-        Me.Button1.Text = "J'accepte que cet Outil n'effectue QUE" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "des opérations sur des GameList déja scra" &
-    "ppés"
-        Me.Button1.UseVisualStyleBackColor = False
         '
         'RichTextBox1
         '
@@ -285,6 +269,7 @@ Partial Class Form1
         '
         Me.PanelGauche.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
         Me.PanelGauche.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelGauche.Controls.Add(Me.ReShowDisclaimer)
         Me.PanelGauche.Controls.Add(Me.ButtonP2k)
         Me.PanelGauche.Controls.Add(Me.RichTextBox1)
         Me.PanelGauche.Controls.Add(Me.Label6)
@@ -303,56 +288,18 @@ Partial Class Form1
         Me.PanelGauche.Size = New System.Drawing.Size(247, 542)
         Me.PanelGauche.TabIndex = 24
         '
-        'ButtonP2k
-        '
-        Me.ButtonP2k.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ButtonP2k.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonP2k.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonP2k.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonP2k.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ButtonP2k.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonP2k.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonP2k.Image = CType(resources.GetObject("ButtonP2k.Image"), System.Drawing.Image)
-        Me.ButtonP2k.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonP2k.Location = New System.Drawing.Point(2, 477)
-        Me.ButtonP2k.Name = "ButtonP2k"
-        Me.ButtonP2k.Size = New System.Drawing.Size(244, 60)
-        Me.ButtonP2k.TabIndex = 29
-        Me.ButtonP2k.Text = "GESTION PAD2KEYBOARD"
-        Me.ButtonP2k.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ButtonP2k.UseVisualStyleBackColor = False
-        '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Font = New System.Drawing.Font("Equinox Com", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Yellow
-        Me.Label6.Location = New System.Drawing.Point(160, 51)
+        Me.Label6.Location = New System.Drawing.Point(158, 39)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(72, 13)
+        Me.Label6.Size = New System.Drawing.Size(79, 18)
         Me.Label6.TabIndex = 28
         Me.Label6.Text = "by Soaresden"
-        '
-        'ButtonSetDossier
-        '
-        Me.ButtonSetDossier.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ButtonSetDossier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonSetDossier.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonSetDossier.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonSetDossier.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
-        Me.ButtonSetDossier.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonSetDossier.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonSetDossier.Image = CType(resources.GetObject("ButtonSetDossier.Image"), System.Drawing.Image)
-        Me.ButtonSetDossier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonSetDossier.Location = New System.Drawing.Point(1, 122)
-        Me.ButtonSetDossier.Name = "ButtonSetDossier"
-        Me.ButtonSetDossier.Size = New System.Drawing.Size(244, 60)
-        Me.ButtonSetDossier.TabIndex = 27
-        Me.ButtonSetDossier.Text = "DEFINIR LE DOSSIER"
-        Me.ButtonSetDossier.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ButtonSetDossier.UseVisualStyleBackColor = False
         '
         'TypeBatocera
         '
@@ -377,6 +324,139 @@ Partial Class Form1
         Me.TypeRecalbox.TabIndex = 25
         Me.TypeRecalbox.Text = "Dossier Recalbox"
         Me.TypeRecalbox.UseVisualStyleBackColor = True
+        '
+        'TitreGauche
+        '
+        Me.TitreGauche.AutoSize = True
+        Me.TitreGauche.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.TitreGauche.Font = New System.Drawing.Font("Equinox Com", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TitreGauche.ForeColor = System.Drawing.SystemColors.InactiveBorder
+        Me.TitreGauche.Location = New System.Drawing.Point(104, 9)
+        Me.TitreGauche.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.TitreGauche.Name = "TitreGauche"
+        Me.TitreGauche.Size = New System.Drawing.Size(133, 29)
+        Me.TitreGauche.TabIndex = 19
+        Me.TitreGauche.Text = "RecopierBox"
+        '
+        'PanelHaut
+        '
+        Me.PanelHaut.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.PanelHaut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelHaut.Controls.Add(Me.TitreRecopierbox)
+        Me.PanelHaut.Controls.Add(Me.soustitre)
+        Me.PanelHaut.Location = New System.Drawing.Point(254, -1)
+        Me.PanelHaut.Name = "PanelHaut"
+        Me.PanelHaut.Size = New System.Drawing.Size(696, 62)
+        Me.PanelHaut.TabIndex = 25
+        '
+        'PanelDroite
+        '
+        Me.PanelDroite.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.PanelDroite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelDroite.Controls.Add(Me.WhyGameList)
+        Me.PanelDroite.Controls.Add(Me.VersionNetFramework)
+        Me.PanelDroite.Location = New System.Drawing.Point(729, 150)
+        Me.PanelDroite.Name = "PanelDroite"
+        Me.PanelDroite.Size = New System.Drawing.Size(225, 391)
+        Me.PanelDroite.TabIndex = 25
+        '
+        'PanelSettings
+        '
+        Me.PanelSettings.BackColor = System.Drawing.Color.Gray
+        Me.PanelSettings.Controls.Add(Me.groupBox2)
+        Me.PanelSettings.Location = New System.Drawing.Point(252, 122)
+        Me.PanelSettings.Name = "PanelSettings"
+        Me.PanelSettings.Size = New System.Drawing.Size(471, 155)
+        Me.PanelSettings.TabIndex = 28
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(144, Byte), Integer), CType(CType(249, Byte), Integer))
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Button1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Button1.Location = New System.Drawing.Point(149, 403)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(431, 59)
+        Me.Button1.TabIndex = 17
+        Me.Button1.Text = "J'accepte que cet Outil n'effectue QUE" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "des opérations sur des GameList déja scra" &
+    "ppés"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'ButtonHideArrm
+        '
+        Me.ButtonHideArrm.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonHideArrm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonHideArrm.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonHideArrm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonHideArrm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonHideArrm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonHideArrm.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonHideArrm.Image = CType(resources.GetObject("ButtonHideArrm.Image"), System.Drawing.Image)
+        Me.ButtonHideArrm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonHideArrm.Location = New System.Drawing.Point(897, 101)
+        Me.ButtonHideArrm.Name = "ButtonHideArrm"
+        Me.ButtonHideArrm.Size = New System.Drawing.Size(53, 43)
+        Me.ButtonHideArrm.TabIndex = 27
+        Me.ButtonHideArrm.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonHideArrm.UseVisualStyleBackColor = False
+        '
+        'ReShowDisclaimer
+        '
+        Me.ReShowDisclaimer.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ReShowDisclaimer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ReShowDisclaimer.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ReShowDisclaimer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ReShowDisclaimer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal
+        Me.ReShowDisclaimer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ReShowDisclaimer.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ReShowDisclaimer.Location = New System.Drawing.Point(55, 86)
+        Me.ReShowDisclaimer.Name = "ReShowDisclaimer"
+        Me.ReShowDisclaimer.Size = New System.Drawing.Size(152, 30)
+        Me.ReShowDisclaimer.TabIndex = 29
+        Me.ReShowDisclaimer.Text = "Ouvrir le Disclaimer"
+        Me.ReShowDisclaimer.UseVisualStyleBackColor = False
+        '
+        'ButtonP2k
+        '
+        Me.ButtonP2k.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.ButtonP2k.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonP2k.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonP2k.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonP2k.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.ButtonP2k.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonP2k.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonP2k.Image = CType(resources.GetObject("ButtonP2k.Image"), System.Drawing.Image)
+        Me.ButtonP2k.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonP2k.Location = New System.Drawing.Point(2, 477)
+        Me.ButtonP2k.Name = "ButtonP2k"
+        Me.ButtonP2k.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonP2k.TabIndex = 29
+        Me.ButtonP2k.Text = "GESTION PAD2KEYBOARD"
+        Me.ButtonP2k.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonP2k.UseVisualStyleBackColor = False
+        '
+        'ButtonSetDossier
+        '
+        Me.ButtonSetDossier.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ButtonSetDossier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonSetDossier.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonSetDossier.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonSetDossier.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.ButtonSetDossier.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonSetDossier.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonSetDossier.Image = CType(resources.GetObject("ButtonSetDossier.Image"), System.Drawing.Image)
+        Me.ButtonSetDossier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonSetDossier.Location = New System.Drawing.Point(1, 122)
+        Me.ButtonSetDossier.Name = "ButtonSetDossier"
+        Me.ButtonSetDossier.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonSetDossier.TabIndex = 27
+        Me.ButtonSetDossier.Text = "DEFINIR LE DOSSIER"
+        Me.ButtonSetDossier.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonSetDossier.UseVisualStyleBackColor = False
         '
         'ButtonOverlay
         '
@@ -454,19 +534,6 @@ Partial Class Form1
         Me.ButtonCopy.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ButtonCopy.UseVisualStyleBackColor = False
         '
-        'TitreGauche
-        '
-        Me.TitreGauche.AutoSize = True
-        Me.TitreGauche.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.TitreGauche.Font = New System.Drawing.Font("Equinox Com", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TitreGauche.ForeColor = System.Drawing.SystemColors.InactiveBorder
-        Me.TitreGauche.Location = New System.Drawing.Point(104, 9)
-        Me.TitreGauche.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.TitreGauche.Name = "TitreGauche"
-        Me.TitreGauche.Size = New System.Drawing.Size(133, 29)
-        Me.TitreGauche.TabIndex = 19
-        Me.TitreGauche.Text = "RecopierBox"
-        '
         'Paypal
         '
         Me.Paypal.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
@@ -482,55 +549,6 @@ Partial Class Form1
         Me.Paypal.Size = New System.Drawing.Size(184, 60)
         Me.Paypal.TabIndex = 24
         Me.Paypal.UseVisualStyleBackColor = False
-        '
-        'PanelHaut
-        '
-        Me.PanelHaut.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(22, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.PanelHaut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PanelHaut.Controls.Add(Me.TitreRecopierbox)
-        Me.PanelHaut.Controls.Add(Me.soustitre)
-        Me.PanelHaut.Location = New System.Drawing.Point(254, -1)
-        Me.PanelHaut.Name = "PanelHaut"
-        Me.PanelHaut.Size = New System.Drawing.Size(696, 62)
-        Me.PanelHaut.TabIndex = 25
-        '
-        'PanelDroite
-        '
-        Me.PanelDroite.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.PanelDroite.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PanelDroite.Controls.Add(Me.WhyGameList)
-        Me.PanelDroite.Controls.Add(Me.VersionNetFramework)
-        Me.PanelDroite.Location = New System.Drawing.Point(729, 150)
-        Me.PanelDroite.Name = "PanelDroite"
-        Me.PanelDroite.Size = New System.Drawing.Size(225, 391)
-        Me.PanelDroite.TabIndex = 25
-        '
-        'ButtonHideArrm
-        '
-        Me.ButtonHideArrm.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.ButtonHideArrm.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonHideArrm.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonHideArrm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonHideArrm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.ButtonHideArrm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonHideArrm.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonHideArrm.Image = CType(resources.GetObject("ButtonHideArrm.Image"), System.Drawing.Image)
-        Me.ButtonHideArrm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonHideArrm.Location = New System.Drawing.Point(897, 101)
-        Me.ButtonHideArrm.Name = "ButtonHideArrm"
-        Me.ButtonHideArrm.Size = New System.Drawing.Size(53, 43)
-        Me.ButtonHideArrm.TabIndex = 27
-        Me.ButtonHideArrm.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ButtonHideArrm.UseVisualStyleBackColor = False
-        '
-        'PanelSettings
-        '
-        Me.PanelSettings.BackColor = System.Drawing.Color.Gray
-        Me.PanelSettings.Controls.Add(Me.groupBox2)
-        Me.PanelSettings.Location = New System.Drawing.Point(252, 122)
-        Me.PanelSettings.Name = "PanelSettings"
-        Me.PanelSettings.Size = New System.Drawing.Size(471, 155)
-        Me.PanelSettings.TabIndex = 28
         '
         'Form1
         '
@@ -610,4 +628,5 @@ Partial Class Form1
     Friend WithEvents ButtonSetDossier As MyButton
     Friend WithEvents ButtonP2k As MyButton
     Private WithEvents ButtonBrowseRecalboxFolder As Button
+    Friend WithEvents ReShowDisclaimer As MyButton
 End Class
