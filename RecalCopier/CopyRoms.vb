@@ -2438,9 +2438,11 @@ lignesuivb:
         If listboxMaSelection.Visible = True Then
             listboxMaSelection.Hide()
             LabelSelection.Hide()
+            txt_romname.Show()
         Else
             listboxMaSelection.Location = New Point(-2, 43)
             listboxMaSelection.Size = New Size(396, 433)
+            txt_romname.Hide()
             listboxMaSelection.Show()
             LabelSelection.Show()
         End If

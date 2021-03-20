@@ -583,11 +583,11 @@ Partial Class CopyRoms
         Me.LabelSelection.AutoSize = True
         Me.LabelSelection.Font = New System.Drawing.Font("VAG Rounded", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelSelection.ForeColor = System.Drawing.Color.Yellow
-        Me.LabelSelection.Location = New System.Drawing.Point(1, 10)
+        Me.LabelSelection.Location = New System.Drawing.Point(47, 4)
         Me.LabelSelection.Name = "LabelSelection"
-        Me.LabelSelection.Size = New System.Drawing.Size(369, 17)
+        Me.LabelSelection.Size = New System.Drawing.Size(300, 17)
         Me.LabelSelection.TabIndex = 48
-        Me.LabelSelection.Text = "Ma Selection à Copier : (Double Cliquer pour supprimer)"
+        Me.LabelSelection.Text = "Ma Selection à Copier : (2x clic p/ supprimer)"
         Me.LabelSelection.Visible = False
         '
         'txt_romname
