@@ -899,6 +899,7 @@ recalculrando:
     Private Sub PlayerStop_Click(sender As Object, e As EventArgs) Handles PlayerStop.Click
         PlayerVideo.Ctlcontrols.stop()
         Timer1.Stop()
+        If VidPartiel.Checked = True Then PixelOverlay.Hide()
         TimeBox.Text = ""
         TimeBox.BackColor = Color.FromArgb(72, 61, 139)
 
@@ -1049,6 +1050,7 @@ finboucle:
         If IsNothing(ListTitreDesJeux.SelectedItem.ToString) Then Exit Sub
         If ListTitreDesJeux.SelectedItem.ToString = titreencours Then
             MsgBox("BIEN JOUE !")
+            If VidPartiel.Checked = True Then PixelOverlay.Hide()
             PlayerVideo.uiMode = "none"
         Else
             MsgBox("NOPE !")
