@@ -2690,7 +2690,7 @@ lignesuivb:
 
         'Sorting A-Z the console
         dv = table.DefaultView
-        dv.Sort = "Console asc, FileName asc"
+        dv.Sort = "Presence asc, Console asc, FileName asc"
         CollectionGrid.DataSource = table
 
         'Width for columns

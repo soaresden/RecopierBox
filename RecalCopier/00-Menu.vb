@@ -92,14 +92,25 @@ Public Class Form1
         'Au clic, on ouvre la selection du repertoire
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
             'Check si un dossier Roms est present dedans
-            Dim cheminsaisi As String = FolderBrowserDialog1.SelectedPath
+            Dim tailledossier = Len(FolderBrowserDialog1.SelectedPath.ToString)
+            Dim derniercar = FolderBrowserDialog1.SelectedPath.ToString.Substring(tailledossier - 1, 1)
+            Dim cheminsaisi As String
+
+            'si c'st un dossier direct on enleve le "\"
+            If derniercar = "\" Then
+                cheminsaisi = FolderBrowserDialog1.SelectedPath.ToString.Substring(0, tailledossier - 1)
+            Else
+                cheminsaisi = FolderBrowserDialog1.SelectedPath.ToString.Substring(0, tailledossier)
+            End If
+
+
             If (Not System.IO.Directory.Exists(cheminsaisi & "\Roms")) Then
                 MsgBox("Le Chemin saisi ne possede pas de dossier 'Roms'" & Chr(13) & "Selectionner votre dossier Mère")
                 TxtRecalfolderPath.Text = Nothing
             Else
                 MsgBox("Chemin OK !")
 
-                TxtRecalfolderPath.Text = FolderBrowserDialog1.SelectedPath
+                TxtRecalfolderPath.Text = cheminsaisi
                 'On va remplacer la valeur par defaut "RecalboxFolder" et on la sauvegarde pour les prochaines fois
                 My.Settings.RecalboxFolder = TxtRecalfolderPath.Text
                 My.Settings.Save()
