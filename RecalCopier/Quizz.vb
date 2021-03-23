@@ -788,7 +788,7 @@ recalculrando:
     Private Sub PlayerNext_Click(sender As Object, e As EventArgs) Handles PlayerNext.Click
         Dim selectionactuelle = RandomList.SelectedIndex
         If selectionactuelle >= txtpositionend.Text - 1 Then Exit Sub
-        PlayerVideo.Ctlcontrols.stop()
+        PlayerStop.PerformClick()
         RandomList.SelectedIndex = selectionactuelle + 1
         ListTitreDesJeux.Items.Clear()
         'On securise en mettant le player en hide
@@ -798,7 +798,7 @@ recalculrando:
     Private Sub PlayerPrev_Click(sender As Object, e As EventArgs) Handles PlayerPrev.Click
         Dim selectionactuelle = RandomList.SelectedIndex
         If selectionactuelle <= 0 Then Exit Sub
-        PlayerVideo.Ctlcontrols.stop()
+        PlayerStop.PerformClick()
         RandomList.SelectedIndex = selectionactuelle - 1
         ListTitreDesJeux.Items.Clear()
         'On securise en mettant le player en hide
@@ -806,6 +806,9 @@ recalculrando:
     End Sub
 
     Private Sub PlayerPlay_Click(sender As Object, e As EventArgs) Handles PlayerPlay.Click
+        'Force Stopping
+        PlayerStop.PerformClick()
+
         'si y'a pas de jeux dans la liste msgbox
         If Historique.Items.Count = 0 Then
             MsgBox("Pas De Jeux dans Le Quizz !")
