@@ -515,7 +515,7 @@ Partial Class CopyRoms
         Me.ButtonAfficherMaSelection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonAfficherMaSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ButtonAfficherMaSelection.Image = CType(resources.GetObject("ButtonAfficherMaSelection.Image"), System.Drawing.Image)
-        Me.ButtonAfficherMaSelection.Location = New System.Drawing.Point(10, 19)
+        Me.ButtonAfficherMaSelection.Location = New System.Drawing.Point(8, 19)
         Me.ButtonAfficherMaSelection.Name = "ButtonAfficherMaSelection"
         Me.ButtonAfficherMaSelection.Size = New System.Drawing.Size(50, 49)
         Me.ButtonAfficherMaSelection.TabIndex = 39
@@ -1068,11 +1068,11 @@ Partial Class CopyRoms
         '
         Me.Label15.AutoSize = True
         Me.Label15.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label15.Location = New System.Drawing.Point(9, 73)
+        Me.Label15.Location = New System.Drawing.Point(8, 73)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(54, 26)
+        Me.Label15.Size = New System.Drawing.Size(51, 26)
         Me.Label15.TabIndex = 40
-        Me.Label15.Text = "Afficher" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Selection"
+        Me.Label15.Text = "Votre" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'GroupMode
@@ -1122,13 +1122,13 @@ Partial Class CopyRoms
         Me.GroupBoxSelectionRoms.Size = New System.Drawing.Size(128, 105)
         Me.GroupBoxSelectionRoms.TabIndex = 42
         Me.GroupBoxSelectionRoms.TabStop = False
-        Me.GroupBoxSelectionRoms.Text = "Selection"
+        Me.GroupBoxSelectionRoms.Text = "Selection : Afficher ..."
         '
         'Label16
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label16.Location = New System.Drawing.Point(63, 73)
+        Me.Label16.Location = New System.Drawing.Point(68, 73)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(58, 26)
         Me.Label16.TabIndex = 42
@@ -1146,7 +1146,7 @@ Partial Class CopyRoms
         Me.ButtonCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ButtonCollection.Image = CType(resources.GetObject("ButtonCollection.Image"), System.Drawing.Image)
-        Me.ButtonCollection.Location = New System.Drawing.Point(67, 19)
+        Me.ButtonCollection.Location = New System.Drawing.Point(72, 19)
         Me.ButtonCollection.Name = "ButtonCollection"
         Me.ButtonCollection.Size = New System.Drawing.Size(50, 49)
         Me.ButtonCollection.TabIndex = 41
