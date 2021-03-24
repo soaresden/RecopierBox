@@ -158,7 +158,7 @@ nextconsole:
 
         'Si y'a eu des erreur faut avertir
         If yauerreur > 0 Then
-            MsgBox("Des fichiers sont manquants" & Chr(13) & "Vérifiez leur dispo ou rescrappez les via le Bouton Requete ARRM" & Chr(13))
+            MsgBox("Des fichiers sont manquants" & Chr(10) & "Vérifiez leur dispo ou rescrappez les via le Bouton Requete ARRM" & Chr(10))
             RqtARRM.Show()
         Else
             RqtARRM.Hide()
@@ -292,7 +292,7 @@ lignesuivante:
         'On verifie qu'un dossier Batocera est bien selectionné
         If ComboBox1.Text = Nothing Then
             If CheckBoxBatocera.Checked = True Then
-                MsgBox("Aucun Dossier Final Selectionné" & Chr(13) & Chr(13) & "Abandon")
+                MsgBox("Aucun Dossier Final Selectionné" & Chr(10) & Chr(10) & "Abandon")
                 Exit Sub
             End If
         End If
@@ -300,7 +300,7 @@ lignesuivante:
         Dim nomdossierquestion As String
         'Si c'est Recalbox, On va creer le dossier final juste avant de convertir
         If CheckBoxRecalbox.Checked = True Then
-            nomdossierquestion = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(13) & Chr(13) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
+            nomdossierquestion = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(10) & Chr(10) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
             ComboBox1.Items.Add(nomdossierquestion)
             ComboBox1.SelectedIndex = 0
 
@@ -316,7 +316,7 @@ lignesuivante:
             End If
 
         Else 'si c'est Batocera, on va devoir creer un dossier pour Recalbox
-            nomdossierquestion = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier pour Recalbox " & Chr(13) & Chr(13) & "RECALBOXCONVERTED", "Conversion BATOCERA --> RECALBOX", "RECALBOXCONVERTED")
+            nomdossierquestion = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier pour Recalbox " & Chr(10) & Chr(10) & "RECALBOXCONVERTED", "Conversion BATOCERA --> RECALBOX", "RECALBOXCONVERTED")
 
             'Si on annule, on quitte tout
             If nomdossierquestion = Nothing Then
@@ -638,7 +638,7 @@ lignesuivante:
 fichiersuivantbato:
             Next
 
-            MsgBox("Copiez/Deplacer le contenu de votre dossier '" & Chr(13) & Chr(13) & nomdossierquestion & Chr(13) & "dans le repertoire '/overlays' de votre Recalbox")
+            MsgBox("Copiez/Deplacer le contenu de votre dossier '" & Chr(10) & Chr(10) & nomdossierquestion & Chr(10) & "dans le repertoire '/overlays' de votre Recalbox")
             Process.Start(My.Settings.DossierOverlay & nomdossierquestion)
         End If
     End Sub
@@ -885,7 +885,7 @@ findugame:
 
             Dim vraieromfilecompte As Integer = diroms.GetFiles(FileNameWithoutExtension(nomfichiercfg) & ".*", SearchOption.AllDirectories).Count
             If vraieromfilecompte = 0 Then
-                MsgBox("Pas de Roms trouvée à :" & Chr(13) & Chr(13) & nomfichiercfg & Chr(13) & "Verifiez vos Overlays. Abandon")
+                MsgBox("Pas de Roms trouvée à :" & Chr(10) & Chr(10) & nomfichiercfg & Chr(10) & "Verifiez vos Overlays. Abandon")
                 Exit Sub
             End If
             Dim vraieromfile As IO.FileInfo() = diroms.GetFiles(FileNameWithoutExtension(nomfichiercfg) & ".*", SearchOption.AllDirectories)
@@ -922,7 +922,7 @@ fichiersuivant:
 
             'Si y'a eu des erreur faut avertir
             If yauerreur > 0 Then
-            MsgBox("Des fichiers sont manquants" & Chr(13) & "Vérifiez leur dispo ou rescrappez les via le Bouton Requete ARRM" & Chr(13))
+            MsgBox("Des fichiers sont manquants" & Chr(10) & "Vérifiez leur dispo ou rescrappez les via le Bouton Requete ARRM" & Chr(10))
             RqtARRM.Show()
         Else
             RqtARRM.Hide()
@@ -1034,7 +1034,7 @@ fichiersuivant:
             End If
         Next
 Fin:
-        MsgBox("Requete dans le presse papiers" & Chr(13) & "Collez ca dans la barre de Requete d'ARRM et filtrez")
+        MsgBox("Requete dans le presse papiers" & Chr(10) & "Collez ca dans la barre de Requete d'ARRM et filtrez")
     End Sub
     Sub Supplescfgs(num As Integer)
         For Each i In DataGridOverlays.SelectedRows

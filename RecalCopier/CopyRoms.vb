@@ -971,19 +971,19 @@ consolesanssaves:
     Private Sub ButtonCopy_Click(sender As Object, e As EventArgs) Handles ButtonCopy.Click
         'verif du chemin
         If txt_CopyFolder.Text = Nothing Then
-            MsgBox("Pas de Repertoire de Copie Défini" & Chr(13) & "ABANDON")
+            MsgBox("Pas de Repertoire de Copie Défini" & Chr(10) & "ABANDON")
             Exit Sub
         End If
 
         'verif de la liste a copier
         If listboxMaSelection.Items.Count = 0 Then
-            MsgBox("Pas de Roms à Copier" & Chr(13) & "ABANDON")
+            MsgBox("Pas de Roms à Copier" & Chr(10) & "ABANDON")
             Exit Sub
         End If
 
         'verif de l'espace disque
         If txt_GoAPrevoir.Text < 0 Then
-            MsgBox("Trop d'espace est necessaire à la Copie" & Chr(13) & "ABANDON")
+            MsgBox("Trop d'espace est necessaire à la Copie" & Chr(10) & "ABANDON")
             Exit Sub
         End If
 
@@ -1003,7 +1003,7 @@ consolesanssaves:
         End If
 
         If sizedudossier >= 0 Then
-            If MsgBox("Le Chemin de Copie : " & Chr(13) & txt_CopyFolder.Text & Chr(13) & "n'est pas vide" & Chr(13) & Chr(13) & "L'Assistant va creer un dossier : " & Chr(13) & txt_CopyFolder.Text & typedistri & Chr(13) & "Continuer ?", vbYesNo) = vbNo Then Exit Sub
+            If MsgBox("Le Chemin de Copie : " & Chr(10) & txt_CopyFolder.Text & Chr(10) & "n'est pas vide" & Chr(10) & Chr(10) & "L'Assistant va creer un dossier : " & Chr(10) & txt_CopyFolder.Text & typedistri & Chr(10) & "Continuer ?", vbYesNo) = vbNo Then Exit Sub
         End If
 
         'msgbox pour un recap de la selection et des options
@@ -1053,13 +1053,13 @@ consolesanssaves:
             temptxt6 = ""
         End If
 
-        Dim optionsbox As String = temptxt1 & Chr(13) & temptxt2 & Chr(13) & temptxt3 & Chr(13) & temptxt4 & Chr(13) & temptxt5 & Chr(13) & temptxt6
+        Dim optionsbox As String = temptxt1 & Chr(10) & temptxt2 & Chr(10) & temptxt3 & Chr(10) & temptxt4 & Chr(10) & temptxt5 & Chr(10) & temptxt6
 
         'Reposition listboxmaselection
         listboxMaSelection.Location = New Point(-2, 43)
         listboxMaSelection.Size = New Size(396, 433)
 
-        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(13) & optionsbox & Chr(13) & Chr(13) & "Chemin de Copie :  " & Chr(13) & txt_CopyFolder.Text & "\recalbox", vbYesNo) = vbNo Then
+        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(10) & optionsbox & Chr(10) & Chr(10) & "Chemin de Copie :  " & Chr(10) & txt_CopyFolder.Text & "\recalbox", vbYesNo) = vbNo Then
             listboxMaSelection.Hide()
             Exit Sub
         End If
@@ -1762,7 +1762,7 @@ Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWitho
 
         'Demande les Overlay systemes ?
         If checkoverlays.Checked = True Then
-            If MsgBox("Overlays : Que souhaitez vous copier ?" & Chr(13) & Chr(13) & "Oui = Jeux + Tous les Overlays Générique de tous les Systemes" & Chr(13) & Chr(13) & "Non = Jeux + Overlays Systèmes en cours", vbYesNo) = vbYes Then
+            If MsgBox("Overlays : Que souhaitez vous copier ?" & Chr(10) & Chr(10) & "Oui = Jeux + Tous les Overlays Générique de tous les Systemes" & Chr(10) & Chr(10) & "Non = Jeux + Overlays Systèmes en cours", vbYesNo) = vbYes Then
 
                 For overlaysys = 0 To ListGameLists.Items.Count - 1
 
@@ -1987,7 +1987,7 @@ lignesuivb:
 
         Dim calcultailletotal As Decimal = Math.Round(sizefichier / 1048576, 2)
 
-        MsgBox("Copie Terminée !" & Chr(13) & "Taille Totale : " & calcultailletotal & " Mo" & Chr(13) & "Veuillez Deplacer le dossier 'recalbox' sur votre media")
+        MsgBox("Copie Terminée !" & Chr(10) & "Taille Totale : " & calcultailletotal & " Mo" & Chr(10) & "Veuillez Deplacer le dossier 'recalbox' sur votre media")
         Process.Start("explorer", My.Settings.CopyFolder)
     End Sub
     Private Sub CreateNode(ByVal xmlname As String _
@@ -2288,7 +2288,7 @@ lignesuivb:
     Private Sub Txt_txtsearch_MouseClick(sender As Object, e As MouseEventArgs) Handles txt_txtsearch.MouseClick
         'Si la colonne c'est le filtre des Dates, afficher le popup
         If ComboFiltreColonnes.Text = "DateSortie" Then
-            MsgBox("Vous allez filtrer sur une date" & Chr(13) & "Le Format des dates est 'AAAAMMJJ'" & Chr(13) & Chr(13) & "Je vous recommande de toujours saisir une année")
+            MsgBox("Vous allez filtrer sur une date" & Chr(10) & "Le Format des dates est 'AAAAMMJJ'" & Chr(10) & Chr(10) & "Je vous recommande de toujours saisir une année")
         End If
     End Sub
 
@@ -2381,24 +2381,24 @@ lignesuivb:
         TutoHideBoutonCopy.Show()
 
         TutoHideSimpleMode.Hide()
-        CreateObject("WScript.Shell").popup("Avant toute chose : Reglez le mode simple ou avancé" & Chr(13) & Chr(13) & "Le mode avancé vous permet d'afficher des filtres supplémentaires", 2, "01/19 : Les Gamelists")
+        CreateObject("WScript.Shell").popup("Avant toute chose : Reglez le mode simple ou avancé" & Chr(10) & Chr(10) & "Le mode avancé vous permet d'afficher des filtres supplémentaires", 2, "01/19 : Les Gamelists")
 
         TutoHideGameList.Hide()
         ListGameLists.Show()
         FinalGrid.Hide()
-        CreateObject("WScript.Shell").Popup("Ci-Contre, vos Gamelists :" & Chr(13) & "Que vous avez selectionné à la Souris ou en laissant enfoncé le clic" & Chr(13) & "Ou avec CTRL Enfoncé + Clic" & Chr(13) & "les systèmes que vous avez importés dans le tableau", 2, "02/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Ci-Contre, vos Gamelists :" & Chr(10) & "Que vous avez selectionné à la Souris ou en laissant enfoncé le clic" & Chr(10) & "Ou avec CTRL Enfoncé + Clic" & Chr(10) & "les systèmes que vous avez importés dans le tableau", 2, "02/19 : Les Gamelists")
 
         ListGameLists.Hide()
         TutoHideFinalGrid.Hide()
         FinalGrid.Show()
         CreateObject("WScript.Shell").Popup("Une fois les Gamelists chargés, retrouvez l'intégralité de vos roms dans ce tableau", 2, "03/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("Chaque ligne du tableau représente une Rom" & Chr(13) & "Les coches à sa droite representent les métadonnées", 2, "04/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("Si la cellule est Verte : Info présente dans le Gamelist" & Chr(13) & "Si la cellule est Rouge : Info non présente" & Chr(13) & "Si la cellule est Noire : Non applicable à cette Console", 2, "05/19 : Les Gamelists")
-        CreateObject("WScript.Shell").Popup("La dernière colonne est la SEULE colonne qui vous interesse" & Chr(13) & Chr(13) & "Elle permet de selectionner la Rom pour Copie", 2, "06/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Chaque ligne du tableau représente une Rom" & Chr(10) & "Les coches à sa droite representent les métadonnées", 2, "04/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("Si la cellule est Verte : Info présente dans le Gamelist" & Chr(10) & "Si la cellule est Rouge : Info non présente" & Chr(10) & "Si la cellule est Noire : Non applicable à cette Console", 2, "05/19 : Les Gamelists")
+        CreateObject("WScript.Shell").Popup("La dernière colonne est la SEULE colonne qui vous interesse" & Chr(10) & Chr(10) & "Elle permet de selectionner la Rom pour Copie", 2, "06/19 : Les Gamelists")
 
         TutoHideRomInfo.Hide()
-        CreateObject("WScript.Shell").Popup("Lors d'un clic sur une Rom du tableau précédent" & Chr(13) & "Les informations ici sont affichées", 2, "07/19 : Rom Selectionnée")
-        CreateObject("WScript.Shell").Popup("Remarquez les boutons du dessous" & Chr(13) & Chr(13) & "Qui vous permettront d'ouvrir chacun des médias représentés en coche dans le tableau", 2, "08/19 : Rom Selectionnée")
+        CreateObject("WScript.Shell").Popup("Lors d'un clic sur une Rom du tableau précédent" & Chr(10) & "Les informations ici sont affichées", 2, "07/19 : Rom Selectionnée")
+        CreateObject("WScript.Shell").Popup("Remarquez les boutons du dessous" & Chr(10) & Chr(10) & "Qui vous permettront d'ouvrir chacun des médias représentés en coche dans le tableau", 2, "08/19 : Rom Selectionnée")
 
         TutoHideFiltresAvance.Hide()
         CreateObject("WScript.Shell").Popup("Si vous avez coché le mode avancé, voici les filtres qui vous permettre de n'afficher qu'une partie des élements chargés", 2, "09/19 : Filtres Avancés")
@@ -2418,9 +2418,9 @@ lignesuivb:
         CreateObject("WScript.Shell").Popup("Selectionner les elements que vous souhaitez retrouver dans votre copie personnalisée", 2, "15/19 : Detail du Copieur")
 
         TutoHideOuCopier.Hide()
-        CreateObject("WScript.Shell").Popup("Definissez ici votre repertoire de Sortie" & Chr(13) & Chr(13) & "Je vous conseille de mettre ici un repertoire vide 'REMADE'" & Chr(13) & "de préference sur le support de stockage contenant" & Chr(13) & "les médias pour optimiser le temps de copie", 2, "16/19 : Repertoire Final")
+        CreateObject("WScript.Shell").Popup("Definissez ici votre repertoire de Sortie" & Chr(10) & Chr(10) & "Je vous conseille de mettre ici un repertoire vide 'REMADE'" & Chr(10) & "de préference sur le support de stockage contenant" & Chr(10) & "les médias pour optimiser le temps de copie", 2, "16/19 : Repertoire Final")
         TutoHideBoutonCopy.Hide()
-        CreateObject("WScript.Shell").Popup("Quand votre selection est complète, et que votre copie finale est parametrée" & Chr(13) & Chr(13) & "C'est ici qu'on lance le tout !", 2, "17/19 : Demarrer la Copie")
+        CreateObject("WScript.Shell").Popup("Quand votre selection est complète, et que votre copie finale est parametrée" & Chr(10) & Chr(10) & "C'est ici qu'on lance le tout !", 2, "17/19 : Demarrer la Copie")
         CreateObject("WScript.Shell").Popup("En esperant que ces popups vous aient été utile", 2, "18/19 : Tuto Utile ?")
         CreateObject("WScript.Shell").Popup("Bonne Construction =)", 2, "19/19 Merci !")
 
@@ -2583,7 +2583,7 @@ lignesuivb:
         CollectionGrid.RowsDefaultCellStyle.SelectionBackColor = Color.Red
     End Sub
     Private Sub SupCollection_Click(sender As Object, e As EventArgs) Handles SupCollection.Click
-        If MsgBox("Etes vous sur de supprimer la collection : " & Chr(13) & ComboCollection.Text, vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de supprimer la collection : " & Chr(10) & ComboCollection.Text, vbYesNo) = vbNo Then Exit Sub
         'on delete
         Dim adressefinale = My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\" & ComboCollection.Text
         Kill(adressefinale)

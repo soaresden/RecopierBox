@@ -489,7 +489,7 @@ As String) As String
 
         MsgBox("Redimensionnement des Fichiers CFG Terminé")
         If typedecopie = "Nouveau" Then
-            MsgBox("Votre Dossier s'appelle : " & Chr(13) & Chr(13) & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text)
+            MsgBox("Votre Dossier s'appelle : " & Chr(10) & Chr(10) & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text)
         End If
         Process.Start(Path.GetDirectoryName(My.Settings.DossierOverlay))
     End Sub
@@ -502,7 +502,7 @@ As String) As String
 
         If PicXrandr.Visible = False Then
             PicXrandr.Show()
-            MsgBox("Ouvrir Putty en SSH (Putty)" & Chr(13) & "Apres avoir mis le mot de passe de votre distribution, ecrire" & Chr(13) & "xrandr" & Chr(13) & "on vous indique la resolution (en rose)")
+            MsgBox("Ouvrir Putty en SSH (Putty)" & Chr(10) & "Apres avoir mis le mot de passe de votre distribution, ecrire" & Chr(10) & "xrandr" & Chr(10) & "on vous indique la resolution (en rose)")
         End If
 
     End Sub

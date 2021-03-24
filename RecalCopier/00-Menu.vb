@@ -58,7 +58,7 @@ Public Class Form1
             VersionNetFramework.Text = "Votre .NET Framework : " & StrHigher(Integer.Parse(netKey.GetValue("Release")))
         Else
             VersionNetFramework.Text = "Votre .NET Framework : " & StrHigher(Integer.Parse(netKey.GetValue("Release")))
-            MsgBox("Votre .NET Framework : " & StrHigher(Integer.Parse(netKey.GetValue("Release"))) & Chr(13) & "Vous vous exposez à des bugs !" & Chr(13) & "Merci d'installer le Framework minimum de 4.7.2 et Réouvrir le Logiciel")
+            MsgBox("Votre .NET Framework : " & StrHigher(Integer.Parse(netKey.GetValue("Release"))) & Chr(10) & "Vous vous exposez à des bugs !" & Chr(10) & "Merci d'installer le Framework minimum de 4.7.2 et Réouvrir le Logiciel")
             System.Diagnostics.Process.Start(String.Format("https://dotnet.microsoft.com/download/dotnet-framework"))
         End If
     End Sub
@@ -105,7 +105,7 @@ Public Class Form1
 
 
             If (Not System.IO.Directory.Exists(cheminsaisi & "\Roms")) Then
-                MsgBox("Le Chemin saisi ne possede pas de dossier 'Roms'" & Chr(13) & "Selectionner votre dossier Mère")
+                MsgBox("Le Chemin saisi ne possede pas de dossier 'Roms'" & Chr(10) & "Selectionner votre dossier Mère")
                 TxtRecalfolderPath.Text = Nothing
             Else
                 MsgBox("Chemin OK !")
@@ -268,7 +268,7 @@ skipupdate:
             'Declare the input zip file.
             Dim input As Object = shObj.NameSpace((updateFiles))
             'msgbox
-            MsgBox("Update téléchargée dans le dossier 'Updates'" & Chr(13) & "Vous devrez dezipper et remplacer par vous même :)")
+            MsgBox("Update téléchargée dans le dossier 'Updates'" & Chr(10) & "Vous devrez dezipper et remplacer par vous même :)")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try

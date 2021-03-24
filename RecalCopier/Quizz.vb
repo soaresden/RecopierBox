@@ -1232,7 +1232,7 @@ ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
 
         Else
             'il est pas dedans du coup
-            MsgBox("Impossible ! " & Chr(13) & Chr(13) & nomdujeu & " n'est pas dans la liste du Quizz")
+            MsgBox("Impossible ! " & Chr(10) & Chr(10) & nomdujeu & " n'est pas dans la liste du Quizz")
         End If
     End Sub
 

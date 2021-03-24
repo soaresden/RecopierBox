@@ -37,7 +37,7 @@ Public Class P2K
             'Check si un dossier Roms est present dedans
             Dim cheminsaisi As String = FolderBrowserDialog2.SelectedPath
             If (Not System.IO.Directory.Exists(cheminsaisi & "\downloaded_images") And Not System.IO.File.Exists(cheminsaisi & "\gamelist.xml")) Then
-                MsgBox("Le Chemin saisi ne possede pas de dossier 'downloaded_images' et/ou de gamelist.xml" & Chr(13) & "Selectionner votre dossier généré par Exodos Converter")
+                MsgBox("Le Chemin saisi ne possede pas de dossier 'downloaded_images' et/ou de gamelist.xml" & Chr(10) & "Selectionner votre dossier généré par Exodos Converter")
                 adresseExo.Text = Nothing
             Else
                 adresseExo.Text = FolderBrowserDialog2.SelectedPath
@@ -350,7 +350,7 @@ romsuivante:
                 adressepad.Text = FolderBrowserDialog1.SelectedPath
                 NewAdresseExo.Focus()
             Else
-                MsgBox("Le Chemin saisi ne possede pas de fichiers .p2k.cfg ou .keys" & Chr(13))
+                MsgBox("Le Chemin saisi ne possede pas de fichiers .p2k.cfg ou .keys" & Chr(10))
                 adressepad.Text = Nothing
                 Exit Sub
             End If
@@ -547,13 +547,13 @@ fichiersuivant:
                     'detection du joueur et on mets le texte
                     Select Case numplayer
                         Case 1
-                            RichTextBox0.Text = RichTextBox0.Text & touchesfinales & Chr(13)
+                            RichTextBox0.Text = RichTextBox0.Text & touchesfinales & Chr(10)
                         Case 2
-                            RichTextBox1.Text = RichTextBox1.Text & touchesfinales & Chr(13)
+                            RichTextBox1.Text = RichTextBox1.Text & touchesfinales & Chr(10)
                         Case 3
-                            RichTextBox2.Text = RichTextBox2.Text & touchesfinales & Chr(13)
+                            RichTextBox2.Text = RichTextBox2.Text & touchesfinales & Chr(10)
                         Case 4
-                            RichTextBox3.Text = RichTextBox3.Text & touchesfinales & Chr(13)
+                            RichTextBox3.Text = RichTextBox3.Text & touchesfinales & Chr(10)
                     End Select
 
                     'on remet les variable à 0 puisque on va tout refaire
@@ -648,11 +648,11 @@ lignesuivante:
             realkey = Replace(realkey, "s10", "dot")
         End If
 
-        Dim texte As String = vbTab & vbTab & "{" & Chr(13) &
-            vbTab & vbTab & vbTab & Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(13) &
-            vbTab & vbTab & vbTab & Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(13) &
-            vbTab & vbTab & vbTab & Chr(34) & "target" & Chr(34) & ": " & Chr(34) & "KEY_" & UCase(realkey) & Chr(34) & Chr(13) &
-            vbTab & vbTab & "}," & Chr(13)
+        Dim texte As String = vbTab & vbTab & "{" & Chr(10) &
+            vbTab & vbTab & vbTab & Chr(34) & "trigger" & Chr(34) & ": " & Chr(34) & inputpad & Chr(34) & "," & Chr(10) &
+            vbTab & vbTab & vbTab & Chr(34) & "type" & Chr(34) & ": " & Chr(34) & "key" & Chr(34) & "," & Chr(10) &
+            vbTab & vbTab & vbTab & Chr(34) & "target" & Chr(34) & ": " & Chr(34) & "KEY_" & UCase(realkey) & Chr(34) & Chr(10) &
+            vbTab & vbTab & "}," & Chr(10)
         Return texte
     End Function
     Function genererlignep2k(numplayer As Integer, inputpad As String, realkey As String)
@@ -752,7 +752,7 @@ lignesuivante:
             Call savelefichier()
         Next
         Process.Start(Fulladressep2k.Text)
-        MsgBox("Conversion Terminée" & Chr(13) & "Copiez ces dossiers dans votre repertoire")
+        MsgBox("Conversion Terminée" & Chr(10) & "Copiez ces dossiers dans votre repertoire")
     End Sub
     Private Sub WriteFile_Click(sender As Object, e As EventArgs) Handles WriteFile.Click
         If NewP2kFolder.Text = "" Then
@@ -774,35 +774,35 @@ lignesuivante:
         FinalRichText.Clear()
 
         'On commence a ecrire la forme du fichier
-        FinalRichText.Text = "{" & Chr(13)
+        FinalRichText.Text = "{" & Chr(10)
 
         'On mets le player 1
         FinalRichText.Text = FinalRichText.Text &
-             vbTab & Chr(34) & "actions_player1" & Chr(34) & ": [" & Chr(13) &
-        RichTextBox0.Text & Chr(13) & vbTab & "]"
+             vbTab & Chr(34) & "actions_player1" & Chr(34) & ": [" & Chr(10) &
+        RichTextBox0.Text & Chr(10) & vbTab & "]"
 
         'On teste le player 2
         If RichTextBox1.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
-            vbTab & Chr(34) & "actions_player2" & Chr(34) & ": [" & Chr(13) &
-            RichTextBox1.Text & Chr(13) & vbTab & "]"
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(10) &
+            vbTab & Chr(34) & "actions_player2" & Chr(34) & ": [" & Chr(10) &
+            RichTextBox1.Text & Chr(10) & vbTab & "]"
         End If
 
         If RichTextBox2.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
-            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(13) &
-            RichTextBox2.Text & Chr(13) & vbTab & "]"
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(10) &
+            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(10) &
+            RichTextBox2.Text & Chr(10) & vbTab & "]"
         End If
 
         If RichTextBox3.Text <> "" Then
-            FinalRichText.Text = FinalRichText.Text & "," & Chr(13) &
-            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(13) &
-            RichTextBox3.Text & Chr(13) & vbTab & "]"
+            FinalRichText.Text = FinalRichText.Text & "," & Chr(10) &
+            vbTab & Chr(34) & "actions_player3" & Chr(34) & ": [" & Chr(10) &
+            RichTextBox3.Text & Chr(10) & vbTab & "]"
         End If
 
         Dim tailletexte As Integer = Len(FinalRichText.Text)
 
-        FinalRichText.Text = FinalRichText.Text.Substring(0, tailletexte) & Chr(13) & "}"
+        FinalRichText.Text = FinalRichText.Text.Substring(0, tailletexte) & Chr(10) & "}"
     End Sub
     Private Sub RichTextBox0_GotFocus(sender As Object, e As EventArgs) Handles RichTextBox0.GotFocus
         RichTextBox0.Location = New Point(6, 348)

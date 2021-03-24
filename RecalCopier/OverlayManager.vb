@@ -632,11 +632,11 @@ skip:
 
         'Test si le fichier overlay déjà 
         If System.IO.File.Exists(finaladresse) Then
-            MsgBox("Impossible de renommer ce fichier" & Chr(13) & "Un Overlay existe déjà avec ce nom")
+            MsgBox("Impossible de renommer ce fichier" & Chr(10) & "Un Overlay existe déjà avec ce nom")
             Exit Sub
         End If
 
-        If MsgBox("Vous allez changer le nom de l'Overlay : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & NewName.Text & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Vous allez changer le nom de l'Overlay : " & Chr(10) & Chr(10) & ActualName.Text & Chr(10) & Chr(10) & "pour : " & Chr(10) & Chr(10) & NewName.Text & Chr(10) & Chr(10) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
 
         'On va devoir renommer dans les fichiers texte puis déplacer le tout
         Dim fichieractuel As String = ListdesFichiersEnTrop.SelectedItem
@@ -673,7 +673,7 @@ skip:
     End Function
 
     Private Sub ButtonSuppSave_Click(sender As Object, e As EventArgs) Handles ButtonSuppSave.Click
-        If MsgBox("Etes vous sur de supprimer les fichiers présents dans la liste en rouge ci dessous selectionnés ?" & Chr(13) & "Oui = Supprimer tous les fichiers CFG + _overlay + .png", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de supprimer les fichiers présents dans la liste en rouge ci dessous selectionnés ?" & Chr(10) & "Oui = Supprimer tous les fichiers CFG + _overlay + .png", vbYesNo) = vbNo Then Exit Sub
 
         templisttosupp.ClearSelected()
 

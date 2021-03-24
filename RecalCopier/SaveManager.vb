@@ -561,7 +561,7 @@ skip:
             Exit Sub
         End If
 
-        If MsgBox("Etes vous sur de supprimer DEFINITIVEMENT" & Chr(13) & "TOUTES les sauvegardes mentionnées comme Orphelines ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Etes vous sur de supprimer DEFINITIVEMENT" & Chr(10) & "TOUTES les sauvegardes ci-contre ?" & Chr(10) & "Je ne saurais etre tenu pour responsble, maitrisez ce que vous faites !", vbYesNo) = vbNo Then Exit Sub
 
         For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
             System.IO.File.Delete(ListdesFichiersEnTrop.Items(i))
@@ -613,7 +613,7 @@ skip:
             NewName.Focus()
         End If
 
-        If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(13) & Chr(13) & ActualName.Text & Chr(13) & Chr(13) & "pour : " & Chr(13) & Chr(13) & newnamestate & Chr(13) & Chr(13) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
+        If MsgBox("Vous allez changer le nom de la sauvegarde : " & Chr(10) & Chr(10) & ActualName.Text & Chr(10) & Chr(10) & "pour : " & Chr(10) & Chr(10) & newnamestate & Chr(10) & Chr(10) & "Confirmer ?", vbYesNo) = vbNo Then Exit Sub
 
         File.Move(PathActuel.Text, finaladresse)
         'on refresh le tout
