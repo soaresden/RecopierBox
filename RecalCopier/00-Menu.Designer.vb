@@ -334,7 +334,7 @@ Partial Class Form1
         Me.ButtonP2k.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonP2k.Location = New System.Drawing.Point(2, 477)
         Me.ButtonP2k.Name = "ButtonP2k"
-        Me.ButtonP2k.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonP2k.Size = New System.Drawing.Size(240, 60)
         Me.ButtonP2k.TabIndex = 29
         Me.ButtonP2k.Text = "GESTION PAD2KEYBOARD"
         Me.ButtonP2k.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -409,7 +409,7 @@ Partial Class Form1
         Me.ButtonOverlay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonOverlay.Location = New System.Drawing.Point(1, 283)
         Me.ButtonOverlay.Name = "ButtonOverlay"
-        Me.ButtonOverlay.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonOverlay.Size = New System.Drawing.Size(241, 60)
         Me.ButtonOverlay.TabIndex = 23
         Me.ButtonOverlay.Text = "GERER LES OVERLAYS"
         Me.ButtonOverlay.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -428,7 +428,7 @@ Partial Class Form1
         Me.ButtonSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonSave.Location = New System.Drawing.Point(1, 349)
         Me.ButtonSave.Name = "ButtonSave"
-        Me.ButtonSave.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonSave.Size = New System.Drawing.Size(241, 60)
         Me.ButtonSave.TabIndex = 22
         Me.ButtonSave.Text = "ORGANISER LES SAVES"
         Me.ButtonSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -447,7 +447,7 @@ Partial Class Form1
         Me.ButtonQuizz.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonQuizz.Location = New System.Drawing.Point(2, 412)
         Me.ButtonQuizz.Name = "ButtonQuizz"
-        Me.ButtonQuizz.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonQuizz.Size = New System.Drawing.Size(240, 60)
         Me.ButtonQuizz.TabIndex = 21
         Me.ButtonQuizz.Text = "JOUER AU BLIND TEST♪"
         Me.ButtonQuizz.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -466,9 +466,9 @@ Partial Class Form1
         Me.ButtonCopy.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ButtonCopy.Location = New System.Drawing.Point(0, 217)
         Me.ButtonCopy.Name = "ButtonCopy"
-        Me.ButtonCopy.Size = New System.Drawing.Size(244, 60)
+        Me.ButtonCopy.Size = New System.Drawing.Size(242, 60)
         Me.ButtonCopy.TabIndex = 20
-        Me.ButtonCopy.Text = "CREER UN DOSSIER PERSO"
+        Me.ButtonCopy.Text = "CREER UN CUSTOM-SET"
         Me.ButtonCopy.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ButtonCopy.UseVisualStyleBackColor = False
         '
