@@ -301,7 +301,7 @@ lignesuivante:
         If CheckBoxRecalbox.Checked = True Then
             nomdossierquestion = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(10) & Chr(10) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
             ComboBox1.Items.Add(nomdossierquestion)
-            ComboBox1.SelectedIndex = 0
+            ComboBox1.SelectedItem = nomdossierquestion
 
             'Si on annule, on quitte tout
             If nomdossierquestion = Nothing Then
