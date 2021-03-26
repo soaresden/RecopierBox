@@ -18,7 +18,7 @@ Public Class OverlaysConverter
         ComboBox1.Enabled = False
 
         'On dresse la liste des consoles
-        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.RecalboxFolder & "\roms\", FileIO.SearchOption.SearchTopLevelOnly)
+        For Each folder As String In My.Computer.FileSystem.GetDirectories(My.Settings.DossierOverlay, FileIO.SearchOption.SearchTopLevelOnly)
             GameLists.Items.Add(System.IO.Path.GetFileName(folder))
         Next
     End Sub
@@ -107,7 +107,7 @@ Public Class OverlaysConverter
             Dim pathdelarom As String
 
 
-
+            On Error Resume Next
             For Each fi In aryFi
                 If fi.Name = nomconsole & "_overlay.cfg" Then GoTo fichiersuivant
                 cheminducfg = fi.FullName
@@ -125,7 +125,6 @@ Public Class OverlaysConverter
                 End If
 
                 Dim pathpourarrm As String = "*" & Path.GetFileName((pathdelarom))
-
 
                 'On va rechercher le nom de la rom
                 Dim results = Recherchenomdelarom(generegamelist, nomconsole, pathdelarom)
@@ -155,7 +154,7 @@ fichiersuivant:
             Next
 nextconsole:
         Next
-
+        On Error GoTo 0
         'Si y'a eu des erreur faut avertir
         If yauerreur > 0 Then
             MsgBox("Des fichiers sont manquants" & Chr(10) & "Vérifiez leur dispo ou rescrappez les via le Bouton Requete ARRM" & Chr(10))

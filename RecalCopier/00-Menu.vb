@@ -130,11 +130,21 @@ Public Class Form1
     Private Sub TxtRecalfolderPath_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtRecalfolderPath.KeyDown
         'Ajout d'un \ de securite si besoin
         If e.KeyCode = Keys.Enter Then
-            If TxtRecalfolderPath.Text.Substring(Len(TxtRecalfolderPath.Text) - 1, 1) <> "\" Then
-                TxtRecalfolderPath.Text = TxtRecalfolderPath.Text + "\"
+
+            If TxtRecalfolderPath.Text.Substring(Len(TxtRecalfolderPath.Text) - 1, 1) = "\" Then
+                TxtRecalfolderPath.Text = TxtRecalfolderPath.Text.Substring(0, Len(TxtRecalfolderPath.Text) - 1)
             End If
-            My.Settings.RecalboxFolder = TxtRecalfolderPath.Text
-            My.Settings.Save()
+
+            If (Not System.IO.Directory.Exists(TxtRecalfolderPath.Text & "\Roms")) Then
+                MsgBox("Le Chemin saisi ne possede pas de dossier 'Roms'" & Chr(10) & "Selectionner votre dossier Mère")
+                TxtRecalfolderPath.Text = Nothing
+            Else
+                MsgBox("Chemin OK !")
+
+                My.Settings.RecalboxFolder = TxtRecalfolderPath.Text
+                My.Settings.Save()
+                Call DetectTypeDossier(TxtRecalfolderPath.Text)
+            End If
         End If
     End Sub
     Private Sub RichTextBox1_Click(sender As Object, e As EventArgs) Handles RichTextBox1.Click
@@ -277,4 +287,5 @@ skipupdate:
     Private Sub ReShowDisclaimer_Click(sender As Object, e As EventArgs) Handles ReShowDisclaimer.Click
         Disclaimer.Visible = Not Disclaimer.Visible
     End Sub
+
 End Class
