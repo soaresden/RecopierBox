@@ -399,7 +399,7 @@ lignesuivante:
 
                     If detectopacity > 0 Then
                         Dim opacity As Double = CDbl(Replace(Convertendecimal(s), ".", ","))
-                        ligneopacity = " " & Chr(34) & "opacity" & Chr(34) & ":" & FormatNumber(opacity, 7) & ","
+                        ligneopacity = " " & Chr(34) & "opacity" & Chr(34) & ":" & Replace(FormatNumber(opacity, 7), ",", ".") & ","
                     End If
 
                     Dim lignemsgx As String = " " & Chr(34) & "messagex" & Chr(34) & ":" & "0.220000,"
