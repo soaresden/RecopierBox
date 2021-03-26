@@ -169,6 +169,7 @@ Partial Class CopyRoms
         Me.FinalGrid.Margin = New System.Windows.Forms.Padding(2)
         Me.FinalGrid.MultiSelect = False
         Me.FinalGrid.Name = "FinalGrid"
+        Me.FinalGrid.ReadOnly = True
         Me.FinalGrid.RowHeadersVisible = False
         Me.FinalGrid.RowHeadersWidth = 51
         Me.FinalGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -1141,7 +1142,7 @@ Partial Class CopyRoms
         Me.ButtonCollection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ButtonCollection.Cursor = System.Windows.Forms.Cursors.Default
         Me.ButtonCollection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.ButtonCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen
         Me.ButtonCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -1178,7 +1179,7 @@ Partial Class CopyRoms
         '
         'GroupCollections
         '
-        Me.GroupCollections.BackColor = System.Drawing.Color.Plum
+        Me.GroupCollections.BackColor = System.Drawing.Color.DarkGreen
         Me.GroupCollections.Controls.Add(Me.ButtonAddCollection)
         Me.GroupCollections.Controls.Add(Me.ButtonRemoveFromCollection)
         Me.GroupCollections.Controls.Add(Me.AjoutCollection)
@@ -1187,9 +1188,10 @@ Partial Class CopyRoms
         Me.GroupCollections.Controls.Add(Me.CollectionGrid)
         Me.GroupCollections.Controls.Add(Me.Label18)
         Me.GroupCollections.Controls.Add(Me.ComboCollection)
-        Me.GroupCollections.Location = New System.Drawing.Point(163, 4)
+        Me.GroupCollections.ForeColor = System.Drawing.Color.White
+        Me.GroupCollections.Location = New System.Drawing.Point(187, 2)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(87, 23)
+        Me.GroupCollections.Size = New System.Drawing.Size(59, 21)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
@@ -1255,9 +1257,9 @@ Partial Class CopyRoms
         Me.SaveCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SaveCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SaveCollection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.SaveCollection.Location = New System.Drawing.Point(80, 356)
+        Me.SaveCollection.Location = New System.Drawing.Point(80, 353)
         Me.SaveCollection.Name = "SaveCollection"
-        Me.SaveCollection.Size = New System.Drawing.Size(77, 29)
+        Me.SaveCollection.Size = New System.Drawing.Size(77, 34)
         Me.SaveCollection.TabIndex = 40
         Me.SaveCollection.Text = "Sauvegarder"
         Me.SaveCollection.UseVisualStyleBackColor = False

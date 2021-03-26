@@ -2557,7 +2557,7 @@ lignesuivb:
     Private Sub ButtonCollection_Click(sender As Object, e As EventArgs) Handles ButtonCollection.Click
         GroupCollections.Visible = Not GroupCollections.Visible
         If GroupCollections.Visible = True Then
-            GroupCollections.Location = New Point(376, 1)
+            GroupCollections.Location = New Point(350, 2)
             GroupCollections.Size = New Point(236, 396)
         Else
             GroupCollections.Location = New Point(141, 1)
@@ -2579,8 +2579,10 @@ lignesuivb:
     Private Sub GroupCollections_VisibleChanged(sender As Object, e As EventArgs) Handles GroupCollections.VisibleChanged
         Call importdescollections()
         'focus sur le 1er
-        ComboCollection.SelectedIndex = 0
+        If ComboCollection.SelectedValue = "" Then ComboCollection.SelectedIndex = 0
         CollectionGrid.RowsDefaultCellStyle.SelectionBackColor = Color.Red
+        CollectionGrid.RowsDefaultCellStyle.SelectionForeColor = Color.White
+        CollectionGrid.RowsDefaultCellStyle.ForeColor = Color.Black
     End Sub
     Private Sub SupCollection_Click(sender As Object, e As EventArgs) Handles SupCollection.Click
         If MsgBox("Etes vous sur de supprimer la collection : " & Chr(10) & ComboCollection.Text, vbYesNo) = vbNo Then Exit Sub
@@ -2676,7 +2678,7 @@ lignesuivb:
             'Dim finalconsole = donc.Substring(0, reslash - 1)
             romconsole = rompath.Substring(InStr(rompath, "roms\") + 4).Substring(0, InStr(rompath.Substring(InStr(rompath, "roms\") + 4), "\") - 1)
 
-            If System.IO.File.Exists(rompath) Then
+            If System.IO.File.Exists(rompath) Or System.IO.Directory.Exists(rompath) Then
                 rompresence = True
             Else
                 rompresence = False
