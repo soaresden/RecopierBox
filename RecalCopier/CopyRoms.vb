@@ -52,7 +52,8 @@ Public Class CopyRoms
         ' This list stores the results.
         Dim result As New List(Of String)
 
-        ' This stack stores the directories to process.
+        ' This stack stores the directories to
+        ' .
         Dim stack As New Stack(Of String)
 
         ' Add the initial directory

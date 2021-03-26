@@ -343,7 +343,6 @@ lignesuivante:
 
 
                 If IsNumeric(fichier3) = True Then
-                    Process.Start(fichier1)
                     GoTo fichiersuivant
                 End If
 
@@ -477,7 +476,6 @@ fichiersuivant:
 
 
                 If IsNumeric(fichier3) = True Then
-                    Process.Start(fichier1)
                     GoTo fichiersuivantbato
                 End If
 
