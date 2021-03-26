@@ -3,6 +3,7 @@ Imports System.Threading
 Imports System.Linq
 Imports System.Drawing.Imaging
 Imports AxWMPLib
+Imports System.ComponentModel
 
 Public Class Quizz
     Private WithEvents Proc As New Process
@@ -1768,4 +1769,7 @@ romsuivante:
         PixelOverlay.Close()
     End Sub
 
+    Private Sub Quizz_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
+    End Sub
 End Class

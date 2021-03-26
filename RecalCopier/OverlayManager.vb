@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Public Class OverlayManager
 
     Private Sub OverlayManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -262,7 +263,7 @@ ProchainGamelist:
             nbdansdossier = Directory.GetFiles(My.Settings.RecalboxFolder & "\overlays\" & nomconsole, "*.cfg").Count
 
 
-                If nbdansdossier = 0 Then
+            If nbdansdossier = 0 Then
                 GoTo nextconsole
             End If
 
@@ -281,8 +282,8 @@ ProchainGamelist:
                 pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
 
 
-                    'On va rechercher le nom de la rom
-                    Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
+                'On va rechercher le nom de la rom
+                Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
 
                 'on ajoute au tableau
                 table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg)
@@ -410,7 +411,7 @@ lignesuivante:
 
 
 
-            ListToSupp.Items.Add(genpathducfg)
+        ListToSupp.Items.Add(genpathducfg)
     End Sub
 
     Sub Ecrireles3fichiers()
@@ -471,7 +472,7 @@ lignesuivante:
             detectinputoverlay = InStr(s, "/overlays/")
 
 
-                If detectinputoverlay > 0 Then
+            If detectinputoverlay > 0 Then
                 'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
                 'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
                 'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
@@ -569,7 +570,7 @@ lignesuivante:
             detectinputoverlay = InStr(s, "/overlays/")
 
 
-                If detectinputoverlay > 0 Then
+            If detectinputoverlay > 0 Then
                 'Dim cheminducfgoverlay = s.Substring(detectinputoverlay + 9)
                 'Dim detectdupointcfg = InStr(cheminducfgoverlay, ".cfg")
                 'Dim cheminfinaloverlaycfg = cheminducfgoverlay.Substring(0, detectdupointcfg + 3)
@@ -713,5 +714,9 @@ skip:
     Private Sub ButtonConvert_Click(sender As Object, e As EventArgs) Handles ButtonConvert.Click
         OverlaysConverter.Show()
         Me.Close()
+    End Sub
+
+    Private Sub OverlayManager_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
     End Sub
 End Class

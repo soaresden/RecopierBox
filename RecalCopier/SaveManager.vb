@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Public Class SaveManager
     Private Sub SaveManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TextBox1.Hide()
@@ -211,9 +212,9 @@ ProchainGamelist:
                 End If
 
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
-                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-                Else
-                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = False
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            Else
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = False
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = 0
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
@@ -385,7 +386,7 @@ skip:
         ListdesFichiersEnTrop.Items.Clear()
 
         'On va vérifier si les cfg sont liés à une rom
-        Call CompletiondesSaves
+        Call completiondessaves()
 
         'On met la derniere colonne coche en readonly
         DataGridSave.Columns("CocheRom").ReadOnly = True
@@ -464,10 +465,10 @@ skip:
         Dim pathrom As String = DataGridSave.Rows(rowIndex).Cells(DataGridSave.Columns("CheminSave").Index).Value
         Dim nomdelaromdanslistbox As String
 
-            ListdesFichiersEnTrop.ClearSelected()
+        ListdesFichiersEnTrop.ClearSelected()
 
-            'On va chercher le nom et selectionner
-            For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
+        'On va chercher le nom et selectionner
+        For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
             nomdelaromdanslistbox = Path.GetFileName(ListdesFichiersEnTrop.Items(i).ToString)
 
             If nomdelaromdanslistbox = nomdelasave Then
@@ -704,17 +705,17 @@ skip:
 
         Dim nomfichiersave As String = DataGridSave.Rows(rowactuel).Cells(DataGridSave.Columns("CheminSave").Index).Value
 
-            If InStr(nomfichiersave, ".state") > 1 Then
-                Label9.Show()
-                textstate.Show()
-                Dim getextension As String = Path.GetExtension(nomfichiersave)
-                Dim getnumber As String = getextension.Substring(6)
-                If getnumber = "" Then getnumber = 1
-                textstate.Text = getnumber
-            Else
-                Label9.Hide()
-                textstate.Hide()
-            End If
+        If InStr(nomfichiersave, ".state") > 1 Then
+            Label9.Show()
+            textstate.Show()
+            Dim getextension As String = Path.GetExtension(nomfichiersave)
+            Dim getnumber As String = getextension.Substring(6)
+            If getnumber = "" Then getnumber = 1
+            textstate.Text = getnumber
+        Else
+            Label9.Hide()
+            textstate.Hide()
+        End If
     End Sub
 
     Private Sub DataGridRoms_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridRoms.SelectionChanged
@@ -798,5 +799,9 @@ fichiersuivanttrouve:
             RenameSelection.Location = New Point(134, 361)
             RenameSelection.Size = New Point(367, 177)
         End If
+    End Sub
+
+    Private Sub SaveManager_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
     End Sub
 End Class

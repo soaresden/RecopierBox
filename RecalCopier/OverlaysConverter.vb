@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Text.RegularExpressions
 
 Public Class OverlaysConverter
@@ -456,10 +457,10 @@ lignesuivante:
                             ligneheight = " " & Chr(34) & "height" & Chr(34) & ":" & fullscreeny & ","
                         End If
 
-                        Dim bottomo As Double = fullscreeny - imagey - Topo
+                        Dim bottomo As Double = fullscreeny - imagey - topo
                         Dim lignebottom As String = " " & Chr(34) & "bottom" & Chr(34) & ":" & bottomo & ","
 
-                        Dim righto As Double = fullscreenx - imagex - Lefto
+                        Dim righto As Double = fullscreenx - imagex - lefto
                         Dim ligneright As String = " " & Chr(34) & "right" & Chr(34) & ":" & righto
 
                         sw.WriteLine(lignewidth)
@@ -865,7 +866,7 @@ findugame:
         Dim pathdelarom As String
 
         For Each fi In aryFi
-            Dim fichiercomplet As string = fi.FullName
+            Dim fichiercomplet As String = fi.FullName
 
             'extraction de la console
             Dim nomconsole As String = Path.GetFileName(Path.GetDirectoryName(fi.FullName))
@@ -930,10 +931,10 @@ saisie:
             table.Rows.Add(nomconsole, romname, nomfichiercfg, fichiercomplet, fichierpng, etatoverlay)
 
 fichiersuivant:
-            Next
+        Next
 
-            'Si y'a eu des erreur faut avertir
-            If yauerreur > 0 Then
+        'Si y'a eu des erreur faut avertir
+        If yauerreur > 0 Then
             MsgBox("Des fichiers sont manquants" & Chr(10) & "Vérifiez leur dispo ou rescrappez les via le Bouton Requete ARRM" & Chr(10))
             RqtARRM.Show()
         Else
@@ -1070,7 +1071,7 @@ Fin:
         Next
     End Sub
     Private Sub Supp1_Click(sender As Object, e As EventArgs) Handles Supp1.Click
-        Call supplescfgs(1)
+        Call Supplescfgs(1)
     End Sub
     Private Sub Supp2_Click(sender As Object, e As EventArgs) Handles Supp2.Click
         Call Supplescfgs(2)
@@ -1112,5 +1113,9 @@ Fin:
     End Sub
     Private Sub DataGridOverlays_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridOverlays.ColumnHeaderMouseClick
         Call Colorerbato()
+    End Sub
+
+    Private Sub OverlaysConverter_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
     End Sub
 End Class

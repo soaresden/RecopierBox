@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Text.RegularExpressions
 Imports System.Drawing
+Imports System.ComponentModel
 
 Public Class ResizeOverlays
     Private Sub ButtonGetBack1_Click(sender As Object, e As EventArgs) Handles ButtonGetBack1.Click
@@ -505,5 +506,9 @@ As String) As String
             MsgBox("Ouvrir Putty en SSH (Putty)" & Chr(10) & "Apres avoir mis le mot de passe de votre distribution, ecrire" & Chr(10) & "xrandr" & Chr(10) & "on vous indique la resolution (en rose)")
         End If
 
+    End Sub
+
+    Private Sub ResizeOverlays_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
     End Sub
 End Class

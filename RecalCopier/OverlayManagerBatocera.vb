@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Text.RegularExpressions
 Public Class OverlayManagerBatocera
 
@@ -718,5 +719,9 @@ lignesuivante:
         Else
             Process.Start(fichiercomplet)
         End If
+    End Sub
+
+    Private Sub OverlayManagerBatocera_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
     End Sub
 End Class

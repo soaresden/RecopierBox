@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Xml
 
 Public Class CopyRoms
@@ -2792,5 +2793,9 @@ lignesuivante:
             End If
         Loop Until a Is Nothing
         MsgBox("Sauvegardé !")
+    End Sub
+
+    Private Sub CopyRoms_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
     End Sub
 End Class

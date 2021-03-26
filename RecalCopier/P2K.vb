@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 
 Public Class P2K
     Private Sub P2K_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -367,7 +368,7 @@ romsuivante:
             extension = "p2k.cfg"
         ElseIf BatotoRB.Checked = True Then
             RbToBato.Visible = False
-            BatoToRb.Visible = True
+            BatotoRB.Visible = True
             extension = ".keys"
         End If
 
@@ -410,7 +411,7 @@ romsuivante:
         Dim di As New IO.DirectoryInfo(adressepad.Text)
         Dim aryFi As IO.FileInfo()
         If RbToBato.Checked = True Then
-            aryfi = di.GetFiles("*." & extension, SearchOption.AllDirectories)
+            aryFi = di.GetFiles("*." & extension, SearchOption.AllDirectories)
         Else
             aryFi = di.GetFiles("padto" & extension, SearchOption.AllDirectories)
         End If
@@ -720,7 +721,7 @@ lignesuivante:
             cheminfinal = Replace(chemindufichiercomplet, ".p2k.cfg", "") & "\padto.keys"
         ElseIf extensionfichier = ".p2k.cfg" Then
             cheminfinal = Replace(chemindufichiercomplet, extensionfichier, "padto.keys")
-        ElseIf instr(chemindufichiercomplet, ".pc") > 1 And extensionfichier = ".keys" Then
+        ElseIf InStr(chemindufichiercomplet, ".pc") > 1 And extensionfichier = ".keys" Then
             Dim dossierparent As String = Path.GetDirectoryName(chemindufichiercomplet)
             Dim dossierfinalenreg As String = Path.GetDirectoryName(dossierparent)
             Dim nomdufichierfinal As String = Path.GetFileName(dossierparent) & ".p2k.cfg"
@@ -942,5 +943,9 @@ lignesuivante:
 
     Private Sub RichTextBox0_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox0.TextChanged
         FinalRichText.Text = RichTextBox0.Text & RichTextBox1.Text & RichTextBox2.Text & RichTextBox3.Text
+    End Sub
+
+    Private Sub P2K_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Form1.Show()
     End Sub
 End Class
