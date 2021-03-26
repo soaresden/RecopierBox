@@ -389,6 +389,11 @@ lignesuivante:
                     Dim detecty As String = InStr(s, "custom_viewport_y")
                     Dim detectw As String = InStr(s, "custom_viewport_width")
                     Dim detecth As String = InStr(s, "custom_viewport_height")
+                    Dim imagey As Double
+                    Dim imagex As Double
+                    Dim topo As Double
+                    Dim lefto As Double
+
                     Dim fullscreenx As Double
                     Dim fullscreeny As Double
                     Dim ligneopacity As String
@@ -416,14 +421,23 @@ lignesuivante:
                     End If
 
                     If detecty > 0 Then
-                        Dim top As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
-                        lignetop = " " & Chr(34) & "top" & Chr(34) & ":" & top & ","
+                        topo = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
+                        lignetop = " " & Chr(34) & "top" & Chr(34) & ":" & topo & ","
                     End If
 
                     If detectx > 0 Then
-                        Dim left As Double = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
-                        ligneleft = " " & Chr(34) & "left" & Chr(34) & ":" & left & ","
+                        lefto = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
+                        ligneleft = " " & Chr(34) & "left" & Chr(34) & ":" & lefto & ","
                     End If
+
+                    If detecth > 0 Then
+                        imagey = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
+                    End If
+
+                    If detectw > 0 Then
+                        imagex = Integer.Parse(Regex.Replace(s, "[^\d]", ""))
+                    End If
+
 
                     If compteurlignedufichiercfg = lineCount Then
                         sw.WriteLine(ligneopacity)
@@ -442,11 +456,11 @@ lignesuivante:
                             ligneheight = " " & Chr(34) & "height" & Chr(34) & ":" & fullscreeny & ","
                         End If
 
-                        Dim bottom As Double = fullscreeny - Top
-                        Dim lignebottom As String = " " & Chr(34) & "bottom" & Chr(34) & ":" & bottom & ","
+                        Dim bottomo As Double = fullscreeny - imagey - Topo
+                        Dim lignebottom As String = " " & Chr(34) & "bottom" & Chr(34) & ":" & bottomo & ","
 
-                        Dim right As Double = fullscreenx - Left
-                        Dim ligneright As String = " " & Chr(34) & "right" & Chr(34) & ":" & right
+                        Dim righto As Double = fullscreenx - imagex - Lefto
+                        Dim ligneright As String = " " & Chr(34) & "right" & Chr(34) & ":" & righto
 
                         sw.WriteLine(lignewidth)
                         sw.WriteLine(ligneheight)
@@ -454,6 +468,7 @@ lignesuivante:
                         sw.WriteLine(ligneleft)
                         sw.WriteLine(lignebottom)
                         sw.WriteLine(ligneright)
+
                         sw.WriteLine("}")
                     End If
                 Next
