@@ -1191,7 +1191,7 @@ Partial Class CopyRoms
         Me.GroupCollections.ForeColor = System.Drawing.Color.White
         Me.GroupCollections.Location = New System.Drawing.Point(187, 2)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(59, 21)
+        Me.GroupCollections.Size = New System.Drawing.Size(66, 23)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
