@@ -18,6 +18,15 @@ Public Class CopyRoms
         ButtonTuto1.Hide()
         GroupCollections.Hide()
 
+        'si c'est batocera, on affiche le bouton collection
+        If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
+            ButtonCollection.Show()
+            Label16.Show()
+        Else
+            Label16.Hide()
+            ButtonCollection.Hide()
+        End If
+
         'test sur la valeur modesimple
         If My.Settings.SimpleMode = "simple" Or My.Settings.SimpleMode = Nothing Then
             ChkSimple.Checked = True
@@ -82,7 +91,6 @@ Public Class CopyRoms
         Return result
     End Function
     Private Sub ButtonGenererList_Click_1(sender As Object, e As EventArgs) Handles ButtonGenererList.Click
-
 
         'Conditionnelle pour ne rien lancer si aucun selectionnés
         If ListGameLists.SelectedItems.Count = 0 Then
@@ -453,15 +461,6 @@ consolesuivante:
         'Reajusting Interface and Showing Final Interface
         ListGameLists.Hide()
         GroupBoxSelectionRoms.Show()
-
-        'si c'est batocera, on affiche le bouton collection
-        If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
-            ButtonCollection.Show()
-            Label16.Show()
-        Else
-            Label16.Hide()
-            ButtonCollection.Hide()
-        End If
 
         FinalGrid.Location = New Point(8, 28)
         FinalGrid.Size = New Size(600, 365)

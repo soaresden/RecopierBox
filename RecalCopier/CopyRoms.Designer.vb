@@ -1113,8 +1113,6 @@ Partial Class CopyRoms
         '
         'GroupBoxSelectionRoms
         '
-        Me.GroupBoxSelectionRoms.Controls.Add(Me.Label16)
-        Me.GroupBoxSelectionRoms.Controls.Add(Me.ButtonCollection)
         Me.GroupBoxSelectionRoms.Controls.Add(Me.ButtonAfficherMaSelection)
         Me.GroupBoxSelectionRoms.Controls.Add(Me.Label15)
         Me.GroupBoxSelectionRoms.ForeColor = System.Drawing.SystemColors.ButtonHighlight
@@ -1129,7 +1127,7 @@ Partial Class CopyRoms
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label16.Location = New System.Drawing.Point(68, 73)
+        Me.Label16.Location = New System.Drawing.Point(548, 470)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(58, 26)
         Me.Label16.TabIndex = 42
@@ -1147,7 +1145,7 @@ Partial Class CopyRoms
         Me.ButtonCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ButtonCollection.Image = CType(resources.GetObject("ButtonCollection.Image"), System.Drawing.Image)
-        Me.ButtonCollection.Location = New System.Drawing.Point(72, 19)
+        Me.ButtonCollection.Location = New System.Drawing.Point(551, 418)
         Me.ButtonCollection.Name = "ButtonCollection"
         Me.ButtonCollection.Size = New System.Drawing.Size(50, 49)
         Me.ButtonCollection.TabIndex = 41
@@ -1317,7 +1315,9 @@ Partial Class CopyRoms
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.GroupCollections)
+        Me.Controls.Add(Me.ButtonCollection)
         Me.Controls.Add(Me.TutoSelectionActuelle)
         Me.Controls.Add(Me.TutoHideFiltresAvance)
         Me.Controls.Add(Me.TutoHideBoutonCopy)
