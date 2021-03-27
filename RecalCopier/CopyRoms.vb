@@ -21,7 +21,9 @@ Public Class CopyRoms
         'si c'est batocera, on affiche le bouton collection
         If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
             ButtonCollection.Show()
+            ButtonCollection.Location = New Point(93, 417)
             Label16.Show()
+            Label16.Location = New Point(90, 470)
         Else
             Label16.Hide()
             ButtonCollection.Hide()
@@ -44,7 +46,6 @@ Public Class CopyRoms
         Next
 
         'showing gridview2
-        FinalGrid.Show()
         ButtonGenererList.Show()
         CheckBoxARRM.Hide()
 
@@ -509,6 +510,12 @@ consolesuivante:
 
         'On affiche le bouton Tuto !
         ButtonTuto1.Show()
+
+        'si c'est batocera, on redeplace la collection
+        If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
+            ButtonCollection.Location = New Point(549, 417)
+            Label16.Location = New Point(546, 470)
+        End If
     End Sub
     Function GetSizeSelectedRom(cheminrom As String, console As String)
         'On check si le jeu existe
@@ -2277,15 +2284,10 @@ lignesuivb:
     End Sub
     Private Sub Txt_USBGo_TextChanged(sender As Object, e As EventArgs) Handles txt_USBGo.TextChanged
         txt_morestant.Text = (Val(txt_USBGo.Text) * 1024) - Val(txt_GoAPrevoir.Text)
+        My.Settings.StockageSize = txt_USBGo.Text
+        My.Settings.Save()
     End Sub
 
-    Private Sub Txt_USBGo_KeyDown(sender As Object, e As KeyEventArgs) Handles txt_USBGo.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            'On va remplacer la valeur par defaut du Stockage et on la sauvegarde pour les prochaines fois
-            My.Settings.StockageSize = txt_USBGo.Text
-            My.Settings.Save()
-        End If
-    End Sub
     Private Sub Txt_txtsearch_MouseClick(sender As Object, e As MouseEventArgs) Handles txt_txtsearch.MouseClick
         'Si la colonne c'est le filtre des Dates, afficher le popup
         If ComboFiltreColonnes.Text = "DateSortie" Then

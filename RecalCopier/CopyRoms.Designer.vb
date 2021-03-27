@@ -443,7 +443,6 @@ Partial Class CopyRoms
         Me.txt_morestant.ReadOnly = True
         Me.txt_morestant.Size = New System.Drawing.Size(65, 20)
         Me.txt_morestant.TabIndex = 5
-        Me.txt_morestant.Text = "10240"
         Me.txt_morestant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label3
@@ -462,7 +461,6 @@ Partial Class CopyRoms
         Me.txt_USBGo.Name = "txt_USBGo"
         Me.txt_USBGo.Size = New System.Drawing.Size(65, 20)
         Me.txt_USBGo.TabIndex = 0
-        Me.txt_USBGo.Text = "128"
         Me.txt_USBGo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TutoHideBoutonCopy
@@ -1127,7 +1125,7 @@ Partial Class CopyRoms
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label16.Location = New System.Drawing.Point(548, 470)
+        Me.Label16.Location = New System.Drawing.Point(546, 470)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(58, 26)
         Me.Label16.TabIndex = 42
@@ -1145,7 +1143,7 @@ Partial Class CopyRoms
         Me.ButtonCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ButtonCollection.Image = CType(resources.GetObject("ButtonCollection.Image"), System.Drawing.Image)
-        Me.ButtonCollection.Location = New System.Drawing.Point(551, 418)
+        Me.ButtonCollection.Location = New System.Drawing.Point(549, 417)
         Me.ButtonCollection.Name = "ButtonCollection"
         Me.ButtonCollection.Size = New System.Drawing.Size(50, 49)
         Me.ButtonCollection.TabIndex = 41
