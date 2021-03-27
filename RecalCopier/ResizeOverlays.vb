@@ -510,5 +510,6 @@ As String) As String
 
     Private Sub ResizeOverlays_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Form1.Show()
+        Me.Show()
     End Sub
 End Class

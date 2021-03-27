@@ -1114,8 +1114,8 @@ Fin:
     Private Sub DataGridOverlays_ColumnHeaderMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridOverlays.ColumnHeaderMouseClick
         Call Colorerbato()
     End Sub
-
     Private Sub OverlaysConverter_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Form1.Show()
+        Me.Show()
     End Sub
 End Class

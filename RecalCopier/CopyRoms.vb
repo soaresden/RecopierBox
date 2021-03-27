@@ -2752,7 +2752,6 @@ lignesuivb:
         Next
         CollectionGrid.DataSource = data
     End Sub
-
     Private Sub SaveCollection_Click(sender As Object, e As EventArgs) Handles SaveCollection.Click
         Dim cheminfichier As String = My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\" & ComboCollection.Text
         Kill(cheminfichier)
@@ -2795,7 +2794,6 @@ lignesuivante:
         Loop Until a Is Nothing
         MsgBox("Sauvegardé !")
     End Sub
-
     Private Sub CopyRoms_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Form1.Show()
     End Sub

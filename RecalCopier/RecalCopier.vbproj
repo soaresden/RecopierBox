@@ -65,7 +65,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>iconlog2.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -345,7 +346,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="IconeLog.ico" />
-    <Content Include="iconlog2.ico" />
     <None Include="Resources\pixelfull.png" />
     <None Include="Resources\pixel1.png" />
     <None Include="Resources\pixel3.png" />

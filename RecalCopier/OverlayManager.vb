@@ -703,20 +703,16 @@ skip:
 
         'On enleve les doublons
         Supdoublon(ListToSupp)
-
     End Sub
-
     Private Sub ButtonResizeOverlays_Click(sender As Object, e As EventArgs) Handles ButtonResizeOverlays.Click
         ResizeOverlays.Show()
-        Me.Close()
+        Me.Hide()
     End Sub
-
     Private Sub ButtonConvert_Click(sender As Object, e As EventArgs) Handles ButtonConvert.Click
         OverlaysConverter.Show()
-        Me.Close()
+        Me.Hide()
     End Sub
-
-    Private Sub OverlayManager_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub OverlayManager_Closing(sender As Object, e As EventArgs) Handles Me.Closing
         Form1.Show()
     End Sub
 End Class

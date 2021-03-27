@@ -639,12 +639,12 @@ lignesuivante:
     End Sub
     Private Sub ButtonResizeOverlays_Click(sender As Object, e As EventArgs) Handles ButtonResizeOverlays.Click
         ResizeOverlays.Show()
-        Me.Close()
+        Me.Hide()
     End Sub
 
     Private Sub ButtonConvert_Click(sender As Object, e As EventArgs) Handles ButtonConvert.Click
         OverlaysConverter.Show()
-        Me.Close()
+        Me.Hide()
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
@@ -720,8 +720,7 @@ lignesuivante:
             Process.Start(fichiercomplet)
         End If
     End Sub
-
-    Private Sub OverlayManagerBatocera_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub OverlayManager_Closing(sender As Object, e As EventArgs) Handles Me.Closing
         Form1.Show()
     End Sub
 End Class
