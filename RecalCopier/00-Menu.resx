@@ -2091,8 +2091,9 @@ PS: Pour une bonne visualisation, installez les 2 fonts du dossier</value>
   <data name="txtWhyGamelist.Text" xml:space="preserve">
     <value>RecopierBox vous permet de :
 - Visualiser vos médias des GameLists
-sans passer par l'OS Recalbox
+sans passer par l'OS Recalbox ou Batocera
 - Concevoir des sets personnalisés
+- Gerer vos overlays
 - Jouer et Remuer vos Souvenirs sur le Quizz/Blind Test
 - Gérer Vos Sauvegardes
 

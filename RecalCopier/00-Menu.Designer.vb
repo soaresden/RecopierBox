@@ -172,7 +172,7 @@ Partial Class Form1
         Me.Disclaimer.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Disclaimer.Location = New System.Drawing.Point(252, 67)
         Me.Disclaimer.Name = "Disclaimer"
-        Me.Disclaimer.Size = New System.Drawing.Size(702, 470)
+        Me.Disclaimer.Size = New System.Drawing.Size(698, 470)
         Me.Disclaimer.TabIndex = 16
         Me.Disclaimer.TabStop = False
         Me.Disclaimer.Text = "Fonctionnalités :"
@@ -278,7 +278,7 @@ Partial Class Form1
         Me.txtWhyGamelist.Multiline = True
         Me.txtWhyGamelist.Name = "txtWhyGamelist"
         Me.txtWhyGamelist.ReadOnly = True
-        Me.txtWhyGamelist.Size = New System.Drawing.Size(203, 215)
+        Me.txtWhyGamelist.Size = New System.Drawing.Size(203, 236)
         Me.txtWhyGamelist.TabIndex = 0
         Me.txtWhyGamelist.Text = resources.GetString("txtWhyGamelist.Text")
         '
