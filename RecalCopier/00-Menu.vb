@@ -106,7 +106,6 @@ Public Class Form1
 
             If (Not System.IO.Directory.Exists(cheminsaisi & "\Roms")) Then
                 MsgBox("Le Chemin saisi ne possede pas de dossier 'Roms'" & Chr(10) & "Selectionner votre dossier Mère")
-                TxtRecalfolderPath.Text = Nothing
             Else
                 MsgBox("Chemin OK !")
 
