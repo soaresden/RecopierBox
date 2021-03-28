@@ -549,12 +549,20 @@ skip:
         'On delete les fichiers
         For Each i In ListdesFichiersEnTrop.SelectedItems
             System.IO.File.Delete(i)
+            'test si y'a un png
+            Dim fichierpng As String = Path.GetDirectoryName(i) & "\" & Path.GetFileName(i) & ".png"
+            On Error Resume Next
+            System.IO.File.Delete(fichierpng)
+            On Error GoTo 0
+
             compteur += 1
         Next
 
         'on remove les entrees
         For n As Integer = ListdesFichiersEnTrop.SelectedItems.Count - 1 To 0 Step -1
             ListdesFichiersEnTrop.Items.Remove(ListdesFichiersEnTrop.SelectedItems(n))
+
+
         Next n
 
         'On enleve les doublons
