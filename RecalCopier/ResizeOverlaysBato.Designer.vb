@@ -108,9 +108,9 @@ Partial Class ResizeOverlaysBato
         Me.ButtonGoResize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGoResize.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonGoResize.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonGoResize.Location = New System.Drawing.Point(122, 175)
+        Me.ButtonGoResize.Location = New System.Drawing.Point(122, 168)
         Me.ButtonGoResize.Name = "ButtonGoResize"
-        Me.ButtonGoResize.Size = New System.Drawing.Size(116, 23)
+        Me.ButtonGoResize.Size = New System.Drawing.Size(116, 30)
         Me.ButtonGoResize.TabIndex = 7
         Me.ButtonGoResize.Text = "Redimensionner"
         Me.ButtonGoResize.UseVisualStyleBackColor = False
