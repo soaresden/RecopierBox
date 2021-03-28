@@ -38,6 +38,11 @@ Public Class SaveManager
         DataGridRoms.Rows.Clear()
         On Error GoTo 0
 
+        'on enleve la picturebox au cas ou
+        If InStr(My.Settings.DossierOverlay, "overlays") = 0 Then
+            BatoPict.Image = Nothing
+        End If
+
         If GameLists.Items.Count = 0 Then Exit Sub
 
         Dim gamelist As String = GameLists.Items(0)
@@ -732,6 +737,10 @@ skip:
             If rowactuelle = Nothing Then Exit Sub
         End Try
 
+        'on enleve l'image par securite aussi
+        If InStr(My.Settings.DossierOverlay, "overlays") = 0 Then
+            BatoPict.Image = Nothing
+        End If
 
         Dim nomfichiersave As String = DataGridRoms.Rows(rowactuelle).Cells(DataGridRoms.Columns("CheminSave").Index).Value
         Dim racinesave As String = Path.GetFileName(nomfichiersave)
@@ -803,5 +812,18 @@ fichiersuivanttrouve:
 
     Private Sub SaveManager_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Form1.Show()
+    End Sub
+
+    Private Sub BatoPict_DoubleClick(sender As Object, e As EventArgs) Handles BatoPict.DoubleClick
+        Dim nomdufichierselectionne = ListSaves.SelectedItem.ToString
+        Dim extensionselected = Path.GetExtension(nomdufichierselectionne)
+
+        Dim img As Image
+        Dim imgno As Image
+        If BatoPict.Visible = True And InStr(extensionselected, "state") >= 1 Then
+            'on test si le png de la racine existe
+            Dim testdupng = Replace(nomdufichierselectionne, Path.GetFileName(nomdufichierselectionne), Path.GetFileName(nomdufichierselectionne) & ".png")
+            System.Diagnostics.Process.Start(testdupng, vbNormalFocus)
+        End If
     End Sub
 End Class

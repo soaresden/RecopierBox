@@ -2797,4 +2797,5 @@ lignesuivante:
     Private Sub CopyRoms_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Form1.Show()
     End Sub
+
 End Class
