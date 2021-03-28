@@ -600,8 +600,13 @@ skip:
 
         'on verifie que c'est un state
         If textstate.Visible = True Then
-            If textstate.Text = 1 Then textstate.Text = ""
+            If textstate.Text = 1 Then
+                textstate.Text = ""
+            Else
+                textstate.Text = textstate.Text + 1
+            End If
             finaladresse = Replace(finaladresse, extension, ".state" & textstate.Text)
+
         End If
         Dim newnamestate = Path.GetFileName(finaladresse)
 
@@ -646,15 +651,18 @@ skip:
             End If
         Next
 
-
         'detect if state
         Dim statenb As Integer = InStr(ActualName.Text, ".state")
         If statenb > 0 Then
             textstate.Show()
             Label9.Show()
+
             Dim numero As String = ActualName.Text.Substring(statenb + 5)
             textstate.Text = numero
-            If textstate.Text = "" Then textstate.Text = 1
+
+            If textstate.Text = "" Then
+                textstate.Text = 1
+            End If
         Else
             textstate.Hide()
             Label9.Hide()
