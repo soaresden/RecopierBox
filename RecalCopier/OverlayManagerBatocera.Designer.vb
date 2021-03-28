@@ -520,12 +520,13 @@ Partial Class OverlayManagerBatocera
         '
         'PanelChoice
         '
+        Me.PanelChoice.Controls.Add(Me.templisttosupp)
         Me.PanelChoice.Controls.Add(Me.ButtonConvert)
         Me.PanelChoice.Controls.Add(Me.ButtonShowOverlayManager)
         Me.PanelChoice.Controls.Add(Me.ButtonResizeOverlays)
         Me.PanelChoice.Location = New System.Drawing.Point(309, 12)
         Me.PanelChoice.Name = "PanelChoice"
-        Me.PanelChoice.Size = New System.Drawing.Size(183, 23)
+        Me.PanelChoice.Size = New System.Drawing.Size(183, 21)
         Me.PanelChoice.TabIndex = 89
         '
         'ButtonShowOverlayManager
@@ -570,7 +571,7 @@ Partial Class OverlayManagerBatocera
         'templisttosupp
         '
         Me.templisttosupp.FormattingEnabled = True
-        Me.templisttosupp.Location = New System.Drawing.Point(498, 414)
+        Me.templisttosupp.Location = New System.Drawing.Point(56, 399)
         Me.templisttosupp.Name = "templisttosupp"
         Me.templisttosupp.Size = New System.Drawing.Size(168, 43)
         Me.templisttosupp.TabIndex = 92
@@ -582,7 +583,6 @@ Partial Class OverlayManagerBatocera
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkGreen
         Me.ClientSize = New System.Drawing.Size(983, 604)
-        Me.Controls.Add(Me.templisttosupp)
         Me.Controls.Add(Me.PanelChoice)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label9)
@@ -659,8 +659,8 @@ Partial Class OverlayManagerBatocera
     Friend WithEvents ButtonShowOverlayManager As Button
     Friend WithEvents Label12 As Label
     Friend WithEvents ListGamesFolder As ListBox
-    Friend WithEvents templisttosupp As ListBox
     Friend WithEvents Label7 As Label
     Friend WithEvents nbselected As TextBox
     Friend WithEvents actualpath As TextBox
+    Friend WithEvents templisttosupp As ListBox
 End Class

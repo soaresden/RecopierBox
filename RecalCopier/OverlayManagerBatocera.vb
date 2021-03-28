@@ -638,7 +638,7 @@ lignesuivante:
         ButtonImportOverlays1.PerformClick()
     End Sub
     Private Sub ButtonResizeOverlays_Click(sender As Object, e As EventArgs) Handles ButtonResizeOverlays.Click
-        ResizeOverlays.Show()
+        ResizeOverlaysBato.Show()
         Me.Hide()
     End Sub
 

@@ -173,6 +173,12 @@
     <Compile Include="ResizeOverlays.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ResizeOverlaysBato.Designer.vb">
+      <DependentUpon>ResizeOverlaysBato.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ResizeOverlaysBato.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SaveManager.Designer.vb">
       <DependentUpon>SaveManager.vb</DependentUpon>
     </Compile>
@@ -213,6 +219,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResizeOverlays.resx">
       <DependentUpon>ResizeOverlays.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResizeOverlaysBato.resx">
+      <DependentUpon>ResizeOverlaysBato.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SaveManager.resx">
       <DependentUpon>SaveManager.vb</DependentUpon>
