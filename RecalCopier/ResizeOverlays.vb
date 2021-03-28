@@ -100,6 +100,20 @@ Public Class ResizeOverlays
         End With
         table.Columns.Add(column)
 
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "pngW"
+        End With
+        table.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "pngH"
+        End With
+        table.Columns.Add(column)
+
         For Each i In GameLists.SelectedItems
             Dim nomconsole As String = i
             Dim nbdansdossier As Integer
@@ -141,8 +155,15 @@ Public Class ResizeOverlays
                 Dim cvw As Integer = Getcustomcfg(cheminducfg, "custom_viewport_width")
                 Dim cvh As Integer = Getcustomcfg(cheminducfg, "custom_viewport_height")
 
+                Dim imagedupng = LectureDesCfgs(nomconsole, cheminducfg)
+
+                Dim png As System.Drawing.Image = System.Drawing.Image.FromFile(imagedupng)
+                Dim pngw As Integer = png.Width
+                Dim pngh As Integer = png.Height
+                png.Dispose()
+
                 'on ajoute au tableau
-                table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg, cvx, cvy, cvw, cvh)
+                table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg, cvx, cvy, cvw, cvh, pngw, pngh)
 
 fichiersuivant:
             Next
@@ -166,15 +187,17 @@ nextconsole:
         'Width for columns
         DataGridOverlays.RowHeadersWidth = 25
         DataGridOverlays.Columns("Console").Width = 40
-        DataGridOverlays.Columns("Titre").Width = 145
+        DataGridOverlays.Columns("Titre").Width = 105
         DataGridOverlays.Columns("NomdeRom").Width = 10
         DataGridOverlays.Columns("CheminOverlay").Width = 50
         DataGridOverlays.Columns("CocheOverlay").Width = 25
 
         DataGridOverlays.Columns("custom_viewport_x").Width = 40
         DataGridOverlays.Columns("custom_viewport_y").Width = 40
-        DataGridOverlays.Columns("custom_viewport_width").Width = 55
-        DataGridOverlays.Columns("custom_viewport_height").Width = 55
+        DataGridOverlays.Columns("custom_viewport_width").Width = 40
+        DataGridOverlays.Columns("custom_viewport_height").Width = 40
+        DataGridOverlays.Columns("pngw").Width = 40
+        DataGridOverlays.Columns("pngH").Width = 40
 
         'Hiding les colonnes
         DataGridOverlays.Columns("NomdeRom").Visible = False
@@ -349,17 +372,17 @@ As String) As String
         ElseIf DataGridOverlays.CurrentRow.Index >= totalline Then
             Exit Sub
         End If
-        'Chargement de l'image
 
+        'Chargement de l'image
         Dim console As String = row.Cells(DataGridOverlays.Columns("Console").Index).Value
         Dim adressecfg As String = row.Cells(DataGridOverlays.Columns("CheminOverlay").Index).Value
         Dim png As String = LectureDesCfgs(console, adressecfg)
         On Error Resume Next
-
         ActualOverlay.Image = Image.FromFile(png)
+
         'Recuperer la taille du fichier
-        LargeurOriginale.Text = Image.FromFile(png).Size.Width
-        HauteurOriginale.Text = Image.FromFile(png).Size.Height
+        LargeurOriginale.Text = row.Cells(DataGridOverlays.Columns("pngW").Index).Value
+        HauteurOriginale.Text = row.Cells(DataGridOverlays.Columns("pngH").Index).Value
 
         On Error GoTo 0
     End Sub
@@ -511,5 +534,9 @@ As String) As String
     Private Sub ResizeOverlays_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Form1.Show()
         Me.Show()
+    End Sub
+
+    Private Sub DataGridOverlays_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridOverlays.CellContentClick
+
     End Sub
 End Class

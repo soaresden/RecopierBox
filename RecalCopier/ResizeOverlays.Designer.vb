@@ -230,6 +230,7 @@ Partial Class ResizeOverlays
         Me.HauteurOriginale.ReadOnly = True
         Me.HauteurOriginale.Size = New System.Drawing.Size(47, 20)
         Me.HauteurOriginale.TabIndex = 1
+        Me.HauteurOriginale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'NouveauY
         '
@@ -256,6 +257,7 @@ Partial Class ResizeOverlays
         Me.LargeurOriginale.ReadOnly = True
         Me.LargeurOriginale.Size = New System.Drawing.Size(47, 20)
         Me.LargeurOriginale.TabIndex = 0
+        Me.LargeurOriginale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'NouveauX
         '
