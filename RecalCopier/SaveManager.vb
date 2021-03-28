@@ -579,6 +579,11 @@ skip:
 
         For i = 0 To ListdesFichiersEnTrop.Items.Count - 1
             System.IO.File.Delete(ListdesFichiersEnTrop.Items(i))
+            'test si y'a un png
+            Dim fichierpng As String = Path.GetDirectoryName(i) & "\" & Path.GetFileName(i) & ".png"
+            On Error Resume Next
+            System.IO.File.Delete(fichierpng)
+            On Error GoTo 0
         Next
 
         'On refresh
