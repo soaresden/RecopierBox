@@ -28,7 +28,7 @@ Partial Class PixelOverlay
         '
         'CacaGif
         '
-        Me.CacaGif.Image = Global.RecalCopier.My.Resources.Resources.pixelempty
+        Me.CacaGif.Image = Global.RecopierBox.My.Resources.Resources.pixelempty
         Me.CacaGif.Location = New System.Drawing.Point(0, 0)
         Me.CacaGif.Name = "CacaGif"
         Me.CacaGif.Size = New System.Drawing.Size(320, 192)

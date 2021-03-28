@@ -55,16 +55,16 @@ Partial Class Form1
         Me.ToolTipPaypal = New System.Windows.Forms.ToolTip(Me.components)
         Me.PanelSettings = New System.Windows.Forms.Panel()
         Me.ToolTipP2k = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button1 = New RecalCopier.MyButton()
-        Me.ButtonHideArrm = New RecalCopier.MyButton()
-        Me.ReShowDisclaimer = New RecalCopier.MyButton()
-        Me.ButtonP2k = New RecalCopier.MyButton()
-        Me.ButtonSetDossier = New RecalCopier.MyButton()
-        Me.ButtonOverlay = New RecalCopier.MyButton()
-        Me.ButtonSave = New RecalCopier.MyButton()
-        Me.ButtonQuizz = New RecalCopier.MyButton()
-        Me.ButtonCopy = New RecalCopier.MyButton()
-        Me.Paypal = New RecalCopier.MyButton()
+        Me.Button1 = New RecopierBox.MyButton()
+        Me.ButtonHideArrm = New RecopierBox.MyButton()
+        Me.ReShowDisclaimer = New RecopierBox.MyButton()
+        Me.ButtonP2k = New RecopierBox.MyButton()
+        Me.ButtonSetDossier = New RecopierBox.MyButton()
+        Me.ButtonOverlay = New RecopierBox.MyButton()
+        Me.ButtonSave = New RecopierBox.MyButton()
+        Me.ButtonQuizz = New RecopierBox.MyButton()
+        Me.ButtonCopy = New RecopierBox.MyButton()
+        Me.Paypal = New RecopierBox.MyButton()
         Me.groupBox2.SuspendLayout()
         Me.Disclaimer.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -200,7 +200,7 @@ Partial Class Form1
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.RecalCopier.My.Resources.Resources.iconlog
+        Me.PictureBox1.Image = Global.RecopierBox.My.Resources.Resources.iconlog
         Me.PictureBox1.Location = New System.Drawing.Point(10, 3)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(69, 60)

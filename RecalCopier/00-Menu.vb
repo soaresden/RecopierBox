@@ -37,13 +37,6 @@ Public Class Form1
         ToolTipPaypal.SetToolTip(Paypal, "N'Hesitez pas à soutenir le projet par ce bouton :) !")
         ToolTipP2k.SetToolTip(ButtonP2k, "Convertissez vos Roms ExoDos depuis Exodos Convert et Convertissez vos P2K-Info !")
 
-        'Et on indique si y'a besoin d'écrire
-        If TxtRecalfolderPath Is Nothing Then
-            MsgBox("Merci de Choisir votre Dossier Mère d'abord !")
-            PanelSettings.Show()
-            Exit Sub
-        End If
-
         'On call le test des dossier
         Call DetectTypeDossier(TxtRecalfolderPath.Text)
 
@@ -136,7 +129,6 @@ Public Class Form1
 
             If (Not System.IO.Directory.Exists(TxtRecalfolderPath.Text & "\Roms")) Then
                 MsgBox("Le Chemin saisi ne possede pas de dossier 'Roms'" & Chr(10) & "Selectionner votre dossier Mère")
-                TxtRecalfolderPath.Text = Nothing
             Else
                 MsgBox("Chemin OK !")
 
@@ -153,7 +145,7 @@ Public Class Form1
         System.Diagnostics.Process.Start(String.Format("http://jujuvincebros.fr/telechargements2/file/10-arrm-another-recalbox-roms-manager"))
     End Sub
     Private Sub ButtonCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonCopy.Click
-        If My.Settings.RecalboxFolder Is Nothing Then
+        If My.Settings.RecalboxFolder = "" Then
             MsgBox("Pas de Chemin !")
             ButtonSetDossier.PerformClick()
         End If
@@ -162,12 +154,12 @@ Public Class Form1
         Me.Hide()
     End Sub
     Private Sub ButtonQuizz_Click_1(sender As Object, e As EventArgs) Handles ButtonQuizz.Click
-        If My.Settings.RecalboxFolder Is Nothing Then
+        If My.Settings.RecalboxFolder = "" Then
             MsgBox("Pas de Chemin !")
             ButtonSetDossier.PerformClick()
         End If
 
-        If TxtRecalfolderPath Is Nothing Then
+        If TxtRecalfolderPath.Text = "" Then
             MsgBox("Merci de Choisir votre Dossier Recalbox d'abord !")
             Exit Sub
         End If
@@ -176,7 +168,7 @@ Public Class Form1
         Me.Hide()
     End Sub
     Private Sub ButtonSave_Click_1(sender As Object, e As EventArgs) Handles ButtonSave.Click
-        If My.Settings.RecalboxFolder Is Nothing Then
+        If My.Settings.RecalboxFolder = "" Then
             MsgBox("Pas de Chemin !")
             ButtonSetDossier.PerformClick()
         End If
@@ -185,7 +177,7 @@ Public Class Form1
         Me.Hide()
     End Sub
     Private Sub ButtonOverlay_Click_1(sender As Object, e As EventArgs) Handles ButtonOverlay.Click
-        If My.Settings.RecalboxFolder Is Nothing Then
+        If My.Settings.RecalboxFolder = "" Then
             MsgBox("Pas de Chemin !")
             ButtonSetDossier.PerformClick()
         End If
@@ -199,7 +191,7 @@ Public Class Form1
         End If
     End Sub
     Private Sub ButtonP2k_Click(sender As Object, e As EventArgs) Handles ButtonP2k.Click
-        If My.Settings.RecalboxFolder Is Nothing Then
+        If My.Settings.RecalboxFolder = "" Then
             MsgBox("Pas de Chemin !")
             ButtonSetDossier.PerformClick()
         End If
