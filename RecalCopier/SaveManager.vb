@@ -602,8 +602,6 @@ skip:
         If textstate.Visible = True Then
             If textstate.Text = 1 Then
                 textstate.Text = ""
-            Else
-                textstate.Text = textstate.Text + 1
             End If
             finaladresse = Replace(finaladresse, extension, ".state" & textstate.Text)
 
