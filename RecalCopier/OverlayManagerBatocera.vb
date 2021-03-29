@@ -393,14 +393,21 @@ ProchainGamelist:
             Dim romnomderom As String = "##CONSOLE##"
             Dim presenceoverlays As Boolean = True
 
-            'test presence png
-            Dim png As String = Replace(cheminducfg, ".info", ".png")
-            If System.IO.File.Exists(png) Then
-            Else
-                png = "0"
-            End If
-            'on ajoute l'overlay
-            table.Rows.Add(nomconsole, romname, rompath, romnomderom, cheminducfg, png, presenceoverlays)
+            'On ignore les fichiers autres que selection
+            For Each i In ListGamesFolder.SelectedItems
+                If i <> nomconsole Then GoTo consolesuivante
+
+                'test presence png
+                Dim png As String = Replace(cheminducfg, ".info", ".png")
+                If System.IO.File.Exists(png) Then
+                Else
+                    png = "0"
+                End If
+                'on ajoute l'overlay
+                table.Rows.Add(nomconsole, romname, rompath, romnomderom, cheminducfg, png, presenceoverlays)
+            Next
+
+consolesuivante:
         Next
 
         'Sorting A-Z the console
@@ -413,7 +420,7 @@ ProchainGamelist:
         DataGridOverlay.Columns("Titre").Width = 80
         DataGridOverlay.Columns("CheminRom").Width = 20
         DataGridOverlay.Columns("NomdeRom").Width = 150
-        DataGridOverlay.Columns("CheminOverlay").Width = 65
+        DataGridOverlay.Columns("CheminOverlay").Width = 50
         DataGridOverlay.Columns("CheminPNG").Width = 65
         DataGridOverlay.Columns("CocheOverlay").Width = 25
 
@@ -422,7 +429,7 @@ ProchainGamelist:
         DataGridOverlay.Columns("NomdeRom").Visible = True
 
         'Reajusting Interface and Showing Final Interface
-        dv.Sort = "Console asc, Titre asc"
+        dv.Sort = "CocheOverlay asc, Console asc, Titre asc"
 
         'On colore les coches
         Call Colorerlescoches()
