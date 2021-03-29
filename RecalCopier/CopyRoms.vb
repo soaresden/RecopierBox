@@ -757,8 +757,12 @@ consolesanssaves:
 
         If e.RowIndex = totalline Or e.RowIndex < 0 Then Exit Sub
 
+        Call loadlesinfos(FinalGrid.CurrentCell.RowIndex)
+
+    End Sub
+    Sub loadlesinfos(rowindex As Integer)
         'Chargement des informations dans Rom Informations
-        Dim row As DataGridViewRow = FinalGrid.Rows(e.RowIndex)
+        Dim row As DataGridViewRow = FinalGrid.Rows(rowindex)
 
         Dim celluleromname As String = row.Cells(FinalGrid.Columns("Titre").Index).Value
         Dim cellulerompath As String = row.Cells(FinalGrid.Columns("CheminRom").Index).Value
@@ -2797,5 +2801,33 @@ lignesuivante:
     Private Sub CopyRoms_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Form1.Show()
     End Sub
+    Private Sub FinalGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles FinalGrid.KeyDown
+        Dim actualrow As Integer = FinalGrid.CurrentRow.Index
 
+        If e.KeyCode = Keys.Space Then
+            Dim status = FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("Selection").Index).Value
+            Dim newstatus As Boolean
+
+            If status = False Or Nothing Then
+                newstatus = True
+            End If
+            Dim pathrom As String = FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("CheminRom").Index).Value
+
+            'Si déja dans la liste, on force l'ouverture de la selection
+            If listboxMaSelection.Items.Contains(pathrom) Then
+                MsgBox("Déja dans la Selection")
+                listboxMaSelection.Hide()
+                ButtonAfficherMaSelection.PerformClick()
+            Else
+                listboxMaSelection.Items.Add(pathrom)
+                FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("Selection").Index).Value = False
+            End If
+        End If
+
+    End Sub
+
+    Private Sub FinalGrid_SelectionChanged(sender As Object, e As EventArgs) Handles FinalGrid.SelectionChanged
+        Dim actualrow As Integer = FinalGrid.CurrentRow.Index
+        Call loadlesinfos(actualrow)
+    End Sub
 End Class
