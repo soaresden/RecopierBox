@@ -246,7 +246,7 @@ skipupdate:
             'Declare application path
             Dim appPath As String = Application.StartupPath
             'Declare download directory path
-            Dim downloadDir As String = Application.StartupPath & "\Updates"
+            Dim downloadDir As String = Application.StartupPath & "\RecopierBox-Updates"
             'Declare update files path
             Dim updateFiles As String = downloadDir & "\release.zip"
             'Create download directory
@@ -269,7 +269,8 @@ skipupdate:
             'Declare the input zip file.
             Dim input As Object = shObj.NameSpace((updateFiles))
             'msgbox
-            MsgBox("Update téléchargée dans le dossier 'Updates'" & Chr(10) & "Vous devrez dezipper et remplacer par vous même :)")
+            MsgBox("Update téléchargée dans le dossier 'RecopierBox-Updates'" & Chr(10) & "Vous devrez dezipper et remplacer par vous même :)")
+            Process.Start(Application.StartupPath & "\RecopierBox-Updates")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
