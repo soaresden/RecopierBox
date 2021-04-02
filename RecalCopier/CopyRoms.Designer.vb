@@ -122,12 +122,12 @@ Partial Class CopyRoms
         Me.TutoHideRomInfo = New System.Windows.Forms.PictureBox()
         Me.TutoHideFinalGrid = New System.Windows.Forms.PictureBox()
         Me.GroupCollectEditor = New System.Windows.Forms.GroupBox()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.ButtonHideEditor = New System.Windows.Forms.Button()
         Me.CollectionGridDetaille = New System.Windows.Forms.DataGridView()
         Me.ConfirmEditInfoonCollection = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.CollectionEditorList = New System.Windows.Forms.ComboBox()
-        Me.Label19 = New System.Windows.Forms.Label()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -1353,6 +1353,15 @@ Partial Class CopyRoms
         Me.GroupCollectEditor.TabStop = False
         Me.GroupCollectEditor.Text = "Editeur d'Infos des Collections Avancé"
         '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(252, 39)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(265, 13)
+        Me.Label19.TabIndex = 51
+        Me.Label19.Text = "Vous Pouvez Déplacer, Réduire la Taille des Colonnes"
+        '
         'ButtonHideEditor
         '
         Me.ButtonHideEditor.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
@@ -1431,15 +1440,6 @@ Partial Class CopyRoms
         Me.CollectionEditorList.Name = "CollectionEditorList"
         Me.CollectionEditorList.Size = New System.Drawing.Size(119, 21)
         Me.CollectionEditorList.TabIndex = 1
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(252, 39)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(265, 13)
-        Me.Label19.TabIndex = 51
-        Me.Label19.Text = "Vous Pouvez Déplacer, Réduire la Taille des Colonnes"
         '
         'CopyRoms
         '

@@ -2843,6 +2843,7 @@ lignesuivante:
         Call importdescollections(CollectionEditorList)
         If CollectionEditorList.SelectedValue = "" Then CollectionEditorList.SelectedIndex = 0
         GroupCollections.Hide()
+        GroupBox6.Hide()
     End Sub
 
     Private Sub ButtonHideEditor_Click(sender As Object, e As EventArgs) Handles ButtonHideEditor.Click
@@ -2850,7 +2851,7 @@ lignesuivante:
         GroupCollectEditor.Hide()
         GroupCollectEditor.Location = New Point(122, 2)
         GroupCollectEditor.Size = New Point(59, 25)
-        GroupBox6.Hide()
+        GroupBox6.Show()
     End Sub
 
     Private Sub CollectionEditorList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CollectionEditorList.SelectedIndexChanged
@@ -2941,17 +2942,8 @@ lignesuivante:
             Dim cheminrom = CollectionGridDetaille.Rows(i).Cells(CollectionGridDetaille.Columns("CheminRom").Index).Value
             Dim nomconsole As String = CollectionGridDetaille.Rows(i).Cells(CollectionGridDetaille.Columns("Console").Index).Value
             Dim gamelist As String
-            If CheckBoxARRM.Checked = True Then
 
-                'on va verifier si ARRM ou non dans gamelist
-                If System.IO.File.Exists(My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & "gamelist_ARRM.xml") Then
-                    gamelist = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\gamelist_ARRM.xml"
-                Else
-                    gamelist = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\gamelist.xml"
-                End If
-            Else
-                gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist.xml"
-            End If
+            gamelist = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\gamelist.xml"
 
             Dim gamelistXml As XElement
             Try
@@ -2984,7 +2976,8 @@ lignesuivante:
                 Dim romhidden As String = xEle.Element("hidden")
 
                 'on check le path 
-                If Path.GetFileName(cheminrom) <> temprom Then GoTo romsuivante
+                Dim detectrompath As Integer = InStr(cheminrom, temprom)
+                If detectrompath = 0 Then GoTo romsuivante
 
                 If xEle.Element("desc") Is Nothing Then
                     romdesc = Nothing
@@ -3116,14 +3109,108 @@ romcollectionsuivante:
 
         'On lance la coloration des checkbox
         Call colorercollectionlignes(CollectionGridDetaille)
-
-    End Sub
-
-    Private Sub CollectionGridDetaille_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles CollectionGridDetaille.CellContentClick
-
     End Sub
 
     Private Sub CollectionGridDetaille_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles CollectionGridDetaille.CellEndEdit
         Me.CollectionGridDetaille.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.ForeColor = Color.Red
+    End Sub
+
+    Private Sub ConfirmEditInfoonCollection_Click(sender As Object, e As EventArgs) Handles ConfirmEditInfoonCollection.Click
+        If MsgBox("Etes vous sur de vouloir modifier votre Gamelist" & Chr(10) & "par vos modifs en Rouge ?", vbYesNo) = vbNo Then
+            Exit Sub
+        End If
+        Dim compteurjeux As Integer
+        Dim fulltext As String
+
+        'On fait la sauvegarde
+        For i = 0 To CollectionGridDetaille.Rows.Count - 1
+            For j = 0 To CollectionGridDetaille.Columns.Count - 1
+                Dim couleurtext As Color = CollectionGridDetaille.Rows(i).Cells(j).Style.ForeColor
+                If couleurtext = Color.Red Then
+                    compteurjeux = compteurjeux + 1
+                    Dim nomconsole As String = CollectionGridDetaille.Rows(i).Cells(CollectionGridDetaille.Columns("Console").Index).Value
+                    Dim gamelist As String
+                    Dim pathjeu As String = CollectionGridDetaille.Rows(i).Cells(CollectionGridDetaille.Columns("CheminRom").Index).Value
+                    Dim nomcolonne As String = CollectionGridDetaille.Columns(j).Name
+
+                    Select Case nomcolonne
+                        Case "CheminRom"
+                            nomcolonne = "<path>"
+                        Case "Titre"
+                            nomcolonne = "<name>"
+                        Case "Synopsis"
+                            nomcolonne = "<desc>"
+                        Case "DateSortie"
+                            nomcolonne = "<releasedate>"
+                        Case = "Genre"
+                            nomcolonne = "<genre>"
+                        Case "Note"
+                            nomcolonne = "<rating>"
+                        Case "developer"
+                            nomcolonne = "<developer>"
+                        Case "publisher"
+                            nomcolonne = "<publisher>"
+                        Case "NbPlayers"
+                            nomcolonne = "<players>"
+                        Case "Region"
+                            nomcolonne = "<region>"
+                    End Select
+
+                    gamelist = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\gamelist.xml"
+
+                    'On ouvre le fichier gamelist et on va editer le texte
+                    'Création d'un flux d'écriture
+                    Dim compteurlignedufichiergamelist As Integer = 0
+                    Dim readText() As String = File.ReadAllLines(gamelist)
+                    Dim okgame As Integer = 0
+                    Dim laligne As String
+
+                    For Each s In readText
+                        compteurlignedufichiergamelist = compteurlignedufichiergamelist + 1
+
+                        'On lit notre fichier original
+                        Dim nomdujeu = Path.GetFileName(pathjeu)
+                        Dim nomformate = Replace(s, "amp;", "")
+                        Dim detectpathjeu As Integer = InStr(nomformate, nomdujeu)
+                        Dim detectcolonne As Integer = InStr(s, nomcolonne)
+
+                        If detectpathjeu > 0 Then
+                            okgame = 1
+                        Else
+                            If okgame = 0 Then GoTo lignesuivante
+                        End If
+
+                        If okgame > 0 Then
+                            If detectcolonne = 0 Then
+                                GoTo lignesuivante
+                            Else
+                                If detectcolonne > 0 And okgame = 1 Then
+                                    Dim textavant = readText(compteurlignedufichiergamelist - 1)
+                                    'Dim valeur = InStr(textavant, ">")
+                                    'Dim textavant2 = textavant.Substring(valeur)
+                                    'Dim valeur2 = InStr(textavant2, "<")
+                                    'Dim textcomplet = textavant2.Substring(0, valeur2 - 1)
+                                    Dim anciennevaleur = textavant.Substring(InStr(textavant, ">")).Substring(0, InStr(textavant.Substring(InStr(textavant, ">")), "<") - 1)
+                                    Dim txtmodif = Replace(s, anciennevaleur, CollectionGridDetaille.Rows(i).Cells(j).Value)
+                                    readText(compteurlignedufichiergamelist - 1) = txtmodif
+                                    fulltext = fulltext + txtmodif & Chr(10)
+                                    System.IO.File.WriteAllLines(gamelist, readText)
+                                    Exit For
+                                Else
+                                    GoTo lignesuivante
+                                End If
+                            End If
+                        End If
+                        GoTo lignesuivante
+lignesuivante:
+                    Next
+                End If
+            Next
+        Next
+        If compteurjeux = 0 Then
+            MsgBox("Aucun Changement detecté")
+        Else
+            MsgBox("Gamelist(s) sauvegardés" & Chr(10) & Chr(10) & fulltext)
+        End If
     End Sub
 End Class
