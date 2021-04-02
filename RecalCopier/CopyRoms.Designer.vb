@@ -24,6 +24,7 @@ Partial Class CopyRoms
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ListGameLists = New System.Windows.Forms.ListBox()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -49,12 +50,6 @@ Partial Class CopyRoms
         Me.txt_morestant = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_USBGo = New System.Windows.Forms.TextBox()
-        Me.TutoHideBoutonCopy = New System.Windows.Forms.PictureBox()
-        Me.TutoHideOuCopier = New System.Windows.Forms.PictureBox()
-        Me.TutoHideQuoiCopier = New System.Windows.Forms.PictureBox()
-        Me.TutoHideSelectionIndic = New System.Windows.Forms.PictureBox()
-        Me.TutoHideUSB = New System.Windows.Forms.PictureBox()
-        Me.ButtonAfficherMaSelection = New System.Windows.Forms.Button()
         Me.grp_RomInfos = New System.Windows.Forms.GroupBox()
         Me.listboxMaSelection = New System.Windows.Forms.ListBox()
         Me.ButtonSonVid = New System.Windows.Forms.Button()
@@ -97,20 +92,15 @@ Partial Class CopyRoms
         Me.ButtonGetBack = New System.Windows.Forms.Button()
         Me.ButtonTuto1 = New System.Windows.Forms.Button()
         Me.ButtonGenererList = New System.Windows.Forms.Button()
-        Me.TutoHideGameList = New System.Windows.Forms.PictureBox()
-        Me.TutoHideRomInfo = New System.Windows.Forms.PictureBox()
-        Me.TutoHideFinalGrid = New System.Windows.Forms.PictureBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.GroupMode = New System.Windows.Forms.GroupBox()
         Me.ChkAvance = New System.Windows.Forms.CheckBox()
         Me.ChkSimple = New System.Windows.Forms.CheckBox()
         Me.GroupBoxSelectionRoms = New System.Windows.Forms.GroupBox()
+        Me.ButtonAfficherMaSelection = New System.Windows.Forms.Button()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.ButtonCollection = New System.Windows.Forms.Button()
-        Me.TutoHideSimpleMode = New System.Windows.Forms.PictureBox()
-        Me.TutoHideFiltresAvance = New System.Windows.Forms.PictureBox()
-        Me.TutoSelectionActuelle = New System.Windows.Forms.PictureBox()
         Me.GroupCollections = New System.Windows.Forms.GroupBox()
+        Me.ButtonCollectionAvance = New System.Windows.Forms.Button()
         Me.ButtonAddCollection = New System.Windows.Forms.Button()
         Me.ButtonRemoveFromCollection = New System.Windows.Forms.Button()
         Me.AjoutCollection = New System.Windows.Forms.Button()
@@ -119,33 +109,54 @@ Partial Class CopyRoms
         Me.CollectionGrid = New System.Windows.Forms.DataGridView()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.ComboCollection = New System.Windows.Forms.ComboBox()
+        Me.ButtonCollection = New System.Windows.Forms.Button()
+        Me.TutoSelectionActuelle = New System.Windows.Forms.PictureBox()
+        Me.TutoHideFiltresAvance = New System.Windows.Forms.PictureBox()
+        Me.TutoHideBoutonCopy = New System.Windows.Forms.PictureBox()
+        Me.TutoHideOuCopier = New System.Windows.Forms.PictureBox()
+        Me.TutoHideSimpleMode = New System.Windows.Forms.PictureBox()
+        Me.TutoHideQuoiCopier = New System.Windows.Forms.PictureBox()
+        Me.TutoHideSelectionIndic = New System.Windows.Forms.PictureBox()
+        Me.TutoHideUSB = New System.Windows.Forms.PictureBox()
+        Me.TutoHideGameList = New System.Windows.Forms.PictureBox()
+        Me.TutoHideRomInfo = New System.Windows.Forms.PictureBox()
+        Me.TutoHideFinalGrid = New System.Windows.Forms.PictureBox()
+        Me.GroupCollectEditor = New System.Windows.Forms.GroupBox()
+        Me.ButtonHideEditor = New System.Windows.Forms.Button()
+        Me.CollectionGridDetaille = New System.Windows.Forms.DataGridView()
+        Me.ConfirmEditInfoonCollection = New System.Windows.Forms.Button()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.CollectionEditorList = New System.Windows.Forms.ComboBox()
+        Me.Label19 = New System.Windows.Forms.Label()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grp_RomInfos.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupFiltresAvances.SuspendLayout()
+        Me.GroupMode.SuspendLayout()
+        Me.GroupBoxSelectionRoms.SuspendLayout()
+        Me.GroupCollections.SuspendLayout()
+        CType(Me.CollectionGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoSelectionActuelle, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideFiltresAvance, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideSimpleMode, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupMode.SuspendLayout()
-        Me.GroupBoxSelectionRoms.SuspendLayout()
-        CType(Me.TutoHideSimpleMode, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoHideFiltresAvance, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TutoSelectionActuelle, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupCollections.SuspendLayout()
-        CType(Me.CollectionGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupCollectEditor.SuspendLayout()
+        CType(Me.CollectionGridDetaille, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ListGameLists
@@ -462,63 +473,6 @@ Partial Class CopyRoms
         Me.txt_USBGo.Size = New System.Drawing.Size(65, 20)
         Me.txt_USBGo.TabIndex = 0
         Me.txt_USBGo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TutoHideBoutonCopy
-        '
-        Me.TutoHideBoutonCopy.Location = New System.Drawing.Point(839, 4)
-        Me.TutoHideBoutonCopy.Name = "TutoHideBoutonCopy"
-        Me.TutoHideBoutonCopy.Size = New System.Drawing.Size(32, 23)
-        Me.TutoHideBoutonCopy.TabIndex = 30
-        Me.TutoHideBoutonCopy.TabStop = False
-        '
-        'TutoHideOuCopier
-        '
-        Me.TutoHideOuCopier.Location = New System.Drawing.Point(725, 4)
-        Me.TutoHideOuCopier.Name = "TutoHideOuCopier"
-        Me.TutoHideOuCopier.Size = New System.Drawing.Size(87, 23)
-        Me.TutoHideOuCopier.TabIndex = 26
-        Me.TutoHideOuCopier.TabStop = False
-        '
-        'TutoHideQuoiCopier
-        '
-        Me.TutoHideQuoiCopier.Location = New System.Drawing.Point(657, 4)
-        Me.TutoHideQuoiCopier.Name = "TutoHideQuoiCopier"
-        Me.TutoHideQuoiCopier.Size = New System.Drawing.Size(62, 23)
-        Me.TutoHideQuoiCopier.TabIndex = 27
-        Me.TutoHideQuoiCopier.TabStop = False
-        '
-        'TutoHideSelectionIndic
-        '
-        Me.TutoHideSelectionIndic.Location = New System.Drawing.Point(617, 4)
-        Me.TutoHideSelectionIndic.Name = "TutoHideSelectionIndic"
-        Me.TutoHideSelectionIndic.Size = New System.Drawing.Size(34, 23)
-        Me.TutoHideSelectionIndic.TabIndex = 28
-        Me.TutoHideSelectionIndic.TabStop = False
-        '
-        'TutoHideUSB
-        '
-        Me.TutoHideUSB.Location = New System.Drawing.Point(583, 4)
-        Me.TutoHideUSB.Name = "TutoHideUSB"
-        Me.TutoHideUSB.Size = New System.Drawing.Size(28, 23)
-        Me.TutoHideUSB.TabIndex = 23
-        Me.TutoHideUSB.TabStop = False
-        '
-        'ButtonAfficherMaSelection
-        '
-        Me.ButtonAfficherMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
-        Me.ButtonAfficherMaSelection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonAfficherMaSelection.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonAfficherMaSelection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonAfficherMaSelection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
-        Me.ButtonAfficherMaSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonAfficherMaSelection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonAfficherMaSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonAfficherMaSelection.Image = CType(resources.GetObject("ButtonAfficherMaSelection.Image"), System.Drawing.Image)
-        Me.ButtonAfficherMaSelection.Location = New System.Drawing.Point(8, 19)
-        Me.ButtonAfficherMaSelection.Name = "ButtonAfficherMaSelection"
-        Me.ButtonAfficherMaSelection.Size = New System.Drawing.Size(50, 49)
-        Me.ButtonAfficherMaSelection.TabIndex = 39
-        Me.ButtonAfficherMaSelection.UseVisualStyleBackColor = False
         '
         'grp_RomInfos
         '
@@ -1039,30 +993,6 @@ Partial Class CopyRoms
         Me.ButtonGenererList.Text = "Valider les Systèmes Selectionnés"
         Me.ButtonGenererList.UseVisualStyleBackColor = False
         '
-        'TutoHideGameList
-        '
-        Me.TutoHideGameList.Location = New System.Drawing.Point(259, 2)
-        Me.TutoHideGameList.Name = "TutoHideGameList"
-        Me.TutoHideGameList.Size = New System.Drawing.Size(74, 21)
-        Me.TutoHideGameList.TabIndex = 24
-        Me.TutoHideGameList.TabStop = False
-        '
-        'TutoHideRomInfo
-        '
-        Me.TutoHideRomInfo.Location = New System.Drawing.Point(409, 2)
-        Me.TutoHideRomInfo.Name = "TutoHideRomInfo"
-        Me.TutoHideRomInfo.Size = New System.Drawing.Size(33, 21)
-        Me.TutoHideRomInfo.TabIndex = 22
-        Me.TutoHideRomInfo.TabStop = False
-        '
-        'TutoHideFinalGrid
-        '
-        Me.TutoHideFinalGrid.Location = New System.Drawing.Point(339, 2)
-        Me.TutoHideFinalGrid.Name = "TutoHideFinalGrid"
-        Me.TutoHideFinalGrid.Size = New System.Drawing.Size(64, 21)
-        Me.TutoHideFinalGrid.TabIndex = 20
-        Me.TutoHideFinalGrid.TabStop = False
-        '
         'Label15
         '
         Me.Label15.AutoSize = True
@@ -1121,6 +1051,23 @@ Partial Class CopyRoms
         Me.GroupBoxSelectionRoms.TabStop = False
         Me.GroupBoxSelectionRoms.Text = "Selection : Afficher ..."
         '
+        'ButtonAfficherMaSelection
+        '
+        Me.ButtonAfficherMaSelection.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.ButtonAfficherMaSelection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonAfficherMaSelection.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonAfficherMaSelection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonAfficherMaSelection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.ButtonAfficherMaSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonAfficherMaSelection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonAfficherMaSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonAfficherMaSelection.Image = CType(resources.GetObject("ButtonAfficherMaSelection.Image"), System.Drawing.Image)
+        Me.ButtonAfficherMaSelection.Location = New System.Drawing.Point(8, 19)
+        Me.ButtonAfficherMaSelection.Name = "ButtonAfficherMaSelection"
+        Me.ButtonAfficherMaSelection.Size = New System.Drawing.Size(50, 49)
+        Me.ButtonAfficherMaSelection.TabIndex = 39
+        Me.ButtonAfficherMaSelection.UseVisualStyleBackColor = False
+        '
         'Label16
         '
         Me.Label16.AutoSize = True
@@ -1132,50 +1079,10 @@ Partial Class CopyRoms
         Me.Label16.Text = "Gestion " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Collections"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'ButtonCollection
-        '
-        Me.ButtonCollection.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
-        Me.ButtonCollection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonCollection.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonCollection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen
-        Me.ButtonCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonCollection.Image = CType(resources.GetObject("ButtonCollection.Image"), System.Drawing.Image)
-        Me.ButtonCollection.Location = New System.Drawing.Point(549, 417)
-        Me.ButtonCollection.Name = "ButtonCollection"
-        Me.ButtonCollection.Size = New System.Drawing.Size(50, 49)
-        Me.ButtonCollection.TabIndex = 41
-        Me.ButtonCollection.UseVisualStyleBackColor = False
-        '
-        'TutoHideSimpleMode
-        '
-        Me.TutoHideSimpleMode.Location = New System.Drawing.Point(534, 2)
-        Me.TutoHideSimpleMode.Name = "TutoHideSimpleMode"
-        Me.TutoHideSimpleMode.Size = New System.Drawing.Size(42, 23)
-        Me.TutoHideSimpleMode.TabIndex = 43
-        Me.TutoHideSimpleMode.TabStop = False
-        '
-        'TutoHideFiltresAvance
-        '
-        Me.TutoHideFiltresAvance.Location = New System.Drawing.Point(478, 2)
-        Me.TutoHideFiltresAvance.Name = "TutoHideFiltresAvance"
-        Me.TutoHideFiltresAvance.Size = New System.Drawing.Size(50, 23)
-        Me.TutoHideFiltresAvance.TabIndex = 45
-        Me.TutoHideFiltresAvance.TabStop = False
-        '
-        'TutoSelectionActuelle
-        '
-        Me.TutoSelectionActuelle.Location = New System.Drawing.Point(448, 2)
-        Me.TutoSelectionActuelle.Name = "TutoSelectionActuelle"
-        Me.TutoSelectionActuelle.Size = New System.Drawing.Size(24, 21)
-        Me.TutoSelectionActuelle.TabIndex = 47
-        Me.TutoSelectionActuelle.TabStop = False
-        '
         'GroupCollections
         '
         Me.GroupCollections.BackColor = System.Drawing.Color.DarkGreen
+        Me.GroupCollections.Controls.Add(Me.ButtonCollectionAvance)
         Me.GroupCollections.Controls.Add(Me.ButtonAddCollection)
         Me.GroupCollections.Controls.Add(Me.ButtonRemoveFromCollection)
         Me.GroupCollections.Controls.Add(Me.AjoutCollection)
@@ -1187,10 +1094,27 @@ Partial Class CopyRoms
         Me.GroupCollections.ForeColor = System.Drawing.Color.White
         Me.GroupCollections.Location = New System.Drawing.Point(187, 2)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(66, 23)
+        Me.GroupCollections.Size = New System.Drawing.Size(319, 269)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
+        '
+        'ButtonCollectionAvance
+        '
+        Me.ButtonCollectionAvance.BackColor = System.Drawing.Color.DarkMagenta
+        Me.ButtonCollectionAvance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonCollectionAvance.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonCollectionAvance.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonCollectionAvance.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Pink
+        Me.ButtonCollectionAvance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonCollectionAvance.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonCollectionAvance.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonCollectionAvance.Location = New System.Drawing.Point(151, 39)
+        Me.ButtonCollectionAvance.Name = "ButtonCollectionAvance"
+        Me.ButtonCollectionAvance.Size = New System.Drawing.Size(76, 27)
+        Me.ButtonCollectionAvance.TabIndex = 44
+        Me.ButtonCollectionAvance.Text = "Editer Infos Roms"
+        Me.ButtonCollectionAvance.UseVisualStyleBackColor = False
         '
         'ButtonAddCollection
         '
@@ -1238,9 +1162,9 @@ Partial Class CopyRoms
         Me.AjoutCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.AjoutCollection.Location = New System.Drawing.Point(151, 8)
         Me.AjoutCollection.Name = "AjoutCollection"
-        Me.AjoutCollection.Size = New System.Drawing.Size(76, 46)
+        Me.AjoutCollection.Size = New System.Drawing.Size(76, 27)
         Me.AjoutCollection.TabIndex = 41
-        Me.AjoutCollection.Text = "Creer une" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Collection"
+        Me.AjoutCollection.Text = "New Collec."
         Me.AjoutCollection.UseVisualStyleBackColor = False
         '
         'SaveCollection
@@ -1270,9 +1194,9 @@ Partial Class CopyRoms
         Me.SupCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SupCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SupCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.SupCollection.Location = New System.Drawing.Point(9, 59)
+        Me.SupCollection.Location = New System.Drawing.Point(9, 70)
         Me.SupCollection.Name = "SupCollection"
-        Me.SupCollection.Size = New System.Drawing.Size(218, 31)
+        Me.SupCollection.Size = New System.Drawing.Size(218, 23)
         Me.SupCollection.TabIndex = 39
         Me.SupCollection.Text = "Supprimer la collection ci dessus"
         Me.SupCollection.UseVisualStyleBackColor = False
@@ -1307,12 +1231,223 @@ Partial Class CopyRoms
         Me.ComboCollection.Size = New System.Drawing.Size(132, 21)
         Me.ComboCollection.TabIndex = 1
         '
+        'ButtonCollection
+        '
+        Me.ButtonCollection.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(101, Byte), Integer))
+        Me.ButtonCollection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonCollection.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonCollection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen
+        Me.ButtonCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonCollection.Image = CType(resources.GetObject("ButtonCollection.Image"), System.Drawing.Image)
+        Me.ButtonCollection.Location = New System.Drawing.Point(549, 417)
+        Me.ButtonCollection.Name = "ButtonCollection"
+        Me.ButtonCollection.Size = New System.Drawing.Size(50, 49)
+        Me.ButtonCollection.TabIndex = 41
+        Me.ButtonCollection.UseVisualStyleBackColor = False
+        '
+        'TutoSelectionActuelle
+        '
+        Me.TutoSelectionActuelle.Location = New System.Drawing.Point(448, 2)
+        Me.TutoSelectionActuelle.Name = "TutoSelectionActuelle"
+        Me.TutoSelectionActuelle.Size = New System.Drawing.Size(24, 21)
+        Me.TutoSelectionActuelle.TabIndex = 47
+        Me.TutoSelectionActuelle.TabStop = False
+        '
+        'TutoHideFiltresAvance
+        '
+        Me.TutoHideFiltresAvance.Location = New System.Drawing.Point(478, 2)
+        Me.TutoHideFiltresAvance.Name = "TutoHideFiltresAvance"
+        Me.TutoHideFiltresAvance.Size = New System.Drawing.Size(50, 23)
+        Me.TutoHideFiltresAvance.TabIndex = 45
+        Me.TutoHideFiltresAvance.TabStop = False
+        '
+        'TutoHideBoutonCopy
+        '
+        Me.TutoHideBoutonCopy.Location = New System.Drawing.Point(839, 4)
+        Me.TutoHideBoutonCopy.Name = "TutoHideBoutonCopy"
+        Me.TutoHideBoutonCopy.Size = New System.Drawing.Size(32, 23)
+        Me.TutoHideBoutonCopy.TabIndex = 30
+        Me.TutoHideBoutonCopy.TabStop = False
+        '
+        'TutoHideOuCopier
+        '
+        Me.TutoHideOuCopier.Location = New System.Drawing.Point(725, 4)
+        Me.TutoHideOuCopier.Name = "TutoHideOuCopier"
+        Me.TutoHideOuCopier.Size = New System.Drawing.Size(87, 23)
+        Me.TutoHideOuCopier.TabIndex = 26
+        Me.TutoHideOuCopier.TabStop = False
+        '
+        'TutoHideSimpleMode
+        '
+        Me.TutoHideSimpleMode.Location = New System.Drawing.Point(534, 2)
+        Me.TutoHideSimpleMode.Name = "TutoHideSimpleMode"
+        Me.TutoHideSimpleMode.Size = New System.Drawing.Size(42, 23)
+        Me.TutoHideSimpleMode.TabIndex = 43
+        Me.TutoHideSimpleMode.TabStop = False
+        '
+        'TutoHideQuoiCopier
+        '
+        Me.TutoHideQuoiCopier.Location = New System.Drawing.Point(657, 4)
+        Me.TutoHideQuoiCopier.Name = "TutoHideQuoiCopier"
+        Me.TutoHideQuoiCopier.Size = New System.Drawing.Size(62, 23)
+        Me.TutoHideQuoiCopier.TabIndex = 27
+        Me.TutoHideQuoiCopier.TabStop = False
+        '
+        'TutoHideSelectionIndic
+        '
+        Me.TutoHideSelectionIndic.Location = New System.Drawing.Point(617, 4)
+        Me.TutoHideSelectionIndic.Name = "TutoHideSelectionIndic"
+        Me.TutoHideSelectionIndic.Size = New System.Drawing.Size(34, 23)
+        Me.TutoHideSelectionIndic.TabIndex = 28
+        Me.TutoHideSelectionIndic.TabStop = False
+        '
+        'TutoHideUSB
+        '
+        Me.TutoHideUSB.Location = New System.Drawing.Point(583, 4)
+        Me.TutoHideUSB.Name = "TutoHideUSB"
+        Me.TutoHideUSB.Size = New System.Drawing.Size(28, 23)
+        Me.TutoHideUSB.TabIndex = 23
+        Me.TutoHideUSB.TabStop = False
+        '
+        'TutoHideGameList
+        '
+        Me.TutoHideGameList.Location = New System.Drawing.Point(259, 2)
+        Me.TutoHideGameList.Name = "TutoHideGameList"
+        Me.TutoHideGameList.Size = New System.Drawing.Size(74, 21)
+        Me.TutoHideGameList.TabIndex = 24
+        Me.TutoHideGameList.TabStop = False
+        '
+        'TutoHideRomInfo
+        '
+        Me.TutoHideRomInfo.Location = New System.Drawing.Point(409, 2)
+        Me.TutoHideRomInfo.Name = "TutoHideRomInfo"
+        Me.TutoHideRomInfo.Size = New System.Drawing.Size(33, 21)
+        Me.TutoHideRomInfo.TabIndex = 22
+        Me.TutoHideRomInfo.TabStop = False
+        '
+        'TutoHideFinalGrid
+        '
+        Me.TutoHideFinalGrid.Location = New System.Drawing.Point(339, 2)
+        Me.TutoHideFinalGrid.Name = "TutoHideFinalGrid"
+        Me.TutoHideFinalGrid.Size = New System.Drawing.Size(64, 21)
+        Me.TutoHideFinalGrid.TabIndex = 20
+        Me.TutoHideFinalGrid.TabStop = False
+        '
+        'GroupCollectEditor
+        '
+        Me.GroupCollectEditor.BackColor = System.Drawing.Color.DarkMagenta
+        Me.GroupCollectEditor.Controls.Add(Me.Label19)
+        Me.GroupCollectEditor.Controls.Add(Me.ButtonHideEditor)
+        Me.GroupCollectEditor.Controls.Add(Me.CollectionGridDetaille)
+        Me.GroupCollectEditor.Controls.Add(Me.ConfirmEditInfoonCollection)
+        Me.GroupCollectEditor.Controls.Add(Me.Label17)
+        Me.GroupCollectEditor.Controls.Add(Me.CollectionEditorList)
+        Me.GroupCollectEditor.ForeColor = System.Drawing.Color.White
+        Me.GroupCollectEditor.Location = New System.Drawing.Point(483, 27)
+        Me.GroupCollectEditor.Name = "GroupCollectEditor"
+        Me.GroupCollectEditor.Size = New System.Drawing.Size(523, 366)
+        Me.GroupCollectEditor.TabIndex = 50
+        Me.GroupCollectEditor.TabStop = False
+        Me.GroupCollectEditor.Text = "Editeur d'Infos des Collections Avancé"
+        '
+        'ButtonHideEditor
+        '
+        Me.ButtonHideEditor.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonHideEditor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonHideEditor.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonHideEditor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonHideEditor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonHideEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonHideEditor.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonHideEditor.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonHideEditor.Location = New System.Drawing.Point(6, 335)
+        Me.ButtonHideEditor.Name = "ButtonHideEditor"
+        Me.ButtonHideEditor.Size = New System.Drawing.Size(94, 23)
+        Me.ButtonHideEditor.TabIndex = 50
+        Me.ButtonHideEditor.Text = "Cacher l'Editeur"
+        Me.ButtonHideEditor.UseVisualStyleBackColor = False
+        '
+        'CollectionGridDetaille
+        '
+        Me.CollectionGridDetaille.AllowUserToAddRows = False
+        Me.CollectionGridDetaille.AllowUserToDeleteRows = False
+        Me.CollectionGridDetaille.AllowUserToOrderColumns = True
+        Me.CollectionGridDetaille.AllowUserToResizeRows = False
+        Me.CollectionGridDetaille.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+        Me.CollectionGridDetaille.Cursor = System.Windows.Forms.Cursors.Hand
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle1
+        Me.CollectionGridDetaille.Location = New System.Drawing.Point(5, 58)
+        Me.CollectionGridDetaille.Margin = New System.Windows.Forms.Padding(2)
+        Me.CollectionGridDetaille.MultiSelect = False
+        Me.CollectionGridDetaille.Name = "CollectionGridDetaille"
+        Me.CollectionGridDetaille.RowHeadersVisible = False
+        Me.CollectionGridDetaille.RowHeadersWidth = 51
+        Me.CollectionGridDetaille.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.CollectionGridDetaille.RowTemplate.Height = 24
+        Me.CollectionGridDetaille.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.CollectionGridDetaille.Size = New System.Drawing.Size(511, 267)
+        Me.CollectionGridDetaille.TabIndex = 50
+        '
+        'ConfirmEditInfoonCollection
+        '
+        Me.ConfirmEditInfoonCollection.BackColor = System.Drawing.Color.Gold
+        Me.ConfirmEditInfoonCollection.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ConfirmEditInfoonCollection.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ConfirmEditInfoonCollection.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ConfirmEditInfoonCollection.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange
+        Me.ConfirmEditInfoonCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ConfirmEditInfoonCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ConfirmEditInfoonCollection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ConfirmEditInfoonCollection.Location = New System.Drawing.Point(274, 332)
+        Me.ConfirmEditInfoonCollection.Name = "ConfirmEditInfoonCollection"
+        Me.ConfirmEditInfoonCollection.Size = New System.Drawing.Size(242, 27)
+        Me.ConfirmEditInfoonCollection.TabIndex = 40
+        Me.ConfirmEditInfoonCollection.Text = "Sauvegarder les Changements dans les GameLists"
+        Me.ConfirmEditInfoonCollection.UseVisualStyleBackColor = False
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(6, 43)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(118, 13)
+        Me.Label17.TabIndex = 3
+        Me.Label17.Text = "Roms de la Collection : "
+        '
+        'CollectionEditorList
+        '
+        Me.CollectionEditorList.FormattingEnabled = True
+        Me.CollectionEditorList.Location = New System.Drawing.Point(5, 19)
+        Me.CollectionEditorList.Name = "CollectionEditorList"
+        Me.CollectionEditorList.Size = New System.Drawing.Size(119, 21)
+        Me.CollectionEditorList.TabIndex = 1
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(252, 39)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(265, 13)
+        Me.Label19.TabIndex = 51
+        Me.Label19.Text = "Vous Pouvez Déplacer, Réduire la Taille des Colonnes"
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.GroupCollectEditor)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.GroupCollections)
         Me.Controls.Add(Me.ButtonCollection)
@@ -1353,11 +1488,6 @@ Partial Class CopyRoms
         Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grp_RomInfos.ResumeLayout(False)
         Me.grp_RomInfos.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -1368,19 +1498,27 @@ Partial Class CopyRoms
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupFiltresAvances.ResumeLayout(False)
         Me.GroupFiltresAvances.PerformLayout()
-        CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupMode.ResumeLayout(False)
         Me.GroupMode.PerformLayout()
         Me.GroupBoxSelectionRoms.ResumeLayout(False)
         Me.GroupBoxSelectionRoms.PerformLayout()
-        CType(Me.TutoHideSimpleMode, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoHideFiltresAvance, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TutoSelectionActuelle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupCollections.ResumeLayout(False)
         Me.GroupCollections.PerformLayout()
         CType(Me.CollectionGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoSelectionActuelle, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideFiltresAvance, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideBoutonCopy, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideOuCopier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideSimpleMode, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideQuoiCopier, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideSelectionIndic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideUSB, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideGameList, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideRomInfo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TutoHideFinalGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupCollectEditor.ResumeLayout(False)
+        Me.GroupCollectEditor.PerformLayout()
+        CType(Me.CollectionGridDetaille, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1480,4 +1618,12 @@ Partial Class CopyRoms
     Friend WithEvents ComboCollection As ComboBox
     Friend WithEvents ButtonRemoveFromCollection As Button
     Friend WithEvents ButtonAddCollection As Button
+    Friend WithEvents ButtonCollectionAvance As Button
+    Friend WithEvents GroupCollectEditor As GroupBox
+    Friend WithEvents ButtonHideEditor As Button
+    Friend WithEvents ConfirmEditInfoonCollection As Button
+    Friend WithEvents Label17 As Label
+    Friend WithEvents CollectionEditorList As ComboBox
+    Friend WithEvents CollectionGridDetaille As DataGridView
+    Friend WithEvents Label19 As Label
 End Class

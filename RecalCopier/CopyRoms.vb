@@ -17,6 +17,7 @@ Public Class CopyRoms
         GroupBoxSelectionRoms.Hide()
         ButtonTuto1.Hide()
         GroupCollections.Hide()
+        GroupCollectEditor.Hide()
 
         'si c'est batocera, on affiche le bouton collection
         If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
@@ -2571,20 +2572,22 @@ lignesuivb:
             GroupCollections.Size = New Point(80, 19)
         End If
     End Sub
-    Sub importdescollections()
+    Sub importdescollections(nomdelalist As ComboBox)
         'reset la combobox et grid
-        ComboCollection.Items.Clear()
-        CollectionGrid.ClearSelection()
+        nomdelalist.Items.Clear()
+        If nomdelalist.Name = "ComboCollection" Then CollectionGrid.ClearSelection()
+        If nomdelalist.Name = "CollectionEditor" Then CollectionGridDetaille.ClearSelection()
+
         'import les fichiers
         Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\")
         Dim aryFi As IO.FileInfo() = di.GetFiles("*.cfg")
         Dim fi As IO.FileInfo
         For Each fi In aryFi
-            ComboCollection.Items.Add(fi.Name)
+            nomdelalist.Items.Add(fi.Name)
         Next
     End Sub
     Private Sub GroupCollections_VisibleChanged(sender As Object, e As EventArgs) Handles GroupCollections.VisibleChanged
-        Call importdescollections()
+        Call importdescollections(ComboCollection)
         'focus sur le 1er
         If ComboCollection.SelectedValue = "" Then ComboCollection.SelectedIndex = 0
         CollectionGrid.RowsDefaultCellStyle.SelectionBackColor = Color.Red
@@ -2596,7 +2599,7 @@ lignesuivb:
         'on delete
         Dim adressefinale = My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\" & ComboCollection.Text
         Kill(adressefinale)
-        Call importdescollections()
+        Call importdescollections(ComboCollection)
         ComboCollection.Text = ""
     End Sub
     Private Sub AjoutCollection_Click(sender As Object, e As EventArgs) Handles AjoutCollection.Click
@@ -2612,7 +2615,7 @@ lignesuivb:
 
         'On cree le fichier
         File.Create(My.Settings.RecalboxFolder & "\system\configs\emulationstation\collections\custom-" & nomdelanouvellecollec & ".cfg").Dispose()
-        Call importdescollections()
+        Call importdescollections(ComboCollection)
 
         'Focus sur lui
         ComboCollection.SelectedItem = "custom-" & nomdelanouvellecollec & ".cfg"
@@ -2624,9 +2627,9 @@ lignesuivb:
     Private Sub ComboCollection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboCollection.SelectedIndexChanged
         'Securite RAZ
         CollectionGrid.DataSource = Nothing
-        Call lirelacollection(ComboCollection.Text)
+        Call lirelacollection(ComboCollection.Text, CollectionGrid)
     End Sub
-    Sub lirelacollection(filenamecollec As String)
+    Sub lirelacollection(filenamecollec As String, grido As DataGridView)
         'Creer le tableau
         Dim table As New DataTable()
         Dim dv As DataView
@@ -2700,24 +2703,25 @@ lignesuivb:
         'Sorting A-Z the console
         dv = table.DefaultView
         dv.Sort = "Presence asc, Console asc, FileName asc"
-        CollectionGrid.DataSource = table
+        grido.DataSource = table
 
         'Width for columns
-        CollectionGrid.Columns("Console").Width = 70
-        CollectionGrid.Columns("FileName").Width = 95
-        CollectionGrid.Columns("CheminRom").Visible = False
-        CollectionGrid.Columns("Presence").Width = 30
 
-        Call colorercollectionlignes()
+        grido.Columns("Console").Width = 70
+        grido.Columns("FileName").Width = 95
+        grido.Columns("CheminRom").Visible = False
+        grido.Columns("Presence").Width = 30
+
+        Call colorercollectionlignes(grido)
     End Sub
-    Sub colorercollectionlignes()
-        For i = 0 To CollectionGrid.Rows.Count - 1
-            Dim presence = CollectionGrid.Rows(i).Cells(CollectionGrid.Columns("Presence").Index).Value
+    Sub colorercollectionlignes(grido As DataGridView)
+        For i = 0 To grido.Rows.Count - 1
+            Dim presence = grido.Rows(i).Cells(grido.Columns("Presence").Index).Value
 
             If presence = True Then
-                CollectionGrid.Rows(i).Cells(CollectionGrid.Columns("Presence").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+                grido.Rows(i).Cells(grido.Columns("Presence").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
             Else
-                CollectionGrid.Rows(i).Cells(CollectionGrid.Columns("Presence").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+                grido.Rows(i).Cells(grido.Columns("Presence").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
         Next
     End Sub
@@ -2829,5 +2833,297 @@ lignesuivante:
     Private Sub FinalGrid_SelectionChanged(sender As Object, e As EventArgs) Handles FinalGrid.SelectionChanged
         Dim actualrow As Integer = FinalGrid.CurrentRow.Index
         Call loadlesinfos(actualrow)
+    End Sub
+
+    Private Sub ButtonCollectionAvance_Click(sender As Object, e As EventArgs) Handles ButtonCollectionAvance.Click
+        GroupCollectEditor.Show()
+        GroupCollectEditor.Location = New Point(483, 27)
+        GroupCollectEditor.Size = New Point(523, 366)
+        GroupBox6.Show()
+        Call importdescollections(CollectionEditorList)
+        If CollectionEditorList.SelectedValue = "" Then CollectionEditorList.SelectedIndex = 0
+        GroupCollections.Hide()
+    End Sub
+
+    Private Sub ButtonHideEditor_Click(sender As Object, e As EventArgs) Handles ButtonHideEditor.Click
+        GroupCollections.Show()
+        GroupCollectEditor.Hide()
+        GroupCollectEditor.Location = New Point(122, 2)
+        GroupCollectEditor.Size = New Point(59, 25)
+        GroupBox6.Hide()
+    End Sub
+
+    Private Sub CollectionEditorList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CollectionEditorList.SelectedIndexChanged
+        'Reset par securite
+        CollectionGridDetaille.ClearSelection()
+
+        'On load les roms de la collection
+        Call lirelacollection(CollectionEditorList.Text, CollectionGridDetaille)
+
+        'On reprend le tableau et on le retravaille
+        Call reprisedutableauetcollectionedetaille()
+    End Sub
+
+    Sub reprisedutableauetcollectionedetaille()
+        Dim dt As DataTable = TryCast(CollectionGridDetaille.DataSource, DataTable)
+
+        Dim dv As DataView
+        Dim column As DataColumn
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "DateSortie"
+        End With
+        dt.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Titre"
+        End With
+        dt.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Synopsis"
+        End With
+        dt.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Genre"
+        End With
+        dt.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Note"
+        End With
+        dt.Columns.Add(column)
+
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Developer"
+        End With
+        dt.Columns.Add(column)
+
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Publisher"
+        End With
+        dt.Columns.Add(column)
+
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "NbPlayers"
+        End With
+        dt.Columns.Add(column)
+
+        column = New DataColumn()
+        With column
+            .DataType = Type.GetType("System.String")
+            .ColumnName = "Region"
+        End With
+        dt.Columns.Add(column)
+
+        'Loop for every gamelists
+        For i = 0 To CollectionGridDetaille.Rows.Count - 1
+            Dim cheminrom = CollectionGridDetaille.Rows(i).Cells(CollectionGridDetaille.Columns("CheminRom").Index).Value
+            Dim nomconsole As String = CollectionGridDetaille.Rows(i).Cells(CollectionGridDetaille.Columns("Console").Index).Value
+            Dim gamelist As String
+            If CheckBoxARRM.Checked = True Then
+
+                'on va verifier si ARRM ou non dans gamelist
+                If System.IO.File.Exists(My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & "gamelist_ARRM.xml") Then
+                    gamelist = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\gamelist_ARRM.xml"
+                Else
+                    gamelist = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\gamelist.xml"
+                End If
+            Else
+                gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist.xml"
+            End If
+
+            Dim gamelistXml As XElement
+            Try
+                gamelistXml = XElement.Load(gamelist)
+            Catch ex As Exception
+                GoTo romcollectionsuivante
+            End Try
+
+            'getting the list for the xml with nodes
+            Dim query2 = From st In gamelistXml.Descendants("game") Select st
+
+            For Each xEle As XElement In query2
+                Dim romconsole As String = nomconsole
+                Dim romname As String = xEle.Element("name")
+                Dim romId As String
+                Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
+                Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & temprom
+                Dim romgenre As String
+                Dim romdesc As String
+                Dim romimage As String
+                Dim romvideo As String
+                Dim romanual As String
+                Dim romnote As String
+                Dim romdev As String
+                Dim rompubl As String
+                Dim romnbplayers As String
+                Dim romdate As String
+                Dim romCompteur As String
+                Dim romRegion As String
+                Dim romhidden As String = xEle.Element("hidden")
+
+                'on check le path 
+                If Path.GetFileName(cheminrom) <> temprom Then GoTo romsuivante
+
+                If xEle.Element("desc") Is Nothing Then
+                    romdesc = Nothing
+                Else
+                    romdesc = xEle.Element("desc")
+                End If
+
+                Dim ExistGameId As Boolean = xEle.Attributes("id").Any
+
+                If ExistGameId = True Then
+                    romId = xEle.Attribute("id").Value
+                Else
+                    romId = Nothing
+                End If
+
+                If xEle.Element("image") Is Nothing Then
+                    romimage = Nothing
+                Else
+                    romimage = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(Replace(xEle.Element("image"), "/", "\"), "./", ""), ".\", "")
+                End If
+
+                If xEle.Element("video") Is Nothing Then
+                    romvideo = Nothing
+                Else
+                    romvideo = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(Replace(xEle.Element("video"), "/", "\"), "./", ""), ".\", "")
+                End If
+
+                If xEle.Element("manual") Is Nothing Then
+                    romanual = Nothing
+                Else
+                    romanual = My.Settings.RecalboxFolder & "\roms\" & nomconsole & "\" & Replace(Replace(Replace(xEle.Element("manual"), "/", "\"), "./", ""), ".\", "")
+                End If
+
+                If xEle.Element("genre") Is Nothing Then
+                    romgenre = Nothing
+                Else
+                    romgenre = xEle.Element("genre")
+                End If
+
+                If xEle.Element("rating") Is Nothing Then
+                    romnote = Nothing
+                Else
+                    romnote = xEle.Element("rating")
+                End If
+
+                If xEle.Element("developer") Is Nothing Then
+                    romdev = Nothing
+                Else
+                    romdev = xEle.Element("developer")
+                End If
+
+                If xEle.Element("publisher") Is Nothing Then
+                    rompubl = Nothing
+                Else
+                    rompubl = xEle.Element("publisher")
+                End If
+
+                If xEle.Element("players") Is Nothing Then
+                    romnbplayers = Nothing
+                Else
+                    romnbplayers = xEle.Element("players")
+                End If
+
+                If xEle.Element("releasedate") Is Nothing Then
+                    romdate = Nothing
+                Else
+                    romdate = xEle.Element("releasedate")
+                End If
+
+                If xEle.Element("playcount") Is Nothing Then
+                    romCompteur = Nothing
+                Else
+                    romCompteur = xEle.Element("playcount")
+                End If
+
+                If xEle.Element("region") Is Nothing Then
+                    romRegion = Nothing
+                Else
+                    romRegion = xEle.Element("region")
+                End If
+
+                'on ajoute le tout dans une table
+                dt.Rows(i)("DateSortie") = romdate
+                dt.Rows(i)("Titre") = romname
+                dt.Rows(i)("Synopsis") = romdesc
+                dt.Rows(i)("Genre") = romgenre
+                dt.Rows(i)("Note") = romnote
+                dt.Rows(i)("Developer") = romdev
+                dt.Rows(i)("Publisher") = rompubl
+                dt.Rows(i)("NbPlayers") = romnbplayers
+                dt.Rows(i)("Region") = romRegion
+
+                Exit For
+romsuivante:
+            Next
+romcollectionsuivante:
+        Next
+
+        'Width for columns
+        CollectionGridDetaille.Columns("Console").Width = 50
+        CollectionGridDetaille.Columns("Console").Frozen = True
+        CollectionGridDetaille.Columns("FileName").Width = 110
+        CollectionGridDetaille.Columns("FileName").Frozen = True
+        CollectionGridDetaille.Columns("Titre").Width = 150
+        CollectionGridDetaille.Columns("Presence").ReadOnly = True
+        CollectionGridDetaille.Columns("CheminRom").Visible = False
+        CollectionGridDetaille.Columns("Synopsis").Visible = True
+        CollectionGridDetaille.Columns("Genre").Visible = True
+        CollectionGridDetaille.Columns("Note").Visible = True
+        CollectionGridDetaille.Columns("Note").Width = 40
+        CollectionGridDetaille.Columns("Developer").Visible = True
+        CollectionGridDetaille.Columns("Publisher").Visible = True
+        CollectionGridDetaille.Columns("NbPlayers").Visible = True
+        CollectionGridDetaille.Columns("NbPlayers").Width = 40
+        CollectionGridDetaille.Columns("DateSortie").Visible = True
+        CollectionGridDetaille.Columns("Region").Visible = False
+
+
+
+        'Sorting A-Z the console
+
+        dt.Columns("Titre").SetOrdinal(1)
+        dt.Columns("DateSortie").SetOrdinal(2)
+        dt.Columns("CheminRom").SetOrdinal(11)
+        dt.Columns("Presence").SetOrdinal(10)
+        CollectionGridDetaille.DataSource = dt
+        dv = dt.DefaultView
+        dv.Sort = "Presence asc, Console asc, CheminRom asc"
+
+        'On lance la coloration des checkbox
+        Call colorercollectionlignes(CollectionGridDetaille)
+
+    End Sub
+
+    Private Sub CollectionGridDetaille_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles CollectionGridDetaille.CellContentClick
+
+    End Sub
+
+    Private Sub CollectionGridDetaille_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles CollectionGridDetaille.CellEndEdit
+        Me.CollectionGridDetaille.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.ForeColor = Color.Red
     End Sub
 End Class
