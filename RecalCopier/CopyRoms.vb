@@ -2855,6 +2855,10 @@ lignesuivante:
     End Sub
 
     Private Sub CollectionEditorList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CollectionEditorList.SelectedIndexChanged
+        'On force en noir les cellules
+        CollectionGridDetaille.DefaultCellStyle.ForeColor = Color.Black
+        CollectionGridDetaille.DefaultCellStyle.BackColor = Color.White
+
         'Reset par securite
         CollectionGridDetaille.ClearSelection()
 

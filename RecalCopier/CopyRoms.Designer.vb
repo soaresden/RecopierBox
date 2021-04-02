@@ -24,7 +24,7 @@ Partial Class CopyRoms
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ListGameLists = New System.Windows.Forms.ListBox()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -1094,7 +1094,7 @@ Partial Class CopyRoms
         Me.GroupCollections.ForeColor = System.Drawing.Color.White
         Me.GroupCollections.Location = New System.Drawing.Point(187, 2)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(319, 269)
+        Me.GroupCollections.Size = New System.Drawing.Size(312, 241)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
@@ -1109,11 +1109,11 @@ Partial Class CopyRoms
         Me.ButtonCollectionAvance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonCollectionAvance.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCollectionAvance.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonCollectionAvance.Location = New System.Drawing.Point(151, 39)
+        Me.ButtonCollectionAvance.Location = New System.Drawing.Point(122, 84)
         Me.ButtonCollectionAvance.Name = "ButtonCollectionAvance"
-        Me.ButtonCollectionAvance.Size = New System.Drawing.Size(76, 27)
+        Me.ButtonCollectionAvance.Size = New System.Drawing.Size(105, 32)
         Me.ButtonCollectionAvance.TabIndex = 44
-        Me.ButtonCollectionAvance.Text = "Editer Infos Roms"
+        Me.ButtonCollectionAvance.Text = "Editer les Infos"
         Me.ButtonCollectionAvance.UseVisualStyleBackColor = False
         '
         'ButtonAddCollection
@@ -1160,7 +1160,7 @@ Partial Class CopyRoms
         Me.AjoutCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.AjoutCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AjoutCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.AjoutCollection.Location = New System.Drawing.Point(151, 8)
+        Me.AjoutCollection.Location = New System.Drawing.Point(151, 18)
         Me.AjoutCollection.Name = "AjoutCollection"
         Me.AjoutCollection.Size = New System.Drawing.Size(76, 27)
         Me.AjoutCollection.TabIndex = 41
@@ -1194,7 +1194,7 @@ Partial Class CopyRoms
         Me.SupCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SupCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SupCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.SupCollection.Location = New System.Drawing.Point(9, 70)
+        Me.SupCollection.Location = New System.Drawing.Point(9, 51)
         Me.SupCollection.Name = "SupCollection"
         Me.SupCollection.Size = New System.Drawing.Size(218, 23)
         Me.SupCollection.TabIndex = 39
@@ -1217,7 +1217,7 @@ Partial Class CopyRoms
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(6, 96)
+        Me.Label18.Location = New System.Drawing.Point(6, 103)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(118, 13)
         Me.Label18.TabIndex = 3
@@ -1346,9 +1346,9 @@ Partial Class CopyRoms
         Me.GroupCollectEditor.Controls.Add(Me.Label17)
         Me.GroupCollectEditor.Controls.Add(Me.CollectionEditorList)
         Me.GroupCollectEditor.ForeColor = System.Drawing.Color.White
-        Me.GroupCollectEditor.Location = New System.Drawing.Point(483, 27)
+        Me.GroupCollectEditor.Location = New System.Drawing.Point(115, 2)
         Me.GroupCollectEditor.Name = "GroupCollectEditor"
-        Me.GroupCollectEditor.Size = New System.Drawing.Size(523, 366)
+        Me.GroupCollectEditor.Size = New System.Drawing.Size(66, 25)
         Me.GroupCollectEditor.TabIndex = 50
         Me.GroupCollectEditor.TabStop = False
         Me.GroupCollectEditor.Text = "Editeur d'Infos des Collections Avancé"
@@ -1387,14 +1387,14 @@ Partial Class CopyRoms
         Me.CollectionGridDetaille.AllowUserToResizeRows = False
         Me.CollectionGridDetaille.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.CollectionGridDetaille.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle3
         Me.CollectionGridDetaille.Location = New System.Drawing.Point(5, 58)
         Me.CollectionGridDetaille.Margin = New System.Windows.Forms.Padding(2)
         Me.CollectionGridDetaille.MultiSelect = False
