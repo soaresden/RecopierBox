@@ -24,7 +24,7 @@ Partial Class CopyRoms
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ListGameLists = New System.Windows.Forms.ListBox()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -1094,7 +1094,7 @@ Partial Class CopyRoms
         Me.GroupCollections.ForeColor = System.Drawing.Color.White
         Me.GroupCollections.Location = New System.Drawing.Point(187, 2)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(312, 241)
+        Me.GroupCollections.Size = New System.Drawing.Size(66, 21)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
@@ -1348,7 +1348,7 @@ Partial Class CopyRoms
         Me.GroupCollectEditor.ForeColor = System.Drawing.Color.White
         Me.GroupCollectEditor.Location = New System.Drawing.Point(115, 2)
         Me.GroupCollectEditor.Name = "GroupCollectEditor"
-        Me.GroupCollectEditor.Size = New System.Drawing.Size(66, 25)
+        Me.GroupCollectEditor.Size = New System.Drawing.Size(66, 21)
         Me.GroupCollectEditor.TabIndex = 50
         Me.GroupCollectEditor.TabStop = False
         Me.GroupCollectEditor.Text = "Editeur d'Infos des Collections Avancé"
@@ -1387,14 +1387,14 @@ Partial Class CopyRoms
         Me.CollectionGridDetaille.AllowUserToResizeRows = False
         Me.CollectionGridDetaille.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.CollectionGridDetaille.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle1
         Me.CollectionGridDetaille.Location = New System.Drawing.Point(5, 58)
         Me.CollectionGridDetaille.Margin = New System.Windows.Forms.Padding(2)
         Me.CollectionGridDetaille.MultiSelect = False
