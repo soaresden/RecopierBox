@@ -18,15 +18,16 @@ Public Class CopyRoms
         ButtonTuto1.Hide()
         GroupCollections.Hide()
         GroupCollectEditor.Hide()
+        CellEnGrand.Hide()
 
         'si c'est batocera, on affiche le bouton collection
         If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
             ButtonCollection.Show()
             ButtonCollection.Location = New Point(93, 417)
-            Label16.Show()
-            Label16.Location = New Point(90, 470)
+            LabelCollection.Show()
+            LabelCollection.Location = New Point(90, 470)
         Else
-            Label16.Hide()
+            LabelCollection.Hide()
             ButtonCollection.Hide()
         End If
 
@@ -515,7 +516,7 @@ consolesuivante:
         'si c'est batocera, on redeplace la collection
         If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
             ButtonCollection.Location = New Point(549, 417)
-            Label16.Location = New Point(546, 470)
+            LabelCollection.Location = New Point(546, 470)
         End If
     End Sub
     Function GetSizeSelectedRom(cheminrom As String, console As String)
@@ -2839,7 +2840,6 @@ lignesuivante:
         GroupCollectEditor.Show()
         GroupCollectEditor.Location = New Point(483, 27)
         GroupCollectEditor.Size = New Point(523, 366)
-        GroupBoxBoutonsMedias.Show()
 
         'on replique la combobox
         CollectionEditorList.Items.Clear()
@@ -2853,21 +2853,27 @@ lignesuivante:
             CollectionEditorList.Text = ComboCollection.SelectedItem.ToString
         End If
 
+        'On hide le group selection et lui meme
         GroupCollections.Hide()
+        ButtonCollection.Hide()
+        LabelCollection.Hide()
         GroupBoxBoutonsMedias.Hide()
         GroupBoxSelectionRoms.Hide()
-
         CollectionEditorList.Focus()
+        CellEnGrand.Show()
+        ValidCell.Hide()
     End Sub
-
     Private Sub ButtonHideEditor_Click(sender As Object, e As EventArgs) Handles ButtonHideEditor.Click
         GroupCollections.Show()
         GroupCollectEditor.Hide()
         GroupCollectEditor.Location = New Point(122, 2)
         GroupCollectEditor.Size = New Point(59, 25)
 
+        ButtonCollection.Show()
+        LabelCollection.Show()
         GroupBoxBoutonsMedias.Show()
         GroupBoxSelectionRoms.Show()
+        CellEnGrand.Hide()
     End Sub
 
     Private Sub CollectionEditorList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CollectionEditorList.SelectedIndexChanged
@@ -2884,7 +2890,6 @@ lignesuivante:
         'On reprend le tableau et on le retravaille
         Call reprisedutableauetcollectionedetaille()
     End Sub
-
     Sub reprisedutableauetcollectionedetaille()
         Dim dt As DataTable = TryCast(CollectionGridDetaille.DataSource, DataTable)
 
@@ -3130,11 +3135,6 @@ romcollectionsuivante:
         'On lance la coloration des checkbox
         Call colorercollectionlignes(CollectionGridDetaille)
     End Sub
-
-    Private Sub CollectionGridDetaille_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles CollectionGridDetaille.CellEndEdit
-        Me.CollectionGridDetaille.Rows(e.RowIndex).Cells(e.ColumnIndex).Style.ForeColor = Color.Red
-    End Sub
-
     Private Sub ConfirmEditInfoonCollection_Click(sender As Object, e As EventArgs) Handles ConfirmEditInfoonCollection.Click
         If MsgBox("Etes vous sur de vouloir modifier votre Gamelist" & Chr(10) & "par vos modifs en Rouge ?", vbYesNo) = vbNo Then
             Exit Sub
@@ -3232,5 +3232,51 @@ lignesuivante:
         Else
             MsgBox("Gamelist(s) sauvegardés" & Chr(10) & Chr(10) & fulltext)
         End If
+    End Sub
+    Private Sub CollectionGridDetaille_SelectionChanged(sender As Object, e As EventArgs) Handles CollectionGridDetaille.SelectionChanged
+        CellEnGrand.Location = New Point(483, 415)
+        CellEnGrand.Size = New Point(523, 88)
+
+        Dim valeurcell As String
+        If IsDBNull(CollectionGridDetaille.Rows(CollectionGridDetaille.CurrentCell.RowIndex).Cells(CollectionGridDetaille.CurrentCell.ColumnIndex).Value) = True Then
+            valeurcell = Nothing
+        Else
+            valeurcell = CollectionGridDetaille.Rows(CollectionGridDetaille.CurrentCell.RowIndex).Cells(CollectionGridDetaille.CurrentCell.ColumnIndex).Value
+        End If
+
+        CellEnGrand.Text = valeurcell
+    End Sub
+    Private Sub CollectionGridDetaille_KeyDown(sender As Object, e As KeyEventArgs) Handles CollectionGridDetaille.KeyDown
+        Dim rowo As Integer = CollectionGridDetaille.CurrentCell.RowIndex
+        Dim colo As Integer = CollectionGridDetaille.CurrentCell.ColumnIndex
+
+        'Test sur les valeurs
+        If rowo < 0 Or rowo > CollectionGridDetaille.Rows.Count - 1 Then Exit Sub
+        If colo < 0 Or colo > CollectionGridDetaille.Columns.Count - 1 Then Exit Sub
+    End Sub
+    Private Sub CellEnGrand_GotFocus(sender As Object, e As EventArgs) Handles CellEnGrand.GotFocus
+        ValidCell.Show()
+    End Sub
+    Private Sub ValidCell_Click(sender As Object, e As EventArgs) Handles ValidCell.Click
+        CellEnGrand.Location = New Point(234, 4)
+        CellEnGrand.Size = New Point(19, 23)
+
+        Dim valeurcell As String
+        If IsDBNull(CollectionGridDetaille.Rows(CollectionGridDetaille.CurrentCell.RowIndex).Cells(CollectionGridDetaille.CurrentCell.ColumnIndex).Value) = True Then
+            valeurcell = Nothing
+        Else
+            valeurcell = CollectionGridDetaille.Rows(CollectionGridDetaille.CurrentCell.RowIndex).Cells(CollectionGridDetaille.CurrentCell.ColumnIndex).Value
+        End If
+
+        'Test si c'est identique ou non
+        If CellEnGrand.Text <> valeurcell Then
+            CollectionGridDetaille.Rows(CollectionGridDetaille.CurrentCell.RowIndex).Cells(CollectionGridDetaille.CurrentCell.ColumnIndex).Value = CellEnGrand.Text
+            CollectionGridDetaille.Rows(CollectionGridDetaille.CurrentCell.RowIndex).Cells(CollectionGridDetaille.CurrentCell.ColumnIndex).Style.ForeColor = Color.Red
+        Else
+            CollectionGridDetaille.Rows(CollectionGridDetaille.CurrentCell.RowIndex).Cells(CollectionGridDetaille.CurrentCell.ColumnIndex).Style.ForeColor = Color.Black
+        End If
+
+        CollectionGridDetaille.Focus()
+        ValidCell.Hide()
     End Sub
 End Class

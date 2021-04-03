@@ -24,7 +24,7 @@ Partial Class CopyRoms
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ListGameLists = New System.Windows.Forms.ListBox()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -98,7 +98,7 @@ Partial Class CopyRoms
         Me.ChkSimple = New System.Windows.Forms.CheckBox()
         Me.GroupBoxSelectionRoms = New System.Windows.Forms.GroupBox()
         Me.ButtonAfficherMaSelection = New System.Windows.Forms.Button()
-        Me.Label16 = New System.Windows.Forms.Label()
+        Me.LabelCollection = New System.Windows.Forms.Label()
         Me.GroupCollections = New System.Windows.Forms.GroupBox()
         Me.ButtonCollectionAvance = New System.Windows.Forms.Button()
         Me.ButtonAddCollection = New System.Windows.Forms.Button()
@@ -122,12 +122,14 @@ Partial Class CopyRoms
         Me.TutoHideRomInfo = New System.Windows.Forms.PictureBox()
         Me.TutoHideFinalGrid = New System.Windows.Forms.PictureBox()
         Me.GroupCollectEditor = New System.Windows.Forms.GroupBox()
+        Me.ValidCell = New System.Windows.Forms.Button()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ButtonHideEditor = New System.Windows.Forms.Button()
         Me.CollectionGridDetaille = New System.Windows.Forms.DataGridView()
         Me.ConfirmEditInfoonCollection = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.CollectionEditorList = New System.Windows.Forms.ComboBox()
+        Me.CellEnGrand = New System.Windows.Forms.RichTextBox()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -1068,16 +1070,16 @@ Partial Class CopyRoms
         Me.ButtonAfficherMaSelection.TabIndex = 39
         Me.ButtonAfficherMaSelection.UseVisualStyleBackColor = False
         '
-        'Label16
+        'LabelCollection
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label16.Location = New System.Drawing.Point(546, 470)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(58, 26)
-        Me.Label16.TabIndex = 42
-        Me.Label16.Text = "Gestion " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Collections"
-        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LabelCollection.AutoSize = True
+        Me.LabelCollection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.LabelCollection.Location = New System.Drawing.Point(546, 470)
+        Me.LabelCollection.Name = "LabelCollection"
+        Me.LabelCollection.Size = New System.Drawing.Size(58, 26)
+        Me.LabelCollection.TabIndex = 42
+        Me.LabelCollection.Text = "Gestion " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Collections"
+        Me.LabelCollection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'GroupCollections
         '
@@ -1092,9 +1094,9 @@ Partial Class CopyRoms
         Me.GroupCollections.Controls.Add(Me.Label18)
         Me.GroupCollections.Controls.Add(Me.ComboCollection)
         Me.GroupCollections.ForeColor = System.Drawing.Color.White
-        Me.GroupCollections.Location = New System.Drawing.Point(115, 2)
+        Me.GroupCollections.Location = New System.Drawing.Point(110, 4)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(304, 391)
+        Me.GroupCollections.Size = New System.Drawing.Size(57, 21)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
@@ -1339,6 +1341,7 @@ Partial Class CopyRoms
         'GroupCollectEditor
         '
         Me.GroupCollectEditor.BackColor = System.Drawing.Color.DarkMagenta
+        Me.GroupCollectEditor.Controls.Add(Me.ValidCell)
         Me.GroupCollectEditor.Controls.Add(Me.Label19)
         Me.GroupCollectEditor.Controls.Add(Me.ButtonHideEditor)
         Me.GroupCollectEditor.Controls.Add(Me.CollectionGridDetaille)
@@ -1346,21 +1349,41 @@ Partial Class CopyRoms
         Me.GroupCollectEditor.Controls.Add(Me.Label17)
         Me.GroupCollectEditor.Controls.Add(Me.CollectionEditorList)
         Me.GroupCollectEditor.ForeColor = System.Drawing.Color.White
-        Me.GroupCollectEditor.Location = New System.Drawing.Point(173, 4)
+        Me.GroupCollectEditor.Location = New System.Drawing.Point(173, 2)
         Me.GroupCollectEditor.Name = "GroupCollectEditor"
-        Me.GroupCollectEditor.Size = New System.Drawing.Size(80, 21)
+        Me.GroupCollectEditor.Size = New System.Drawing.Size(48, 23)
         Me.GroupCollectEditor.TabIndex = 50
         Me.GroupCollectEditor.TabStop = False
         Me.GroupCollectEditor.Text = "Editeur d'Infos des Collections Avancé"
         '
+        'ValidCell
+        '
+        Me.ValidCell.BackColor = System.Drawing.Color.Orchid
+        Me.ValidCell.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ValidCell.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ValidCell.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ValidCell.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Pink
+        Me.ValidCell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ValidCell.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ValidCell.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.ValidCell.Location = New System.Drawing.Point(124, 330)
+        Me.ValidCell.Name = "ValidCell"
+        Me.ValidCell.Size = New System.Drawing.Size(132, 31)
+        Me.ValidCell.TabIndex = 52
+        Me.ValidCell.Text = "Valider la Cellule"
+        Me.ValidCell.UseVisualStyleBackColor = False
+        '
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(252, 39)
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.Yellow
+        Me.Label19.Location = New System.Drawing.Point(146, 29)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(265, 13)
+        Me.Label19.Size = New System.Drawing.Size(317, 39)
         Me.Label19.TabIndex = 51
-        Me.Label19.Text = "Vous Pouvez Déplacer, Réduire la Taille des Colonnes"
+        Me.Label19.Text = "Vous Pouvez DEPLACER, REDUIRE les Colonnes à votre Guise." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FLECHES" & Global.Microsoft.VisualBasic.ChrW(9) & Global.Microsoft.VisualBasic.ChrW(9) & "= Deplacement" &
+    " Cellule" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "CLIC S/ CELLULE" & Global.Microsoft.VisualBasic.ChrW(9) & "= Valider"
         '
         'ButtonHideEditor
         '
@@ -1372,9 +1395,9 @@ Partial Class CopyRoms
         Me.ButtonHideEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonHideEditor.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonHideEditor.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonHideEditor.Location = New System.Drawing.Point(6, 335)
+        Me.ButtonHideEditor.Location = New System.Drawing.Point(6, 330)
         Me.ButtonHideEditor.Name = "ButtonHideEditor"
-        Me.ButtonHideEditor.Size = New System.Drawing.Size(94, 23)
+        Me.ButtonHideEditor.Size = New System.Drawing.Size(94, 31)
         Me.ButtonHideEditor.TabIndex = 50
         Me.ButtonHideEditor.Text = "Cacher l'Editeur"
         Me.ButtonHideEditor.UseVisualStyleBackColor = False
@@ -1387,24 +1410,25 @@ Partial Class CopyRoms
         Me.CollectionGridDetaille.AllowUserToResizeRows = False
         Me.CollectionGridDetaille.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.CollectionGridDetaille.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle1
-        Me.CollectionGridDetaille.Location = New System.Drawing.Point(5, 58)
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle5
+        Me.CollectionGridDetaille.Location = New System.Drawing.Point(5, 70)
         Me.CollectionGridDetaille.Margin = New System.Windows.Forms.Padding(2)
         Me.CollectionGridDetaille.MultiSelect = False
         Me.CollectionGridDetaille.Name = "CollectionGridDetaille"
+        Me.CollectionGridDetaille.ReadOnly = True
         Me.CollectionGridDetaille.RowHeadersVisible = False
         Me.CollectionGridDetaille.RowHeadersWidth = 51
         Me.CollectionGridDetaille.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.CollectionGridDetaille.RowTemplate.Height = 24
         Me.CollectionGridDetaille.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.CollectionGridDetaille.Size = New System.Drawing.Size(511, 267)
+        Me.CollectionGridDetaille.Size = New System.Drawing.Size(511, 255)
         Me.CollectionGridDetaille.TabIndex = 50
         '
         'ConfirmEditInfoonCollection
@@ -1417,9 +1441,9 @@ Partial Class CopyRoms
         Me.ConfirmEditInfoonCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ConfirmEditInfoonCollection.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ConfirmEditInfoonCollection.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ConfirmEditInfoonCollection.Location = New System.Drawing.Point(274, 332)
+        Me.ConfirmEditInfoonCollection.Location = New System.Drawing.Point(276, 330)
         Me.ConfirmEditInfoonCollection.Name = "ConfirmEditInfoonCollection"
-        Me.ConfirmEditInfoonCollection.Size = New System.Drawing.Size(242, 27)
+        Me.ConfirmEditInfoonCollection.Size = New System.Drawing.Size(240, 31)
         Me.ConfirmEditInfoonCollection.TabIndex = 40
         Me.ConfirmEditInfoonCollection.Text = "Sauvegarder les Changements dans les GameLists"
         Me.ConfirmEditInfoonCollection.UseVisualStyleBackColor = False
@@ -1427,7 +1451,7 @@ Partial Class CopyRoms
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(6, 43)
+        Me.Label17.Location = New System.Drawing.Point(6, 55)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(118, 13)
         Me.Label17.TabIndex = 3
@@ -1441,14 +1465,25 @@ Partial Class CopyRoms
         Me.CollectionEditorList.Size = New System.Drawing.Size(119, 21)
         Me.CollectionEditorList.TabIndex = 1
         '
+        'CellEnGrand
+        '
+        Me.CellEnGrand.BackColor = System.Drawing.Color.LavenderBlush
+        Me.CellEnGrand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.CellEnGrand.Location = New System.Drawing.Point(227, 2)
+        Me.CellEnGrand.Name = "CellEnGrand"
+        Me.CellEnGrand.Size = New System.Drawing.Size(33, 22)
+        Me.CellEnGrand.TabIndex = 52
+        Me.CellEnGrand.Text = ""
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.CellEnGrand)
         Me.Controls.Add(Me.GroupCollectEditor)
-        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.LabelCollection)
         Me.Controls.Add(Me.GroupCollections)
         Me.Controls.Add(Me.ButtonCollection)
         Me.Controls.Add(Me.TutoSelectionActuelle)
@@ -1607,7 +1642,7 @@ Partial Class CopyRoms
     Friend WithEvents TutoHideFiltresAvance As PictureBox
     Friend WithEvents TutoSelectionActuelle As PictureBox
     Friend WithEvents LabelSelection As Label
-    Friend WithEvents Label16 As Label
+    Friend WithEvents LabelCollection As Label
     Friend WithEvents ButtonCollection As Button
     Friend WithEvents GroupCollections As GroupBox
     Friend WithEvents AjoutCollection As Button
@@ -1626,4 +1661,6 @@ Partial Class CopyRoms
     Friend WithEvents CollectionEditorList As ComboBox
     Friend WithEvents CollectionGridDetaille As DataGridView
     Friend WithEvents Label19 As Label
+    Friend WithEvents CellEnGrand As RichTextBox
+    Friend WithEvents ValidCell As Button
 End Class
