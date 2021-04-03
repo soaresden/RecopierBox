@@ -56,7 +56,7 @@ Partial Class CopyRoms
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.LabelSelection = New System.Windows.Forms.Label()
         Me.txt_romname = New System.Windows.Forms.Label()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GroupBoxBoutonsMedias = New System.Windows.Forms.GroupBox()
         Me.romsaveo = New System.Windows.Forms.Button()
         Me.romoverlayo = New System.Windows.Forms.Button()
         Me.rommanualo = New System.Windows.Forms.Button()
@@ -136,7 +136,7 @@ Partial Class CopyRoms
         Me.GroupBox3.SuspendLayout()
         Me.grp_RomInfos.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
+        Me.GroupBoxBoutonsMedias.SuspendLayout()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupFiltresAvances.SuspendLayout()
@@ -480,7 +480,7 @@ Partial Class CopyRoms
         Me.grp_RomInfos.Controls.Add(Me.listboxMaSelection)
         Me.grp_RomInfos.Controls.Add(Me.ButtonSonVid)
         Me.grp_RomInfos.Controls.Add(Me.Panel1)
-        Me.grp_RomInfos.Controls.Add(Me.GroupBox6)
+        Me.grp_RomInfos.Controls.Add(Me.GroupBoxBoutonsMedias)
         Me.grp_RomInfos.Controls.Add(Me.RomImage)
         Me.grp_RomInfos.Controls.Add(Me.txt_romdesc)
         Me.grp_RomInfos.Controls.Add(Me.txt_rompath)
@@ -554,26 +554,26 @@ Partial Class CopyRoms
         Me.txt_romname.TabIndex = 22
         Me.txt_romname.Text = "Veuillez cliquer sur une Rom"
         '
-        'GroupBox6
+        'GroupBoxBoutonsMedias
         '
-        Me.GroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(66, Byte), Integer), CType(CType(252, Byte), Integer))
-        Me.GroupBox6.Controls.Add(Me.romsaveo)
-        Me.GroupBox6.Controls.Add(Me.romoverlayo)
-        Me.GroupBox6.Controls.Add(Me.rommanualo)
-        Me.GroupBox6.Controls.Add(Me.romvideoo)
-        Me.GroupBox6.Controls.Add(Me.romscreeno)
-        Me.GroupBox6.Controls.Add(Me.Label14)
-        Me.GroupBox6.Controls.Add(Me.Label13)
-        Me.GroupBox6.Controls.Add(Me.Label12)
-        Me.GroupBox6.Controls.Add(Me.Label11)
-        Me.GroupBox6.Controls.Add(Me.Label2)
-        Me.GroupBox6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupBox6.Location = New System.Drawing.Point(6, 387)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(381, 82)
-        Me.GroupBox6.TabIndex = 21
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Fichiers Liés à la Rom :"
+        Me.GroupBoxBoutonsMedias.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(66, Byte), Integer), CType(CType(252, Byte), Integer))
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.romsaveo)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.romoverlayo)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.rommanualo)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.romvideoo)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.romscreeno)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.Label14)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.Label13)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.Label12)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.Label11)
+        Me.GroupBoxBoutonsMedias.Controls.Add(Me.Label2)
+        Me.GroupBoxBoutonsMedias.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.GroupBoxBoutonsMedias.Location = New System.Drawing.Point(6, 387)
+        Me.GroupBoxBoutonsMedias.Name = "GroupBoxBoutonsMedias"
+        Me.GroupBoxBoutonsMedias.Size = New System.Drawing.Size(381, 82)
+        Me.GroupBoxBoutonsMedias.TabIndex = 21
+        Me.GroupBoxBoutonsMedias.TabStop = False
+        Me.GroupBoxBoutonsMedias.Text = "Fichiers Liés à la Rom :"
         '
         'romsaveo
         '
@@ -1092,9 +1092,9 @@ Partial Class CopyRoms
         Me.GroupCollections.Controls.Add(Me.Label18)
         Me.GroupCollections.Controls.Add(Me.ComboCollection)
         Me.GroupCollections.ForeColor = System.Drawing.Color.White
-        Me.GroupCollections.Location = New System.Drawing.Point(187, 2)
+        Me.GroupCollections.Location = New System.Drawing.Point(115, 2)
         Me.GroupCollections.Name = "GroupCollections"
-        Me.GroupCollections.Size = New System.Drawing.Size(66, 21)
+        Me.GroupCollections.Size = New System.Drawing.Size(304, 391)
         Me.GroupCollections.TabIndex = 48
         Me.GroupCollections.TabStop = False
         Me.GroupCollections.Text = "Gestionnaire de Collections"
@@ -1346,9 +1346,9 @@ Partial Class CopyRoms
         Me.GroupCollectEditor.Controls.Add(Me.Label17)
         Me.GroupCollectEditor.Controls.Add(Me.CollectionEditorList)
         Me.GroupCollectEditor.ForeColor = System.Drawing.Color.White
-        Me.GroupCollectEditor.Location = New System.Drawing.Point(115, 2)
+        Me.GroupCollectEditor.Location = New System.Drawing.Point(173, 4)
         Me.GroupCollectEditor.Name = "GroupCollectEditor"
-        Me.GroupCollectEditor.Size = New System.Drawing.Size(66, 21)
+        Me.GroupCollectEditor.Size = New System.Drawing.Size(80, 21)
         Me.GroupCollectEditor.TabIndex = 50
         Me.GroupCollectEditor.TabStop = False
         Me.GroupCollectEditor.Text = "Editeur d'Infos des Collections Avancé"
@@ -1492,8 +1492,8 @@ Partial Class CopyRoms
         Me.grp_RomInfos.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
+        Me.GroupBoxBoutonsMedias.ResumeLayout(False)
+        Me.GroupBoxBoutonsMedias.PerformLayout()
         CType(Me.RomImage, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.vid_romvid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupFiltresAvances.ResumeLayout(False)
@@ -1566,7 +1566,7 @@ Partial Class CopyRoms
     Friend WithEvents txt_nbrom As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents listconsoleselected As ListBox
-    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents GroupBoxBoutonsMedias As GroupBox
     Friend WithEvents Label10 As Label
     Friend WithEvents TutoHideFinalGrid As PictureBox
     Friend WithEvents TutoHideRomInfo As PictureBox

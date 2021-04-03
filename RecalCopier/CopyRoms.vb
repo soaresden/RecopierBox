@@ -2702,7 +2702,7 @@ lignesuivb:
 
         'Sorting A-Z the console
         dv = table.DefaultView
-        dv.Sort = "Presence asc, Console asc, FileName asc"
+        'dv.Sort = "Presence asc, Console asc, FileName asc"
         grido.DataSource = table
 
         'Width for columns
@@ -2839,11 +2839,25 @@ lignesuivante:
         GroupCollectEditor.Show()
         GroupCollectEditor.Location = New Point(483, 27)
         GroupCollectEditor.Size = New Point(523, 366)
-        GroupBox6.Show()
-        Call importdescollections(CollectionEditorList)
-        If CollectionEditorList.SelectedValue = "" Then CollectionEditorList.SelectedIndex = 0
+        GroupBoxBoutonsMedias.Show()
+
+        'on replique la combobox
+        CollectionEditorList.Items.Clear()
+
+        For i = 0 To ComboCollection.Items.Count - 1
+            CollectionEditorList.Items.Add(ComboCollection.Items(i))
+        Next
+
+        'On focus sur la selection precedente
+        If CollectionEditorList.SelectedValue = Nothing Then
+            CollectionEditorList.Text = ComboCollection.SelectedItem.ToString
+        End If
+
         GroupCollections.Hide()
-        GroupBox6.Hide()
+        GroupBoxBoutonsMedias.Hide()
+        GroupBoxSelectionRoms.Hide()
+
+        CollectionEditorList.Focus()
     End Sub
 
     Private Sub ButtonHideEditor_Click(sender As Object, e As EventArgs) Handles ButtonHideEditor.Click
@@ -2851,7 +2865,9 @@ lignesuivante:
         GroupCollectEditor.Hide()
         GroupCollectEditor.Location = New Point(122, 2)
         GroupCollectEditor.Size = New Point(59, 25)
-        GroupBox6.Show()
+
+        GroupBoxBoutonsMedias.Show()
+        GroupBoxSelectionRoms.Show()
     End Sub
 
     Private Sub CollectionEditorList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CollectionEditorList.SelectedIndexChanged
