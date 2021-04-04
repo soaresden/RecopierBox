@@ -3309,21 +3309,119 @@ lignesuivante:
         For i = 0 To FinalGrid.RowCount - 1
             For j = 0 To FinalGrid.ColumnCount - 2
 
+                Dim verifheader As String = xlWorkSheet.Cells(1, j + 1).value.ToString
 
                 'On ecrit les cellules
                 If Not FinalGrid(j, i).Value.ToString = "" Then
-                    If j = 21 Then
-                        xlWorkSheet.Cells(i + 2, j + 1) = CInt(FinalGrid(j, i).Value.ToString())
-                    Else
-                        xlWorkSheet.Cells(i + 2, j + 1) = FinalGrid(j, i).Value.ToString()
-                    End If
+                    Select Case j
+                        Case 12 'format player en chiffre entier
+                            xlWorkSheet.Cells(i + 2, j + 1) = CStr((FinalGrid(j, i).Value.ToString()))
+                        Case 21 'format Taille Mo en virgule
+                            xlWorkSheet.Cells(i + 2, j + 1) = CDbl(FinalGrid(j, i).Value.ToString())
+                        Case Else 'copie classique 
+                            xlWorkSheet.Cells(i + 2, j + 1) = FinalGrid(j, i).Value.ToString()
+                    End Select
                 End If
             Next
         Next
 
+        'On va hider certaines colonnes
+
+        xlWorkSheet.Columns(2 + 1).EntireColumn.Hidden = True 'GameId
+        xlWorkSheet.Columns(3 + 1).EntireColumn.Hidden = True 'CheminRom
+        xlWorkSheet.Columns(5 + 1).EntireColumn.Hidden = True 'CheminImage
+        xlWorkSheet.Columns(6 + 1).EntireColumn.Hidden = True 'CheminVideo
+        xlWorkSheet.Columns(7 + 1).EntireColumn.Hidden = True 'CheminManuel
+        xlWorkSheet.Columns(14 + 1).EntireColumn.Hidden = True 'NbLance
+        xlWorkSheet.Columns(16 + 1).EntireColumn.Hidden = True 'coches...
+        xlWorkSheet.Columns(17 + 1).EntireColumn.Hidden = True 'coches...
+        xlWorkSheet.Columns(18 + 1).EntireColumn.Hidden = True 'coches...
+        xlWorkSheet.Columns(19 + 1).EntireColumn.Hidden = True 'coches...
+        xlWorkSheet.Columns(20 + 1).EntireColumn.Hidden = True 'coches...
+
+        'On tente la Mise en forme Tableau
+        Dim rg As Excel.Range = xlWorkSheet.Range("A1:W" & FinalGrid.RowCount - 1)
+        Dim objTable As Excel.ListObject
+        objTable = xlWorkSheet.ListObjects.AddEx(Excel.XlListObjectSourceType.xlSrcRange, rg, , Excel.XlYesNoGuess.xlYes)
+
+        'On met en forme la colonne Selection,  Inserez un 1, et icone
+        Dim rgselection As Excel.Range = xlWorkSheet.Range("W2:W" & FinalGrid.RowCount - 1)
+
+        'Gris
+        rgselection.Interior.Color = Color.DarkGray
+
+        'Blanc si Sup a 0
+        rgselection.FormatConditions.Add(Type:=Excel.XlFormatConditionType.xlCellValue, Operator:=Excel.XlFormatConditionOperator.xlGreater, Formula1:="=0")
+        rgselection.FormatConditions(rgselection.FormatConditions.Count).SetFirstPriority
+        rgselection.FormatConditions(1).font.bold = True
+        rgselection.FormatConditions(1).font.color = RGB(0, 0, 0)
+        rgselection.FormatConditions(1).Interior.color = RGB(255, 255, 255)
+        rgselection.FormatConditions(1).StopIfTrue = False
+
+        'Symboles Check
+        rgselection.FormatConditions.AddIconSetCondition()
+        rgselection.FormatConditions(rgselection.FormatConditions.Count).SetFirstPriority
+        With rgselection.FormatConditions(1)
+            .ReverseOrder = False
+            .ShowIconOnly = False
+            .IconSet = Excel.XlIconSet.xl3Symbols
+        End With
+        With rgselection.FormatConditions(1).IconCriteria(2)
+            .Type = Excel.XlConditionValueTypes.xlConditionValuePercent
+            .Value = 0
+            .Operator = 5
+        End With
+        With rgselection.FormatConditions(1).IconCriteria(3)
+            .Type = Excel.XlConditionValueTypes.xlConditionValuePercent
+            .Value = 1
+            .Operator = 7
+        End With
+
+        'Validation en 1
+        With rgselection.Validation
+            .Delete()
+            .Add(Type:=Excel.XlDVType.xlValidateList,
+            AlertStyle:=Excel.XlDVAlertStyle.xlValidAlertStop,
+            Operator:=Excel.XlFormatConditionOperator.xlBetween,
+            Formula1:="1")
+            .IgnoreBlank = True
+            .InCellDropdown = True
+            .InputTitle = "Saisir 1 ou Blanc"
+            .ErrorTitle = "Uniquement 1 !"
+            .InputMessage = "Saisir un 1 si vous souhaitez cette ROM" & Chr(10) & "Sinon, laissez vide"
+            .ErrorMessage = "Saisir un 1 si vous souhaitez cette ROM" & Chr(10) & "Sinon, laissez vide"
+            .ShowInput = True
+            .ShowError = True
+        End With
+
         'Date de l'export
         Dim ladate As String = Format(Now, "yyyy-MM-dd HH_mm_ss")
+        'Enlever le saut de ligne
         xlWorkSheet.Cells.WrapText = False
+        'Focus sur le stockage USB
+        xlWorkSheet.Range("Y4").Select()
+
+        'Creation de l'indicateur
+        xlWorkSheet.Range("Y1").FormulaR1C1 = "Indicateurs"
+
+        xlWorkSheet.Range("Y2").FormulaR1C1 = "=SUM(C[-2])"
+        xlWorkSheet.Range("Z2").FormulaR1C1 = "roms selectionnées"
+
+        xlWorkSheet.Range("Y3").FormulaR1C1 = "=SUMIFS(C[-3],C[-2],1)"
+        xlWorkSheet.Range("Z3").FormulaR1C1 = "MO à prevoir"
+
+        xlWorkSheet.Range("Y4").Interior.Color = RGB(255, 255, 0)
+        xlWorkSheet.Range("Z4").FormulaR1C1 = "votre stockage USB"
+
+        xlWorkSheet.Range("Y5").FormulaR1C1 = "=R[-1]C-R[-2]C"
+        xlWorkSheet.Range("Z5").FormulaR1C1 = "MO restant sur votre Stockage"
+
+        xlWorkSheet.Columns("Z:Z").EntireColumn.AutoFit
+
+        xlWorkSheet.Range("A2").Select()
+        xlApp.ActiveWindow.FreezePanes = True
+
+        'Save
         xlWorkSheet.SaveAs(My.Computer.FileSystem.SpecialDirectories.Desktop & "Export RecopierBox - " & ladate & ".xlsx")
         xlWorkBook.Close()
         xlApp.Quit()
