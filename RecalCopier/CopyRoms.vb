@@ -3503,6 +3503,9 @@ colonneselection:
 
                 xlWorkBook.Close()
                 xlApp.Quit()
+                releaseObject(xlApp)
+                releaseObject(xlWorkBook)
+                releaseObject(xlWorkSheet)
                 MsgBox("Importation OK")
             End If
         End Using
