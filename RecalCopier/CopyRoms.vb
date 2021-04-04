@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Xml
+Imports Microsoft.Office.Interop
 
 Public Class CopyRoms
     Private Sub CopyRoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -19,6 +20,7 @@ Public Class CopyRoms
         GroupCollections.Hide()
         GroupCollectEditor.Hide()
         CellEnGrand.Hide()
+        ExportExcel.Hide()
 
         'si c'est batocera, on affiche le bouton collection
         If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
@@ -512,6 +514,9 @@ consolesuivante:
 
         'On affiche le bouton Tuto !
         ButtonTuto1.Show()
+
+        'Et lexport Excel
+        ExportExcel.Show()
 
         'si c'est batocera, on redeplace la collection
         If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
@@ -3278,5 +3283,65 @@ lignesuivante:
 
         CollectionGridDetaille.Focus()
         ValidCell.Hide()
+    End Sub
+
+    Private Sub ExportExcel_Click(sender As Object, e As EventArgs) Handles ExportExcel.Click
+        Dim xlApp As Microsoft.Office.Interop.Excel.Application
+        Dim xlWorkBook As Microsoft.Office.Interop.Excel.Workbook
+        Dim xlWorkSheet As Microsoft.Office.Interop.Excel.Worksheet
+        Dim misValue As Object = System.Reflection.Missing.Value
+        Dim i As Integer
+        Dim j As Integer
+
+        xlApp = New Excel.Application
+        xlWorkBook = xlApp.Workbooks.Add(misValue)
+        xlWorkSheet = xlWorkBook.Sheets(1)
+
+        'On ecrit les titres de colonnes
+        For k As Integer = 0 To FinalGrid.Columns.Count - 1
+            xlWorkSheet.Cells(1, k + 1) = FinalGrid.Columns(k).HeaderText
+            xlWorkSheet.Rows(1).Font.Bold = True
+            xlWorkSheet.Rows(1).Interior.color = RGB(0, 32, 96) 'Bleu Foncé
+            xlWorkSheet.Rows(1).font.color = RGB(255, 255, 255) 'Blanc
+            xlWorkSheet.Cells(1, 1).select
+        Next
+
+        For i = 0 To FinalGrid.RowCount - 1
+            For j = 0 To FinalGrid.ColumnCount - 2
+
+
+                'On ecrit les cellules
+                If Not FinalGrid(j, i).Value.ToString = "" Then
+                    If j = 21 Then
+                        xlWorkSheet.Cells(i + 2, j + 1) = CInt(FinalGrid(j, i).Value.ToString())
+                    Else
+                        xlWorkSheet.Cells(i + 2, j + 1) = FinalGrid(j, i).Value.ToString()
+                    End If
+                End If
+            Next
+        Next
+
+        'Date de l'export
+        Dim ladate As String = Format(Now, "yyyy-MM-dd HH_mm_ss")
+        xlWorkSheet.Cells.WrapText = False
+        xlWorkSheet.SaveAs(My.Computer.FileSystem.SpecialDirectories.Desktop & "Export RecopierBox - " & ladate & ".xlsx")
+        xlWorkBook.Close()
+        xlApp.Quit()
+
+        releaseObject(xlApp)
+        releaseObject(xlWorkBook)
+        releaseObject(xlWorkSheet)
+
+        Process.Start(My.Computer.FileSystem.SpecialDirectories.Desktop & "Export RecopierBox - " & ladate & ".xlsx")
+    End Sub
+    Private Sub releaseObject(ByVal obj As Object)
+        Try
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+            obj = Nothing
+        Catch ex As Exception
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
     End Sub
 End Class

@@ -24,7 +24,7 @@ Partial Class CopyRoms
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CopyRoms))
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ListGameLists = New System.Windows.Forms.ListBox()
         Me.FinalGrid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -130,6 +130,7 @@ Partial Class CopyRoms
         Me.Label17 = New System.Windows.Forms.Label()
         Me.CollectionEditorList = New System.Windows.Forms.ComboBox()
         Me.CellEnGrand = New System.Windows.Forms.RichTextBox()
+        Me.ExportExcel = New System.Windows.Forms.Button()
         CType(Me.FinalGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -1410,14 +1411,14 @@ Partial Class CopyRoms
         Me.CollectionGridDetaille.AllowUserToResizeRows = False
         Me.CollectionGridDetaille.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.CollectionGridDetaille.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CollectionGridDetaille.DefaultCellStyle = DataGridViewCellStyle2
         Me.CollectionGridDetaille.Location = New System.Drawing.Point(5, 70)
         Me.CollectionGridDetaille.Margin = New System.Windows.Forms.Padding(2)
         Me.CollectionGridDetaille.MultiSelect = False
@@ -1475,12 +1476,30 @@ Partial Class CopyRoms
         Me.CellEnGrand.TabIndex = 52
         Me.CellEnGrand.Text = ""
         '
+        'ExportExcel
+        '
+        Me.ExportExcel.BackColor = System.Drawing.Color.DarkOrange
+        Me.ExportExcel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ExportExcel.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ExportExcel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ExportExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.ExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ExportExcel.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ExportExcel.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ExportExcel.Location = New System.Drawing.Point(322, 4)
+        Me.ExportExcel.Name = "ExportExcel"
+        Me.ExportExcel.Size = New System.Drawing.Size(206, 24)
+        Me.ExportExcel.TabIndex = 53
+        Me.ExportExcel.Text = "Exporter le Tableau Entier sous Excel"
+        Me.ExportExcel.UseVisualStyleBackColor = False
+        '
         'CopyRoms
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1018, 611)
+        Me.Controls.Add(Me.ExportExcel)
         Me.Controls.Add(Me.CellEnGrand)
         Me.Controls.Add(Me.GroupCollectEditor)
         Me.Controls.Add(Me.LabelCollection)
@@ -1663,4 +1682,5 @@ Partial Class CopyRoms
     Friend WithEvents Label19 As Label
     Friend WithEvents CellEnGrand As RichTextBox
     Friend WithEvents ValidCell As Button
+    Friend WithEvents ExportExcel As Button
 End Class
