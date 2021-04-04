@@ -2812,30 +2812,35 @@ lignesuivante:
         Form1.Show()
     End Sub
     Private Sub FinalGrid_KeyDown(sender As Object, e As KeyEventArgs) Handles FinalGrid.KeyDown
-        Dim actualrow As Integer = FinalGrid.CurrentRow.Index
-
         If e.KeyCode = Keys.Space Then
-            Dim status = FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("Selection").Index).Value
-            Dim newstatus As Boolean
-
-            If status = False Or Nothing Then
-                newstatus = True
-            End If
-            Dim pathrom As String = FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("CheminRom").Index).Value
-
-            'Si déja dans la liste, on force l'ouverture de la selection
-            If listboxMaSelection.Items.Contains(pathrom) Then
-                MsgBox("Déja dans la Selection")
-                listboxMaSelection.Hide()
-                ButtonAfficherMaSelection.PerformClick()
-            Else
-                listboxMaSelection.Items.Add(pathrom)
-                FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("Selection").Index).Value = False
-            End If
+            Call oncheck()
         End If
-
     End Sub
+    Sub oncheck()
+        Dim actualrow As Integer = FinalGrid.CurrentRow.Index
+        Dim status = FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("Selection").Index).Value
+        Dim newstatus As Boolean
 
+        If status = False Or Nothing Then
+            newstatus = True
+        End If
+        Dim pathrom As String = FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("CheminRom").Index).Value
+
+        'Si déja dans la liste, on force l'ouverture de la selection
+        If listboxMaSelection.Items.Contains(pathrom) Then
+            MsgBox("Déja dans la Selection")
+            listboxMaSelection.Hide()
+            ButtonAfficherMaSelection.PerformClick()
+        Else
+            listboxMaSelection.Items.Add(pathrom)
+            FinalGrid.Rows(actualrow).Cells(FinalGrid.Columns("Selection").Index).Value = False
+        End If
+    End Sub
+    Private Sub FinalGrid_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles FinalGrid.CellContentClick
+        If e.ColumnIndex = FinalGrid.Columns("Selection").Index Then
+            Call oncheck()
+        End If
+    End Sub
     Private Sub FinalGrid_SelectionChanged(sender As Object, e As EventArgs) Handles FinalGrid.SelectionChanged
         Dim actualrow As Integer = FinalGrid.CurrentRow.Index
         Call loadlesinfos(actualrow)
@@ -3307,17 +3312,25 @@ lignesuivante:
         Next
 
         For i = 0 To FinalGrid.RowCount - 1
-            For j = 0 To FinalGrid.ColumnCount - 2
+            For j = 0 To FinalGrid.ColumnCount - 1
 
                 Dim verifheader As String = xlWorkSheet.Cells(1, j + 1).value.ToString
 
                 'On ecrit les cellules
+                If j = 22 Then GoTo colonneselection
+
                 If Not FinalGrid(j, i).Value.ToString = "" Then
                     Select Case j
                         Case 12 'format player en chiffre entier
                             xlWorkSheet.Cells(i + 2, j + 1) = CStr((FinalGrid(j, i).Value.ToString()))
                         Case 21 'format Taille Mo en virgule
                             xlWorkSheet.Cells(i + 2, j + 1) = CDbl(FinalGrid(j, i).Value.ToString())
+                        Case 22
+colonneselection:
+                            Dim pathrom = FinalGrid.Rows(i).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                            If listboxMaSelection.Items.Contains(pathrom) Then
+                                xlWorkSheet.Cells(i + 2, j + 1) = 1
+                            End If
                         Case Else 'copie classique 
                             xlWorkSheet.Cells(i + 2, j + 1) = FinalGrid(j, i).Value.ToString()
                     End Select
@@ -3422,7 +3435,7 @@ lignesuivante:
         xlApp.ActiveWindow.FreezePanes = True
 
         'Save
-        xlWorkSheet.SaveAs(My.Computer.FileSystem.SpecialDirectories.Desktop & "Export RecopierBox - " & ladate & ".xlsx")
+        xlWorkSheet.SaveAs(My.Computer.FileSystem.SpecialDirectories.Desktop & "\Export RecopierBox - " & ladate & ".xlsx")
         xlWorkBook.Close()
         xlApp.Quit()
 
@@ -3430,7 +3443,7 @@ lignesuivante:
         releaseObject(xlWorkBook)
         releaseObject(xlWorkSheet)
 
-        Process.Start(My.Computer.FileSystem.SpecialDirectories.Desktop & "Export RecopierBox - " & ladate & ".xlsx")
+        Process.Start(My.Computer.FileSystem.SpecialDirectories.Desktop & "\Export RecopierBox - " & ladate & ".xlsx")
     End Sub
     Private Sub releaseObject(ByVal obj As Object)
         Try
@@ -3441,5 +3454,57 @@ lignesuivante:
         Finally
             GC.Collect()
         End Try
+    End Sub
+
+    Private Sub ImportToRecopierBox_Click(sender As Object, e As EventArgs) Handles ImportToRecopierBox.Click
+
+        Using O As New OpenFileDialog With {.Filter = "Fichiers Excel|*.xlsx", .Multiselect = False, .Title = "Choisir votre Xlsx"}
+            If O.ShowDialog = 1 Then
+                Dim xlApp As Excel.Application
+                Dim xlWorkBook As Excel.Workbook
+                Dim xlWorkSheet As Excel.Worksheet
+
+                xlApp = New Excel.Application
+                xlWorkBook = xlApp.Workbooks.Open(O.FileName)
+                xlWorkSheet = xlWorkBook.Worksheets(1)
+
+                listconsoleselected.Items.Clear()
+                'Dim get systems
+                For i = 2 To xlWorkSheet.Application.WorksheetFunction.CountA(xlWorkSheet.Range("A:A"))
+                    Dim valeurcellule As String = xlWorkSheet.Range("A" & i).Value
+                    If Not listconsoleselected.Items.Contains(valeurcellule) Then
+                        listconsoleselected.Items.Add(valeurcellule)
+                    End If
+                Next
+
+                'Clear par precaution
+                FinalGrid.Rows.Clear()
+                'On peuple par les consoles
+                For j = 0 To ListGameLists.Items.Count - 1
+                    Dim valeurencours = ListGameLists.Items(j)
+                    If listconsoleselected.Items.Contains(valeurencours) = True Then
+                        ListGameLists.SetSelected(j, True)
+                    End If
+                Next
+                ButtonGenererList.PerformClick()
+
+                'Maintenant on va analyser les selection et cocher
+                ButtonAfficherMaSelection.PerformClick()
+                listboxMaSelection.Items.Clear()
+
+                For i = 2 To xlWorkSheet.Application.WorksheetFunction.CountA(xlWorkSheet.Range("A:A"))
+                    Dim valeurselection As String = xlWorkSheet.Range("W" & i).Value
+                    Dim valeurpath As String = xlWorkSheet.Range("D" & i).Value
+                    If valeurselection = 1 Then 'si c'est 1, on va aller ajouter a la selection
+                        listboxMaSelection.Items.Add(valeurpath)
+                    End If
+                Next
+                Call UpdatelesChiffreRoms()
+
+                xlWorkBook.Close()
+                xlApp.Quit()
+                MsgBox("Importation OK")
+            End If
+        End Using
     End Sub
 End Class
