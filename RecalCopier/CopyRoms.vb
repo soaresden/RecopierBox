@@ -3436,7 +3436,8 @@ colonneselection:
         xlWorkSheet.SaveAs(My.Computer.FileSystem.SpecialDirectories.Desktop & "\Export RecopierBox - " & ladate & ".xlsx")
         xlWorkBook.Close()
         xlApp.Quit()
-
+        'Force close excel
+        Interaction.Shell("taskkill /f /IM excel.exe")
         releaseObject(xlApp)
         releaseObject(xlWorkBook)
         releaseObject(xlWorkSheet)
@@ -3506,6 +3507,10 @@ colonneselection:
                 releaseObject(xlApp)
                 releaseObject(xlWorkBook)
                 releaseObject(xlWorkSheet)
+
+                'Close Excel
+                Interaction.Shell("taskkill /f /IM excel.exe") '
+
                 MsgBox("Importation OK")
             End If
         End Using
