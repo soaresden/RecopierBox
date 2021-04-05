@@ -3313,7 +3313,6 @@ lignesuivante:
 
         For i = 0 To FinalGrid.RowCount - 1
             For j = 0 To FinalGrid.ColumnCount - 1
-
                 Dim verifheader As String = xlWorkSheet.Cells(1, j + 1).value.ToString
 
                 'On ecrit les cellules
@@ -3322,6 +3321,7 @@ lignesuivante:
                 If Not FinalGrid(j, i).Value.ToString = "" Then
                     Select Case j
                         Case 12 'format player en chiffre entier
+                            xlWorkSheet.Cells(i + 2, j + 1).NumberFormat = "@"
                             xlWorkSheet.Cells(i + 2, j + 1) = CStr((FinalGrid(j, i).Value.ToString()))
                         Case 21 'format Taille Mo en virgule
                             xlWorkSheet.Cells(i + 2, j + 1) = CDbl(FinalGrid(j, i).Value.ToString())
@@ -3353,12 +3353,12 @@ colonneselection:
         xlWorkSheet.Columns(20 + 1).EntireColumn.Hidden = True 'coches...
 
         'On tente la Mise en forme Tableau
-        Dim rg As Excel.Range = xlWorkSheet.Range("A1:W" & FinalGrid.RowCount - 1)
+        Dim rg As Excel.Range = xlWorkSheet.Range("A1:W" & FinalGrid.RowCount + 1)
         Dim objTable As Excel.ListObject
         objTable = xlWorkSheet.ListObjects.AddEx(Excel.XlListObjectSourceType.xlSrcRange, rg, , Excel.XlYesNoGuess.xlYes)
 
         'On met en forme la colonne Selection,  Inserez un 1, et icone
-        Dim rgselection As Excel.Range = xlWorkSheet.Range("W2:W" & FinalGrid.RowCount - 1)
+        Dim rgselection As Excel.Range = xlWorkSheet.Range("W2:W" & FinalGrid.RowCount + 1)
 
         'Gris
         rgselection.Interior.Color = Color.DarkGray
@@ -3380,12 +3380,12 @@ colonneselection:
             .IconSet = Excel.XlIconSet.xl3Symbols
         End With
         With rgselection.FormatConditions(1).IconCriteria(2)
-            .Type = Excel.XlConditionValueTypes.xlConditionValuePercent
+            .Type = Excel.XlConditionValueTypes.xlConditionValueNumber
             .Value = 0
             .Operator = 5
         End With
         With rgselection.FormatConditions(1).IconCriteria(3)
-            .Type = Excel.XlConditionValueTypes.xlConditionValuePercent
+            .Type = Excel.XlConditionValueTypes.xlConditionValueNumber
             .Value = 1
             .Operator = 7
         End With
@@ -3393,10 +3393,7 @@ colonneselection:
         'Validation en 1
         With rgselection.Validation
             .Delete()
-            .Add(Type:=Excel.XlDVType.xlValidateList,
-            AlertStyle:=Excel.XlDVAlertStyle.xlValidAlertStop,
-            Operator:=Excel.XlFormatConditionOperator.xlBetween,
-            Formula1:="1")
+            .Add(Type:=Excel.XlDVType.xlValidateList, AlertStyle:=Excel.XlDVAlertStyle.xlValidAlertStop, Operator:=Excel.XlFormatConditionOperator.xlBetween, Formula1:="1")
             .IgnoreBlank = True
             .InCellDropdown = True
             .InputTitle = "Saisir 1 ou Blanc"
@@ -3457,7 +3454,6 @@ colonneselection:
     End Sub
 
     Private Sub ImportToRecopierBox_Click(sender As Object, e As EventArgs) Handles ImportToRecopierBox.Click
-
         Using O As New OpenFileDialog With {.Filter = "Fichiers Excel|*.xlsx", .Multiselect = False, .Title = "Choisir votre Xlsx"}
             If O.ShowDialog = 1 Then
                 Dim xlApp As Excel.Application
@@ -3469,7 +3465,7 @@ colonneselection:
                 xlWorkSheet = xlWorkBook.Worksheets(1)
 
                 listconsoleselected.Items.Clear()
-                'Dim get systems
+                'On recupere les systemes temporairement dans la liste des systemes selectionnés
                 For i = 2 To xlWorkSheet.Application.WorksheetFunction.CountA(xlWorkSheet.Range("A:A"))
                     Dim valeurcellule As String = xlWorkSheet.Range("A" & i).Value
                     If Not listconsoleselected.Items.Contains(valeurcellule) Then
@@ -3477,18 +3473,21 @@ colonneselection:
                     End If
                 Next
 
-                'Clear par precaution
-                FinalGrid.Rows.Clear()
-                'On peuple par les consoles
+                'On selection par rapport a la liste temporaire
+                ListGameLists.ClearSelected()
+
                 For j = 0 To ListGameLists.Items.Count - 1
                     Dim valeurencours = ListGameLists.Items(j)
                     If listconsoleselected.Items.Contains(valeurencours) = True Then
                         ListGameLists.SetSelected(j, True)
                     End If
                 Next
+                'on efface pour eviter les doublons
+                listconsoleselected.Items.Clear()
+                'On réalise l'import
                 ButtonGenererList.PerformClick()
 
-                'Maintenant on va analyser les selection et cocher
+                'Maintenant on va analyser les selections et cocher
                 ButtonAfficherMaSelection.PerformClick()
                 listboxMaSelection.Items.Clear()
 

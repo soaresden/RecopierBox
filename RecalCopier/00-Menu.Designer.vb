@@ -52,7 +52,7 @@ Partial Class Form1
         Me.ButtonOverlay = New RecopierBox.MyButton()
         Me.ButtonSave = New RecopierBox.MyButton()
         Me.ButtonQuizz = New RecopierBox.MyButton()
-        Me.ButtonCopy = New RecopierBox.MyButton()
+        Me.ButtonCopyMenu = New RecopierBox.MyButton()
         Me.TitreGauche = New System.Windows.Forms.Label()
         Me.PanelHaut = New System.Windows.Forms.Panel()
         Me.PanelDroite = New System.Windows.Forms.Panel()
@@ -298,7 +298,7 @@ Partial Class Form1
         Me.PanelGauche.Controls.Add(Me.ButtonOverlay)
         Me.PanelGauche.Controls.Add(Me.ButtonSave)
         Me.PanelGauche.Controls.Add(Me.ButtonQuizz)
-        Me.PanelGauche.Controls.Add(Me.ButtonCopy)
+        Me.PanelGauche.Controls.Add(Me.ButtonCopyMenu)
         Me.PanelGauche.Controls.Add(Me.TitreGauche)
         Me.PanelGauche.Controls.Add(Me.PictureBox1)
         Me.PanelGauche.Location = New System.Drawing.Point(1, -1)
@@ -454,24 +454,24 @@ Partial Class Form1
         Me.ButtonQuizz.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ButtonQuizz.UseVisualStyleBackColor = False
         '
-        'ButtonCopy
+        'ButtonCopyMenu
         '
-        Me.ButtonCopy.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
-        Me.ButtonCopy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ButtonCopy.Cursor = System.Windows.Forms.Cursors.Default
-        Me.ButtonCopy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
-        Me.ButtonCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.ButtonCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ButtonCopy.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonCopy.Image = CType(resources.GetObject("ButtonCopy.Image"), System.Drawing.Image)
-        Me.ButtonCopy.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonCopy.Location = New System.Drawing.Point(0, 217)
-        Me.ButtonCopy.Name = "ButtonCopy"
-        Me.ButtonCopy.Size = New System.Drawing.Size(242, 60)
-        Me.ButtonCopy.TabIndex = 20
-        Me.ButtonCopy.Text = "CREER UN CUSTOM-SET"
-        Me.ButtonCopy.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.ButtonCopy.UseVisualStyleBackColor = False
+        Me.ButtonCopyMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(98, Byte), Integer), CType(CType(198, Byte), Integer))
+        Me.ButtonCopyMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.ButtonCopyMenu.Cursor = System.Windows.Forms.Cursors.Default
+        Me.ButtonCopyMenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black
+        Me.ButtonCopyMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.ButtonCopyMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ButtonCopyMenu.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ButtonCopyMenu.Image = CType(resources.GetObject("ButtonCopyMenu.Image"), System.Drawing.Image)
+        Me.ButtonCopyMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonCopyMenu.Location = New System.Drawing.Point(0, 217)
+        Me.ButtonCopyMenu.Name = "ButtonCopyMenu"
+        Me.ButtonCopyMenu.Size = New System.Drawing.Size(242, 60)
+        Me.ButtonCopyMenu.TabIndex = 20
+        Me.ButtonCopyMenu.Text = "CREER UN CUSTOM-SET"
+        Me.ButtonCopyMenu.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonCopyMenu.UseVisualStyleBackColor = False
         '
         'TitreGauche
         '
@@ -624,7 +624,7 @@ Partial Class Form1
     Friend WithEvents ButtonOverlay As MyButton
     Friend WithEvents ButtonSave As MyButton
     Friend WithEvents ButtonQuizz As MyButton
-    Friend WithEvents ButtonCopy As MyButton
+    Friend WithEvents ButtonCopyMenu As MyButton
     Friend WithEvents ButtonHideArrm As MyButton
     Friend WithEvents ButtonSetDossier As MyButton
     Friend WithEvents ButtonP2k As MyButton

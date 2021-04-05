@@ -30,7 +30,7 @@ Public Class Form1
         End If
 
         'On met les tooltip
-        ToolTipCopy.SetToolTip(ButtonCopy, "Générez votre dossier Custom !")
+        ToolTipCopy.SetToolTip(ButtonCopyMenu, "Générez votre dossier Custom !")
         ToolTipOverlays.SetToolTip(ButtonOverlay, "Gérez votre collection d'overlays")
         ToolTipSaves.SetToolTip(ButtonSave, "Maitrisez/renommer vos sauvegardes orphelines")
         ToolTipBlindTest.SetToolTip(ButtonQuizz, "Essayez de reconnaitre par video/son vos jeux favoris !")
@@ -144,7 +144,7 @@ Public Class Form1
     Private Sub RichTextBox2_Click(sender As Object, e As EventArgs) Handles RichTextBox2.Click
         System.Diagnostics.Process.Start(String.Format("http://jujuvincebros.fr/telechargements2/file/10-arrm-another-recalbox-roms-manager"))
     End Sub
-    Private Sub ButtonCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonCopy.Click
+    Private Sub ButtonCopy_Click_1(sender As Object, e As EventArgs) Handles ButtonCopyMenu.Click
         If My.Settings.RecalboxFolder = "" Then
             MsgBox("Pas de Chemin !")
             ButtonSetDossier.PerformClick()
