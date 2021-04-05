@@ -517,6 +517,7 @@ consolesuivante:
 
         'Et lexport Excel
         ExportExcel.Show()
+        ImportToRecopierBox.Hide()
 
         'si c'est batocera, on redeplace la collection
         If InStr(My.Settings.DossierOverlay, "overlay") = 0 Then
