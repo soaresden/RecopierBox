@@ -91,7 +91,11 @@ Public Class SaveManager
 
             'generating the console name
             Dim console As String = i
-            gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist.xml"
+            If i = "duckstation" Then
+                gamelist = My.Settings.RecalboxFolder & "\roms\psx\gamelist.xml"
+            Else
+                gamelist = My.Settings.RecalboxFolder & "\roms\" & i & "\gamelist.xml"
+            End If
 
             'Si dans le dossier y'a pas de gamelist on va annuler l'ajout de roms parce que y'en a pas.
             If Not System.IO.File.Exists(gamelist) Then
@@ -158,6 +162,7 @@ ProchainGamelist:
 
         'On remplit les Coches Saves
         Call CompletiondesSavesRoms()
+        If GameLists.SelectedItems.Contains("duckstation") Then Call completionsaveduckstation()
 
         'On compte le nombre total d'entrées
         RomTotal.Text = DataGridRoms.Rows.Count - 1
@@ -167,21 +172,18 @@ ProchainGamelist:
         TextBox1.Show()
         GroupRoms.Show()
     End Sub
-
-    Public Function FileNameWithoutExtension(ByVal FullPath _
-    As String) As String
-        Return System.IO.Path.GetFileNameWithoutExtension(FullPath)
-    End Function
     Sub CompletiondesSavesRoms()
         Dim compteurSave As Integer = 0
         For ligne = 0 To DataGridRoms.RowCount - 2
+            Dim console = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("Console").Index).Value
+            If console = "duckstation" Then GoTo lignesuivante
+
             Dim rompath = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminRom").Index).Value
             Dim dossierparent = Path.GetDirectoryName(rompath)
             Dim romname = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value
-            Dim console = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("Console").Index).Value
-            Dim romnamesansext = FileNameWithoutExtension(DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value)
+            Dim romnamesansext = Path.GetFileNameWithoutExtension((DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value))
             Dim nomducfg As String = romname & ".*"
-            Dim cheminsave As String = Replace(rompath, "\roms\", "\saves\")
+            Dim cheminsave As String = Path.GetDirectoryName(Replace(rompath, "\roms\", "\saves\"))
             Dim dossiersaveparent As String = Replace(dossierparent, "roms", "saves")
             Dim testcheminsave As String = Replace(cheminsave, romname, romnamesansext)
             Dim compteurfiles As Integer = 0
@@ -223,6 +225,7 @@ ProchainGamelist:
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = 0
                 DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
             End If
+lignesuivante:
         Next
         RomTotalSave.Text = compteurSave
 
@@ -233,7 +236,135 @@ ProchainGamelist:
             BatoPict.Hide()
         End If
     End Sub
+    Sub completionsaveduckstation()
+        Dim compteurSave As Integer = 0
+        For ligne = 0 To DataGridRoms.RowCount - 2
+            Dim console = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("Console").Index).Value
+            If console <> "duckstation" Then GoTo lignesuivante
 
+            Dim rompath = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminRom").Index).Value
+            Dim romname = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value
+            Dim titre = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("Titre").Index).Value
+            Dim compteurfiles As Integer = 0
+
+            'Dossier Memcard
+            'on va compter le nombredefichier avec la racine du nom et ajouter
+            Dim di1 As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\duckstation\memcards")
+            Dim racinederom As String = Path.GetFileNameWithoutExtension(romname)
+            Dim aryFi As IO.FileInfo() = di1.GetFiles(racinederom & "*")
+            Dim fi1 As IO.FileInfo
+            compteurfiles = aryFi.Length
+
+            'Dossier SaveState
+            Dim iddujeu
+            'on va compter le nombredefichier avec la racine du nom et ajouter
+            Dim di2 As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\duckstation\savestates")
+            Dim getid = recupererpsxid(titre)
+            Dim aryFi2 As IO.FileInfo() = di2.GetFiles(getid & "*")
+            Dim fi2 As IO.FileInfo
+            compteurfiles = compteurfiles + aryFi2.Length
+
+            'On colore les cellules
+            If compteurfiles > 0 Then
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = True
+                If Path.GetExtension(romname) <> ".png" Then  ' on va pas inclure les png dans le dossier
+                    compteurSave += 1
+                End If
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminSave").Index).Value = My.Settings.RecalboxFolder & "\saves\duckstation\memcards"
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+            Else
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = False
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
+                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
+            End If
+
+lignesuivante:
+        Next
+        RomTotalSave.Text = compteurSave
+
+        'Afficher la picture Batocera si
+        If InStr(My.Settings.RecalboxFolder, "batocera") > 1 Then
+            BatoPict.Show()
+        Else
+            BatoPict.Hide()
+        End If
+    End Sub
+    Function recupererpsxid(titredujeu As String)
+        Using MyReader As New FileIO.TextFieldParser(Application.StartupPath & "\a-psxlistcodes.csv")
+            MyReader.TextFieldType = FileIO.FieldType.Delimited
+            MyReader.SetDelimiters(",")
+            Dim currentRow As String()
+            While Not MyReader.EndOfData
+                Try
+                    currentRow = MyReader.ReadFields()
+                    Dim currentField As String
+                    For Each currentField In currentRow
+
+                        'Fuzzy search 
+                        Dim string1 As String = titredujeu
+                        Dim string2 As String = currentField
+                        Dim similarity As Single = GetSimilarity(string1, string2)
+
+                        If similarity > 0.15 Then
+                            'on a la ligne, on va la travailler
+                            Dim laligne = string2
+                            Dim premierpoint = InStr(string2, ";")
+                            Dim lesles = string2.Substring(0, premierpoint - 1)
+                            Return lesles
+                        End If
+                    Next
+                Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
+                End Try
+                Return "NOCODEFOUND"
+            End While
+        End Using
+    End Function
+    Public Function GetSimilarity(string1 As String, string2 As String) As Single
+        Dim dis As Single = ComputeDistance(string1, string2)
+        Dim maxLen As Single = string1.Length
+        If maxLen < string2.Length Then
+            maxLen = string2.Length
+        End If
+        If maxLen = 0.0F Then
+            Return 1.0F
+        Else
+            Return 1.0F - dis / maxLen
+        End If
+    End Function
+
+    Private Function ComputeDistance(s As String, t As String) As Integer
+        Dim n As Integer = s.Length
+        Dim m As Integer = t.Length
+        Dim distance As Integer(,) = New Integer(n, m) {}
+        ' matrix
+        Dim cost As Integer = 0
+        If n = 0 Then
+            Return m
+        End If
+        If m = 0 Then
+            Return n
+        End If
+        'init1
+
+        Dim i As Integer = 0
+        While i <= n
+            distance(i, 0) = System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
+        End While
+        Dim j As Integer = 0
+        While j <= m
+            distance(0, j) = System.Math.Max(System.Threading.Interlocked.Increment(j), j - 1)
+        End While
+        'find min distance
+
+        For i = 1 To n
+            For j = 1 To m
+                cost = (If(t.Substring(j - 1, 1) = s.Substring(i - 1, 1), 0, 1))
+                distance(i, j) = Math.Min(distance(i - 1, j) + 1, Math.Min(distance(i, j - 1) + 1, distance(i - 1, j - 1) + cost))
+            Next
+        Next
+        Return distance(n, m)
+    End Function
     Sub completiondessaves()
         ListdesFichiersEnTrop.Items.Clear()
         For row = 0 To DataGridSave.Rows.Count - 2
@@ -431,7 +562,7 @@ skip:
 
         'On copie le nom du fichier dans le fichier de renommage
         Dim nomdufichier As String = Path.GetFileName(DataGridRoms.Rows(e.RowIndex).Cells(DataGridRoms.Columns("CheminRom").Index).Value)
-        NewName.Text = FileNameWithoutExtension(nomdufichier)
+        NewName.Text = Path.GetFileNameWithoutExtension(nomdufichier)
 
         'On recherche le numero de la colonne des Selections
         Dim valeursaves = DataGridRoms.Rows(e.RowIndex).Cells(DataGridRoms.Columns("NbSaves").Index).Value
@@ -761,16 +892,14 @@ skip:
             BatoPict.Image = Nothing
         End If
 
-        Dim nomfichiersave As String = DataGridRoms.Rows(rowactuelle).Cells(DataGridRoms.Columns("CheminSave").Index).Value
-        Dim racinesave As String = Path.GetFileName(nomfichiersave)
+        Dim chemindelasave As String = DataGridRoms.Rows(rowactuelle).Cells(DataGridRoms.Columns("CheminSave").Index).Value
         Dim console As String = DataGridRoms.Rows(rowactuelle).Cells(DataGridRoms.Columns("Console").Index).Value
         'On va ajouter la liste des saves
         'On va essayer de trouver le nom de la rom avec le nom de la save
-
-        Dim di As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\" & console)
-        Dim aryFi As IO.FileInfo() = di.GetFiles(racinesave & "*")
+        Dim romachercher = Path.GetFileNameWithoutExtension(DataGridRoms.Rows(rowactuelle).Cells(DataGridRoms.Columns("CheminRom").Index).Value)
+        Dim di As New IO.DirectoryInfo(chemindelasave)
+        Dim aryFi As IO.FileInfo() = di.GetFiles(romachercher & "*")
         Dim fi As IO.FileInfo
-        Dim nomfichierdelasave As String
         Dim chemindelasavetrouvee As String
         Dim romtrouvee As Integer = 0
 
