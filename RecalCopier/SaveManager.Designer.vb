@@ -246,9 +246,9 @@ Partial Class SaveManager
         Me.RenameSelection.Controls.Add(Me.ButtonRenameSave)
         Me.RenameSelection.Controls.Add(Me.NewName)
         Me.RenameSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.RenameSelection.Location = New System.Drawing.Point(113, 361)
+        Me.RenameSelection.Location = New System.Drawing.Point(443, 404)
         Me.RenameSelection.Name = "RenameSelection"
-        Me.RenameSelection.Size = New System.Drawing.Size(381, 177)
+        Me.RenameSelection.Size = New System.Drawing.Size(58, 53)
         Me.RenameSelection.TabIndex = 48
         Me.RenameSelection.TabStop = False
         Me.RenameSelection.Text = "OUTIL RENOMMER VOS SAVES :"
