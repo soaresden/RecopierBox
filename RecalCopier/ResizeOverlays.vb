@@ -156,11 +156,13 @@ Public Class ResizeOverlays
                 Dim cvh As Integer = Getcustomcfg(cheminducfg, "custom_viewport_height")
 
                 Dim imagedupng = LectureDesCfgs(nomconsole, cheminducfg)
+                Dim pngw As Integer
+                Dim pngh As Integer
+                Using png As System.Drawing.Image = System.Drawing.Image.FromFile(imagedupng)
+                    pngw = png.Width
+                    pngh = png.Height
+                End Using
 
-                Dim png As System.Drawing.Image = System.Drawing.Image.FromFile(imagedupng)
-                Dim pngw As Integer = png.Width
-                Dim pngh As Integer = png.Height
-                png.Dispose()
 
                 'on ajoute au tableau
                 table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg, cvx, cvy, cvw, cvh, pngw, pngh)

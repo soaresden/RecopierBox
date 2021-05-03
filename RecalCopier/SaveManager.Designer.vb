@@ -62,6 +62,8 @@ Partial Class SaveManager
         Me.prevplatform = New System.Windows.Forms.Button()
         Me.nextplatform = New System.Windows.Forms.Button()
         Me.BatoPict = New System.Windows.Forms.PictureBox()
+        Me.tempDUCKsavestates = New System.Windows.Forms.ListBox()
+        Me.tempSLESname = New System.Windows.Forms.ListBox()
         CType(Me.DataGridSave, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -547,12 +549,31 @@ Partial Class SaveManager
         Me.BatoPict.TabIndex = 69
         Me.BatoPict.TabStop = False
         '
+        'tempDUCKsavestates
+        '
+        Me.tempDUCKsavestates.FormattingEnabled = True
+        Me.tempDUCKsavestates.Location = New System.Drawing.Point(385, 458)
+        Me.tempDUCKsavestates.Name = "tempDUCKsavestates"
+        Me.tempDUCKsavestates.Size = New System.Drawing.Size(58, 69)
+        Me.tempDUCKsavestates.TabIndex = 70
+        Me.tempDUCKsavestates.Visible = False
+        '
+        'tempSLESname
+        '
+        Me.tempSLESname.FormattingEnabled = True
+        Me.tempSLESname.Location = New System.Drawing.Point(443, 459)
+        Me.tempSLESname.Name = "tempSLESname"
+        Me.tempSLESname.Size = New System.Drawing.Size(58, 69)
+        Me.tempSLESname.TabIndex = 71
+        '
         'SaveManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(970, 545)
+        Me.Controls.Add(Me.tempSLESname)
+        Me.Controls.Add(Me.tempDUCKsavestates)
         Me.Controls.Add(Me.RenameSelection)
         Me.Controls.Add(Me.ButtonRenommer)
         Me.Controls.Add(Me.BatoPict)
@@ -636,4 +657,6 @@ Partial Class SaveManager
     Friend WithEvents nextplatform As Button
     Friend WithEvents BatoPict As PictureBox
     Friend WithEvents ButtonRenommer As Button
+    Friend WithEvents tempDUCKsavestates As ListBox
+    Friend WithEvents tempSLESname As ListBox
 End Class

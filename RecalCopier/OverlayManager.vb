@@ -281,12 +281,8 @@ ProchainGamelist:
 
                 pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
 
-
-                'On va rechercher le nom de la rom
-                Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
-
                 'on ajoute au tableau
-                table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg)
+                table.Rows.Add(nomconsole, pathdelarom, nomfichiercfg, cheminducfg)
 
 fichiersuivant:
             Next
@@ -357,40 +353,6 @@ nextconsole:
         ListdesFichiersEnTrop.Show()
 
     End Sub
-    Function Recherchenomdelarom(console As String, pathdelarom As String)
-        Dim lagamelist As String = My.Settings.RecalboxFolder & "\roms\" & console & "\gamelist.xml"
-        Dim nomdelarom = Path.GetFileName(pathdelarom)
-
-
-        'Si il n'existe pas de gamelist, on va mettre les infos generique
-        If Not System.IO.File.Exists(lagamelist) Then
-            Return "#NOGAMELIST#-" & nomdelarom
-        End If
-
-        Dim gamelistXml As XElement = XElement.Load(lagamelist)
-
-        'getting the list for the xml with nodes
-        Dim query2 = From st In gamelistXml.Descendants("game") Select st
-        Dim genpathdelarom As String
-        genpathdelarom = My.Settings.RecalboxFolder & "\roms\" & console & "\" & nomdelarom
-
-        For Each xEle As XElement In query2
-            Dim romname As String = xEle.Element("name")
-            Dim temprom As String = Replace(Replace(Replace(xEle.Element("path"), "/", "\"), "./", ""), ".\", "")
-            Dim rompath As String = My.Settings.RecalboxFolder & "\roms\" & console & "\" & temprom
-
-            If console = nomdelarom Then
-                Return "#CONSOLE#"
-            End If
-
-            If rompath = pathdelarom Then
-                Return romname
-                GoTo lignesuivante
-            End If
-lignesuivante:
-        Next
-        Return "#PASDANSXML#"
-    End Function
     Sub FichiersCfgLies(cheminencours As String, consolerom As String)
         Dim cheminducfg As String = cheminencours
         Dim nomducfg As String = Path.GetFileName(cheminducfg)

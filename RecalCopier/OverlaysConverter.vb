@@ -47,13 +47,6 @@ Public Class OverlaysConverter
         column = New DataColumn()
         With column
             .DataType = Type.GetType("System.String")
-            .ColumnName = "NomRomXML"
-        End With
-        table.Columns.Add(column)
-
-        column = New DataColumn()
-        With column
-            .DataType = Type.GetType("System.String")
             .ColumnName = "NomFichierCFG"
         End With
         table.Columns.Add(column)
@@ -171,7 +164,6 @@ nextconsole:
         'Width for columns
         DataGridOverlays.RowHeadersWidth = 25
         DataGridOverlays.Columns("Console").Width = 40
-        DataGridOverlays.Columns("NomRomXML").Width = 110
         DataGridOverlays.Columns("NomFichierCFG").Width = 110
         DataGridOverlays.Columns("CheminCFG").Width = 120
         DataGridOverlays.Columns("CheminCFG2").Width = 120
@@ -342,29 +334,8 @@ lignesuivante:
                 Dim fichier2 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG2").Index).Value
                 Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
 
-
                 If IsNumeric(fichier3) = True Then
                     GoTo fichiersuivant
-                End If
-
-                'des le depart on va copier les fichiers PNG au bon endroit grace au fichier 3
-                'Si c'est overlay console ou jeu
-                Dim cheminfinalducfg As String
-
-                If GameLists.Items.Contains(FileNameWithoutExtension(fichier1.ToString)) Then
-                    'c'est un overlay console donc on cree le dossier systems
-                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & ComboBox1.Text & "\systems\")) Then
-                        Directory.CreateDirectory(My.Settings.DossierOverlay & ComboBox1.Text & "\systems\")
-                    End If
-                    cheminfinalducfg = My.Settings.DossierOverlay & ComboBox1.Text & "\systems\" & FileNameWithoutExtension(fichier1) & ".info"
-                    File.Copy(fichier3, My.Settings.DossierOverlay & ComboBox1.Text & "\systems\" & Path.GetFileName(fichier3), True)
-                Else
-                    'c'est un jeu donc on va le mettre dans son dossierr games puis console
-                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console)) Then
-                        Directory.CreateDirectory(My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console)
-                    End If
-                    cheminfinalducfg = My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console & "\" & FileNameWithoutExtension(FileNameWithoutExtension(fichier1)) & ".info"
-                    File.Copy(fichier3, My.Settings.DossierOverlay & ComboBox1.Text & "\games\" & console & "\" & Path.GetFileName(fichier3), True)
                 End If
 
                 'on ouvre le fichier 1 pour recuperer les infos
@@ -377,7 +348,7 @@ lignesuivante:
                 'Création d'un flux d'écriture
                 Dim compteurlignedufichiercfg As Integer = 0
 
-                Dim sw As New StreamWriter(cheminfinalducfg)
+                Dim sw As New StreamWriter(fichier1)
                 sw.WriteLine("{")
 
                 For Each s In readText
@@ -488,35 +459,21 @@ fichiersuivant:
                 Dim nomducfg = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("NomFichierCFG").Index).Value.ToString
 
                 Dim fichier1 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminCFG").Index).Value
+                Dim fichier2 As String
                 Dim fichier3 As String = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("CheminPNG").Index).Value
-
 
                 If IsNumeric(fichier3) = True Then
                     GoTo fichiersuivantbato
                 End If
 
-                'des le depart on va copier les fichiers PNG au bon endroit grace au fichier 3
-                'Si c'est overlay console ou jeu
-                Dim cheminfinalducfg As String
                 'Recuperer la taille du fichier
-                Dim largimg = Image.FromFile(fichier3).Size.Width
-                Dim hautimg = Image.FromFile(fichier3).Size.Height
+                Dim largimg As Integer
+                Dim hautimg As Integer
 
-                If FileNameWithoutExtension(fichier1.ToString) = console Then
-                    'c'est un overlay console donc on cree le dossier systems
-                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console)) Then
-                        Directory.CreateDirectory(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console)
-                    End If
-                    cheminfinalducfg = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & FileNameWithoutExtension(FileNameWithoutExtension(fichier1)) & ".cfg"
-                    File.Copy(fichier3, My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & Path.GetFileName(fichier3), True)
-                Else
-                    'c'est un jeu donc on va le mettre dans son dossierr games puis console
-                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console)) Then
-                        Directory.CreateDirectory(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console)
-                    End If
-                    cheminfinalducfg = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & FileNameWithoutExtension(FileNameWithoutExtension(fichier1)) & ".cfg"
-                    File.Copy(fichier3, My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & Path.GetFileName(fichier3), True)
-                End If
+                Using newimage = Image.FromFile(fichier3)
+                    largimg = newimage.Width
+                    hautimg = newimage.Height
+                End Using
 
                 'on ouvre le fichier 1 pour recuperer les infos
                 File.ReadAllLines(fichier1)
@@ -527,10 +484,17 @@ fichiersuivant:
 
                 'Création d'un flux d'écriture
                 Dim compteurlignedufichiercfg As Integer = 0
+                Dim fichier1final = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & Path.GetFileNameWithoutExtension(fichier1) & ".cfg"
 
-                Dim sw As New StreamWriter(cheminfinalducfg)
+                'on cree le dossier au cas ou 
+                If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\")) Then
+                    Directory.CreateDirectory(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\")
+                End If
+
+                Dim sw As New StreamWriter(fichier1final)
                 sw.WriteLine("# generated by RecopierBox by Soaresden")
-                sw.WriteLine("input_overlay = " & Chr(34) & "/recalbox/share/overlays/" & console & "/" & largimg & "x" & hautimg & "/" & FileNameWithoutExtension(fichier1) & "_overlay.cfg" & Chr(34))
+                fichier2 = Path.GetFileNameWithoutExtension(fichier1final) & "_overlay.cfg"
+                sw.WriteLine("input_overlay = " & Chr(34) & "/recalbox/share/overlays/" & console & "/" & largimg & "x" & hautimg & "/" & fichier2 & Chr(34))
                 sw.WriteLine("# aspect ratio")
                 sw.WriteLine("aspect_ratio_index = " & Chr(34) & "23" & Chr(34))
                 sw.WriteLine("video_force_aspect = " & Chr(34) & "true" & Chr(34))
@@ -619,12 +583,13 @@ lignesuivante:
 
                 'On ferme le fichier
                 sw.Close()
+                sw.Dispose()
 
 
                 'Si c'est un overlay console, ce sera dans le dossier principal, sinon dans le dossier resolution
                 'On va creer le fichier _overlay
                 Dim dossierducfgoverlay2 As String
-                If InStr(cheminfinalducfg, console & ".cfg") > 1 Then
+                If InStr(fichier2, console & ".cfg") > 1 Then
                     dossierducfgoverlay2 = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\"
                 Else
                     dossierducfgoverlay2 = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & largimg & "x" & hautimg & "\"
@@ -635,19 +600,42 @@ lignesuivante:
                     Directory.CreateDirectory(dossierducfgoverlay2)
                 End If
 
-                Dim cheminoverlaycfg2 As String = dossierducfgoverlay2 & FileNameWithoutExtension(fichier1) & "_overlay.cfg"
+                'On va copier le fichier 3 dans le dossier du Cfg2
+                'Si c'est overlay console ou jeu
+                Dim cheminfinalducfg As String
+
+                If GameLists.Items.Contains(Path.GetFileNameWithoutExtension(fichier1.ToString)) Then
+                    'c'est un overlay console donc on cree le dossier systems
+                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\systems\")) Then
+                        Directory.CreateDirectory(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\systems\")
+                    End If
+                    cheminfinalducfg = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\systems\" & FileNameWithoutExtension(fichier1) & ".info"
+                    File.Copy(fichier3, My.Settings.DossierOverlay & nomdossierquestion & "\overlays\systems\" & Path.GetFileName(fichier3), True)
+                Else
+                    'c'est un jeu donc on va le mettre dans son dossierr games puis console
+                    If (Not System.IO.Directory.Exists(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & largimg & "x" & hautimg)) Then
+                        Directory.CreateDirectory(My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & largimg & "x" & hautimg)
+                    End If
+                    cheminfinalducfg = My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & largimg & "x" & hautimg & "\" & Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(fichier1)) & ".info"
+                    File.Copy(fichier3, My.Settings.DossierOverlay & nomdossierquestion & "\overlays\" & console & "\" & largimg & "x" & hautimg & "\" & Path.GetFileName(fichier3), True)
+                End If
+
+
+
+                Dim cheminoverlaycfg2 As String = dossierducfgoverlay2 & Path.GetFileNameWithoutExtension(fichier1) & "_overlay.cfg"
 
                 'Nouveau fichier _overlay.cfg
                 Dim sw2 As New StreamWriter(cheminoverlaycfg2)
                 sw2.WriteLine("# generated by RecopierBox by Soaresden")
-                sw2.WriteLine("overlay0_overlay = " & Chr(34) & Path.GetFileName(fichier3) & Chr(34))
+                Dim lefichier3 = Path.GetFileName(fichier3)
+                sw2.WriteLine("overlay0_overlay = " & Chr(34) & lefichier3 & Chr(34))
                 sw2.WriteLine("overlays = 1")
                 sw2.WriteLine("overlay0_full_screen = True")
                 sw2.WriteLine("overlay0_descs = 0")
 
                 'On ferme le fichier
                 sw2.Close()
-
+                sw.Dispose()
 fichiersuivantbato:
             Next
 
@@ -822,13 +810,6 @@ findugame:
         column = New DataColumn()
         With column
             .DataType = Type.GetType("System.String")
-            .ColumnName = "NomRomXML"
-        End With
-        table.Columns.Add(column)
-
-        column = New DataColumn()
-        With column
-            .DataType = Type.GetType("System.String")
             .ColumnName = "NomFichierCFG"
         End With
         table.Columns.Add(column)
@@ -898,24 +879,14 @@ findugame:
 
             Dim vraieromfilecompte As Integer = diroms.GetFiles(FileNameWithoutExtension(nomfichiercfg) & ".*", SearchOption.AllDirectories).Count
             If vraieromfilecompte = 0 Then
-                MsgBox("Pas de Roms trouvée à :" & Chr(10) & Chr(10) & nomfichiercfg & Chr(10) & "Verifiez vos Overlays. Abandon")
-                Exit Sub
+                GoTo fichiersuivant
             End If
             Dim vraieromfile As IO.FileInfo() = diroms.GetFiles(FileNameWithoutExtension(nomfichiercfg) & ".*", SearchOption.AllDirectories)
             Dim realromfile As String = vraieromfile(0).ToString
             Dim generegamelist As String = Path.GetDirectoryName(pathdelarom) & "\gamelist.xml"
 
-
-            'On va rechercher le nom de la rom
-
-            If realromfile <> Nothing Then
-                Dim results = Recherchenomdelarom(generegamelist, nomconsole, realromfile)
-                romname = results.item1
-                etatoverlay = results.item2
-            Else
-                romname = pathdelarom
-                etatoverlay = True
-            End If
+            romname = pathdelarom
+            etatoverlay = True
 
 saisie:
             'On prends le nom du fichier png
@@ -928,7 +899,7 @@ saisie:
             End If
 
             'on ajoute au tableau
-            table.Rows.Add(nomconsole, romname, nomfichiercfg, fichiercomplet, fichierpng, etatoverlay)
+            table.Rows.Add(nomconsole, nomfichiercfg, fichiercomplet, fichierpng, etatoverlay)
 
 fichiersuivant:
         Next
@@ -948,7 +919,6 @@ fichiersuivant:
         'Width for columns
         DataGridOverlays.RowHeadersWidth = 25
         DataGridOverlays.Columns("Console").Width = 70
-        DataGridOverlays.Columns("NomRomXML").Width = 240
         DataGridOverlays.Columns("NomFichierCFG").Width = 150
         DataGridOverlays.Columns("CheminCFG").Width = 90
         DataGridOverlays.Columns("CheminPNG").Width = 90
@@ -1104,6 +1074,7 @@ Fin:
     End Sub
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         If CheckBoxBatocera.Checked = True Then MsgBox("Import en Cours ...")
+        TextBox1.Focus()
         ButtonImportAll.Show()
         ButtonImportAll.PerformClick()
         ButtonImportAll.Hide()
@@ -1117,5 +1088,9 @@ Fin:
     Private Sub OverlaysConverter_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Form1.Show()
         Me.Show()
+    End Sub
+
+    Private Sub ComboBox1_GotFocus(sender As Object, e As EventArgs) Handles ComboBox1.GotFocus
+        ComboBox1.DroppedDown = True
     End Sub
 End Class

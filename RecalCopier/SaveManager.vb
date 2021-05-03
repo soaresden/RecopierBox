@@ -241,47 +241,47 @@ lignesuivante:
         For ligne = 0 To DataGridRoms.RowCount - 2
             Dim console = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("Console").Index).Value
             If console <> "duckstation" Then GoTo lignesuivante
+            'on lance le calcul des SLES
+            Call recupererpsxid()
 
             Dim rompath = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminRom").Index).Value
             Dim romname = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NomdeRom").Index).Value
             Dim titre = DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("Titre").Index).Value
+            Dim indexdujeu As Integer
+
             Dim compteurfiles As Integer = 0
 
-            'Dossier Memcard
-            'on va compter le nombredefichier avec la racine du nom et ajouter
-            Dim di1 As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\duckstation\memcards")
-            Dim racinederom As String = Path.GetFileNameWithoutExtension(romname)
-            Dim aryFi As IO.FileInfo() = di1.GetFiles(racinederom & "*")
-            Dim fi1 As IO.FileInfo
-            compteurfiles = aryFi.Length
+                'Dossier Memcard
+                'on va compter le nombredefichier avec la racine du nom et ajouter
+                Dim di1 As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\duckstation\memcards")
+                Dim racinederom As String = Path.GetFileNameWithoutExtension(romname)
+                Dim aryFi As IO.FileInfo() = di1.GetFiles(racinederom & "*")
 
-            'Dossier SaveState
-            Dim iddujeu
-            'on va compter le nombredefichier avec la racine du nom et ajouter
-            Dim di2 As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\duckstation\savestates")
-            Dim getid = recupererpsxid(titre)
-            Dim aryFi2 As IO.FileInfo() = di2.GetFiles(getid & "*")
-            Dim fi2 As IO.FileInfo
-            compteurfiles = compteurfiles + aryFi2.Length
+                'Dossier SaveState
+                'on va compter le nombredefichier avec la racine du nom et ajouter
+                Dim di2 As New IO.DirectoryInfo(My.Settings.RecalboxFolder & "\saves\duckstation\savestates")
+                'Dim getid = getpsxname(titre)
+                Dim aryFi2 As IO.FileInfo() = di2.GetFiles("" & "*")
+            compteurfiles = aryFi.Length + aryFi2.Length
 
             'On colore les cellules
             If compteurfiles > 0 Then
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = True
-                If Path.GetExtension(romname) <> ".png" Then  ' on va pas inclure les png dans le dossier
-                    compteurSave += 1
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = True
+                    If Path.GetExtension(romname) <> ".png" Then  ' on va pas inclure les png dans le dossier
+                        compteurSave += 1
+                    End If
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminSave").Index).Value = My.Settings.RecalboxFolder & "\saves\duckstation\memcards"
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
+                Else
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = False
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
+                    DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
                 End If
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CheminSave").Index).Value = My.Settings.RecalboxFolder & "\saves\duckstation\memcards"
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(162, 255, 162)
-            Else
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Value = False
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("NbSaves").Index).Value = compteurfiles
-                DataGridRoms.Rows(ligne).Cells(DataGridRoms.Columns("CocheSave").Index).Style.BackColor = Color.FromArgb(255, 139, 139)
-            End If
 
 lignesuivante:
-        Next
-        RomTotalSave.Text = compteurSave
+            Next
+            RomTotalSave.Text = compteurSave
 
         'Afficher la picture Batocera si
         If InStr(My.Settings.RecalboxFolder, "batocera") > 1 Then
@@ -290,7 +290,16 @@ lignesuivante:
             BatoPict.Hide()
         End If
     End Sub
-    Function recupererpsxid(titredujeu As String)
+    Sub recupererpsxid()
+        'on enleve tout
+        tempDUCKsavestates.Items.Clear()
+        tempSLESname.Items.Clear()
+
+        For Each file As String In My.Computer.FileSystem.GetFiles(My.Settings.RecalboxFolder & "\saves\duckstation\savestates", FileIO.SearchOption.SearchTopLevelOnly)
+            Dim nomdufichier = tempDUCKsavestates.Items.Add(System.IO.Path.GetFileName(file))
+        Next
+
+        'on va looper toutes les lignes du fichier
         Using MyReader As New FileIO.TextFieldParser(Application.StartupPath & "\a-psxlistcodes.csv")
             MyReader.TextFieldType = FileIO.FieldType.Delimited
             MyReader.SetDelimiters(",")
@@ -300,26 +309,28 @@ lignesuivante:
                     currentRow = MyReader.ReadFields()
                     Dim currentField As String
                     For Each currentField In currentRow
+                        'sur cette ligne, on loope sur les fichier pour recuperer le nom
+                        For i = 0 To tempDUCKsavestates.Items.Count - 1
+                            Dim savestate As String = tempDUCKsavestates.Items(i)
+                            Dim remadesavestate As String = savestate.Substring(0, InStr(savestate, "_") - 1)
+                            Dim stringo2 As String = " " & currentField
 
-                        'Fuzzy search 
-                        Dim string1 As String = titredujeu
-                        Dim string2 As String = currentField
-                        Dim similarity As Single = GetSimilarity(string1, string2)
-
-                        If similarity > 0.15 Then
-                            'on a la ligne, on va la travailler
-                            Dim laligne = string2
-                            Dim premierpoint = InStr(string2, ";")
-                            Dim lesles = string2.Substring(0, premierpoint - 1)
-                            Return lesles
-                        End If
+                            If InStr(stringo2, remadesavestate) > 0 Then
+                                'ici on a trouvé donc on l'ajoute au tableau des noms
+                                Dim pointvirgule As String = InStr(stringo2, ";")
+                                Dim SLES As String = stringo2.Substring(0, pointvirgule - 1)
+                                'Dim nomdujeu As String = stringo2.Substring(pointvirgule + 1)
+                                'Dim pointvirgule2 As String = InStr(nomdujeu, ";")
+                                Dim nomdujeucomplet As String = stringo2.Substring(pointvirgule + 1).Substring(0, InStr(stringo2.Substring(pointvirgule + 1), ";") - 1)
+                                tempSLESname.Items.Add(nomdujeucomplet)
+                            End If
+                        Next
                     Next
                 Catch ex As Microsoft.VisualBasic.FileIO.MalformedLineException
                 End Try
-                Return "NOCODEFOUND"
             End While
         End Using
-    End Function
+    End Sub
     Public Function GetSimilarity(string1 As String, string2 As String) As Single
         Dim dis As Single = ComputeDistance(string1, string2)
         Dim maxLen As Single = string1.Length
@@ -911,6 +922,21 @@ skip:
             ListSaves.Items.Add(chemindelasavetrouvee)
 fichiersuivanttrouve:
         Next
+
+        If InStr(chemindelasave, "duckstation") > 1 Then
+            Dim di2 As New IO.DirectoryInfo(Replace(chemindelasave, "memcards", "savestates"))
+            'Dim getid As String = recupererpsxid(DataGridRoms.Rows(rowactuelle).Cells(DataGridRoms.Columns("Titre").Index).Value)
+            Dim aryFi2 As IO.FileInfo() = di.GetFiles(romachercher & "*")
+
+            For Each fi In aryFi2
+                chemindelasavetrouvee = fi.FullName
+                Dim extensiondufichier = Path.GetExtension(chemindelasavetrouvee)
+                If extensiondufichier = ".png" Then GoTo fichiersuivanttrouve2
+
+                ListSaves.Items.Add(chemindelasavetrouvee)
+fichiersuivanttrouve2:
+            Next
+        End If
     End Sub
 
     Private Sub ListSaves_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListSaves.SelectedIndexChanged
