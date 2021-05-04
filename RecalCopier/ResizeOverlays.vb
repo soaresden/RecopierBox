@@ -393,7 +393,6 @@ As String) As String
 
     Private Sub ButtonGoResize_Click(sender As Object, e As EventArgs) Handles ButtonGoResize.Click
         If MsgBox("Etes vous sur de vouloir redimensionner l'intégralité du tableau ?", vbYesNo) = vbNo Then Exit Sub
-        Dim typedecopie As String
 
         'On va boucler pour le tableau entier
         For i = 0 To DataGridOverlays.Rows.Count - 2
@@ -405,7 +404,6 @@ As String) As String
             Dim cvw As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_width").Index).Value
             Dim cvh As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_height").Index).Value
 
-            DataGridOverlays.ClearSelection()
             'Chargement de l'image
             Dim png As String = LectureDesCfgs(console, adressecfg)
             lepng.Text = png
@@ -439,9 +437,9 @@ As String) As String
             File.Copy(nouveau2cfg, secondcfg, True)
 
             'On lit le fichier cfg
-            IO.File.ReadAllText(adressecfg)
-            Dim detectfullscreenx As Integer = InStr(IO.File.ReadAllText(adressecfg), "video_fullscreen_x")
-            Dim detectfullscreeny As Integer = InStr(IO.File.ReadAllText(adressecfg), "video_fullscreen_y")
+            IO.File.ReadAllText(nouveauchemin)
+            Dim detectfullscreenx As Integer = InStr(IO.File.ReadAllText(nouveauchemin), "video_fullscreen_x")
+            Dim detectfullscreeny As Integer = InStr(IO.File.ReadAllText(nouveauchemin), "video_fullscreen_y")
 
             'detect video fullscreen
             If detectfullscreenx = 0 Then 'Si la ligne fullscreen n'existe pas on va la creer
@@ -452,7 +450,7 @@ As String) As String
             Else
                 'On fait du ligne a ligne pour trouver la bonnne ligne et on remplace
                 Dim nomdufichiercfg As String
-                Dim lines() As String = IO.File.ReadAllLines(adressecfg)
+                Dim lines() As String = IO.File.ReadAllLines(nouveauchemin)
                 For j As Integer = 0 To lines.Length - 1
                     If lines(j).Contains("video_fullscreen_x") Then
                         Dim ligneoriginaleX = Integer.Parse(Regex.Replace(j.ToString, "[^\d]", ""))
@@ -466,7 +464,7 @@ As String) As String
                     End If
                 Next
 
-                IO.File.WriteAllLines(adressecfg, lines) 'assuming you want to write the file
+                IO.File.WriteAllLines(nouveauchemin, lines) 'assuming you want to write the file
 
             End If
 
@@ -479,7 +477,7 @@ As String) As String
             Dim newvalw As Integer = Math.Round(cvw / ratiodux, 0)
             Dim newvalh As Integer = Math.Round(cvh / ratioduy, 0)
 
-            Dim lines2() As String = IO.File.ReadAllLines(adressecfg)
+            Dim lines2() As String = IO.File.ReadAllLines(nouveauchemin)
             For j As Integer = 0 To lines2.Length - 1
                 If lines2(j).Contains("custom_viewport_x") Then
                     Dim ligneoriginaleX = Integer.Parse(Regex.Replace(lines2(j).ToString, "[^\d]", ""))
@@ -502,7 +500,7 @@ As String) As String
                     lines2(j) = nouvelleligneH
                 End If
             Next
-            IO.File.WriteAllLines(adressecfg, lines2)
+            IO.File.WriteAllLines(nouveauchemin, lines2)
 
             'Fichier suivant
         Next i

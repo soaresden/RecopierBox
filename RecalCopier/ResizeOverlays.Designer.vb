@@ -31,7 +31,6 @@ Partial Class ResizeOverlays
         Me.GroupBoxOriginalOverlay = New System.Windows.Forms.GroupBox()
         Me.ButtonKnowResolution = New System.Windows.Forms.Button()
         Me.ButtonGoResize = New System.Windows.Forms.Button()
-        Me.chkcopysomewhere = New System.Windows.Forms.CheckBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -62,9 +61,10 @@ Partial Class ResizeOverlays
         Me.buttonImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.buttonImport.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.buttonImport.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.buttonImport.Location = New System.Drawing.Point(5, 536)
+        Me.buttonImport.Location = New System.Drawing.Point(7, 660)
+        Me.buttonImport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.buttonImport.Name = "buttonImport"
-        Me.buttonImport.Size = New System.Drawing.Size(116, 30)
+        Me.buttonImport.Size = New System.Drawing.Size(155, 37)
         Me.buttonImport.TabIndex = 44
         Me.buttonImport.Text = "Importer les Overlays"
         Me.buttonImport.UseVisualStyleBackColor = False
@@ -72,11 +72,13 @@ Partial Class ResizeOverlays
         'GameLists
         '
         Me.GameLists.FormattingEnabled = True
-        Me.GameLists.Location = New System.Drawing.Point(5, 58)
+        Me.GameLists.ItemHeight = 16
+        Me.GameLists.Location = New System.Drawing.Point(7, 71)
+        Me.GameLists.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GameLists.Name = "GameLists"
         Me.GameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.GameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.GameLists.Size = New System.Drawing.Size(116, 472)
+        Me.GameLists.Size = New System.Drawing.Size(153, 580)
         Me.GameLists.TabIndex = 43
         '
         'DataGridOverlays
@@ -84,19 +86,22 @@ Partial Class ResizeOverlays
         Me.DataGridOverlays.AllowUserToOrderColumns = True
         Me.DataGridOverlays.AllowUserToResizeRows = False
         Me.DataGridOverlays.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridOverlays.Location = New System.Drawing.Point(127, 58)
+        Me.DataGridOverlays.Location = New System.Drawing.Point(169, 71)
+        Me.DataGridOverlays.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DataGridOverlays.Name = "DataGridOverlays"
+        Me.DataGridOverlays.RowHeadersWidth = 51
         Me.DataGridOverlays.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridOverlays.Size = New System.Drawing.Size(491, 497)
+        Me.DataGridOverlays.Size = New System.Drawing.Size(655, 612)
         Me.DataGridOverlays.TabIndex = 42
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label1.Location = New System.Drawing.Point(127, 42)
+        Me.Label1.Location = New System.Drawing.Point(169, 52)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(176, 13)
+        Me.Label1.Size = New System.Drawing.Size(237, 17)
         Me.Label1.TabIndex = 41
         Me.Label1.Text = "Liste de Tous les Fichiers Overlays :"
         '
@@ -110,9 +115,10 @@ Partial Class ResizeOverlays
         Me.ButtonGetBack1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGetBack1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonGetBack1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonGetBack1.Location = New System.Drawing.Point(5, 3)
+        Me.ButtonGetBack1.Location = New System.Drawing.Point(7, 4)
+        Me.ButtonGetBack1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonGetBack1.Name = "ButtonGetBack1"
-        Me.ButtonGetBack1.Size = New System.Drawing.Size(116, 23)
+        Me.ButtonGetBack1.Size = New System.Drawing.Size(155, 28)
         Me.ButtonGetBack1.TabIndex = 45
         Me.ButtonGetBack1.Text = "Retour Aux Overlays"
         Me.ButtonGetBack1.UseVisualStyleBackColor = False
@@ -122,7 +128,6 @@ Partial Class ResizeOverlays
         Me.GroupBoxOriginalOverlay.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.ButtonKnowResolution)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.ButtonGoResize)
-        Me.GroupBoxOriginalOverlay.Controls.Add(Me.chkcopysomewhere)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label7)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label4)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label5)
@@ -131,9 +136,11 @@ Partial Class ResizeOverlays
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.Label3)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.LargeurOriginale)
         Me.GroupBoxOriginalOverlay.Controls.Add(Me.NouveauX)
-        Me.GroupBoxOriginalOverlay.Location = New System.Drawing.Point(624, 351)
+        Me.GroupBoxOriginalOverlay.Location = New System.Drawing.Point(832, 432)
+        Me.GroupBoxOriginalOverlay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBoxOriginalOverlay.Name = "GroupBoxOriginalOverlay"
-        Me.GroupBoxOriginalOverlay.Size = New System.Drawing.Size(362, 204)
+        Me.GroupBoxOriginalOverlay.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBoxOriginalOverlay.Size = New System.Drawing.Size(483, 251)
         Me.GroupBoxOriginalOverlay.TabIndex = 46
         Me.GroupBoxOriginalOverlay.TabStop = False
         Me.GroupBoxOriginalOverlay.Text = "Parametre Overlay :"
@@ -148,9 +155,10 @@ Partial Class ResizeOverlays
         Me.ButtonKnowResolution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonKnowResolution.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonKnowResolution.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonKnowResolution.Location = New System.Drawing.Point(188, 59)
+        Me.ButtonKnowResolution.Location = New System.Drawing.Point(251, 73)
+        Me.ButtonKnowResolution.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonKnowResolution.Name = "ButtonKnowResolution"
-        Me.ButtonKnowResolution.Size = New System.Drawing.Size(168, 30)
+        Me.ButtonKnowResolution.Size = New System.Drawing.Size(224, 37)
         Me.ButtonKnowResolution.TabIndex = 4
         Me.ButtonKnowResolution.Text = "Connaitre sa Resolution sous PC ?"
         Me.ButtonKnowResolution.UseVisualStyleBackColor = False
@@ -165,67 +173,60 @@ Partial Class ResizeOverlays
         Me.ButtonGoResize.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGoResize.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonGoResize.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonGoResize.Location = New System.Drawing.Point(122, 175)
+        Me.ButtonGoResize.Location = New System.Drawing.Point(163, 171)
+        Me.ButtonGoResize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonGoResize.Name = "ButtonGoResize"
-        Me.ButtonGoResize.Size = New System.Drawing.Size(116, 23)
+        Me.ButtonGoResize.Size = New System.Drawing.Size(155, 72)
         Me.ButtonGoResize.TabIndex = 7
-        Me.ButtonGoResize.Text = "Redimensionner"
+        Me.ButtonGoResize.Text = "Creer un dossier Redimensionné"
         Me.ButtonGoResize.UseVisualStyleBackColor = False
-        '
-        'chkcopysomewhere
-        '
-        Me.chkcopysomewhere.AutoSize = True
-        Me.chkcopysomewhere.Checked = True
-        Me.chkcopysomewhere.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkcopysomewhere.Location = New System.Drawing.Point(6, 132)
-        Me.chkcopysomewhere.Name = "chkcopysomewhere"
-        Me.chkcopysomewhere.Size = New System.Drawing.Size(310, 30)
-        Me.chkcopysomewhere.TabIndex = 6
-        Me.chkcopysomewhere.Text = "Copier les fichiers redimensionnés vers un autre Repertoire ?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & """overlays\aCustom""" &
-    ""
-        Me.chkcopysomewhere.UseVisualStyleBackColor = True
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(199, 16)
+        Me.Label7.Location = New System.Drawing.Point(265, 20)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(145, 13)
+        Me.Label7.Size = New System.Drawing.Size(193, 17)
         Me.Label7.TabIndex = 4
         Me.Label7.Text = "Resolution Finale Souhaitée :"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(71, 41)
+        Me.Label4.Location = New System.Drawing.Point(95, 50)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(12, 13)
+        Me.Label4.Size = New System.Drawing.Size(14, 17)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "x"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(267, 40)
+        Me.Label5.Location = New System.Drawing.Point(356, 49)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(12, 13)
+        Me.Label5.Size = New System.Drawing.Size(14, 17)
         Me.Label5.TabIndex = 3
         Me.Label5.Text = "x"
         '
         'HauteurOriginale
         '
-        Me.HauteurOriginale.Location = New System.Drawing.Point(99, 34)
+        Me.HauteurOriginale.Location = New System.Drawing.Point(132, 42)
+        Me.HauteurOriginale.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.HauteurOriginale.Name = "HauteurOriginale"
         Me.HauteurOriginale.ReadOnly = True
-        Me.HauteurOriginale.Size = New System.Drawing.Size(47, 20)
+        Me.HauteurOriginale.Size = New System.Drawing.Size(61, 22)
         Me.HauteurOriginale.TabIndex = 1
         Me.HauteurOriginale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'NouveauY
         '
-        Me.NouveauY.Location = New System.Drawing.Point(297, 33)
+        Me.NouveauY.Location = New System.Drawing.Point(396, 41)
+        Me.NouveauY.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.NouveauY.Name = "NouveauY"
-        Me.NouveauY.Size = New System.Drawing.Size(47, 20)
+        Me.NouveauY.Size = New System.Drawing.Size(61, 22)
         Me.NouveauY.TabIndex = 3
         Me.NouveauY.Text = "720"
         Me.NouveauY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -233,26 +234,29 @@ Partial Class ResizeOverlays
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 18)
+        Me.Label3.Location = New System.Drawing.Point(8, 22)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(140, 13)
+        Me.Label3.Size = New System.Drawing.Size(190, 17)
         Me.Label3.TabIndex = 1
         Me.Label3.Text = "Taille Originale des Overlays"
         '
         'LargeurOriginale
         '
-        Me.LargeurOriginale.Location = New System.Drawing.Point(9, 33)
+        Me.LargeurOriginale.Location = New System.Drawing.Point(12, 41)
+        Me.LargeurOriginale.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.LargeurOriginale.Name = "LargeurOriginale"
         Me.LargeurOriginale.ReadOnly = True
-        Me.LargeurOriginale.Size = New System.Drawing.Size(47, 20)
+        Me.LargeurOriginale.Size = New System.Drawing.Size(61, 22)
         Me.LargeurOriginale.TabIndex = 0
         Me.LargeurOriginale.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'NouveauX
         '
-        Me.NouveauX.Location = New System.Drawing.Point(202, 33)
+        Me.NouveauX.Location = New System.Drawing.Point(269, 41)
+        Me.NouveauX.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.NouveauX.Name = "NouveauX"
-        Me.NouveauX.Size = New System.Drawing.Size(47, 20)
+        Me.NouveauX.Size = New System.Drawing.Size(61, 22)
         Me.NouveauX.TabIndex = 2
         Me.NouveauX.Text = "1280"
         Me.NouveauX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -261,28 +265,31 @@ Partial Class ResizeOverlays
         '
         Me.Label2.AutoSize = True
         Me.Label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label2.Location = New System.Drawing.Point(768, 19)
+        Me.Label2.Location = New System.Drawing.Point(1024, 23)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(82, 13)
+        Me.Label2.Size = New System.Drawing.Size(108, 17)
         Me.Label2.TabIndex = 49
         Me.Label2.Text = "Overlay Actuel :"
         '
         'ActualOverlay
         '
         Me.ActualOverlay.BackColor = System.Drawing.Color.Black
-        Me.ActualOverlay.Location = New System.Drawing.Point(624, 58)
+        Me.ActualOverlay.Location = New System.Drawing.Point(832, 71)
+        Me.ActualOverlay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ActualOverlay.Name = "ActualOverlay"
-        Me.ActualOverlay.Size = New System.Drawing.Size(362, 284)
+        Me.ActualOverlay.Size = New System.Drawing.Size(483, 350)
         Me.ActualOverlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.ActualOverlay.TabIndex = 50
         Me.ActualOverlay.TabStop = False
         '
         'TotalOverlay
         '
-        Me.TotalOverlay.Location = New System.Drawing.Point(546, 35)
+        Me.TotalOverlay.Location = New System.Drawing.Point(728, 43)
+        Me.TotalOverlay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TotalOverlay.Name = "TotalOverlay"
         Me.TotalOverlay.ReadOnly = True
-        Me.TotalOverlay.Size = New System.Drawing.Size(72, 20)
+        Me.TotalOverlay.Size = New System.Drawing.Size(95, 22)
         Me.TotalOverlay.TabIndex = 51
         Me.TotalOverlay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -290,9 +297,10 @@ Partial Class ResizeOverlays
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label8.Location = New System.Drawing.Point(543, 19)
+        Me.Label8.Location = New System.Drawing.Point(724, 23)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(75, 13)
+        Me.Label8.Size = New System.Drawing.Size(100, 17)
         Me.Label8.TabIndex = 52
         Me.Label8.Text = "Total Overlays"
         '
@@ -300,27 +308,29 @@ Partial Class ResizeOverlays
         '
         Me.PicXrandr.BackColor = System.Drawing.Color.Black
         Me.PicXrandr.Image = CType(resources.GetObject("PicXrandr.Image"), System.Drawing.Image)
-        Me.PicXrandr.Location = New System.Drawing.Point(127, 58)
+        Me.PicXrandr.Location = New System.Drawing.Point(169, 71)
+        Me.PicXrandr.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PicXrandr.Name = "PicXrandr"
-        Me.PicXrandr.Size = New System.Drawing.Size(491, 308)
+        Me.PicXrandr.Size = New System.Drawing.Size(655, 379)
         Me.PicXrandr.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PicXrandr.TabIndex = 53
         Me.PicXrandr.TabStop = False
         '
         'lepng
         '
-        Me.lepng.Location = New System.Drawing.Point(624, 35)
+        Me.lepng.Location = New System.Drawing.Point(832, 43)
+        Me.lepng.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lepng.Name = "lepng"
-        Me.lepng.Size = New System.Drawing.Size(362, 20)
+        Me.lepng.Size = New System.Drawing.Size(481, 22)
         Me.lepng.TabIndex = 54
         Me.lepng.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'ResizeOverlays
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(177, Byte), Integer), CType(CType(76, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(998, 576)
+        Me.ClientSize = New System.Drawing.Size(1328, 699)
         Me.Controls.Add(Me.lepng)
         Me.Controls.Add(Me.PicXrandr)
         Me.Controls.Add(Me.Label8)
@@ -333,8 +343,9 @@ Partial Class ResizeOverlays
         Me.Controls.Add(Me.GameLists)
         Me.Controls.Add(Me.DataGridOverlays)
         Me.Controls.Add(Me.Label1)
-        Me.MaximumSize = New System.Drawing.Size(1014, 615)
-        Me.MinimumSize = New System.Drawing.Size(1014, 615)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MaximumSize = New System.Drawing.Size(1346, 746)
+        Me.MinimumSize = New System.Drawing.Size(1346, 746)
         Me.Name = "ResizeOverlays"
         Me.Text = "ResizeOverlays"
         CType(Me.DataGridOverlays, System.ComponentModel.ISupportInitialize).EndInit()
@@ -366,7 +377,6 @@ Partial Class ResizeOverlays
     Friend WithEvents TotalOverlay As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents ButtonGoResize As Button
-    Friend WithEvents chkcopysomewhere As CheckBox
     Friend WithEvents ButtonKnowResolution As Button
     Friend WithEvents PicXrandr As PictureBox
     Friend WithEvents lepng As TextBox
