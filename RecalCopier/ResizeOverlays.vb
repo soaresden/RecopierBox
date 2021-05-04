@@ -381,6 +381,7 @@ As String) As String
         Dim png As String = LectureDesCfgs(console, adressecfg)
         On Error Resume Next
         ActualOverlay.Image = Image.FromFile(png)
+        lepng.Text = png
 
         'Recuperer la taille du fichier
         LargeurOriginale.Text = row.Cells(DataGridOverlays.Columns("pngW").Index).Value
@@ -388,33 +389,10 @@ As String) As String
 
         On Error GoTo 0
     End Sub
-    Private Sub ChkOriginalReplace_CheckedChanged(sender As Object, e As EventArgs) Handles chkOriginalReplace.CheckedChanged
-        If chkOriginalReplace.Checked = True Then
-            chkOriginalReplace.Checked = True
-            chkcopysomewhere.Checked = False
-        Else
-            chkOriginalReplace.Checked = False
-            chkcopysomewhere.Checked = True
-        End If
-    End Sub
-    Private Sub Chkcopysomewhere_CheckedChanged(sender As Object, e As EventArgs) Handles chkcopysomewhere.CheckedChanged
-        If chkcopysomewhere.Checked = True Then
-            chkOriginalReplace.Checked = False
-            chkcopysomewhere.Checked = True
-        Else
-            chkOriginalReplace.Checked = True
-            chkcopysomewhere.Checked = False
-        End If
-    End Sub
+
     Private Sub ButtonGoResize_Click(sender As Object, e As EventArgs) Handles ButtonGoResize.Click
         If MsgBox("Etes vous sur de vouloir redimensionner l'intégralité du tableau ?", vbYesNo) = vbNo Then Exit Sub
         Dim typedecopie As String
-
-        If chkOriginalReplace.Checked = True Then
-            typedecopie = "Replacement"
-        Else
-            typedecopie = "Nouveau"
-        End If
 
         'On va boucler pour le tableau entier
         For i = 0 To DataGridOverlays.Rows.Count - 2
@@ -426,23 +404,33 @@ As String) As String
             Dim cvw As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_width").Index).Value
             Dim cvh As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_height").Index).Value
 
+            DataGridOverlays.CurrentCell = DataGridOverlays.Rows(i).Cells(0)
 
             'Si on est en mode Nouveau, il faut copier le fichier au prealable
-            If typedecopie = "Nouveau" Then
-                Dim nouveauchemincfg As String = My.Settings.DossierOverlay & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text
+
+            Dim nouveauchemincfg As String = My.Settings.DossierOverlay & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text
                 If (Not System.IO.Directory.Exists(nouveauchemincfg)) Then
                     System.IO.Directory.CreateDirectory(nouveauchemincfg)
                 End If
+
                 'et on copie le fichier cfg vers le nouveau
                 If (Not System.IO.Directory.Exists(nouveauchemincfg & "\" & console)) Then
                     System.IO.Directory.CreateDirectory(nouveauchemincfg & "\" & console)
                 End If
 
-                System.IO.File.Copy(adressecfg, nouveauchemincfg & "\" & console & "\" & Path.GetFileName(adressecfg), True)
-
-                adressecfg = nouveauchemincfg & "\" & console & "\" & Path.GetFileName(adressecfg)
-
-            End If
+                Dim nouveauchemin = nouveauchemincfg & "\" & console & "\" & Path.GetFileName(adressecfg)
+                Dim nouveaupng = Replace(lepng.Text, My.Settings.DossierOverlay, nouveauchemincfg & "\")
+                If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouveaupng))) Then
+                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouveaupng))
+                End If
+                System.IO.File.Copy(adressecfg, nouveauchemin, True)
+            'On copie le PNG
+            System.IO.File.Copy(lepng.Text, nouveaupng, True)
+            'On en deduit le 2eme cfg
+            Dim nouveau2cfg = Replace(lepng.Text, ".png", "_overlay.cfg")
+            Dim secondcfg = Replace(nouveaupng, ".png", "_overlay.cfg")
+            System.IO.File.Copy(nouveau2cfg, secondcfg, True)
+            'On copie le fichier image ! 
 
             'On lit le fichier cfg
             IO.File.ReadAllText(adressecfg)
@@ -457,7 +445,7 @@ As String) As String
                 End Using
             Else
                 'On fait du ligne a ligne pour trouver la bonnne ligne et on remplace
-
+                Dim nomdufichiercfg As String
                 Dim lines() As String = IO.File.ReadAllLines(adressecfg)
                 For j As Integer = 0 To lines.Length - 1
                     If lines(j).Contains("video_fullscreen_x") Then
