@@ -147,7 +147,7 @@ Public Class ResizeOverlays
                 End If
 
                 'On va rechercher le nom de la rom
-                Dim romname = Recherchenomdelarom(nomconsole, pathdelarom)
+                Dim romname = Path.GetFileName(pathdelarom)
 
                 'On recupere les valeurs dans les overlay custom
                 Dim cvx As Integer = Getcustomcfg(cheminducfg, "custom_viewport_x")
@@ -368,6 +368,7 @@ As String) As String
     Private Sub DataGridOverlays_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridOverlays.SelectionChanged
         Dim row As DataGridViewRow = DataGridOverlays.CurrentRow
         Dim totalline As Integer = DataGridOverlays.RowCount - 1
+        lepng.Text = ""
 
         If DataGridOverlays.SelectedRows.Count = 0 Then
             Exit Sub
@@ -404,33 +405,38 @@ As String) As String
             Dim cvw As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_width").Index).Value
             Dim cvh As Integer = DataGridOverlays.Rows(i).Cells(DataGridOverlays.Columns("custom_viewport_height").Index).Value
 
-            DataGridOverlays.CurrentCell = DataGridOverlays.Rows(i).Cells(0)
+            DataGridOverlays.ClearSelection()
+            'Chargement de l'image
+            Dim png As String = LectureDesCfgs(console, adressecfg)
+            lepng.Text = png
 
-            'Si on est en mode Nouveau, il faut copier le fichier au prealable
+            'On copie le fichier au prealable
 
             Dim nouveauchemincfg As String = My.Settings.DossierOverlay & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text
-                If (Not System.IO.Directory.Exists(nouveauchemincfg)) Then
-                    System.IO.Directory.CreateDirectory(nouveauchemincfg)
-                End If
+            If (Not System.IO.Directory.Exists(nouveauchemincfg)) Then
+                System.IO.Directory.CreateDirectory(nouveauchemincfg)
+            End If
 
-                'et on copie le fichier cfg vers le nouveau
-                If (Not System.IO.Directory.Exists(nouveauchemincfg & "\" & console)) Then
-                    System.IO.Directory.CreateDirectory(nouveauchemincfg & "\" & console)
-                End If
+            'et on copie le fichier cfg vers le nouveau
+            If (Not System.IO.Directory.Exists(nouveauchemincfg & "\" & console)) Then
+                System.IO.Directory.CreateDirectory(nouveauchemincfg & "\" & console)
+            End If
 
-                Dim nouveauchemin = nouveauchemincfg & "\" & console & "\" & Path.GetFileName(adressecfg)
-                Dim nouveaupng = Replace(lepng.Text, My.Settings.DossierOverlay, nouveauchemincfg & "\")
-                If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouveaupng))) Then
-                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouveaupng))
-                End If
-                System.IO.File.Copy(adressecfg, nouveauchemin, True)
-            'On copie le PNG
-            System.IO.File.Copy(lepng.Text, nouveaupng, True)
+            Dim nouveauchemin = nouveauchemincfg & "\" & console & "\" & Path.GetFileName(adressecfg)
+            Dim nouveaupngtemp = Replace(png, My.Settings.DossierOverlay, nouveauchemincfg & "\")
+            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(nouveaupngtemp))) Then
+                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(nouveaupngtemp))
+            End If
+            'on va copier le fichier temp png en png
+            ResizeImage(Image.FromFile(png), NouveauX.Text, NouveauY.Text, nouveaupngtemp)
+
+            'et on copie le cfg
+            File.Copy(adressecfg, nouveauchemin, True)
+
             'On en deduit le 2eme cfg
-            Dim nouveau2cfg = Replace(lepng.Text, ".png", "_overlay.cfg")
-            Dim secondcfg = Replace(nouveaupng, ".png", "_overlay.cfg")
-            System.IO.File.Copy(nouveau2cfg, secondcfg, True)
-            'On copie le fichier image ! 
+            Dim nouveau2cfg = Replace(png, ".png", "_overlay.cfg")
+            Dim secondcfg = Replace(nouveaupngtemp, ".png", "_overlay.cfg")
+            File.Copy(nouveau2cfg, secondcfg, True)
 
             'On lit le fichier cfg
             IO.File.ReadAllText(adressecfg)
@@ -496,18 +502,19 @@ As String) As String
                     lines2(j) = nouvelleligneH
                 End If
             Next
-
             IO.File.WriteAllLines(adressecfg, lines2)
+
             'Fichier suivant
         Next i
 
-        MsgBox("Redimensionnement des Fichiers CFG Terminé")
-        If typedecopie = "Nouveau" Then
-            MsgBox("Votre Dossier s'appelle : " & Chr(10) & Chr(10) & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text)
-        End If
+        MsgBox("Votre Dossier s'appelle : " & Chr(10) & Chr(10) & "aCUSTOM RESOLUTION - " & NouveauX.Text & "x" & NouveauY.Text)
         Process.Start(Path.GetDirectoryName(My.Settings.DossierOverlay))
-    End Sub
 
+    End Sub
+    Public Shared Function ResizeImage(ByVal InputBitmap As Bitmap, width As Integer, height As Integer, pathdesortie As String) As Bitmap
+        Dim converted As New Bitmap(InputBitmap, New Size(width, height))
+        converted.Save(pathdesortie, Imaging.ImageFormat.Png)
+    End Function
     Private Sub ButtonKnowResolution_Click(sender As Object, e As EventArgs) Handles ButtonKnowResolution.Click
         If PicXrandr.Visible = True Then
             PicXrandr.Hide()

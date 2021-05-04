@@ -207,6 +207,7 @@ Public Class Form1
     End Sub
     Private Sub ButtonSetDossier_Click(sender As Object, e As EventArgs) Handles ButtonSetDossier.Click
         PanelSettings.Visible = Not PanelSettings.Visible
+        If PanelSettings.Visible = True Then TxtRecalfolderPath.Focus()
     End Sub
     Sub Checkupdate()
         'check online
