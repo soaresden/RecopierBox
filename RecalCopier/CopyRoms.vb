@@ -2594,12 +2594,14 @@ lignesuivb:
         Next
     End Sub
     Private Sub GroupCollections_VisibleChanged(sender As Object, e As EventArgs) Handles GroupCollections.VisibleChanged
+        On Error Resume Next
         Call importdescollections(ComboCollection)
         'focus sur le 1er
         If ComboCollection.SelectedValue = "" Then ComboCollection.SelectedIndex = 0
         CollectionGrid.RowsDefaultCellStyle.SelectionBackColor = Color.Red
         CollectionGrid.RowsDefaultCellStyle.SelectionForeColor = Color.White
         CollectionGrid.RowsDefaultCellStyle.ForeColor = Color.Black
+        On Error GoTo 0
     End Sub
     Private Sub SupCollection_Click(sender As Object, e As EventArgs) Handles SupCollection.Click
         If MsgBox("Etes vous sur de supprimer la collection : " & Chr(10) & ComboCollection.Text, vbYesNo) = vbNo Then Exit Sub

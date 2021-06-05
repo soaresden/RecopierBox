@@ -107,23 +107,17 @@ Public Class OverlaysConverter
                 cheminducfg = fi.FullName
                 nomfichiercfg = fi.Name
 
-                Dim generegamelist As String
-
                 If nomfichiercfg = nomconsole & ".cfg" Then
                     pathdelarom = Path.GetFileName(cheminducfg)
                     Dim aenlever = "\" & nomfichiercfg
-                    generegamelist = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), aenlever, "\gamelist.xml")
                 Else
                     pathdelarom = Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")
-                    generegamelist = Replace(Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", ""), Path.GetFileName(Replace(Replace(cheminducfg, "\overlays\", "\roms\"), ".cfg", "")), "") & "gamelist.xml"
                 End If
 
                 Dim pathpourarrm As String = "*" & Path.GetFileName((pathdelarom))
 
                 'On va rechercher le nom de la rom
-                Dim results = Recherchenomdelarom(generegamelist, nomconsole, pathdelarom)
-                Dim romname = results.item1
-                Dim etatoverlay = results.item2
+                Dim etatoverlay = True
 
                 Dim results2 = LectureDesCfgs(nomconsole, nomfichiercfg)
                 Dim overlay2 = results2.item2
@@ -142,7 +136,7 @@ Public Class OverlaysConverter
                 End If
 ajout:
                 'on ajoute au tableau
-                table.Rows.Add(nomconsole, romname, nomfichiercfg, cheminducfg, overlay2, fichierpng, etatoverlay)
+                table.Rows.Add(nomconsole, nomfichiercfg, cheminducfg, overlay2, fichierpng, etatoverlay)
 
 fichiersuivant:
             Next
@@ -290,18 +284,18 @@ lignesuivante:
         End If
 
         Dim nomdossierquestion As String
+        Dim fullchemin As String
         'Si c'est Recalbox, On va creer le dossier final juste avant de convertir
         If CheckBoxRecalbox.Checked = True Then
             nomdossierquestion = InputBox("Veuillez Saisir un Nom Personnalisé pour le Dossier sous Batocera comme " & Chr(10) & Chr(10) & "CONVERTED", "Conversion RECALBOX --> BATOCERA", "CONVERTED")
             ComboBox1.Items.Add(nomdossierquestion)
-            ComboBox1.SelectedItem = nomdossierquestion
 
             'Si on annule, on quitte tout
             If nomdossierquestion = Nothing Then
                 MsgBox("Abandon")
                 Exit Sub
             Else
-                Dim fullchemin = My.Settings.DossierOverlay & ComboBox1.Text
+                fullchemin = My.Settings.DossierOverlay & nomdossierquestion
                 If (Not System.IO.Directory.Exists(fullchemin)) Then
                     System.IO.Directory.CreateDirectory(fullchemin)
                 End If
@@ -315,7 +309,7 @@ lignesuivante:
                 MsgBox("Abandon")
                 Exit Sub
             Else
-                Dim fullchemin = My.Settings.DossierOverlay & nomdossierquestion
+                fullchemin = My.Settings.DossierOverlay & nomdossierquestion
                 If (Not System.IO.Directory.Exists(fullchemin)) Then
                     System.IO.Directory.CreateDirectory(fullchemin)
                 End If
@@ -348,7 +342,25 @@ lignesuivante:
                 'Création d'un flux d'écriture
                 Dim compteurlignedufichiercfg As Integer = 0
 
-                Dim sw As New StreamWriter(fichier1)
+                Dim nouveaufichier1 = fullchemin & "\" & console
+                'Test si c'est un system ou un jeu
+                Dim testnomdufichier = Replace(Replace(Path.GetFileName(fichier1), Path.GetExtension(fichier1), ""), Path.GetExtension(Replace(Path.GetFileName(fichier1), Path.GetExtension(fichier1), "")), "")
+                Dim fichierinfo As String
+
+                If testnomdufichier = console Then 'c'est un system
+                    If (Not System.IO.Directory.Exists(fullchemin & "\systems")) Then
+                        System.IO.Directory.CreateDirectory(fullchemin & "\systems")
+                    End If
+                    'on cree le .info
+                    fichierinfo = fullchemin & "\systems\" & testnomdufichier & ".info"
+                Else 'c'est un jeu 
+                    If (Not System.IO.Directory.Exists(fullchemin & "\games\" & console)) Then
+                        System.IO.Directory.CreateDirectory(fullchemin & "\games\" & console)
+                    End If
+                    fichierinfo = fullchemin & "\games\" & console & "\" & testnomdufichier & ".info"
+                End If
+                Dim sw As New StreamWriter(fichierinfo)
+
                 sw.WriteLine("{")
 
                 For Each s In readText
@@ -361,6 +373,7 @@ lignesuivante:
                     Dim detecty As String = InStr(s, "custom_viewport_y")
                     Dim detectw As String = InStr(s, "custom_viewport_width")
                     Dim detecth As String = InStr(s, "custom_viewport_height")
+                    Dim detectle2cfg As String = InStr(s, ".cfg")
                     Dim imagey As Double
                     Dim imagex As Double
                     Dim topo As Double
@@ -447,10 +460,13 @@ lignesuivante:
 
                 'On ferme le fichier
                 sw.Close()
+                'et on va copier le fichier image a coté
+                Dim cheminfinalpng3 = Replace(fichierinfo, ".info", ".png")
+                FileCopy(fichier3, cheminfinalpng3)
 fichiersuivant:
             Next
-            MsgBox("Copiez/Deplacer votre dossier '" & ComboBox1.Text & "' dans le repertoire '/decorations' de Batocera")
-            Process.Start(My.Settings.DossierOverlay & ComboBox1.Text)
+            MsgBox("Copiez/Deplacer votre dossier '" & nomdossierquestion & "' dans le repertoire '/decorations' de Batocera")
+            Process.Start(My.Settings.DossierOverlay & nomdossierquestion)
         Else 'Si c'est Batocera 
             'On va lire toutes les lignes
             For i = 0 To DataGridOverlays.Rows.Count - 1
