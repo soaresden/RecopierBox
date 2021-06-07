@@ -989,6 +989,11 @@ consolesanssaves:
     End Sub
 
     Private Sub ButtonCopy_Click(sender As Object, e As EventArgs) Handles ButtonCopy.Click
+        'creation du dossier final
+        If (Not System.IO.Directory.Exists(txt_CopyFolder.Text)) Then
+            System.IO.Directory.CreateDirectory(txt_CopyFolder.Text)
+        End If
+
         'verif du chemin
         If txt_CopyFolder.Text = Nothing Then
             MsgBox("Pas de Repertoire de Copie Défini" & Chr(10) & "ABANDON")
@@ -1028,12 +1033,19 @@ consolesanssaves:
 
         'msgbox pour un recap de la selection et des options
         listboxMaSelection.Show()
+        Dim temptxt0 As String
         Dim temptxt1 As String
         Dim temptxt2 As String
         Dim temptxt3 As String
         Dim temptxt4 As String
         Dim temptxt5 As String
         Dim temptxt6 As String
+
+        If checkroms.Checked = True Then
+            temptxt0 = "Les Roms seront copiées"
+        Else
+            temptxt0 = ""
+        End If
 
         If checkbios.Checked = True Then
             temptxt1 = "Les Bios seront Copiées"
@@ -1073,13 +1085,13 @@ consolesanssaves:
             temptxt6 = ""
         End If
 
-        Dim optionsbox As String = temptxt1 & Chr(10) & temptxt2 & Chr(10) & temptxt3 & Chr(10) & temptxt4 & Chr(10) & temptxt5 & Chr(10) & temptxt6
+        Dim optionsbox As String = temptxt0 & Chr(10) & temptxt1 & Chr(10) & temptxt2 & Chr(10) & temptxt3 & Chr(10) & temptxt4 & Chr(10) & temptxt5 & Chr(10) & temptxt6
 
         'Reposition listboxmaselection
         listboxMaSelection.Location = New Point(-2, 43)
         listboxMaSelection.Size = New Size(396, 433)
 
-        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(10) & optionsbox & Chr(10) & Chr(10) & "Chemin de Copie :  " & Chr(10) & txt_CopyFolder.Text & "\recalbox", vbYesNo) = vbNo Then
+        If MsgBox("Vérifiez Votre Liste de Roms Ci Dessus" & Chr(10) & optionsbox & Chr(10) & Chr(10) & "Chemin de Copie :  " & Chr(10) & txt_CopyFolder.Text & typedistri, vbYesNo) = vbNo Then
             listboxMaSelection.Hide()
             Exit Sub
         End If
@@ -1107,441 +1119,444 @@ consolesanssaves:
             Dim lenouvogamelist As String = newrecalbox & "\roms\" & consolederom & "\gamelist.xml"
             Dim attr As FileAttributes = File.GetAttributes(pathjeu)
 
-            'On test si c'est un jeu en dossier ou non
-            If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
-                'si c'est un repertoire (daphne, dos ...etc) 
-                CopyDirectory(pathjeu, replacejeu)
-                GoTo alagamelist
-            End If
+            If checkroms.Checked = True Then
+
+                'On test si c'est un jeu en dossier ou non
+                If ((attr And FileAttribute.Directory) = FileAttribute.Directory) Then
+                    'si c'est un repertoire (daphne, dos ...etc) 
+                    CopyDirectory(pathjeu, replacejeu)
+                    GoTo alagamelist
+                End If
 
 
-            'On check d'abord si c'est un m3u ou un cue pour recupérer les vrais jeux et le fichier
-            'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
-            If extensionrom = ".m3u" Then
-                File.ReadAllLines(pathjeu)
+                'On check d'abord si c'est un m3u ou un cue pour recupérer les vrais jeux et le fichier
+                'si c'est un m3u, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+                If extensionrom = ".m3u" Then
+                    File.ReadAllLines(pathjeu)
 
-                ' Open the m3u file to read from.
-                Dim readText() As String = File.ReadAllLines(pathjeu)
-                Dim s As String
+                    ' Open the m3u file to read from.
+                    Dim readText() As String = File.ReadAllLines(pathjeu)
+                    Dim s As String
 
-                For Each s In readText
-                    Dim pathducd As String = My.Settings.RecalboxFolder & "\roms\" & consolederom & "\" & Replace(s, "/", "\")
-                    Dim replaceducd As String = Replace(pathducd, My.Settings.RecalboxFolder, newrecalbox)
-                    'On check si ca existe, au cas ou on le cree
-                    If (Not System.IO.Directory.Exists(Path.GetDirectoryName(replaceducd))) Then
-                        System.IO.Directory.CreateDirectory(Path.GetDirectoryName(replaceducd))
-                    End If
-                    'et on copie LES CDS
-                    System.IO.File.Copy(pathducd, replaceducd, True)
-
-                Next
-            ElseIf extensionrom = ".cue" Then 'si c'est un cue, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
-                File.ReadAllLines(pathjeu)
-
-                ' Open the cue file to read from.
-                Dim readText() As String = File.ReadAllLines(pathjeu)
-                Dim g As String
-
-                For Each g In readText
-                    Dim detectfile = InStr(g, Chr(34))
-                    If detectfile >= 1 Then
-                        'Dim isolerome As String = s.Substring(detectfile)
-                        'Dim isolebinary As String = InStr(isolerome, Chr(34))
-                        'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
-
-                        Dim iso As String = g.Substring(detectfile).Substring(0, InStr(g.Substring(detectfile), Chr(34)) - 1)
-                        Dim pathdeliso As String = My.Settings.RecalboxFolder & "\roms\" & consolederom & "\" & Replace(iso, "/", "\")
-                        Dim pathisofinal As String = Replace(pathdeliso, My.Settings.RecalboxFolder, newrecalbox)
+                    For Each s In readText
+                        Dim pathducd As String = My.Settings.RecalboxFolder & "\roms\" & consolederom & "\" & Replace(s, "/", "\")
+                        Dim replaceducd As String = Replace(pathducd, My.Settings.RecalboxFolder, newrecalbox)
                         'On check si ca existe, au cas ou on le cree
-                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(pathdeliso))) Then
-                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(pathdeliso))
+                        If (Not System.IO.Directory.Exists(Path.GetDirectoryName(replaceducd))) Then
+                            System.IO.Directory.CreateDirectory(Path.GetDirectoryName(replaceducd))
                         End If
                         'et on copie LES CDS
-                        System.IO.File.Copy(pathdeliso, pathisofinal, True)
-                    End If
-                Next
-            End If
+                        System.IO.File.Copy(pathducd, replaceducd, True)
 
-            'On retourne a la copie de la rom pure (pas les fichiers induits des CUE et bin)
-            'On check si ca existe, au cas ou on le cree
-            If (Not System.IO.Directory.Exists(repertoirefinal)) Then
-                System.IO.Directory.CreateDirectory(repertoirefinal)
-            End If
+                    Next
+                ElseIf extensionrom = ".cue" Then 'si c'est un cue, il faut lire le fichier pour recuperer la vraie taille des cd's dedans
+                    File.ReadAllLines(pathjeu)
 
-            'et on copie LES ROMS
-            System.IO.File.Copy(pathjeu, replacejeu, True)
+                    ' Open the cue file to read from.
+                    Dim readText() As String = File.ReadAllLines(pathjeu)
+                    Dim g As String
 
-            'on fait un test sur les patchs SBI pour Playstation
-            If consolederom = "psx" Then
-                'on va chercher le fichier sbi avec le nom de la rom
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(
-Path.GetDirectoryName(pathjeu),
-Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWithoutExtension(pathjeu) & ".sbi")
+                    For Each g In readText
+                        Dim detectfile = InStr(g, Chr(34))
+                        If detectfile >= 1 Then
+                            'Dim isolerome As String = s.Substring(detectfile)
+                            'Dim isolebinary As String = InStr(isolerome, Chr(34))
+                            'Dim isolerom As String = isolerome.Substring(0, isolebinary - 1)
 
-                    Dim nomdusbi = foundFile
-                    Dim cheminfinalsave = Replace(foundFile, My.Settings.RecalboxFolder, newrecalbox)
-                    'et on copie LES saves
-                    System.IO.File.Copy(foundFile, cheminfinalsave, True)
-                Next
+                            Dim iso As String = g.Substring(detectfile).Substring(0, InStr(g.Substring(detectfile), Chr(34)) - 1)
+                            Dim pathdeliso As String = My.Settings.RecalboxFolder & "\roms\" & consolederom & "\" & Replace(iso, "/", "\")
+                            Dim pathisofinal As String = Replace(pathdeliso, My.Settings.RecalboxFolder, newrecalbox)
+                            'On check si ca existe, au cas ou on le cree
+                            If (Not System.IO.Directory.Exists(Path.GetDirectoryName(pathdeliso))) Then
+                                System.IO.Directory.CreateDirectory(Path.GetDirectoryName(pathdeliso))
+                            End If
+                            'et on copie LES CDS
+                            System.IO.File.Copy(pathdeliso, pathisofinal, True)
+                        End If
+                    Next
+                End If
 
-            End If
+                'On retourne a la copie de la rom pure (pas les fichiers induits des CUE et bin)
+                'On check si ca existe, au cas ou on le cree
+                If (Not System.IO.Directory.Exists(repertoirefinal)) Then
+                    System.IO.Directory.CreateDirectory(repertoirefinal)
+                End If
 
-            'GAMELIST:
-            'Tentative ecriture gamelist
-            'on va d'abord tester pour voir si y'a deja un gamelist 
+                'et on copie LES ROMS
+                System.IO.File.Copy(pathjeu, replacejeu, True)
+
+                'on fait un test sur les patchs SBI pour Playstation
+                If consolederom = "psx" Then
+                    'on va chercher le fichier sbi avec le nom de la rom
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(
+    Path.GetDirectoryName(pathjeu),
+    Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, FileNameWithoutExtension(pathjeu) & ".sbi")
+
+                        Dim nomdusbi = foundFile
+                        Dim cheminfinalsave = Replace(foundFile, My.Settings.RecalboxFolder, newrecalbox)
+                        'et on copie LES saves
+                        System.IO.File.Copy(foundFile, cheminfinalsave, True)
+                    Next
+
+                End If
+
+                'GAMELIST:
+                'Tentative ecriture gamelist
+                'on va d'abord tester pour voir si y'a deja un gamelist 
 alagamelist:
-            If System.IO.File.Exists(lenouvogamelist) Then
-                For xmline = 0 To FinalGrid.RowCount - 1
+                If System.IO.File.Exists(lenouvogamelist) Then
+                    For xmline = 0 To FinalGrid.RowCount - 1
 
-                    Dim jeuencours As String = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                    If jeuencours = pathjeu Then ' on cherche la ligne du jeu' si il existe on va UPDATE le gamelist
+                        Dim jeuencours As String = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                        If jeuencours = pathjeu Then ' on cherche la ligne du jeu' si il existe on va UPDATE le gamelist
 
-                        Dim doctoupdate As New Xml.XmlDocument()
-                        doctoupdate.Load(lenouvogamelist)
+                            Dim doctoupdate As New Xml.XmlDocument()
+                            doctoupdate.Load(lenouvogamelist)
 
-                        'on recupere toutes les valeurs
-                        Dim xmlname As String
-                        Dim xmlpath As String = Replace(Replace(pathjeu, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
-                        Dim xmlromId As String
-                        Dim xmldesc As String
-                        Dim xmlrating As String
-                        Dim xmldeveloper As String
-                        Dim xmlpublisher As String
-                        Dim xmlgenre As String
-                        Dim xmladult As String
-                        Dim xmlplayers As String
-                        Dim xmlreleasedate As String
-                        Dim xmlimage As String
-                        Dim xmlvideo As String
-                        Dim xmlmanual As String
-                        Dim xmlregion As String
-                        Dim xmlplaycount As String
+                            'on recupere toutes les valeurs
+                            Dim xmlname As String
+                            Dim xmlpath As String = Replace(Replace(pathjeu, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                            Dim xmlromId As String
+                            Dim xmldesc As String
+                            Dim xmlrating As String
+                            Dim xmldeveloper As String
+                            Dim xmlpublisher As String
+                            Dim xmlgenre As String
+                            Dim xmladult As String
+                            Dim xmlplayers As String
+                            Dim xmlreleasedate As String
+                            Dim xmlimage As String
+                            Dim xmlvideo As String
+                            Dim xmlmanual As String
+                            Dim xmlregion As String
+                            Dim xmlplaycount As String
 
-                        'test dugameid 
-                        Dim game As Xml.XmlElement = doctoupdate.CreateElement("game")
+                            'test dugameid 
+                            Dim game As Xml.XmlElement = doctoupdate.CreateElement("game")
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value) Then
-                            xmlromId = Nothing
-                        Else
-                            xmlromId = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value) Then
+                                xmlromId = Nothing
+                            Else
+                                xmlromId = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value) Then
-                            xmlname = Nothing
-                        Else
-                            xmlname = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value) Then
+                                xmlname = Nothing
+                            Else
+                                xmlname = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value) Then
-                            xmldesc = Nothing
-                        Else
-                            xmldesc = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value) Then
+                                xmldesc = Nothing
+                            Else
+                                xmldesc = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value) Then
-                            xmlrating = Nothing
-                        Else
-                            xmlrating = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value) Then
+                                xmlrating = Nothing
+                            Else
+                                xmlrating = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value) Then
-                            xmldeveloper = Nothing
-                        Else
-                            xmldeveloper = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value) Then
+                                xmldeveloper = Nothing
+                            Else
+                                xmldeveloper = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value) Then
-                            xmlpublisher = Nothing
-                        Else
-                            xmlpublisher = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value) Then
+                                xmlpublisher = Nothing
+                            Else
+                                xmlpublisher = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value) Then
-                            xmlgenre = Nothing
-                        Else
-                            xmlgenre = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value) Then
+                                xmlgenre = Nothing
+                            Else
+                                xmlgenre = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value) Then
-                            xmlplayers = Nothing
-                        Else
-                            xmlplayers = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value) Then
+                                xmlplayers = Nothing
+                            Else
+                                xmlplayers = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value) Then
-                            xmlreleasedate = Nothing
-                        Else
-                            xmlreleasedate = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value) Then
+                                xmlreleasedate = Nothing
+                            Else
+                                xmlreleasedate = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
-                            xmlimage = Nothing
-                        Else
-                            xmlimage = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
+                                xmlimage = Nothing
+                            Else
+                                xmlimage = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
-                            xmlvideo = Nothing
-                        Else
-                            xmlvideo = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
+                                xmlvideo = Nothing
+                            Else
+                                xmlvideo = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value) Then
-                            xmlplaycount = Nothing
-                        Else
-                            xmlplaycount = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value) Then
+                                xmlplaycount = Nothing
+                            Else
+                                xmlplaycount = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
-                            xmlmanual = Nothing
-                        Else
-                            xmlmanual = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
+                                xmlmanual = Nothing
+                            Else
+                                xmlmanual = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                            End If
 
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value) Then
-                            xmlregion = Nothing
-                        Else
-                            xmlregion = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value
-                        End If
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value) Then
+                                xmlregion = Nothing
+                            Else
+                                xmlregion = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value
+                            End If
 
-                        'On va prendre chaque node et assigner aux valeur du dessus
-                        Dim nameEl As Xml.XmlElement = doctoupdate.CreateElement("name")
-                        nameEl.InnerText = xmlname
-                        game.AppendChild(nameEl)
-                        If xmlromId <> Nothing Then game.SetAttribute("id", xmlromId)
-                        doctoupdate.DocumentElement.AppendChild(game)
-
-                        Dim pathEl As Xml.XmlElement = doctoupdate.CreateElement("path")
-                        pathEl.InnerText = xmlpath
-                        game.AppendChild(pathEl)
-                        doctoupdate.DocumentElement.AppendChild(game)
-
-                        If xmldesc <> Nothing Then
-                            Dim descEl As Xml.XmlElement = doctoupdate.CreateElement("desc")
-                            descEl.InnerText = xmldesc
-                            game.AppendChild(descEl)
+                            'On va prendre chaque node et assigner aux valeur du dessus
+                            Dim nameEl As Xml.XmlElement = doctoupdate.CreateElement("name")
+                            nameEl.InnerText = xmlname
+                            game.AppendChild(nameEl)
+                            If xmlromId <> Nothing Then game.SetAttribute("id", xmlromId)
                             doctoupdate.DocumentElement.AppendChild(game)
-                        End If
 
-                        If xmlrating <> Nothing Then
-                            Dim rateEl As Xml.XmlElement = doctoupdate.CreateElement("rating")
-                            rateEl.InnerText = xmlrating
-                            game.AppendChild(rateEl)
+                            Dim pathEl As Xml.XmlElement = doctoupdate.CreateElement("path")
+                            pathEl.InnerText = xmlpath
+                            game.AppendChild(pathEl)
                             doctoupdate.DocumentElement.AppendChild(game)
+
+                            If xmldesc <> Nothing Then
+                                Dim descEl As Xml.XmlElement = doctoupdate.CreateElement("desc")
+                                descEl.InnerText = xmldesc
+                                game.AppendChild(descEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlrating <> Nothing Then
+                                Dim rateEl As Xml.XmlElement = doctoupdate.CreateElement("rating")
+                                rateEl.InnerText = xmlrating
+                                game.AppendChild(rateEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmldeveloper <> Nothing Then
+                                Dim devEl As Xml.XmlElement = doctoupdate.CreateElement("developer")
+                                devEl.InnerText = xmldeveloper
+                                game.AppendChild(devEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlpublisher <> Nothing Then
+                                Dim publEl As Xml.XmlElement = doctoupdate.CreateElement("publisher")
+                                publEl.InnerText = xmlpublisher
+                                game.AppendChild(publEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlgenre <> Nothing Then
+                                Dim genrEl As Xml.XmlElement = doctoupdate.CreateElement("genre")
+                                genrEl.InnerText = xmlgenre
+                                game.AppendChild(genrEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlplayers <> Nothing Then
+                                Dim playEl As Xml.XmlElement = doctoupdate.CreateElement("players")
+                                playEl.InnerText = xmlplayers
+                                game.AppendChild(playEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlreleasedate <> Nothing Then
+                                Dim dateEl As Xml.XmlElement = doctoupdate.CreateElement("releasedate")
+                                dateEl.InnerText = xmlreleasedate
+                                game.AppendChild(dateEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlimage <> Nothing Then
+                                Dim imageEl As Xml.XmlElement = doctoupdate.CreateElement("image")
+                                imageEl.InnerText = xmlimage
+                                game.AppendChild(imageEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlvideo <> Nothing Then
+                                Dim videoEl As Xml.XmlElement = doctoupdate.CreateElement("video")
+                                videoEl.InnerText = xmlvideo
+                                game.AppendChild(videoEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlplaycount <> Nothing Then
+                                Dim pcountEl As Xml.XmlElement = doctoupdate.CreateElement("playcount")
+                                pcountEl.InnerText = xmlplaycount
+                                game.AppendChild(pcountEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlmanual <> Nothing Then
+                                Dim manualEl As Xml.XmlElement = doctoupdate.CreateElement("manual")
+                                manualEl.InnerText = xmlmanual
+                                game.AppendChild(manualEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+
+                            If xmlregion <> Nothing Then
+                                Dim regEl As Xml.XmlElement = doctoupdate.CreateElement("region")
+                                regEl.InnerText = xmlregion
+                                game.AppendChild(regEl)
+                                doctoupdate.DocumentElement.AppendChild(game)
+                            End If
+                            doctoupdate.Save(lenouvogamelist)
                         End If
+                    Next
+                Else
+                    'si le gamelist n'existe pas, on va devoir le creer
+                    Dim xmlDoc As New Xml.XmlDocument
+                    Dim fooElement As Xml.XmlElement = xmlDoc.CreateElement("gameList")
 
-                        If xmldeveloper <> Nothing Then
-                            Dim devEl As Xml.XmlElement = doctoupdate.CreateElement("developer")
-                            devEl.InnerText = xmldeveloper
-                            game.AppendChild(devEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
+                    For xmline = 0 To FinalGrid.RowCount - 1
+
+                        Dim jeuencours As String = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminRom").Index).Value
+                        If jeuencours = pathjeu Then ' on cherche la ligne du jeu
+                            'on doit obtenir tout les nodes qu'on a sur le jeu 
+                            xmlDoc.AppendChild(fooElement)
+                            Dim xmlname As String
+                            Dim xmlpath As String = Replace(Replace(pathjeu, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                            Dim xmldesc As String
+                            Dim xmlromId As Integer
+                            Dim xmlrating As String
+                            Dim xmldeveloper As String
+                            Dim xmlpublisher As String
+                            Dim xmlgenre As String
+                            Dim xmladult As String
+                            Dim xmlplayers As String
+                            Dim xmlreleasedate As String
+                            Dim xmlimage As String
+                            Dim xmlvideo As String
+                            Dim xmlmanual As String
+                            Dim xmlregion As String
+                            Dim xmlplaycount As String
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value) Then
+                                xmlname = Nothing
+                            Else
+                                xmlname = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value) Then
+                                xmlromId = Nothing
+                            Else
+                                xmlromId = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value) Then
+                                xmldesc = Nothing
+                            Else
+                                xmldesc = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value) Then
+                                xmlrating = Nothing
+                            Else
+                                xmlrating = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value) Then
+                                xmldeveloper = Nothing
+                            Else
+                                xmldeveloper = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value) Then
+                                xmlpublisher = Nothing
+                            Else
+                                xmlpublisher = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value) Then
+                                xmlgenre = Nothing
+                            Else
+                                xmlgenre = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value) Then
+                                xmlplayers = Nothing
+                            Else
+                                xmlplayers = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value) Then
+                                xmlreleasedate = Nothing
+                            Else
+                                xmlreleasedate = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
+                                xmlimage = Nothing
+                            Else
+                                xmlimage = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
+                                xmlvideo = Nothing
+                            Else
+                                xmlvideo = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value) Then
+                                xmlplaycount = Nothing
+                            Else
+                                xmlplaycount = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
+                                xmlmanual = Nothing
+                            Else
+                                xmlmanual = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
+                            End If
+
+                            If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value) Then
+                                xmlregion = Nothing
+                            Else
+                                xmlregion = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value
+                            End If
+
+                            Dim writer As New XmlTextWriter(lenouvogamelist.ToString, System.Text.Encoding.UTF8)
+                            writer.WriteStartDocument(True)
+                            writer.Formatting = Xml.Formatting.Indented
+                            writer.Indentation = 2
+                            writer.WriteStartElement("gameList")
+
+                            CreateNode(xmlname _
+                                         , xmlpath _
+                                         , xmldesc _
+                                         , xmlrating _
+                                         , xmldeveloper _
+                                         , xmlpublisher _
+                                         , xmlgenre _
+                                         , xmlplayers _
+                                         , xmlreleasedate _
+                                         , xmlimage _
+                                         , xmlvideo _
+                                         , xmlmanual _
+                                         , xmlregion _
+                                         , xmlplaycount _
+                                         , writer, xmlromId)
+
+                            writer.WriteEndElement()
+                            writer.WriteEndDocument()
+                            writer.Close()
+
                         End If
-
-                        If xmlpublisher <> Nothing Then
-                            Dim publEl As Xml.XmlElement = doctoupdate.CreateElement("publisher")
-                            publEl.InnerText = xmlpublisher
-                            game.AppendChild(publEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmlgenre <> Nothing Then
-                            Dim genrEl As Xml.XmlElement = doctoupdate.CreateElement("genre")
-                            genrEl.InnerText = xmlgenre
-                            game.AppendChild(genrEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmlplayers <> Nothing Then
-                            Dim playEl As Xml.XmlElement = doctoupdate.CreateElement("players")
-                            playEl.InnerText = xmlplayers
-                            game.AppendChild(playEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmlreleasedate <> Nothing Then
-                            Dim dateEl As Xml.XmlElement = doctoupdate.CreateElement("releasedate")
-                            dateEl.InnerText = xmlreleasedate
-                            game.AppendChild(dateEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmlimage <> Nothing Then
-                            Dim imageEl As Xml.XmlElement = doctoupdate.CreateElement("image")
-                            imageEl.InnerText = xmlimage
-                            game.AppendChild(imageEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmlvideo <> Nothing Then
-                            Dim videoEl As Xml.XmlElement = doctoupdate.CreateElement("video")
-                            videoEl.InnerText = xmlvideo
-                            game.AppendChild(videoEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmlplaycount <> Nothing Then
-                            Dim pcountEl As Xml.XmlElement = doctoupdate.CreateElement("playcount")
-                            pcountEl.InnerText = xmlplaycount
-                            game.AppendChild(pcountEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmlmanual <> Nothing Then
-                            Dim manualEl As Xml.XmlElement = doctoupdate.CreateElement("manual")
-                            manualEl.InnerText = xmlmanual
-                            game.AppendChild(manualEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-
-                        If xmlregion <> Nothing Then
-                            Dim regEl As Xml.XmlElement = doctoupdate.CreateElement("region")
-                            regEl.InnerText = xmlregion
-                            game.AppendChild(regEl)
-                            doctoupdate.DocumentElement.AppendChild(game)
-                        End If
-                        doctoupdate.Save(lenouvogamelist)
-                    End If
-                Next
-            Else
-                'si le gamelist n'existe pas, on va devoir le creer
-                Dim xmlDoc As New Xml.XmlDocument
-                Dim fooElement As Xml.XmlElement = xmlDoc.CreateElement("gameList")
-
-                For xmline = 0 To FinalGrid.RowCount - 1
-
-                    Dim jeuencours As String = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminRom").Index).Value
-                    If jeuencours = pathjeu Then ' on cherche la ligne du jeu
-                        'on doit obtenir tout les nodes qu'on a sur le jeu 
-                        xmlDoc.AppendChild(fooElement)
-                        Dim xmlname As String
-                        Dim xmlpath As String = Replace(Replace(pathjeu, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
-                        Dim xmldesc As String
-                        Dim xmlromId As Integer
-                        Dim xmlrating As String
-                        Dim xmldeveloper As String
-                        Dim xmlpublisher As String
-                        Dim xmlgenre As String
-                        Dim xmladult As String
-                        Dim xmlplayers As String
-                        Dim xmlreleasedate As String
-                        Dim xmlimage As String
-                        Dim xmlvideo As String
-                        Dim xmlmanual As String
-                        Dim xmlregion As String
-                        Dim xmlplaycount As String
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value) Then
-                            xmlname = Nothing
-                        Else
-                            xmlname = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Titre").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value) Then
-                            xmlromId = Nothing
-                        Else
-                            xmlromId = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("GameId").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value) Then
-                            xmldesc = Nothing
-                        Else
-                            xmldesc = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Synopsis").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value) Then
-                            xmlrating = Nothing
-                        Else
-                            xmlrating = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Note").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value) Then
-                            xmldeveloper = Nothing
-                        Else
-                            xmldeveloper = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Developer").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value) Then
-                            xmlpublisher = Nothing
-                        Else
-                            xmlpublisher = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Publisher").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value) Then
-                            xmlgenre = Nothing
-                        Else
-                            xmlgenre = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Genre").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value) Then
-                            xmlplayers = Nothing
-                        Else
-                            xmlplayers = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("NbPlayers").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value) Then
-                            xmlreleasedate = Nothing
-                        Else
-                            xmlreleasedate = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("DateSortie").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value) Then
-                            xmlimage = Nothing
-                        Else
-                            xmlimage = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminImage").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value) Then
-                            xmlvideo = Nothing
-                        Else
-                            xmlvideo = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminVideo").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value) Then
-                            xmlplaycount = Nothing
-                        Else
-                            xmlplaycount = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Nblancé").Index).Value
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value) Then
-                            xmlmanual = Nothing
-                        Else
-                            xmlmanual = Replace(Replace(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("CheminManuel").Index).Value, My.Settings.RecalboxFolder & "\roms\" & consolederom & "\", ""), "\", "/")
-                        End If
-
-                        If IsDBNull(FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value) Then
-                            xmlregion = Nothing
-                        Else
-                            xmlregion = FinalGrid.Rows(xmline).Cells(FinalGrid.Columns("Region").Index).Value
-                        End If
-
-                        Dim writer As New XmlTextWriter(lenouvogamelist.ToString, System.Text.Encoding.UTF8)
-                        writer.WriteStartDocument(True)
-                        writer.Formatting = Xml.Formatting.Indented
-                        writer.Indentation = 2
-                        writer.WriteStartElement("gameList")
-
-                        CreateNode(xmlname _
-                                     , xmlpath _
-                                     , xmldesc _
-                                     , xmlrating _
-                                     , xmldeveloper _
-                                     , xmlpublisher _
-                                     , xmlgenre _
-                                     , xmlplayers _
-                                     , xmlreleasedate _
-                                     , xmlimage _
-                                     , xmlvideo _
-                                     , xmlmanual _
-                                     , xmlregion _
-                                     , xmlplaycount _
-                                     , writer, xmlromId)
-
-                        writer.WriteEndElement()
-                        writer.WriteEndDocument()
-                        writer.Close()
-
-                    End If
-                Next
+                    Next
+                End If
             End If
 
             'on check si la copie des image a été activée

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class SaveManager
     Inherits System.Windows.Forms.Form
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class SaveManager
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SaveManager))
         Me.ButtonImportSaves1 = New System.Windows.Forms.Button()
@@ -62,8 +62,6 @@ Partial Class SaveManager
         Me.prevplatform = New System.Windows.Forms.Button()
         Me.nextplatform = New System.Windows.Forms.Button()
         Me.BatoPict = New System.Windows.Forms.PictureBox()
-        Me.tempDUCKsavestates = New System.Windows.Forms.ListBox()
-        Me.tempSLESname = New System.Windows.Forms.ListBox()
         CType(Me.DataGridSave, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RenameSelection.SuspendLayout()
         CType(Me.DataGridRoms, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,9 +80,10 @@ Partial Class SaveManager
         Me.ButtonImportSaves1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonImportSaves1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonImportSaves1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonImportSaves1.Location = New System.Drawing.Point(844, 28)
+        Me.ButtonImportSaves1.Location = New System.Drawing.Point(1125, 34)
+        Me.ButtonImportSaves1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonImportSaves1.Name = "ButtonImportSaves1"
-        Me.ButtonImportSaves1.Size = New System.Drawing.Size(116, 30)
+        Me.ButtonImportSaves1.Size = New System.Drawing.Size(155, 37)
         Me.ButtonImportSaves1.TabIndex = 58
         Me.ButtonImportSaves1.Text = "Importer les Saves"
         Me.ButtonImportSaves1.UseVisualStyleBackColor = False
@@ -99,9 +98,10 @@ Partial Class SaveManager
         Me.buttonImportRoms1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.buttonImportRoms1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.buttonImportRoms1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.buttonImportRoms1.Location = New System.Drawing.Point(379, 28)
+        Me.buttonImportRoms1.Location = New System.Drawing.Point(505, 34)
+        Me.buttonImportRoms1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.buttonImportRoms1.Name = "buttonImportRoms1"
-        Me.buttonImportRoms1.Size = New System.Drawing.Size(116, 30)
+        Me.buttonImportRoms1.Size = New System.Drawing.Size(155, 37)
         Me.buttonImportRoms1.TabIndex = 57
         Me.buttonImportRoms1.Text = "Importer les Roms"
         Me.buttonImportRoms1.UseVisualStyleBackColor = False
@@ -116,9 +116,10 @@ Partial Class SaveManager
         Me.ButtonGetBack1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonGetBack1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonGetBack1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonGetBack1.Location = New System.Drawing.Point(12, 12)
+        Me.ButtonGetBack1.Location = New System.Drawing.Point(16, 15)
+        Me.ButtonGetBack1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonGetBack1.Name = "ButtonGetBack1"
-        Me.ButtonGetBack1.Size = New System.Drawing.Size(116, 23)
+        Me.ButtonGetBack1.Size = New System.Drawing.Size(155, 28)
         Me.ButtonGetBack1.TabIndex = 56
         Me.ButtonGetBack1.Text = "Retour Au Menu"
         Me.ButtonGetBack1.UseVisualStyleBackColor = False
@@ -133,9 +134,10 @@ Partial Class SaveManager
         Me.ImportBoth1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ImportBoth1.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ImportBoth1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ImportBoth1.Location = New System.Drawing.Point(134, 5)
+        Me.ImportBoth1.Location = New System.Drawing.Point(179, 6)
+        Me.ImportBoth1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ImportBoth1.Name = "ImportBoth1"
-        Me.ImportBoth1.Size = New System.Drawing.Size(116, 30)
+        Me.ImportBoth1.Size = New System.Drawing.Size(155, 37)
         Me.ImportBoth1.TabIndex = 55
         Me.ImportBoth1.Text = "Tout Importer"
         Me.ImportBoth1.UseVisualStyleBackColor = False
@@ -145,38 +147,44 @@ Partial Class SaveManager
         Me.DataGridSave.AllowUserToOrderColumns = True
         Me.DataGridSave.AllowUserToResizeRows = False
         Me.DataGridSave.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridSave.Location = New System.Drawing.Point(507, 140)
+        Me.DataGridSave.Location = New System.Drawing.Point(676, 172)
+        Me.DataGridSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DataGridSave.Name = "DataGridSave"
+        Me.DataGridSave.RowHeadersWidth = 51
         Me.DataGridSave.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridSave.Size = New System.Drawing.Size(453, 218)
+        Me.DataGridSave.Size = New System.Drawing.Size(604, 268)
         Me.DataGridSave.TabIndex = 50
         '
         'GameLists
         '
         Me.GameLists.FormattingEnabled = True
-        Me.GameLists.Location = New System.Drawing.Point(12, 77)
+        Me.GameLists.ItemHeight = 16
+        Me.GameLists.Location = New System.Drawing.Point(16, 95)
+        Me.GameLists.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GameLists.Name = "GameLists"
         Me.GameLists.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.GameLists.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.GameLists.Size = New System.Drawing.Size(116, 459)
+        Me.GameLists.Size = New System.Drawing.Size(153, 564)
         Me.GameLists.TabIndex = 49
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label6.Location = New System.Drawing.Point(835, 364)
+        Me.Label6.Location = New System.Drawing.Point(1113, 448)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(85, 13)
+        Me.Label6.Size = New System.Drawing.Size(111, 17)
         Me.Label6.TabIndex = 20
         Me.Label6.Text = "Total de Saves :"
         '
         'RomTotal
         '
-        Me.RomTotal.Location = New System.Drawing.Point(454, 361)
+        Me.RomTotal.Location = New System.Drawing.Point(605, 444)
+        Me.RomTotal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RomTotal.Name = "RomTotal"
         Me.RomTotal.ReadOnly = True
-        Me.RomTotal.Size = New System.Drawing.Size(40, 20)
+        Me.RomTotal.Size = New System.Drawing.Size(52, 22)
         Me.RomTotal.TabIndex = 15
         Me.RomTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -184,27 +192,30 @@ Partial Class SaveManager
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label5.Location = New System.Drawing.Point(782, 385)
+        Me.Label5.Location = New System.Drawing.Point(1043, 474)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(138, 13)
+        Me.Label5.Size = New System.Drawing.Size(184, 17)
         Me.Label5.TabIndex = 19
         Me.Label5.Text = "Total de Saves Orphelines :"
         '
         'SaveSingle
         '
-        Me.SaveSingle.Location = New System.Drawing.Point(920, 384)
+        Me.SaveSingle.Location = New System.Drawing.Point(1227, 473)
+        Me.SaveSingle.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.SaveSingle.Name = "SaveSingle"
         Me.SaveSingle.ReadOnly = True
-        Me.SaveSingle.Size = New System.Drawing.Size(40, 20)
+        Me.SaveSingle.Size = New System.Drawing.Size(52, 22)
         Me.SaveSingle.TabIndex = 17
         Me.SaveSingle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'SaveTotal
         '
-        Me.SaveTotal.Location = New System.Drawing.Point(920, 361)
+        Me.SaveTotal.Location = New System.Drawing.Point(1227, 444)
+        Me.SaveTotal.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.SaveTotal.Name = "SaveTotal"
         Me.SaveTotal.ReadOnly = True
-        Me.SaveTotal.Size = New System.Drawing.Size(40, 20)
+        Me.SaveTotal.Size = New System.Drawing.Size(52, 22)
         Me.SaveTotal.TabIndex = 16
         Me.SaveTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -212,9 +223,10 @@ Partial Class SaveManager
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label4.Location = New System.Drawing.Point(348, 388)
+        Me.Label4.Location = New System.Drawing.Point(464, 478)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(101, 13)
+        Me.Label4.Size = New System.Drawing.Size(131, 17)
         Me.Label4.TabIndex = 18
         Me.Label4.Text = "Total AVEC Saves :"
         '
@@ -222,18 +234,20 @@ Partial Class SaveManager
         '
         Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label3.Location = New System.Drawing.Point(366, 364)
+        Me.Label3.Location = New System.Drawing.Point(488, 448)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(82, 13)
+        Me.Label3.Size = New System.Drawing.Size(108, 17)
         Me.Label3.TabIndex = 17
         Me.Label3.Text = "Total de Roms :"
         '
         'RomTotalSave
         '
-        Me.RomTotalSave.Location = New System.Drawing.Point(454, 385)
+        Me.RomTotalSave.Location = New System.Drawing.Point(605, 474)
+        Me.RomTotalSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RomTotalSave.Name = "RomTotalSave"
         Me.RomTotalSave.ReadOnly = True
-        Me.RomTotalSave.Size = New System.Drawing.Size(40, 20)
+        Me.RomTotalSave.Size = New System.Drawing.Size(52, 22)
         Me.RomTotalSave.TabIndex = 16
         Me.RomTotalSave.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -248,9 +262,11 @@ Partial Class SaveManager
         Me.RenameSelection.Controls.Add(Me.ButtonRenameSave)
         Me.RenameSelection.Controls.Add(Me.NewName)
         Me.RenameSelection.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.RenameSelection.Location = New System.Drawing.Point(443, 404)
+        Me.RenameSelection.Location = New System.Drawing.Point(591, 497)
+        Me.RenameSelection.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.RenameSelection.Name = "RenameSelection"
-        Me.RenameSelection.Size = New System.Drawing.Size(58, 53)
+        Me.RenameSelection.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.RenameSelection.Size = New System.Drawing.Size(77, 65)
         Me.RenameSelection.TabIndex = 48
         Me.RenameSelection.TabStop = False
         Me.RenameSelection.Text = "OUTIL RENOMMER VOS SAVES :"
@@ -258,26 +274,29 @@ Partial Class SaveManager
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(271, 144)
+        Me.Label9.Location = New System.Drawing.Point(361, 177)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(51, 13)
+        Me.Label9.Size = New System.Drawing.Size(67, 17)
         Me.Label9.TabIndex = 66
         Me.Label9.Text = "n° State :"
         '
         'textstate
         '
-        Me.textstate.Location = New System.Drawing.Point(328, 142)
+        Me.textstate.Location = New System.Drawing.Point(437, 175)
+        Me.textstate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.textstate.Name = "textstate"
-        Me.textstate.Size = New System.Drawing.Size(32, 20)
+        Me.textstate.Size = New System.Drawing.Size(41, 22)
         Me.textstate.TabIndex = 62
         Me.textstate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(5, 79)
+        Me.Label8.Location = New System.Drawing.Point(7, 97)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(290, 26)
+        Me.Label8.Size = New System.Drawing.Size(394, 34)
         Me.Label8.TabIndex = 65
         Me.Label8.Text = "Nouveau Nom du fichier Save " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Cliquer sur une ligne du Tableau ci dessus pour Pr" &
     "éRemplir)"
@@ -285,19 +304,21 @@ Partial Class SaveManager
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(5, 14)
+        Me.Label7.Location = New System.Drawing.Point(7, 17)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(241, 26)
+        Me.Label7.Size = New System.Drawing.Size(331, 34)
         Me.Label7.TabIndex = 64
         Me.Label7.Text = "Nom du Fichier Save Actuel" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Cliquer sur la liste Rose à Droite pour Préremplir) " &
     ":"
         '
         'ActualName
         '
-        Me.ActualName.Location = New System.Drawing.Point(6, 50)
+        Me.ActualName.Location = New System.Drawing.Point(8, 62)
+        Me.ActualName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ActualName.Name = "ActualName"
         Me.ActualName.ReadOnly = True
-        Me.ActualName.Size = New System.Drawing.Size(354, 20)
+        Me.ActualName.Size = New System.Drawing.Size(471, 22)
         Me.ActualName.TabIndex = 63
         '
         'ButtonRenameSave
@@ -310,26 +331,29 @@ Partial Class SaveManager
         Me.ButtonRenameSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonRenameSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonRenameSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonRenameSave.Location = New System.Drawing.Point(140, 140)
+        Me.ButtonRenameSave.Location = New System.Drawing.Point(187, 172)
+        Me.ButtonRenameSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonRenameSave.Name = "ButtonRenameSave"
-        Me.ButtonRenameSave.Size = New System.Drawing.Size(100, 28)
+        Me.ButtonRenameSave.Size = New System.Drawing.Size(133, 34)
         Me.ButtonRenameSave.TabIndex = 43
         Me.ButtonRenameSave.Text = "Renommer la save"
         Me.ButtonRenameSave.UseVisualStyleBackColor = False
         '
         'NewName
         '
-        Me.NewName.Location = New System.Drawing.Point(6, 108)
+        Me.NewName.Location = New System.Drawing.Point(8, 133)
+        Me.NewName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.NewName.Name = "NewName"
-        Me.NewName.Size = New System.Drawing.Size(354, 20)
+        Me.NewName.Size = New System.Drawing.Size(471, 22)
         Me.NewName.TabIndex = 62
         '
         'PathActuel
         '
-        Me.PathActuel.Location = New System.Drawing.Point(10, 61)
+        Me.PathActuel.Location = New System.Drawing.Point(13, 75)
+        Me.PathActuel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PathActuel.Name = "PathActuel"
         Me.PathActuel.ReadOnly = True
-        Me.PathActuel.Size = New System.Drawing.Size(100, 20)
+        Me.PathActuel.Size = New System.Drawing.Size(132, 22)
         Me.PathActuel.TabIndex = 66
         Me.PathActuel.Visible = False
         '
@@ -343,9 +367,10 @@ Partial Class SaveManager
         Me.ButtonSuppSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonSuppSave.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonSuppSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonSuppSave.Location = New System.Drawing.Point(286, 79)
+        Me.ButtonSuppSave.Location = New System.Drawing.Point(381, 97)
+        Me.ButtonSuppSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonSuppSave.Name = "ButtonSuppSave"
-        Me.ButtonSuppSave.Size = New System.Drawing.Size(161, 51)
+        Me.ButtonSuppSave.Size = New System.Drawing.Size(215, 63)
         Me.ButtonSuppSave.TabIndex = 61
         Me.ButtonSuppSave.Text = "Supprimer le(s) " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Saves Selectionnées ci-contre"
         Me.ButtonSuppSave.UseVisualStyleBackColor = False
@@ -353,20 +378,22 @@ Partial Class SaveManager
         'TextBox2
         '
         Me.TextBox2.BackColor = System.Drawing.Color.Bisque
-        Me.TextBox2.Location = New System.Drawing.Point(507, 64)
+        Me.TextBox2.Location = New System.Drawing.Point(676, 79)
+        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(453, 57)
+        Me.TextBox2.Size = New System.Drawing.Size(603, 69)
         Me.TextBox2.TabIndex = 46
         Me.TextBox2.Text = resources.GetString("TextBox2.Text")
         '
         'TextBox1
         '
         Me.TextBox1.BackColor = System.Drawing.Color.Lavender
-        Me.TextBox1.Location = New System.Drawing.Point(134, 64)
+        Me.TextBox1.Location = New System.Drawing.Point(179, 79)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(360, 57)
+        Me.TextBox1.Size = New System.Drawing.Size(479, 69)
         Me.TextBox1.TabIndex = 45
         Me.TextBox1.Text = "La liste de toutes vos roms" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "La coche à droite permet de savoir si une save est d" &
     "isponible ou non." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selectionner une ligne copie automatiquement le nom du fichie" &
@@ -377,10 +404,12 @@ Partial Class SaveManager
         Me.DataGridRoms.AllowUserToOrderColumns = True
         Me.DataGridRoms.AllowUserToResizeRows = False
         Me.DataGridRoms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridRoms.Location = New System.Drawing.Point(134, 140)
+        Me.DataGridRoms.Location = New System.Drawing.Point(179, 172)
+        Me.DataGridRoms.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.DataGridRoms.Name = "DataGridRoms"
+        Me.DataGridRoms.RowHeadersWidth = 51
         Me.DataGridRoms.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridRoms.Size = New System.Drawing.Size(360, 218)
+        Me.DataGridRoms.Size = New System.Drawing.Size(480, 268)
         Me.DataGridRoms.TabIndex = 44
         '
         'Label2
@@ -388,9 +417,10 @@ Partial Class SaveManager
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Equinox Com", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label2.Location = New System.Drawing.Point(599, 124)
+        Me.Label2.Location = New System.Drawing.Point(799, 153)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(286, 18)
+        Me.Label2.Size = New System.Drawing.Size(368, 22)
         Me.Label2.TabIndex = 43
         Me.Label2.Text = "Liste COMPLETE de Toutes les Saves dans le Dossier :"
         '
@@ -399,9 +429,10 @@ Partial Class SaveManager
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Equinox Com", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label1.Location = New System.Drawing.Point(210, 124)
+        Me.Label1.Location = New System.Drawing.Point(280, 153)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(211, 18)
+        Me.Label1.Size = New System.Drawing.Size(271, 22)
         Me.Label1.TabIndex = 42
         Me.Label1.Text = "Liste de Toutes les Roms Gamelistées :"
         '
@@ -409,22 +440,26 @@ Partial Class SaveManager
         '
         Me.ListdesFichiersEnTrop.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(214, Byte), Integer), CType(CType(254, Byte), Integer))
         Me.ListdesFichiersEnTrop.FormattingEnabled = True
-        Me.ListdesFichiersEnTrop.Location = New System.Drawing.Point(6, 18)
+        Me.ListdesFichiersEnTrop.ItemHeight = 16
+        Me.ListdesFichiersEnTrop.Location = New System.Drawing.Point(8, 22)
+        Me.ListdesFichiersEnTrop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ListdesFichiersEnTrop.Name = "ListdesFichiersEnTrop"
         Me.ListdesFichiersEnTrop.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ListdesFichiersEnTrop.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListdesFichiersEnTrop.Size = New System.Drawing.Size(274, 108)
+        Me.ListdesFichiersEnTrop.Size = New System.Drawing.Size(364, 132)
         Me.ListdesFichiersEnTrop.TabIndex = 59
         '
         'ListSaves
         '
         Me.ListSaves.BackColor = System.Drawing.Color.LightCyan
         Me.ListSaves.FormattingEnabled = True
-        Me.ListSaves.Location = New System.Drawing.Point(6, 19)
+        Me.ListSaves.ItemHeight = 16
+        Me.ListSaves.Location = New System.Drawing.Point(8, 23)
+        Me.ListSaves.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ListSaves.Name = "ListSaves"
         Me.ListSaves.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ListSaves.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.ListSaves.Size = New System.Drawing.Size(198, 95)
+        Me.ListSaves.Size = New System.Drawing.Size(263, 116)
         Me.ListSaves.TabIndex = 60
         '
         'ButtonMenageOrphelin
@@ -437,9 +472,10 @@ Partial Class SaveManager
         Me.ButtonMenageOrphelin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonMenageOrphelin.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonMenageOrphelin.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonMenageOrphelin.Location = New System.Drawing.Point(286, 19)
+        Me.ButtonMenageOrphelin.Location = New System.Drawing.Point(381, 23)
+        Me.ButtonMenageOrphelin.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonMenageOrphelin.Name = "ButtonMenageOrphelin"
-        Me.ButtonMenageOrphelin.Size = New System.Drawing.Size(161, 46)
+        Me.ButtonMenageOrphelin.Size = New System.Drawing.Size(215, 57)
         Me.ButtonMenageOrphelin.TabIndex = 42
         Me.ButtonMenageOrphelin.Text = "Supprimer TOUTES" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "les Saves Orphelines"
         Me.ButtonMenageOrphelin.UseVisualStyleBackColor = False
@@ -454,9 +490,10 @@ Partial Class SaveManager
         Me.ButtonRomsDeleteSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonRomsDeleteSelected.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonRomsDeleteSelected.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonRomsDeleteSelected.Location = New System.Drawing.Point(164, 363)
+        Me.ButtonRomsDeleteSelected.Location = New System.Drawing.Point(219, 447)
+        Me.ButtonRomsDeleteSelected.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonRomsDeleteSelected.Name = "ButtonRomsDeleteSelected"
-        Me.ButtonRomsDeleteSelected.Size = New System.Drawing.Size(145, 44)
+        Me.ButtonRomsDeleteSelected.Size = New System.Drawing.Size(193, 54)
         Me.ButtonRomsDeleteSelected.TabIndex = 62
         Me.ButtonRomsDeleteSelected.Text = "Supprimer le(s) Saves" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selectionné(es) ci-dessous"
         Me.ButtonRomsDeleteSelected.UseVisualStyleBackColor = False
@@ -466,9 +503,11 @@ Partial Class SaveManager
         Me.GroupRoms.BackColor = System.Drawing.Color.DarkBlue
         Me.GroupRoms.Controls.Add(Me.ListSaves)
         Me.GroupRoms.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.GroupRoms.Location = New System.Drawing.Point(134, 413)
+        Me.GroupRoms.Location = New System.Drawing.Point(179, 508)
+        Me.GroupRoms.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupRoms.Name = "GroupRoms"
-        Me.GroupRoms.Size = New System.Drawing.Size(210, 123)
+        Me.GroupRoms.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupRoms.Size = New System.Drawing.Size(280, 151)
         Me.GroupRoms.TabIndex = 63
         Me.GroupRoms.TabStop = False
         Me.GroupRoms.Text = "Fichiers liés à la Rom Select. ci-dessus :"
@@ -481,9 +520,11 @@ Partial Class SaveManager
         Me.GroupSaves.Controls.Add(Me.ListdesFichiersEnTrop)
         Me.GroupSaves.Controls.Add(Me.ButtonSuppSave)
         Me.GroupSaves.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.GroupSaves.Location = New System.Drawing.Point(507, 406)
+        Me.GroupSaves.Location = New System.Drawing.Point(676, 500)
+        Me.GroupSaves.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupSaves.Name = "GroupSaves"
-        Me.GroupSaves.Size = New System.Drawing.Size(453, 132)
+        Me.GroupSaves.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupSaves.Size = New System.Drawing.Size(604, 162)
         Me.GroupSaves.TabIndex = 64
         Me.GroupSaves.TabStop = False
         Me.GroupSaves.Text = "Dans la Liste ci dessus, voici les fichiers 'Orphelins' qui n'ont pas de Rom asso" &
@@ -499,9 +540,10 @@ Partial Class SaveManager
         Me.ButtonRenommer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonRenommer.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonRenommer.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.ButtonRenommer.Location = New System.Drawing.Point(507, 361)
+        Me.ButtonRenommer.Location = New System.Drawing.Point(676, 444)
+        Me.ButtonRenommer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.ButtonRenommer.Name = "ButtonRenommer"
-        Me.ButtonRenommer.Size = New System.Drawing.Size(161, 41)
+        Me.ButtonRenommer.Size = New System.Drawing.Size(215, 50)
         Me.ButtonRenommer.TabIndex = 67
         Me.ButtonRenommer.Text = "Ouvrir l'Outil" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "'Renommer vos Saves'"
         Me.ButtonRenommer.UseVisualStyleBackColor = False
@@ -516,9 +558,10 @@ Partial Class SaveManager
         Me.prevplatform.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.prevplatform.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.prevplatform.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.prevplatform.Location = New System.Drawing.Point(12, 50)
+        Me.prevplatform.Location = New System.Drawing.Point(16, 62)
+        Me.prevplatform.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.prevplatform.Name = "prevplatform"
-        Me.prevplatform.Size = New System.Drawing.Size(56, 23)
+        Me.prevplatform.Size = New System.Drawing.Size(75, 28)
         Me.prevplatform.TabIndex = 66
         Me.prevplatform.Text = "<<"
         Me.prevplatform.UseVisualStyleBackColor = False
@@ -533,47 +576,30 @@ Partial Class SaveManager
         Me.nextplatform.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nextplatform.Font = New System.Drawing.Font("Equinox Com", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nextplatform.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.nextplatform.Location = New System.Drawing.Point(72, 50)
+        Me.nextplatform.Location = New System.Drawing.Point(96, 62)
+        Me.nextplatform.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.nextplatform.Name = "nextplatform"
-        Me.nextplatform.Size = New System.Drawing.Size(56, 23)
+        Me.nextplatform.Size = New System.Drawing.Size(75, 28)
         Me.nextplatform.TabIndex = 67
         Me.nextplatform.Text = ">>"
         Me.nextplatform.UseVisualStyleBackColor = False
         '
         'BatoPict
         '
-        Me.BatoPict.Location = New System.Drawing.Point(350, 420)
+        Me.BatoPict.Location = New System.Drawing.Point(467, 517)
+        Me.BatoPict.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.BatoPict.Name = "BatoPict"
-        Me.BatoPict.Size = New System.Drawing.Size(144, 113)
+        Me.BatoPict.Size = New System.Drawing.Size(192, 139)
         Me.BatoPict.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.BatoPict.TabIndex = 69
         Me.BatoPict.TabStop = False
         '
-        'tempDUCKsavestates
-        '
-        Me.tempDUCKsavestates.FormattingEnabled = True
-        Me.tempDUCKsavestates.Location = New System.Drawing.Point(385, 458)
-        Me.tempDUCKsavestates.Name = "tempDUCKsavestates"
-        Me.tempDUCKsavestates.Size = New System.Drawing.Size(58, 69)
-        Me.tempDUCKsavestates.TabIndex = 70
-        Me.tempDUCKsavestates.Visible = False
-        '
-        'tempSLESname
-        '
-        Me.tempSLESname.FormattingEnabled = True
-        Me.tempSLESname.Location = New System.Drawing.Point(443, 459)
-        Me.tempSLESname.Name = "tempSLESname"
-        Me.tempSLESname.Size = New System.Drawing.Size(58, 69)
-        Me.tempSLESname.TabIndex = 71
-        '
         'SaveManager
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(16, Byte), Integer), CType(CType(19, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(970, 545)
-        Me.Controls.Add(Me.tempSLESname)
-        Me.Controls.Add(Me.tempDUCKsavestates)
+        Me.ClientSize = New System.Drawing.Size(1291, 661)
         Me.Controls.Add(Me.RenameSelection)
         Me.Controls.Add(Me.ButtonRenommer)
         Me.Controls.Add(Me.BatoPict)
@@ -601,8 +627,9 @@ Partial Class SaveManager
         Me.Controls.Add(Me.DataGridRoms)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.MaximumSize = New System.Drawing.Size(986, 584)
-        Me.MinimumSize = New System.Drawing.Size(986, 584)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MaximumSize = New System.Drawing.Size(1309, 708)
+        Me.MinimumSize = New System.Drawing.Size(1309, 708)
         Me.Name = "SaveManager"
         Me.Text = "SaveManager"
         CType(Me.DataGridSave, System.ComponentModel.ISupportInitialize).EndInit()
@@ -657,6 +684,4 @@ Partial Class SaveManager
     Friend WithEvents nextplatform As Button
     Friend WithEvents BatoPict As PictureBox
     Friend WithEvents ButtonRenommer As Button
-    Friend WithEvents tempDUCKsavestates As ListBox
-    Friend WithEvents tempSLESname As ListBox
 End Class
